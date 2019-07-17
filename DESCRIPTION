@@ -1,5 +1,5 @@
 Package: climate
-Title: Meteorological and Hydrological Data
+Title: Meteorological and Hydrological Data Downloading
 Version: 0.2.0
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",

@@ -11,10 +11,10 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   ogimet_stations(country = "Australia", add_map = T)
+#'   stations_ogimet(country = "Australia", add_map = T)
 #' }
 #'
-ogimet_stations <- function(country = "United+Kingdom", date=Sys.Date(), add_map = FALSE){
+stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(), add_map = FALSE){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 

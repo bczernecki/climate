@@ -4,7 +4,7 @@
 \name{climate-package}
 \alias{climate}
 \alias{climate-package}
-\title{climate: Meteorological and Hydrological Data}
+\title{climate: Meteorological and Hydrological Data Downloading}
 \description{
 Download meteorological and hydrological data from the Institute of Meteorology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
     EXPANDEXPANDEXPAND.

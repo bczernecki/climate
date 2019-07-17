@@ -47,8 +47,8 @@ install_github("bczernecki/climate")
     the World Meteorological Organizaton framework 
     after year 2000 should be accessible
     
-    - **ogimet_stations()** - retrieving geographical coordinates, altitude, WMO ID 
-    and station names for the user-specified country nam; 
+    - **stations_ogimet()** - retrieving geographical coordinates, altitude, WMO ID 
+    and station names for the user-specified country name; 
     optionally plot results on a map
 
   - **meteo\_sounding()** - Downloading measurements of
