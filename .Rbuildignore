@@ -1,0 +1,12 @@
+^codemeta\.json$
+^LICENSE\.md$
+^\.travis\.yml$
+^docs$
+^_pkgdown\.yml$
+^README\.Rmd$
+^climate\.Rproj$
+^\.Rproj\.user$
+^\.httr-oauth$
+^data-raw$
+^vignettes/articles$
+

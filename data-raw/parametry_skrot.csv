@@ -1,0 +1,253 @@
+fullname,abbr_eng,fullname_eng
+Absolutna temperatura maksymalna [C],tmax_abs,Absolute maximum air temperature [C]
+Absolutna temperatura minimalna [C],tmin_abs,Absolute minimum air temperature [C]
+Aktynometria [J/cm2],irrad,Irradiance [J/cm2]
+Charakterystyka tendencji [kod],press_tend,Pressure tendency
+Chmury CH [kod],cl_CH_code,High cloud cover [code]
+Chmury CH tekstem,cl_CH,High cloud cover [text]
+Chmury CL [kod],cl_CL_code,Middle cloud cover [code]
+Chmury CL tekstem,cl_CH,Middle cloud cover [text]
+Chmury CM [kod],cl_CM_code,Low cloud cover [code]
+Chmury CM tekstem,cl_CM,Low cloud cover [text]
+Ciezar probki [g],sample_weight,Sample weight [g]
+Cisnienie na pozimie morza [hPa],slp,Sea level pressure [hPa]
+Cisnienie na pozimie stacji [hPa],press,Station level pressure [hPa]
+Cisnienie pary wodnej [hPa],vapor_press,Vapour pressure [hPa]
+Czas trwania burzy [godziny],thunderstorm_hours,Duration of thunderstorm [hours]
+Czas trwania gololedzi [godziny],glaze_hours,Duration of glaze [hours]
+Czas trwania gradu [godziny],hail_hours,Duration of hail [hours]
+Czas trwania mgly [godziny],fog_hours,Duration of fog [hours]
+Czas trwania opadu deszczu [godziny],rain_hours,Duration of rain [hours]
+Czas trwania opadu deszczu ze sniegiem [godziny],r_s_hours,Duration of sleet [hours]
+Czas trwania opadu sniegu [godziny],snow_hours,Duration of snowing [hours]
+Czas trwania rosy [godziny],dew_hours,Duration of dew [hours]
+Czas trwania sadzi [godziny],rime_hours,Duration of rime [hours]
+Czas trwania szronu [godziny],hoarfrost_hours,Duration of hoarfrost [hours]
+Czas trwania wiatru >=10m/s [godziny],ws_10ms_hours,Duration of wind speed above 10 ms [hours]
+Czas trwania wiatru >15m/s [godziny],ws_15ms_hours,Duration of wind speed above 15 ms [hours]
+Czas trwania zamglenia [godziny],fogginess_hours,Duration of fogginess [hours]
+Czas trwania zamieci snieznej niskiej [godziny],snowstorm_low_hours,Duration of low snowstorm [hours]
+Czas trwania zamieci snieznej wysokiej [godziny],snowstorm_high_hours,Duration of high snowstorm [hours]
+Czas trwania zmetnienia [godziny],hazyness_hours,Duration of hazyness [hours]
+Dzien,day,Day
+Dzien ostatni wystapienia opadu maksymalnego,last_day_max_rr,Last day with maximum precipitation
+Dzien pierwszy wystapienia opadu maksymalnego,first_day_max_rr,First day with maximum precipitation
+Gatunek sniegu [kod],snow_type,Snow type [code]
+Godzina,hour,Hour
+Godzina wystapienia porywu,gust_hour,Gust hour
+Izoterma dolna [cm],lower_isotherm,Lower isotherm [cm]
+Izoterma gorna [cm],upper_isotherm,Upper isotherm [cm]
+Kierunek wiatru [],wd,Wind direction [deg]
+Kod kierunku wiatru [kod],wd_code,Wind direction [code]
+Kod stacji,id,ID
+Liczba dni z burza,thunder_days,Days with thunderstorm
+Liczba dni z gololedzia,glaze_days,Days with glaze
+Liczba dni z gradem,hail_days,Days with hail
+Liczba dni z mgla,fog_days,Days with fog
+Liczba dni z opadem deszczu,rain_days,Days with rain
+Liczba dni z opadem deszczu ze sniegiem,r_s_days,Days with sleet
+Liczba dni z opadem sniegu,snow_days,Days with snow
+Liczba dni z pokrywa sniezna,snowcover_days,Days with snow cover
+Liczba dni z rosa,dew_days,Days with dew
+Liczba dni z sadzia,rime_days,Days with rime
+Liczba dni z wiatrem >= 10m/s,ws_10ms_days,Days with wind speed above 10 ms
+Liczba dni z wiatrem >15m/s,ws_15ms_days,Days with wind speed above 15 ms
+Liczba dni z zamgleniem,fogginess_days,Days with fogginess
+Liczba dni z zamiecia sniezna niska,snowstorm_low_days,Days with low snowstorm
+Liczba dni z zamiecia sniezna wysoka,snowstorm_high_days,Days with high snowstorm
+Liczba dni ze szronem,hoarfrost_days,Days with hoarfrost
+Liczba dni ze zmetnieniem,hazyness_days,Days with hazyness
+Maksymalna dobowa suma opadow [mm],rr_max_daily,Maximum daily preciptation [mm]
+Maksymalna temperatura dobowa [C],tmax_daily,Maximum daily air temperatury [C]
+Maksymalna wysokosc pokrywy snieznej [cm],snowcover_max,Maximum daily snow cover [cm]
+Miesiac,mm,Month
+Miesieczna suma opadow [mm],rr_monthly,Total monthly precipitation [mm]
+Miesieczna suma uslonecznienia [godziny],insolation_monthly,Total monthly insolation [hours]
+Minimalna temperatura dobowa [C],tmin_daily,Minimum daily air temperature [C]
+Minimalna temperatura przy gruncie [C],t5cm_min,Minimum daily near surface air temperature [C]
+Minuta wystapienia porywu,gust_minute,Minute of wind gust
+Nazwa stacji,station,Station
+Niedosyt wilgotnosci [hPa},vapor_press_deficit,Vapour pressure deficit [hPa]
+Opad maksymalny [mm],rr_max,Maximum preciptation [mm]
+Opad za 6 godzin [mm],rr_6h,Precipitation for last 6 hours [mm]
+Ostatni dzien wystapienia opadu maksymalnego,last_day_max_rr,Last day with maximum precipitation
+Pierwszy dzien wystapienia opadu maksymalnego,first_day_max_rr,First day with maximum precipitation
+Pogoda biezaca [kod],curr_weather,Current weather [code]
+Pogoda ubiegla [kod],past_weather,Past weather [code]
+Pomiar przyrzadem 1 (nizsza) [P],meas1,Measurement with device 1 lower [P]
+Pomiar przyrzadem 2 (wyzsza) [P],meas2,Measurement with device 2 upper [P]
+Poryw maksymalny za okres WW [m/s],gust_WW,Maximum wind gust in WW period [m/s]
+Poryw wiatru [m/s],gust,Wind gust [m/s]
+Predkosc wiatru [m/s],ws,Wind speed [m/s]
+Rodzaj opadu [S/W/ ],rr_type,Precipitation type [S/W]
+Rodzaj opadu za 6 godzin [kod],rr_type_6h,Precipitation type for last 6 hours [code]
+Rodzaj pokrywy snieznej [kod],snowcover_type,Snow cover type [code]
+Rok,yy,Year
+Rownowaznik wodny sniegu [mm/cm],snow_water_equivalent,Snow water equivalent [mm/cm]
+Srednia dobowa predkosc wiatru [m/s],ws_mean_daily,Daily mean wind speed [m/s]
+Srednia dobowa temperatura [C],t2m_mean_daily,Daily mean air temperature [C]
+Srednia dobowa wilgotnosc wzgledna [%],rh_mean_daily,Daily mean relative humidity [%]
+Srednia dobowe cisnienie na poziomie stacji [hPa],press_mean_daily,Daily mean pressure at station level [hPa]
+Srednia dobowe cisnienie pary wodnej [hPa],vapor_press_mean_daily,Daily mean vapour pressure [hPa]
+Srednia miesieczna predkosc wiatru [m/s],ws_mean_mon,Monthly mean wind speed [m/s]
+Srednia miesieczna temperatura [C],t2m_mean_mon,Monthly mean air temperature [C]
+Srednia miesieczna wilgotnosc wzgledna [%],rh_mean_mon,Monthly mean relative humidity [%]
+Srednia temperatura dobowa [C],t2m_mean_daily,Monthly mean air temperature [C]
+Srednia temperatura maksymalna [C],tmax_mean,Monthly mean maximum air temperature [C]
+Srednia temperatura miesieczna [C],t2m_mean_mon,Monthly mean air temperature [C]
+Srednia temperatura minimalna [C],tmin_mean,Monthly mean minimum air temperature [C]
+Srednie dobowe cisnienie na pozimie morza [hPa],slp_mean_daily,Monthly mean sea level pressure [hPa]
+Srednie dobowe zachmurzenie ogolne [oktanty],cloud_mean_daily,Monthly mean total cloudiness [hPa]
+Srednie miesieczne cisnienie na pozimie morza [hPa],slp_mean_mon,Monthly mean sea level pressure [hPa]
+Srednie miesieczne cisnienie na poziomie stacji [hPa],press_mean_mon,Monthly mean pressure at station level [hPa]
+Srednie miesieczne cisnienie pary wodnej [hPa],vapor_press_mean_mon,Monthly mean vapour pressure [hPa]
+Srednie miesieczne zachmurzenie ogolne [oktanty],cloud_mean_mon,Monthly mean total cloudiness [hPa]
+Stan gruntu [kod],soil_state_code,Soil state [code]
+Stan gruntu [Z/R],soil_state,Soil state [Z/R]
+Status pomiaru AKTN,StatusAKTN,Status of actynometry
+Status pomiaru APP,StatusAPP,Status of pressure tendency
+Status pomiaru BRZA,StatusBRZA,Status of thunderstorm length
+Status pomiaru BURD,StatusBURD,Status of thunderstorm days
+Status pomiaru CHCH,StatusCHCH,Status of high cloudiness
+Status pomiaru CHCL,StatusCHCL,Status of low cloudiness
+Status pomiaru CHCM,StatusCHCM,Status of middle cloudiness
+Status pomiaru CIPR,StatusCIPR,Status of sample weight
+Status pomiaru CLCM,StatusCLCM,Status of low cloudiness [code]
+Status pomiaru CPW,StatusCPW,Status of water vapour pressure
+Status pomiaru DEFI,StatusDEFI,Status of water vapour pressure deficit
+Status pomiaru DESD,StatusDESD,Status of days with precipitation
+Status pomiaru DESZ,StatusDESZ,Status of time of preciptation
+Status pomiaru DISN,StatusDISN,Status of time of sleet [hours]
+Status pomiaru DKDK,StatusDKDK,Status of wind direction [code]
+Status pomiaru DSND,StatusDSND,Status of time of sleet
+Status pomiaru DZBL,StatusDZBL,Status of lightning
+Status pomiaru DZPS,StatusDZPS,Status of snow cover occurrence
+Status pomiaru FF10,StatusFF10,Status of wind speed above 10 ms
+Status pomiaru FF15,StatusFF15,Status of wind speed above 15 ms
+Status pomiaru FWR,StatusFWR,Status of wind speed
+Status pomiaru FWS,StatusFWS,Status of mean daily wind speed
+Status pomiaru GATS,StatusGATS,Status of fresh snow cover
+Status pomiaru GOLD,StatusGOLD,Status of glaze
+Status pomiaru GOLO,StatusGOLO,Status of length of glaze
+Status pomiaru GRAD,StatusGRAD,Status of hail
+Status pomiaru GRDD,StatusGRDD,Status of days with hail
+Status pomiaru GRSN,StatusGRSN,Status of snow cover on field
+Status pomiaru HPOD,StatusHPOD,Status of cloud base
+Status pomiaru HPON,StatusHPON,Status of lower cloud base
+Status pomiaru HPOW,StatusHPOW,Status of upper cloud base
+Status pomiaru HPRO,StatusHPRO,Status of height of sample
+Status pomiaru HSS,StatusHSS,Status of fresh snow cover2
+Status pomiaru IZD,StatusIZD,Status of lower isotherm
+Status pomiaru IZG,StatusIZG,Status of higher isotherm
+Status pomiaru KRWR,StatusKRWR,Status of wind direction
+Status pomiaru LDPS,StatusLDPS,Status of last day with wind gust
+Status pomiaru LDS,StatusLDS,Status of monthly sea level pressure
+Status pomiaru MAXO,StatusMAXO,Status of maximum precipitation
+Status pomiaru MGLA,StatusMGLA,Status of length of fog
+Status pomiaru MGLD,StatusMGLD,Status of length of hazyness
+Status pomiaru NOG,StatusNOG,Status of total cloudiness
+Status pomiaru NOS,StatusNOS,Status of daily mean total cloudiness
+Status pomiaru OPMX,StatusOPMX,Status of daily max precipitation
+Status pomiaru PKSN,StatusPKSN,Status of snow cover
+Status pomiaru PORK,StatusPORK,Status of wind gust in time interval
+Status pomiaru PORW,StatusPORW,Status of wind gust
+Status pomiaru PPPM,StatusPPPM,Status of sea level pressure
+Status pomiaru PPPS,StatusPPPS,Status of pressure at station level
+Status pomiaru PSDN,StatusPSDN,Status of days with snow cover
+Status pomiaru ROPT,StatusROPT,Status of precipitation type within 6 hours
+Status pomiaru ROSA,StatusROSA,Status of dew length
+Status pomiaru ROSD,StatusROSD,Status of days with dew
+Status pomiaru ROSW,StatusROSW,Status of dew occurrence
+Status pomiaru RPSN,StatusRPSN,Status of snow cover type
+Status pomiaru RWSN,StatusRWSN,Status of snow water equivalent
+Status pomiaru SADD,StatusSADD,Status of number of days with rime 
+Status pomiaru SADZ,StatusSADZ,Status of length of rime 
+Status pomiaru SGRN,StatusSGRN,Status of soil state
+Status pomiaru SMDB,StatusSMDB,Status of daily precipitation
+Status pomiaru SNEG,StatusSNEG,Status of length of snowing
+Status pomiaru SNID,StatusSNID,Status of number of days with snowing
+Status pomiaru STD,StatusSTD,Status of daily mean air temperature
+Status pomiaru STM,StatusSTM,Status of monthly mean air temperature
+Status pomiaru SUMM,StatusSUMM,Status of monthly total precipitation
+Status pomiaru SUUS,StatusSUUS,Status of monthly total insolation
+Status pomiaru SZRD,StatusSZRD,Status of number of days with hoarfrost
+Status pomiaru SZRO,StatusSZRO,Status of length of hoarfrost
+Status pomiaru TEMP,StatusTEMP,Status of air temperature
+Status pomiaru TG05,StatusTG05,Status of soil temperature 5 cm below ground
+Status pomiaru TG10,StatusTG10,Status of soil temperature 10 cm below ground
+Status pomiaru TG100,StatusTG100,Status of soil temperature 100 cm below ground
+Status pomiaru TG20,StatusTG20,Status of soil temperature 20 cm below ground
+Status pomiaru TG50,StatusTG50,Status of soil temperature 50 cm below ground
+Status pomiaru TGMI,StatusTGMI,Status of minimum soil temperature in last 12 hours
+Status pomiaru TMAX,StatusTMAX,Status of maximum air temperature in last 12 hours
+Status pomiaru TMIN,StatusTMIN,Status of minimum air temperature in last 12 hours
+Status pomiaru TMNG,StatusTMNG,Status of minimum near surface air temperature 
+Status pomiaru TMNS,StatusTMNS,Status of mean minimum air temperature
+Status pomiaru TMXS,StatusTMXS,Status of mean maximum air temperature
+Status pomiaru TPTR,StatusTPTR,Status of dew point temperature
+Status pomiaru TTZW,StatusTTZW,Status of wet thermometer
+Status pomiaru USL,StatusUSL,Status of insolation
+Status pomiaru USLN,StatusUSLN,Status of daily max precipitation
+Status pomiaru W10D,StatusW10D,Status of number of days with wind speed above 10 ms
+Status pomiaru W15D,StatusW15D,Status of number of days with wind speed above 15 ms
+Status pomiaru WID,StatusWID,Status of visibility (human)
+Status pomiaru WIDA,StatusWIDA,Status of cloudiness [octants]
+Status pomiaru WIDO,StatusWIDO,Status of visibility (automated)
+Status pomiaru WLGS,StatusWLGS,Status of daily mean relative humidity
+Status pomiaru WLGW,StatusWLGW,Status of relative humidity
+Status pomiaru WO6G,StatusWO6G,Status of 6 hour precipitation
+Status pomiaru WODZ,StatusWODZ,Status of daily precipitation
+Status pomiaru WONO,StatusWONO,Status of nightly precipitation
+Status pomiaru ZAMD,StatusZAMD,Status of number of days with fogginess
+Status pomiaru ZAND,StatusZAND,Status of number of days with low snowstorm
+Status pomiaru ZAWD,StatusZAWD,Status of number of days with high snowstorm
+Status pomiaru ZMED,StatusZMED,Status of number of days with hazyness
+Status pomiaru ZMET,StatusZMET,Status of duration of hazyness
+Status pomiaru ZMGL,StatusZMGL,Status of duration of fogginess
+Status pomiaru ZMNI,StatusZMNI,Status of duration of low snowstorm
+Status pomiaru ZMWS,StatusZMWS,Status of duration of high snowstorm
+Status pomiaru ZOGK,StatusZOGK,Status of total cloudiness [0-10 before 1988 and 0-8 since 1989]
+Suma dobowa opadow [mm],rr_daily,Total daily preciptation [mm]
+Suma dobowa opadu [mm],rr_daily,Total daily preciptation [mm]
+Suma opadu dzien [mm],rr_daytime,Total precipitation during day [mm]
+Suma opadu noc [mm],rr_nightime,Total precipitation during night [mm]
+Temperatura gruntu -10 [C],t10_soil,Soil temperature 10 cm below surface [C]
+Temperatura gruntu -100 [C],t100_soil,Soil temperature 100 cm below surface [C]
+Temperatura gruntu -20 [C],t20_soil,Soil temperature 20 cm below surface [C]
+Temperatura gruntu -5 [C],t5_soil,Soil temperature 5 cm below surface [C]
+Temperatura gruntu -50 [C],t50_soil,Soil temperature 50 cm below surface [C]
+Temperatura maksymalna za 12 godzin [C],tmax_12h,Maximum air temperature for 12 hours [C]
+Temperatura minimalna przy gruncie [C],tmin_soil,Minimum near surface air temperature [C]
+Temperatura minimalna przy gruncie za 12 godzin [C],tmin_soil_12h,Minimum near surface air temperature for 12 hours [C]
+Temperatura minimalna za 12 godzin [C],tmin_12h,Minimum air temperature for 12 hours [C]
+Temperatura powietrza [C],t2m,Air temperature [C]
+Temperatura punktu rosy [C],td,Dew point temperature [C]
+Temperatura termometru zwilzonego [C],t_wet,Temperature of wet thermometer [C]
+Uksztaltowanie pokrywy [kod],snowcover_state,Snow cover state [code]
+Uslonecznienie,insolation,Insolation
+Uslonecznienie [godziny],insolation_hours,Insolation [hours]
+Wartosc tendencji [wartosc],tendency,Pressure tendency [value]
+Widzialnosc [kod],visibility_code,Visibility [code]
+Widzialnosc automat [m],visibility_auto,Visibilty by device [m]
+Widzialnosc operatora [m],visibility_human,Visibilty by observer [m]
+Wilgotnosc wzgledna [%],rh,Relative humidity [%]
+Wskaznik lodu [L/W],ice_indicator,Ice indicator [L/W]
+Wskaznik wentylacji [W/N],ventil_indicator,Ventilation indicator [W/N]
+Wysokosc podstawy chmur CL CM szyfrowana [kod],cloudbase_CM_code,Middle cloud base [code]
+Wysokosc podstawy nizszej [m],cloudbase_low,Lower cloud base [m]
+Wysokosc podstawy tekstowy [opis],cloudbase,Upper cloud base [text]
+Wysokosc podstawy wyzszej [m],cloudbase_high,Upper cloud base [m]
+Wysokosc pokrywy snieznej [cm],snowcover_height,Snow cover height [cm]
+Wysokosc probki [cm],sample_height,Height of a sample [cm]
+Wysokosc sniegu na poletku [cm],snowcover_field_height,Fresh snow cover on a field [cm]
+Wysokosc swiezo spadlego sniegu [cm,fresh_snow,Fresh snow cover [cm]
+Wysokosc swiezo spadlego sniegu [cm],fresh_snow,Fresh snow cover [cm]
+Wystapienie blyskawicy [0/1],lightning,Ligthning occurrence
+Wystapienie pokrywy snieznej [0/1],snowcover_occur,Snow cover occurrence [0/1]
+Wystapienie rosy [0/1],dew_occur,Dew occurrence [0/1]
+Zachmurzenie niskie [oktanty],cl_low,Low cloud cover [octants]
+Zachmurzenie ogolne [0-10 do dn.31.12.1988/oktanty od dn.01.01.1989],cl_tot,"Total cloudiness [0-10 to 1988, octants since 1999]"
+Zachmurzenie ogolne [oktanty],cl_tot,Total cloudiness [octants]
+Nazwa stacji.x,station,Station
+Nazwa stacji.y,station,Station
+rank_code,rank,Station rank code

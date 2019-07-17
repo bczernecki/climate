@@ -1,0 +1,135 @@
+#' Scrapping of daily meteorological (Synop) data from the Ogimet webpage
+#'
+#' Downloading daily (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
+#'
+#' @param date start and finish of date (e.g., date=c("2018-05-01","2018-07-01") )
+#' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
+#' @param station WMO ID of meteorological station(s). Character or numeric vector
+#' @importFrom RCurl getURL
+#' @importFrom XML readHTMLTable
+#'
+#' @examples \donttest{
+#'   # downloading data for Poznan-Lawica
+#'   poznan <- ogimet_daily(station = 12330, date = c("2019-01-01","2019-03-31"), coords = TRUE)
+#'   head(poznan)
+#' }
+#'
+
+ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, station = c(12326,12330)){
+
+  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+
+  dates <-  seq.Date(min(as.Date(date)), max(as.Date(date)), by="1 month") - 1
+  dates <-  unique(c(dates, as.Date(max(date))))
+
+  # initalizing empty data frame for storing results:
+
+  data_station <- data.frame("Date" = character(),"TemperatureCMax" = character(),"TemperatureCMin" = character(),"TemperatureCAvg" = character(), "TdAvgC" = character(),
+                                  "HrAvg" = character(), "WindkmhDir" = character(), "WindkmhInt" = character(),"WindkmhGust" = character(),
+                            "PresslevHp" = character(),"Precmm" = character(),"SunD1h"= character(),"SnowDepcm"= character(),
+                            "TotClOct" = character(), "lowClOct" = character(),"station_ID"= character(),
+                            "VisKm" = character(),stringsAsFactors = F)
+
+
+  for (station_nr in station){
+    print(station_nr)
+    for (i in length(dates):1) {
+      year <- format(dates[i], "%Y")
+      month <- format(dates[i], "%m")
+      day <- format(dates[i], "%d")
+      ndays <- day
+      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=30&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
+      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=30&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
+      a <-  getURL(linkpl2)
+      a <- readHTMLTable(a, stringsAsFactors=FALSE)
+      b <-  a[[length(a)]]
+      b=b[,1:(length(b)-8)]
+      test=b[1:2,]
+      #exeptions diferent names_col
+      if ((length(test[2,!is.na(test[2,])])==6 & test[2,5]=="Int.")) {
+        names_col=unlist(c(test[1,1],paste(test[1,2],test[2,1:3],sep = "_"),test[1,3:4],paste(test[1,5],test[2,4:6],sep = "_"),test[1,c(6:(length(test)-4))]))
+      }else if ((length(test[2,!is.na(test[2,])])==2 & test[2,2]=="Int.")) {
+        names_col=unlist(c(test[1,1:2],paste(test[1,3],test[2,1:2],sep = "_"),test[1,c(4:(length(test)-1))]))
+      }else if ((length(test[2,!is.na(test[2,])])==5 & test[2,5]=="Int.")) {
+        names_col=unlist(c(test[1,1],paste(test[1,2],test[2,1:3],sep = "_"),test[1,3:4],paste(test[1,5],test[2,4:5],sep = "_"),test[1,c(6:(length(test)-3))]))
+      }else { names_col="Error_column"}
+
+      names_col <- gsub("[^A-Za-z0-9]", "", as.character(lapply(names_col, as.character), stringsAsFactors=FALSE))
+      colnames(b) <-names_col
+      b <- b[-c(1:2),]
+      b["station_ID"] <-  station_nr
+
+      # adding year to date
+      b$Date <-paste0(b$Date,"/",year)
+
+      # to avoid gtools::smartbind function or similar from another package..
+      if (ncol(data_station)>=ncol(b)) {
+        b[setdiff(names(data_station), names(b))] <- NA # adding missing columns
+        data_station <- rbind(data_station, b)  # joining data
+
+      } else { # when b have more columns then data_station
+       if(nrow(data_station)==0){
+         data_station=b
+        } else {
+          # adding missing columns
+          data_station <- merge(b,data_station,all = T )# joining data
+        }
+
+        }
+
+      cat(paste(year,month,"\n"))
+      # coords można lepiej na samym koncu dodać kolumne
+      # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
+      if (coords){
+        coord <- a[[1]][2,1]
+        data_station["Lon"] <-  get_coord_from_string(coord, "Longitude")
+        data_station["Lat"] <-  get_coord_from_string(coord, "Latitude")
+      }
+
+
+    } # koniec petli daty
+
+    data_station <-  data_station[!duplicated(data_station), ]
+
+
+  }# koniec petli stacje
+
+  # converting character to proper field representation:
+
+  # get rid off "---" standing for missing/blank fields:
+  data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] <- NA
+
+
+
+
+  # other columns to numeric:
+  suppressWarnings(data_station[,c("TemperatureCMax", "TemperatureCMin", "TemperatureCAvg","TdAvgC" ,"HrAvg",
+                                   "WindkmhInt","WindkmhGust" ,"PresslevHp", "Precmm" ,
+                                   "TotClOct", "lowClOct" ,"VisKm","station_ID")] <-
+                     as.data.frame(sapply(data_station[,c("TemperatureCMax", "TemperatureCMin", "TemperatureCAvg","TdAvgC" ,"HrAvg",
+                                                          "WindkmhInt","WindkmhGust" ,"PresslevHp", "Precmm" ,
+                                                          "TotClOct", "lowClOct" ,"VisKm","station_ID")], as.numeric)))
+  # date to as.Date()
+  data_station$Date <- as.Date(data_station$Date, format="%m/%d/%Y")
+
+  #  TODO:
+  # changing order of columns and removing blank records:
+  if(coords){
+    ord1 <- c("station_ID", "Lon", "Lat", "Date", "TemperatureCAvg")
+    ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Lon", "Lat", "Date", "TemperatureCAvg")))
+    data_station <- data_station[, ord1]
+  } else {
+    ord1 <- c("station_ID", "Date", "TemperatureCAvg")
+    ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Date", "TemperatureCAvg")))
+    data_station <- data_station[, ord1]
+  }
+  # setdiff(names(df), c("station_ID", "Date", "TC"))
+
+
+  # clipping to interesting period as we're downloading slightly more than needed:
+   data_station <- data_station[which(data_station$Date >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))),]
+
+
+  return(data_station)
+
+}

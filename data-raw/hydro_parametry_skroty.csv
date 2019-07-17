@@ -1,0 +1,23 @@
+fullname;abbr_eng;fullname_eng;;
+Kod stacji;id;ID;;
+Dzien;dd;Day;;
+Miesiac kalendarzowy;mm;Month;;
+Nazwa rzeki/jeziora;riv_or_lake;River_or_Lake;;
+Nazwa stacji;station;Station;;
+Przeplyw [m^3/s];Q;Flow [m3_s];;
+Rodzaj wielkosci (H - stan wody, Q - przeplyw, T - temperatura wody);Mesu;"Measurement [state - H, flow - Q, or temperature - T]""";;`
+Rok hydrologiczny;hyy;Hydrologic year;;
+Stan wody [cm];H;State [cm];;
+Temperatura wody [st. C];T;Temperature [C];;
+Wskaznik ekstremum;idex;Extreme ID [min - 1, mean - 2, Max - 3];;
+Wskaznik ekstremum (1 - minimum, 2 - srednia, 3 - maksimum);idex;Extreme ID [min - 1, mean - 2, Max - 3];;
+Wskaznik miesiaca w roku hydrologicznym;idhyy;Hydrologic year ID;;
+Wskaznik polrocza (13 - zima, 14 - lato, 15 - rok);idyy;Year ID [13 -winter, 14 - summer, 15 - year];;
+wystapienie_od_Dzien;bedd;Occurrence from day;;
+wystapienie_od_Godzina:Minuta;behm;Occurrence from time;;
+wystapienie_od_Miesiac;bemm;Occurrence from month;;
+wystapienie_od_Rok;beyy;Occurrence from year;;
+Grubosc lodu [cm];thick;Thickness of ice [cm];;
+Kod zjawiska lodowego (slownik ponizej);id_ice;Ice phenomena;;
+"Procent udzialu zjawiska lodowego [mnoznik *10; np. 3 oznacza 30% udzialu zjawisk lodowych]";p_ice;Percentage of ice phenomena;;
+Kod zarastania (slownik ponizej);id_over_grow;Overgrowing;;

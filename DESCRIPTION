@@ -1,0 +1,45 @@
+Package: climate
+Title: Meteorological and Hydrological Data
+Version: 0.2.0
+Authors@R: c(person(given = "Bartosz",
+           family = "Czernecki",
+           role = c("aut", "cre"),
+           email = "nwp@amu.edu.pl",
+           comment = c(ORCID = "0000-0001-6496-1386")),
+           person(given = "Arkadiusz", 
+           family = "Głogowski", 
+           role = "aut", 
+           email = "arkadiusz.glogowski@upwr.edu.pl", 
+           comment = c(ORCID = "0000-0002-7587-8892")),
+           person(given = "Jakub", 
+           family = "Nowosad", 
+           role = "aut",
+           email = "nowosad.jakub@gmail.com", 
+           comment = c(ORCID = "0000-0002-1057-3721")),
+           person("IMGW-PIB", role = "ctb", comment = "source of the data"))
+Description: Download meteorological and hydrological data from the Institute of Meteorology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
+    EXPANDEXPANDEXPAND.
+    This package also allows for adding geographical coordinates for each observation.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Depends: 
+    R (>= 3.1)
+Imports: 
+    RCurl,
+    XML,
+    imgw,
+    maps
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown,
+    dplyr,
+    tidyr
+URL: https://github.com/bczernecki/climate
+BugReports: https://github.com/bczernecki/climate/issues
+VignetteBuilder: knitr
+Remotes:
+    bczernecki/imgw
