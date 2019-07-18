@@ -1,6 +1,6 @@
 # climate 0.2
 
-* splits imgw to imgw and climate
+* splits imgw into two packages: imgw and climate
 
 # imgw 0.1.1
 
