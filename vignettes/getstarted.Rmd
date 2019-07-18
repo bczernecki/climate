@@ -1,5 +1,5 @@
 ---
-title: "Introduction to the climate package (EN)"
+title: "Introduction to the climate package"
 author: "Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -14,8 +14,98 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(imgw)
+library(climate)
 library(tidyr)
 library(dplyr)
 options(scipen=999)
 ```
+
+The main goal of the **imgw** package is to give convenient and programmable access to meteorological
+and hydrological data from the publicly available repositories:
+
+- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
+- University of Wyoming webpage - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
+
+## Functions 
+
+The **climate** package consists of four main functions - two for meteorological data, one for hydrological data and one for sounding meteo:
+
+1. Meteorological data:
+
+- `meteo_ogimet()` - ...
+- `meteo_imgw()` - ...
+
+2. Hydrological data: 
+
+- `hydro_imgw()` - ...
+
+3. Rawinsonde data: 
+
+- `meteo_sounding()` -- downloading rawinsonde data (+metadata)
+
+## Application
+
+We will show how to use our package and prepare the data for spatial analysis with the additional help of the [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) packages.
+Firstly, we download ten years (**2001-2010**) of monthly hydrological observations for all stations available and automatically add their spatial coordinates. 
+
+```{r data, echo = FALSE}
+h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
+head(h)
+```
+
+The `idex` variable represents id of the extremum, where `1` means minimum, `2` mean, and `3` maximum.^[You can find more information about this in the `hydro_abbrev` dataset.]
+Hydrologists often use the maximum value so we will filter the data and select only the station `id`, hydrological year (`hyy`), latitude `X` and longitude `Y`.
+Next, we will calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
+
+```{r filtering, eval=TRUE, include=TRUE}
+h2 = h %>%
+  filter(idex == 3) %>%
+  select(id, station, X, Y, hyy, Q) %>%
+  group_by(hyy, id, station, X, Y) %>%
+  summarise(srednie_roczne_Q = round(mean(Q, na.rm = TRUE),1)) %>% 
+  spread(hyy, srednie_roczne_Q)
+```
+
+```{r filtering2, echo=FALSE}
+library(knitr)
+kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
+```
+
+<!-- The resulting table can be easily exported to any spatial software with a changing annual maximum annual average water flow rate over the decade for Poland as a whole. -->
+The result represent changing annual maximum average of water flow rate over the decade for all available stations in Poland. 
+We can save it to:
+
+- `.csv` with: `write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = T, row.names = F)`. 
+This command saves our result to `result.csv` where the column's separator is `;`, the decimal is `.`, we are keeping the headers of columns and remove names of rows which are simply numbers of observation.
+
+- `.xlsx` with: `write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)`
+This command saves our result to result.xlsx with the name of the sheet `Poland`. Argument `append=TRUE` add the sheet to already existing `xlsx` file.
+To save data in `.xlsx` you have first to install package with command: `install.packages("writexl")`, and add it: `library(writexl)`.
+ 
+<!-- dodatkowo można pokazać jak zapisać wynik do formatu teskstowego/excela/przestrzennego -->
+<!-- nie umiem zapisać do formatu przestrzennego -->
+
+```{r, eval=FALSE, include=TRUE}
+library(sf)
+library(tmap)
+library(rnaturalearth)
+library(rnaturalearthdata)
+world = ne_countries(scale = "medium", returnclass = "sf")
+
+h3 = h2 %>% 
+  filter(!is.na(X)) %>% 
+  st_as_sf(coords = c("X", "Y"))
+
+tm_shape(h3) + 
+  tm_symbols(size = as.character(c(2001:2010)),
+             title.size = "Średni przepływ maksymalny") +
+  tm_facets(free.scales = FALSE, ncol = 4) + 
+  tm_shape(world) + 
+  tm_borders(col = "black", lwd = 2) +
+  tm_layout(legend.position = c(-1.25, 0.05),
+            outer.margins = c(0, 0.05, 0, -0.25),
+            panel.labels = as.character(c(2001:2010)))
+```
+
+<!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->

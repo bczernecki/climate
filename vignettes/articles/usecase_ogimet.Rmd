@@ -1,0 +1,46 @@
+---
+title: "Use Case - Ogimet database"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ogimet - download and visualize wind patterns over Svalbard 
+
+1. Downloading hourly data from the Ogimet repository for the defined time frame (2018/01/01-2018/12/31); chosen station: Svalbard Lufthavn
+2. Using external package 'openair' to visualize the downloaded results
+
+```{r,warning=FALSE}
+library(climate)
+# downloading data
+df <- meteo_ogimet(interval = "hourly",
+                     date = c("2018-01-01", "2018-12-31"), 
+                     station = "01008")
+
+# loading external packages:
+library(dplyr)
+library(openair) # external package for plotting wind roses
+
+# converting wind direction from character into degress required by most 
+wdir <- data.frame(ddd = c("CAL","N","NNE","NE","ENE","E","ESE","SE","SSE",
+                           "S","SSW","SW","WSW","W","WNW","NW","NNW"),
+                   dir = c(NA, 0:15 * 22.5), stringsAsFactors = FALSE)
+# changing date column to the format required by openair package:
+df$Date <- as.POSIXct(df$Date, tz = "UTC")
+df$date <- df$Date
+df <- left_join(df, wdir)
+
+df$ws <- df$ffkmh / 3.6 # conversion to m/s from km/h
+df$gust <- df$Gustkmh / 3.6 # conversion to m/s from km/h
+windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE, 
+         main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
+
+# do we miss any data?
+summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
+
+# which sectors are responsible for warm/cold air mass advection:
+polarPlot(df, pollutant = "TC", x = "ws", wd = "dir", k = 50, force.positive = FALSE, 
+          type = "season", layout = c(4, 1), resolution = "fine",  normalise = FALSE)
+```
