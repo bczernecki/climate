@@ -19,7 +19,7 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  dates <-  seq.Date(min(as.Date(date)), max(as.Date(date)), by="1 month") - 1
+  dates <-  seq.Date(min(as.Date(date)), max(as.Date(date)), by="1 month") 
   dates <-  unique(c(dates, as.Date(max(date))))
 
   # initalizing empty data frame for storing results:
@@ -38,8 +38,8 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
       month <- format(dates[i], "%m")
       day <- format(dates[i], "%d")
       ndays <- day
-      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=30&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
-      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=30&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
+      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
+      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
       a <-  getURL(linkpl2)
       a <- readHTMLTable(a, stringsAsFactors=FALSE)
       b <-  a[[length(a)]]
