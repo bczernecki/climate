@@ -9,10 +9,10 @@ test_that("meteo_ogimet works!", {
                     station = 12330, coords = TRUE, precip_split = FALSE)
   
   x <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
-                    station = 12330, coords = TRUE, precip_split = TRUE)
+                    station = 12330, coords = TRUE)
   
   x <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
-                    station = 12330, coords = FALSE, precip_split = TRUE)
+                    station = 12330, coords = FALSE)
 })
 
 
