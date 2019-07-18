@@ -29,11 +29,19 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
                             "PresslevHp" = character(),"Precmm" = character(),"SunD1h"= character(),"SnowDepcm"= character(),
                             "TotClOct" = character(), "lowClOct" = character(),"station_ID"= character(),
                             "VisKm" = character(),stringsAsFactors = F)
-
-
+  
   for (station_nr in station){
     print(station_nr)
+    
+    # adding progress bar if at least 3 iterations are needed
+    if(length(dates) >=3 ) pb <- txtProgressBar(min = 0, max = length(dates), style = 3)
+    
+    
     for (i in length(dates):1) {
+      
+      # update progressbar:
+      if(length(dates) >=3 ) setTxtProgressBar(pb, abs(length(dates) - i))
+      
       year <- format(dates[i], "%Y")
       month <- format(dates[i], "%m")
       day <- format(dates[i], "%d")
@@ -77,7 +85,7 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
 
         }
 
-      cat(paste(year,month,"\n"))
+      # cat(paste(year,month,"\n"))
       # coords można lepiej na samym koncu dodać kolumne
       # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
       if (coords){
