@@ -3,6 +3,8 @@
 
 # climate
 
+PLEASE NOTE THAT THE PACKAGE IS NOT COMPLETED YET AND HASN'T BEEN PUBLISHED ON CRAN. THEREFORE, SOME OF THE BELOW ATTACHED INSTALLATION PROCEDURES ARE NOT VALID.
+
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
 [![CRAN
