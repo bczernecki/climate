@@ -7,6 +7,7 @@
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #' @examples \donttest{
 #'   # downloading data for Poznan-Lawica
