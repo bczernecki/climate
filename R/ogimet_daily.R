@@ -35,13 +35,13 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
     print(station_nr)
     
     # adding progress bar if at least 3 iterations are needed
-    if(length(dates) >=3 ) pb <- txtProgressBar(min = 0, max = length(dates)-1, style = 3)
+    if(length(dates)*length(station) >=3 ) pb <- txtProgressBar(min = 0, max = length(dates)*length(station)-1, style = 3)
     
     
     for (i in length(dates):1) {
       
       # update progressbar:
-      if(length(dates) >=3 ) setTxtProgressBar(pb, abs(length(dates) - i))
+      if(length(dates) >=3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)),"\n")
       
       year <- format(dates[i], "%Y")
       month <- format(dates[i], "%m")
