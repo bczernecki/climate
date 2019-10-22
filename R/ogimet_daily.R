@@ -43,7 +43,10 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
       a <-  getURL(linkpl2)
       a <- readHTMLTable(a, stringsAsFactors=FALSE)
       b <-  a[[length(a)]]
-      b=b[,1:(length(b)-8)]
+      if (sum(b[1,]=="Dailyweather summary", na.rm = T)) {
+        b=b[,1:(length(b)-8)]
+      } else {b=b[,1:length(b)]}
+      
       test=b[1:2,]
       #exeptions diferent names_col
       if ((length(test[2,!is.na(test[2,])])==6 & test[2,5]=="Int.")) {
