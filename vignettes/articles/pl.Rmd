@@ -1,0 +1,143 @@
+---
+title: "Wstęp do pakietu 'climate' (PL)"
+author: "Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Wstęp-do-pakietu-climate }
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(climate)
+library(tidyr)
+library(dplyr)
+options(scipen=999)
+```
+
+Głównym celem pakietu **climate** jest zapewnienie wygodnego i programowalnego dostępu do danych meteorologicznych 
+i hydrologicznych z publicznie dostępnych repozytoriów:
+
+- Polski Instytut Metrologii i Gospodarki Wodnej - Państwowy Instytut Badawczy (IMGW-PIB)
+
+- OGIMET (ogimet.com)
+
+- Strona University of Wyoming - dane atmosferycznego profilowania pionowego (http://weather.uwyo.edu/upperair/).
+
+## Funkcje
+
+
+
+Pakiet **climate** składa się z czterech głównych funkcji - dwóch dla danych meteorologicznych, jednej dla danych
+hydrologicznych i jednej dla sondowania meteo:
+
+1. Dane meteorologiczne 
+
+- **meteo_ogimet()** - Umożliwia pobieranie godzinnych i dziennych danych meteorologicznych ze stacji SYNOP dostępnych 
+w repozytorium ogimet.com. Każda stacja meteorologiczna (Synoptyczna) pracująca w ramach World Meteorological
+framework powinna być dostępne po roku 2000 roku 
+
+     - **stations_ogimet()** - Umożliwia uzyskiwanie współrzędnych geograficznych, położenia stacji nad poziomem 
+     morza oraz  identyfikatora WMO i nazwy stacji dla kraju określonej przez użytkownika; opcjonalnie 
+     wykreśl wyniki na mapie
+
+- **meteo_imgw()** - Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub 
+miesięcznym  o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji danepubliczne.imgw.pl. 
+Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej wersji paczki).
+
+- **meteo\_shortening()** - Skracanie nazw kolumn parametrów meteorologicznych
+    poprawiając czytelność pobranego zestawu danych i usuwanie zduplikowanych nazw kolumn.
+
+2. Dane hydrologiczne: 
+
+- **hydro_imgw()** -  Pobieranie danych hydrologicznych o interwale dziennym, miesięcznym lub  rocznym ze 
+stacji dostępnych w repozytorium danepubliczne.imgw.pl.
+Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej
+wersji paczki).
+
+
+3. Dane radiosondażowe : 
+
+- **meteo\_sounding()** - Pobieranie pomiarów pionowych profil atmosfery (danych radiosondażowych)
+
+## Przykłady
+
+Pokażemy, jak korzystać z naszego pakietu i przygotować dane do analizy przestrzennej z dodatkową pomocą paczek
+[dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) oraz 
+[tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
+Najpierw pobierzemy 10 lat (**2001-2010**) miesięcznych obserwacji hydrologicznych dla wszystkich dostępnych stacji i automatycznie dodają ich współrzędne przestrzenne.
+
+
+
+```{r data, echo = FALSE}
+h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
+head(h)
+```
+
+Zmienna  `idex` reprezentuje id ekstremum, gdzie„ 1”oznacza minimum, „2” oznacza średnią, a„3” maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
+Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym
+celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas 
+informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (` hyy`), szerokość geograficzną `X` i długość 
+geograficzną` Y`.
+Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w każdym roku za pomocą ** dplyr ** `summarise()`,
+oraz rozdzielimy dane według roku używając ** tidyr **' `spread ()` aby uzyskać roczne średnie maksymalne przepływy w 
+kolejnych kolumnach.
+  
+```{r filtering, eval=TRUE, include=TRUE}
+h2 = h %>%
+  filter(idex == 3) %>%
+  select(id, station, X, Y, hyy, Q) %>%
+  group_by(hyy, id, station, X, Y) %>%
+  summarise(srednie_roczne_Q = round(mean(Q, na.rm = TRUE),1)) %>% 
+  spread(hyy, srednie_roczne_Q)
+```
+
+```{r filtering2, echo=FALSE}
+library(knitr)
+kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
+```
+
+Wynik pokazuje jak zmienia się maksymalna roczna średnia prędkość przepływu wody w ciągu dekady dla wszystkich 
+dostępnych stacji w Polsce.
+Możemy zapisać to do:
+
+- **.csv** przy pomocą funckcji: `write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = T, row.names = F)`. 
+To polecenie zapisuje nasz wynik do pliku: `result.csv`, gdzie separatorem kolumn jest `;`, część dziesiętna liczby 
+następuje po `.`, zachowujemy nagłówki kolumn i usuwamy nazwy wierszy, które są po prostu liczbami obserwacji.
+
+- **.xlsx** przy pomocą funckcji: `write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)`
+To polecenie zapisuje nasz wynik do pliku: `result.xlsx` o nazwie arkusza `Poland`. Argument `append=TRUE` dodaje arkusz
+do istniejącego pliku `.xlsx`.
+By zapisać dane do formatu`.xlsx` najpierw należy zaisntalować pakiet **writexl** przy pomocy 
+komendy`install.packages("writexl")`, oraz dodać go do naszego środowiska: `library(writexl)`.
+ 
+```{r, eval=FALSE, include=TRUE}
+
+library(sf)
+library(tmap)
+library(rnaturalearth)
+library(rnaturalearthdata)
+world = ne_countries(scale = "medium", returnclass = "sf")
+
+h3 = h2 %>% 
+  filter(!is.na(X)) %>% 
+  st_as_sf(coords = c("X", "Y"))
+
+tm_shape(h3) + 
+  tm_symbols(size = as.character(c(2001:2010)),
+             title.size = "Średni przepływ maksymalny") +
+  tm_facets(free.scales = FALSE, ncol = 4) + 
+  tm_shape(world) + 
+  tm_borders(col = "black", lwd = 2) +
+  tm_layout(legend.position = c(-1.25, 0.05),
+            outer.margins = c(0, 0.05, 0, -0.25),
+            panel.labels = as.character(c(2001:2010)))
+```
+
+<!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
+

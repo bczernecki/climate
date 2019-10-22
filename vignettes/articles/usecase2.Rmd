@@ -1,0 +1,37 @@
+---
+title: "use_case2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## USE CASE - METEO (2) - DERECHO 2017-08-11
+
+1. Pobieranie danych godzinowych ze stacji meteo (SYNOP)
+2. Wybranie tylko interesującego przedziału czasu z najbardziej intensywnym przebiegiem zjawiska derecho (np. 2017-08-11, po godz. 12:00 UTC)
+3. Wybranie tylko interesujących elementów
+
+```{r}
+library(imgw)
+library(dplyr)
+library(rgdal)
+library(sp)
+
+# pobieranie danych:
+df <-  meteo(interval = "hourly", rank = "synop", year = 2017, status = FALSE, coords = TRUE )
+df <- filter(df, mm == 8, day %in% 11:12) %>% select(., X:hour, ws, gust, t2m, rh, slp, curr_weather)
+
+# pojedyncza godzina
+jednagodzina <- df %>% filter(hour == 16, day == 11) # wybranie tylko godziny 16 z 11.08
+plot(jednagodzina$X, jednagodzina$Y)
+text(jednagodzina$X+0.3, jednagodzina$Y, labels = jednagodzina$gust)
+
+coordinates(jednagodzina) <- ~X+Y
+
+spplot(jednagodzina["ws"])
+proj4string(jednagodzina) <- CRS("+init=epsg:4326") # nadajemy wspolrzedne dla ukladu wspolrzednych WGS-84
+jednagodzina <- spTransform(jednagodzina, CRS("+init=epsg:2180"))  # transformacja ukladu wspolrzednych na PUWG-1992
+#writeOGR(obj = jednagodzina, dsn = getwd(), layer="godz16.shp", driver = "ESRI Shapefile")
+

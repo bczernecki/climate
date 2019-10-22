@@ -3,6 +3,8 @@
 
 # climate
 
+PLEASE NOTE THAT THE PACKAGE IS NOT COMPLETED YET AND HASN'T BEEN PUBLISHED ON CRAN. THEREFORE, SOME OF THE BELOW ATTACHED INSTALLATION PROCEDURES ARE NOT VALID.
+
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
 [![CRAN
@@ -60,10 +62,11 @@ install_github("bczernecki/climate")
 
 ### Hydrological data
 
-  - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological
-    data from the SYNOP / CLIMATE / PRECIP stations available in the
-    danepubliczne.imgw.pl collection. It is a wrapper for
-    `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`.
+  - **hydro_imgw()** - Downloading with daily, monthly,annual intaerval hydrological
+    data from the stations available in the
+    danepubliczne.imgw.pl collection. It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
+    from `imgw` package (previous version of current package).
+
 
   - **hydro\_shortening()** - Shortening column names of hydrological
     parameters to improve the readability of downloaded dataset and

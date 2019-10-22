@@ -5,6 +5,7 @@
 #' @param date start and finish of date (e.g., date=c("2018-05-01","2018-07-01") )
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
+#' @param hour time for which the daily raport is generated. Set defoult as hour=6 
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #'
@@ -15,7 +16,7 @@
 #' }
 #'
 
-ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, station = c(12326,12330)){
+ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, station = c(12326,12330),hour=6){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -23,23 +24,31 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
   dates <-  unique(c(dates, as.Date(max(date))))
 
   # initalizing empty data frame for storing results:
-
+  cat(paste("Daily raports was genereted starting form", hour,"am each day. Set hour to change it","\n"))
   data_station <- data.frame("Date" = character(),"TemperatureCMax" = character(),"TemperatureCMin" = character(),"TemperatureCAvg" = character(), "TdAvgC" = character(),
                                   "HrAvg" = character(), "WindkmhDir" = character(), "WindkmhInt" = character(),"WindkmhGust" = character(),
                             "PresslevHp" = character(),"Precmm" = character(),"SunD1h"= character(),"SnowDepcm"= character(),
                             "TotClOct" = character(), "lowClOct" = character(),"station_ID"= character(),
                             "VisKm" = character(),stringsAsFactors = F)
-
-
+  
   for (station_nr in station){
     print(station_nr)
+    
+    # adding progress bar if at least 3 iterations are needed
+    if(length(dates)*length(station) >=3 ) pb <- txtProgressBar(min = 0, max = length(dates)*length(station)-1, style = 3)
+    
+    
     for (i in length(dates):1) {
+      
+      # update progressbar:
+      if(length(dates) >=3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)),"\n")
+      
       year <- format(dates[i], "%Y")
       month <- format(dates[i], "%m")
       day <- format(dates[i], "%d")
       ndays <- day
-      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
-      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ord=REV&Send=Send",sep="")
+      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=",hour,"&ord=REV&Send=Send",sep="")
+      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=",hour,"&ord=REV&Send=Send",sep="")
       a <-  getURL(linkpl2)
       a <- readHTMLTable(a, stringsAsFactors=FALSE)
       b <-  a[[length(a)]]
@@ -80,7 +89,7 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
 
         }
 
-      cat(paste(year,month,"\n"))
+      # cat(paste(year,month,"\n"))
       # coords można lepiej na samym koncu dodać kolumne
       # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
       if (coords){
