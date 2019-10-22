@@ -27,7 +27,7 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
   cat(paste("Daily raports was genereted starting form", hour,"am each day. Set hour to change it","\n"))
   data_station <- data.frame("Date" = character(),"TemperatureCMax" = character(),"TemperatureCMin" = character(),"TemperatureCAvg" = character(), "TdAvgC" = character(),
                                   "HrAvg" = character(), "WindkmhDir" = character(), "WindkmhInt" = character(),"WindkmhGust" = character(),
-                            "PresslevHp" = character(),"Precmm" = character(),"SunD1h"= character(),"SnowDepcm"= character(),
+                            "PresslevHp" = character(),PreselevHp = character(),"Precmm" = character(),"SunD1h"= character(),"SnowDepcm"= character(),
                             "TotClOct" = character(), "lowClOct" = character(),"station_ID"= character(),
                             "VisKm" = character(),stringsAsFactors = F)
   
@@ -65,7 +65,8 @@ ogimet_daily <- function(date=c(Sys.Date()-30, Sys.Date()),  coords = FALSE, sta
       }else if ((length(test[2,!is.na(test[2,])])==5 & test[2,5]=="Int.")) {
         names_col=unlist(c(test[1,1],paste(test[1,2],test[2,1:3],sep = "_"),test[1,3:4],paste(test[1,5],test[2,4:5],sep = "_"),test[1,c(6:(length(test)-3))]))
       }else { names_col="Error_column"}
-
+      
+        
       names_col <- gsub("[^A-Za-z0-9]", "", as.character(lapply(names_col, as.character), stringsAsFactors=FALSE))
       colnames(b) <-names_col
       b <- b[-c(1:2),]
