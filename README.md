@@ -3,8 +3,6 @@
 
 # climate
 
-PLEASE NOTE THAT THE PACKAGE IS NOT COMPLETED YET AND HASN'T BEEN PUBLISHED ON CRAN. THEREFORE, SOME OF THE BELOW ATTACHED INSTALLATION PROCEDURES ARE NOT VALID.
-
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
 [![CRAN
@@ -13,15 +11,15 @@ status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.or
 downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 
 The goal of the  **climate** R package is to automatize downloading of meteorological
-and hydrological data from the publicly available repositories:
+and hydrological data from publicly available repositories:
 
-- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming webpage - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
+- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 
 ## Installation
 
-The stable release of climate package from the [CRAN](https://CRAN.R-project.org) reposity can be installed with:
+~~The stable release of climate package from the [CRAN](https://CRAN.R-project.org) reposity can be installed with:~~
 
 ``` r
 install.packages("climate")
@@ -38,38 +36,26 @@ install_github("bczernecki/climate")
 
 ### Meteorological data
 
-  - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological
-    data from the SYNOP/CLIMATE/PRECIP stations available in the
-    danepubliczne.imgw.pl collection. It is a wrapper for
-    `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`.
-    
-  - **meteo_ogimet()** - Downloading hourly and daily meteorological
-    data from the SYNOP stations available in the
-    ogimet.com collection. Basically any meteorological (aka Synop) station working under 
-    the World Meteorological Organizaton framework 
-    after year 2000 should be accessible
-    
-    - **stations_ogimet()** - retrieving geographical coordinates, altitude, WMO ID 
-    and station names for the user-specified country name; 
-    optionally plot results on a map
+- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
+Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
-  - **meteo\_sounding()** - Downloading measurements of
-    the vertical profile of atmosphere (aka rawinsonde data)
+- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
-  - **meteo\_shortening()** - Shortening column names of meteorological
-    parameters to improve the readability of downloaded dataset and
-    removing duplicated column names
-
+- **meteo\_sounding()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+  
 ### Hydrological data
 
-  - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological
-    data from the SYNOP / CLIMATE / PRECIP stations available in the
-    danepubliczne.imgw.pl collection. It is a wrapper for
-    `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`.
+- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection.
+It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
-  - **hydro\_shortening()** - Shortening column names of hydrological
-    parameters to improve the readability of downloaded dataset and
-    removing duplicated column names
+### Auxiliary functions
+
+- **stations_ogimet()** - Retrieving geographical coordinates, altitude, WMO ID, and station names for the user-specified country name; optionally plot results on a map.
+
+- **meteo\_shortening()** - Shortening column names of meteorological parameters to improve the readability of downloaded dataset and removing duplicated column names
+
+- **hydro\_shortening()** - Shortening column names of hydrological parameters to improve the readability of downloaded dataset and removing duplicated column names
 
 ## Examples
 
@@ -105,5 +91,4 @@ head(h)
 
 ## Acknowledgment
 
-Institute of Meteorology and Water Management - National Research
-Institute, Ogimet.com and University of Wyoming are the sources of the data.
+Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute are the sources of the data.
