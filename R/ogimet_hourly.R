@@ -55,7 +55,14 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
 
   for (station_nr in station){
     print(station_nr)
+    # adding progress bar if at least 3 iterations are needed
+    if(length(dates)*length(station) >=3 ) pb <- txtProgressBar(min = 0, max = length(dates)*length(station)-1, style = 3)
+    
+#    print(station_nr)
     for (i in length(dates):1) {
+      
+      if(length(dates) >=3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)),"\n")
+      
       year <- format(dates[i], "%Y")
       month <- format(dates[i], "%m")
       day <- format(dates[i], "%d")
@@ -85,7 +92,8 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
 
       }
 
-      cat(paste(year, month, "\n"))
+      #cat(paste(year, month, "\n"))
+
       # coords można lepiej na samym koncu dodać kolumne
       # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
       if (coords){
