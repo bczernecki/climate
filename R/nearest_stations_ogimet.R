@@ -1,23 +1,23 @@
-#' Scrapping list of meteorological (Synop) stations for a defined country from the Ogimet webpage
+#' Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage
 #'
-#' Returns list of meteorological stations with its coordinates from the ogimet webpage. The returned list is valid only for a given day. 
-#' Possible selection of stations located closest to the indicated point. 
+#' Returns a list of meteorological stations with their coordinates from the ogimet webpage. 
+#' The returned list is valid only for a given day. 
+#' It is possible to select stations located closest to the indicated point. 
 #'
+#' @param country country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")
 #' @param date a day when measurements were done in all available locations
-#' @param country country name; for more than 2 words seperated with plus character (e.g. "United+Kingdom")
-#'  numeric fields (logical value TRUE (default) or FALSE)
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
-#' @param point a vector of two coordinates (longines, latitute) for point we want to find nearest stations (e.g. c(0,0))
-#' @param numbers_station numbers of nearest stations to select
+#' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
+#' @param numbers_station numbers of the nearest stations to select
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @examples \donttest{
-#'   stations_ogimet(country = "Australia", add_map = T)
+#'   stations_ogimet(country = "Australia", add_map = TRUE)
 #' }
 #'
-nearest_stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(), add_map = FALSE,nearest=FALSE, point=c(0,0),numbers_station=1){
+nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, nearest = FALSE, point = c(0, 0), numbers_station = 1){
   
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
@@ -27,7 +27,18 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(),
   month <- format(date, "%m")
   day <- format(date, "%d")
   ndays <- 1
-  linkpl2 <- paste0("http://ogimet.com/cgi-bin/gsynres?lang=en&state=",country,"&osum=no&fmt=html&ord=REV&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ndays=1&Send=send")
+  linkpl2 <-
+    paste0(
+      "http://ogimet.com/cgi-bin/gsynres?lang=en&state=",
+      country,
+      "&osum=no&fmt=html&ord=REV&ano=",
+      year,
+      "&mes=",
+      month,
+      "&day=",
+      day,
+      "&hora=06&ndays=1&Send=send"
+    )
   a <-  getURL(linkpl2)
   
   b <- strsplit(a, "Decoded synops since")
@@ -69,10 +80,10 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(),
   lat_hemisphere <-  gsub("-", "", lat_hemisphere)
   lat_hemisphere <- ifelse(lat_hemisphere == "S", -1, 1)
   
-  lon <- as.numeric(substr(res1[,2], 1, 3)) + (as.numeric(substr(res1[,2], 5, 6))/100)*1.6667
+  lon <- as.numeric(substr(res1[, 2], 1, 3)) + (as.numeric(substr(res1[, 2], 5, 6)) / 100)*1.6667
   lon <- lon*lon_hemisphere
   
-  lat <- as.numeric(substr(res1[,1], 1, 2)) + (as.numeric(substr(res1[,1], 4, 5))/100)*1.6667
+  lat <- as.numeric(substr(res1[, 1], 1, 2)) + (as.numeric(substr(res1[, 1], 4, 5)) / 100)*1.6667
   lat <- lat * lat_hemisphere
   
   res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
@@ -80,15 +91,18 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(),
   
   if(nearest == TRUE){
   point=as.data.frame(t(point))
-  names(point)=c("lon","lat")
-  distmatrix=rbind(point,res[,3:4])
-  distance_points=stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
-  res["distance [km]"]=distance_points*112.196672
-  orderd_distance=res[order(res$distance),]
-  res=orderd_distance[numbers_station,]
+  names(point) = c("lon", "lat")
+  distmatrix = rbind(point,res[, 3:4])
+  distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
+  res["distance [km]"] = distance_points * 112.196672
+  orderd_distance = res[order(res$distance), ]
+  res = orderd_distance[numbers_station, ]
   }
   
   if(add_map == TRUE){
+    if (FUTURE && !requireNamespace("maps", quietly = TRUE)){
+      stop("package maps required, please install it first")
+    }
     # plot labels a little bit higher...
     addfactor <- as.numeric(diff(stats::quantile(res$lat, na.rm = TRUE, c(0.48, 0.51))))
     addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)

@@ -17,7 +17,7 @@
 #' }
 #'
 
-ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()),  coords = FALSE, station = c(12326, 12330), hour = 6){
+ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, station = c(12326, 12330), hour = 6){
   
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 

@@ -2,7 +2,7 @@
 #'
 #' Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day
 #'
-#' @param country country name; for more than 2 words seperated with plus character (e.g. "United+Kingdom")
+#' @param country country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")
 #' @param date a day when measurements were done in all available locations
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
 #' @importFrom RCurl getURL
