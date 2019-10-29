@@ -1,4 +1,4 @@
-#' Scrapping of hourly meteorological (Synop) data from the Ogimet webpage
+#' Scrapping hourly meteorological (Synop) data from the Ogimet webpage
 #'
 #' Downloading hourly (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
 #'
