@@ -1,20 +1,19 @@
-#' Scrapping list of meteorological (Synop) stations for a defined country from the Ogimet webpage
+#' Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage
 #'
-#' Returns list of meteorological stations with its coordinates from the ogimet webpage. The returned list is valid only for a given day
+#' Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day
 #'
-#' @param date a day when measurements were done in all available locations
 #' @param country country name; for more than 2 words seperated with plus character (e.g. "United+Kingdom")
-#'  numeric fields (logical value TRUE (default) or FALSE)
+#' @param date a day when measurements were done in all available locations
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @examples \donttest{
-#'   stations_ogimet(country = "Australia", add_map = T)
+#'   stations_ogimet(country = "Australia", add_map = TRUE)
 #' }
 #'
-stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(), add_map = FALSE){
+stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -53,7 +52,7 @@ stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(), add_map
 
       res <- suppressWarnings(do.call("rbind", strsplit(res, " ")))
 
-      res1 <- res[,c(1,3,5:7)]
+      res1 <- res[, c(1, 3, 5:7)]
 
       lat <- as.numeric(substr(res1[, 1], 1, 2)) +
         (as.numeric(substr(res1[,1], 4, 5))/100) * 1.6667
@@ -66,26 +65,30 @@ stations_ogimet <- function(country = "United+Kingdom", date=Sys.Date(), add_map
       lat_hemisphere <-  gsub("-", "", lat_hemisphere)
       lat_hemisphere <- ifelse(lat_hemisphere == "S", -1, 1)
 
-      lon <- as.numeric(substr(res1[,2], 1, 3)) + (as.numeric(substr(res1[,2], 5, 6))/100)*1.6667
-      lon <- lon*lon_hemisphere
+      lon <- as.numeric(substr(res1[, 2], 1, 3)) + (as.numeric(substr(res1[, 2], 5, 6)) /
+                                                      100) * 1.6667
+      lon <- lon * lon_hemisphere
 
-      lat <- as.numeric(substr(res1[,1], 1, 2)) + (as.numeric(substr(res1[,1], 4, 5))/100)*1.6667
+      lat <- as.numeric(substr(res1[, 1], 1, 2)) + (as.numeric(substr(res1[, 1], 4, 5)) /
+                                                      100) * 1.6667
       lat <- lat * lat_hemisphere
 
       res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                         lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
 
       if(add_map == TRUE){
-      # plot labels a little bit higher...
-      addfactor <- as.numeric(diff(stats::quantile(res$lat, na.rm = TRUE, c(0.48, 0.51))))
-      addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
-      addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
-
-      graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
-      graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
-                     col = 'grey70', cex = 0.6)
-      maps::map(add = TRUE)
-
+        if (FUTURE && !requireNamespace("maps", quietly = TRUE)){
+          stop("package maps required, please install it first")
+        }
+        # plot labels a little bit higher...
+        addfactor <- as.numeric(diff(stats::quantile(res$lat, na.rm = TRUE, c(0.48, 0.51))))
+        addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
+        addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
+        
+        graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
+        graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
+                       col = 'grey70', cex = 0.6)
+        maps::map(add = TRUE)
       }
 
 

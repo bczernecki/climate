@@ -32,14 +32,14 @@ Depends:
 Imports: 
     RCurl,
     XML,
-    imgw,
-    maps
+    imgw
 Suggests: 
     testthat,
     knitr,
     rmarkdown,
     dplyr,
-    tidyr
+    tidyr,
+    maps
 URL: https://github.com/bczernecki/climate
 BugReports: https://github.com/bczernecki/climate/issues
 VignetteBuilder: knitr
