@@ -14,7 +14,7 @@ The goal of the  **climate** R package is to automatize downloading of meteorolo
 and hydrological data from publicly available repositories:
 
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
-- University of Wyoming webpage - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
+- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 
 ## Installation

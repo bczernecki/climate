@@ -1,6 +1,6 @@
 Package: climate
 Title: Meteorological and Hydrological Data Downloading
-Version: 0.2.0
+Version: 0.2.9
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",
            role = c("aut", "cre"),
@@ -17,8 +17,10 @@ Authors@R: c(person(given = "Bartosz",
            email = "nowosad.jakub@gmail.com", 
            comment = c(ORCID = "0000-0002-1057-3721")),
            person("IMGW-PIB", role = "ctb", comment = "source of the data"))
-Description: Download meteorological and hydrological data from the Institute of Meteorology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
-    EXPANDEXPANDEXPAND.
+Description: Automatize downloading of meteorological and hydrological data from publicly available repositories:
+    OGIMET (<http://ogimet.com/index.phtml.en>), 
+    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
+    and Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
     This package also allows for adding geographical coordinates for each observation.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -41,5 +43,3 @@ Suggests:
 URL: https://github.com/bczernecki/climate
 BugReports: https://github.com/bczernecki/climate/issues
 VignetteBuilder: knitr
-Remotes:
-    bczernecki/imgw
