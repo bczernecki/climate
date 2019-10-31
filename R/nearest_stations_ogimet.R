@@ -1,26 +1,27 @@
-#' Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage
+#' List of nearby synop stations for a defined geographical location
 #'
-#' Returns a list of meteorological stations with their coordinates from the ogimet webpage. 
+#' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the ogimet webpage. 
 #' The returned list is valid only for a given day. 
-#' It is possible to select stations located closest to the indicated point. 
 #'
 #' @param country country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")
-#' @param date a day when measurements were done in all available locations
-#' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
+#' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
+#' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
-#' @param nearest
-#' @param numbers_station numbers of the nearest stations to select
+#' @param nearest logical vector indicating whether to look only for the nearest stations or to all available stations in a country
+#' @param numbers_station how many nearest stations will be returned from the given geographical coordinates
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @examples \donttest{
-#'   stations_ogimet(country = "Australia", add_map = TRUE)
+#'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10,50), add_map = T, numbers_station = 60)
 #' }
 #'
-nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, nearest = FALSE, point = c(0, 0), numbers_station = 1){
+nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, nearest = TRUE, point = c(50, 0), numbers_station = 1){
   
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  
+  pt <- point
   
   # initalizing empty data frame for storing results:
   
@@ -91,13 +92,13 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
                     lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
   
   if(nearest == TRUE){
-  point=as.data.frame(t(point))
-  names(point) = c("lon", "lat")
-  distmatrix = rbind(point,res[, 3:4])
-  distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
-  res["distance [km]"] = distance_points * 112.196672
-  orderd_distance = res[order(res$distance), ]
-  res = orderd_distance[1:numbers_station, ]
+    point <- as.data.frame(t(point))
+    names(point) <-  c("lon", "lat")
+    distmatrix <-  rbind(point,res[, 3:4])
+    distance_points <-  stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
+    res["distance [km]"] <-  distance_points * 112.196672
+    orderd_distance <-  res[order(res$distance), ]
+    res <-  orderd_distance[1:numbers_station, ]
   }
   
   if(add_map == TRUE){
@@ -110,6 +111,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
     
     graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
+    graphics::points(x= pt[1], y= pt[2], col='blue', pch=19, cex=1)
     graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
                    col = 'grey70', cex = 0.6)
     maps::map(add = TRUE)
@@ -118,6 +120,5 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   
   
   return(res)
-  
 }
 

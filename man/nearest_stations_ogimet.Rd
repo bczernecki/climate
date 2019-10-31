@@ -2,31 +2,32 @@
 % Please edit documentation in R/nearest_stations_ogimet.R
 \name{nearest_stations_ogimet}
 \alias{nearest_stations_ogimet}
-\title{Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage}
+\title{List of nearby synop stations for a defined geographical location}
 \usage{
 nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
-  add_map = FALSE, nearest = FALSE, point = c(0, 0),
+  add_map = FALSE, nearest = TRUE, point = c(50, 0),
   numbers_station = 1)
 }
 \arguments{
 \item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
 
-\item{date}{a day when measurements were done in all available locations}
+\item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
 
-\item{add_map}{logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)}
+\item{add_map}{logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)}
+
+\item{nearest}{logical vector indicating whether to look only for the nearest stations or to all available stations in a country}
 
 \item{point}{a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))}
 
-\item{numbers_station}{numbers of the nearest stations to select}
+\item{numbers_station}{how many nearest stations will be returned from the given geographical coordinates}
 }
 \description{
-Returns a list of meteorological stations with their coordinates from the ogimet webpage.
+Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the ogimet webpage.
 The returned list is valid only for a given day.
-It is possible to select stations located closest to the indicated point.
 }
 \examples{
 \donttest{
-  stations_ogimet(country = "Australia", add_map = TRUE)
+  nearest_stations_ogimet(country = "United+Kingdom", point = c(10,50), add_map = T, numbers_station = 60)
 }
 
 }
