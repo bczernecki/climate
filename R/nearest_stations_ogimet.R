@@ -96,11 +96,11 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
   res["distance [km]"] = distance_points * 112.196672
   orderd_distance = res[order(res$distance), ]
-  res = orderd_distance[numbers_station, ]
+  res = orderd_distance[1:numbers_station, ]
   }
   
   if(add_map == TRUE){
-    if (FUTURE && !requireNamespace("maps", quietly = TRUE)){
+    if (!requireNamespace("maps", quietly = TRUE)){
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...
@@ -108,7 +108,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
     
-    graphics::plot(res$lat, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
+    graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
     graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
                    col = 'grey70', cex = 0.6)
     maps::map(add = TRUE)
