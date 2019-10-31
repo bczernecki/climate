@@ -34,7 +34,7 @@
 #' }
 #'
 
-sounding <- function(wmo_id, yy, mm, dd, hh){
+sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
 
   mm <- formatC(mm, width = 2, format = "d", flag = "0")
   dd <- formatC(dd, width = 2, format = "d", flag = "0")
