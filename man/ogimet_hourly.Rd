@@ -2,13 +2,13 @@
 % Please edit documentation in R/ogimet_hourly.R
 \name{ogimet_hourly}
 \alias{ogimet_hourly}
-\title{Scrapping of hourly meteorological (Synop) data from the Ogimet webpage}
+\title{Scrapping hourly meteorological (Synop) data from the Ogimet webpage}
 \usage{
 ogimet_hourly(date = c("2019-06-01", "2019-07-31"), coords = FALSE,
   station = c(12326, 12330), precip_split = TRUE)
 }
 \arguments{
-\item{date}{start and finish of date (e.g., date=c("2018-05-01","2018-07-01") )}
+\item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )}
 
 \item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
@@ -23,7 +23,7 @@ Downloading hourly (meteorological) data from the Synop stations available in th
 \examples{
 \donttest{
   # downloading data for Poznan-Lawica
-  poznan <- ogimet_hourly( station = 12330, coords = TRUE, precip_split = TRUE)
+  poznan <- ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
   head(poznan)
 }
 

@@ -2,25 +2,24 @@
 % Please edit documentation in R/ogimet_stations.R
 \name{stations_ogimet}
 \alias{stations_ogimet}
-\title{Scrapping list of meteorological (Synop) stations for a defined country from the Ogimet webpage}
+\title{Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage}
 \usage{
 stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
   add_map = FALSE)
 }
 \arguments{
-\item{country}{country name; for more than 2 words seperated with plus character (e.g. "United+Kingdom")
-numeric fields (logical value TRUE (default) or FALSE)}
+\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
 
 \item{date}{a day when measurements were done in all available locations}
 
 \item{add_map}{logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)}
 }
 \description{
-Returns list of meteorological stations with its coordinates from the ogimet webpage. The returned list is valid only for a given day
+Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day
 }
 \examples{
 \donttest{
-  stations_ogimet(country = "Australia", add_map = T)
+  stations_ogimet(country = "Australia", add_map = TRUE)
 }
 
 }

@@ -2,17 +2,19 @@
 % Please edit documentation in R/ogimet_daily.R
 \name{ogimet_daily}
 \alias{ogimet_daily}
-\title{Scrapping of daily meteorological (Synop) data from the Ogimet webpage}
+\title{Scrapping daily meteorological (Synop) data from the Ogimet webpage}
 \usage{
 ogimet_daily(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE,
-  station = c(12326, 12330))
+  station = c(12326, 12330), hour = 6)
 }
 \arguments{
-\item{date}{start and finish of date (e.g., date=c("2018-05-01","2018-07-01") )}
+\item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )}
 
 \item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
+
+\item{hour}{time for which the daily raport is generated. Set defoult as hour = 6}
 }
 \description{
 Downloading daily (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
@@ -20,7 +22,7 @@ Downloading daily (meteorological) data from the Synop stations available in the
 \examples{
 \donttest{
   # downloading data for Poznan-Lawica
-  poznan <- ogimet_daily(station = 12330, date = c("2019-01-01","2019-03-31"), coords = TRUE)
+  poznan <- ogimet_daily(station = 12330, date = c("2019-01-01", "2019-03-31"), coords = TRUE)
   head(poznan)
 }
 
