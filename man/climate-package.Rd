@@ -4,7 +4,7 @@
 \name{climate-package}
 \alias{climate}
 \alias{climate-package}
-\title{climate: An interface for downloading meteorological (and hydrological) dataset}
+\title{climate: Interface for Downloading Meteorological (and Hydrological) Datasets}
 \description{
 Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
