@@ -1,6 +1,6 @@
 #' Shortening column names for hydrological variables
 #'
-#' Shortening column names of hydrological parameters to improve the readability of downloaded dataset and removing duplicated column names
+#' Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 #'
 #' @param data downloaded dataset with original column names
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
@@ -8,14 +8,14 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   monthly <- hydro_monthly(year = 1969)
+#'   monthly <- hydro("monthly", year = 1969)
 #'   colnames(monthly)
-#'   abbr <- hydro_shortening(data = monthly, col_names = "polish", remove_duplicates = TRUE)
+#'   abbr <- hydro_shortening_imgw(data = monthly, col_names = "polish", remove_duplicates = TRUE)
 #'   head(abbr)
 #' }
 #'
 
-hydro_shortening <- function(data, col_names = "short", remove_duplicates = TRUE){
+hydro_shortening_imgw <- function(data, col_names = "short", remove_duplicates = TRUE){
 
   if (col_names != "polish"){
     abbrev <- imgw::hydro_abbrev

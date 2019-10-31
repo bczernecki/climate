@@ -10,7 +10,7 @@
 #'     \item{abbr_eng} {shorten column names with abbreviations derived from the most popular scheme used for meteorological parameters}
 #'     \item{fullname_eng} {detailed description of downloaded meteorological variables}
 #' }
-#' The object is created mostly to be used altogether with the meteo_shortening function
+#' The object is created mostly to be used altogether with the meteo_shortening_imgw function
 #'
 #' @docType data
 #' @keywords datasets meteo abbreviations shortening

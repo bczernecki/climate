@@ -1,8 +1,8 @@
 context("hydro-metadata")
 
-h_d <- hydro_metadata("daily")
-h_m <- hydro_metadata("monthly")
-h_a <- hydro_metadata("semiannual_and_annual")
+h_d <- hydro_metadata_imgw("daily")
+h_m <- hydro_metadata_imgw("monthly")
+h_a <- hydro_metadata_imgw("semiannual_and_annual")
 
 test_that("hydro-metadata works!", {
   expect_equal(dim(h_d[[1]]), c(10, 1))
