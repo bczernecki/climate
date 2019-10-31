@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   profile <- sounding(wmo_id = 12120, yy = 2019, mm = 4, dd = 4, hh = 0)
+#'   profile <- sounding_wyoming(wmo_id = 12120, yy = 2019, mm = 4, dd = 4, hh = 0)
 #'   head(profile)
 #'   plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 #' }
