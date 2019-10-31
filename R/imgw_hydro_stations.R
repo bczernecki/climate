@@ -1,10 +1,10 @@
-#' @name meteo_stations
-#' @title Location of the meteorological stations
+#' @name imgw_hydro_stations
+#' @title Location of the hydrological stations from the danepubliczne.imgw.pl collection
 #'
 #' @description The object contains weather stations
 #' coordinates, ID numbers, and elevations
 #'
-#' @format The data contains a data.frame with 1998 obs. of 3 variables:
+#' @format The data contains a data.frame with 1304 obs. of 3 variables:
 #' \itemize{
 #'     \item{id} {Station ID}
 #'     \item{X} {Longitude}
@@ -15,6 +15,6 @@
 #' @docType data
 #' @keywords datasets meteo
 #' @examples
-#' data(meteo_stations)
-#' head(meteo_stations)
-"meteo_stations"
+#' data(imgw_hydro_stations)
+#' head(imgw_hydro_stations)
+"imgw_hydro_stations"

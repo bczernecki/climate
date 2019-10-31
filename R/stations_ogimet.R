@@ -77,7 +77,7 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
                         lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
 
       if(add_map == TRUE){
-        if (FUTURE && !requireNamespace("maps", quietly = TRUE)){
+        if (!requireNamespace("maps", quietly = TRUE)){
           stop("package maps required, please install it first")
         }
         # plot labels a little bit higher...

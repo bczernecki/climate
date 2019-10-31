@@ -8,6 +8,7 @@
 #' @param date a day when measurements were done in all available locations
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
+#' @param nearest
 #' @param numbers_station numbers of the nearest stations to select
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable

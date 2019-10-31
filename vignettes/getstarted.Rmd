@@ -29,49 +29,36 @@ and hydrological data from publicly available repositories:
 
 ## Functions 
 
-The **climate** package consists of four main functions - two for meteorological data, one for hydrological data and one for sounding meteo:
+The **climate** package consists of four main functions - two for meteorological data, one for hydrological data and one for sounding data:
 
 1. Meteorological data:
 
-- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the
-ogimet.com collection. Basically any meteorological (aka Synop) station working under the World Meteorological
-Organizaton framework after year 2000 should be accessible
-
-     - **stations_ogimet()** - retrieving geographical coordinates, altitude, WMO ID 
-      and station names for the user-specified country name; 
-      optionally plot results on a map
-
-- **meteo_imgw()** -  Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP
-stations available in the danepubliczne.imgw.pl collection. It is a wrapper for `meteo_monthly()`, `meteo_daily()`,
-and `meteo_hourly()` from **imgw** package (previous version of current package).
-
-- **meteo\_shortening()** - Shortening column names of meteorological
-    parameters to improve the readability of downloaded dataset and
-    removing duplicated column names
+- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
+Meteorological (aka Synop) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
+- **meteo_imgw()** -  Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`,
+and `meteo_hourly()` from **imgw** package.
 
 2. Hydrological data: 
 
-- **hydro_imgw()** -  Downloading with daily, monthly,annual intaerval hydrological
-    data from the stations available in the
-    danepubliczne.imgw.pl collection. It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
-    from **imgw** package (previous version of current package).
+- **hydro_imgw()** -  Downloading with daily, monthly, annual interval hydrological data from the stations available in the danepubliczne.imgw.pl collection. 
+It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`    from **imgw** package.
 
 3. Rawinsonde data: 
 
-- **meteo\_sounding()** - Downloading measurements of
-    the vertical profile of atmosphere (aka rawinsonde data)
+- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
     
 ## Application
 
 We will show how to use our package and prepare the data for spatial analysis with the additional help of the [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) packages.
 Firstly, we download ten years (**2001-2010**) of monthly hydrological observations for all stations available and automatically add their spatial coordinates. 
 
-```{r data, echo = FALSE}
+```{r data}
 h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
 
-The `idex` variable represents id of the extremum, where `1` means minimum, `2` mean, and `3` maximum.^[You can find more information about this in the `hydro_abbrev` dataset.]
+The `idex` variable represents id of the extremum, where `1` means minimum, `2` mean, and `3` maximum.^[You can find more information about this in the `imgw_hydro_abbrev` dataset.]
 Hydrologists often use the maximum value so we will filter the data and select only the station `id`, hydrological year (`hyy`), latitude `X` and longitude `Y`.
 Next, we will calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
@@ -80,8 +67,8 @@ h2 = h %>%
   filter(idex == 3) %>%
   select(id, station, X, Y, hyy, Q) %>%
   group_by(hyy, id, station, X, Y) %>%
-  summarise(srednie_roczne_Q = round(mean(Q, na.rm = TRUE), 1)) %>% 
-  spread(hyy, srednie_roczne_Q)
+  summarise(annual_mean_Q = round(mean(Q, na.rm = TRUE), 1)) %>% 
+  pivot_wider(names_from = hyy, values_from = annual_mean_Q)
 ```
 
 ```{r filtering2, echo=FALSE}
@@ -90,18 +77,17 @@ kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing."
 ```
 
 <!-- The resulting table can be easily exported to any spatial software with a changing annual maximum annual average water flow rate over the decade for Poland as a whole. -->
-The result represent changing annual maximum average of water flow rate over the decade for all available stations in Poland. 
+The result represents changes in the annual maximum average of water flow rate over the decade for all available stations in Poland. 
 We can save it to:
 
 - `.csv` with: `write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = TRUE, row.names = FALSE)`. 
-This command saves our result to `result.csv` where the column's separator is `;`, the decimal is `.`, we are keeping the headers of columns and remove names of rows which are simply numbers of observation.
+This command saves our result to `result.csv` where the column's separator is `;`, the decimal is `.`, we are keeping the headers of columns and remove names of rows.
 
 - `.xlsx` with: `write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)`
-This command saves our result to result.xlsx with the name of the sheet `Poland`. Argument `append=TRUE` add the sheet to already existing `xlsx` file.
-To save data in `.xlsx` you have first to install package with command: `install.packages("writexl")`, and add it: `library(writexl)`.
+This command saves our result to result.xlsx with the name of the sheet `Poland`. Argument `append = TRUE` adds the sheet to already existing `xlsx` file.
+To save data in `.xlsx` you have first to install the **writexl** package with command: `install.packages("writexl")`, and add it: `library(writexl)`.
  
-<!-- dodatkowo można pokazać jak zapisać wynik do formatu teskstowego/excela/przestrzennego -->
-<!-- nie umiem zapisać do formatu przestrzennego -->
+The annual means of maximum flow can be also presented on the map using the **tmap** package:
 
 ```{r, eval=FALSE, include=TRUE}
 library(sf)
@@ -116,7 +102,7 @@ h3 = h2 %>%
 
 tm_shape(h3) + 
   tm_symbols(size = as.character(c(2001:2010)),
-             title.size = "Średni przepływ maksymalny") +
+             title.size = "The annual means of maximum flow") +
   tm_facets(free.scales = FALSE, ncol = 4) + 
   tm_shape(world) + 
   tm_borders(col = "black", lwd = 2) +
