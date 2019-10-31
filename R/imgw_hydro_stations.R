@@ -1,5 +1,5 @@
 #' @name imgw_hydro_stations
-#' @title Location of the hydrological stations
+#' @title Location of the hydrological stations from the danepubliczne.imgw.pl collection
 #'
 #' @description The object contains weather stations
 #' coordinates, ID numbers, and elevations

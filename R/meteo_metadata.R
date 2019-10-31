@@ -9,12 +9,12 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   meta <- meteo_metadata(interval = "hourly", rank = "synop")
-#'   meta <- meteo_metadata(interval = "daily", rank = "synop")
-#'   meta <- meteo_metadata(interval = "monthly", rank = "precip")
+#'   meta <- meteo_metadata_imgw(interval = "hourly", rank = "synop")
+#'   meta <- meteo_metadata_imgw(interval = "daily", rank = "synop")
+#'   meta <- meteo_metadata_imgw(interval = "monthly", rank = "precip")
 #' }
 
-meteo_metadata <- function(interval, rank){ # interval moze byc: monthly, hourly, hourly
+meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, hourly, hourly
   b <- NULL
 
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"

@@ -1,6 +1,6 @@
 #' Shortening column names for meteorological variables
 #'
-#' Shortening column names of meteorological parameters to improve the readability of downloaded dataset and removing duplicated column names
+#' Shortening column names of meteorological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names 
 #'
 #' @param data downloaded dataset with original column names
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
@@ -8,14 +8,14 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   monthly <- meteo_monthly(rank = "climate", year = 1969)
+#'   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
 #'   colnames(monthly)
-#'   abbr <- meteo_shortening(data = monthly, col_names = "short", remove_duplicates = TRUE)
+#'   abbr <- meteo_shortening_imgw(data = monthly, col_names = "short", remove_duplicates = TRUE)
 #'   head(abbr)
 #' }
 #'
 
-meteo_shortening <- function(data, col_names = "short", remove_duplicates = TRUE){
+meteo_shortening_imgw <- function(data, col_names = "short", remove_duplicates = TRUE){
 
   if (col_names != "polish"){
     abbrev <- imgw::meteo_abbrev
