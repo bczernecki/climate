@@ -1,4 +1,4 @@
-#' @name hydro_abbrev
+#' @name imgw_hydro_abbrev
 #' @title Definitions of hydrological parameters used for shortening column names
 #'
 #' @description The object contains 3 columns that are currently used for improving readability of the downloaded dataset:
@@ -15,7 +15,7 @@
 #' @docType data
 #' @keywords datasets hydro abbreviations shortening
 #' @examples
-#' data(hydro_abbrev)
-#' head(hydro_abbrev)
-"hydro_abbrev"
+#' data(imgw_hydro_abbrev)
+#' head(imgw_hydro_abbrev)
+"imgw_hydro_abbrev"
 

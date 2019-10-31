@@ -1,4 +1,4 @@
-#' @name hydro_stations
+#' @name imgw_hydro_stations
 #' @title Location of the hydrological stations
 #'
 #' @description The object contains weather stations
@@ -15,6 +15,6 @@
 #' @docType data
 #' @keywords datasets meteo
 #' @examples
-#' data(hydro_stations)
-#' head(hydro_stations)
-"hydro_stations"
+#' data(imgw_hydro_stations)
+#' head(imgw_hydro_stations)
+"imgw_hydro_stations"
