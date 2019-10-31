@@ -5,8 +5,7 @@
 \title{List of nearby synop stations for a defined geographical location}
 \usage{
 nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
-  add_map = FALSE, nearest = TRUE, point = c(50, 0),
-  numbers_station = 1)
+  add_map = FALSE, point = c(0, 0), numbers_station = 1)
 }
 \arguments{
 \item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
@@ -14,8 +13,6 @@ nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
 \item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
 
 \item{add_map}{logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)}
-
-\item{nearest}{logical vector indicating whether to look only for the nearest stations or to all available stations in a country}
 
 \item{point}{a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))}
 

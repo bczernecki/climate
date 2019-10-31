@@ -7,7 +7,6 @@
 #' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
-#' @param nearest logical vector indicating whether to look only for the nearest stations or to all available stations in a country
 #' @param numbers_station how many nearest stations will be returned from the given geographical coordinates
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
@@ -17,12 +16,9 @@
 #'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10,50), add_map = T, numbers_station = 60)
 #' }
 #'
-<<<<<<< HEAD
-nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, nearest = TRUE, point = c(50, 0), numbers_station = 1){
-=======
+
 nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, point = c(0, 0), numbers_station = 1){
->>>>>>> 47133b4ebd3d02facad980c26b00ca9ba84c6149
-  
+
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   pt <- point
@@ -95,18 +91,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                     lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
   
-<<<<<<< HEAD
-  if(nearest == TRUE){
-    point <- as.data.frame(t(point))
-    names(point) <-  c("lon", "lat")
-    distmatrix <-  rbind(point,res[, 3:4])
-    distance_points <-  stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
-    res["distance [km]"] <-  distance_points * 112.196672
-    orderd_distance <-  res[order(res$distance), ]
-    res <-  orderd_distance[1:numbers_station, ]
-  }
-=======
- 
+
   point=as.data.frame(t(point))
   names(point) = c("lon", "lat")
   distmatrix = rbind(point,res[, 3:4])
@@ -115,7 +100,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   orderd_distance = res[order(res$distance), ]
   res = orderd_distance[1:numbers_station, ]
 
->>>>>>> 47133b4ebd3d02facad980c26b00ca9ba84c6149
+
   
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
