@@ -8,7 +8,7 @@ nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
   add_map = FALSE, point = c(0, 0), numbers_station = 1)
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
+\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")}
 
 \item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
 
@@ -24,7 +24,8 @@ The returned list is valid only for a given day.
 }
 \examples{
 \donttest{
-  nearest_stations_ogimet(country = "United+Kingdom", point = c(10,50), add_map = T, numbers_station = 60)
+  nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),
+     add_map = TRUE, numbers_station = 60)
 }
 
 }
