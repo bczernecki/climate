@@ -28,9 +28,9 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
 
   cat(
     paste(
-      "Daily raports was genereted starting form",
+      "Daily raports were genereted starting from",
       hour,
-      "am each day. Set hour to change it",
+      "am each day. Use the hour argument to change it",
       "\n"
     )
   )
