@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # climate
 
 [![Build
@@ -49,13 +46,12 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` fro
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection.
 It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
-### Auxiliary functions
+### Auxiliary functions and datasets
 
-- **stations_ogimet()** - Retrieving geographical coordinates, altitude, WMO ID, and station names for the user-specified country name; optionally plot results on a map.
-
-- **meteo\_shortening()** - Shortening column names of meteorological parameters to improve the readability of downloaded dataset and removing duplicated column names
-
-- **hydro\_shortening()** - Shortening column names of hydrological parameters to improve the readability of downloaded dataset and removing duplicated column names
+- **stations_ogimet()** -
+- **nearest_stations_ogimet()** - 
+- **meteo_imgw_stations** - 
+- **hydro_imgw_stations** -
 
 ## Examples
 
@@ -92,3 +88,9 @@ head(h)
 ## Acknowledgment
 
 Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute are the sources of the data.
+
+## Contribution
+
+Contributions to this package are welcome. 
+The preferred method of contribution is through a GitHub pull request. 
+Feel also free to contact us by creating [an issue](https://github.com/bczernecki/climate/issues).
