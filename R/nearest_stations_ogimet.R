@@ -21,10 +21,7 @@
 nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, point = c(0, 0), numbers_station = 1){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-  if (length(country)!=1) {
-    stop("To many country selected. Please choose one country")
-  }
-  
+
   if (length(point)>2) {
     stop("To many points to calculating distance. Please choose one point")
   } else if (length(point)<2) {
@@ -38,7 +35,10 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   pt <- point
   
   # initalizing empty data frame for storing results:
-  
+  result=NULL
+  for (number_countires in country) {
+  #  print(number_countires)
+
   year <- format(date, "%Y")
   month <- format(date, "%m")
   day <- format(date, "%d")
@@ -46,7 +46,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   linkpl2 <-
     paste0(
       "http://ogimet.com/cgi-bin/gsynres?lang=en&state=",
-      country,
+      number_countires,
       "&osum=no&fmt=html&ord=REV&ano=",
       year,
       "&mes=",
@@ -64,7 +64,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   
   b21 <- unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
   
-  pattern <- paste0(" (", gsub(x = country, pattern = "+", replacement = " ", fixed = TRUE))
+  pattern <- paste0(" (", gsub(x = number_countires, pattern = "+", replacement = " ", fixed = TRUE))
   b22 <- unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
   
   b1 <- data.frame(str = b1[[1]], start = b21, stop = b22, stringsAsFactors = FALSE)
@@ -104,18 +104,20 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   
   res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                     lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-  if (dim(res)[1]==0) {
+  result=rbind(result,res)
+}
+  if (dim(result)[1]==0) {
     stop("Wrong name of country, please check station index database at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
     
 
   point=as.data.frame(t(point))
   names(point) = c("lon", "lat")
-  distmatrix = rbind(point,res[, 3:4])
-  distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(res)[1]]
-  res["distance [km]"] = distance_points * 112.196672
-  orderd_distance = res[order(res$distance), ]
-  res = orderd_distance[1:numbers_station, ]
+  distmatrix = rbind(point,result[, 3:4])
+  distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
+  result["distance [km]"] = distance_points * 112.196672
+  orderd_distance = result[order(result$distance), ]
+  result = orderd_distance[1:numbers_station, ]
 
 
   
@@ -124,20 +126,20 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...
-    addfactor <- as.numeric(diff(stats::quantile(res$lat, na.rm = TRUE, c(0.48, 0.51))))
+    addfactor <- as.numeric(diff(stats::quantile(result$lat, na.rm = TRUE, c(0.48, 0.51))))
     addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
     
-    graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude', 
-                   xlim=(c(min(c(res$lon,point[1]))-0.5, max(c(res$lon,point[1]))+0.5)),
-                   ylim=(c(min(c(res$lat,point[2]))-0.5, max(c(res$lat,point[2]))+0.5)))
-    graphics::points(x= pt[1], y= pt[2], col='blue', pch=19, cex=1)
-    graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
+    graphics::plot(result$lon, result$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude', 
+                   xlim=(c(min(c(result$lon,point$lon))-0.5, max(c(result$lon,point$lon))+0.5)),
+                   ylim=(c(min(c(result$lat,point$lon))-0.5, max(c(result$lat,point$lon))+0.5)))
+    graphics::points(x= point[1], y= point[2], col='blue', pch=19, cex=1)
+    graphics::text(result$lon, result$lat + addfactor, labels = result$station_names,
                    col = 'grey70', cex = 0.6)
     maps::map(add = TRUE)
     
   }
    }
-  return(res)
+  return(result)
 }
 
