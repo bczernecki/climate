@@ -57,7 +57,6 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
 
   txt <- read.fwf(file = temp, widths = 1000)
   sects <- grep(pattern = "PRE>", x = txt$V1)
-rm(df)
   tryCatch({
     df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
                    n = (sects[2] - (sects[1] + 5)))
