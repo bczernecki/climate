@@ -21,7 +21,20 @@
 nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, point = c(0, 0), numbers_station = 1){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  if (length(country)!=1) {
+    stop("To many country selected. Please choose one country")
+  }
   
+  if (length(point)>2) {
+    stop("To many points to calculating distance. Please choose one point")
+  } else if (length(point)<2) {
+    stop("Point need to have to coordinates. Please change your selection")
+  }
+  
+  if (length(date)!=1) {
+    stop("You can check available nearest stations for one day. Please chenge selection")
+    
+  }
   pt <- point
   
   # initalizing empty data frame for storing results:
@@ -91,7 +104,10 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   
   res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                     lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-  
+  if (dim(res)[1]==0) {
+    stop("Wrong name of country, please check station index database at 
+         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
+    
 
   point=as.data.frame(t(point))
   names(point) = c("lon", "lat")
@@ -112,15 +128,16 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
     
-    graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude')
+    graphics::plot(res$lon, res$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude', 
+                   xlim=(c(min(c(res$lon,point[1]))-0.5, max(c(res$lon,point[1]))+0.5)),
+                   ylim=(c(min(c(res$lat,point[2]))-0.5, max(c(res$lat,point[2]))+0.5)))
     graphics::points(x= pt[1], y= pt[2], col='blue', pch=19, cex=1)
     graphics::text(res$lon, res$lat + addfactor, labels = res$station_names,
                    col = 'grey70', cex = 0.6)
     maps::map(add = TRUE)
     
   }
-  
-  
+   }
   return(res)
 }
 

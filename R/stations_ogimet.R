@@ -17,7 +17,14 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  # initalizing empty data frame for storing results:
+  if (length(country)!=1) {
+    stop("To many country selected. Please choose one country")
+  }
+  
+  if (length(date)!=1) {
+    stop("You can check available nearest stations for one day. Please chenge selection")
+    
+  }  # initalizing empty data frame for storing results:
 
       year <- format(date, "%Y")
       month <- format(date, "%m")
@@ -75,7 +82,10 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
 
       res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                         lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-
+      if (dim(res)[1]==0) {
+        stop("Wrong name of country, please check station index database at 
+         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
+      }
       if(add_map == TRUE){
         if (!requireNamespace("maps", quietly = TRUE)){
           stop("package maps required, please install it first")
@@ -91,7 +101,7 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
         maps::map(add = TRUE)
       }
 
-
+ 
   return(res)
 
 }
