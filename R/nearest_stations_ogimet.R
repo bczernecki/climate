@@ -139,6 +139,6 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     
   }
   
-  result
+  return(result)
 }
 
