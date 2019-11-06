@@ -131,7 +131,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     
     graphics::plot(result$lon, result$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude', 
                    xlim=(c(min(c(result$lon,point$lon))-0.5, max(c(result$lon,point$lon))+0.5)),
-                   ylim=(c(min(c(result$lat,point$lon))-0.5, max(c(result$lat,point$lon))+0.5)))
+                   ylim=(c(min(c(result$lat,point$lat))-0.5, max(c(result$lat,point$lat))+0.5)))
     graphics::points(x= point[1], y= point[2], col='blue', pch=19, cex=1)
     graphics::text(result$lon, result$lat + addfactor, labels = result$station_names,
                    col = 'grey70', cex = 0.6)
@@ -139,6 +139,6 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     
   }
   
-  return(result)
+  result
 }
 
