@@ -36,10 +36,19 @@
 
 sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
 
+  
+  if (length(yy)!=1 || length(mm)!=1 || length(dd)!=1 || length(hh)!=1) {
+    stop("The function supports downloading data for a given day. Please change arguments yy, mm, dd, hh to single values")
+  }
+  
+  if (length(wmo_id)!=1) {
+    stop("Function supports downloading data for one station. Please change argument to single values")
+  }
+  
   mm <- formatC(mm, width = 2, format = "d", flag = "0")
   dd <- formatC(dd, width = 2, format = "d", flag = "0")
   hh <- formatC(hh, width = 2, format = "d", flag = "0")
-
+ 
   url <- paste0("http://weather.uwyo.edu/cgi-bin/sounding?region=europe&TYPE=TEXT%3ALIST&YEAR=",
                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=", wmo_id)
 
@@ -48,8 +57,16 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
 
   txt <- read.fwf(file = temp, widths = 1000)
   sects <- grep(pattern = "PRE>", x = txt$V1)
-  df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
-                 n = (sects[2] - (sects[1] + 5)))
+rm(df)
+  tryCatch({
+    df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
+                   n = (sects[2] - (sects[1] + 5)))
+  }, error=function(cond) {
+    # Choose a return value in case of error
+    message("Wrong wmo_id number. Please check wmo_id numbers at:
+          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
+  }
+  )
   colnames(df) <- c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
                     "MIXR", "DRCT", "SKNT", "THTA", "THTE", "THTV")
 
