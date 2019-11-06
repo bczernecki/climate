@@ -32,8 +32,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     stop("You can check available nearest stations for one day. Please chenge selection")
     
   }
-  pt <- point
-  
+ 
   # initalizing empty data frame for storing results:
   result=NULL
   for (number_countires in country) {
@@ -109,7 +108,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   if (dim(result)[1]==0) {
     stop("Wrong name of country, please check station index database at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
-    
+  } 
 
   point=as.data.frame(t(point))
   names(point) = c("lon", "lat")
@@ -139,7 +138,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     maps::map(add = TRUE)
     
   }
-   }
+  
   return(result)
 }
 
