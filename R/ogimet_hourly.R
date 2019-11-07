@@ -75,8 +75,7 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
       b <-  a[[length(a)]]
       
       if (is.null(b)) {
-        stop(paste0("Wrong ID station(",station_nr,") Please change this ID number. Check station index database at 
-         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+        stop(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
       } 
       
       colnames(b) <- gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))

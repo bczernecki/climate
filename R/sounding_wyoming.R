@@ -42,7 +42,7 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
   }
   
   if (length(wmo_id)!=1) {
-    stop("Function supports downloading data for one station. Please change argument to single values")
+    stop("The function supports downloading data for one station at the time. Please change the `wmo_id` argument to a single value")
   }
   
   mm <- formatC(mm, width = 2, format = "d", flag = "0")
@@ -62,7 +62,7 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
                    n = (sects[2] - (sects[1] + 5)))
   }, error=function(cond) {
     # Choose a return value in case of error
-    message("Wrong wmo_id number. Please check wmo_id numbers at:
+    message("Wrong wmo_id number. Please check wmo_id numbers at
           https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   }
   )

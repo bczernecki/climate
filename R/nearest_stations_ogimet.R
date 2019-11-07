@@ -23,14 +23,13 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
   if (length(point)>2) {
-    stop("To many points to calculating distance. Please choose one point")
+    stop("Too many points for the distance calculations. Please provide just one point")
   } else if (length(point)<2) {
-    stop("Point need to have to coordinates. Please change your selection")
+    stop("The point needs to have two coordinates. Please change the `point` argument")
   }
   
   if (length(date)!=1) {
-    stop("You can check available nearest stations for one day. Please chenge selection")
-    
+    stop("You can check the available nearest stations for one day only. Please provide just one date")
   }
  
   # initalizing empty data frame for storing results:
@@ -106,7 +105,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
   result=rbind(result,res)
 }
   if (dim(result)[1]==0) {
-    stop("Wrong name of country, please check station index database at 
+    stop("Wrong name of a country. Please check countries names at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   } 
 
@@ -129,12 +128,38 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
     addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
     
-    graphics::plot(result$lon, result$lat, col='red', pch=19, xlab = 'longitude', ylab = 'latitude', 
-                   xlim=(c(min(c(result$lon,point$lon))-0.5, max(c(result$lon,point$lon))+0.5)),
-                   ylim=(c(min(c(result$lat,point$lat))-0.5, max(c(result$lat,point$lat))+0.5)))
-    graphics::points(x= point[1], y= point[2], col='blue', pch=19, cex=1)
-    graphics::text(result$lon, result$lat + addfactor, labels = result$station_names,
-                   col = 'grey70', cex = 0.6)
+    graphics::plot(
+      result$lon,
+      result$lat,
+      col = "red",
+      pch = 19,
+      xlab = "longitude",
+      ylab = "latitude",
+      xlim = (c(min(
+        c(result$lon, point$lon)
+      ) - 0.5, max(
+        c(result$lon, point$lon)
+      ) + 0.5)),
+      ylim = (c(min(
+        c(result$lat, point$lat)
+      ) - 0.5, max(
+        c(result$lat, point$lat)
+      ) + 0.5))
+    )
+    graphics::points(
+      x = point[1],
+      y = point[2],
+      col = "blue",
+      pch = 19,
+      cex = 1
+    )
+    graphics::text(
+      result$lon,
+      result$lat + addfactor,
+      labels = result$station_names,
+      col = "grey70",
+      cex = 0.6
+    )
     maps::map(add = TRUE)
     
   }
