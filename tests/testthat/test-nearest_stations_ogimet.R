@@ -10,4 +10,6 @@ test_that("nearest_stations_ogimet works!", {
   
   x <- nearest_stations_ogimet(country = "Pland", point = c(10, 50), add_map = TRUE, numbers_station = 10)
   
+  x <- nearest_stations_ogimet(country = c("United+Kingdom", "Poland"), point = c(0, 0), add_map = TRUE, numbers_station = 150)
+  
 })
