@@ -62,7 +62,7 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
                    n = (sects[2] - (sects[1] + 5)))
   }, error=function(cond) {
     # Choose a return value in case of error
-    message("Wrong wmo_id number. Please check wmo_id numbers at
+    message("HTTP status was '503 Service Unavailable'. Have you provided a correct station id? Please check wmo_id numbers at
           https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   }
   )
