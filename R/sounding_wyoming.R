@@ -57,15 +57,13 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
 
   txt <- read.fwf(file = temp, widths = 1000)
   sects <- grep(pattern = "PRE>", x = txt$V1)
-  tryCatch({
-    df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
-                   n = (sects[2] - (sects[1] + 5)))
-  }, error=function(cond) {
-    # Choose a return value in case of error
-    message("HTTP status was '503 Service Unavailable'. Have you provided a correct station id? Please check wmo_id numbers at
+  if (length(sects) == 0){
+    stop("HTTP status was '503 Service Unavailable'. Have you provided a correct station id? Please check wmo_id numbers at
           https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   }
-  )
+  df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
+                   n = (sects[2] - (sects[1] + 5)))
+  
   colnames(df) <- c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
                     "MIXR", "DRCT", "SKNT", "THTA", "THTE", "THTV")
 
