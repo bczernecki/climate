@@ -75,9 +75,9 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
       b <-  a[[length(a)]]
       
       if (is.null(b)) {
-        data_station
-        stop(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
-      } 
+        warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+        return(data_station)
+        } 
       
       colnames(b) <- gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))
       colnames(b) <- c("Date", "hour", colnames(b)[2:(ncol(b) - 1)]) # workaround for adding hour which is wrongly recognized

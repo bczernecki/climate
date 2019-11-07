@@ -86,9 +86,9 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
       
       test=b[1:2,]
       if (is.null(test)) {
-        data_station
-        stop(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
-      } 
+        warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+        return(data_station)
+        } 
       #exeptions diferent names_col
         if ((length(test[2, !is.na(test[2, ])]) == 6 &
              test[2, 5] == "Int.")) {
