@@ -1,24 +1,10 @@
 library(climate)
-nearest_stations_ogimet(point = c(-4, 56), numbers_station = 50, add_map = TRUE)
-#>    wmo_id                     station_names       lon      lat  alt distance [km]
-#>34  03166              Edinburgh Gogarbank  -3.350007 55.93335   57      39.97523
-#>35  03171                         Leuchars  -2.866684 56.38334   12      45.53630
-#>32  03158                      Charterhall  -2.383341 55.70001  112      76.93943
-#>33  03162                      Eskdalemuir  -3.200004 55.31667  242      79.88351
-#>28  03144                      Strathallan  -3.733348 56.31667   35      89.62268
-#>31  03155                        Drumalbin  -3.733348 55.61668  245      92.84126
-#>17  03072                        Cairnwell  -3.416675 56.88335  933     109.58158
-#>45  03230                        Redesdale  -2.283339 55.28334  211     113.71264
-#>41  03224                        Spadeadam  -2.550011 55.05000  285     117.93937
-#>40  03220                         Carlisle  -2.966686 54.93335   28     119.73271
-#>19  03080                           Aboyne  -2.833350 57.08333  140     122.97630
-#>20  03088                      Inverbervie  -2.266672 56.85002  134     125.95539
-#>14  03065                        Cairngorm  -3.633346 57.11667 1245     144.03522
-#>29  03148                        Glen Ogle  -4.316673 56.41667  564     154.94705
-#>38  03212                          Keswick  -3.166670 54.61668   81     156.32648
-#>44  03227                   Great Dun Fell  -2.450009 54.68335  847     160.09428
-#>21  03091                  Aberdeen / Dyce  -2.216671 57.20000   65     160.78272
-#>13  03063                         Aviemore  -3.833350 57.20000  220     163.91783
-#>46  03238                        Albemarle  -1.866684 55.01667  145     168.34545
-#>42  03225                             Shap  -2.683347 54.50001  249     172.00299
-#>26  03134                Glasgow Bishopton  -4.533344 55.90002   59     172.40143
+ns = nearest_stations_ogimet(point = c(-4, 56), numbers_station = 50, add_map = TRUE)
+head(ns)
+#>    wmo_id       station_names       lon       lat alt  distance [km]
+#> 29  03144         Strathallan  -3.733348 56.31667  35      46.44794
+#> 32  03155           Drumalbin  -3.733348 55.61668 245      52.38975
+#> 30  03148           Glen Ogle  -4.316673 56.41667 564      58.71862
+#> 27  03134   Glasgow Bishopton  -4.533344 55.90002  59      60.88179
+#> 35  03166 Edinburgh Gogarbank  -3.350007 55.93335  57      73.30942
+#> 28  03136      Prestwick RNAS  -4.583345 55.51668  26      84.99537
