@@ -75,16 +75,18 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
       month <- format(dates[i], "%m")
       day <- format(dates[i], "%d")
       ndays <- day
-      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=",hour,"&ord=REV&Send=Send",sep="")
-      if(month==1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=",station_nr,"&ndays=32&ano=",year,"&mes=",month,"&day=",day,"&hora=",hour,"&ord=REV&Send=Send",sep="")
-      a <-  getURL(linkpl2)
-      a <- readHTMLTable(a, stringsAsFactors=FALSE)
-      b <-  a[[length(a)]]
-      if (sum(b[1,]=="Dailyweather summary", na.rm = T)) {
-        b=b[,1:(length(b)-8)]
-      } else {b=b[,1:length(b)]}
+      linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep="")
+      if(month == 1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
+      a <- getURL(linkpl2)
+      a <- readHTMLTable(a, stringsAsFactors = FALSE)
+      b <- a[[length(a)]]
+      if (sum(b[1,]=="Dailyweather summary", na.rm = TRUE)) {
+        b <- b[,1:(length(b) - 8)]
+      } else {
+        b <- b[, 1:length(b)]
+      }
       
-      test=b[1:2,]
+      test <- b[1:2, ]
       if (is.null(test)) {
         warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
         return(data_station)
