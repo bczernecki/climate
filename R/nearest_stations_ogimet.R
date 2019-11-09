@@ -8,6 +8,7 @@
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
 #' @param numbers_station how many nearest stations will be returned from the given geographical coordinates
+#' @param ... extra arguments to be provided for plotting map (only if add_map = TRUE)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
