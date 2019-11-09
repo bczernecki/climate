@@ -18,7 +18,9 @@
 #' }
 #'
 
-nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, point = c(0, 0), numbers_station = 1){
+nearest_stations_ogimet <- function(country = "United+Kingdom", 
+                                    date = Sys.Date(), add_map = FALSE, point = c(0, 0), 
+                                    numbers_station = 1, ...){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -144,7 +146,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(
         c(result$lat, point$lat)
       ) - 0.5, max(
         c(result$lat, point$lat)
-      ) + 0.5))
+      ) + 0.5)), ...
     )
     graphics::points(
       x = point[1],
