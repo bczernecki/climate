@@ -8,7 +8,7 @@
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
 #' @param numbers_station how many nearest stations will be returned from the given geographical coordinates
-#' @param ... extra arguments to be provided for plotting map (only if add_map = TRUE)
+#' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
@@ -112,15 +112,13 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   } 
 
-  point=as.data.frame(t(point))
+  point = as.data.frame(t(point))
   names(point) = c("lon", "lat")
   distmatrix = rbind(point,result[, 3:4])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
   result["distance [km]"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:numbers_station, ]
-
-
   
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
