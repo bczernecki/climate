@@ -7,7 +7,7 @@
 #' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
-#' @param numbers_station how many nearest stations will be returned from the given geographical coordinates
+#' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
@@ -15,13 +15,13 @@
 #'
 #' @examples \donttest{
 #'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),
-#'      add_map = TRUE, numbers_station = 60)
+#'      add_map = TRUE, no_of_stations = 60)
 #' }
 #'
 
 nearest_stations_ogimet <- function(country = "United+Kingdom", 
                                     date = Sys.Date(), add_map = FALSE, point = c(0, 0), 
-                                    numbers_station = 1, ...){
+                                    no_of_stations = 1, ...){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -118,7 +118,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
   result["distance [km]"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
-  result = orderd_distance[1:numbers_station, ]
+  result = orderd_distance[1:no_of_stations, ]
   
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
