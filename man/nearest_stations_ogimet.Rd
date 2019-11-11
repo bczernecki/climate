@@ -5,7 +5,7 @@
 \title{List of nearby synop stations for a defined geographical location}
 \usage{
 nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
-  add_map = FALSE, point = c(0, 0), numbers_station = 1, ...)
+  add_map = FALSE, point = c(0, 0), no_of_stations = 1, ...)
 }
 \arguments{
 \item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")}
@@ -16,7 +16,7 @@ nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
 
 \item{point}{a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))}
 
-\item{numbers_station}{how many nearest stations will be returned from the given geographical coordinates}
+\item{no_of_stations}{how many nearest stations will be returned from the given geographical coordinates}
 
 \item{...}{extra arguments to be provided to the \code{\link[graphics:plot]{graphics::plot()}} function (only if add_map = TRUE)}
 }
@@ -27,7 +27,7 @@ The returned list is valid only for a given day.
 \examples{
 \donttest{
   nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),
-     add_map = TRUE, numbers_station = 60)
+     add_map = TRUE, no_of_stations = 60)
 }
 
 }
