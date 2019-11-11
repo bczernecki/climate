@@ -17,10 +17,10 @@ test_that("meteo_ogimet works!", {
   x <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
                     station = c(12330, 12375), coords = FALSE)
   
-  # expected error
+  # expected warning
   x <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
                     station = 22222, coords = FALSE)
-  # expected error
+  # expected warning
   x <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
                     station = c(12330, 22222), coords = FALSE)
 })
