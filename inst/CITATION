@@ -6,7 +6,7 @@ citEntry(entry = "manual",
              person("Jakub", "Nowosad")),
   title = "climate: Meteorological and Hydrological Data Downloading",
   year = "2019",
-  note = "R package version 0.2.0",
-  url = "https://bczernecki.github.io/climate/",
-  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2019). imgw: Polish Meteorological and Hydrological Data. R package version 0.2.0. https://bczernecki.github.io/climate/"
+  note = "R package version 0.3.0",
+  url = "https://github.com/bczernecki/climate/",
+  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2019). climate: An R package to access free in-situ meteorological and hydrological datasets. R package version 0.3.0. https://github.com/bczernecki/climate/"
 )

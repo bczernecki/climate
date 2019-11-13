@@ -50,7 +50,7 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`    
     
 ## Application
 
-We will show how to use our package and prepare the data for spatial analysis with the additional help of the [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) packages.
+We will show how to use our package and prepare the data for spatial analysis with the additional help of the [dplyr](https://CRAN.R-project.org/package=dplyr) and [tidyr](https://CRAN.R-project.org/package=tidyr) packages.
 Firstly, we download ten years (**2001-2010**) of monthly hydrological observations for all stations available and automatically add their spatial coordinates. 
 
 ```{r data}
