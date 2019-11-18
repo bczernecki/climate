@@ -14,6 +14,9 @@ meteo_shortening_imgw(data, col_names = "short",
 
 \item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
 }
+\value{
+A data frame with updated column names.
+}
 \description{
 Shortening column names of meteorological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 }
@@ -21,7 +24,7 @@ Shortening column names of meteorological parameters to improve the readability 
 \donttest{
   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
   colnames(monthly)
-  abbr <- meteo_shortening_imgw(data = monthly, col_names = "short", remove_duplicates = TRUE)
+  abbr <- meteo_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
   head(abbr)
 }
 

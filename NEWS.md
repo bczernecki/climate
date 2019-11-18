@@ -1,3 +1,7 @@
+# climate 0.3
+
+* improves API
+
 # climate 0.2
 
 * splits imgw into two packages: imgw and climate

@@ -6,13 +6,13 @@
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
 #' @param remove_duplicates whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)
 #' @export
-#' @return Convering a column names in imgw repository to abbrev, full name (english) or polish language. 
+#' @return A data frame with updated column names.
 #' 
 #' @examples 
 #' \donttest{
 #'   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
 #'   colnames(monthly)
-#'   abbr <- meteo_shortening_imgw(data = monthly, col_names = "short", remove_duplicates = TRUE)
+#'   abbr <- meteo_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
 #'   head(abbr)
 #' }
 #'

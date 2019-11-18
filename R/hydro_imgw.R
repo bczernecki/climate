@@ -14,7 +14,8 @@
 #' @export
 #' @return A data.frame with columns describing the hydrological parameters (e.g. flow, water level) where each row represent a measurement,
 #'  depending on the interval, at a given hour, month or year. If `coords = TRUE` additional two columns with geografic coordinates are added.  
-#'  
+#'
+#' @examples 
 #' \donttest{
 #'   x <- hydro_imgw("monthly", year = 1999)
 #'   head(x)

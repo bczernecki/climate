@@ -14,14 +14,17 @@ hydro_shortening_imgw(data, col_names = "short",
 
 \item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
 }
+\value{
+A data frame with updated column names.
+}
 \description{
 Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 \examples{
 \donttest{
-  monthly <- hydro("monthly", year = 1969)
+  monthly <- hydro_imgw("monthly", year = 1969)
   colnames(monthly)
-  abbr <- hydro_shortening_imgw(data = monthly, col_names = "polish", remove_duplicates = TRUE)
+  abbr <- hydro_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
   head(abbr)
 }
 
