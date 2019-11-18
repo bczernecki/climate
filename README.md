@@ -39,7 +39,7 @@ Any meteorological (aka SYNOP) station working under the World Meteorological Or
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
-- **sounding()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
   
 ### Hydrological data
 

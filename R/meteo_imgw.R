@@ -13,7 +13,8 @@
 #' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   x <- meteo_imgw("monthly", rank = "synop", year = 2018, coords = TRUE)
 #'   head(x)
 #' }

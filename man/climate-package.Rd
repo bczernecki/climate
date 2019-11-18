@@ -4,12 +4,12 @@
 \name{climate-package}
 \alias{climate}
 \alias{climate-package}
-\title{climate: Interface for Downloading Meteorological (and Hydrological) Datasets}
+\title{climate: Interface to Download Meteorological (and Hydrological) Datasets}
 \description{
 Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
-    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
-    and Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
+    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair>),
+    and Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl>).
     This package also allows for adding geographical coordinates for each observation.
 }
 \seealso{

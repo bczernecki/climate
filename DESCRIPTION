@@ -19,8 +19,8 @@ Authors@R: c(person(given = "Bartosz",
            person("IMGW-PIB", role = "ctb", comment = "source of the data"))
 Description: Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
-    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
-    and Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl/>).
+    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair>),
+    and Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl>).
     This package also allows for adding geographical coordinates for each observation.
 License: MIT + file LICENSE
 Encoding: UTF-8

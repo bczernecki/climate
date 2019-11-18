@@ -9,7 +9,8 @@
 #' @importFrom XML readHTMLTable
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   stations_ogimet(country = "Australia", add_map = TRUE)
 #' }
 #'

@@ -13,7 +13,8 @@
 #' @importFrom XML readHTMLTable
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),
 #'      add_map = TRUE, no_of_stations = 60)
 #' }

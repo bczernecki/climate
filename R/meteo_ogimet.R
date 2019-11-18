@@ -10,9 +10,11 @@
 #' numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
+#' 
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   # downloading data for Poznan-Lawica
 #'   poznan <- meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-07-08"),
 #'                    station = 12330, coords = TRUE)

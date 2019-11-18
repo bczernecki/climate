@@ -7,7 +7,8 @@
 #' @param remove_duplicates whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
 #'   colnames(monthly)
 #'   abbr <- meteo_shortening_imgw(data = monthly, col_names = "short", remove_duplicates = TRUE)

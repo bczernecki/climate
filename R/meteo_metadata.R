@@ -7,6 +7,7 @@
 #' @param rank rank of station ("synop", "climate", "precip")
 #'
 #' @export
+#' 
 #' @examples
 #' \donttest{
 #'   meta <- meteo_metadata_imgw(interval = "hourly", rank = "synop")
