@@ -39,8 +39,7 @@
 #'
 
 sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
-profile[[2]]
-  
+
   if (length(yy)!=1 || length(mm)!=1 || length(dd)!=1 || length(hh)!=1) {
     stop("The function supports downloading data for a given day. Please change arguments yy, mm, dd, hh to single values")
   }
