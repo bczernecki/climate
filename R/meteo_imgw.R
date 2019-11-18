@@ -12,7 +12,9 @@
 #' @param station vector of hydrological stations danepubliczne.imgw.pl can be name of station CAPITAL LETTERS(character)
 #' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
 #' @export
-#'
+#' @return A data.frame with columns describing the meteorological parameters (e.g. temperature, wind speed, precipitation) where each row represent a measurement,
+#'  depending on the interval, at a given hour, month or year. If `coords = TRUE` additional two columns with geografic coordinates are added. 
+#'  
 #' @examples 
 #' \donttest{
 #'   x <- meteo_imgw("monthly", rank = "synop", year = 2018, coords = TRUE)

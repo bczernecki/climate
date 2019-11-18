@@ -12,7 +12,9 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
-#'
+#' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
+#'  each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
+#'  
 #' @examples 
 #' \donttest{
 #'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),

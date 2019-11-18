@@ -12,8 +12,9 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' 
 #' @export
-#'
-#' @examples 
+#' @return A data.frame with columns describing the hydrological parameters (e.g. flow, water level) where each row represent a measurement,
+#'  depending on the interval, at a given hour, month or year. If `coords = TRUE` additional two columns with geografic coordinates are added.  
+#'  
 #' \donttest{
 #'   x <- hydro_imgw("monthly", year = 1999)
 #'   head(x)
