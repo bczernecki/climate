@@ -6,8 +6,6 @@
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
 #' @param rank rank of station ("synop", "climate", "precip")
 #'
-#' @export
-#' @return Auxiliary function for preparing meteorological data from imgw repository to download
 #'  
 #' @examples
 #' \donttest{
