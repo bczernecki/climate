@@ -20,6 +20,10 @@ nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
 
 \item{...}{extra arguments to be provided to the \code{\link[graphics:plot]{graphics::plot()}} function (only if add_map = TRUE)}
 }
+\value{
+A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
+each station which has a measurements on selected date. If \code{add_map = TRUE} additional map of downloaded data is added.
+}
 \description{
 Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the ogimet webpage.
 The returned list is valid only for a given day.

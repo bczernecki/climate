@@ -23,6 +23,10 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
 \item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
 }
+\value{
+A data.frame with columns describing the hydrological parameters (e.g. flow, water level) where each row represent a measurement,
+depending on the interval, at a given hour, month or year. If \code{coords = TRUE} additional two columns with geografic coordinates are added.
+}
 \description{
 Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 }
