@@ -7,6 +7,8 @@
 #' @importFrom RCurl getURL
 #'
 #' @export
+#' @return Auxiliary function for preparing hydrological data from imgw repository to download
+#' 
 #' @examples
 #' \donttest{
 #'   meta <- hydro_metadata_imgw(interval = "daily")

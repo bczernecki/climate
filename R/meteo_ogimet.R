@@ -12,7 +12,9 @@
 #' @importFrom XML readHTMLTable
 #' 
 #' @export
-#'
+#' @return A data.frame with columns describing the synoptic parameters (e.g. air temperature, wind speed, cloudines) where each row represent a measurement,
+#' depending on the interval, at a given hour or day.  
+
 #' @examples 
 #' \donttest{
 #'   # downloading data for Poznan-Lawica

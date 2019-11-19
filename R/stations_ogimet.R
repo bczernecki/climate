@@ -8,8 +8,8 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
-#' @return A data.frame with columns describing the synoptic parameters (e.g. air temperature, wind speed, cloudines) where each row represent a measurement,
-#' depending on the interval, at a given hour or day. If `add_map = TRUE` additional map of downloaded data is added.  
+#' @return A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
+#' If `add_map = TRUE` additional map of downloaded data is added.  
 #'
 #' @examples 
 #' \donttest{
