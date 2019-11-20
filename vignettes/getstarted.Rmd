@@ -29,24 +29,40 @@ and hydrological data from publicly available repositories:
 
 ## Functions 
 
-The **climate** package consists of four main functions - two for meteorological data, one for hydrological data and one for sounding data:
+The **climate** package consists of eigth main functions - three for meteorological data, one for hydrological data and four auxiliary functions and datasets:
 
 1. Meteorological data:
 
 - **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
 Meteorological (aka Synop) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
-- **meteo_imgw()** -  Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`,
+
+- **sounding_wyoming()** - Downloading radiosonde data for any rawinsonde station in the world (i.e., vertical profiles of the atmosphere) 
+from the Wyoming University
+repository
+
+- **meteo_imgw()** - A generic function for downloading hourly, daily and monthly dataset,
+from the IMGW-PIB repository. It is a wrapper for `meteo_monthly()`, `meteo_daily()`,
 and `meteo_hourly()` from **imgw** package.
 
 2. Hydrological data: 
 
-- **hydro_imgw()** -  Downloading with daily, monthly, annual interval hydrological data from the stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`    from **imgw** package.
+- **hydro_imgw()** -  A generic function for downloading daily, monthly, and annual dataset
+from IMGW-PIB repositor. It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from **imgw** package.
 
-3. Rawinsonde data: 
+3. Auxiliary functions and datasets: 
 
-- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+- **stations_ogimet()** - Downloading information about all stations available in the selected
+country in the Ogimet repository
+
+- **nearest_stations_ogimet** - Downloading information about nearest stations to the selected point
+available in the selected country in the Ogimet repository
+
+- **meteo_imgw_stations** - Built-in   metadata   for   meteorological   stations,   their   geographical
+coordinates, and ID numbers (from the IMGW-PIB repository)
+
+- **hydro_imgw_stations** -Built-in   metadata   for   hydrological   stations,    their   geographical
+coordinates, and ID numbers (from the IMGW-PIB repository)
+
     
 ## Application
 
@@ -111,4 +127,9 @@ tm_shape(h3) +
             panel.labels = as.character(c(2001:2010)))
 ```
 
+```{r nearest, eval=FALSE, include=TRUE}
+library(climate)
+ns = nearest_stations_ogimet(point =c(-4, 56), no_of_stations = 50,add_map = TRUE)
+head(ns)
+```
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
