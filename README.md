@@ -43,15 +43,20 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` fro
   
 ### Hydrological data
 
-- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection.
+- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
+danepubliczne.imgw.pl collection.
 It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
 ### Auxiliary functions and datasets
 
-- **stations_ogimet()** -
-- **nearest_stations_ogimet()** - 
-- **meteo_imgw_stations** - 
-- **hydro_imgw_stations** -
+- **stations_ogimet()** - Downloading information about all stations available in the selected
+country in the Ogimet repository
+- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
+available in the selected country in the Ogimet repository
+- **meteo_imgw_stations** - Built-in   metadata   for   meteorological   stations,   their   geographical
+coordinates, and ID numbers (from the IMGW-PIB repository) 
+- **hydro_imgw_stations** - Built-in   metadata   for   hydrological   stations,    their   geographical
+coordinates, and ID numbers (from the IMGW-PIB repository)
 
 ## Examples
 
