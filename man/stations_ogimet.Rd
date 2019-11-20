@@ -15,8 +15,8 @@ stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
 \item{add_map}{logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)}
 }
 \value{
-A data.frame with columns describing the synoptic parameters (e.g. air temperature, wind speed, cloudines) where each row represent a measurement,
-depending on the interval, at a given hour or day. If \code{add_map = TRUE} additional map of downloaded data is added.
+A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
+If \code{add_map = TRUE} additional map of downloaded data is added.
 }
 \description{
 Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day

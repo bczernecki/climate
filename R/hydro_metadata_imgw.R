@@ -6,8 +6,6 @@
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @importFrom RCurl getURL
 #'
-#' @export
-#' @return Auxiliary function for preparing hydrological data from imgw repository to download
 #' 
 #' @examples
 #' \donttest{

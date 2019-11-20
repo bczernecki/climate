@@ -19,6 +19,10 @@ meteo_ogimet(interval, date, coords = FALSE, station,
 \item{precip_split}{whether to split precipitation fields into 6/12/24h
 numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step}
 }
+\value{
+A data.frame with columns describing the synoptic parameters (e.g. air temperature, wind speed, cloudines) where each row represent a measurement,
+depending on the interval, at a given hour or day.
+}
 \description{
 Downloading hourly or daily (meteorological) data from the Synop stations available at https://www.ogimet.com/
 }
