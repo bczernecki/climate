@@ -52,11 +52,11 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` fro
 - **stations_ogimet()** - Downloading information about all stations available in the selected
 country in the Ogimet repository
 - **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
-available in the selected country in the Ogimet repository
-- **meteo_imgw_stations** - Built-in   metadata   for   meteorological   stations,   their   geographical
-coordinates, and ID numbers (from the IMGW-PIB repository) 
-- **hydro_imgw_stations** - Built-in   metadata   for   hydrological   stations,    their   geographical
-coordinates, and ID numbers (from the IMGW-PIB repository)
+available for the selected country in the Ogimet repository
+- **meteo_imgw_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
+coordinates, and ID numbers
+- **hydro_imgw_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
+coordinates, and ID numbers
 
 ## Examples
 
