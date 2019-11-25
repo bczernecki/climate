@@ -84,7 +84,7 @@ h2 = h %>%
   select(id, station, X, Y, hyy, Q) %>%
   group_by(hyy, id, station, X, Y) %>%
   summarise(annual_mean_Q = round(mean(Q, na.rm = TRUE), 1)) %>% 
-  pivot_wider(names_from = hyy, values_from = annual_mean_Q)
+  tidyr::pivot_wider(names_from = hyy, values_from = annual_mean_Q)
 ```
 
 ```{r filtering2, echo=FALSE}
