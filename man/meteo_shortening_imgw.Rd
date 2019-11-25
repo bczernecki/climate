@@ -4,8 +4,7 @@
 \alias{meteo_shortening_imgw}
 \title{Shortening column names for meteorological variables}
 \usage{
-meteo_shortening_imgw(data, col_names = "short",
-  remove_duplicates = TRUE)
+meteo_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
 }
 \arguments{
 \item{data}{downloaded dataset with original column names}

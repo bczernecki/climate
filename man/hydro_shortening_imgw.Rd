@@ -4,8 +4,7 @@
 \alias{hydro_shortening_imgw}
 \title{Shortening column names for hydrological variables}
 \usage{
-hydro_shortening_imgw(data, col_names = "short",
-  remove_duplicates = TRUE)
+hydro_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
 }
 \arguments{
 \item{data}{downloaded dataset with original column names}

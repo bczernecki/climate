@@ -4,8 +4,7 @@
 \alias{stations_ogimet}
 \title{Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage}
 \usage{
-stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
-  add_map = FALSE)
+stations_ogimet(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE)
 }
 \arguments{
 \item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}

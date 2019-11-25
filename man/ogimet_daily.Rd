@@ -4,8 +4,12 @@
 \alias{ogimet_daily}
 \title{Scrapping daily meteorological (Synop) data from the Ogimet webpage}
 \usage{
-ogimet_daily(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE,
-  station = c(12326, 12330), hour = 6)
+ogimet_daily(
+  date = c(Sys.Date() - 30, Sys.Date()),
+  coords = FALSE,
+  station = c(12326, 12330),
+  hour = 6
+)
 }
 \arguments{
 \item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )}

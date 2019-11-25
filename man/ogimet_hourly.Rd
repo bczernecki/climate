@@ -4,8 +4,12 @@
 \alias{ogimet_hourly}
 \title{Scrapping hourly meteorological (Synop) data from the Ogimet webpage}
 \usage{
-ogimet_hourly(date = c("2019-06-01", "2019-07-31"), coords = FALSE,
-  station = c(12326, 12330), precip_split = TRUE)
+ogimet_hourly(
+  date = c("2019-06-01", "2019-07-31"),
+  coords = FALSE,
+  station = c(12326, 12330),
+  precip_split = TRUE
+)
 }
 \arguments{
 \item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )}

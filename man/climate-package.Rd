@@ -21,12 +21,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Bartosz Czernecki \email{nwp@amu.edu.pl} (0000-0001-6496-1386)
+\strong{Maintainer}: Bartosz Czernecki \email{nwp@amu.edu.pl} (\href{https://orcid.org/0000-0001-6496-1386}{ORCID})
 
 Authors:
 \itemize{
-  \item Arkadiusz Głogowski \email{arkadiusz.glogowski@upwr.edu.pl} (0000-0002-7587-8892)
-  \item Jakub Nowosad \email{nowosad.jakub@gmail.com} (0000-0002-1057-3721)
+  \item Arkadiusz Głogowski \email{arkadiusz.glogowski@upwr.edu.pl} (\href{https://orcid.org/0000-0002-7587-8892}{ORCID})
+  \item Jakub Nowosad \email{nowosad.jakub@gmail.com} (\href{https://orcid.org/0000-0002-1057-3721}{ORCID})
 }
 
 Other contributors:

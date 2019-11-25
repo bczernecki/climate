@@ -4,8 +4,14 @@
 \alias{nearest_stations_ogimet}
 \title{List of nearby synop stations for a defined geographical location}
 \usage{
-nearest_stations_ogimet(country = "United+Kingdom", date = Sys.Date(),
-  add_map = FALSE, point = c(0, 0), no_of_stations = 1, ...)
+nearest_stations_ogimet(
+  country = "United+Kingdom",
+  date = Sys.Date(),
+  add_map = FALSE,
+  point = c(0, 0),
+  no_of_stations = 1,
+  ...
+)
 }
 \arguments{
 \item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")}

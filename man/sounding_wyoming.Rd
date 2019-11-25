@@ -27,7 +27,7 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
 \item HGHT - Height (metres)
 \item TEMP - Temperature (C)
 \item DWPT - Dew point (C)
-\item RELH - Relative humidity (%)
+\item RELH - Relative humidity (\%)
 \item MIXR - Mixing ratio (g/kg)
 \item DRCT - Wind direction (deg)
 \item SKNT - Wind speed (knots)

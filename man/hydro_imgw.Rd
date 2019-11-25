@@ -4,8 +4,15 @@
 \alias{hydro_imgw}
 \title{Hydrological data from IMGW}
 \usage{
-hydro_imgw(interval, year, coords = FALSE, value = "H",
-  station = NULL, col_names = "short", ...)
+hydro_imgw(
+  interval,
+  year,
+  coords = FALSE,
+  value = "H",
+  station = NULL,
+  col_names = "short",
+  ...
+)
 }
 \arguments{
 \item{interval}{temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")}
