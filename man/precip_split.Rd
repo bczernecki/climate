@@ -17,7 +17,7 @@ Internal function for splitting precipitation field provided by Ogimet and conve
 \examples{
 \donttest{
  df <- ogimet_hourly(station = 12330)
- precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
+ climate:::precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
 }
 
 }

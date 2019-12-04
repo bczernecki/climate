@@ -10,7 +10,7 @@
 #' \donttest{
 #'   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
 #'   colnames(monthly)
-#'   abbr <- meteo_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
+#'   abbr <- climate:::meteo_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
 #'   head(abbr)
 #' }
 #'

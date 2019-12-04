@@ -7,7 +7,7 @@
 #' @examples
 #' \donttest{
 #'  df <- ogimet_hourly(station = 12330)
-#'  precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
+#'  climate:::precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
 #' }
 #'
 precip_split <- function(precip,  pattern = "/12"){

@@ -13,7 +13,7 @@
 #' @examples 
 #' \donttest{
 #'   # downloading data for Poznan-Lawica
-#'   poznan <- ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
+#'   poznan <- climate:::ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
 #'   head(poznan)
 #' }
 #'

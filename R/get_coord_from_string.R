@@ -10,7 +10,7 @@
 #' @examples
 #' \donttest{
 #'  txt <- "12120:   Leba (Poland)\nLatitude: 54-45N    Longitude: 017-32E    Altitude: 2 m."
-#'  get_coord_from_string(txt, pattern = "Latitude")
+#'  climate:::get_coord_from_string(txt, pattern = "Latitude")
 #' }
 #'
 get_coord_from_string <- function(txt , pattern = "Longitude") {
