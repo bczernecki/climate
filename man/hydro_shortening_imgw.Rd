@@ -20,7 +20,9 @@ Shortening column names of hydrological parameters to improve the readability of
 \donttest{
   monthly <- hydro_imgw("monthly", year = 1969)
   colnames(monthly)
-  abbr <- climate:::hydro_shortening_imgw(data = monthly, col_names = "full", remove_duplicates = TRUE)
+  abbr <- climate:::hydro_shortening_imgw(data = monthly, 
+      col_names = "full", 
+      remove_duplicates = TRUE)
   head(abbr)
 }
 
