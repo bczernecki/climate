@@ -1,4 +1,4 @@
-# climate
+# climate <img src="man/figures/logo.png" align="right" width="150" />
 
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
