@@ -14,3 +14,4 @@ clean_metadata_hydro(address, interval)
 \description{
 Internal function for hydrological metadata cleaning
 }
+\keyword{internal}

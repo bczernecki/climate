@@ -5,6 +5,7 @@
 #' @param data downloaded dataset with original column names
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
 #' @param remove_duplicates whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)
+#' @keywords internal
 #' 
 #' @examples 
 #' \donttest{

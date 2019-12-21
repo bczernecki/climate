@@ -5,6 +5,7 @@
 #' @param interval temporal interval
 #' @importFrom RCurl getURL
 #' @importFrom utils read.fwf
+#' @keywords internal
 clean_metadata_hydro <- function(address, interval){
   #miesieczne
   #address="https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"

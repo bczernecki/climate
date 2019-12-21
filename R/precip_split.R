@@ -3,6 +3,8 @@
 #' Internal function for splitting precipitation field provided by Ogimet and converting string to numerical value
 #' @param precip vector of characters with precipitation field from Ogimet
 #' @param pattern 6h-12h-24h precipitation pattern to obtain written as: "/6h", "/12h" , "/24h" (see examples)
+#' 
+#' @keywords internal
 #'
 #' @examples
 #' \donttest{

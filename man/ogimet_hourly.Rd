@@ -32,3 +32,4 @@ Downloading hourly (meteorological) data from the Synop stations available in th
 }
 
 }
+\keyword{internal}

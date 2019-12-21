@@ -33,3 +33,4 @@ Downloading daily (meteorological) data from the Synop stations available in the
 }
 
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ By default, the function returns a list or data frame for a selected subset
   meta <- climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
 }
 }
+\keyword{internal}

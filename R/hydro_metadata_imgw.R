@@ -5,7 +5,7 @@
 #`
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @importFrom RCurl getURL
-#'
+#' @keywords internal
 #' 
 #' @examples
 #' \donttest{

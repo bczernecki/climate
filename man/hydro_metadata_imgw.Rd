@@ -20,3 +20,4 @@ By default, the function returns a list or data frame for a selected subset
   meta <- climate:::hydro_metadata_imgw(interval = "semiannual_and_annual")
 }
 }
+\keyword{internal}

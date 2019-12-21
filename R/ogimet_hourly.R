@@ -9,6 +9,8 @@
 #'  numeric fields (logical value TRUE (default) or FALSE)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
+#' 
+#' @keywords internal
 #'
 #' @examples 
 #' \donttest{

@@ -9,6 +9,8 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils setTxtProgressBar txtProgressBar
+#' 
+#' @keywords internal
 #'
 #' @examples \donttest{
 #'   # downloading data for Poznan-Lawica

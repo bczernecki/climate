@@ -6,6 +6,7 @@
 #'
 #' @format The returned object is the geographic coordinates using WGS84 (EPSG:4326) in decimal format.
 #' Negative values mean western or southern Hemisphere
+#' @keywords internal
 #'
 #' @examples
 #' \donttest{

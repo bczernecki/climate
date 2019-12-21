@@ -5,7 +5,7 @@
 #'
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
 #' @param rank rank of station ("synop", "climate", "precip")
-#'
+#' @keywords internal
 #'  
 #' @examples
 #' \donttest{

@@ -23,3 +23,4 @@ Internal function for cleaning coordinates' metadata provided by Ogimet
 }
 
 }
+\keyword{internal}

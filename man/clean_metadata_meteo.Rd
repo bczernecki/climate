@@ -24,3 +24,4 @@ Internal function for meteorological metadata cleaning
 }
 
 }
+\keyword{internal}
