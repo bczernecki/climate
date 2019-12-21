@@ -57,11 +57,15 @@ country in the Ogimet repository
 - **nearest_stations_ogimet** - Downloading information about nearest stations to the selected point
 available in the selected country in the Ogimet repository
 
-- **meteo_imgw_stations** - Built-in   metadata   for   meteorological   stations,   their   geographical
-coordinates, and ID numbers (from the IMGW-PIB repository)
+- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
+coordinates, and ID numbers
 
-- **hydro_imgw_stations** -Built-in   metadata   for   hydrological   stations,    their   geographical
-coordinates, and ID numbers (from the IMGW-PIB repository)
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
+coordinates, and ID numbers
+
+- **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
+
+- **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
     
 ## Application

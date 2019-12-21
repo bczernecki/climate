@@ -16,7 +16,7 @@ and hydrological data from publicly available repositories:
 
 ## Installation
 
-~~The stable release of climate package from the [CRAN](https://CRAN.R-project.org) reposity can be installed with:~~
+The stable release of the **climate** package from the [CRAN](https://CRAN.R-project.org) reposity can be installed with:
 
 ``` r
 install.packages("climate")
@@ -53,10 +53,12 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` fro
 country in the Ogimet repository
 - **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
 available for the selected country in the Ogimet repository
-- **meteo_imgw_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
+- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
 coordinates, and ID numbers
-- **hydro_imgw_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
 coordinates, and ID numbers
+- **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
+- **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
 ## Examples
 
