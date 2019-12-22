@@ -64,23 +64,23 @@ coordinates, and ID numbers
 
 ``` r
 library(climate)
-o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date()-1), 
-                 interval = 'daily',
-                 coords = FALSE,  station = 12330)
-print(o)
+o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
+                 interval = "daily",
+                 coords = FALSE, station = 12330)
+head(o)
 
-#>   station_ID       Date TemperatureCAvg TemperatureCMax TemperatureCMin TdAvgC HrAvg WindkmhDir WindkmhInt
-#> 3      12330 2019-12-21             8.8            13.2             4.9    5.3  79.3        SSE       11.4
-#> 4      12330 2019-12-20             5.4             8.5            -1.2    4.5  92.4        ESE       15.0
-#> 5      12330 2019-12-19             3.8            10.3            -3.0    1.9  89.6         SW        7.1
-#> 6      12330 2019-12-18             6.3             9.0             2.2    4.1  84.8          S        9.2
-#> 7      12330 2019-12-17             4.9             7.6             0.3    2.9  87.2        SSE        7.2
-#>   WindkmhGust PresslevHp Precmm TotClOct lowClOct SunD1h VisKm SnowDepcm PreselevHp
-#> 3        39.6      995.9    1.8      3.6      2.0    6.7  21.4      <NA>         NA
-#> 4          NA     1015.0    0.0      6.4      0.6    1.0   8.0      <NA>         NA
-#> 5          NA     1020.4    0.0      5.2      5.9    2.5  14.1      <NA>         NA
-#> 6          NA     1009.2    0.0      5.7      2.7    1.4  12.2      <NA>         NA
-#> 7          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
+#>   station_ID       Date TemperatureCAvg TemperatureCMax TemperatureCMin TdAvgC HrAvg WindkmhDir
+#> 3      12330 2019-12-21             8.8            13.2             4.9    5.3  79.3        SSE
+#> 4      12330 2019-12-20             5.4             8.5            -1.2    4.5  92.4        ESE
+#> 5      12330 2019-12-19             3.8            10.3            -3.0    1.9  89.6         SW
+#> 6      12330 2019-12-18             6.3             9.0             2.2    4.1  84.8          S
+#> 7      12330 2019-12-17             4.9             7.6             0.3    2.9  87.2        SSE
+#>   WindkmhInt WindkmhGust PresslevHp Precmm TotClOct lowClOct SunD1h VisKm SnowDepcm PreselevHp
+#> 3       11.4        39.6      995.9    1.8      3.6      2.0    6.7  21.4      <NA>         NA
+#> 4       15.0          NA     1015.0    0.0      6.4      0.6    1.0   8.0      <NA>         NA
+#> 5        7.1          NA     1020.4    0.0      5.2      5.9    2.5  14.1      <NA>         NA
+#> 6        9.2          NA     1009.2    0.0      5.7      2.7    1.4  12.2      <NA>         NA
+#> 7        7.2          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
 
 m = meteo_imgw(interval = "monthly", rank = "synop", year = 2000, coords = TRUE)
 head(m)
