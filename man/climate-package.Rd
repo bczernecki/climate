@@ -6,6 +6,8 @@
 \alias{climate-package}
 \title{climate: Interface to Download Meteorological (and Hydrological) Datasets}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
     University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair>),
