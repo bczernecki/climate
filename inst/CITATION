@@ -1,12 +1,16 @@
-citHeader("To cite climate in publications, please use:")
+citHeader("To cite the climate package in publications, please use:")
 
 citEntry(entry = "manual",
   author = c(person("Bartosz", "Czernecki"),
              person("Arkadiusz", "Głogowski"),
              person("Jakub", "Nowosad")),
-  title = "climate: Meteorological and Hydrological Data Downloading",
-  year = "2019",
+  journal = {"Sustainability"},
+  title = "Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment",
+  year = {"2019"},
+  pages = {"XX-XX"}
+  volume = {"XX"}
+  doi = {"xx./sustain...xx"}
   note = "R package version 0.3.0",
   url = "https://github.com/bczernecki/climate/",
-  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2019). climate: An R package to access free in-situ meteorological and hydrological datasets. R package version 0.3.0. https://github.com/bczernecki/climate/"
+  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2019). Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment. R package version 0.3.0. https://github.com/bczernecki/climate/"
 )
