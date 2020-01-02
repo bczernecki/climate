@@ -6,11 +6,11 @@ citEntry(entry = "manual",
              person("Jakub", "Nowosad")),
   journal = {"Sustainability"},
   title = "Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment",
-  year = {"2019"},
-  pages = {"XX-XX"}
-  volume = {"XX"}
-  doi = {"xx./sustain...xx"}
+  year = {"2020"},
+  pages = {"XX-XX"},
+  volume = {"5"},
+  doi = {"xx./sustain...xx"},
   note = "R package version 0.3.0",
   url = "https://github.com/bczernecki/climate/",
-  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2019). Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment. R package version 0.3.0. https://github.com/bczernecki/climate/"
+  textVersion = "Czernecki, B., Głogowski A., Nowosad, J. (2020). Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment. R package version 0.3.0. https://github.com/bczernecki/climate/"
 )
