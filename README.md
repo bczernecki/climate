@@ -119,3 +119,17 @@ Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Manage
 Contributions to this package are welcome. 
 The preferred method of contribution is through a GitHub pull request. 
 Feel also free to contact us by creating [an issue](https://github.com/bczernecki/climate/issues).
+
+
+## Citation
+
+To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
+
+Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. https://doi.org/10.3390/su12010394"
+
+LaTex version can be obtained with:
+```
+library(climate)
+citation("climate")
+```
+
