@@ -14,7 +14,7 @@
 #'  climate:::get_coord_from_string(txt, pattern = "Latitude")
 #' }
 #'
-get_coord_from_string <- function(txt , pattern = "Longitude") {
+get_coord_from_string <- function(txt, pattern = "Longitude") {
   tt <- gregexpr(pattern, txt)
   start <- tt[[1]][1] + attributes(tt[[1]])$match.length + 1
   tmp <- trimws(substr(txt, start = start, stop = start + 8))

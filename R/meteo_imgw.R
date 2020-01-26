@@ -23,13 +23,13 @@
 meteo_imgw <- function(interval, rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
   if (interval == "daily"){
     # daily
-    calosc <- imgw::meteo_daily(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc <- meteo_imgw_daily(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "monthly"){
     #monthly
-    calosc <- imgw::meteo_monthly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc <- meteo_imgw_monthly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "hourly"){
     #hourly
-    calosc <- imgw::meteo_hourly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc <- meteo_imgw_hourly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else{
     stop("Wrong `interval` value. It should be either 'hourly', 'daily', or 'monthly'.")
   }

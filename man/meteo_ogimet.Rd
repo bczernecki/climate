@@ -19,8 +19,8 @@ meteo_ogimet(interval, date, coords = FALSE, station, precip_split = TRUE)
 numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step}
 }
 \value{
-A data.frame with columns describing the synoptic parameters (e.g. air temperature, wind speed, cloudines) where each row represent a measurement,
-depending on the interval, at a given hour or day. Different parameters are returned for daily and hourly datasets.
+A data.frame of measured values with columns describing the meteorological parameters (e.g. air temperature, wind speed, cloudines).
+Depending on the interval, at a given hour or day. Different parameters are returned for daily and hourly datasets.
 \enumerate{
 \item station_ID - WMO station identifier
 \item Lon - longitude
