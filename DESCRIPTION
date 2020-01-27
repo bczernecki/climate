@@ -31,8 +31,7 @@ Depends:
     R (>= 3.1)
 Imports: 
     RCurl,
-    XML,
-    imgw
+    XML
 Suggests: 
     testthat,
     knitr,

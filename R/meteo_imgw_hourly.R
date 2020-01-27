@@ -24,70 +24,46 @@
 meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
   stopifnot(rank == "synop" | rank == "climate") # dla terminowek tylko synopy i klimaty maja dane
-  synop_stations <- climate::imgw_synop_stations # ulepszenie wyboru stacji
+  
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-
+  
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
-
+  
   interval <- "hourly" # to mozemy ustawic na sztywno
   interval_pl <- "terminowe" # to mozemy ustawic na sztywno
-
+  
   meta <- meteo_metadata_imgw(interval = "hourly", rank = rank)
-
+  
   rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
-
+  
   a <- getURL(paste0(base_url, "dane_meteorologiczne/", interval_pl, "/", rank_pl, "/"),
               ftp.use.epsv = FALSE,
               dirlistonly = TRUE)
   ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
-
+  
   # fragment dla lat (ktore catalogs wymagaja pobrania:
   years_in_catalogs <- strsplit(gsub(x = catalogs, pattern = "/", replacement = ""), split = "_")
   years_in_catalogs <- lapply(years_in_catalogs, function(x) x[1]:x[length(x)])
   ind <- lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
   catalogs <- catalogs[unlist(ind)] # to sa nasze prawdziwe catalogs do przemielenia
-
+  
   all_data <- NULL
-
+  
   for (i in seq_along(catalogs)){
     catalog <- gsub(catalogs[i], pattern = "/", replacement = "")
-
+    
     if(rank == "synop") {
       address <- paste0(base_url, "dane_meteorologiczne/terminowe/synop",
                         "/", catalog, "/")
       folder_contents <- getURL(address, ftp.use.epsv = FALSE, dirlistonly = FALSE) # zawartosc folderu dla wybranego roku
-
+      
       ind <- grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
       files <- as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
       addresses_to_download <- paste0(address, files)
-      #### w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:####
-      if (!is.null(station)) {
-        if (is.character(station)) {
-          if (dim(synop_stations[synop_stations$station == station, ])[1] == 0) {
-            stop("Selected station(s) is not available in the database.",
-                 call. = FALSE)
-          }
-          cut_stations = synop_stations[synop_stations$station == station, ]
-          index_add = substr(addresses_to_download, 102, 104) %in% substr(cut_stations[, 1], 7, 9)
-          addresses_to_download = addresses_to_download[index_add]
-        } else if (is.numeric(station)) {
-          if (dim(synop_stations[synop_stations$id == station, ])[1] == 0) {
-            stop("Selected station(s) is not available in the database.",
-                 call. = FALSE)
-          }
-          cut_stations = synop_stations[synop_stations$station == station, ]
-          index_add = substr(addresses_to_download, 102, 104) %in% substr(cut_stations[, 1], 7, 9)
-          addresses_to_download = addresses_to_download[index_add]
-        } else {
-          stop("Selected station(s) is not available is in wrong format",
-               call. = FALSE)
-        }
-        # if (length(addresses_to_download) == 0) {
-        #   stop("Selected station(s) is not available in this years",
-        #        call. = FALSE)
-        # }
-      }
+      # w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
+      # na podstawie zawartosci obiektu files
+      
       for(j in seq_along(addresses_to_download)){
         temp <- tempfile()
         temp2 <- tempfile()
@@ -96,39 +72,17 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
         file1 <- paste(temp2, dir(temp2), sep = "/")
         data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
         colnames(data1) <- meta[[1]]$parameters
-
+        
         # usuwa statusy
         if(status == FALSE){
           data1[grep("^Status", colnames(data1))] <- NULL
         }
-
+        
         unlink(c(temp, temp2))
-        #proba obejscia
-        ttt = data1[order(data1$`Nazwa stacji`, data1$Rok, data1$Miesiac, data1$Dzien),]
-
-
-        if (!is.null(station)) {
-          if (is.character(station)) {
-            all_data[[length(all_data) + 1]] <-
-              ttt[ttt$`Nazwa stacji` %in% station,]
-            if (nrow(all_data[[length(all_data)]]) == 0) {
-              stop("Selected station(s) is not available in the database.",
-                   call. = FALSE)
-            }
-          } else if (is.numeric(station)) {
-            all_data[[length(all_data) + 1]] <-
-              ttt[ttt$`Kod stacji` %in% station,]
-            if (nrow(all_data[[length(all_data)]]) == 0) {
-              stop("Selected station(s) is not available in the database.",
-                   call. = FALSE)
-            }
-          }
-        } else {
-          all_data[[length(all_data) + 1]] <- ttt
-        } #koniec obejscia
+        all_data[[length(all_data) + 1]] <- data1
       } # koniec petli po zipach do pobrania
     } # koniec if'a dla synopa
-
+    
     ######################
     ###### KLIMAT: #######
     ######################
@@ -136,13 +90,13 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
       address <- paste0(base_url, "dane_meteorologiczne/terminowe/klimat",
                         "/", catalog, "/")
       folder_contents <- getURL(address, ftp.use.epsv = FALSE, dirlistonly = FALSE) # zawartosc folderu dla wybranego roku
-
+      
       ind <- grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
       files <- as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
       addresses_to_download <- paste0(address, files)
       # w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
       # na podstawie zawartosci obiektu files
-
+      
       for(j in seq_along(addresses_to_download)){
         temp <- tempfile()
         temp2 <- tempfile()
@@ -155,49 +109,42 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
         if(status == FALSE){
           data1[grep("^Status", colnames(data1))] <- NULL
         }
-
+        
         unlink(c(temp, temp2))
-        #proba obejscia
-        ttt = data1[order(data1$`Nazwa stacji`, data1$Rok, data1$Miesiac, data1$Dzien),]
-
-
-        if (!is.null(station)) {
-          if (is.character(station)) {
-            all_data[[length(all_data) + 1]] <-
-              ttt[ttt$`Nazwa stacji` %in% station,]
-            if (nrow(all_data[[length(all_data)]]) == 0) {
-              stop("Selected station(s) is not available in the database.",
-                   call. = FALSE)
-            }
-          } else if (is.numeric(station)) {
-            all_data[[length(all_data) + 1]] <-
-              ttt[ttt$`Kod stacji` %in% station,]
-            if (nrow(all_data[[length(all_data)]]) == 0) {
-              stop("Selected station(s) is not available in the database.",
-                   call. = FALSE)
-            }
-          }
-        } else {
-          all_data[[length(all_data) + 1]] <- ttt
-        } #koniec obejscia
+        all_data[[length(all_data) + 1]] <- data1
       } # koniec petli po zipach do pobrania
     } # koniec if'a dla klimatu
   } # koniec petli po glownych catalogach danych dobowych
-
+  
   all_data <- do.call(rbind, all_data)
-
+  
   if (coords){
     all_data <- merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
   }
-
+  
   # dodaje rank
   rank_code <- switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA")
   all_data <- cbind(data.frame(rank_code = rank_code), all_data)
-
+  
   all_data <- all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
-
-
-
+  
+  #station selection
+  if (!is.null(station)) {
+    if (is.character(station)) {
+      all_data <- all_data[all_data$`Nazwa stacji` %in% station, ]
+      if (nrow(all_data) == 0){
+        stop("Selected station(s) is not available in the database.", call. = FALSE)
+      }
+    } else if (is.numeric(station)){
+      all_data <- all_data[all_data$`Kod stacji`%in% station, ]
+      if (nrow(all_data) == 0){
+        stop("Selected station(s) is not available in the database.", call. = FALSE)
+      }
+    } else {
+      stop("Selected station(s) are not in the proper format.", call. = FALSE)
+    }
+  }
+  
   all_data <- all_data[order(all_data$`Nazwa stacji`, all_data$`Rok`, all_data$`Miesiac`, all_data$`Dzien`, all_data$`Godzina`), ]
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)

@@ -27,111 +27,111 @@
 
 meteo_imgw_monthly <- function(rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
-    options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-
-    base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
-
-    interval <- "miesieczne" # to mozemy ustawic na sztywno
-    meta <- meteo_metadata_imgw(interval = "monthly", rank = rank)
-
-    rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
-
-    a <- getURL(paste0(base_url, "dane_meteorologiczne/", interval, "/", rank_pl, "/"),
-                ftp.use.epsv = FALSE,
-                dirlistonly = TRUE)
-    ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-    catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
-
-    # fragment dla lat (ktore catalogs wymagaja pobrania:
-    years_in_catalogs <- strsplit(gsub(x = catalogs, pattern = "/", replacement = ""), split = "_")
-    years_in_catalogs <- lapply(years_in_catalogs, function(x) x[1]:x[length(x)])
-    ind <- lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
-    catalogs <- catalogs[unlist(ind)] # to sa nasze prawdziwe catalogs do przemielenia
-
-    all_data <- vector("list", length = length(catalogs))
-
-    for (i in seq_along(catalogs)){
-      # print(i)
-      catalog <- gsub(catalogs[i], pattern = "/", replacement = "")
-
-      if(rank == "synop") {
-        address <- paste0(base_url, "dane_meteorologiczne/miesieczne/synop",
-                          "/", catalog, "/", catalog, "_m_s.zip")
-      }
-      if(rank == "climate") {
-        address <- paste0(base_url, "dane_meteorologiczne/miesieczne/klimat",
-                          "/", catalog, "/", catalog, "_m_k.zip")
-      }
-      if(rank == "precip") {
-        address <- paste0(base_url, "dane_meteorologiczne/miesieczne/opad",
-                          "/", catalog, "/", catalog, "_m_o.zip")
-      }
-
-      temp <- tempfile()
-      temp2 <- tempfile()
-      download.file(address, temp)
-      unzip(zipfile = temp, exdir = temp2)
-      file1 <- paste(temp2, dir(temp2), sep = "/")[1]
-      data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-      colnames(data1) <- meta[[1]]$parameters
-
-      if( rank != "precip"){ # w opadpwkach jest tylko jeden plik
+  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  
+  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  
+  interval <- "miesieczne" # to mozemy ustawic na sztywno
+  meta <- meteo_metadata_imgw(interval = "monthly", rank = rank)
+  
+  rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
+  
+  a <- getURL(paste0(base_url, "dane_meteorologiczne/", interval, "/", rank_pl, "/"),
+              ftp.use.epsv = FALSE,
+              dirlistonly = TRUE)
+  ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
+  catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
+  
+  # fragment dla lat (ktore catalogs wymagaja pobrania:
+  years_in_catalogs <- strsplit(gsub(x = catalogs, pattern = "/", replacement = ""), split = "_")
+  years_in_catalogs <- lapply(years_in_catalogs, function(x) x[1]:x[length(x)])
+  ind <- lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
+  catalogs <- catalogs[unlist(ind)] # to sa nasze prawdziwe catalogs do przemielenia
+  
+  all_data <- vector("list", length = length(catalogs))
+  
+  for (i in seq_along(catalogs)){
+    # print(i)
+    catalog <- gsub(catalogs[i], pattern = "/", replacement = "")
+    
+    if(rank == "synop") {
+      address <- paste0(base_url, "dane_meteorologiczne/miesieczne/synop",
+                        "/", catalog, "/", catalog, "_m_s.zip")
+    }
+    if(rank == "climate") {
+      address <- paste0(base_url, "dane_meteorologiczne/miesieczne/klimat",
+                        "/", catalog, "/", catalog, "_m_k.zip")
+    }
+    if(rank == "precip") {
+      address <- paste0(base_url, "dane_meteorologiczne/miesieczne/opad",
+                        "/", catalog, "/", catalog, "_m_o.zip")
+    }
+    
+    temp <- tempfile()
+    temp2 <- tempfile()
+    download.file(address, temp)
+    unzip(zipfile = temp, exdir = temp2)
+    file1 <- paste(temp2, dir(temp2), sep = "/")[1]
+    data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    colnames(data1) <- meta[[1]]$parameters
+    
+    if( rank != "precip"){ # w opadpwkach jest tylko jeden plik
       file2 <- paste(temp2, dir(temp2), sep = "/")[2]
       data2 <- read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
       colnames(data2) <- meta[[2]]$parameters
+    }
+    
+    # usuwa statusy
+    if(status == FALSE){
+      data1[grep("^Status", colnames(data1))] <- NULL
+      
+      if(rank != "precip"){ # w plikach opadowych tylko jeden plik
+        data2[grep("^Status", colnames(data2))] <- NULL
       }
-
-      # usuwa statusy
-      if(status == FALSE){
-        data1[grep("^Status", colnames(data1))] <- NULL
-
-          if(rank != "precip"){ # w plikach opadowych tylko jeden plik
-          data2[grep("^Status", colnames(data2))] <- NULL
-          }
-      }
-
-      unlink(c(temp, temp2))
-
-      if(rank != "precip"){
+    }
+    
+    unlink(c(temp, temp2))
+    
+    if(rank != "precip"){
       all_data[[i]] <- merge(data1, data2,
-                           by = c("Kod stacji", "Nazwa stacji", "Rok", "Miesiac"),
-                           all.x = TRUE)
-      } else {
-        all_data[[i]] <- data1
+                             by = c("Kod stacji", "Nazwa stacji", "Rok", "Miesiac"),
+                             all.x = TRUE)
+    } else {
+      all_data[[i]] <- data1
+    }
+  }
+  
+  all_data <- do.call(rbind, all_data)
+  all_data <- all_data[all_data$Rok %in% year, ]
+  
+  if (coords){
+    all_data <- merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
+  }
+  
+  # dodaje rank
+  rank_code <- switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA", precip = "OPADOWA")
+  all_data <- cbind(data.frame(rank_code = rank_code), all_data)
+  
+  #station selection
+  if (!is.null(station)) {
+    if (is.character(station)) {
+      all_data <- all_data[all_data$`Nazwa stacji` %in% station, ]
+      if (nrow(all_data) == 0){
+        stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
-    }
-
-    all_data <- do.call(rbind, all_data)
-    all_data <- all_data[all_data$Rok %in% year, ]
-
-    if (coords){
-      all_data <- merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
-    }
-
-    # dodaje rank
-    rank_code <- switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA", precip = "OPADOWA")
-    all_data <- cbind(data.frame(rank_code = rank_code), all_data)
-
-    #station selection
-    if (!is.null(station)) {
-      if (is.character(station)) {
-        all_data <- all_data[all_data$`Nazwa stacji` %in% station, ]
-        if (nrow(all_data) == 0){
-          stop("Selected station(s) is not available in the database.", call. = FALSE)
-        }
-      } else if (is.numeric(station)){
-        all_data <- all_data[all_data$`Kod stacji` %in% station, ]
-        if (nrow(all_data) == 0){
-          stop("Selected station(s) is not available in the database.", call. = FALSE)
-        }
-      } else {
-        stop("Selected station(s) are not in the proper format.", call. = FALSE)
+    } else if (is.numeric(station)){
+      all_data <- all_data[all_data$`Kod stacji` %in% station, ]
+      if (nrow(all_data) == 0){
+        stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
+    } else {
+      stop("Selected station(s) are not in the proper format.", call. = FALSE)
     }
-
-    all_data <- all_data[order(all_data$`Nazwa stacji`, all_data$`Rok`, all_data$`Miesiac`), ]
-    # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
-    all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
-
-    return(all_data) # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
+  }
+  
+  all_data <- all_data[order(all_data$`Nazwa stacji`, all_data$`Rok`, all_data$`Miesiac`), ]
+  # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  
+  return(all_data) # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
 }
