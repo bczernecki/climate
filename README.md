@@ -165,6 +165,10 @@ print(monthly_summary)
 # tmax   8.7  11.2 17.2 23.8 28.3 31.6 32.3 31.8 26.9 21.3 14.3   9.8
 # tmin -15.0 -11.9 -7.6 -3.3  1.0  5.8  8.9  7.5  2.7 -2.4 -5.2 -10.4
 # tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
+
+
+# create plot with use of the "climatol" package:
+climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, per = "1991-2019", p3line = F)
 ```
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](poznan.svg)
