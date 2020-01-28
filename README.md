@@ -87,13 +87,14 @@ nearest_stations_ogimet(country = "United+Kingdom",
 
 ![100 nearest stations to given coordinates in UK](uk.png)
 
-## Examples 2 - downloading data:
+## Example 2 - downloading daily (or hourly) data from a global repository knowing its ID (see Example 1):
 
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
                  interval = "daily",
-                 coords = FALSE, station = 12330)
+                 coords = FALSE, 
+                 station = 12330)
 head(o)
 
 #>   station_ID       Date TemperatureCAvg TemperatureCMax TemperatureCMin TdAvgC HrAvg WindkmhDir
@@ -108,7 +109,11 @@ head(o)
 #> 5        7.1          NA     1020.4    0.0      5.2      5.9    2.5  14.1      <NA>         NA
 #> 6        9.2          NA     1009.2    0.0      5.7      2.7    1.4  12.2      <NA>         NA
 #> 7        7.2          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
+```
 
+## Example 3 - Downloading meteorological/hydrological data from the Polish (IMGW-PIB) repository:
+
+``` r3
 m = meteo_imgw(interval = "monthly", rank = "synop", year = 2000, coords = TRUE)
 head(m)
 #>            rank        id        X        Y   station   yy mm tmax_abs
@@ -137,10 +142,10 @@ head(h)
 #> 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA
 ```
 
-## Example 3 - create Walter & Lieth climatic diagram:
+## Example 4 - Create Walter & Lieth climatic diagram based on downloaded data
 
 
-``` r2
+``` r4
 library(climate)
 library(dplyr)
 
@@ -191,7 +196,7 @@ To cite the `climate` package in publications, please use [this paper](https://w
 
 Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. https://doi.org/10.3390/su12010394"
 
-LaTex version can be obtained with:
+LaTeX/BibTeX version can be obtained with:
 ```
 library(climate)
 citation("climate")
