@@ -60,7 +60,7 @@ coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
-## Examples 1 - finding the nearest meteorological station
+## Example 1 - finding the nearest meteorological station in a given country:
 
 ``` r1
 library(climate)
@@ -87,7 +87,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 
 ![100 nearest stations to given coordinates in UK](uk.png)
 
-## Examples 2 - downloading data
+## Examples 2 - downloading data:
 
 ``` r
 library(climate)
@@ -137,6 +137,37 @@ head(h)
 #> 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA
 ```
 
+## Example 3 - create Walter & Lieth climatic diagram:
+
+
+``` r2
+library(climate)
+library(dplyr)
+
+df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
+df2 = select(df, station:t2m_mean_mon, rr_monthly)
+
+
+monthly_summary = df2 %>% 
+  group_by(mm) %>% 
+  summarise(tmax=mean(tmax_abs, na.rm=T), 
+            tmin=mean(tmin_abs, na.rm=T),
+            tavg=mean(t2m_mean_mon, na.rm=T), 
+            opad=sum(rr_monthly)/n_distinct(yy))            
+
+monthly_summary = as.data.frame(t(monthly_summary[,c(5,2,3,4)])) 
+monthly_summary = round(monthly_summary,1)
+colnames(monthly_summary) = month.abb
+print(monthly_summary)
+
+#        Jan   Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov   Dec
+# opad  37.1  31.3 38.5 31.3 53.9 60.8 94.8 59.6 40.5 39.7 35.7  38.6
+# tmax   8.7  11.2 17.2 23.8 28.3 31.6 32.3 31.8 26.9 21.3 14.3   9.8
+# tmin -15.0 -11.9 -7.6 -3.3  1.0  5.8  8.9  7.5  2.7 -2.4 -5.2 -10.4
+# tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
+```
+
+![Walter and Lieth climatic diagram for Poznan, Poland](poznan.svg)
 
 
 ## Acknowledgment
