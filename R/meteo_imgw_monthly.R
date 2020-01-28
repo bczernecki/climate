@@ -31,8 +31,8 @@ meteo_imgw_monthly <- function(rank, year, status = FALSE, coords = FALSE, stati
   
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
-  interval <- "miesieczne" # to mozemy ustawic na sztywno
-  meta <- meteo_metadata_imgw(interval = "monthly", rank = rank)
+  interval <- "miesieczne" # to mozemy ustawic na sztywno do odwolania w url
+  meta <- climate:::meteo_metadata_imgw(interval = "monthly", rank = rank)
   
   rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
   
@@ -75,7 +75,7 @@ meteo_imgw_monthly <- function(rank, year, status = FALSE, coords = FALSE, stati
     data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
     colnames(data1) <- meta[[1]]$parameters
     
-    if( rank != "precip"){ # w opadpwkach jest tylko jeden plik
+    if( rank != "precip"){ # w opadowkach jest tylko jeden plik
       file2 <- paste(temp2, dir(temp2), sep = "/")[2]
       data2 <- read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
       colnames(data2) <- meta[[2]]$parameters

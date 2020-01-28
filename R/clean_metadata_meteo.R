@@ -22,7 +22,11 @@ clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   a <- readLines(address, warn = FALSE)
   a <- iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
   a <- gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
-  # a <- iconv(a, from = "cp1250", to = 'UTF-8') # usuwamy polskie znaki, bo to robi spore "kuku"
+  
+  # additional workarounds for mac os but not only...
+  a = gsub(x = a, pattern="'", replacement = "")
+  a = gsub(x = a, pattern="\\^0", replacement = "")
+  
 
   a <- data.frame(V1 = a[nchar(a) > 0], stringsAsFactors = FALSE)
 

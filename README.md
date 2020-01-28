@@ -60,7 +60,34 @@ coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
-## Examples
+## Examples 1 - finding the nearest meteorological station
+
+``` r1
+library(climate)
+
+# find 100 nearest UK stations to longitude 1W and latitude 53N :
+
+nearest_stations_ogimet(country = "United+Kingdom",
+  date = Sys.Date(),
+  add_map = TRUE,
+  point = c(-1, 53),
+  no_of_stations = 100
+)
+
+#     wmo_id                   station_names       lon      lat alt distance [km]
+# 66   03354      Nottingham Weather Centre  -1.250005 53.00000 117      28.04973
+# 69   03379                       Cranwell  -0.500010 53.03333  67      56.22175
+# 68   03377                     Waddington  -0.516677 53.16667  68      57.36093
+# 67   03373                       Scampton  -0.550011 53.30001  57      60.67897
+# 78   03462                      Wittering  -0.466676 52.61668  84      73.68934
+# 89   03544                 Church Lawford  -1.333340 52.36667 107      80.29844
+# ...
+
+```
+
+![100 nearest stations to given coordinates in UK](uk.png)
+
+## Examples 2 - downloading data
 
 ``` r
 library(climate)
@@ -109,6 +136,8 @@ head(h)
 #> 3227 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010   10   27
 #> 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA
 ```
+
+
 
 ## Acknowledgment
 
