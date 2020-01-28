@@ -50,7 +50,7 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
       "WindkmhInt" = character(),
       "WindkmhGust" = character(),
       "PresslevHp" = character(),
-      PreselevHp = character(),
+      "PreselevHp" = character(),
       "Precmm" = character(),
       "SunD1h" = character(),
       "SnowDepcm" = character(),
@@ -71,7 +71,6 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
     } 
 
     for (i in length(dates):1) {
-      
       # update progressbar:
       if(length(dates) >=3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)),"\n")
       
@@ -117,7 +116,14 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
             paste(test[1, 5], test[2, 4:5], sep = "_"),
             test[1, c(6:(length(test) - 3))]
           ))
-        } else {
+        } else if ((length(test[2, !is.na(test[2, ])]) == 3 &
+                    test[2, 2] == "Int.")) {
+          names_col = unlist(c(
+            test[1, 1:2],
+            paste(test[1, 3], test[2, 1:3], sep = "_"),
+            test[1, c(4:(length(test) - 2))]
+          ))
+        }else {
           names_col = "Error_column"
         }
       
