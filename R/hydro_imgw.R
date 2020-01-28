@@ -24,13 +24,13 @@ hydro_imgw <- function(interval, year, coords = FALSE, value = "H", station = NU
 
   if (interval == "daily"){
     # dobowe
-    calosc <- imgw::hydro_daily(year = year, coords = coords, station = station, col_names = col_names, ...)
+    calosc <- hydro_imgw_daily(year = year, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "monthly"){
     #miesieczne
-    calosc <- imgw::hydro_monthly(year = year, coords = coords, station = station, col_names = col_names, ...)
+    calosc <- hydro_imgw_monthly(year = year, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "semiannual_and_annual"){
     # polroczne_i_roczne
-    calosc <- imgw::hydro_annual(year = year, coords = coords, value = value, station = station, col_names = col_names, ...)
+    calosc <- hydro_imgw_annual(year = year, coords = coords, value = value, station = station, col_names = col_names, ...)
   } else{
     stop("Wrong `interval` value. It should be either 'daily', 'monthly', or 'semiannual_and_annual'.", call. = FALSE)
   }

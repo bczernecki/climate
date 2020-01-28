@@ -21,7 +21,7 @@
 hydro_shortening_imgw <- function(data, col_names = "short", remove_duplicates = TRUE){
 
   if (col_names != "polish"){
-    abbrev <- imgw::hydro_abbrev
+    abbrev <- climate::imgw_hydro_abbrev
     orig_columns <- trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
 
     matches <- match(orig_columns, abbrev$fullname)
