@@ -22,6 +22,12 @@ hydro_shortening_imgw <- function(data, col_names = "short", remove_duplicates =
 
   if (col_names != "polish"){
     abbrev <- climate::imgw_hydro_abbrev
+    
+    # additional workarounds for mac os but not only...
+    abbrev$fullname = gsub(x = abbrev$fullname, pattern="'", replacement = "")
+    abbrev$fullname = gsub(x = abbrev$fullname, pattern="\\^", replacement = "")
+    # end of workaround
+    
     orig_columns <- trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
 
     matches <- match(orig_columns, abbrev$fullname)

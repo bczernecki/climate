@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_metadata_hydro.R
 \name{clean_metadata_hydro}
 \alias{clean_metadata_hydro}
-\title{Hydrological metadata cleaning}
+\title{Hydrological metadata cleaning (IMGW-PIB data only)}
 \usage{
 clean_metadata_hydro(address, interval)
 }

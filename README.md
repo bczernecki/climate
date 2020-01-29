@@ -60,11 +60,11 @@ coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
-## Example 1 - finding the nearest meteorological station in a given country:
+## Example 1 
+#### Finding a nearest meteorological stations in a given country:
 
 ``` r1
 library(climate)
-
 # find 100 nearest UK stations to longitude 1W and latitude 53N :
 
 nearest_stations_ogimet(country = "United+Kingdom",
@@ -82,13 +82,13 @@ nearest_stations_ogimet(country = "United+Kingdom",
 # 78   03462                      Wittering  -0.466676 52.61668  84      73.68934
 # 89   03544                 Church Lawford  -1.333340 52.36667 107      80.29844
 # ...
-
 ```
 
 ![100 nearest stations to given coordinates in UK](uk.png)
 
-## Example 2 - downloading daily (or hourly) data from a global repository knowing its ID (see Example 1):
 
+## Example 2 
+#### Downloading daily (or hourly) data from a global repository knowing its ID (see Example 1):
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
@@ -111,7 +111,8 @@ head(o)
 #> 7        7.2          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
 ```
 
-## Example 3 - Downloading meteorological/hydrological data from the Polish (IMGW-PIB) repository:
+## Example 3 
+#### Downloading meteorological/hydrological data from the Polish (IMGW-PIB) repository:
 
 ``` r3
 m = meteo_imgw(interval = "monthly", rank = "synop", year = 2000, coords = TRUE)
@@ -131,18 +132,19 @@ head(m)
 #> 580      21.3     -4.3       5.7         13.8     -8.3        9.4
 #> 581      23.1      1.0       9.6         16.6     -1.8       36.4
 
-h = hydro_imgw(interval = "annual", year = 2010)
+h = hydro_imgw(interval = "semiannual_and_annual", year = 2010:2011)
 head(h)
-#>             id station riv_or_lake  hyy idyy Mesu idex   H beyy bemm bedd
-#> 3223 150210180 ANNOPOL   Wisła (2) 2010   13    H    1 227 2009   12   19
-#> 3224 150210180 ANNOPOL   Wisła (2) 2010   13    H    2 319   NA   NA   NA
-#> 3225 150210180 ANNOPOL   Wisła (2) 2010   13    H    3 531 2010    3    3
-#> 3226 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010    8   29
-#> 3227 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010   10   27
-#> 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA
+            id station riv_or_lake  hyy idyy Mesu idex   H beyy bemm bedd behm
+3223 150210180 ANNOPOL   Wisła (2) 2010   13    H    1 227 2009   12   19   NA
+3224 150210180 ANNOPOL   Wisła (2) 2010   13    H    2 319   NA   NA   NA   NA
+3225 150210180 ANNOPOL   Wisła (2) 2010   13    H    3 531 2010    3    3   18
+3226 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010    8   29   NA
+3227 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010   10   27   NA
+3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA   NA
 ```
 
-## Example 4 - Create Walter & Lieth climatic diagram based on downloaded data
+## Example 4 
+#### Create Walter & Lieth climatic diagram based on downloaded data
 
 
 ``` r4
@@ -151,7 +153,6 @@ library(dplyr)
 
 df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
 df2 = select(df, station:t2m_mean_mon, rr_monthly)
-
 
 monthly_summary = df2 %>% 
   group_by(mm) %>% 
@@ -170,7 +171,6 @@ print(monthly_summary)
 # tmax   8.7  11.2 17.2 23.8 28.3 31.6 32.3 31.8 26.9 21.3 14.3   9.8
 # tmin -15.0 -11.9 -7.6 -3.3  1.0  5.8  8.9  7.5  2.7 -2.4 -5.2 -10.4
 # tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
-
 
 # create plot with use of the "climatol" package:
 climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, per = "1991-2019", p3line = F)

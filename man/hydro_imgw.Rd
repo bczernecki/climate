@@ -23,8 +23,8 @@ hydro_imgw(
 
 \item{value}{type of data (can be: state - "H" (default), flow - "Q", or temperature - "T")}
 
-\item{station}{vector of hydrological stations danepubliczne.imgw.pl can be name of station CAPITAL LETTERS(character)
-It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
+\item{station}{vector of hydrological stations danepubliczne.imgw.pl; can be given as station name with CAPITAL LETTERS (character)
+It accepts either names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
 \item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
 
@@ -35,7 +35,7 @@ A data.frame with columns describing the hydrological parameters (e.g. flow, wat
 depending on the interval, at a given hour, month or year. If \code{coords = TRUE} additional two columns with geografic coordinates are added.
 }
 \description{
-Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+Downloading hourly, daily, and monthly hydrological data from the measurement stations available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
