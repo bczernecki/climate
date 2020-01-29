@@ -156,13 +156,13 @@ df2 = select(df, station:t2m_mean_mon, rr_monthly)
 
 monthly_summary = df2 %>% 
   group_by(mm) %>% 
-  summarise(tmax=mean(tmax_abs, na.rm=T), 
-            tmin=mean(tmin_abs, na.rm=T),
-            tavg=mean(t2m_mean_mon, na.rm=T), 
-            opad=sum(rr_monthly)/n_distinct(yy))            
+  summarise(tmax = mean(tmax_abs, na.rm = TRUE), 
+            tmin = mean(tmin_abs, na.rm = TRUE),
+            tavg = mean(t2m_mean_mon, na.rm = TRUE), 
+            opad = sum(rr_monthly) / n_distinct(yy))            
 
-monthly_summary = as.data.frame(t(monthly_summary[,c(5,2,3,4)])) 
-monthly_summary = round(monthly_summary,1)
+monthly_summary = as.data.frame(t(monthly_summary[, c(5,2,3,4)])) 
+monthly_summary = round(monthly_summary, 1)
 colnames(monthly_summary) = month.abb
 print(monthly_summary)
 
@@ -173,7 +173,8 @@ print(monthly_summary)
 # tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
 
 # create plot with use of the "climatol" package:
-climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, per = "1991-2019", p3line = F)
+climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, 
+  per = "1991-2019", p3line = FALSE)
 ```
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](poznan.svg)
