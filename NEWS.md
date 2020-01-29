@@ -1,3 +1,9 @@
+# climate 0.9.1
+
+* climate is independent of imgw
+* Bug fixes
+    * #24
+
 # climate 0.3
 
 * improves API
