@@ -4,7 +4,7 @@ y <-  2018
 test_that("meteo_imgw works!", {
   x <- meteo_imgw("hourly", "synop", year = y)
   x <- meteo_imgw("hourly", "climate", year = y)
-  x <- meteo_imgw("hourly", "precip", year = y)
+  #x <- meteo_imgw("hourly", "precip", year = y) # this one should not be tested - error expected
   x <- meteo_imgw("daily", "synop", year = y)
   x <- meteo_imgw("daily", "climate", year = y)
   x <- meteo_imgw("daily", "precip", year = y)

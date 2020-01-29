@@ -32,7 +32,7 @@ meteo_imgw_monthly <- function(rank, year, status = FALSE, coords = FALSE, stati
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
   interval <- "miesieczne" # to mozemy ustawic na sztywno do odwolania w url
-  meta <- climate:::meteo_metadata_imgw(interval = "monthly", rank = rank)
+  meta <- meteo_metadata_imgw(interval = "monthly", rank = rank)
   
   rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
   

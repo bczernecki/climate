@@ -84,7 +84,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 # ...
 ```
 
-![100 nearest stations to given coordinates in UK](uk.png)
+![100 nearest stations to given coordinates in UK](http://iqdata.eu/kolokwium/uk.png)
 
 
 ## Example 2 
@@ -177,7 +177,7 @@ climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA,
   per = "1991-2019", p3line = FALSE)
 ```
 
-![Walter and Lieth climatic diagram for Poznan, Poland](poznan.svg)
+![Walter and Lieth climatic diagram for Poznan, Poland](http://iqdata.eu/kolokwium/poznan.svg)
 
 
 ## Acknowledgment
