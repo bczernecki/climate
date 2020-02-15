@@ -40,7 +40,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
  
   # initalizing empty data frame for storing results:
   result=NULL
-  for (number_countires in country) {
+  for (number_countries in country) {
   #  print(number_countires)
 
   year <- format(date, "%Y")
@@ -50,7 +50,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   linkpl2 <-
     paste0(
       "http://ogimet.com/cgi-bin/gsynres?lang=en&state=",
-      number_countires,
+      number_countries,
       "&osum=no&fmt=html&ord=REV&ano=",
       year,
       "&mes=",
@@ -68,7 +68,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   
   b21 <- unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
   
-  pattern <- paste0(" (", gsub(x = number_countires, pattern = "+", replacement = " ", fixed = TRUE))
+  pattern <- paste0(" (", gsub(x = number_countries, pattern = "+", replacement = " ", fixed = TRUE))
   b22 <- unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
   
   b1 <- data.frame(str = b1[[1]], start = b21, stop = b22, stringsAsFactors = FALSE)
@@ -122,6 +122,10 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   result["distance [km]"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
+  
+  # removing rows with all NA records from the obtained dataset;
+  # otherwise there might be problems with plotting infinite xlim, ylim, etc..
+  result = result[!apply(is.na(result), 1, sum) == ncol(result),]
   
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){

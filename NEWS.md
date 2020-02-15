@@ -1,3 +1,8 @@
+# climate 0.9.2
+
+* Bug fixes
+    * #26
+
 # climate 0.9.1
 
 * climate is independent of imgw package
