@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   hourly <- meteo_hourly(rank = "climate", year = 1984)
+#'   hourly <- meteo_imgw_hourly(rank = "climate", year = 1984)
 #'   head(hourly)
 #' }
 #'
