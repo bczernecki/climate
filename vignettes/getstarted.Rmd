@@ -1,12 +1,12 @@
 ---
-  title: "Introduction to the climate package"
+title: "Introduction to the climate package"
 author: "Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{introduction-to-the-climate-package}
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
   
   ```{r setup, include = FALSE}
@@ -49,7 +49,7 @@ df$gust <- df$Gustkmh / 3.6 # converting to m/s from km/h
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
   
-  - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
+- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 
@@ -58,9 +58,9 @@ and hydrological data from publicly available repositories:
 
 The **climate** package consists of ten main functions - three for meteorological data, one for hydrological data and six auxiliary functions and datasets:
   
-  ### Meteorological data
+### Meteorological data
   
-  - **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
+- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
@@ -102,7 +102,7 @@ Examples shows aplication of climate package with additional use of tools that h
 ### Example 1
 
 Finding a 50 nearest meteorological stations in a given country:
-  ``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
+``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
 ns = nearest_stations_ogimet(country ="United+Kingdom",point = c(-4, 56), no_of_stations = 50, add_map = TRUE)
 head(ns)
@@ -119,7 +119,7 @@ head(ns)
 
 Creating a wind rose of Svalbard in 2018 with external package: **openair**
   
-  ``` {r windrose, eval=F}
+``` {r windrose, eval=F}
 # downloading data
 df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"), 
                    station = c("01008"))
@@ -137,7 +137,7 @@ windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE,
          main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
 ```
 
-``` {r windrose_plot, echo=F,fig.width=7, fig.height=3, fig.fullwidth=TRUE}
+``` {r windrose_plot, echo=F,include=TRUE,fig.width=7, fig.height=3, fig.fullwidth=TRUE}
 windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE,
          main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
 ```
@@ -155,7 +155,7 @@ RadioSonde::plotsonde(df, winds = FALSE, title = "2019-04-04 00UTC (LEBA, PL)",
 
 ### Example 4
 Preparing a annual summary of air temperature and precipitation, processing with **dplyr** and plot by **climatol**
-  ```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
+```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
 library(dplyr)
 
