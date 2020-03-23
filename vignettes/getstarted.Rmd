@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
   
-  ```{r setup, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -38,21 +38,12 @@ df$ws <- df$ffkmh / 3.6 # converting to m/s from km/h
 df$gust <- df$Gustkmh / 3.6 # converting to m/s from km/h
 ```
 
-
-[![Build
-   Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
-[![CRAN
-   status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
-[![CRAN RStudio mirror
-   downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
-
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
   
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
-
 
 ## Functions 
 
@@ -88,6 +79,7 @@ coordinates, and ID numbers
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
 ## Examples
+
 Examples shows aplication of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.  
 
 - [dplyr](https://CRAN.R-project.org/package=dplyr)
@@ -97,11 +89,10 @@ Examples shows aplication of climate package with additional use of tools that h
 - [openair](https://CRAN.R-project.org/package=openair)
 - [sf](https://CRAN.R-project.org/package=sf)
 
-
-
 ### Example 1
 
 Finding a 50 nearest meteorological stations in a given country:
+
 ``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
 ns = nearest_stations_ogimet(country ="United+Kingdom",point = c(-4, 56), no_of_stations = 50, add_map = TRUE)
@@ -117,7 +108,7 @@ head(ns)
 
 ### Example 2
 
-Creating a wind rose of Svalbard in 2018 with external package: **openair**
+Creating a wind rose of Svalbard in 2018 with external package **openair**: 
   
 ``` {r windrose, eval=F}
 # downloading data
@@ -154,7 +145,9 @@ RadioSonde::plotsonde(df, winds = FALSE, title = "2020-03-23 00UTC (LEBA, PL)",
 ```
 
 ### Example 4
-Preparing a annual summary of air temperature and precipitation, processing with **dplyr** and plot by **climatol**
+
+Preparing a annual summary of air temperature and precipitation, processing with **dplyr** and plot by **climatol**:
+
 ```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
 library(dplyr)
@@ -186,7 +179,6 @@ climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA,
 ```
 
 ### Example 5
-
 
 ```{r data}
 h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
@@ -243,7 +235,6 @@ Contributions to this package are welcome.
 The preferred method of contribution is through a GitHub pull request. 
 Feel also free to contact us by creating [an issue](https://github.com/bczernecki/climate/issues).
 
-
 ## Citation
 
 To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
@@ -253,13 +244,6 @@ To cite the `climate` package in publications, please use [this paper](https://w
 LaTex version can be obtained with:
 ```
 library(climate)
-<<<<<<< HEAD
 citation("climate")
-=======
-ns = nearest_stations_ogimet(point =c(-4, 56), no_of_stations = 50, add_map = TRUE)
-head(ns)
->>>>>>> cfd9b7041ee412a8c874323c1d9497de2c91db9f
 ```
-
-
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
