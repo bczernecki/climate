@@ -19,23 +19,6 @@ library(tidyr)
 library(tidyverse)
 library(dplyr)
 options(scipen=999)
-library(openair)
-library(climatol)
-library(sf)
-library(tmap)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(RadioSonde)
-df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"), 
-                   station = c("01008"))
-wdir <- data.frame(ddd = c("CAL", "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-                           "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"),
-                   dir = c(NA, 0:15 * 22.5), stringsAsFactors = FALSE)
-# changing the date column to the format required by the openair package
-df$date <- as.POSIXct(df$Date, tz = "UTC")
-df <- merge(df, wdir, by = "ddd", all.x = TRUE) # joining two datasets
-df$ws <- df$ffkmh / 3.6 # converting to m/s from km/h
-df$gust <- df$Gustkmh / 3.6 # converting to m/s from km/h
 ```
 
 
@@ -92,19 +75,16 @@ Examples shows aplication of climate package with additional use of tools that h
 
 - [dplyr](https://CRAN.R-project.org/package=dplyr)
 - [tidyr](https://CRAN.R-project.org/package=tidyr)
-- [tmap](https://CRAN.R-project.org/package=tmap)
-- [climatol](https://CRAN.R-project.org/package=climatol)
-- [openair](https://CRAN.R-project.org/package=openair)
-- [sf](https://CRAN.R-project.org/package=sf)
-
 
 
 ### Example 1
 
 Finding a 50 nearest meteorological stations in a given country:
+
 ``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-ns = nearest_stations_ogimet(country ="United+Kingdom",point = c(-4, 56), no_of_stations = 50, add_map = TRUE)
+ns = nearest_stations_ogimet(country ="United+Kingdom",point = c(-4, 56),
+                             no_of_stations = 50, add_map = TRUE)
 head(ns)
 #>    wmo_id       station_names       lon       lat alt  distance [km]
 #> 29  03144         Strathallan  -3.733348 56.31667  35      46.44794
@@ -117,46 +97,46 @@ head(ns)
 
 ### Example 2
 
-Creating a wind rose of Svalbard in 2018 with external package: **openair**
-  
-``` {r windrose, eval=F}
-# downloading data
-df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"), 
-                   station = c("01008"))
-library(openair) # external package for plotting wind roses
-# converting wind direction from character into degrees 
-wdir <- data.frame(ddd = c("CAL", "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
-                           "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"),
-                   dir = c(NA, 0:15 * 22.5), stringsAsFactors = FALSE)
-# changing the date column to the format required by the openair package
-df$date <- as.POSIXct(df$Date, tz = "UTC")
-df <- merge(df, wdir, by = "ddd", all.x = TRUE) # joining two datasets
-df$ws <- df$ffkmh / 3.6 # converting to m/s from km/h
-df$gust <- df$Gustkmh / 3.6 # converting to m/s from km/h
-windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE,
-         main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
-```
+Summary of stations availible in Ogimet repositoy  selected by county:
 
-``` {r windrose_plot, echo=F,include=TRUE,fig.width=7, fig.height=3, fig.fullwidth=TRUE}
-windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE,
-         main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
+``` {r stations, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
+library(climate)
+PL = stations_ogimet(country ="Poland", add_map = TRUE)
+head(PL)
 ```
 
 ### Example 3
+Downlading hourly meteorological data Svalbard in 2018 
+  
+``` {r windrose,eval=T}
+# downloading data
+df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),station = c("01008"))
+```
 
-```{r sonda, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
-library(climate)
-profile <- sounding_wyoming(wmo_id = 12120, yy = 2020, mm = 3, dd = 23, hh = 0)
-df <- profile[[1]] 
-colnames(df)[c(1, 3:4)] = c("press", "temp", "dewpt") # changing column names
-RadioSonde::plotsonde(df, winds = FALSE, title = "2020-03-23 00UTC (LEBA, PL)",
-                      col = c("red", "blue"), lwd = 3)
+```{r windrose2, echo=FALSE}
+library(knitr)
+kable(head(df[,c(1:12)],10), caption = "Examplary data frame of meteorological data.")
 ```
 
 ### Example 4
-Preparing a annual summary of air temperature and precipitation, processing with **dplyr** and plot by **climatol**
-```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
+Downloading sounding data for Łeba (Poland) station
+
+```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
+profile <- sounding_wyoming(wmo_id = 12120, yy = 2020, mm = 3, dd = 23, hh = 0)
+df2 <- profile[[1]] 
+colnames(df2)[c(1, 3:4)] = c("press", "temp", "dewpt") # changing column names
+```
+
+```{r sonda2, echo=FALSE}
+library(knitr)
+kable(head(df2,10), caption = "Examplary data frame of sounding preprocesssing.")
+```
+
+### Example 5
+Preparing a annual summary of air temperature and precipitation, processing with **dplyr** 
+
+```{r imgw_meteo,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(dplyr)
 
 df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
@@ -167,25 +147,20 @@ monthly_summary = df2 %>%
   summarise(tmax = mean(tmax_abs, na.rm = TRUE), 
             tmin = mean(tmin_abs, na.rm = TRUE),
             tavg = mean(t2m_mean_mon, na.rm = TRUE), 
-            opad = sum(rr_monthly) / n_distinct(yy))            
+            precip = sum(rr_monthly) / n_distinct(yy))            
 
 monthly_summary = as.data.frame(t(monthly_summary[, c(5,2,3,4)])) 
 monthly_summary = round(monthly_summary, 1)
 colnames(monthly_summary) = month.abb
-print(monthly_summary)
-
-#        Jan   Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov   Dec
-# opad  37.1  31.3 38.5 31.3 53.9 60.8 94.8 59.6 40.5 39.7 35.7  38.6
-# tmax   8.7  11.2 17.2 23.8 28.3 31.6 32.3 31.8 26.9 21.3 14.3   9.8
-# tmin -15.0 -11.9 -7.6 -3.3  1.0  5.8  8.9  7.5  2.7 -2.4 -5.2 -10.4
-# tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
-
-# create plot with use of the "climatol" package:
-climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, 
-                 per = "1991-2019", p3line = FALSE)
 ```
 
-### Example 5
+```{r imgw_meto2, echo=FALSE}
+library(knitr)
+kable(head(monthly_summary), caption = "Examplary data frame of meteorological preprocesssing.")
+```
+
+### Example 6
+Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
 
 ```{r data}
@@ -193,7 +168,6 @@ h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
 
-Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
 ```{r filtering, eval=TRUE, include=TRUE}
 h2 = h %>%
@@ -209,29 +183,6 @@ library(knitr)
 kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
 ```
 
-The annual means of maximum flow can be also presented on the map using the **tmap** package and boarders of Poland take
-
-```{r, eval=T,warning=F, fig.width=7, fig.height=6, fig.fullwidth=TRUE}
-library(sf)
-library(tmap)
-library(rnaturalearthdata)
-world = ne_countries(scale = "medium", returnclass = "sf")
-
-h3 = h2 %>% 
-  filter(!is.na(X)) %>% 
-  st_as_sf(coords = c("X", "Y"))
-
-tm_shape(h3) + 
-  tm_symbols(size = as.character(c(2001:2010)),
-             title.size = "The annual means of maximum flow") +
-  tm_facets(free.scales = FALSE, ncol = 4) + 
-  tm_shape(world) + 
-  tm_borders(col = "black", lwd = 2) +
-  tm_layout(legend.position = c(-1.25, 0.05),
-            outer.margins = c(0, 0.05, 0, -0.25),
-            panel.labels = as.character(c(2001:2010)))
-
-```
 
 ## Acknowledgment
 
@@ -253,12 +204,7 @@ To cite the `climate` package in publications, please use [this paper](https://w
 LaTex version can be obtained with:
 ```
 library(climate)
-<<<<<<< HEAD
 citation("climate")
-=======
-ns = nearest_stations_ogimet(point =c(-4, 56), no_of_stations = 50, add_map = TRUE)
-head(ns)
->>>>>>> cfd9b7041ee412a8c874323c1d9497de2c91db9f
 ```
 
 
