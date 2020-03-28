@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
   
-  ```{r setup, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -21,21 +21,12 @@ library(dplyr)
 options(scipen=999)
 ```
 
-
-[![Build
-   Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
-[![CRAN
-   status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
-[![CRAN RStudio mirror
-   downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
-
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
   
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
-
 
 ## Functions 
 
@@ -71,11 +62,19 @@ coordinates, and ID numbers
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
 ## Examples
+
 Examples shows aplication of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.  
 
 - [dplyr](https://CRAN.R-project.org/package=dplyr)
 - [tidyr](https://CRAN.R-project.org/package=tidyr)
+<<<<<<< HEAD
 
+=======
+- [tmap](https://CRAN.R-project.org/package=tmap)
+- [climatol](https://CRAN.R-project.org/package=climatol)
+- [openair](https://CRAN.R-project.org/package=openair)
+- [sf](https://CRAN.R-project.org/package=sf)
+>>>>>>> 6cc42c2b65fa0fd2cf4550809fa8922f32a1afb5
 
 ### Example 1
 
@@ -97,6 +96,7 @@ head(ns)
 
 ### Example 2
 
+<<<<<<< HEAD
 Summary of stations availible in Ogimet repositoy  selected by county:
 
 ``` {r stations, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
@@ -107,6 +107,9 @@ head(PL)
 
 ### Example 3
 Downlading hourly meteorological data Svalbard in 2018 
+=======
+Creating a wind rose of Svalbard in 2018 with external package **openair**: 
+>>>>>>> 6cc42c2b65fa0fd2cf4550809fa8922f32a1afb5
   
 ``` {r windrose,eval=T}
 # downloading data
@@ -128,6 +131,7 @@ df2 <- profile[[1]]
 colnames(df2)[c(1, 3:4)] = c("press", "temp", "dewpt") # changing column names
 ```
 
+<<<<<<< HEAD
 ```{r sonda2, echo=FALSE}
 library(knitr)
 kable(head(df2,10), caption = "Examplary data frame of sounding preprocesssing.")
@@ -137,6 +141,14 @@ kable(head(df2,10), caption = "Examplary data frame of sounding preprocesssing."
 Preparing a annual summary of air temperature and precipitation, processing with **dplyr** 
 
 ```{r imgw_meteo,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
+=======
+### Example 4
+
+Preparing a annual summary of air temperature and precipitation, processing with **dplyr** and plot by **climatol**:
+
+```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
+library(climate)
+>>>>>>> 6cc42c2b65fa0fd2cf4550809fa8922f32a1afb5
 library(dplyr)
 
 df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
@@ -161,7 +173,6 @@ kable(head(monthly_summary), caption = "Examplary data frame of meteorological p
 
 ### Example 6
 Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
-
 
 ```{r data}
 h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
@@ -194,7 +205,6 @@ Contributions to this package are welcome.
 The preferred method of contribution is through a GitHub pull request. 
 Feel also free to contact us by creating [an issue](https://github.com/bczernecki/climate/issues).
 
-
 ## Citation
 
 To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
@@ -206,6 +216,4 @@ LaTex version can be obtained with:
 library(climate)
 citation("climate")
 ```
-
-
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
