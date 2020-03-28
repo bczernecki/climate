@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(climate)
-library(tidyr)
-library(tidyverse)
-library(dplyr)
 options(scipen=999)
 ```
 
@@ -130,7 +126,6 @@ Preparing a annual summary of air temperature and precipitation, processing with
 
 ```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-
 library(dplyr)
 
 df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
@@ -157,6 +152,9 @@ kable(head(monthly_summary), caption = "Examplary data frame of meteorological p
 Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
 ```{r data}
+library(climate)
+library(dplyr)
+library(tidyr)
 h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
@@ -175,7 +173,6 @@ h2 = h %>%
 library(knitr)
 kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
 ```
-
 
 ## Acknowledgment
 
