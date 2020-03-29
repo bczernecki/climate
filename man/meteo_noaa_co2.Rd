@@ -4,7 +4,7 @@
 \alias{meteo_noaa_co2}
 \title{CO2 Mauna Loa (NOAA) dataset}
 \usage{
-meteo_noaa_co2(...)
+meteo_noaa_co2()
 }
 \description{
 Carbon Dioxide (CO2) monthly measurements from Mauna Loa observatory.
