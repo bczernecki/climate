@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 3. Wykonanie wykresu zmienności średniej rocznej temperatury oraz obliczenie trendu zmian za pomocą modelu regresji liniowej
 
 ```{r}
-library(imgw)
+library(climate)
 library(ggplot2)
 library(dplyr)
 meteo_poz = meteo_imgw(interval = "monthly", rank = "synop", year = 1966:2019, station = c("POZNAŃ", "POZNAŃ-ŁAWICA")) %>% 
@@ -26,7 +26,7 @@ ggplot(meteo_poz, aes(yy, t2)) +
   geom_line() + 
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Poznań", 
-       subtitle = "Annual mean air temperature (1966 - 2018)",
+       subtitle = "Annual mean air temperature (1966 - 2019)",
        x = "Year",
        y = "Temperature [*C]") +
   ggpubr::stat_regline_equation()
@@ -38,7 +38,7 @@ plot(
   type = "l",
   xlab = "Year",
   ylab = "Temperature [*C]",
-  main = "Poznań - annual mean air temperature (1966 - 2018)"
+  main = "Poznań - annual mean air temperature (1966 - 2019)"
   )
 model = lm(t2 ~ yy, data = meteo_poz)
 abline(model, col = "red", lwd = 3)
@@ -56,7 +56,7 @@ legend("topleft",
 5. Obliczenie trendu dla serii rocznej w punktach gridowych - mapa współczynnika kierunkowego trendu w Polsce w latach 1966-2017
 
 ```{r}
-library(imgw)
+library(climate)
 library(dplyr)
 library(sf)
 library(gstat)
@@ -65,9 +65,11 @@ library(raster)
 library(rnaturalearth)
 
 # downloads monthly data and calculates annual mean air temperature
-meteo_mon = meteo("monthly", rank = "synop", year = 1966:2017, coords = TRUE) %>%
+meteo_mon = meteo_imgw(interval = "monthly", rank = "synop", status = F,
+                       year = 1966:2019, coords = TRUE) %>%
   dplyr::select(id, station, X, Y, yy, mm, t2m_mean_mon) %>%
   dplyr::filter(id != 352180345) %>% # stacja w Kole ma kilka zer zamiast NA
+  dplyr::filter(id != 349190650 | id != 349190510) %>% # nie bierzemy obserwatorium na Kasprowym i Sniezce
   group_by(yy, id, station, X, Y) %>%
   summarise(t2 = mean(t2m_mean_mon))
 
@@ -81,7 +83,7 @@ europe = ne_countries(scale = "medium", continent = "Europe", returnclass = "sf"
 tm_shape(europe) +
   tm_borders(col = "black", lwd = 2) +
   tm_shape(meteo_mon_sp) +
-  tm_symbols(col = "t2", title.col = "") +
+  tm_symbols(col = "t2", title.col = "", style = "kmeans") +
   tm_facets(by = "yy")  +
   tm_layout(main.title = "Annual mean air temperature in Poland")
 
@@ -97,12 +99,12 @@ meteo_grid = raster(poland, ncol = 50, nrow = 50)
 meteo_inter = meteo_mon_sp %>%
   group_split(yy) %>%
   purrr::map(~gstat(formula = t2~1, data = ., #idw
-                  nmax = 10, set = list(idp = 0.1))) %>% 
+                    nmax = 10, set = list(idp = 0.1))) %>% 
   purrr::map(~interpolate(meteo_grid, .)) %>%
   stack()
 
 # calculates a trend for each pixel
-years = 1966:2017
+years = 1966:2019
 meteo_trend = calc(meteo_inter, fun = function(x) {summary(lm(x ~ years))$coefficients[2]}) %>% 
   mask(poland)
 
@@ -112,12 +114,13 @@ tm_shape(meteo_trend) +
   tm_shape(europe) +
   tm_borders(col = "black", lwd = 2) +
   tm_layout(legend.outside = TRUE,
-            main.title = "Annual mean air temperature in Poland - annual trend")
+            main.title = "Annual mean air temperature in Poland 
+            -annual trend")
 ```
 
 
 ## IMGW-PIB - dane hydrologicze (example no. 2)
-Moze byc ten ktory jest w winietce z przeplywami
+TODO
 
 
 ## DANE RADIOSONDAŻOWE - meteo_sounding() - 

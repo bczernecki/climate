@@ -135,7 +135,15 @@ meteo_imgw_monthly <- function(rank, year, status = FALSE, coords = FALSE, stati
     }
   }
   
-  all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac), ]
+  
+  # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
+  if(sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))){
+    all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac), ]
+  } else {
+    all_data <- all_data[order(all_data$id, all_data$Rok, all_data$Miesiac), ]
+  }
+  
+  
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
   
