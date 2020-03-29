@@ -145,7 +145,7 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
     }
   }
   
-  all_data <- all_data[order(all_data$`id`, all_data$`Rok`, all_data$`Miesiac`, all_data$`Dzien`, all_data$`Godzina`), ]
+  all_data <- all_data[order(all_data$`Kod stacji`, all_data$`Rok`, all_data$`Miesiac`, all_data$`Dzien`, all_data$`Godzina`), ]
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
   return(all_data)

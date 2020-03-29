@@ -79,7 +79,7 @@ h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
 
-Zmienna  `idex` reprezentuje id ekstremum, gdzie„ 1”oznacza minimum, „2” oznacza średnią, a„3” maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
+Zmienna  `idex` reprezentuje id ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
 Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym
 celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas 
 informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (` hyy`), szerokość geograficzną `X` i długość 

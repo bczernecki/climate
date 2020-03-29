@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## IMGW-PIB - dane meteo (example no. 1)
 
-1. Pobieranie danych miesięcznych ze stacji meteo (SYNOP) dla Poznania w latach 1966-2018.
+1. Pobieranie danych miesięcznych ze stacji meteo (SYNOP) dla Poznania w latach 1966-2018. Należy zwrócić uwagę, że w bazie IMGW-PIB stacja występuje jako "POZNAŃ" i "POZNAŃ-ŁAWICA", stąd też konieczne zdefiniowanie obu nazw.
 2. Przeliczenie wartości miesięcznych na wartości roczne
 3. Wykonanie wykresu zmienności średniej rocznej temperatury oraz obliczenie trendu zmian za pomocą modelu regresji liniowej
 
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(imgw)
 library(ggplot2)
 library(dplyr)
-meteo_poz = meteo("monthly", rank = "synop", year = 1966:2018, station = "POZNAŃ") %>% 
+meteo_poz = meteo_imgw(interval = "monthly", rank = "synop", year = 1966:2019, station = c("POZNAŃ", "POZNAŃ-ŁAWICA")) %>% 
   select(id, station, yy, mm, t2m_mean_mon) %>% 
   group_by(yy) %>%
   summarise(t2 = mean(t2m_mean_mon))

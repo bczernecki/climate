@@ -39,8 +39,14 @@ Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stat
   head(monthly)
 
   # a descriptive (long) column names:
-  monthly2 <- meteo_imgw_monthly(rank = "synop", year = 2018, col_names = "full")
+  monthly2 <- meteo_imgw_monthly(rank = "synop", year = 2018, 
+         col_names = "full")
   head(monthly2)
+  
+  # please note that station names may change over time 
+  # and thus 2 names are required in some cases:
+  df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000, 
+          coords = T, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
 }
 
 }
