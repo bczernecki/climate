@@ -200,7 +200,7 @@ meteo_imgw_daily <- function(rank, year, status = FALSE, coords = FALSE, station
   }
   
   
-  all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien),]
+  all_data <- all_data[order(all_data$`id`, all_data$Rok, all_data$Miesiac, all_data$Dzien),]
   
   
   # # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
