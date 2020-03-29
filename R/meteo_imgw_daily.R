@@ -209,7 +209,7 @@ meteo_imgw_daily <- function(rank, year, status = FALSE, coords = FALSE, station
   
   
   # # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
-  all_data <- meteo_shortening_imgw(all_data, col_names = col_names)
+  all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
   
   return(all_data)
   

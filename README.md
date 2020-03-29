@@ -179,6 +179,17 @@ climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA,
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](http://iqdata.eu/kolokwium/poznan.svg)
 
+## Example 5
+#### Download monthly CO2 dataset from Mauna Loa observatory
+
+``` r5
+  library(climate)
+  co2 <- meteo_noaa_co2()
+  head(co2)
+  plot(co2$yy_d, co2$co2_avg, type='l')
+```
+
+
 
 ## Acknowledgment
 
