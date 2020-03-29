@@ -34,13 +34,13 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   co2 <- meteo_co2()
+#'   co2 <- meteo_noaa_co2()
 #'   head(co2)
 #'   plot(co2$yy_d, co2$co2_avg, type='l')
 #' }
 #'
 
-meteo_co2 <- function(...){
+meteo_noaa_co2 <- function(...){
   
   co2 = read.table("ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt", na.strings = "-99.99")
   colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays")
