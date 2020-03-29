@@ -200,12 +200,11 @@ meteo_imgw_daily <- function(rank, year, status = FALSE, coords = FALSE, station
   }
   
   
-  all_data <- all_data[order(all_data$`Nazwa stacji.x`, all_data$Rok, all_data$Miesiac, all_data$Dzien),]
-  #powyzsza linia wykrzacza pobieranie
+  all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien),]
   
   
   # # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
-  all_data <- meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data <- meteo_shortening_imgw(all_data, col_names = col_names)
   
   return(all_data)
   

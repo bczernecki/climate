@@ -1,3 +1,10 @@
+# climate 0.9.3
+
+* Bug fixes
+    * #27
+* New datasets:
+    * CO2 concentration from Mauna Loa observatory
+
 # climate 0.9.2
 
 * Bug fixes
