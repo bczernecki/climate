@@ -13,6 +13,7 @@ and hydrological data from publicly available repositories:
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- National Oceanic & Atmospheric Agency - Earth System Research Laboratory - Global Monitoring Division [(NOAA)](https://www.esrl.noaa.gov/gmd/ccgg/trends/)
 
 ## Installation
 
@@ -40,6 +41,9 @@ Any meteorological (aka SYNOP) station working under the World Meteorological Or
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
 - **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+
+- **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
+
   
 ### Hydrological data
 
@@ -193,7 +197,7 @@ climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA,
 
 ## Acknowledgment
 
-Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB) are the sources of the data.
+Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Agency, Earth System Research Laboratory, Global Monitoring Division (NOAA) are the sources of the data.
 
 ## Contribution
 
