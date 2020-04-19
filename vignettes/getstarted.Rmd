@@ -110,7 +110,7 @@ Downloading sounding data for Łeba (Poland) station
 
 ```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-profile <- sounding_wyoming(wmo_id = 12120, yy = 2020, mm = 3, dd = 23, hh = 0)
+profile <- sounding_wyoming(wmo_id = 12120, yy = 2020, mm = 2, dd = 23, hh = 0)
 df2 <- profile[[1]] 
 colnames(df2)[c(1, 3:4)] = c("press", "temp", "dewpt") # changing column names
 ```
@@ -159,7 +159,7 @@ Calculate the mean maximum value of the flow on the stations in each year with *
 library(climate)
 library(dplyr)
 library(tidyr)
-h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
+h = hydro_imgw(interval = "monthly", year = 2001:2005, coords = TRUE)
 head(h)
 ```
 

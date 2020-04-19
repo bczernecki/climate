@@ -4,13 +4,15 @@
 \name{imgw_hydro_stations}
 \alias{imgw_hydro_stations}
 \title{Location of the hydrological stations from the danepubliczne.imgw.pl collection}
-\format{The data contains a data.frame with 1304 obs. of 3 variables:
+\format{
+The data contains a data.frame with 1304 obs. of 3 variables:
 \itemize{
 \item{id} {Station ID}
 \item{X} {Longitude}
 \item{Y} {Latitude}
 }
-The object is in the geographic coordinates using WGS84 (EPSG:4326).}
+The object is in the geographic coordinates using WGS84 (EPSG:4326).
+}
 \usage{
 imgw_hydro_stations
 }

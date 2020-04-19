@@ -1,4 +1,4 @@
-#' Daily meteorological data
+#' Daily IMGW meteorological data
 #'
 #' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/meteo_imgw_hourly.R
 \name{meteo_imgw_hourly}
 \alias{meteo_imgw_hourly}
-\title{Hourly meteorological data}
+\title{Hourly IMGW meteorological data}
 \usage{
 meteo_imgw_hourly(
   rank,

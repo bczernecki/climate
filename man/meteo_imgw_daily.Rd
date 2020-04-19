@@ -2,7 +2,7 @@
 % Please edit documentation in R/meteo_imgw_daily.R
 \name{meteo_imgw_daily}
 \alias{meteo_imgw_daily}
-\title{Daily meteorological data}
+\title{Daily IMGW meteorological data}
 \usage{
 meteo_imgw_daily(
   rank,

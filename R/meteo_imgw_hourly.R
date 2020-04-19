@@ -1,4 +1,4 @@
-#' Hourly meteorological data
+#' Hourly IMGW meteorological data
 #'
 #' Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'

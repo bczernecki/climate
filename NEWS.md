@@ -1,3 +1,8 @@
+# climate 0.9.4
+
+* New dataset:
+    * Hourly NOAA ISH (Integrated Surface Hourly) data - global meteorological dataset dated back up to 1900
+
 # climate 0.9.3
 
 * Bug fixes

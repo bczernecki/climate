@@ -3,8 +3,10 @@
 \name{get_coord_from_string}
 \alias{get_coord_from_string}
 \title{Getting coordinates from a string provided by the Ogimet web portal}
-\format{The returned object is the geographic coordinates using WGS84 (EPSG:4326) in decimal format.
-Negative values mean western or southern Hemisphere}
+\format{
+The returned object is the geographic coordinates using WGS84 (EPSG:4326) in decimal format.
+Negative values mean western or southern Hemisphere
+}
 \usage{
 get_coord_from_string(txt, pattern = "Longitude")
 }
