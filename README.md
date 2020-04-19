@@ -220,7 +220,7 @@ ggplot(co2, aes(date, co2_avg)) +
   geom_line()+ geom_smooth()+
   theme_bw()+
   labs(
-    title = "Carbond Dioxide (CO2)",
+    title = "Carbon Dioxide (CO2)",
     subtitle = paste0("Mauna Loa Observatory "),
     caption = "data source: NOAA
     visualization: Bartosz Czernecki / R climate package",
