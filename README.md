@@ -228,9 +228,9 @@ ggplot(co2, aes(date, co2_avg)) +
     y = "ppm"
 )
 
-![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
-
 ```
+
+![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
 
 
 
