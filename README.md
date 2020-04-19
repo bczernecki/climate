@@ -209,17 +209,34 @@ climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA,
 #### Download monthly CO2 dataset from Mauna Loa observatory
 
 ``` r5
-  library(climate)
-  co2 <- meteo_noaa_co2()
-  head(co2)
-  plot(co2$yy_d, co2$co2_avg, type='l')
+library(climate)
+library(ggplot2)
+library(ggthemes)
+
+co2 = meteo_noaa_co2()
+head(co2)
+co2$date = ISOdate(co2$yy, co2$mm, 1)
+ggplot(co2, aes(date, co2_avg)) + 
+  geom_line()+ geom_smooth()+
+  theme_bw()+
+  labs(
+    title = "Carbond Dioxide (CO2)",
+    subtitle = paste0("Mauna Loa Observatory "),
+    caption = "data source: NOAA
+    visualization: Bartosz Czernecki / R climate package",
+    x = "",
+    y = "ppm"
+)
+
+![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
+
 ```
 
 
 
 ## Acknowledgment
 
-Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Agency, Earth System Research Laboratory, Global Monitoring Division (NOAA) are the sources of the data.
+Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Agency (NOAA) - Earth System Research Laboratory, Global Monitoring Division and Integrated Surface Hourly (NOAA ISH) are the sources of the data.
 
 ## Contribution
 
