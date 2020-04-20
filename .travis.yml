@@ -7,5 +7,8 @@ cache: packages
 r_packages:
   - covr
 
+r_check_args:
+  - --as-cran
+
 after_success:
   - Rscript -e 'library(covr); codecov()'
