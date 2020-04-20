@@ -47,11 +47,18 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
                         "wd", "ws",  "visibility", "t2m", "dpt2m", 
                         "slp")
       
-      dat$t2m[dat$t2m==9999] = NA
-      dat$dpt2m[dat$dpt2m==9999] = NA
-      dat$ws[dat$ws==9999] = NA
-      dat$wd[dat$wd==999] = NA
-      dat$slp[dat$slp==99999] = NA
+      dat$date = ISOdatetime(year = dat$year, 
+                             month = dat$month, 
+                             day = dat$day, 
+                             hour = dat$hour, 0, 0, tz = "UTC")
+                            
+      
+      dat$t2m[dat$t2m == 9999] = NA
+      dat$dpt2m[dat$dpt2m == 9999] = NA
+      dat$ws[dat$ws == 9999] = NA
+      dat$wd[dat$wd == 999] = NA
+      dat$slp[dat$slp == 99999] = NA
+      dat$visibility[dat$visibility == 999999] = NA
       
       dat$lon = dat$lon/1000
       dat$lat = dat$lat/1000
@@ -68,11 +75,11 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
   all_data <- do.call(rbind, all_data)
   
   # order columns:
-  all_data = all_data[, c("year", "month", "day", "hour", "lon", "lat", "alt",
+  all_data = all_data[, c("date","year", "month", "day", "hour", "lon", "lat", "alt",
                           "t2m", "dpt2m", "ws", "wd", "slp", "visibility") ]
   
   # sort data
-  all_data = all_data[order(all_data$year, all_data$month, all_data$day, all_data$hour), ]
+  all_data = all_data[order(all_data$date), ]
   
   return(all_data)
 } # koniec funkcji meteo_terminowe

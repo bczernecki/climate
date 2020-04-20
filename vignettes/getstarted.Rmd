@@ -19,10 +19,12 @@ options(scipen=999)
 
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
-  
+
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- National Oceanic & Atmospheric Administration - Earth System Research Laboratory - Global Monitoring Division [(NOAA)](https://www.esrl.noaa.gov/gmd/ccgg/trends/)
+- National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
 
 ## Functions 
 
@@ -35,6 +37,9 @@ Any meteorological (aka SYNOP) station working under the World Meteorological Or
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+
+- **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
+
 
 - **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
 
@@ -84,7 +89,7 @@ head(ns)
 
 ### Example 2
 
-Summary of stations availible in Ogimet repositoy  selected by county:
+Summary of stations available in Ogimet repository for a selected country:
 
 ``` {r stations, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
 library(climate)
@@ -93,16 +98,20 @@ head(PL)
 ```
 
 ### Example 3
-Downlading hourly meteorological data Svalbard in 2018 
+Downlading hourly meteorological data Svalbard in 2018 from Ogimet
   
 ``` {r windrose,eval=T}
-# downloading data
-df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),station = c("01008"))
+# downloading data with NOAA service:
+df = meteo_noaa_hourly(station = "010080-99999", year = 2018)
+
+# downloading the same data with Ogimet.com:
+# df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),
+#                   station = c("01008"))
 ```
 
 ```{r windrose2, echo=FALSE}
 library(knitr)
-kable(head(df[,c(1:12)],10), caption = "Examplary data frame of meteorological data.")
+kable(head(df[,c(-2:-5)],10), caption = "Examplary data frame of meteorological data.")
 ```
 
 ### Example 4
@@ -180,7 +189,7 @@ kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing."
 
 ## Acknowledgment
 
-Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB) are the sources of the data.
+Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Administration (NOAA) - Earth System Research Laboratory, Global Monitoring Division and Integrated Surface Hourly (NOAA ISH) are the sources of the data.
 
 ## Contribution
 
