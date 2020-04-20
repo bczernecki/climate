@@ -1,4 +1,4 @@
-#' Monthly INGMmeteorological data
+#' Monthly IMGW meteorological data
 #'
 #' Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'

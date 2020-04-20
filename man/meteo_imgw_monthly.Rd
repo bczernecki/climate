@@ -2,7 +2,7 @@
 % Please edit documentation in R/meteo_imgw_monthly.R
 \name{meteo_imgw_monthly}
 \alias{meteo_imgw_monthly}
-\title{Monthly INGMmeteorological data}
+\title{Monthly IMGW meteorological data}
 \usage{
 meteo_imgw_monthly(
   rank,
