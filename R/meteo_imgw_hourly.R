@@ -67,7 +67,8 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
       for(j in seq_along(addresses_to_download)){
         temp <- tempfile()
         temp2 <- tempfile()
-        download.file(addresses_to_download[j], temp)
+        download_gently(addresses_to_download[j], temp)
+        #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 <- paste(temp2, dir(temp2), sep = "/")
         data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")

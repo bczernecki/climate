@@ -31,7 +31,7 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
 
       address = paste0(base_url, year[i], "/", station, "-", year[i], ".gz")
       temp = tempfile()
-      download.file(address, temp)
+      download_gently(address, temp)
       
       dat = read.fwf(gzfile(temp,'rt'),header=F,  
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 

@@ -32,7 +32,8 @@ Depends:
     R (>= 3.1)
 Imports: 
     RCurl,
-    XML
+    XML,
+    httr
 Suggests: 
     testthat,
     knitr,

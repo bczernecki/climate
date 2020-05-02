@@ -50,7 +50,8 @@ hydro_imgw_daily <- function(year, coords = FALSE, station = NULL, col_names= "s
       address <- paste0(base_url, interval_pl, "/", catalog, "/codz_", catalog,"_", iterator[j], ".zip")
       temp <- tempfile()
       temp2 <- tempfile()
-      download.file(address, temp)
+      download_gently(address, temp)
+      #download.file(address, temp)
       unzip(zipfile = temp, exdir = temp2)
       file1 <- paste(temp2, dir(temp2), sep = "/")[1]
       data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")

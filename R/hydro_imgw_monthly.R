@@ -47,7 +47,8 @@ hydro_imgw_monthly <- function(year, coords = FALSE, station = NULL, col_names= 
 
     temp <- tempfile()
     temp2 <- tempfile()
-    download.file(adres, temp)
+    download_gently(adres, temp)
+    #download.file(adres, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 <- paste(temp2, dir(temp2), sep = "/")[1]
     data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
