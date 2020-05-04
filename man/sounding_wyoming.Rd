@@ -37,7 +37,7 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
 }
 The second list contains metadata and calculated thermodynamic / atmospheric instability indices
 
-A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorogical parameters (e.g. temperature, air pressure) where each row represent a measurement,
+A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorological parameters (e.g. temperature, air pressure) where each row represent a measurement,
 depending on the height. Secound data.frame present a description of the conditions under which the sounding was carried out.
 }
 \description{

@@ -14,7 +14,7 @@ nearest_stations_ogimet(
 )
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")}
+\item{country}{country name; for more than two words they need to be separated with a plus character (e.g., "United+Kingdom")}
 
 \item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
 

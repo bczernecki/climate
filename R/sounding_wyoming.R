@@ -24,7 +24,7 @@
 #'  }
 #'  The second list contains metadata and calculated thermodynamic / atmospheric instability indices
 #'
-#' @return A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorogical parameters (e.g. temperature, air pressure) where each row represent a measurement,
+#' @return A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorological parameters (e.g. temperature, air pressure) where each row represent a measurement,
 #' depending on the height. Secound data.frame present a description of the conditions under which the sounding was carried out. 
 #'
 #' @source http://weather.uwyo.edu/upperair/sounding.html

@@ -7,14 +7,14 @@
 stations_ogimet(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE)
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
+\item{country}{country name; for more than two words they need to be separated with a plus character (e.g. "United+Kingdom")}
 
 \item{date}{a day when measurements were done in all available locations}
 
 \item{add_map}{logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)}
 }
 \value{
-A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
+A data.frame with columns describing the synoptic stations in selected countries where each row represent a station.
 If \code{add_map = TRUE} additional map of downloaded data is added.
 }
 \description{

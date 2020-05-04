@@ -80,12 +80,12 @@ hydro_imgw_daily <- function(year, coords = FALSE, station = NULL, col_names= "s
   #Grubość lodu
   #0   oznacza brak pomiaru grubości lodu ze względu na brak zjawisk lodowych
   #999 oznacza brak pomiaru grubości lodu przy występowaniu zjawisk lodowych lub (w miesiacach letnich)
-  #występowanie zarastania przy braku zjawisk lodowych (tzn. jeżli kod pole zjawiska lodowego jest puste)
+  #występowanie zarastania przy braku zjawisk lodowych (tzn. jeżeli kod pole zjawiska lodowego jest puste)
   all_data <- do.call(rbind, all_data)
   all_data[all_data == 9999] <- NA
   all_data[all_data == 99999.999] <- NA
   all_data[all_data == 99.9] <- NA
-  #zjawiska lodowe nie uwzględniam 0 przy braku zjawisk lodowych bo to znaczy ze było poprostu 0
+  #zjawiska lodowe nie uwzględniam 0 przy braku zjawisk lodowych bo to znaczy ze było po prostu 0
   all_data[all_data == 999] <- NA
   # coords
   if (coords){
