@@ -18,6 +18,14 @@ meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, h
   b <- NULL
 
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  
+  if (httr::http_error(base_url)) {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                base_url,
+                "\n"))
+  }
 
   # METADANE daily:
   if(interval == "daily")   { # uwaga! daily maja dla climateow i synopow po 2 pliki z metadanymi!!!

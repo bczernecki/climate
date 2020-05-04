@@ -7,6 +7,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom utils read.fwf
 #' @importFrom stats na.omit
+#' @importFrom httr http_error
 #' @keywords internal
 #'
 #' @examples
@@ -18,8 +19,16 @@
 #'
 
 clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
+  
+  if (!httr::http_error(url)) {
+    a = readLines(address, warn = FALSE)
+  } else {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                url, "\n"))
+  }
 
-  a <- readLines(address, warn = FALSE)
   a <- iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
   a <- gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
   

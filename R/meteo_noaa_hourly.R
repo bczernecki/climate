@@ -25,6 +25,16 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://www1.ncdc.noaa.gov/pub/data/noaa/"
+  
+  if (httr::http_error(base_url)) {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                base_url,
+                "\n"))
+  }
+  
+  
   all_data <- NULL
   
   for (i in seq_along(year)){

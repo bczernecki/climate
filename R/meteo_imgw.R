@@ -3,7 +3,7 @@
 #' Downloading hourly, daily, and monthly meteorological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
-#' @param rank rank of the stations ("synop", "climate", "precip")
+#' @param rank rank of the stations: "synop" (default), "climate" or "precip"
 #' @param year vector of years (e.g., 1966:2000)
 #' @param status leave the columns with measurement and observation statuses (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
@@ -17,10 +17,10 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   x <- meteo_imgw("monthly", rank = "synop", year = 2018, coords = TRUE)
+#'   x <- meteo_imgw("monthly", year = 2018, coords = TRUE)
 #'   head(x)
 #' }
-meteo_imgw <- function(interval, rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
+meteo_imgw <- function(interval, rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
   if (interval == "daily"){
     # daily
     calosc <- meteo_imgw_daily(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)

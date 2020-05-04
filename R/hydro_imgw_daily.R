@@ -11,64 +11,74 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
-#'   daily <- hydro_imgw_daily(year = 2000)
+#'   daily = hydro_imgw_daily(year = 2000)
 #'   head(daily)
 #' }
 #'
 
-hydro_imgw_daily <- function(year, coords = FALSE, station = NULL, col_names= "short", ...){
+hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "short", ...){
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
-  interval <- "daily"
-  interval_pl <- "dobowe"
-  a <- getURL(paste0(base_url, interval_pl, "/"),
-              ftp.use.epsv = FALSE,
-              dirlistonly = TRUE)
+  base_url = "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  interval = "daily"
+  interval_pl = "dobowe"
+  
+  if (!httr::http_error(paste0(base_url, interval_pl, "/"))) {
+    a = getURL(paste0(base_url, interval_pl, "/"),
+               ftp.use.epsv = FALSE,
+               dirlistonly = TRUE)
+  } else {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                paste0(base_url, interval_pl, "/"), "\n"))
+  }
+  
 
-  ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
-  catalogs <- gsub(x = catalogs, pattern = "/", replacement = "")
-  catalogs <- catalogs[catalogs %in% as.character(year)]
+  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
+  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
+  catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
+  catalogs = catalogs[catalogs %in% as.character(year)]
   if (length(catalogs) == 0) {
     stop("Selected year(s) is not available in the database.", call. = FALSE)
   }
-  meta <- hydro_metadata_imgw(interval)
+  meta = hydro_metadata_imgw(interval)
 
-  all_data <- vector("list", length = length(catalogs))
+  all_data = vector("list", length = length(catalogs))
   for (i in seq_along(catalogs)){
-    catalog <- catalogs[i]
+    catalog = catalogs[i]
     # print(i)
 
-    iterator <- c("01", "02", "03", "04", "05", "06",
+    iterator = c("01", "02", "03", "04", "05", "06",
                 "07", "08", "09", "10", "11", "12")
     data=NULL
     for (j in seq_along(iterator)) {
-      address <- paste0(base_url, interval_pl, "/", catalog, "/codz_", catalog,"_", iterator[j], ".zip")
-      temp <- tempfile()
-      temp2 <- tempfile()
+      address = paste0(base_url, interval_pl, "/", catalog, "/codz_", catalog,"_", iterator[j], ".zip")
+      temp = tempfile()
+      temp2 = tempfile()
       download_gently(address, temp)
       #download.file(address, temp)
       unzip(zipfile = temp, exdir = temp2)
-      file1 <- paste(temp2, dir(temp2), sep = "/")[1]
-      data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-      colnames(data1) <- meta[[1]][,1]
+      file1 = paste(temp2, dir(temp2), sep = "/")[1]
+      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      colnames(data1) = meta[[1]][,1]
       data=rbind(data,data1)
     }
-    address <- paste0(base_url, interval_pl, "/", catalog, "/zjaw_", catalog, ".zip")
+    address = paste0(base_url, interval_pl, "/", catalog, "/zjaw_", catalog, ".zip")
 
-    temp <- tempfile()
-    temp2 <- tempfile()
+    temp = tempfile()
+    temp2 = tempfile()
     download.file(address, temp)
     unzip(zipfile = temp, exdir = temp2)
-    file2 <- paste(temp2, dir(temp2), sep = "/")[1]
-    data2 <- read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-    colnames(data2) <- meta[[2]][, 1]
+    file2 = paste(temp2, dir(temp2), sep = "/")[1]
+    data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    colnames(data2) = meta[[2]][, 1]
 
-    all_data[[i]] <- merge(data, data2,
+    all_data[[i]] = merge(data, data2,
                          by = c("Kod stacji", "Nazwa stacji",
                                "Rok hydrologiczny", "Nazwa rzeki/jeziora",
                                "Wskaznik miesiaca w roku hydrologicznym", "Dzien"),
@@ -81,25 +91,25 @@ hydro_imgw_daily <- function(year, coords = FALSE, station = NULL, col_names= "s
   #0   oznacza brak pomiaru grubości lodu ze względu na brak zjawisk lodowych
   #999 oznacza brak pomiaru grubości lodu przy występowaniu zjawisk lodowych lub (w miesiacach letnich)
   #występowanie zarastania przy braku zjawisk lodowych (tzn. jeżli kod pole zjawiska lodowego jest puste)
-  all_data <- do.call(rbind, all_data)
-  all_data[all_data == 9999] <- NA
-  all_data[all_data == 99999.999] <- NA
-  all_data[all_data == 99.9] <- NA
+  all_data = do.call(rbind, all_data)
+  all_data[all_data == 9999] = NA
+  all_data[all_data == 99999.999] = NA
+  all_data[all_data == 99.9] = NA
   #zjawiska lodowe nie uwzględniam 0 przy braku zjawisk lodowych bo to znaczy ze było poprostu 0
-  all_data[all_data == 999] <- NA
+  all_data[all_data == 999] = NA
   # coords
   if (coords){
-    all_data <- merge(climate::imgw_hydro_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
+    all_data = merge(climate::imgw_hydro_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
   }
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data <- all_data[all_data$`Nazwa stacji` %in% station, ]
+      all_data = all_data[all_data$`Nazwa stacji` %in% station, ]
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
     } else if (is.numeric(station)){
-      all_data <- all_data[all_data$`Kod stacji` %in% station, ]
+      all_data = all_data[all_data$`Kod stacji` %in% station, ]
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
@@ -108,9 +118,9 @@ hydro_imgw_daily <- function(year, coords = FALSE, station = NULL, col_names= "s
     }
   }
 
-  all_data <- all_data[order(all_data$`Nazwa stacji`, all_data$`Rok hydrologiczny`, all_data$`Wskaznik miesiaca w roku hydrologicznym`, all_data$`Dzien`), ]
+  all_data = all_data[order(all_data$`Nazwa stacji`, all_data$`Rok hydrologiczny`, all_data$`Wskaznik miesiaca w roku hydrologicznym`, all_data$`Dzien`), ]
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
-  all_data <- hydro_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)
 }

@@ -9,6 +9,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils setTxtProgressBar txtProgressBar
+#' @importFrom httr http_error
 #' 
 #' @keywords internal
 #'
@@ -80,7 +81,20 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
       ndays <- day
       linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep="")
       if(month == 1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
-      a <- getURL(linkpl2)
+      
+      if (!httr::http_error(linkpl2)) {
+        a = getURL(linkpl2,
+                   ftp.use.epsv = FALSE,
+                   dirlistonly = TRUE)
+      } else {
+        stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    linkpl2, "\n"))
+      }
+      
+      
+      #a <- getURL(linkpl2)
       a <- readHTMLTable(a, stringsAsFactors = FALSE)
       b <- a[[length(a)]]
       if (sum(b[1,]=="Dailyweather summary", na.rm = TRUE)) {
