@@ -28,7 +28,7 @@ download_gently = function(url, output){
   # pomyslec czy rozwiazanie z trycatchem nie bylo by szybszee, bo nie wymaga
   # testowania przed pobraniem
       if (!httr::http_error(url)) {
-        download.file(url, output)
+        download.file(url, output, mode = "wb")
       } else {
         stop(call. = FALSE, 
         paste0("\nDownload failed. ",

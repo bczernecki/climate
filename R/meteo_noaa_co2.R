@@ -32,7 +32,6 @@
 #' CO2 expressed as a mole fraction in dry air, micromol/mol, abbreviated as ppm
 #'
 #' @importFrom utils read.table
-#' @importFrom httr http_error
 #' @export
 #' 
 #'
@@ -47,15 +46,13 @@ meteo_noaa_co2 <- function(){
   
   base_url = "ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt"
   
-  if (httr::http_error(base_url)) {
-    stop(call. = FALSE, 
-         paste0("\nDownload failed. ",
-                "Check your internet connection or validate this url in your browser: ",
-                base_url,
-                "\n"))
-  }
+  temp = tempfile()
+  download_gently(url = base_url, output = temp)
   
-  co2 = read.table(base_url, na.strings = "-99.99")
+  co2 = read.table(temp, na.strings = "-99.99")
   colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays")
+  
+  unlink(temp)
+  closeAllConnections()
   return(co2)
 }

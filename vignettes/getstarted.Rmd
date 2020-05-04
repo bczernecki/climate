@@ -115,28 +115,29 @@ kable(head(df[,c(-2:-5)],10), caption = "Examplary data frame of meteorological 
 ```
 
 ### Example 4
-Downloading sounding data for Łeba (Poland) station
+Downloading atmospheric (sounding) profile for Łeba, PL rawinsonde  station:
 
 ```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-year = sample(1990:2020, 1) # take a year randomly
-profile <- sounding_wyoming(wmo_id = 12120, 
-                            yy = year, 
-                            mm = 3, 
-                            dd = 23, 
-                            hh = 0)
-df2 <- profile[[1]] 
+data("profile_demo")
+# same as:
+# profile_demo <- sounding_wyoming(wmo_id = 12120,
+#                                  yy = 2000,
+#                                  mm = 3,
+#                                  dd = 23,
+#                                  hh = 0)
+df2 <- profile_demo[[1]] 
 colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
 ```
 
 
 ```{r sonda2, echo=FALSE}
 library(knitr)
-kable(head(df2,10), caption = "Examplary data frame of sounding preprocessing.")
+kable(head(df2,10), caption = "Examplary data frame of sounding preprocessing")
 ```
 
 ### Example 5
-Preparing a annual summary of air temperature and precipitation, processing with **dplyr** 
+Preparing an annual summary of air temperature and precipitation, processing with **dplyr** 
 
 ```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
