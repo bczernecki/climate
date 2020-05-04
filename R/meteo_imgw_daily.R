@@ -28,6 +28,15 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
   
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
+  if (httr::http_error(base_url)) {
+    b = stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    base_url,
+                    "\n"))
+  }
+  
+  
   interval <- "daily" # to mozemy ustawic na sztywno
   interval_pl <- "dobowe"
   meta = meteo_metadata_imgw(interval = "daily", rank = rank)

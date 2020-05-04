@@ -12,7 +12,7 @@ download_gently(url, output)
 \item{output}{character vector with URL to check}
 }
 \description{
-Internal function for downloading URLs, but with extra checking of internet connection and stopping if url is wrong or no internet access
+Internal function for testing url/internet connection and stopping if url is wrong or no internet access detected
 }
 \examples{
 \donttest{
@@ -22,4 +22,3 @@ Internal function for downloading URLs, but with extra checking of internet conn
 }
 
 }
-\keyword{internal}

@@ -10,6 +10,7 @@
 #' @param fm12 use only FM-12 (SYNOP) records (TRUE by default)
 #' @importFrom RCurl getURL
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{

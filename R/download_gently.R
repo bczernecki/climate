@@ -1,6 +1,6 @@
 #' Download gently 
 #'
-#' Internal function for downloading URLs, but with extra checking of internet connection and stopping if url is wrong or no internet access
+#' Internal function for testing url/internet connection and stopping if url is wrong or no internet access detected
 #' @param url character vector with URL to check
 #' @param output character vector with URL to check
 #' 
@@ -8,7 +8,7 @@
 #' @importFrom utils download.file
 #' @import httr
 #' 
-#' @keywords internal
+#' @export
 #'
 #' @examples
 #' \donttest{

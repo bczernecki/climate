@@ -13,6 +13,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -36,6 +37,15 @@ meteo_imgw_monthly <- function(rank = "synop", year, status = FALSE, coords = FA
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  
+  if (httr::http_error(base_url)) {
+    b = stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    base_url,
+                    "\n"))
+  }
+  
   
   interval <- "miesieczne" # to mozemy ustawic na sztywno do odwolania w url
   meta <- meteo_metadata_imgw(interval = "monthly", rank = rank)

@@ -18,7 +18,7 @@ clean_metadata_hydro <- function(address, interval){
   #a <- suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
   #                                       fileEncoding = "CP1250", stringsAsFactors = FALSE)))
   
-  if (!httr::http_error(url)) {
+  if (!httr::http_error(address)) {
     a = readLines(address, warn = FALSE)
   } else {
     stop(call. = FALSE, 

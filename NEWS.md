@@ -1,3 +1,9 @@
+# climate 0.9.5
+
+* Following CRAN policies
+    * Adding information if no internet access detected
+    * or URL for downloading files no longer valid
+
 # climate 0.9.4
 
 * New dataset:

@@ -5,6 +5,7 @@
 #'
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
 #' @param rank rank of station ("synop", "climate", "precip")
+#' @importFrom httr http_error
 #' @keywords internal
 #'  
 #' @examples
@@ -19,14 +20,6 @@ meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, h
 
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
-  if (httr::http_error(base_url)) {
-    stop(call. = FALSE, 
-         paste0("\nDownload failed. ",
-                "Check your internet connection or validate this url in your browser: ",
-                base_url,
-                "\n"))
-  }
-
   # METADANE daily:
   if(interval == "daily")   { # uwaga! daily maja dla climateow i synopow po 2 pliki z metadanymi!!!
 

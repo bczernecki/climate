@@ -20,10 +20,10 @@
 
 clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   
-  if (!httr::http_error(url)) {
+  if (!httr::http_error(address)) {
     a = readLines(address, warn = FALSE)
   } else {
-    stop(call. = FALSE, 
+    a = stop(call. = FALSE, 
          paste0("\nDownload failed. ",
                 "Check your internet connection or validate this url in your browser: ",
                 url, "\n"))
