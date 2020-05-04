@@ -5,6 +5,7 @@
 #`
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @importFrom RCurl getURL
+#' @importFrom httr http_error
 #' @keywords internal
 #' 
 #' @examples
@@ -17,6 +18,14 @@
 hydro_metadata_imgw <- function(interval){
 
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  
+  if (httr::http_error(base_url)) {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                base_url, "\n"))
+  }
+  
 
   if (interval == "daily"){
     # dobowe

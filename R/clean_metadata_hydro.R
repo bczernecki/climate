@@ -5,6 +5,7 @@
 #' @param interval temporal interval
 #' @importFrom RCurl getURL
 #' @importFrom utils read.fwf
+#' @importFrom httr http_error
 #' @keywords internal
 clean_metadata_hydro <- function(address, interval){
   #miesieczne
@@ -16,9 +17,20 @@ clean_metadata_hydro <- function(address, interval){
   #address="https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/polroczne_i_roczne/polr_info.txt"
   #a <- suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
   #                                       fileEncoding = "CP1250", stringsAsFactors = FALSE)))
-  a <- readLines(address, warn = FALSE)
-  a <- iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
-  a <- gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
+  
+  if (!httr::http_error(address)) {
+    a = readLines(address, warn = FALSE)
+  } else {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                url, "\n"))
+  }
+  
+  
+  
+  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
+  a = gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
   
   # additional workarounds for mac os but not only...
   a = gsub(x = a, pattern="'", replacement = "")

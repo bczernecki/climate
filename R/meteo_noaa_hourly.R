@@ -10,6 +10,7 @@
 #' @param fm12 use only FM-12 (SYNOP) records (TRUE by default)
 #' @importFrom RCurl getURL
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -25,13 +26,23 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://www1.ncdc.noaa.gov/pub/data/noaa/"
+  
+  if (httr::http_error(base_url)) {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                base_url,
+                "\n"))
+  }
+  
+  
   all_data <- NULL
   
   for (i in seq_along(year)){
 
       address = paste0(base_url, year[i], "/", station, "-", year[i], ".gz")
       temp = tempfile()
-      download.file(address, temp)
+      download_gently(address, temp)
       
       dat = read.fwf(gzfile(temp,'rt'),header=F,  
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 

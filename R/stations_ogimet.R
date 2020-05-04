@@ -7,6 +7,7 @@
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
+#' @importFrom httr http_error
 #' @export
 #' @return A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
 #' If `add_map = TRUE` additional map of downloaded data is added.  
@@ -34,7 +35,19 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
       day <- format(date, "%d")
       ndays <- 1
       linkpl2 <- paste0("http://ogimet.com/cgi-bin/gsynres?lang=en&state=",country,"&osum=no&fmt=html&ord=REV&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ndays=1&Send=send")
-      a <-  getURL(linkpl2)
+      
+      if (!httr::http_error(linkpl2)) {
+        a = getURL(linkpl2,
+                   ftp.use.epsv = FALSE,
+                   dirlistonly = TRUE)
+      } else {
+        stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    linkpl2, "\n"))
+      }
+      
+      #a <-  getURL(linkpl2)
 
       b <- strsplit(a, "Decoded synops since")
 

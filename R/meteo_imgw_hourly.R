@@ -2,7 +2,7 @@
 #'
 #' Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
-#' @param rank rank of the stations ("synop", "climate", or "precip")
+#' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
 #' @param status leave the columns with measurement and observation statuses (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
@@ -13,6 +13,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -21,13 +22,23 @@
 #' }
 #'
 
-meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
+meteo_imgw_hourly <- function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
   stopifnot(rank == "synop" | rank == "climate") # dla terminowek tylko synopy i klimaty maja dane
   
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  
+  if (httr::http_error(base_url)) {
+    b = stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    base_url,
+                    "\n"))
+  }
+  
+  
   
   interval <- "hourly" # to mozemy ustawic na sztywno
   interval_pl <- "terminowe" # to mozemy ustawic na sztywno
@@ -67,7 +78,8 @@ meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, statio
       for(j in seq_along(addresses_to_download)){
         temp <- tempfile()
         temp2 <- tempfile()
-        download.file(addresses_to_download[j], temp)
+        download_gently(addresses_to_download[j], temp)
+        #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 <- paste(temp2, dir(temp2), sep = "/")
         data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")

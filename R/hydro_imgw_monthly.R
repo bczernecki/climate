@@ -11,6 +11,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -25,9 +26,18 @@ hydro_imgw_monthly <- function(year, coords = FALSE, station = NULL, col_names= 
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval <- "monthly"
   interval_pl <- "miesieczne"
-  a <- getURL(paste0(base_url, interval_pl, "/"),
-              ftp.use.epsv = FALSE,
-              dirlistonly = TRUE)
+  
+  if (!httr::http_error(paste0(base_url, interval_pl, "/"))) {
+    a = getURL(paste0(base_url, interval_pl, "/"),
+               ftp.use.epsv = FALSE,
+               dirlistonly = TRUE)
+  } else {
+    stop(call. = FALSE, 
+         paste0("\nDownload failed. ",
+                "Check your internet connection or validate this url in your browser: ",
+                paste0(base_url, interval_pl, "/"), "\n"))
+  }
+  
 
   ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
@@ -47,7 +57,8 @@ hydro_imgw_monthly <- function(year, coords = FALSE, station = NULL, col_names= 
 
     temp <- tempfile()
     temp2 <- tempfile()
-    download.file(adres, temp)
+    download_gently(adres, temp)
+    #download.file(adres, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 <- paste(temp2, dir(temp2), sep = "/")[1]
     data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")

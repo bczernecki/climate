@@ -2,7 +2,7 @@
 #'
 #' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
-#' @param rank rank of the stations ("synop", "climate", or "precip")
+#' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
 #' @param status leave the columns with measurement and observation statuses (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
@@ -13,6 +13,7 @@
 #' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -21,21 +22,31 @@
 #' }
 #'
 
-meteo_imgw_daily <- function(rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
+meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
   options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
+  if (httr::http_error(base_url)) {
+    b = stop(call. = FALSE, 
+             paste0("\nDownload failed. ",
+                    "Check your internet connection or validate this url in your browser: ",
+                    base_url,
+                    "\n"))
+  }
+  
+  
   interval <- "daily" # to mozemy ustawic na sztywno
   interval_pl <- "dobowe"
-  meta <- meteo_metadata_imgw(interval = "daily", rank = rank)
+  meta = meteo_metadata_imgw(interval = "daily", rank = rank)
   
   rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
   
-  a <- getURL(paste0(base_url, "dane_meteorologiczne/", interval_pl, "/", rank_pl, "/"),
-              ftp.use.epsv = FALSE,
-              dirlistonly = TRUE)
+  a = getURL(paste0(base_url, "dane_meteorologiczne/", interval_pl, "/", rank_pl, "/"),
+             ftp.use.epsv = FALSE,
+             dirlistonly = TRUE)
+  
   ind <- grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs <- as.character(readHTMLTable(a)[[1]]$Name[ind])
   
@@ -64,7 +75,8 @@ meteo_imgw_daily <- function(rank, year, status = FALSE, coords = FALSE, station
       for(j in seq_along(addresses_to_download)){
         temp <- tempfile()
         temp2 <- tempfile()
-        download.file(addresses_to_download[j], temp)
+        download_gently(addresses_to_download[j], temp)
+        #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 <- paste(temp2, dir(temp2), sep = "/")[1]
         data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")

@@ -56,7 +56,8 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=", wmo_id)
 
   temp <- tempfile()
-  download.file(url, temp)
+  download_gently(url, temp)
+  #download.file(url, temp)
 
   txt <- read.fwf(file = temp, widths = 1000)
   sects <- grep(pattern = "PRE>", x = txt$V1)
