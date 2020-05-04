@@ -5,7 +5,7 @@
 \title{Monthly IMGW meteorological data}
 \usage{
 meteo_imgw_monthly(
-  rank,
+  rank = "synop",
   year,
   status = FALSE,
   coords = FALSE,
@@ -15,7 +15,7 @@ meteo_imgw_monthly(
 )
 }
 \arguments{
-\item{rank}{rank of the stations ("synop", "climate", or "precip")}
+\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"}
 
 \item{year}{vector of years (e.g., 1966:2000)}
 

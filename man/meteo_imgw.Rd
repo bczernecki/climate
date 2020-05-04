@@ -6,7 +6,7 @@
 \usage{
 meteo_imgw(
   interval,
-  rank,
+  rank = "synop",
   year,
   status = FALSE,
   coords = FALSE,
@@ -18,7 +18,7 @@ meteo_imgw(
 \arguments{
 \item{interval}{temporal resolution of the data ("hourly", "daily", "monthly")}
 
-\item{rank}{rank of the stations ("synop", "climate", "precip")}
+\item{rank}{rank of the stations: "synop" (default), "climate" or "precip"}
 
 \item{year}{vector of years (e.g., 1966:2000)}
 
@@ -42,7 +42,7 @@ Downloading hourly, daily, and monthly meteorological data from the SYNOP / CLIM
 }
 \examples{
 \donttest{
-  x <- meteo_imgw("monthly", rank = "synop", year = 2018, coords = TRUE)
+  x <- meteo_imgw("monthly", year = 2018, coords = TRUE)
   head(x)
 }
 }

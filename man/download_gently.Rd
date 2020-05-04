@@ -18,7 +18,7 @@ Internal function for downloading URLs, but with extra checking of internet conn
 \donttest{
  link = "https://www1.ncdc.noaa.gov/pub/data/noaa/2019/123300-99999-2019.gz"
  output = basename(link)
- climate:::download_gently(url = link, output = output)
+ climate::download_gently(url = link, output = output)
 }
 
 }

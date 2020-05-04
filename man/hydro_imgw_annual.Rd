@@ -33,7 +33,7 @@ available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-  yearly <- hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
+  yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
   head(yearly)
 }
 }

@@ -29,7 +29,7 @@ Downloading daily hydrological data from the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-  daily <- hydro_imgw_daily(year = 2000)
+  daily = hydro_imgw_daily(year = 2000)
   head(daily)
 }
 

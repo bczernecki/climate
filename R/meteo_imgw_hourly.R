@@ -2,7 +2,7 @@
 #'
 #' Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
-#' @param rank rank of the stations ("synop", "climate", or "precip")
+#' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
 #' @param status leave the columns with measurement and observation statuses (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
@@ -21,7 +21,7 @@
 #' }
 #'
 
-meteo_imgw_hourly <- function(rank, year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
+meteo_imgw_hourly <- function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
   stopifnot(rank == "synop" | rank == "climate") # dla terminowek tylko synopy i klimaty maja dane
   
