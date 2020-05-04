@@ -119,7 +119,12 @@ Downloading sounding data for Łeba (Poland) station
 
 ```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-profile <- sounding_wyoming(wmo_id = 12120, yy = 2020, mm = 3, dd = 23, hh = 0)
+year = sample(1990:2020, 1) # take a year randomly
+profile <- sounding_wyoming(wmo_id = 12120, 
+                            yy = year, 
+                            mm = 3, 
+                            dd = 23, 
+                            hh = 0)
 df2 <- profile[[1]] 
 colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
 ```
