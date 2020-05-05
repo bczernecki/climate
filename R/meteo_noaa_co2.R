@@ -32,27 +32,26 @@
 #' CO2 expressed as a mole fraction in dry air, micromol/mol, abbreviated as ppm
 #'
 #' @importFrom utils read.table
+#' @importFrom utils data
 #' @export
 #' 
 #'
 #' @examples \donttest{
-#'   co2 <- meteo_noaa_co2()
-#'   head(co2)
-#'   plot(co2$yy_d, co2$co2_avg, type='l')
+#'   #co2 <- meteo_noaa_co2()
+#'   #head(co2)
+#'   #plot(co2$yy_d, co2$co2_avg, type='l')
 #' }
 #'
 
 meteo_noaa_co2 <- function(){
   
   base_url = "ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt"
-  
   temp = tempfile()
-  download_gently(url = base_url, output = temp)
+  test_url(link = base_url, output = temp)
   
   co2 = read.table(temp, na.strings = "-99.99")
   colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays")
-  
+    
   unlink(temp)
-  closeAllConnections()
   return(co2)
 }

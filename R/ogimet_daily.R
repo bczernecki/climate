@@ -6,16 +6,16 @@
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param hour time for which the daily raport is generated. Set defoult as hour = 6 
-#' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils setTxtProgressBar txtProgressBar
-#' @importFrom httr http_error
+#' 
+#' @export
 #' 
 #' @keywords internal
 #'
 #' @examples \donttest{
 #'   # downloading data for Poznan-Lawica
-#'   poznan <- climate:::ogimet_daily(station = 12330,
+#'   poznan <- ogimet_daily(station = 12330,
 #'       date = c("2019-01-01", "2019-03-31"),
 #'       coords = TRUE)
 #'   head(poznan)
@@ -24,7 +24,7 @@
 
 ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, station = c(12326, 12330), hour = 6){
   
-  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
   dates <- seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") 
   dates <- unique(c(dates, as.Date(max(date))))
@@ -82,20 +82,25 @@ ogimet_daily <- function(date = c(Sys.Date()-30, Sys.Date()), coords = FALSE, st
       linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep="")
       if(month == 1) linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
       
-      if (!httr::http_error(linkpl2)) {
-        a = getURL(linkpl2,
-                   ftp.use.epsv = FALSE,
-                   dirlistonly = TRUE)
-      } else {
-        stop(call. = FALSE, 
-             paste0("\nDownload failed. ",
-                    "Check your internet connection or validate this url in your browser: ",
-                    linkpl2, "\n"))
-      }
+      # if (!httr::http_error(linkpl2)) {
+      #   a = getURL(linkpl2,
+      #              ftp.use.epsv = FALSE,
+      #              dirlistonly = TRUE)
+      # } else {
+      #   stop(call. = FALSE, 
+      #        paste0("\nDownload failed. ",
+      #               "Check your internet connection or validate this url in your browser: ",
+      #               linkpl2, "\n"))
+      # }
       
+      
+      temp = tempfile()
+      test_url(linkpl2, temp)
       
       #a <- getURL(linkpl2)
-      a <- readHTMLTable(a, stringsAsFactors = FALSE)
+      a <- readHTMLTable(temp, stringsAsFactors = FALSE)
+      unlink(temp)
+      
       b <- a[[length(a)]]
       if (sum(b[1,]=="Dailyweather summary", na.rm = TRUE)) {
         b <- b[,1:(length(b) - 8)]

@@ -10,10 +10,8 @@
 #' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
-#' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
-#' @importFrom httr http_error
 #' @export
 #'
 #' @examples
@@ -23,31 +21,36 @@
 #' }
 hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL, col_names = "short", ...){
 
-  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+ # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
   base_url = "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "semiannual_and_annual"
   interval_pl = "polroczne_i_roczne"
   
-  if (!httr::http_error(paste0(base_url, interval_pl, "/"))) {
-    a = getURL(paste0(base_url, interval_pl, "/"),
-                ftp.use.epsv = FALSE,
-                dirlistonly = TRUE)
-  } else {
-    stop(call. = FALSE, 
-         paste0("\nDownload failed. ",
-                "Check your internet connection or validate this url in your browser: ",
-                paste0(base_url, interval_pl, "/"), "\n"))
-  }
+  temp = tempfile()
+  test_url(link = paste0(base_url, interval_pl, "/"), output = temp)
+  a = readLines(temp, warn = FALSE)
   
+  # 
+  # tryCatch(
+  #   a = getURL(paste0(base_url, interval_pl, "/"),
+  #               ftp.use.epsv = FALSE,
+  #               dirlistonly = TRUE)
+  # } else {
+  #   stop(call. = FALSE, 
+  #        paste0("\nDownload failed. ",
+  #               "Check your internet connection or validate this url in your browser: ",
+  #               paste0(base_url, interval_pl, "/"), "\n"))
+  # }
+  # 
   
   ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
   catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
-  # mniej plików do wczytywania
+  # less files to read:
   catalogs = catalogs[catalogs %in% as.character(year)]
   if (length(catalogs) == 0) {
-    stop("Selected year(s) is not available in the database.", call. = FALSE)
+    stop("Selected year(s) is/are not available in the database.", call. = FALSE)
   }
   meta = hydro_metadata_imgw(interval)
 
@@ -61,7 +64,7 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
 
     temp = tempfile()
     temp2 = tempfile()
-    download_gently(address, temp)
+    test_url(address, temp)
     #download.file(address, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]

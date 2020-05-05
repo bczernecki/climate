@@ -7,7 +7,7 @@
 #' @param mm month - single number denoting month
 #' @param dd day - single number denoting day
 #' @param hh hour - single number denoting initial hour of sounding; for most stations this measurement is done twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day
-#' @importFrom utils download.file read.fwf
+#' @importFrom utils read.fwf
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 #' \enumerate{
 #'  \item PRES - Pressure (hPa)
@@ -56,7 +56,7 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=", wmo_id)
 
   temp <- tempfile()
-  download_gently(url, temp)
+  test_url(url, temp)
   #download.file(url, temp)
 
   txt <- read.fwf(file = temp, widths = 1000)

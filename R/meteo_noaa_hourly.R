@@ -8,9 +8,7 @@
 #' @param station ID of meteorological station(s) (characters). Find your station's ID at: https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt
 #' @param year vector of years (e.g., 1966:2000)
 #' @param fm12 use only FM-12 (SYNOP) records (TRUE by default)
-#' @importFrom RCurl getURL
 #' @importFrom utils download.file unzip read.csv
-#' @importFrom httr http_error
 #' @export
 #'
 #' @examples \donttest{
@@ -23,18 +21,9 @@
 meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
   
   stopifnot(is.character(station)) 
-  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
   base_url <- "https://www1.ncdc.noaa.gov/pub/data/noaa/"
-  
-  if (httr::http_error(base_url)) {
-    stop(call. = FALSE, 
-         paste0("\nDownload failed. ",
-                "Check your internet connection or validate this url in your browser: ",
-                base_url,
-                "\n"))
-  }
-  
   
   all_data <- NULL
   
@@ -42,12 +31,13 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
 
       address = paste0(base_url, year[i], "/", station, "-", year[i], ".gz")
       temp = tempfile()
-      download_gently(address, temp)
+      test_url(address, temp)
       
       dat = read.fwf(gzfile(temp,'rt'),header=F,  
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
                      7, 5, 5, 5, 4, 3, 1, 1, 4, 1,
                      5, 1, 1, 1, 6, 1, 1, 1, 5, 1, 5, 1, 5, 1)) 
+      unlink(temp)
       
       if(fm12){
       dat = dat[dat$V12 == "FM-12",] # take only FM-12 records
@@ -79,7 +69,6 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
       dat$slp = dat$slp/10
                                                                                                                                                                                                                                                                                                                                       
         
-      unlink(temp)
       all_data[[length(all_data) + 1]] <- dat
       } # end of loop for years
     

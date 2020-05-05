@@ -9,7 +9,6 @@
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
-#' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
@@ -17,7 +16,7 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_ogimet(country = "United+Kingdom", point = c(10, 50),
+#'   nearest_stations_ogimet(country = "United+Kingdom", point = c(-2, 50),
 #'      add_map = TRUE, no_of_stations = 60)
 #' }
 #'
@@ -26,7 +25,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
                                     date = Sys.Date(), add_map = FALSE, point = c(0, 0), 
                                     no_of_stations = 1, ...){
 
-  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+ # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
   if (length(point)>2) {
     stop("Too many points for the distance calculations. Please provide just one point")
@@ -59,7 +58,12 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
       day,
       "&hora=06&ndays=1&Send=send"
     )
-  a <-  getURL(linkpl2)
+
+  #a <-  getURL(linkpl2)
+  temp = tempfile()
+  test_url(link = linkpl2, output = temp)
+  a = readLines(temp)
+  a = paste(a, sep="", collapse="") 
   
   b <- strsplit(a, "Decoded synops since")
   

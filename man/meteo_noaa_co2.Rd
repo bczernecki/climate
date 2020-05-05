@@ -38,9 +38,9 @@ CO2 expressed as a mole fraction in dry air, micromol/mol, abbreviated as ppm
 }
 \examples{
 \donttest{
-  co2 <- meteo_noaa_co2()
-  head(co2)
-  plot(co2$yy_d, co2$co2_avg, type='l')
+  #co2 <- meteo_noaa_co2()
+  #head(co2)
+  #plot(co2$yy_d, co2$co2_avg, type='l')
 }
 
 }

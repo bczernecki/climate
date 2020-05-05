@@ -8,7 +8,6 @@
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param precip_split whether to split precipitation fields into 6/12/24h
 #' numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step
-#' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
 #' 
 #' @export

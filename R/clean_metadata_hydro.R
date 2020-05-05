@@ -3,9 +3,7 @@
 #' Internal function for hydrological metadata cleaning
 #' @param address URL address of the metadata file
 #' @param interval temporal interval
-#' @importFrom RCurl getURL
 #' @importFrom utils read.fwf
-#' @importFrom httr http_error
 #' @keywords internal
 clean_metadata_hydro <- function(address, interval){
   #miesieczne
@@ -18,15 +16,19 @@ clean_metadata_hydro <- function(address, interval){
   #a <- suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
   #                                       fileEncoding = "CP1250", stringsAsFactors = FALSE)))
   
-  if (!httr::http_error(address)) {
-    a = readLines(address, warn = FALSE)
-  } else {
-    stop(call. = FALSE, 
-         paste0("\nDownload failed. ",
-                "Check your internet connection or validate this url in your browser: ",
-                url, "\n"))
-  }
+  temp = tempfile()
   
+  test_url(link = address, output = temp)
+  a = readLines(temp, warn = FALSE)
+  
+  # if (!httr::http_error(address)) {
+  #   a = readLines(address, warn = FALSE)
+  # } else {
+  #   stop(call. = FALSE, 
+  #        paste0("\nDownload failed. ",
+  #               "Check your internet connection or validate this url in your browser: ",
+  #               url, "\n"))
+  # }
   
   
   a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"

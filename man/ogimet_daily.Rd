@@ -26,7 +26,7 @@ Downloading daily (meteorological) data from the Synop stations available in the
 \examples{
 \donttest{
   # downloading data for Poznan-Lawica
-  poznan <- climate:::ogimet_daily(station = 12330,
+  poznan <- ogimet_daily(station = 12330,
       date = c("2019-01-01", "2019-03-31"),
       coords = TRUE)
   head(poznan)

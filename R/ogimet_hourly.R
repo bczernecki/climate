@@ -7,23 +7,23 @@
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param precip_split whether to split precipitation fields into 6/12/24h
 #'  numeric fields (logical value TRUE (default) or FALSE)
-#' @importFrom RCurl getURL
 #' @importFrom XML readHTMLTable
-#' @importFrom httr http_error
+#' 
+#' @export
 #' 
 #' @keywords internal
 #'
 #' @examples 
 #' \donttest{
 #'   # downloading data for Poznan-Lawica
-#'   poznan <- climate:::ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
+#'   poznan <- ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
 #'   head(poznan)
 #' }
 #'
 
 ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE){
 
-  options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
   dates <- seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") - 1
   dates <- unique(c(dates, as.Date(max(date))))
@@ -74,19 +74,26 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
       linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=",ndays,"&ano=",year,"&mes=",month,"&day=",day,"&hora=23",sep="")
       if(month=="01") linkpl2 <- paste("http://ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=31&ano=",year,"&mes=02&day=1&hora=00",sep="")
       
-      if (!httr::http_error(linkpl2)) {
-        a = getURL(linkpl2,
-                   ftp.use.epsv = FALSE,
-                   dirlistonly = TRUE)
-      } else {
-        stop(call. = FALSE, 
-             paste0("\nDownload failed. ",
-                    "Check your internet connection or validate this url in your browser: ",
-                    linkpl2, "\n"))
-      }
+      # if (!httr::http_error(linkpl2)) {
+      #   a = getURL(linkpl2,
+      #              ftp.use.epsv = FALSE,
+      #              dirlistonly = TRUE)
+      # } else {
+      #   stop(call. = FALSE, 
+      #        paste0("\nDownload failed. ",
+      #               "Check your internet connection or validate this url in your browser: ",
+      #               linkpl2, "\n"))
+      # }
+      # 
+      
+      temp = tempfile()
+      test_url(linkpl2, temp)
       
       #a <- getURL(linkpl2)
-      a <- readHTMLTable(a, stringsAsFactors=FALSE)
+      a <- readHTMLTable(temp, stringsAsFactors = FALSE)
+      unlink(temp)
+      
+      #a <- readHTMLTable(a, stringsAsFactors=FALSE)
 
       b <-  a[[length(a)]]
       
