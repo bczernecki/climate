@@ -45,7 +45,13 @@ Downloading the mea (i.e., measurements of the vertical profile of atmosphere) s
 }
 \examples{
 \donttest{
-  profile <- sounding_wyoming(wmo_id = 12120, yy = 2019, mm = 4, dd = 4, hh = 0)
+# generate the date to download randomly:
+
+  profile = sounding_wyoming(wmo_id = 12120, 
+                             yy = sample(2000:2019,1),
+                             mm = sample(1:12,1), 
+                             dd = sample(1:20,1), 
+                             hh = 0)
   head(profile)
   plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 }
