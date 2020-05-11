@@ -1,4 +1,4 @@
-#' List of nearby synop stations for a defined geographical location
+#' List of nearby SYNOP stations for a defined geographical location
 #'
 #' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the noaa website. 
 #' The returned list is valid only for a given day. 
@@ -16,14 +16,17 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_nooa(country = "SRI LANKA", point = c(80, 6),
-#'      add_map = TRUE, no_of_stations = 4)
+#'   nearest_stations_nooa(country = "SRI LANKA", 
+#'   point = c(80, 6),
+#'   add_map = TRUE, 
+#'   no_of_stations = 4)
 #' }
 #'
 
 nearest_stations_nooa <- function(country = "SRI LANKA", 
-                                    date = Sys.Date(), add_map = TRUE, point = c(80, 6), 
-                                    no_of_stations = 5, ...){
+                                  date = Sys.Date(), 
+                                  add_map = TRUE, point = c(80, 6), 
+                                  no_of_stations = 5, ...){
   if (length(point)>2) {
     stop("Too many points for the distance calculations. Please provide just one point")
   } else if (length(point)<2) {
@@ -63,8 +66,8 @@ nearest_stations_nooa <- function(country = "SRI LANKA",
   } 
   result=result[(result$Begin_date<date & result$End_date<date), ]
   if (dim(result)[1]==0) {
-    stop("Propobly there is no data in this date. Please check available data at :  
-        https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt?fbclid=IwAR1qAZpmpMgWHfqUeehFhjI5H4lVtfTMq-05WQB5T9Y-0cmdaFO8KRXD1eo")
+    stop("Propobly there is no data for this date. Please check available records :  
+        https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
   } 
   distmatrix = rbind(point,result[, 8:9])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
