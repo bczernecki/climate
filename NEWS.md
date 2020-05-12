@@ -1,3 +1,7 @@
+# climate 0.9.6
+
+* Adding nearest_stations_noaa for NOAA hourly dataset
+
 # climate 0.9.5
 
 * Following CRAN policies
