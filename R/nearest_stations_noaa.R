@@ -31,7 +31,7 @@ nearest_stations_nooa <- function(country = NULL,
   if (length(point)>2) {
     stop("Too many points for the distance calculations. Please provide just one point")
   } else if (length(point)<2) {
-    stop("The point needs to have two coordinates. Please change the `point` argument c(LON,LAT)" )
+    message("The point should have two coordinates. \n We will provide nearest stations for mean location. \n To change it please change the `point` argument c(LON,LAT)" )
   }
   
   if (length(date)!=1) {
@@ -46,7 +46,6 @@ nearest_stations_nooa <- function(country = NULL,
   test_url(link = linkpl2, output = temp)
   a = readLines(temp)
   a = trimws(a,which = "right")
-  a
   b <- strsplit(a, "          ")
   b1=do.call(rbind, b)
   colnames(b1)=c("CTRY","countries")
@@ -58,8 +57,7 @@ nearest_stations_nooa <- function(country = NULL,
   stations_noaa["Begin_date"]=as.Date(paste0(substr(stations_noaa[,11],1,4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
   stations_noaa["End_date"]=as.Date(paste0(substr(stations_noaa[,12],1,4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
   result=stations_noaa
-  point = as.data.frame(t(point))
-  names(point) = c("LON", "LAT")
+ 
   if (!is.null(country)){
     result=result[result$countries==country,]
   }
@@ -73,6 +71,11 @@ nearest_stations_nooa <- function(country = NULL,
     stop("Propobly there is no data for this date. Please check available records :  
         https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
   } 
+  if (is.null(point)){
+    point=c(round(mean(result$LON,na.rm=T),2),round(mean(result$LAT,na.rm=T),2))
+  }
+  point = as.data.frame(t(point))
+  names(point) = c("LON", "LAT")
   distmatrix = rbind(point,result[, 8:9])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
   result["distance [km]"] = distance_points * 112.196672
