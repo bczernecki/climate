@@ -3,7 +3,8 @@
 #' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the noaa website. 
 #' The returned list is valid only for a given day. 
 #'
-#' @param country country name; use CAPITAL LETTERS (e.g., "SRI LANKA")
+#' @param country country name; use CAPITAL LETTERS (e.g., "SRI LANKA"), if not used function will found selected 
+#' number of nearest stations without country classification  
 #' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(80, 6))
@@ -25,7 +26,7 @@
 
 nearest_stations_nooa <- function(country = NULL, 
                                   date = Sys.Date(), 
-                                  add_map = TRUE, point = c(80, 6), 
+                                  add_map = TRUE, point = c(17, 52), 
                                   no_of_stations = 5, ...){
   if (length(point)>2) {
     stop("Too many points for the distance calculations. Please provide just one point")
