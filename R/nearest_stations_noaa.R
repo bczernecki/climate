@@ -26,12 +26,12 @@
 
 nearest_stations_nooa <- function(country = NULL, 
                                   date = Sys.Date(), 
-                                  add_map = TRUE, point = c(17, 52), 
+                                  add_map = TRUE, point = NULL, 
                                   no_of_stations = 5, ...){
   if (length(point)>2) {
     stop("Too many points for the distance calculations. Please provide just one point")
   } else if (length(point)<2) {
-    stop("The point needs to have two coordinates. Please change the `point` argument")
+    stop("The point needs to have two coordinates. Please change the `point` argument c(LON,LAT)" )
   }
   
   if (length(date)!=1) {
