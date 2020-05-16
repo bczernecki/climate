@@ -23,7 +23,7 @@
 #' }
 #'
 
-nearest_stations_nooa <- function(country = "SRI LANKA", 
+nearest_stations_nooa <- function(country = NULL, 
                                   date = Sys.Date(), 
                                   add_map = TRUE, point = c(80, 6), 
                                   no_of_stations = 5, ...){
@@ -59,7 +59,10 @@ nearest_stations_nooa <- function(country = "SRI LANKA",
   result=stations_noaa
   point = as.data.frame(t(point))
   names(point) = c("LON", "LAT")
-  result=result[result$countries==country,]
+  if (!is.null(country)){
+    result=result[result$countries==country,]
+  }
+  
   if (dim(result)[1]==0) {
     stop("Wrong name of a country. Please check countries names at 
          https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt")
