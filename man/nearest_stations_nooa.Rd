@@ -5,11 +5,11 @@
 \title{List of nearby SYNOP stations for a defined geographical location}
 \usage{
 nearest_stations_nooa(
-  country = NULL,
+  country,
   date = Sys.Date(),
   add_map = TRUE,
   point = NULL,
-  no_of_stations = 5,
+  no_of_stations = 10,
   ...
 )
 }
@@ -40,7 +40,7 @@ The returned list is valid only for a given day.
   nearest_stations_nooa(country = "SRI LANKA", 
   point = c(80, 6),
   add_map = TRUE, 
-  no_of_stations = 4)
+  no_of_stations = 10)
 }
 
 }

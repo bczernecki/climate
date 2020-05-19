@@ -20,14 +20,14 @@
 #'   nearest_stations_nooa(country = "SRI LANKA", 
 #'   point = c(80, 6),
 #'   add_map = TRUE, 
-#'   no_of_stations = 4)
+#'   no_of_stations = 10)
 #' }
 #'
 
 nearest_stations_nooa <- function(country,
                                   date = Sys.Date(), 
                                   add_map = TRUE, point = NULL, 
-                                  no_of_stations = 100, ...){
+                                  no_of_stations = 10, ...){
   
   if(missing(country) | is.null(country)){
     stop("No country provided!")
@@ -146,4 +146,3 @@ nearest_stations_nooa <- function(country,
   
   return(result)
 }
-
