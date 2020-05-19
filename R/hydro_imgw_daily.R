@@ -107,7 +107,7 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data = all_data[all_data$`Nazwa stacji` %in% station, ]
+      all_data = all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ]
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }

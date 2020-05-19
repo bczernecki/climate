@@ -20,6 +20,7 @@ clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   
   temp = tempfile()
   
+  
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
   
@@ -50,7 +51,7 @@ clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
 
   if(rank == "precip" && interval == "hourly") length_char <- 40 # wyjatek dla precipow
   if(rank == "precip" && interval == "daily") length_char <- 40 # wyjatek dla precipow dobowych
-  #if(rank == "synop" && interval == "hourly") length_char <- 60 # wyjatek dla synopow terminowych
+  if(rank == "synop" && interval == "hourly") length_char <- 60 # wyjatek dla synopow terminowych
 
   field <- substr(a$V1, length_char - 3, length_char)
 
