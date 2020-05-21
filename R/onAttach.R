@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @importFrom utils packageVersion
 #' @export
 
 .onAttach <- function(libname, pkgname) {
