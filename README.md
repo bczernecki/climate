@@ -11,9 +11,9 @@ The goal of the  **climate** R package is to automatize downloading of meteorolo
 and hydrological data from publicly available repositories:
 
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
-- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
-- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratory - Global Monitoring Division [(NOAA)](https://www.esrl.noaa.gov/gmd/ccgg/trends/)
+- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 - National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
 
 ## Installation
@@ -58,8 +58,8 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` fro
 
 - **stations_ogimet()** - Downloading information about all stations available in the selected
 country in the Ogimet repository
-- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
-available for the selected country in the Ogimet repository
+- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
+- **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
 - **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
 coordinates, and ID numbers
 - **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
@@ -87,7 +87,7 @@ head(noaa)
 
 
 ## Example 1 
-#### Finding a nearest meteorological stations in a given country:
+#### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
 
 ``` r1
 library(climate)
@@ -114,7 +114,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 
 
 ## Example 2 
-#### Downloading daily (or hourly) data from a global repository knowing its ID (see Example 1):
+#### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see `nearest_stations_ogimet()`):
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
