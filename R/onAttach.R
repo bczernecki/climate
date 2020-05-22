@@ -5,10 +5,10 @@
 .onAttach <- function(libname, pkgname) {
   if((runif(1) < 0.1) & interactive()) { # activate occasianally and only if not run as Rscript
     ver = as.character(packageVersion("climate"))
-    packageStartupMessage(paste0(c("\n__________________________________________________\n",
-                                 "Welcome to climate ", ver, "!\n",
+    packageStartupMessage(paste0(c("\n______________________________________________________________\n",
+                                 "  Welcome to climate ", ver, "!\n",
                                  "\n- More about the package and data sources: http://rclimate.ml",
                                  "\n- Using 'climate' for publication? See: citation('climate')\n",  
-                                 "__________________________________________________\n")))
+                                 "______________________________________________________________\n")))
   }
 }
