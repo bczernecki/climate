@@ -3,9 +3,12 @@
 #' @export
 
 .onAttach <- function(libname, pkgname) {
-  ver = as.character(packageVersion("climate"))
-  packageStartupMessage(paste0(c("\n************************\nWelcome to climate ", ver, "!\n",
-                                 "\nFind out more about the package and data sources at: github.com/bczernecki/climate",
-                                 "\nUsing climate as a data source for a publication? Please cite it: citation('climate')\n",  
-                                 "************************\n")))
+  if((runif(1) < 0.1) & interactive()) { # activate occasianally and only if not run as Rscript
+    ver = as.character(packageVersion("climate"))
+    packageStartupMessage(paste0(c("\n__________________________________________________\n",
+                                 "Welcome to climate ", ver, "!\n",
+                                 "\n- More about the package and data sources: http://rclimate.ml",
+                                 "\n- Using 'climate' for publication? See: citation('climate')\n",  
+                                 "__________________________________________________\n")))
+  }
 }
