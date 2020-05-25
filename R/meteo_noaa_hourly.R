@@ -81,6 +81,7 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
   # sort data
   all_data = all_data[order(all_data$date), ]
   
+  #closeAllConnections() # just in case sth left while testing...
   return(all_data)
 } # koniec funkcji meteo_terminowe
 
