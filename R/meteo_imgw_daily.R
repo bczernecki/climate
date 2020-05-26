@@ -205,7 +205,12 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data <- all_data[substr(all_data$`Nazwa stacji.x`,1,nchar(station))==station, ]
+      
+      if(rank == 'synop' | rank == 'climate') all_data <- all_data[substr(all_data$`Nazwa stacji.x`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      
+      # exception for column names in precipitation data:                                                
+      if(rank == 'precip') all_data <- all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
