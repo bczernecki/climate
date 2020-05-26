@@ -4,6 +4,8 @@
 #' The returned list is valid only for a given day. 
 #'
 #' @param type data name;"meteo" (default), "hydro" 
+#' @param rank rank of the stations: "synop" (default), "climate", or "precip"
+#' @param year select year for serching nearest station
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(80, 6))
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
@@ -16,6 +18,8 @@
 #' @examples 
 #' \donttest{
 #'   nearest_stations_imgw(type = "hydro", 
+#'   rank="synop",
+#'   year=2018,
 #'   point = c(17, 52),
 #'   add_map = TRUE, 
 #'   no_of_stations = 4)
@@ -23,7 +27,8 @@
 #'
 
 nearest_stations_imgw <- function(type="meteo", 
-                                  #date = Sys.Date(), function work on internal dataset
+                                  rank="synop",
+                                  year=2018,
                                   add_map = TRUE, point = NULL, 
                                   no_of_stations = 5, ...){
   if (length(point)>2) {
@@ -32,29 +37,23 @@ nearest_stations_imgw <- function(type="meteo",
     message("The point should have two coordinates. \n We will provide nearest stations for mean location. \n To change it please change the `point` argument c(LON,LAT)" )
   }
   
-
-#  if (length(date)!=1) {
-#    stop("You can check the available nearest stations for one day only. Please provide just one date")
-#  }
+  
+  if (max(year)>=as.integer(substr(Sys.Date(),1,4))-1) {
+    message("Data can be not provided to the repository, please check the availablity at: \n
+            https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
+  }
+  
   if (type=="meteo"){
-    result=imgw_meteo_stations
+    result=unique(meteo_imgw_monthly(rank = rank,year = year,coords = T)[,c(2:5)])
   } else if (type=="hydro"){
-    result=imgw_hydro_stations
+    result=unique(hydro_imgw_annual(year = year,coords = T)[,c(1:4)])
   } else {
     stop("You provide wrong type of imgw data please provide \"meteo\", or \"hydro\"")
   }
-# to do przyszłego rozbudowania ewentualnej zamiany
-#  if (type=="meteo"){
-#    result=meteo_imgw_monthly(year = 2019)
-#  } else if (type=="hydro"){
-#    result=hydro_imgw_daily(year = 2019)
-#  } else {
-#    stop("You provide wrong type of imgw data please provide \"meteo\", or \"hydro\"")
-#  }
 
   if (dim(result)[1]==0) {
     stop("Propobly there is no data. Please check available records :  
-        https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/")
+        https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   } 
   if (is.null(point)){
     point=c(round(mean(result$LON,na.rm=T),2),round(mean(result$LAT,na.rm=T),2))
@@ -110,18 +109,15 @@ nearest_stations_imgw <- function(type="meteo",
     graphics::text(
       result$X,
       result$Y + addfactor,
-      labels = result$id,
+      labels = result$station,
       col = "grey70",
       cex = 0.6
     )
     maps::map(add = TRUE)
     
   }
-  if (type=="meteo"){
-    message("Depending of ID synoptic stations may be downloaded by meteo_imgw with different rank \n (eg. if station begin with 3 rank should be \"synop\") \n In different dates, stations may have different availibility of data")
-  }else{
-    message("In different dates, stations may have different availibility of data")
-    
+  if (length(year)>1) {
+    message("Please provide only one year, for more years station may change names and duplicate")
   }
   return(result)
 }
