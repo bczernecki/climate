@@ -1,19 +1,18 @@
-#' List of nearby meteorological or hydrological stations in Poland for a defined geographical coordinates
+#' List of nearby meteorological or hydrological IMGW-PIB stations in Poland
 #'
 #' Returns a data frame of meteorological or hydrological stations with their coordinates in particular year. 
-#' The returned object is valid only for a given year and type of stations (e.g. "synop", "climate" or "precip"). 
+#' The returned object is valid only for a given year and type of stations (e.g. "synop", "climate" or "precip"). If `add_map = TRUE` additional map of downloaded data is added. 
 #'
 #' @param type data name;"meteo" (default), "hydro" 
 #' @param rank rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo
 #' @param year select year for serching nearest station
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
-#' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(80, 6))
+#' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(15, 53)); If not provided calculated as a mean longitude and latitude for the entire dataset
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates. 50 used by default
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom XML readHTMLTable
 #' @export
-#' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
-#'  each station which has a measurements. If `add_map = TRUE` additional map of downloaded data is added. 
+#' @return A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance from a given coordinates). 
 #'  
 #' @examples 
 #' \donttest{
@@ -71,7 +70,7 @@ nearest_stations_imgw <- function(type = "meteo",
   names(point) = c("X", "Y")
   distmatrix = rbind(point,result[, 2:3])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
-  result["distance [km]"] = distance_points * 112.196672
+  result["distance [km]"] = round(distance_points * 112.196672, 3)
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
