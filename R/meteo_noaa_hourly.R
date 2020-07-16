@@ -33,6 +33,8 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
       temp = tempfile()
       test_url(address, temp)
       
+      stopifnot(file.size(temp) > 0) # stop in case sth was wrong with download
+      
       dat = read.fwf(gzfile(temp,'rt'),header=F,  
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
                      7, 5, 5, 5, 4, 3, 1, 1, 4, 1,
