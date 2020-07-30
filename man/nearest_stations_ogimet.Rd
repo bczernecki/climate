@@ -24,7 +24,7 @@ nearest_stations_ogimet(
 
 \item{no_of_stations}{how many nearest stations will be returned from the given geographical coordinates}
 
-\item{...}{extra arguments to be provided to the \code{\link[graphics:plot]{graphics::plot()}} function (only if add_map = TRUE)}
+\item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
 }
 \value{
 A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
