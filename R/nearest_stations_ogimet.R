@@ -62,62 +62,70 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   #a <-  getURL(linkpl2)
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
-  a = readLines(temp)
-  a = paste(a, sep="", collapse="") 
   
-  b <- strsplit(a, "Decoded synops since")
+  # run only if downloaded file is valid
+  if(!is.na(file.size(temp)) & (file.size(temp) > 0)) {
   
-  b1 <- lapply(b, function(x) substr(x, 1, 400))
-  b1[[1]] <- b1[[1]][-1] # header
+    a = readLines(temp)
+    a = paste(a, sep="", collapse="") 
+    
+    b <- strsplit(a, "Decoded synops since")
+    
+    b1 <- lapply(b, function(x) substr(x, 1, 400))
+    b1[[1]] <- b1[[1]][-1] # header
+    
+    b21 <- unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
+    
+    pattern <- paste0(" (", gsub(x = number_countries, pattern = "+", replacement = " ", fixed = TRUE))
+    b22 <- unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
+    
+    b1 <- data.frame(str = b1[[1]], start = b21, stop = b22, stringsAsFactors = FALSE)
+    
+    res <- substr(b1$str, b1$start, b1$stop)
+    
+    station_names <- unlist(lapply(strsplit(res, " - "), function(x) x[length(x)]))
+    
+    
+    res <- gsub(x = res, pattern = ", CAPTION, '", replacement = '', fixed = TRUE)
+    res <- gsub(x = res, pattern = " m'", replacement = ' ', fixed = TRUE)
+    res <- gsub(x = res, pattern = " - ", replacement = ' ', fixed = TRUE)
+    res <- gsub(x = res, pattern = "Lat=", replacement = '', fixed = TRUE)
+    res <- gsub(x = res, pattern = "Lon=", replacement = ' ', fixed = TRUE)
+    res <- gsub(x = res, pattern = "Alt=", replacement = ' ', fixed = TRUE)
+    
+    res <- suppressWarnings(do.call("rbind", strsplit(res, " ")))
+    
+    res1 <- res[,c(1,3,5:7)]
+    
+    lat <- as.numeric(substr(res1[, 1], 1, 2)) +
+      (as.numeric(substr(res1[,1], 4, 5))/100) * 1.6667
+    
+    lon_hemisphere <-  gsub("[0-9]", "\\1", res1[, 2])
+    lon_hemisphere <-  gsub("-", "", lon_hemisphere)
+    lon_hemisphere <- ifelse(lon_hemisphere == "W", -1, 1)
+    
+    lat_hemisphere <-  gsub("[0-9]", "\\1", res1[, 1])
+    lat_hemisphere <-  gsub("-", "", lat_hemisphere)
+    lat_hemisphere <- ifelse(lat_hemisphere == "S", -1, 1)
+    
+    lon <- as.numeric(substr(res1[, 2], 1, 3)) + (as.numeric(substr(res1[, 2], 5, 6)) / 100)*1.6667
+    lon <- lon*lon_hemisphere
+    
+    lat <- as.numeric(substr(res1[, 1], 1, 2)) + (as.numeric(substr(res1[, 1], 4, 5)) / 100)*1.6667
+    lat <- lat * lat_hemisphere
+    
+    res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
+                      lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
+    result=rbind(result,res)
+  } else {
+    result = NULL
+    cat(paste("Wrong name of a country. Please check countries names at 
+         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+  } # end of checking internet connection
   
-  b21 <- unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
-  
-  pattern <- paste0(" (", gsub(x = number_countries, pattern = "+", replacement = " ", fixed = TRUE))
-  b22 <- unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
-  
-  b1 <- data.frame(str = b1[[1]], start = b21, stop = b22, stringsAsFactors = FALSE)
-  
-  res <- substr(b1$str, b1$start, b1$stop)
-  
-  station_names <- unlist(lapply(strsplit(res, " - "), function(x) x[length(x)]))
-  
-  
-  res <- gsub(x = res, pattern = ", CAPTION, '", replacement = '', fixed = TRUE)
-  res <- gsub(x = res, pattern = " m'", replacement = ' ', fixed = TRUE)
-  res <- gsub(x = res, pattern = " - ", replacement = ' ', fixed = TRUE)
-  res <- gsub(x = res, pattern = "Lat=", replacement = '', fixed = TRUE)
-  res <- gsub(x = res, pattern = "Lon=", replacement = ' ', fixed = TRUE)
-  res <- gsub(x = res, pattern = "Alt=", replacement = ' ', fixed = TRUE)
-  
-  res <- suppressWarnings(do.call("rbind", strsplit(res, " ")))
-  
-  res1 <- res[,c(1,3,5:7)]
-  
-  lat <- as.numeric(substr(res1[, 1], 1, 2)) +
-    (as.numeric(substr(res1[,1], 4, 5))/100) * 1.6667
-  
-  lon_hemisphere <-  gsub("[0-9]", "\\1", res1[, 2])
-  lon_hemisphere <-  gsub("-", "", lon_hemisphere)
-  lon_hemisphere <- ifelse(lon_hemisphere == "W", -1, 1)
-  
-  lat_hemisphere <-  gsub("[0-9]", "\\1", res1[, 1])
-  lat_hemisphere <-  gsub("-", "", lat_hemisphere)
-  lat_hemisphere <- ifelse(lat_hemisphere == "S", -1, 1)
-  
-  lon <- as.numeric(substr(res1[, 2], 1, 3)) + (as.numeric(substr(res1[, 2], 5, 6)) / 100)*1.6667
-  lon <- lon*lon_hemisphere
-  
-  lat <- as.numeric(substr(res1[, 1], 1, 2)) + (as.numeric(substr(res1[, 1], 4, 5)) / 100)*1.6667
-  lat <- lat * lat_hemisphere
-  
-  res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
-                    lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-  result=rbind(result,res)
-}
-  if (dim(result)[1]==0) {
-    stop("Wrong name of a country. Please check countries names at 
-         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
   } 
+  
+  if (!is.null(result)) {
 
   point = as.data.frame(t(point))
   names(point) = c("lon", "lat")
@@ -175,6 +183,8 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
     maps::map(add = TRUE)
     
   }
+  
+  } # end of checking whether result is null
   
   return(result)
 }
