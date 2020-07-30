@@ -38,6 +38,11 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
    #a <-  getURL(linkpl2)
    temp = tempfile()
    test_url(link = linkpl2, output = temp)
+   
+   
+   # run only if downloaded file is valid
+   if(!is.na(file.size(temp)) & (file.size(temp) > 0)) {
+   
    a = readLines(temp)
    a = paste(a, sep="", collapse="") 
   
@@ -90,10 +95,16 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
   
   res <- data.frame(wmo_id = res1[, 4], station_names = station_names,
                     lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-  if (dim(res)[1]==0) {
-    stop("Wrong name of country, please check station index database at 
-         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send")
-  }
+  
+   } else {
+     res = NULL
+     cat(paste("Wrong name of a country. Please check countries names at 
+         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+   } # end of checking problems with internet connection:
+   
+  
+if (!is.null(res)) {
+  
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
       stop("package maps required, please install it first")
@@ -109,6 +120,7 @@ stations_ogimet <- function(country = "United+Kingdom", date = Sys.Date(), add_m
     maps::map(add = TRUE)
   }
   
+} # end of checking if res is NULL
   
   return(res)
   
