@@ -33,7 +33,9 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
       temp = tempfile()
       test_url(address, temp)
       
-      stopifnot(file.size(temp) > 0) # stop in case sth was wrong with download
+      # run only if downloaded file is valid
+      dat = NULL
+      if(!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
       
       dat = read.fwf(gzfile(temp,'rt'),header=F,  
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
@@ -69,21 +71,34 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
       dat$t2m = dat$t2m/10
       dat$dpt2m = dat$dpt2m/10
       dat$slp = dat$slp/10
+      
+      } else {
+        
+       cat(paste0("  Check station name or year. The created link is not working properly:\n  ", address))
+        
+      }  # end of if statement for empty files
                                                                                                                                                                                                                                                                                                                                       
         
       all_data[[length(all_data) + 1]] <- dat
       } # end of loop for years
     
-  all_data <- do.call(rbind, all_data)
+  if(is.list(all_data)){
+    all_data <- do.call(rbind, all_data)
+  }
   
-  # order columns:
-  all_data = all_data[, c("date","year", "month", "day", "hour", "lon", "lat", "alt",
-                          "t2m", "dpt2m", "ws", "wd", "slp", "visibility") ]
   
-  # sort data
-  all_data = all_data[order(all_data$date), ]
+  if(!is.null(all_data)){ # run only if there are some data downloaded:
   
-  #closeAllConnections() # just in case sth left while testing...
+    # order columns:
+    all_data = all_data[, c("date","year", "month", "day", "hour", "lon", "lat", "alt",
+                            "t2m", "dpt2m", "ws", "wd", "slp", "visibility") ]
+    
+    # sort data
+    all_data = all_data[order(all_data$date), ]
+    
+    #closeAllConnections() # just in case sth left while testing...
+  }
+  
   return(all_data)
 } # koniec funkcji meteo_terminowe
 
