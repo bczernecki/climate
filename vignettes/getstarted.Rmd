@@ -98,13 +98,14 @@ head(PL)
 ```
 
 ### Example 3
-Downlading hourly meteorological data Svalbard in 2019 from Ogimet
+Downlading hourly meteorological data Svalbard in a random year from Ogimet
   
 ``` {r windrose,eval=T}
 # downloading data with NOAA service:
-df = meteo_noaa_hourly(station = "010080-99999", year = 2019)
+df = meteo_noaa_hourly(station = "010080-99999", 
+                       year = sample(2000:2020, 1))
 
-# downloading the same data with Ogimet.com:
+# downloading the same data with Ogimet.com (example for 2019):
 # df <- meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-12-31"),
 #                   station = c("01008"))
 ```

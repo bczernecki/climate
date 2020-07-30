@@ -40,7 +40,6 @@ test_url <- function(link, output, quiet = FALSE) {
   # First check internet connection
   if (!curl::has_internet()) {
     message("No internet connection! \n")
-    stop()
     return(invisible(NULL))
   }
   # Then try for timeout problems
@@ -53,7 +52,6 @@ test_url <- function(link, output, quiet = FALSE) {
   if (httr::http_error(resp)) { 
     message_for_status(resp)
     message(paste0("\nCheck: ", link, " in your browser!\n"))
-    stop()
     return(invisible(NULL))
   }
  

@@ -1,3 +1,8 @@
+# climate 0.9.7
+
+* Adding informative message if problems with NOAA hourly dataset occur
+* Informative message if problems with downloading detected
+
 # climate 0.9.6
 
 * Adding nearest_stations_noaa for NOAA hourly dataset
