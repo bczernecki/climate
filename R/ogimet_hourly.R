@@ -74,110 +74,108 @@ ogimet_hourly <- function(date = c("2019-06-01","2019-07-31"), coords = FALSE, s
       linkpl2 <- paste("https://www.ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=",ndays,"&ano=",year,"&mes=",month,"&day=",day,"&hora=23",sep="")
       if(month=="01") linkpl2 <- paste("http://ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=31&ano=",year,"&mes=02&day=1&hora=00",sep="")
       
-      # if (!httr::http_error(linkpl2)) {
-      #   a = getURL(linkpl2,
-      #              ftp.use.epsv = FALSE,
-      #              dirlistonly = TRUE)
-      # } else {
-      #   stop(call. = FALSE, 
-      #        paste0("\nDownload failed. ",
-      #               "Check your internet connection or validate this url in your browser: ",
-      #               linkpl2, "\n"))
-      # }
-      # 
+      
       
       temp = tempfile()
       test_url(linkpl2, temp)
       
-      #a <- getURL(linkpl2)
-      a <- readHTMLTable(temp, stringsAsFactors = FALSE)
-      unlink(temp)
+      # run only if downloaded file is valid
+      if(!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
       
-      #a <- readHTMLTable(a, stringsAsFactors=FALSE)
-
-      b <-  a[[length(a)]]
-      
-      if (is.null(b)) {
-        warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
-        return(data_station)
-        } 
-      
-      colnames(b) <- gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))
-      colnames(b) <- c("Date", "hour", colnames(b)[2:(ncol(b) - 1)]) # workaround for adding hour which is wrongly recognized
-      b <- b[-1, ]
-      b["station_ID"] <-  station_nr
-      # to avoid gtools::smartbind function or similar from another package..
-      if (ncol(data_station) >= ncol(b)) {
-        b[setdiff(names(data_station), names(b))] <- NA # adding missing columns
-        data_station <- rbind(data_station, b)  # joining data
-
-      } else { # when b have more columns then data_station
-        if(nrow(data_station) == 0){
-          data_station = b
-        } else {
-          # adding missing columns
-          data_station <- merge(b, data_station, all = TRUE)# joining data
+        #a <- getURL(linkpl2)
+        a <- readHTMLTable(temp, stringsAsFactors = FALSE)
+        unlink(temp)
+        
+        #a <- readHTMLTable(a, stringsAsFactors=FALSE)
+  
+        b <-  a[[length(a)]]
+        
+        if (is.null(b)) {
+          warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+          return(data_station)
+          } 
+        
+        colnames(b) <- gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))
+        colnames(b) <- c("Date", "hour", colnames(b)[2:(ncol(b) - 1)]) # workaround for adding hour which is wrongly recognized
+        b <- b[-1, ]
+        b["station_ID"] <-  station_nr
+        # to avoid gtools::smartbind function or similar from another package..
+        if (ncol(data_station) >= ncol(b)) {
+          b[setdiff(names(data_station), names(b))] <- NA # adding missing columns
+          data_station <- rbind(data_station, b)  # joining data
+  
+        } else { # when b have more columns then data_station
+          if(nrow(data_station) == 0){
+            data_station = b
+          } else {
+            # adding missing columns
+            data_station <- merge(b, data_station, all = TRUE)# joining data
+          }
+  
         }
-
-      }
-
-      #cat(paste(year, month, "\n"))
-
-      # coords można lepiej na samym koncu dodać kolumne
-      # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
-      if (coords){
-        coord <- a[[1]][2,1]
-        data_station["Lon"] <- get_coord_from_string(coord, "Longitude")
-        data_station["Lat"] <- get_coord_from_string(coord, "Latitude")
-      }
-
-    } # koniec petli daty
-
-    data_station <- data_station[!duplicated(data_station), ]
-
-
-  }# koniec petli stacje
-
-  # converting character to proper field representation:
-
-  # get rid off "---" standing for missing/blank fields:
-  data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] <- NA
-
-  # changing time..
-  data_station$Date <-strptime(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
-  data_station$hour <- NULL
-
-  # other columns to numeric:
-  suppressWarnings(data_station[, c("TC", "TdC", "ffkmh",  "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt", "Nh",
-                  "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")] <-
-    as.data.frame(sapply(data_station[,c("TC", "TdC", "ffkmh", "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt","Nh",
-                                         "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")], as.numeric)))
-
-  #  TODO:
-  # changing order of columns and removing blank records:
-  if(coords){
-    ord1 <- c("station_ID", "Lon", "Lat", "Date", "TC")
-    ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Lon", "Lat", "Date", "TC")))
-    ord1 <- ord1[!(ord1 %in% c("WW", "W1","W2","W3"))]
-    data_station <- data_station[, ord1]
-  } else {
-    ord1 <- c("station_ID", "Date", "TC")
-    ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Date", "TC")))
-    ord1 <- ord1[!(ord1 %in% c("WW", "W1","W2","W3"))]
-    data_station <- data_station[, ord1]
-  }
-  # setdiff(names(df), c("station_ID", "Date", "TC"))
-
-
-  # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
-  if(precip_split){
-    data_station$pr6 <- precip_split(data_station$Precmm, pattern = "/6")
-    data_station$pr12 <- precip_split(data_station$Precmm, pattern = "/12")
-    data_station$pr24 <- precip_split(data_station$Precmm, pattern = "/24")
-  }
-
-  # clipping to interesting period as we're downloading slightly more than needed:
-  data_station <- data_station[which(as.Date(data_station$Date) >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
+  
+        #cat(paste(year, month, "\n"))
+  
+        # coords można lepiej na samym koncu dodać kolumne
+        # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
+        if (coords){
+          coord <- a[[1]][2,1]
+          data_station["Lon"] <- get_coord_from_string(coord, "Longitude")
+          data_station["Lat"] <- get_coord_from_string(coord, "Latitude")
+        }
+        
+      } # end of checking for empty files / problems with connection
+      
+    } # end of looping for dates
+    
+  }# end of looping for stations
+  
+  if(nrow(data_station) > 0){
+  
+      data_station <- data_station[!duplicated(data_station), ]
+  
+    # converting character to proper field representation:
+  
+    # get rid off "---" standing for missing/blank fields:
+    data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] <- NA
+  
+    # changing time..
+    data_station$Date <-strptime(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
+    data_station$hour <- NULL
+  
+    # other columns to numeric:
+    suppressWarnings(data_station[, c("TC", "TdC", "ffkmh",  "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt", "Nh",
+                    "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")] <-
+      as.data.frame(sapply(data_station[,c("TC", "TdC", "ffkmh", "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt","Nh",
+                                           "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")], as.numeric)))
+  
+    #  TODO:
+    # changing order of columns and removing blank records:
+    if(coords){
+      ord1 <- c("station_ID", "Lon", "Lat", "Date", "TC")
+      ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Lon", "Lat", "Date", "TC")))
+      ord1 <- ord1[!(ord1 %in% c("WW", "W1","W2","W3"))]
+      data_station <- data_station[, ord1]
+    } else {
+      ord1 <- c("station_ID", "Date", "TC")
+      ord1 <- c(ord1, setdiff(names(data_station), c("station_ID", "Date", "TC")))
+      ord1 <- ord1[!(ord1 %in% c("WW", "W1","W2","W3"))]
+      data_station <- data_station[, ord1]
+    }
+    # setdiff(names(df), c("station_ID", "Date", "TC"))
+  
+  
+    # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
+    if(precip_split){
+      data_station$pr6 <- precip_split(data_station$Precmm, pattern = "/6")
+      data_station$pr12 <- precip_split(data_station$Precmm, pattern = "/12")
+      data_station$pr24 <- precip_split(data_station$Precmm, pattern = "/24")
+    }
+  
+    # clipping to interesting period as we're downloading slightly more than needed:
+    data_station <- data_station[which(as.Date(data_station$Date) >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
+  
+    } # end of checking whether object is empty
 
   return(data_station)
 
