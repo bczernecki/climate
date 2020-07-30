@@ -49,6 +49,10 @@ nearest_stations_nooa <- function(country,
   #a <-  getURL(linkpl2)
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
+  
+  # check connection:
+  if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
+  
   a = readLines(temp)
   a = trimws(a, which = "right")
   b = strsplit(a, "          ")
@@ -142,6 +146,12 @@ nearest_stations_nooa <- function(country,
     )
     maps::map(add = TRUE)
     
+  }
+  
+  
+  } else { # end of checking connection
+    cat(paste0("Service not working, wrong query or problems with internet connection.\n"))
+    result = NULL
   }
   
   return(result)
