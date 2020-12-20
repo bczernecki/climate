@@ -25,7 +25,7 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 \item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
 }
 \description{
-Downloading monthly hydrological data from the danepubliczne.imgw.pl collection
+Downloading monthly hydrological data from the dane.imgw.pl collection
 }
 \examples{
 \donttest{

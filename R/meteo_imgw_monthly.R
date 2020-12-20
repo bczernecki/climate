@@ -1,6 +1,6 @@
 #' Monthly IMGW meteorological data
 #'
-#' Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+#' Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
 #'
 #' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)

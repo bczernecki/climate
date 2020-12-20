@@ -47,7 +47,7 @@ framework powinna być dostępne po roku 2000 roku
      wykreśl wyniki na mapie
 
 - **meteo_imgw()** - Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub 
-miesięcznym  o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji danepubliczne.imgw.pl. 
+miesięcznym  o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji dane.imgw.pl. 
 Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej wersji paczki).
 
 - **meteo\_shortening()** - Skracanie nazw kolumn parametrów meteorologicznych
@@ -56,7 +56,7 @@ Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly(
 2. Dane hydrologiczne: 
 
 - **hydro_imgw()** -  Pobieranie danych hydrologicznych o interwale dziennym, miesięcznym lub  rocznym ze 
-stacji dostępnych w repozytorium danepubliczne.imgw.pl.
+stacji dostępnych w repozytorium dane.imgw.pl.
 Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej
 wersji paczki).
 
