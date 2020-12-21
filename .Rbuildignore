@@ -10,3 +10,4 @@
 ^data-raw$
 ^vignettes/articles$
 
+^\.github$
