@@ -8,7 +8,8 @@
     ver = as.character(packageVersion("climate"))
     packageStartupMessage(paste0(c("\n______________________________________________________________\n",
                                  "  Welcome to climate ", ver, "!\n",
-                                 "\n- More about the package and data sources: http://rclimate.ml",
+                                 "\n- More about the package and data sources:
+				 http://github.com/bczernecki/climate",
                                  "\n- Using 'climate' for publication? See: citation('climate')\n",  
                                  "______________________________________________________________\n")))
   }

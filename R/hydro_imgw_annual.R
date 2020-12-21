@@ -1,7 +1,7 @@
 #' Semi-annual and annual hydrological data
 #'
 #' Downloading hydrological data for the semi-annual and annual period
-#' available in the danepubliczne.imgw.pl collection
+#' available in the dane.imgw.pl collection
 #'
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)

@@ -12,7 +12,7 @@ meteo_metadata_imgw(interval, rank)
 \item{rank}{rank of station ("synop", "climate", "precip")}
 }
 \description{
-Downloading the description (metadata) to the meteorological data available in the danepubliczne.imgw repository.imgw.pl.
+Downloading the description (metadata) to the meteorological data available in the dane.imgw repository.imgw.pl.
 By default, the function returns a list or data frame for a selected subset
 }
 \examples{

@@ -8,7 +8,8 @@ ogimet_daily(
   date = c(Sys.Date() - 30, Sys.Date()),
   coords = FALSE,
   station = c(12326, 12330),
-  hour = 6
+  hour = 6,
+  fill_empty = TRUE
 )
 }
 \arguments{
