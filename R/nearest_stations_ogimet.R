@@ -16,14 +16,20 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_ogimet(country = "United+Kingdom", point = c(-2, 50),
-#'      add_map = TRUE, no_of_stations = 60)
+#'   nearest_stations_ogimet(country = "United+Kingdom", 
+#'                           point = c(-2, 50),
+#'                           add_map = TRUE, 
+#'                           no_of_stations = 60, 
+#'                           main = "Meteo stations in UK")
 #' }
 #'
 
 nearest_stations_ogimet <- function(country = "United+Kingdom", 
-                                    date = Sys.Date(), add_map = FALSE, point = c(0, 0), 
-                                    no_of_stations = 1, ...){
+                                    date = Sys.Date(), 
+                                    add_map = FALSE, 
+                                    point = c(2, 50), 
+                                    no_of_stations = 10,
+                                    ...){
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -38,7 +44,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   }
  
   # initalizing empty data frame for storing results:
-  result=NULL
+  result <- NULL
   for (number_countries in country) {
   #  print(number_countires)
 
@@ -60,14 +66,14 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
     )
 
   #a <-  getURL(linkpl2)
-  temp = tempfile()
+  temp <- tempfile()
   test_url(link = linkpl2, output = temp)
   
   # run only if downloaded file is valid
   if(!is.na(file.size(temp)) & (file.size(temp) > 0)) {
   
-    a = readLines(temp)
-    a = paste(a, sep="", collapse="") 
+    a <- readLines(temp)
+    a <- paste(a, sep="", collapse="") 
     
     b <- strsplit(a, "Decoded synops since")
     
@@ -118,7 +124,7 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
                       lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
     result=rbind(result,res)
   } else {
-    result = NULL
+    result <- NULL
     cat(paste("Wrong name of a country. Please check countries names at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
   } # end of checking internet connection
@@ -127,17 +133,17 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   
   if (!is.null(result)) {
 
-  point = as.data.frame(t(point))
-  names(point) = c("lon", "lat")
-  distmatrix = rbind(point,result[, 3:4])
-  distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
-  result["distance [km]"] = distance_points * 112.196672
+  point <- as.data.frame(t(point))
+  names(point) <- c("lon", "lat")
+  distmatrix <- rbind(point,result[, 3:4])
+  distance_points <- stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
+  result["distance [km]"] <- distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
   # removing rows with all NA records from the obtained dataset;
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
-  result = result[!apply(is.na(result), 1, sum) == ncol(result),]
+  result <- result[!apply(is.na(result), 1, sum) == ncol(result),]
   
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
@@ -188,4 +194,3 @@ nearest_stations_ogimet <- function(country = "United+Kingdom",
   
   return(result)
 }
-

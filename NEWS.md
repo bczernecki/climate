@@ -1,3 +1,9 @@
+# climate 0.9.9
+
+* Changing URL `danepubliczne.imgw.pl` to `dane.imgw.pl` where needed
+* Fixing minor ogimet and IMGW bugs
+* Do not stop downloading data from `ogimet.com`, instead check for all available data in given period of time
+
 # climate 0.9.8
 
 * Adding informative message if problems with NOAA hourly dataset occur
