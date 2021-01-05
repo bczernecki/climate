@@ -5,7 +5,7 @@
 #' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
-#' @param hour time for which the daily raport is generated. Set defoult as hour = 6
+#' @param hour time for which the daily raport is generated. Set default as hour = 6
 #' @importFrom XML readHTMLTable
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' 

@@ -8,8 +8,8 @@ nearest_stations_ogimet(
   country = "United+Kingdom",
   date = Sys.Date(),
   add_map = FALSE,
-  point = c(0, 0),
-  no_of_stations = 1,
+  point = c(2, 50),
+  no_of_stations = 10,
   ...
 )
 }
@@ -36,8 +36,11 @@ The returned list is valid only for a given day.
 }
 \examples{
 \donttest{
-  nearest_stations_ogimet(country = "United+Kingdom", point = c(-2, 50),
-     add_map = TRUE, no_of_stations = 60)
+  nearest_stations_ogimet(country = "United+Kingdom", 
+                          point = c(-2, 50),
+                          add_map = TRUE, 
+                          no_of_stations = 60, 
+                          main = "Meteo stations in UK")
 }
 
 }
