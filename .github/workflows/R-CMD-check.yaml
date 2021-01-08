@@ -10,11 +10,13 @@ on:
       - main
       - master
       - devel
+      - dev
   pull_request:
     branches:
       - main
       - master
       - devel
+      - dev
 
 name: R-CMD-check
 
