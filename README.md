@@ -9,6 +9,7 @@ Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://tra
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
 
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
