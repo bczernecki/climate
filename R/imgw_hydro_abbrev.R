@@ -1,5 +1,5 @@
 #' @name imgw_hydro_abbrev
-#' @title Definitions of hydrological parameters used for shortening column names from the danepubliczne.imgw.pl collection
+#' @title Definitions of hydrological parameters used for shortening column names from the dane.imgw.pl collection
 #'
 #' @description The object contains 3 columns that are currently used for improving readability of the downloaded dataset:
 #' fullname, abbr_eng, and fullname_eng

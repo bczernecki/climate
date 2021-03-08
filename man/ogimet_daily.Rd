@@ -8,7 +8,8 @@ ogimet_daily(
   date = c(Sys.Date() - 30, Sys.Date()),
   coords = FALSE,
   station = c(12326, 12330),
-  hour = 6
+  hour = 6,
+  fill_empty = TRUE
 )
 }
 \arguments{
@@ -18,7 +19,7 @@ ogimet_daily(
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
-\item{hour}{time for which the daily raport is generated. Set defoult as hour = 6}
+\item{hour}{time for which the daily raport is generated. Set default as hour = 6}
 }
 \description{
 Downloading daily (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository

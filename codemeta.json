@@ -150,11 +150,11 @@
       "sameAs": "https://CRAN.R-project.org/package=XML"
     }
   ],
-  "codeRepository": "https://imgw.ml",
-  "releaseNotes": "https://github.com/bczernecki/imgw/blob/master/NEWS.md",
-  "readme": "https://github.com/bczernecki/imgw/blob/master/README.md",
+  "codeRepository": "https://github.com/bczernecki/",
+  "releaseNotes": "https://github.com/bczernecki/climate/blob/master/NEWS.md",
+  "readme": "https://github.com/bczernecki/climate/blob/master/README.md",
   "fileSize": "133.315KB",
-  "contIntegration": "https://travis-ci.org/bczernecki/imgw",
+  "contIntegration": "https://travis-ci.org/bczernecki/climate",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -176,17 +176,17 @@
           "familyName": "Nowosad"
         }
       ],
-      "name": "imgw: Polish Meteorological and Hydrological Data",
-      "url": "https://bczernecki.github.io/imgw/",
+      "name": "climate: Polish Meteorological and Hydrological Data",
+      "url": "https://climate.ml/",
       "description": "R package version 0.1.1"
     }
   ],
-  "issueTracker": "https://github.com/bczernecki/imgw/issues",
+  "issueTracker": "https://github.com/bczernecki/climate/issues",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "relatedLink": "https://CRAN.R-project.org/package=imgw"
+  "relatedLink": "https://CRAN.R-project.org/package=climate"
 }

@@ -1,6 +1,6 @@
 #' Monthly hydrological data
 #'
-#' Downloading monthly hydrological data from the danepubliczne.imgw.pl collection
+#' Downloading monthly hydrological data from the dane.imgw.pl collection
 #'
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)

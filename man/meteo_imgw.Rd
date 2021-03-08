@@ -26,7 +26,7 @@ meteo_imgw(
 
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
-\item{station}{vector of hydrological stations danepubliczne.imgw.pl can be name of station CAPITAL LETTERS(character)
+\item{station}{vector of hydrological stations dane.imgw.pl can be name of station CAPITAL LETTERS(character)
 It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
 \item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
@@ -38,7 +38,7 @@ A data.frame with columns describing the meteorological parameters (e.g. tempera
 depending on the interval, at a given hour, month or year. If \code{coords = TRUE} additional two columns with geografic coordinates are added.
 }
 \description{
-Downloading hourly, daily, and monthly meteorological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+Downloading hourly, daily, and monthly meteorological data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
 }
 \examples{
 \donttest{
