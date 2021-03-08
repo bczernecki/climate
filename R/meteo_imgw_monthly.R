@@ -94,7 +94,7 @@ meteo_imgw_monthly <- function(rank = "synop", year, status = FALSE, coords = FA
     unzip(zipfile = temp, exdir = temp2)
     file1 <- paste(temp2, dir(temp2), sep = "/")[1]
     data1 <- read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-    colnames(data1) <- meta[[2]]$parameters
+    colnames(data1) <- meta[[1]]$parameters
     
     if( rank != "precip"){ # w opadowkach jest tylko jeden plik
       file2 <- paste(temp2, dir(temp2), sep = "/")[2]
