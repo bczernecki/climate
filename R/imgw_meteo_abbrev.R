@@ -1,5 +1,5 @@
 #' @name imgw_meteo_abbrev
-#' @title Definitions of meteorological parameters used for shortening column names for the meteorological data from the danepubliczne.imgw.pl collection
+#' @title Definitions of meteorological parameters used for shortening column names for the meteorological data from the dane.imgw.pl collection
 #'
 #' @description The object contains 3 columns that are currently used for improving readability of the downloaded dataset:
 #' fullname, abbr_eng, and fullname_eng

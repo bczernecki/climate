@@ -29,7 +29,7 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 }
 \description{
 Downloading hydrological data for the semi-annual and annual period
-available in the danepubliczne.imgw.pl collection
+available in the dane.imgw.pl collection
 }
 \examples{
 \donttest{

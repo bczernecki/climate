@@ -1,6 +1,6 @@
 #' Daily hydrological data
 #'
-#' Downloading daily hydrological data from the danepubliczne.imgw.pl collection
+#' Downloading daily hydrological data from the dane.imgw.pl collection
 #'
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
@@ -107,7 +107,7 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data = all_data[all_data$`Nazwa stacji` %in% station, ]
+      all_data = all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ]
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }

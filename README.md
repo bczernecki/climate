@@ -1,19 +1,23 @@
 # climate <img src="man/figures/logo.png" align="right" width="150" />
 
+<!-- badges: start -->
 [![Build
-Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate)
+Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate) [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
+
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
+<!-- badges: end -->
 
 The goal of the  **climate** R package is to automatize downloading of meteorological
 and hydrological data from publicly available repositories:
 
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
-- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
-- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratory - Global Monitoring Division [(NOAA)](https://www.esrl.noaa.gov/gmd/ccgg/trends/)
+- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 - National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
 
 ## Installation
@@ -58,8 +62,9 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` fro
 
 - **stations_ogimet()** - Downloading information about all stations available in the selected
 country in the Ogimet repository
-- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
-available for the selected country in the Ogimet repository
+- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
+- **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
+- **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
 - **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
 coordinates, and ID numbers
 - **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
@@ -87,7 +92,7 @@ head(noaa)
 
 
 ## Example 1 
-#### Finding a nearest meteorological stations in a given country:
+#### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
 
 ``` r1
 library(climate)
@@ -114,7 +119,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 
 
 ## Example 2 
-#### Downloading daily (or hourly) data from a global repository knowing its ID (see Example 1):
+#### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see `nearest_stations_ogimet()`):
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
@@ -185,7 +190,7 @@ monthly_summary = df2 %>%
   summarise(tmax = mean(tmax_abs, na.rm = TRUE), 
             tmin = mean(tmin_abs, na.rm = TRUE),
             tavg = mean(t2m_mean_mon, na.rm = TRUE), 
-            opad = sum(rr_monthly) / n_distinct(yy))            
+            prec = sum(rr_monthly) / n_distinct(yy))            
 
 monthly_summary = as.data.frame(t(monthly_summary[, c(5,2,3,4)])) 
 monthly_summary = round(monthly_summary, 1)
@@ -193,14 +198,15 @@ colnames(monthly_summary) = month.abb
 print(monthly_summary)
 
 #        Jan   Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov   Dec
-# opad  37.1  31.3 38.5 31.3 53.9 60.8 94.8 59.6 40.5 39.7 35.7  38.6
+# prec  37.1  31.3 38.5 31.3 53.9 60.8 94.8 59.6 40.5 39.7 35.7  38.6
 # tmax   8.7  11.2 17.2 23.8 28.3 31.6 32.3 31.8 26.9 21.3 14.3   9.8
 # tmin -15.0 -11.9 -7.6 -3.3  1.0  5.8  8.9  7.5  2.7 -2.4 -5.2 -10.4
 # tavg  -1.0   0.5  3.7  9.4 14.4 17.4 19.4 19.0 14.3  9.1  4.5   0.8
 
 # create plot with use of the "climatol" package:
-climatol::diagwl(monthly_summary, mlab = "en", est = "POZNAŃ", alt = NA, 
-  per = "1991-2019", p3line = FALSE)
+climatol::diagwl(monthly_summary, mlab = "en", 
+                 est = "POZNAŃ", alt = NA, 
+                 per = "1991-2019", p3line = FALSE)
 ```
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](http://iqdata.eu/kolokwium/poznan.svg)

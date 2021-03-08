@@ -1,6 +1,6 @@
 #' Daily IMGW meteorological data
 #'
-#' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+#' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
 #'
 #' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
@@ -31,7 +31,7 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
   meta = meteo_metadata_imgw(interval = "daily", rank = rank)
   
   rank_pl <- switch(rank, synop = "synop", climate = "klimat", precip = "opad")
-  
+
   
   temp = tempfile()
   test_url(link = paste0(base_url, "dane_meteorologiczne/", interval_pl, "/", rank_pl, "/"),
@@ -97,9 +97,9 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
         # moja proba z obejsciem dla wyboru kodu
         ttt = merge(data1, data2, by = c("Kod stacji",  "Rok", "Miesiac", "Dzien"), all.x = TRUE)
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien),]
-        
+        ### ta część kodu powtarza sie po dużej petli od rank
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[ttt$`Nazwa stacji.x` %in% station,]
+          all_data[[length(all_data) + 1]] = ttt[substr(ttt$`Nazwa stacji.x`,1,nchar(station))==station,]
         } else {
           all_data[[length(all_data) + 1]] <- ttt
         }
@@ -205,7 +205,12 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data <- all_data[all_data$`Nazwa stacji.x` %in% station, ]
+      
+      if(rank == 'synop' | rank == 'climate') all_data <- all_data[substr(all_data$`Nazwa stacji.x`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      
+      # exception for column names in precipitation data:                                                
+      if(rank == 'precip') all_data <- all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }

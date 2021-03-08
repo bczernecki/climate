@@ -35,7 +35,7 @@ The **climate** package consists of ten main functions - three for meteorologica
 - **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
-- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
+- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
@@ -75,8 +75,10 @@ Finding a 50 nearest meteorological stations in a given country:
 
 ``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-ns = nearest_stations_ogimet(country ="United+Kingdom",point = c(-4, 56),
-                             no_of_stations = 50, add_map = TRUE)
+ns = nearest_stations_ogimet(country ="United+Kingdom",
+                             point = c(-4, 56),
+                             no_of_stations = 50, 
+                             add_map = TRUE)
 head(ns)
 #>    wmo_id       station_names       lon       lat alt  distance [km]
 #> 29  03144         Strathallan  -3.733348 56.31667  35      46.44794
@@ -98,14 +100,15 @@ head(PL)
 ```
 
 ### Example 3
-Downlading hourly meteorological data Svalbard in 2018 from Ogimet
+Downlading hourly meteorological data Svalbard in a random year from Ogimet
   
 ``` {r windrose,eval=T}
 # downloading data with NOAA service:
-df = meteo_noaa_hourly(station = "010080-99999", year = 2018)
+df = meteo_noaa_hourly(station = "010080-99999", 
+                       year = sample(2000:2020, 1))
 
-# downloading the same data with Ogimet.com:
-# df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),
+# downloading the same data with Ogimet.com (example for 2019):
+# df <- meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-12-31"),
 #                   station = c("01008"))
 ```
 
@@ -143,9 +146,8 @@ Preparing an annual summary of air temperature and precipitation, processing wit
 library(climate)
 library(dplyr)
 
-df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, 
-                station = c("POZNAŃ", "POZNAŃ-ŁAWICA")) 
-# sometimes 2 names are used for the same station in different years
+df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "ŁEBA") 
+# please note that sometimes 2 names are used for the same station in different years
 
 df2 = select(df, station:t2m_mean_mon, rr_monthly)
 
