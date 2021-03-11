@@ -15,8 +15,7 @@
 #'   climate:::clean_metadata_meteo(address = my_add, rank = "synop", interval = "hourly")
 #' }
 #'
-rank="climate"
-interval="monthly"
+
 clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   
   temp = tempfile()
