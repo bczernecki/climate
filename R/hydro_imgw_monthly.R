@@ -21,7 +21,7 @@ hydro_imgw_monthly <- function(year, coords = FALSE, station = NULL, col_names= 
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval <- "monthly"
   interval_pl <- "miesieczne"
   

@@ -15,7 +15,7 @@
 
 hydro_metadata_imgw <- function(interval){
 
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   
   if (interval == "daily"){
     # dobowe

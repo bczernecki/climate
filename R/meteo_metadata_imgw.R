@@ -17,7 +17,7 @@
 meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, hourly, hourly
   b <- NULL
 
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
   # METADANE daily:
   if(interval == "daily")   { # uwaga! daily maja dla climateow i synopow po 2 pliki z metadanymi!!!
@@ -44,7 +44,7 @@ meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, h
   }
 
 
-  # TODO: pod addressem: https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/monthly/synop/
+  # TODO: pod addressem: https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/monthly/synop/
   # sa 2 ranke metadanych, bo pliki monthly maja 2 ranke danych; w starej wersji paczki tylko jedna wersja jest uwzgledniana
   # dodatkowo inne ranke danych beda do pobrania w zaleznosci od danych SYNOP, climate, precip:
   if(interval == "monthly") {

@@ -23,7 +23,7 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  base_url = "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "semiannual_and_annual"
   interval_pl = "polroczne_i_roczne"
   

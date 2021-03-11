@@ -26,7 +26,7 @@ meteo_imgw_hourly <- function(rank = "synop", year, status = FALSE, coords = FAL
   
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   interval <- "hourly" # to mozemy ustawic na sztywno
   interval_pl <- "terminowe" # to mozemy ustawic na sztywno
   

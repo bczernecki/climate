@@ -24,7 +24,7 @@ meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALS
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
   interval <- "daily" # to mozemy ustawic na sztywno
   interval_pl <- "dobowe"
