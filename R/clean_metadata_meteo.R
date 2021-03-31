@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \donttest{
-#'   my_add = paste0("https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/",
+#'   my_add = paste0("https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/",
 #'                   "dane_meteorologiczne/dobowe/synop/s_d_format.txt")
 #'   climate:::clean_metadata_meteo(address = my_add, rank = "synop", interval = "hourly")
 #' }
@@ -20,7 +20,7 @@ clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   
   temp = tempfile()
   
-  
+ 
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
   
@@ -47,11 +47,13 @@ clean_metadata_meteo <- function(address, rank = "synop", interval = "hourly"){
   # a <- suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
   #                                        fileEncoding = "CP1250", stringsAsFactors = FALSE)))
 
+  
   length_char <- max(nchar(a$V1), na.rm = TRUE)
 
   if(rank == "precip" && interval == "hourly") length_char <- 40 # wyjatek dla precipow
   if(rank == "precip" && interval == "daily") length_char <- 40 # wyjatek dla precipow dobowych
   if(rank == "synop" && interval == "hourly") length_char <- 60 # wyjatek dla synopow terminowych
+  if(rank == "climate" && interval == "monthly") length_char <- 52 # wyjatek dla synopow terminowych
 
   field <- substr(a$V1, length_char - 3, length_char)
 

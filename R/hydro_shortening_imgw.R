@@ -1,6 +1,6 @@
 #' Shortening column names for hydrological variables
 #'
-#' Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the dane.imgw.pl collection and removing duplicated column names
+#' Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 #'
 #' @param data downloaded dataset with original column names
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset

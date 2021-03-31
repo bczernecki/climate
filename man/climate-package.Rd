@@ -10,8 +10,8 @@
 
 Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
-    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair>),
-    Polish Institute of Meterology and Water Management - National Research Institute (<https://dane.imgw.pl>),
+    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
+    Polish Institute of Meterology and Water Management - National Research Institute (<https://danepubliczne.imgw.pl>),
     and National Oceanic & Atmospheric Administration (NOAA).
     This package also allows for adding geographical coordinates for each observation.
 }

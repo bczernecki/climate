@@ -1,6 +1,6 @@
 #' Daily hydrological data
 #'
-#' Downloading daily hydrological data from the dane.imgw.pl collection
+#' Downloading daily hydrological data from the danepubliczne.imgw.pl collection
 #'
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
@@ -20,8 +20,10 @@
 
 hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "short", ...){
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  
+  check_locale()
 
-  base_url = "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "daily"
   interval_pl = "dobowe"
   

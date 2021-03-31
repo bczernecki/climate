@@ -3,7 +3,7 @@
 \docType{data}
 \name{imgw_meteo_stations}
 \alias{imgw_meteo_stations}
-\title{Location of the meteorological stations from the dane.imgw.pl collection}
+\title{Location of the meteorological stations from the danepubliczne.imgw.pl collection}
 \format{
 The data contains a data.frame with 1998 obs. of 3 variables:
 \itemize{

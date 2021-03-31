@@ -1,6 +1,6 @@
 #' Monthly IMGW meteorological data
 #'
-#' Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
+#' Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
 #' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
@@ -29,12 +29,13 @@
 #'           coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
 #' }
 #'
-
 meteo_imgw_monthly <- function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
+  check_locale()
+  
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
   # if (httr::http_error(base_url)) {
   #   b = stop(call. = FALSE, 

@@ -1,7 +1,7 @@
 #' Semi-annual and annual hydrological data
 #'
 #' Downloading hydrological data for the semi-annual and annual period
-#' available in the dane.imgw.pl collection
+#' available in the danepubliczne.imgw.pl collection
 #'
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
@@ -22,8 +22,10 @@
 hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL, col_names = "short", ...){
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  
+  check_locale()
 
-  base_url = "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "semiannual_and_annual"
   interval_pl = "polroczne_i_roczne"
   

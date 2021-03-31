@@ -1,6 +1,6 @@
 #' Hydrological metadata
 #'
-#' Downloading the description (metadata) to hydrological data available in the dane.imgw.pl repository.
+#' Downloading the description (metadata) to hydrological data available in the danepubliczne.imgw.pl repository.
 #' By default, the function returns a list or data frame for a selected subset
 #`
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
@@ -15,7 +15,7 @@
 
 hydro_metadata_imgw <- function(interval){
 
-  base_url <- "https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
+  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   
   if (interval == "daily"){
     # dobowe

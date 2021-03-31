@@ -1,12 +1,12 @@
 #' Hydrological data from IMGW
 #'
-#' Downloading hourly, daily, and monthly hydrological data from the measurement stations available in the dane.imgw.pl collection
+#' Downloading hourly, daily, and monthly hydrological data from the measurement stations available in the danepubliczne.imgw.pl collection
 #'
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
 #' @param value type of data (can be: state - "H" (default), flow - "Q", or temperature - "T")
-#' @param station vector of hydrological stations dane.imgw.pl; can be given as station name with CAPITAL LETTERS (character)
+#' @param station vector of hydrological stations danepubliczne.imgw.pl; can be given as station name with CAPITAL LETTERS (character)
 #' It accepts either names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names

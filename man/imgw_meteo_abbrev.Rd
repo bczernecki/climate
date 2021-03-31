@@ -3,7 +3,7 @@
 \docType{data}
 \name{imgw_meteo_abbrev}
 \alias{imgw_meteo_abbrev}
-\title{Definitions of meteorological parameters used for shortening column names for the meteorological data from the dane.imgw.pl collection}
+\title{Definitions of meteorological parameters used for shortening column names for the meteorological data from the danepubliczne.imgw.pl collection}
 \format{
 The data contains a data.frame with ca. 250 elements described in three ways:
 \itemize{
