@@ -1,6 +1,6 @@
 #' Check locale
 #'
-#' This is an extra check for some systems that make use of "C.UTF=8" that cannot parse properly tags used inside the Polish metservice's repository
+#' This is an extra check for some systems that make use of "C.UTF-8" that cannot parse properly tags used inside the Polish metservice's repository
 #' @noRd
 
 check_locale = function(){
