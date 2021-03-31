@@ -31,7 +31,7 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 \item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
 }
 \description{
-Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
+Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{

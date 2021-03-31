@@ -1,6 +1,6 @@
 #' Daily IMGW meteorological data
 #'
-#' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the dane.imgw.pl collection
+#' Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
 #'
 #' @param rank rank of the stations: "synop" (default), "climate", or "precip"
 #' @param year vector of years (e.g., 1966:2000)
@@ -23,6 +23,8 @@
 meteo_imgw_daily <- function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+  
+  check_locale()
   
   base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   

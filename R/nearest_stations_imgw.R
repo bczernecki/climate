@@ -44,7 +44,7 @@ nearest_stations_imgw <- function(type = "meteo",
   
   if (max(year)>=as.integer(substr(Sys.Date(),1,4))-1) {
     message("Data cannot be provided for this repository. Please check the available records at: \n
-            https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
+            https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
   
   if (type == "meteo"){
@@ -57,7 +57,7 @@ nearest_stations_imgw <- function(type = "meteo",
 
   if (dim(result)[1]==0) {
     stop("Propobly there is no data in the downloaded object. Please check available records:  
-        https://dane.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
+        https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   } 
   if (is.null(point)){
   # workaround for different column names:

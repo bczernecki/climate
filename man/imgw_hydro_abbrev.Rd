@@ -3,7 +3,7 @@
 \docType{data}
 \name{imgw_hydro_abbrev}
 \alias{imgw_hydro_abbrev}
-\title{Definitions of hydrological parameters used for shortening column names from the dane.imgw.pl collection}
+\title{Definitions of hydrological parameters used for shortening column names from the danepubliczne.imgw.pl collection}
 \format{
 The data contains a data.frame with ca. 20 elements described in three ways:
 \itemize{

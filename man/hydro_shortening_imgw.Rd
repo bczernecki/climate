@@ -14,7 +14,7 @@ hydro_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
 \item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
 }
 \description{
-Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the dane.imgw.pl collection and removing duplicated column names
+Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 \examples{
 \donttest{

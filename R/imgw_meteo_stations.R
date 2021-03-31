@@ -1,5 +1,5 @@
 #' @name imgw_meteo_stations
-#' @title Location of the meteorological stations from the dane.imgw.pl collection
+#' @title Location of the meteorological stations from the danepubliczne.imgw.pl collection
 #'
 #' @description The object contains weather stations
 #' coordinates, ID numbers, and elevations
