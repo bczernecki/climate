@@ -42,7 +42,7 @@ Downloading hourly, daily, and monthly meteorological data from the SYNOP / CLIM
 }
 \examples{
 \donttest{
-  x <- meteo_imgw("monthly", year = 2018, coords = TRUE)
+  x = meteo_imgw("monthly", year = 2018, coords = TRUE)
   head(x)
 }
 }

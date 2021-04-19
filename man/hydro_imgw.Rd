@@ -39,7 +39,7 @@ Downloading hourly, daily, and monthly hydrological data from the measurement st
 }
 \examples{
 \donttest{
-  x <- hydro_imgw("monthly", year = 1999)
+  x = hydro_imgw("monthly", year = 1999)
   head(x)
 }
 }

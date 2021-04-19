@@ -29,7 +29,7 @@ Downloading monthly hydrological data from the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-  monthly <- hydro_imgw_monthly(year = 2000)
+  monthly = hydro_imgw_monthly(year = 2000)
   head(monthly)
 }
 

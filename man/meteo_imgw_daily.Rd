@@ -35,7 +35,7 @@ Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP statio
 }
 \examples{
 \donttest{
-  daily <- meteo_imgw_daily(rank = "climate", year = 2000)
+  daily = meteo_imgw_daily(rank = "climate", year = 2000)
   head(daily)
 }
 

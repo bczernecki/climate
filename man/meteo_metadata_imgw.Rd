@@ -17,9 +17,9 @@ By default, the function returns a list or data frame for a selected subset
 }
 \examples{
 \donttest{
-  meta <- climate:::meteo_metadata_imgw(interval = "hourly", rank = "synop")
-  meta <- climate:::meteo_metadata_imgw(interval = "daily", rank = "synop")
-  meta <- climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
+  meta = climate:::meteo_metadata_imgw(interval = "hourly", rank = "synop")
+  meta = climate:::meteo_metadata_imgw(interval = "daily", rank = "synop")
+  meta = climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
 }
 }
 \keyword{internal}
