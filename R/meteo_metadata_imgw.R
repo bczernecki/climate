@@ -9,35 +9,35 @@
 #'  
 #' @examples
 #' \donttest{
-#'   meta <- climate:::meteo_metadata_imgw(interval = "hourly", rank = "synop")
-#'   meta <- climate:::meteo_metadata_imgw(interval = "daily", rank = "synop")
-#'   meta <- climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
+#'   meta = climate:::meteo_metadata_imgw(interval = "hourly", rank = "synop")
+#'   meta = climate:::meteo_metadata_imgw(interval = "daily", rank = "synop")
+#'   meta = climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
 #' }
 
-meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, hourly, hourly
-  b <- NULL
+meteo_metadata_imgw = function(interval, rank){ # interval moze byc: monthly, hourly, hourly
+  b = NULL
 
-  base_url <- "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
+  base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
   # METADANE daily:
   if(interval == "daily")   { # uwaga! daily maja dla climateow i synopow po 2 pliki z metadanymi!!!
 
     if(rank == "synop"){
-      b[[1]] <- clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_format.txt"),
                                rank = "synop", interval = "daily")
-      b[[2]] <- clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_t_format.txt"),
+      b[[2]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_t_format.txt"),
                                               rank = "synop", interval = "daily")
     }
 
     if(rank == "climate"){
-      b[[1]] <- clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/klimat/k_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/klimat/k_d_format.txt"),
                                rank = "climate", interval = "daily")
-      b[[2]] <- clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/klimat/k_d_t_format.txt"),
+      b[[2]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/klimat/k_d_t_format.txt"),
                                rank = "climate", interval = "daily")
     }
 
     if(rank == "precip"){
-      b[[1]] <- clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/opad/o_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/opad/o_d_format.txt"),
                                rank = "precip", interval = "daily")
     }
 
@@ -50,21 +50,21 @@ meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, h
   if(interval == "monthly") {
 
     if(rank == "synop"){
-      b[[1]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"),
                                rank = "synop", interval = "monthly")
-      b[[2]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"),
+      b[[2]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"),
                                rank = "synop", interval = "monthly")
     }
 
     if(rank == "climate"){
-      b[[1]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/klimat/k_m_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/klimat/k_m_d_format.txt"),
                                rank = "climate", interval = "monthly")
-      b[[2]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/klimat/k_m_t_format.txt"),
+      b[[2]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/klimat/k_m_t_format.txt"),
                                rank = "climate", interval = "monthly")
     }
 
     if(rank == "precip"){
-      b[[1]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/opad/o_m_format.txt"),
+      b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/miesieczne/opad/o_m_format.txt"),
                                rank = "precip", interval = "monthly")
     }
 
@@ -73,9 +73,9 @@ meteo_metadata_imgw <- function(interval, rank){ # interval moze byc: monthly, h
 
   ## rozpoczecie dla danych TERMINOWYCH:
   if(interval == "hourly"){
-    if(rank == "synop") b[[1]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/terminowe/synop/s_t_format.txt"),
+    if(rank == "synop") b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/terminowe/synop/s_t_format.txt"),
                                                  rank = "synop", interval = "hourly")
-    if(rank == "climate") b[[1]] <- clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/terminowe/klimat/k_t_format.txt"),
+    if(rank == "climate") b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/terminowe/klimat/k_t_format.txt"),
                                                   rank = "climate", interval = "hourly")
     if(rank == "precip"){
       stop("The precipitation stations ('precip') does not provide hourly data.", call. = FALSE)

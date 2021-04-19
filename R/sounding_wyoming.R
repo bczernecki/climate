@@ -44,7 +44,7 @@
 #' }
 #'
 
-sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
+sounding_wyoming = function(wmo_id, yy, mm, dd, hh){
 
   if (length(yy)!=1 || length(mm)!=1 || length(dd)!=1 || length(hh)!=1) {
     stop("The function supports downloading data for a given day. Please change arguments yy, mm, dd, hh to single values")
@@ -54,38 +54,38 @@ sounding_wyoming <- function(wmo_id, yy, mm, dd, hh){
     stop("The function supports downloading data for one station at the time. Please change the `wmo_id` argument to a single value")
   }
   
-  mm <- formatC(mm, width = 2, format = "d", flag = "0")
-  dd <- formatC(dd, width = 2, format = "d", flag = "0")
-  hh <- formatC(hh, width = 2, format = "d", flag = "0")
+  mm = formatC(mm, width = 2, format = "d", flag = "0")
+  dd = formatC(dd, width = 2, format = "d", flag = "0")
+  hh = formatC(hh, width = 2, format = "d", flag = "0")
  
-  url <- paste0("http://weather.uwyo.edu/cgi-bin/sounding?region=europe&TYPE=TEXT%3ALIST&YEAR=",
+  url = paste0("http://weather.uwyo.edu/cgi-bin/sounding?region=europe&TYPE=TEXT%3ALIST&YEAR=",
                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=", wmo_id)
 
-  temp <- tempfile()
+  temp = tempfile()
   test_url(url, temp)
   
   # run only if downloaded file is valid
   df = NULL
   if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
 
-    txt <- read.fwf(file = temp, widths = 1000)
-    sects <- grep(pattern = "PRE>", x = txt$V1)
+    txt = read.fwf(file = temp, widths = 1000)
+    sects = grep(pattern = "PRE>", x = txt$V1)
     if (length(sects) == 0){
       stop("HTTP status was '503 Service Unavailable'. Have you provided a correct station id?
       Please check wmo_id numbers at:
       http://weather.uwyo.edu/upperair/sounding.html")
     }
-    df <- read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
+    df = read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
                      n = (sects[2] - (sects[1] + 5)))
     
-    colnames(df) <- c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
+    colnames(df) = c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
                       "MIXR", "DRCT", "SKNT", "THTA", "THTE", "THTV")
   
-    txt <- read.fwf(file = temp, skip = sects[2] + 1, widths = 1000,
+    txt = read.fwf(file = temp, skip = sects[2] + 1, widths = 1000,
                       n = (sects[3] - (sects[2] + 2)), stringsAsFactors = FALSE)$V1
-    df2 <- as.data.frame(matrix(data = unlist(strsplit(txt, split = ": ")), ncol = 2, byrow = TRUE))
-    colnames(df2) <- c("parameter"," value")
-    df <- list(df, df2)
+    df2 = as.data.frame(matrix(data = unlist(strsplit(txt, split = ": ")), ncol = 2, byrow = TRUE))
+    colnames(df2) = c("parameter"," value")
+    df = list(df, df2)
   
     } else { # end of checking file size / problems with internet connection
      cat(paste0("Service not working or wmo_id or date not correct. Check url:\n", url)) 

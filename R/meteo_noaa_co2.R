@@ -37,13 +37,13 @@
 #' 
 #'
 #' @examples \donttest{
-#'   #co2 <- meteo_noaa_co2()
+#'   #co2 = meteo_noaa_co2()
 #'   #head(co2)
 #'   #plot(co2$yy_d, co2$co2_avg, type='l')
 #' }
 #'
 
-meteo_noaa_co2 <- function(){
+meteo_noaa_co2 = function(){
   
   base_url = "ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt"
   temp = tempfile()

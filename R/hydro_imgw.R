@@ -17,20 +17,20 @@
 #'
 #' @examples 
 #' \donttest{
-#'   x <- hydro_imgw("monthly", year = 1999)
+#'   x = hydro_imgw("monthly", year = 1999)
 #'   head(x)
 #' }
-hydro_imgw <- function(interval, year, coords = FALSE, value = "H", station = NULL, col_names = "short", ...){
+hydro_imgw = function(interval, year, coords = FALSE, value = "H", station = NULL, col_names = "short", ...){
 
   if (interval == "daily"){
     # dobowe
-    calosc <- hydro_imgw_daily(year = year, coords = coords, station = station, col_names = col_names, ...)
+    calosc = hydro_imgw_daily(year = year, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "monthly"){
     #miesieczne
-    calosc <- hydro_imgw_monthly(year = year, coords = coords, station = station, col_names = col_names, ...)
+    calosc = hydro_imgw_monthly(year = year, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "semiannual_and_annual"){
     # polroczne_i_roczne
-    calosc <- hydro_imgw_annual(year = year, coords = coords, value = value, station = station, col_names = col_names, ...)
+    calosc = hydro_imgw_annual(year = year, coords = coords, value = value, station = station, col_names = col_names, ...)
   } else{
     stop("Wrong `interval` value. It should be either 'daily', 'monthly', or 'semiannual_and_annual'.", call. = FALSE)
   }

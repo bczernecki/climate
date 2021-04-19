@@ -24,7 +24,7 @@
 #' }
 #'
 
-nearest_stations_nooa <- function(country,
+nearest_stations_nooa = function(country,
                                   date = Sys.Date(), 
                                   add_map = TRUE, point = NULL, 
                                   no_of_stations = 10, ...){
@@ -46,7 +46,7 @@ nearest_stations_nooa <- function(country,
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   linkpl2 <-"https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
   
-  #a <-  getURL(linkpl2)
+  #a =  getURL(linkpl2)
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
   
@@ -108,9 +108,9 @@ nearest_stations_nooa <- function(country,
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...
-    addfactor <- as.numeric(diff(stats::quantile(result$LAT, na.rm = TRUE, c(0.48, 0.51))))
-    addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
-    addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
+    addfactor = as.numeric(diff(stats::quantile(result$LAT, na.rm = TRUE, c(0.48, 0.51))))
+    addfactor = ifelse(addfactor > 0.2, 0.2, addfactor)
+    addfactor = ifelse(addfactor < 0.05, 0.05, addfactor)
     
     graphics::plot(
       result$LON,

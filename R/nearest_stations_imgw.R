@@ -25,7 +25,7 @@
 #' }
 #'
 
-nearest_stations_imgw <- function(type = "meteo", 
+nearest_stations_imgw = function(type = "meteo", 
                                   rank = "synop",
                                   year = 2018,
                                   add_map = TRUE, 
@@ -84,9 +84,9 @@ nearest_stations_imgw <- function(type = "meteo",
       stop("package maps required, please install it first")
     }
     # plot a little bit more:
-    addfactor <- as.numeric(diff(stats::quantile(result$Y, na.rm = TRUE, c(0.48, 0.51)))) #lat Y
-    addfactor <- ifelse(addfactor > 0.2, 0.2, addfactor)
-    addfactor <- ifelse(addfactor < 0.05, 0.05, addfactor)
+    addfactor = as.numeric(diff(stats::quantile(result$Y, na.rm = TRUE, c(0.48, 0.51)))) #lat Y
+    addfactor = ifelse(addfactor > 0.2, 0.2, addfactor)
+    addfactor = ifelse(addfactor < 0.05, 0.05, addfactor)
     
     graphics::plot(
       result$X,

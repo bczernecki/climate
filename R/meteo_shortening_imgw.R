@@ -9,38 +9,38 @@
 #' 
 #' @examples 
 #' \donttest{
-#'   monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
+#'   monthly = meteo_imgw("monthly", rank = "climate", year = 1969)
 #'   colnames(monthly)
-#'   abbr <- climate:::meteo_shortening_imgw(data = monthly,
+#'   abbr = climate:::meteo_shortening_imgw(data = monthly,
 #'       col_names = "full", 
 #'       remove_duplicates = TRUE)
 #'   head(abbr)
 #' }
 #'
 
-meteo_shortening_imgw <- function(data, col_names = "short", remove_duplicates = TRUE){
+meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = TRUE){
 
   if (col_names != "polish"){
-    abbrev <- climate::imgw_meteo_abbrev
-    orig_columns <- trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
+    abbrev = climate::imgw_meteo_abbrev
+    orig_columns = trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
 
-    matches <- match(orig_columns, abbrev$fullname)
-    matches <- matches[!is.na(matches)]
+    matches = match(orig_columns, abbrev$fullname)
+    matches = matches[!is.na(matches)]
 
     if (col_names == "short"){
       # abbrev english
-      colnames(data)[orig_columns %in% abbrev$fullname] <- abbrev$abbr_eng[matches]
+      colnames(data)[orig_columns %in% abbrev$fullname] = abbrev$abbr_eng[matches]
     }
 
     if (col_names == "full"){
       # full english names:
-      colnames(data)[orig_columns %in% abbrev$fullname] <- abbrev$fullname_eng[matches]
+      colnames(data)[orig_columns %in% abbrev$fullname] = abbrev$fullname_eng[matches]
     }
   }
 
   # removing duplicated column names:  (e.g. station's name)
   if (remove_duplicates == TRUE) {
-    data <- data[, !duplicated(colnames(data))]
+    data = data[, !duplicated(colnames(data))]
   }
 
   return(data)

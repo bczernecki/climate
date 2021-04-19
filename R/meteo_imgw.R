@@ -17,19 +17,19 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   x <- meteo_imgw("monthly", year = 2018, coords = TRUE)
+#'   x = meteo_imgw("monthly", year = 2018, coords = TRUE)
 #'   head(x)
 #' }
-meteo_imgw <- function(interval, rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
+meteo_imgw = function(interval, rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
   if (interval == "daily"){
     # daily
-    calosc <- meteo_imgw_daily(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc = meteo_imgw_daily(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "monthly"){
     #monthly
-    calosc <- meteo_imgw_monthly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc = meteo_imgw_monthly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "hourly"){
     #hourly
-    calosc <- meteo_imgw_hourly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
+    calosc = meteo_imgw_hourly(rank = rank, year = year, status = status, coords = coords, station = station, col_names = col_names, ...)
   } else{
     stop("Wrong `interval` value. It should be either 'hourly', 'daily', or 'monthly'.")
   }

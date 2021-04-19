@@ -13,7 +13,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @export
-#'
+#' 
 #' @examples
 #' \donttest{
 #'   yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
@@ -71,6 +71,7 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
     data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    if(nrow(data1) == 0) data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
     colnames(data1) = meta[[value]]$parameters
     all_data[[i]] = data1
   }
