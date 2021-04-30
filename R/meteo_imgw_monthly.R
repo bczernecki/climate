@@ -12,6 +12,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils unzip read.csv
+#' @importFrom data.table fread
 #' @export
 #'
 #' @examples \donttest{
@@ -31,7 +32,7 @@
 #'
 meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
 
-  check_locale()
+  translit = check_locale()
   
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
@@ -46,29 +47,26 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
   # }
   # 
   # 
-  interval_pl = "miesieczne" # to mozemy ustawic na sztywno do odwolania w url
+  interval_pl = "miesieczne" 
   meta = meteo_metadata_imgw(interval = "monthly", rank = rank)
   
   rank_pl = switch(rank, synop = "synop", climate = "klimat", precip = "opad")
   
-  # checking net connection:
+  # checking internet connection:
   temp = tempfile()
   test_url(link = paste0(base_url, "dane_meteorologiczne/", interval_pl, "/", rank_pl, "/"),
            output = temp)
   a = readLines(temp, warn = FALSE)
   unlink(temp)
   
-  # a = getURL(paste0(base_url, "dane_meteorologiczne/", interval, "/", rank_pl, "/"),
-  #             ftp.use.epsv = FALSE,
-  #             dirlistonly = TRUE)
   ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
   
-  # fragment dla lat (ktore catalogs wymagaja pobrania:
+  # check for catalogs / years that require downloading:
   years_in_catalogs = strsplit(gsub(x = catalogs, pattern = "/", replacement = ""), split = "_")
   years_in_catalogs = lapply(years_in_catalogs, function(x) x[1]:x[length(x)])
   ind = lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
-  catalogs = catalogs[unlist(ind)] # to sa nasze prawdziwe catalogs do przemielenia
+  catalogs = catalogs[unlist(ind)]
   
   all_data = vector("list", length = length(catalogs))
   
@@ -95,20 +93,32 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
     #download.file(address, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
-    data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    
+    if(translit){
+      data1 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1))
+    } else {
+      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    }
+    
     colnames(data1) = meta[[1]]$parameters
     
     if( rank != "precip"){ # w opadowkach jest tylko jeden plik
       file2 = paste(temp2, dir(temp2), sep = "/")[2]
-      data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      
+      if(translit){
+        data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
+      } else {
+        data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      }
+      
       colnames(data2) = meta[[2]]$parameters
     }
     
-    # usuwa statusy
+    # removing status if set
     if(status == FALSE){
       data1[grep("^Status", colnames(data1))] = NULL
       
-      if(rank != "precip"){ # w plikach opadowych tylko jeden plik
+      if(rank != "precip"){ # in precipitation station only 1 file
         data2[grep("^Status", colnames(data2))] = NULL
       }
     }
@@ -131,7 +141,7 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
     all_data = merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
   }
   
-  # dodaje rank
+  # add rank
   rank_code = switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA", precip = "OPADOWA")
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
   
@@ -153,7 +163,7 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
   }
   
   
-  # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
+  # sorting data accordingly to column names - (could be "kod stacji" or "id")
   if(sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))){
     all_data = all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac), ]
   } else {
@@ -161,8 +171,8 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
   }
   
   
-  # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  # adding option to shorten columns and removing duplicates:
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   
-  return(all_data) # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
+  return(all_data) # clipping to selected years only
 }
