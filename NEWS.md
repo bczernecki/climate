@@ -1,3 +1,7 @@
+# climate 1.0.1
+
+* Adding `data.table` package to read CP1250 on machines that do not support this encoding (translit used instead)
+
 # climate 0.9.9
 
 * Changing URL `danepubliczne.imgw.pl` to `dane.imgw.pl` where needed

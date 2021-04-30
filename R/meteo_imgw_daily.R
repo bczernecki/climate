@@ -12,6 +12,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom data.table fread
 #' @export
 #'
 #' @examples \donttest{
@@ -24,7 +25,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  check_locale()
+  translit = check_locale()
   
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   
@@ -81,13 +82,20 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        if(nrow(data1) == 0) data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
+        if(translit){
+          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+        } else {
+          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
+        
         colnames(data1) = meta[[1]]$parameters
         
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        if(nrow(data2) == 0) data2 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
+        if(translit){
+          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
+        } else {
+          data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
         colnames(data2) = meta[[2]]$parameters
         
         # usuwa statusy
@@ -136,11 +144,19 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        if(translit){
+          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+        } else {
+          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
         colnames(data1) = meta[[1]]$parameters
         
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        if(translit){
+          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
+        } else {
+          data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
         colnames(data2) = meta[[2]]$parameters
         
         # usuwa statusy
@@ -179,8 +195,12 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        if(nrow(data1) == 0) data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
+        if(translit){
+          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+        } else {
+          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
+        
         colnames(data1) = meta[[1]]$parameters
         # usuwa statusy
         if(status == FALSE){
@@ -235,13 +255,10 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
   } else {
     all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
   }
-
-  
   
   # # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   
   return(all_data)
   
-
 } # koniec funkcji meteo_daily

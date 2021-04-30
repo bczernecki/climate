@@ -95,7 +95,7 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
     
     if(translit){
-      data1 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1))
+      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
     } else {
       data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
     }
@@ -106,7 +106,7 @@ meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FAL
       file2 = paste(temp2, dir(temp2), sep = "/")[2]
       
       if(translit){
-        data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
+        data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
       } else {
         data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
       }

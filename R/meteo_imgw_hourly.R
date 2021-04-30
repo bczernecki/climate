@@ -12,6 +12,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom data.table fread
 #' @export
 #'
 #' @examples \donttest{
@@ -23,7 +24,7 @@
 meteo_imgw_hourly = function(rank = "synop", year, status = FALSE, 
                               coords = FALSE, station = NULL, col_names = "short", ...){
   
-  check_locale()
+  translit = check_locale()
 
   stopifnot(rank == "synop" | rank == "climate") # dla terminowek tylko synopy i klimaty maja dane
   
@@ -82,8 +83,13 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
         #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
-        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        if(nrow(data1) == 0) data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
+        
+        if(translit){
+          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+        } else {
+          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
+        
         colnames(data1) = meta[[1]]$parameters
         
         # usuwa statusy
@@ -120,8 +126,13 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
-        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        if(nrow(data1) == 0) data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE)
+        
+        if(translit){
+          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+        } else {
+          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
+        
         colnames(data1) = meta[[1]]$parameters
         # usuwa statusy
         if(status == FALSE){
