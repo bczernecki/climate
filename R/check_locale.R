@@ -11,6 +11,7 @@ check_locale = function(){
     message(paste0("    Your system locale is: " , locale," which may cause trouble. 
     Please consider changing it manually while working with climate, e.g.: 
     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') "))
+    Sys.sleep(4)
     return(1)
     
   } else {
