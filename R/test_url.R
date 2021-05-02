@@ -24,16 +24,16 @@
 
 
 
-test_url <- function(link, output, quiet = FALSE) {
+test_url = function(link, output, quiet = FALSE) {
   print(link)
-  try_GET <- function(x, ...) {
+  try_GET = function(x, ...) {
     tryCatch(
       curl::curl_download(url = link, destfile = output, mode = "wb", quiet = quiet, ...),
       error = function(e) conditionMessage(e),
       warning = function(w) conditionMessage(w)
     )
   }
-  is_response <- function(x) {
+  is_response = function(x) {
     class(x) == "response"
   }
   
@@ -43,7 +43,7 @@ test_url <- function(link, output, quiet = FALSE) {
     return(invisible(NULL))
   }
   # Then try for timeout problems
-  resp <- try_GET(link)
+  resp = try_GET(link)
   if (!is_response(resp)) {
     message(resp)
     return(invisible(NULL))
@@ -66,5 +66,5 @@ test_url <- function(link, output, quiet = FALSE) {
 # b = curl_download(url = "http://httpbin.org", destfile = tempfile())
 # b = curl_download(url = "http://httpbin.org/status/404", destfile = tempfile())
 # 
-# url <- "http://www2.census.gov/acs2011_5yr/pums/csv_pus.zip"
+# url = "http://www2.census.gov/acs2011_5yr/pums/csv_pus.zip"
 # test_url(link = url, output = tempfile())

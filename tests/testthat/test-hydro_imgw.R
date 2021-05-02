@@ -12,7 +12,7 @@ test_that("hydro_imgw works!", {
   x <- hydro_imgw("semiannual_and_annual", year = y, coords = TRUE, col_names = "full")
   x <- hydro_imgw("semiannual_and_annual", year = y, col_names = "polish")
   x <- hydro_imgw("semiannual_and_annual", year = y, coords = TRUE, col_names = "polish")
-  x <- hydro_imgw("semiannual_and_annual", year = y, station = "BOGUSŁAW")
+  x <- hydro_imgw("semiannual_and_annual", year = y, station = "BORUCINO")
   x2 <- hydro_imgw("semiannual_and_annual", year = y, station = 149180020)
 })
 

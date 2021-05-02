@@ -18,9 +18,9 @@ Shortening column names of meteorological parameters to improve the readability 
 }
 \examples{
 \donttest{
-  monthly <- meteo_imgw("monthly", rank = "climate", year = 1969)
+  monthly = meteo_imgw("monthly", rank = "climate", year = 1969)
   colnames(monthly)
-  abbr <- climate:::meteo_shortening_imgw(data = monthly,
+  abbr = climate:::meteo_shortening_imgw(data = monthly,
       col_names = "full", 
       remove_duplicates = TRUE)
   head(abbr)

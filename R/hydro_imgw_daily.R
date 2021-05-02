@@ -10,6 +10,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom data.table fread
 #' @export
 #'
 #' @examples \donttest{
@@ -21,7 +22,7 @@
 hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "short", ...){
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  check_locale()
+  translit = check_locale()
 
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "daily"
@@ -68,7 +69,13 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
       #download.file(address, temp)
       unzip(zipfile = temp, exdir = temp2)
       file1 = paste(temp2, dir(temp2), sep = "/")[1]
-      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      
+      if(translit){
+        data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+      } else {
+        data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      }
+      
       colnames(data1) = meta[[1]][,1]
       data=rbind(data,data1)
     }
@@ -80,7 +87,13 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
     test_url(address, temp)
     unzip(zipfile = temp, exdir = temp2)
     file2 = paste(temp2, dir(temp2), sep = "/")[1]
-    data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    
+    if(translit){
+      data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
+    } else {
+      data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    }
+    
     colnames(data2) = meta[[2]][, 1]
 
     all_data[[i]] = merge(data, data2,

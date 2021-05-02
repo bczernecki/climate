@@ -18,14 +18,14 @@
 #' }
 #'
 
-meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
+meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
   
   stopifnot(is.character(station)) 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  base_url <- "https://www1.ncdc.noaa.gov/pub/data/noaa/"
+  base_url = "https://www1.ncdc.noaa.gov/pub/data/noaa/"
   
-  all_data <- NULL
+  all_data = NULL
   
   for (i in seq_along(year)){
 
@@ -79,11 +79,11 @@ meteo_noaa_hourly <- function(station = NULL, year, fm12 = TRUE){
       }  # end of if statement for empty files
                                                                                                                                                                                                                                                                                                                                       
         
-      all_data[[length(all_data) + 1]] <- dat
+      all_data[[length(all_data) + 1]] = dat
       } # end of loop for years
     
   if(is.list(all_data)){
-    all_data <- do.call(rbind, all_data)
+    all_data = do.call(rbind, all_data)
   }
   
   

@@ -12,8 +12,9 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
+#' @importFrom data.table fread
 #' @export
-#'
+#' 
 #' @examples
 #' \donttest{
 #'   yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
@@ -23,7 +24,7 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
-  check_locale()
+  translit = check_locale()
 
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "semiannual_and_annual"
@@ -70,7 +71,13 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
     #download.file(address, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
-    data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    
+    if(translit){
+      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+    } else {
+      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+    }
+    
     colnames(data1) = meta[[value]]$parameters
     all_data[[i]] = data1
   }
@@ -101,7 +108,7 @@ hydro_imgw_annual =  function(year, coords = FALSE, value = "H", station = NULL,
   }
 
   all_data = all_data[order(all_data$`Nazwa stacji`, all_data$`Rok hydrologiczny`), ]
-  # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  # adding option for shortening column names and removing duplicates
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)
