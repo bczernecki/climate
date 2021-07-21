@@ -60,7 +60,7 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
 
     iterator = c("01", "02", "03", "04", "05", "06",
                 "07", "08", "09", "10", "11", "12")
-    data=NULL
+    data = NULL
     for (j in seq_along(iterator)) {
       address = paste0(base_url, interval_pl, "/", catalog, "/codz_", catalog,"_", iterator[j], ".zip")
       temp = tempfile()
@@ -76,8 +76,26 @@ hydro_imgw_daily = function(year, coords = FALSE, station = NULL, col_names= "sh
         data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
       }
       
+      # extra exception for a current year according to information provided by IMGW-PIB:
+      # i.e.:
+      # "Do czasu zakończenia kontroli przepływów z roku hydrologicznego 2020 (do około poczatku sierpnia 2021), rekordy z  danymi z roku 2020 mają format:
+      #Kod stacji
+      #Nazwa stacji
+      #Nazwa rzeki/jeziora
+      #Rok hydrologiczny
+      #Wskaźnik miesiąca w roku hydrologicznym
+      #Dzień
+      #Stan wody [cm]
+      #Temperatura wody [st. C]
+      #Miesiąc kalendarzowy
+      
+      if (ncol(data1) == 9) {
+        data1$flow = NA
+        data1 = data1[, c(1:7, 10, 8:9)]
+      }
+      
       colnames(data1) = meta[[1]][,1]
-      data=rbind(data,data1)
+      data = rbind(data, data1)
     }
     address = paste0(base_url, interval_pl, "/", catalog, "/zjaw_", catalog, ".zip")
 
