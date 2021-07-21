@@ -74,11 +74,12 @@ nearest_stations_imgw = function(type = "meteo",
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
+  message('Currently "climate" package use approximate distance calculation\nIn order to get accurate results please use GIS-based solutions')
+  
   # removing rows with all NA records from the obtained dataset;
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
   result = result[!apply(is.na(result), 1, sum) == ncol(result),]
   
- 
   if(add_map == TRUE){
     if (!requireNamespace("maps", quietly = TRUE)){
       stop("package maps required, please install it first")

@@ -7,7 +7,7 @@
 http://weather.uwyo.edu/upperair/sounding.html
 }
 \usage{
-sounding_wyoming(wmo_id, yy, mm, dd, hh)
+sounding_wyoming(wmo_id, yy, mm, dd, hh, min = 0, bufr = FALSE)
 }
 \arguments{
 \item{wmo_id}{international WMO station code (World Meteorological Organization ID); For Polish stations: Łeba - 12120, Legionowo - 12374, Wrocław- 12425}
@@ -19,6 +19,12 @@ sounding_wyoming(wmo_id, yy, mm, dd, hh)
 \item{dd}{day - single number denoting day}
 
 \item{hh}{hour - single number denoting initial hour of sounding; for most stations this measurement is done twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day}
+
+\item{min}{minute - single number denoting initial minute of sounding; applies only to BUFR soundings.}
+
+\item{bufr}{\itemize{
+\item BUFR or TEMP sounding to be decoded. By default TEMP is used. For BUFR soundings use \code{bufr = TRUE}
+}}
 }
 \value{
 Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
@@ -35,17 +41,29 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
 \item THTE = (K)
 \item THTV = (K)
 }
-The second list contains metadata and calculated thermodynamic / atmospheric instability indices
+The second list contains metadata and calculated thermodynamic / atmospheric instability indices (for TEMP soundings only)
 
 A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorogical parameters (e.g. temperature, air pressure) where each row represent a measurement,
-depending on the height. Secound data.frame present a description of the conditions under which the sounding was carried out.
+depending on the height. Second data.frame presents a description of the conditions under which the sounding was carried out.
 }
 \description{
-Downloading the mea (i.e., measurements of the vertical profile of atmosphere) sounding data
+Downloading the measurements of the vertical profile of atmosphere (also known as sounding data). Data can be retrieved using TEMP and BUFR sounding formatting.
 }
 \examples{
 \donttest{
-# generate the date to download randomly:
+##############################################################################
+# download data for Station 45004 starting 1120Z 11 Jul 2021; Kowloon, HONG KONG, CHINA
+# using TEMP and BUFR sounding formats
+##############################################################################
+TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00)
+head(TEMP[[1]])
+BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00, bufr = TRUE)
+head(BUFR[[1]])
+
+
+##############################################################################
+### example with a random date to download sounding from LEBA, PL station: ###
+##############################################################################
 
   profile = sounding_wyoming(wmo_id = 12120, 
                              yy = sample(2000:2019,1),

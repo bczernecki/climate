@@ -1,3 +1,8 @@
+# climate 1.0.3
+
+* Adding possibility to download BUFR vertical sounding dataset from `http://weather.uwyo.edu/upperair/sounding.html`; extra information with supporting example added to the `sounding_wyoming`'s documentation
+* `hydro_imgw` supports now exception for current year which has no flow data until it is verified by the IMGW-PIB
+
 # climate 1.0.1
 
 * Adding `data.table` package to read CP1250 on machines that do not support this encoding (translit used instead)
