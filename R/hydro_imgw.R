@@ -1,6 +1,6 @@
 #' Hydrological data from IMGW
 #'
-#' Downloading hourly, daily, and monthly hydrological data from the measurement stations available in the danepubliczne.imgw.pl collection
+#' Downloading daily, and monthly hydrological data from the measurement stations available in the danepubliczne.imgw.pl collection
 #'
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @param year vector of years (e.g., 1966:2000)
