@@ -144,10 +144,12 @@ ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, st
     data_station$hour = NULL
   
     # other columns to numeric:
-    suppressWarnings(data_station[, c("TC", "TdC", "ffkmh",  "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt", "Nh",
-                    "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")] <-
-      as.data.frame(sapply(data_station[,c("TC", "TdC", "ffkmh", "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt","Nh",
-                                           "HKm", "InsoD1", "Viskm", "Snowcm","station_ID")], as.numeric)))
+    columns = c("TC", "TdC", "ffkmh",  "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt", "Nh",
+                "HKm", "InsoD1", "Viskm", "Snowcm", "station_ID")
+    columns = colnames(data_station)[(colnames(data_station) %in% columns)]
+    
+    suppressWarnings(data_station[, columns] <-
+      as.data.frame(sapply(data_station[,columns], as.numeric)))
   
     #  TODO:
     # changing order of columns and removing blank records:
