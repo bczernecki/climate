@@ -197,7 +197,7 @@ kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing."
 
 ## Acknowledgment
 
-Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Administration (NOAA) - Earth System Research Laboratory, Global Monitoring Division and Integrated Surface Hourly (NOAA ISH) are the sources of the data.
+Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic & Atmospheric Administration (NOAA) - Earth System Research Laboratories - Global Monitoring Laboratory, Global Monitoring Division and Integrated Surface Hourly (NOAA ISH) are the sources of the data.
 
 ## Contribution
 

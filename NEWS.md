@@ -2,7 +2,8 @@
 
 * Adding possibility to download BUFR vertical sounding dataset from `http://weather.uwyo.edu/upperair/sounding.html`; extra information with supporting example added to the `sounding_wyoming`'s documentation
 * `hydro_imgw` supports now exception for current year which has no flow data until it is verified by the IMGW-PIB
-* `ogimet_daily` automatically detects column names to be used for extraction in final data.frame
+* `ogimet_daily` automatically detects column names to be used for extraction in final data.frame; extra debugging info when temperature or precipitation columns are missing
+* minor changes in documentation (e.g. updated links to NOAA website)
 
 # climate 1.0.1
 

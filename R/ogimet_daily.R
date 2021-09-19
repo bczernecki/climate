@@ -117,7 +117,12 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, s
           if (all(is.na(test[2,]))) {
             message("no values in column names")
           } else {
-          
+            
+            # number of columns contain weird/non-standard data (e.g. only wind speed)
+            if(ncol(test) <= 4){
+              warning(paste0("Mandatory meteorological parameters (i.e. Temperature or precipitations) are not present. \nCheck content of the current URL:\n",
+                             linkpl2))
+            }
             
             if ((length(test[2, !is.na(test[2, ])]) == 6 &
                  test[2, 5] == "Int.")) {
