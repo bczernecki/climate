@@ -25,17 +25,17 @@
 #' }
 #'
 
-nearest_stations_imgw = function(type = "meteo", 
-                                  rank = "synop",
-                                  year = 2018,
-                                  add_map = TRUE, 
-                                  point = NULL, 
-                                  no_of_stations = 50, ...) {
+nearest_stations_imgw = function(type = "meteo",
+                                 rank = "synop",
+                                 year = 2018,
+                                 add_map = TRUE,
+                                 point = NULL,
+                                 no_of_stations = 50,
+                                 ...) {
   if (length(point) > 2) {
     stop("Too many points for the distance calculations. Please provide just one pair of coordinates (e.g. point = c(17,53))")
   } else if (length(point) < 2) {
-    message("
-            The point argument should have two coordinates.
+    message("The point argument should have two coordinates.
             We will provide nearest stations for mean location of all available stations.
             To change it please change the `point` argument c(LON,LAT)")
     Sys.sleep(2)
@@ -60,7 +60,7 @@ nearest_stations_imgw = function(type = "meteo",
     stop("You've provided wrong type argument; please use: \"meteo\", or \"hydro\"")
   }
 
-  if (dim(result)[1] == 0) {
+  if (nrow(result) == 0) {
     stop("Propobly there is no data in the downloaded object. Please check available records:  
         https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
@@ -105,10 +105,10 @@ nearest_stations_imgw = function(type = "meteo",
       pch = 19,
       xlab = "longitude",
       ylab = "latitude",
-      xlim = (c(min(c(result$X, point$X), na.rm = TRUE) - 1,
-                max(c(result$X, point$X), na.rm = TRUE) + 1)),
-      ylim = (c(min(c(result$Y, point$Y), na.rm = TRUE) - 1,
-                max(c(result$Y, point$Y), na.rm = TRUE) + 1)),
+      xlim = c(min(c(result$X, point[1]), na.rm = TRUE) - 1,
+               max(c(result$X, point[1]), na.rm = TRUE) + 1),
+      ylim = c(min(c(result$Y, point[2]), na.rm = TRUE) - 1,
+               max(c(result$Y, point[2]), na.rm = TRUE) + 1),
       ...
     )
     graphics::points(
