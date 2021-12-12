@@ -3,14 +3,13 @@
 #' Returns a data frame of meteorological or hydrological stations with their coordinates in particular year. 
 #' The returned object is valid only for a given year and type of stations (e.g. "synop", "climate" or "precip"). If `add_map = TRUE` additional map of downloaded data is added. 
 #'
-#' @param type data name;"meteo" (default), "hydro" 
-#' @param rank rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo
+#' @param type data name; "meteo" (default), "hydro" 
+#' @param rank rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo"
 #' @param year select year for searching nearest station
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(15, 53)); If not provided calculated as a mean longitude and latitude for the entire dataset
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates. 50 used by default
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
-#' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance in kilometers from a given coordinates). 
 #'  
@@ -33,23 +32,27 @@ nearest_stations_imgw = function(type = "meteo",
                                  no_of_stations = 50,
                                  ...) {
   if (length(point) > 2) {
-    stop("Too many points for the distance calculations. Please provide just one pair of coordinates (e.g. point = c(17,53))")
+    stop(paste("Too many points for the distance calculations.",
+               "Please provide just one pair of coordinates (e.g. point = c(17,53))"))
   } else if (length(point) < 2) {
-    message("The point argument should have two coordinates.
-            We will provide nearest stations for mean location of all available stations.
-            To change it please change the `point` argument c(LON,LAT)")
-    Sys.sleep(2)
+    msg = paste("The point argument should have two coordinates.",
+                 "We will provide nearest stations for mean location of all available stations.",
+                 "To change it please change the `point` argument c(LON,LAT)",
+                 sep = "\n")
+    message(msg)
+    Sys.sleep(2) # display message for 2 sec
   }
   
-  if (point[1] > 180) {
+  if (!is.null(point) && point[1] > 180) {
     stop("x should be longitude")
-  } else if (point[2] > 90) {
+  } else if (!is.null(point) && point[2] > 90) {
     stop("y should be latitude")
   }
 
   if (max(year) >= as.integer(substr(Sys.Date(), 1, 4)) - 1) {
     message("Data cannot be provided for this repository. Please check the available records at: \n
             https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
+    Sys.sleep(2)
   }
   
   if (type == "meteo") {
@@ -60,17 +63,17 @@ nearest_stations_imgw = function(type = "meteo",
     stop("You've provided wrong type argument; please use: \"meteo\", or \"hydro\"")
   }
 
-  if (nrow(result) == 0) {
+  if (dim(result)[1] == 0) {
     stop("Propobly there is no data in the downloaded object. Please check available records:  
         https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
   
   if (is.null(point)) {
   # workaround for different column names:
-    if (any(colnames(result) == "LON"))
+    if ("LON" %in% colnames(result))
       point = c(round(mean(result$LON, na.rm = TRUE), 2),
                 round(mean(result$LAT, na.rm = TRUE), 2))
-    if (any(colnames(result) == "X"))
+    if ("X" %in% colnames(result))
       point = c(round(mean(result$X, na.rm = TRUE), 2),
                 round(mean(result$Y, na.rm = TRUE), 2))
   }
@@ -81,8 +84,8 @@ nearest_stations_imgw = function(type = "meteo",
   }
   
   result["distance"] = round(dist_vec, 3)
-  orderd_distance = result[order(result$distance), ]
-  result = orderd_distance[1:no_of_stations, ]
+  result = result[order(result$distance), ]
+  result = result[1:no_of_stations, ]
   
 
   # removing rows with all NA records from the obtained dataset;
@@ -94,7 +97,8 @@ nearest_stations_imgw = function(type = "meteo",
       stop("package maps required, please install it first")
     }
     # plot a little bit more:
-    addfactor = as.numeric(diff(stats::quantile(result$Y, na.rm = TRUE, c(0.48, 0.51)))) #lat Y
+    addfactor = stats::quantile(result$Y, c(0.48, 0.51), na.rm = TRUE) #lat Y
+    addfactor = as.numeric(diff(addfactor))
     addfactor = ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor = ifelse(addfactor < 0.05, 0.05, addfactor)
     
@@ -105,10 +109,10 @@ nearest_stations_imgw = function(type = "meteo",
       pch = 19,
       xlab = "longitude",
       ylab = "latitude",
-      xlim = c(min(c(result$X, point[1]), na.rm = TRUE) - 1,
-               max(c(result$X, point[1]), na.rm = TRUE) + 1),
-      ylim = c(min(c(result$Y, point[2]), na.rm = TRUE) - 1,
-               max(c(result$Y, point[2]), na.rm = TRUE) + 1),
+      xlim = c(min(c(result[["X"]], point[1]), na.rm = TRUE) - 1,
+               max(c(result[["X"]], point[1]), na.rm = TRUE) + 1),
+      ylim = c(min(c(result[["Y"]], point[2]), na.rm = TRUE) - 1,
+               max(c(result[["Y"]], point[2]), na.rm = TRUE) + 1),
       ...
     )
     graphics::points(
@@ -130,7 +134,8 @@ nearest_stations_imgw = function(type = "meteo",
   }
   
   if (length(year) > 1) {
-    message("Please provide only one year. For more years station's metadata may change (name, location or station may stop collecting data)")
+    message(paste0("Please provide only one year. For more years station's metadata",
+                   "may change (name, location or station may stop collecting data)"))
   }
   return(result)
 }

@@ -15,9 +15,9 @@ nearest_stations_imgw(
 )
 }
 \arguments{
-\item{type}{data name;"meteo" (default), "hydro"}
+\item{type}{data name; "meteo" (default), "hydro"}
 
-\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo}
+\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo"}
 
 \item{year}{select year for searching nearest station}
 
