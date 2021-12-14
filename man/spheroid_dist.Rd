@@ -12,16 +12,16 @@ spheroid_dist(p1, p2)
 \item{p2}{coordinates of the second point in decimal degrees (LON, LAT)}
 }
 \value{
-distance between two points in kilometers
+distance between two locations in kilometers
 }
 \description{
 Calculate the distance between two points on the surface of a spheroid
-using Vincenty's formula
+using Vincenty's formula. This function can be used when GIS libraries
+for calculating distance are not available.
 }
 \examples{
-\donttest{
- p1 = c(18.633333, 54.366667) # Gdańsk
- p2 = c(17.016667, 54.466667) # Słupsk
+ p1 = c(18.633333, 54.366667) # longitude and latitude for Gdansk
+ p2 = c(17.016667, 54.466667) # longitude and latitude for Slupsk
  spheroid_dist(p1, p2)
-}
+ 
 }
