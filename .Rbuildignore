@@ -9,5 +9,5 @@
 ^\.httr-oauth$
 ^data-raw$
 ^vignettes/articles$
-
 ^\.github$
+^\.Rhistory$

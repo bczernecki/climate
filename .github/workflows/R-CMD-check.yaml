@@ -31,9 +31,9 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest,   r: 'release'}
-          - {os: windows-latest, r: '3.6'}
-          - {os: ubuntu-16.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: windows-latest, r: 'release'}
+          - {os: ubuntu-18.04,   r: 'release'}
+          - {os: ubuntu-18.04,   r: '3.6'}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -67,10 +67,14 @@ jobs:
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
+          ls
+          pwd
+          echo -e 'LC_CTYPE = "en_US.UTF-8"\nLC_NUMERIC="C"\nLC_TIME="en_US.UTF-8"\nLC_COLLATE="C"\nLC_MONETARY="en_US.UTF-8"\nLC_MESSAGES="en_US.UTF-8"\nLC_PAPER="en_US.UTF-8"\nLC_NAME="C"\nLC_ADDRESS="C"\nLC_TELEPHONE="C"\nLC_MEASUREMENT="en_US.UTF-8"\nLC_IDENTIFICATION="C"' > .Renviron
+
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
       - name: Install dependencies
         run: |

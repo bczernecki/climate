@@ -1,3 +1,10 @@
+# climate 1.0.4
+
+* Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)
+* Function `nearest_stations_imgw()` now uses the Vincenty's formula in `spheroid_dist` to calculate the distance between points on a spheroid, not the Euclidean distance (previously results were inaccurate for some specific cases)
+* minor bugs fixes and improvements
+
+
 # climate 1.0.3
 
 * Adding possibility to download BUFR vertical sounding dataset from `http://weather.uwyo.edu/upperair/sounding.html`; extra information with supporting example added to the `sounding_wyoming`'s documentation

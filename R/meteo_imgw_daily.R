@@ -91,7 +91,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         colnames(data1) = meta[[1]]$parameters
         
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        if(translit){
+        if (translit) {
           data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
         } else {
           data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
@@ -99,7 +99,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         colnames(data2) = meta[[2]]$parameters
         
         # usuwa statusy
-        if(status == FALSE){
+        if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
           data2[grep("^Status", colnames(data2))] = NULL
         }
@@ -123,7 +123,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
     
     ######################
     ###### KLIMAT: #######
-    if(rank == "climate") {
+    if (rank == "climate") {
       address = paste0(base_url, "dane_meteorologiczne/dobowe/klimat",
                         "/", catalog, "/")
       #folder_contents = getURL(address, ftp.use.epsv = FALSE, dirlistonly = FALSE) # zawartosc folderu dla wybranego yearu
@@ -138,13 +138,13 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
       # w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
       # na podstawie zawartosci obiektu files
       
-      for(j in seq_along(addresses_to_download)){
+      for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        if(translit){
+        if (translit) {
           data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
         } else {
           data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
@@ -152,7 +152,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         colnames(data1) = meta[[1]]$parameters
         
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        if(translit){
+        if (translit) {
           data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
         } else {
           data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
@@ -160,7 +160,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         colnames(data2) = meta[[2]]$parameters
         
         # usuwa statusy
-        if(status == FALSE){
+        if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
           data2[grep("^Status", colnames(data2))] = NULL
         }
@@ -176,7 +176,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
     
     ######################
     ######## OPAD: #######
-    if(rank == "precip") {
+    if (rank == "precip") {
       address = paste0(base_url, "dane_meteorologiczne/dobowe/opad",
                         "/", catalog, "/")
       #folder_contents = getURL(address, ftp.use.epsv = FALSE, dirlistonly = FALSE) # zawartosc folderu dla wybranego yearu
@@ -189,13 +189,13 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
       files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
       addresses_to_download = paste0(address, files)
       
-      for(j in seq_along(addresses_to_download)){
+      for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        if(translit){
+        if (translit) {
           data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
         } else {
           data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
@@ -203,7 +203,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         
         colnames(data1) = meta[[1]]$parameters
         # usuwa statusy
-        if(status == FALSE){
+        if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
         
@@ -250,7 +250,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
   }
   
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
-  if(sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))){
+  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
     all_data = all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
   } else {
     all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]

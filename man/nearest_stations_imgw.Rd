@@ -15,11 +15,11 @@ nearest_stations_imgw(
 )
 }
 \arguments{
-\item{type}{data name;"meteo" (default), "hydro"}
+\item{type}{data name; "meteo" (default), "hydro"}
 
-\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo}
+\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"; Only valid if type = "meteo"}
 
-\item{year}{select year for serching nearest station}
+\item{year}{select year for searching nearest station}
 
 \item{add_map}{logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)}
 
@@ -30,7 +30,7 @@ nearest_stations_imgw(
 \item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
 }
 \value{
-A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance from a given coordinates).
+A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance in kilometers from a given coordinates).
 }
 \description{
 Returns a data frame of meteorological or hydrological stations with their coordinates in particular year.
@@ -39,8 +39,8 @@ The returned object is valid only for a given year and type of stations (e.g. "s
 \examples{
 \donttest{
   nearest_stations_imgw(type = "hydro", 
-  rank="synop",
-  year=2018,
+  rank = "synop",
+  year = 2018,
   point = c(17, 52),
   add_map = TRUE, 
   no_of_stations = 4)

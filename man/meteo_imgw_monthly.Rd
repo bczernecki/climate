@@ -45,8 +45,8 @@ Downloading monthly (meteorological) data from the SYNOP / CLIMATE / PRECIP stat
   
   # please note that station names may change over time 
   # and thus 2 names are required in some cases:
-  df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000, 
-          coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
+  # df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000, 
+  #         coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
 }
 
 }
