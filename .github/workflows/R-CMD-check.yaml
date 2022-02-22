@@ -67,18 +67,18 @@ jobs:
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
-          export LC_CTYPE = "en_US.UTF-8"
-          export LC_NUMERIC = "C"
-          export LC_TIME = "en_US.UTF-8"
-          export LC_COLLATE = "C"
-          export LC_MONETARY = "en_US.UTF-8"
-          export LC_MESSAGES = "en_US.UTF-8"
-          export LC_PAPER = "en_US.UTF-8"
-          export LC_NAME = "C"
-          export LC_ADDRESS = "C"
-          export LC_TELEPHONE = "C"
-          export LC_MEASUREMENT = "en_US.UTF-8"
-          export LC_IDENTIFICATION = "C"
+          export LC_CTYPE="en_US.UTF-8"
+          export LC_NUMERIC="C"
+          export LC_TIME="en_US.UTF-8"
+          export LC_COLLATE="C"
+          export LC_MONETARY="en_US.UTF-8"
+          export LC_MESSAGES="en_US.UTF-8"
+          export LC_PAPER="en_US.UTF-8"
+          export LC_NAME="C"
+          export LC_ADDRESS="C"
+          export LC_TELEPHONE="C"
+          export LC_MEASUREMENT="en_US.UTF-8"
+          export LC_IDENTIFICATION="C"
 
           while read -r cmd
           do
