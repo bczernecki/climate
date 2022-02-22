@@ -26,8 +26,8 @@
 #'   
 #'   # please note that station names may change over time 
 #'   # and thus 2 names are required in some cases:
-#'   df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000, 
-#'           coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
+#'   # df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000, 
+#'   #         coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA")) 
 #' }
 #'
 meteo_imgw_monthly = function(rank = "synop", year, status = FALSE, coords = FALSE, station = NULL, col_names = "short", ...){
