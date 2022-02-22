@@ -1,7 +1,9 @@
 # climate 1.0.4
 
-* Function `nearest_stations_imgw()` now uses the Vincenty's formula to calculate the distance between points on a spheroid, not the Euclidean distance
-(the results were inaccurate)
+* Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)
+* Function `nearest_stations_imgw()` now uses the Vincenty's formula in `spheroid_dist` to calculate the distance between points on a spheroid, not the Euclidean distance (previously results were inaccurate for some specific cases)
+* minor bugs fixes and improvements
+
 
 # climate 1.0.3
 
