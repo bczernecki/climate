@@ -67,23 +67,14 @@ jobs:
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
-          export LC_CTYPE="en_US.UTF-8"
-          export LC_NUMERIC="C"
-          export LC_TIME="en_US.UTF-8"
-          export LC_COLLATE="C"
-          export LC_MONETARY="en_US.UTF-8"
-          export LC_MESSAGES="en_US.UTF-8"
-          export LC_PAPER="en_US.UTF-8"
-          export LC_NAME="C"
-          export LC_ADDRESS="C"
-          export LC_TELEPHONE="C"
-          export LC_MEASUREMENT="en_US.UTF-8"
-          export LC_IDENTIFICATION="C"
+          ls
+          pwd
+          echo -e 'LC_CTYPE = "en_US.UTF-8"\nLC_NUMERIC="C"\nLC_TIME="en_US.UTF-8"\nLC_COLLATE="C"\nLC_MONETARY="en_US.UTF-8"\nLC_MESSAGES="en_US.UTF-8"\nLC_PAPER="en_US.UTF-8"\nLC_NAME="C"\nLC_ADDRESS="C"\nLC_TELEPHONE="C"\nLC_MEASUREMENT="en_US.UTF-8"\nLC_IDENTIFICATION="C"' > .Renviron
 
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "16.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
 
       - name: Install dependencies
         run: |
