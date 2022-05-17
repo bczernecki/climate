@@ -1,3 +1,9 @@
+# climate 1.0.5
+
+* `meteo_imgw` family of functions supports multiple names as argument - bug fix
+* unit tests and code coverage computed with CI/CD
+
+
 # climate 1.0.4
 
 * Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)

@@ -58,10 +58,10 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
   
   all_data = NULL
   
-  for (i in seq_along(catalogs)){
+  for (i in seq_along(catalogs)) {
     catalog = gsub(catalogs[i], pattern = "/", replacement = "")
     
-    if(rank == "synop") {
+    if (rank == "synop") {
       address = paste0(base_url, "dane_meteorologiczne/terminowe/synop",
                         "/", catalog, "/")
       #folder_contents = getURL(address, ftp.use.epsv = FALSE, dirlistonly = FALSE) # zawartosc folderu dla wybranego roku
@@ -76,7 +76,7 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
       # w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
       # na podstawie zawartosci obiektu files
       
-      for(j in seq_along(addresses_to_download)){
+      for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
@@ -93,7 +93,7 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
         colnames(data1) = meta[[1]]$parameters
         
         # usuwa statusy
-        if(status == FALSE){
+        if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
         
@@ -120,14 +120,14 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
       # w tym miejscu trzeba przemyslec fragment kodu do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
       # na podstawie zawartosci obiektu files
       
-      for(j in seq_along(addresses_to_download)){
+      for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
         
-        if(translit){
+        if (translit) {
           data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
         } else {
           data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
@@ -135,7 +135,7 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
         
         colnames(data1) = meta[[1]]$parameters
         # usuwa statusy
-        if(status == FALSE){
+        if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
         
@@ -147,7 +147,7 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
   
   all_data = do.call(rbind, all_data)
   
-  if (coords){
+  if (coords) {
     all_data = merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
   }
   
@@ -160,13 +160,14 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data = all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ]
-      if (nrow(all_data) == 0){
+      inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
+      all_data = all_data[inds, ]
+      if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
-    } else if (is.numeric(station)){
-      all_data = all_data[all_data$`Kod stacji`%in% station, ]
-      if (nrow(all_data) == 0){
+    } else if (is.numeric(station)) {
+      all_data = all_data[all_data$`Kod stacji` %in% station, ]
+      if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
     } else {
@@ -176,7 +177,7 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
   
   
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
-  if(sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))){
+  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
     all_data = all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
   } else {
     all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
@@ -185,5 +186,4 @@ meteo_imgw_hourly = function(rank = "synop", year, status = FALSE,
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   return(all_data)
-} # koniec funkcji meteo_terminowe
-
+} # end of function

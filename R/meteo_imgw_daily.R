@@ -111,7 +111,7 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien),]
         ### ta część kodu powtarza sie po dużej petli od rank
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[substr(ttt$`Nazwa stacji.x`,1,nchar(station))==station,]
+          all_data[[length(all_data) + 1]] = ttt[substr(ttt$`Nazwa stacji.x`, 1, nchar(station)) %in% station, ]
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
@@ -231,10 +231,16 @@ meteo_imgw_daily = function(rank = "synop", year, status = FALSE, coords = FALSE
   if (!is.null(station)) {
     if (is.character(station)) {
       
-      if(rank == 'synop' | rank == 'climate') all_data = all_data[substr(all_data$`Nazwa stacji.x`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      if(rank == 'synop' | rank == 'climate') {
+        inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji.x`)))
+        all_data = all_data[inds, ]
+        }
       
       # exception for column names in precipitation data:                                                
-      if(rank == 'precip') all_data = all_data[substr(all_data$`Nazwa stacji`,1,nchar(station))==station, ] # sprawdzic tutaj czy jest Nazwa stacji.x w synopach
+      if(rank == 'precip') {
+        inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
+        all_data = all_data[inds, ]
+      }
       
       if (nrow(all_data) == 0){
         stop("Selected station(s) is not available in the database.", call. = FALSE)
