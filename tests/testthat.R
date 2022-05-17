@@ -1,4 +1,3 @@
-# library(testthat)
-# library(climate)
-#
-# test_check("climate")
+library(testthat)
+library(climate)
+test_check("climate")
