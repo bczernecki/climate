@@ -11,8 +11,9 @@
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom XML readHTMLTable
 #' @export
-#' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
-#'  each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
+#' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
+#' (e.g. ID station, distance from point in km, geographic coordinates, etc.). Each row represent a measurement,
+#' each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
 #'  
 #' @examples 
 #' \donttest{
@@ -20,7 +21,7 @@
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
 #'                           no_of_stations = 60, 
-#'                           main = "Meteo stations in UK")
+#'                           main = "Meteo stations in UK") -> a
 #' }
 #'
 
@@ -33,13 +34,13 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
-  if (length(point)>2) {
+  if (length(point) > 2 ) {
     stop("Too many points for the distance calculations. Please provide just one point")
-  } else if (length(point)<2) {
+  } else if (length(point) < 2) {
     stop("The point needs to have two coordinates. Please change the `point` argument")
   }
   
-  if (length(date)!=1) {
+  if (length(date) != 1) {
     stop("You can check the available nearest stations for one day only. Please provide just one date")
   }
  
@@ -52,7 +53,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   month = format(date, "%m")
   day = format(date, "%d")
   ndays = 1
-  linkpl2 <-
+  linkpl2 =
     paste0(
       "http://ogimet.com/cgi-bin/gsynres?lang=en&state=",
       number_countries,
@@ -70,10 +71,10 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   test_url(link = linkpl2, output = temp)
   
   # run only if downloaded file is valid
-  if(!is.na(file.size(temp)) & (file.size(temp) > 0)) {
+  if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
   
     a = readLines(temp)
-    a = paste(a, sep="", collapse="") 
+    a = paste(a, sep = "", collapse = "") 
     
     b = strsplit(a, "Decoded synops since")
     
@@ -122,7 +123,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
     
     res = data.frame(wmo_id = res1[, 4], station_names = station_names,
                       lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
-    result=rbind(result,res)
+    result = rbind(result,res)
   } else {
     result = NULL
     cat(paste("Wrong name of a country. Please check countries names at 
@@ -137,7 +138,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   names(point) = c("lon", "lat")
   distmatrix = rbind(point,result[, 3:4])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
-  result["distance [km]"] = distance_points * 112.196672
+  result["distance"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
@@ -145,8 +146,14 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
   result = result[!apply(is.na(result), 1, sum) == ncol(result),]
   
-  if(add_map == TRUE){
-    if (!requireNamespace("maps", quietly = TRUE)){
+  # adding units as attributes:
+  attr(result[["distance"]], "label") = "km"
+  attr(result[["lon"]], "label") = "decimal degrees"
+  attr(result[["lat"]], "label") = "decimal degrees"
+  attr(result[["alt"]], "label") = "metres AGL"
+  
+  if (add_map == TRUE) {
+    if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...

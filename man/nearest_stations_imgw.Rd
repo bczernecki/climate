@@ -38,7 +38,7 @@ The returned object is valid only for a given year and type of stations (e.g. "s
 }
 \examples{
 \donttest{
-  nearest_stations_imgw(type = "hydro", 
+  df =  nearest_stations_imgw(type = "meteo", 
   rank = "synop",
   year = 2018,
   point = c(17, 52),

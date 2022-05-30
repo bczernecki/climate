@@ -12,7 +12,8 @@
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom XML readHTMLTable
 #' @export
-#' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
+#' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
+#' (e.g.  ID station, distance from point, geographic coordinates, etc.) where each row represent a measurement,
 #'  each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
 #'  
 #' @examples 
@@ -80,14 +81,14 @@ nearest_stations_nooa = function(country,
     stop("Propobly there is no data for this date. Please check available records:  
         https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
   } 
-  if (is.null(point)){
-    point = c(round(mean(result$LON,na.rm=T),2),round(mean(result$LAT,na.rm=T),2))
+  if (is.null(point)) {
+    point = c(round(mean(result$LON, na.rm=T), 2),round(mean(result$LAT, na.rm=T), 2))
   }
   point = as.data.frame(t(point))
   names(point) = c("LON", "LAT")
   distmatrix = rbind(point,result[, 8:9])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
-  result["distance [km]"] = distance_points * 112.196672
+  result["distance"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
@@ -95,16 +96,13 @@ nearest_stations_nooa = function(country,
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
   result = result[!apply(is.na(result), 1, sum) == ncol(result),]
   
+  # adding units as attributes:
+  attr(result[["distance"]], "label") = "km"
+  attr(result[["LON"]], "label") = "decimal degrees"
+  attr(result[["LAT"]], "label") = "decimal degrees"
  
-
-
- 
-
- 
-  
-  
-  if(add_map == TRUE){
-    if (!requireNamespace("maps", quietly = TRUE)){
+  if (add_map == TRUE) {
+    if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...
