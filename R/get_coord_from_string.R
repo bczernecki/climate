@@ -20,15 +20,14 @@ get_coord_from_string = function(txt, pattern = "Longitude") {
   tmp = trimws(substr(txt, start = start, stop = start + 8))
   tmp = strsplit(tmp, "-")[[1]]
   hemisphere = gsub("[0-9]", "", strsplit(tmp, "-")[2])
-  hemisphere = gsub(".*?(\\b[A-Za-z0-9 ]+\\b).*","\\1", hemisphere)
+  hemisphere = gsub(".*?(\\b[A-Za-z0-9 ]+\\b).*", "\\1", hemisphere)
 
   tmp = suppressWarnings(as.numeric(gsub("([0-9]+).*$", "\\1", strsplit(tmp, "-"))))
 
   wsp = suppressWarnings(as.numeric(tmp)[1] + (as.numeric(tmp)[2] * 5 / 3) / 100)
 
-  if( hemisphere %in% c("W","S") ) {
+  if (hemisphere %in% c("W", "S")) {
     wsp = wsp * -1
   }
 return(wsp)
 }
-
