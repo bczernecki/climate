@@ -5,6 +5,6 @@ linters: with_defaults(
    object_name_linter = NULL,
    object_length_linter(length = 50L),
    object_usage_linter(source_file = NULL),
-   cyclocomp_linter(complexity_limit = 25L),
+   cyclocomp_linter(complexity_limit = 33L),
    assignment_linter = NULL
  )
