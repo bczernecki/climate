@@ -4,7 +4,7 @@
 #' @export
 
 .onAttach = function(libname, pkgname) {
-  if((runif(1) < 0.2) & interactive()) { # activate occasionally and only if not run as Rscript
+  if ((runif (1) < 0.2) & interactive()) { # activate occasionally and only if not run as Rscript
     ver = as.character(packageVersion("climate"))
     packageStartupMessage(paste0(c("\n______________________________________________________________\n",
                                  "  Welcome to climate ", ver, "!\n",

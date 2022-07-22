@@ -75,7 +75,7 @@ sounding_wyoming = function(wmo_id,
   hh = formatC(hh, width = 2, format = "d", flag = "0")
   min = formatC(min, width = 2, format = "d", flag = "0")
  
-  if(bufr) {
+  if (bufr) {
     url = paste0("http://weather.uwyo.edu/cgi-bin/bufrraob.py?datetime=", 
                  yy, "-", mm, "-", dd, "+", hh, ":", min, ":00&id=", wmo_id, "&type=TEXT:LIST")
   } else {
@@ -88,11 +88,11 @@ sounding_wyoming = function(wmo_id,
   
   # run only if downloaded file is valid
   df = NULL
-  if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
+  if (!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
 
     txt = read.fwf(file = temp, widths = 1000)
     sects = grep(pattern = "PRE>", x = txt$V1)
-    if (length(sects) == 0){
+    if (length(sects) == 0) {
       stop("HTTP status was '503 Service Unavailable'. Have you provided a correct station id?
       Please check wmo_id numbers at:
       http://weather.uwyo.edu/upperair/sounding.html")
@@ -104,7 +104,7 @@ sounding_wyoming = function(wmo_id,
     colnames(df) = c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
                       "MIXR", "DRCT", "SKNT", "THTA", "THTE", "THTV")
     
-    if(bufr == FALSE) {
+    if (bufr == FALSE) {
       # the section below is not valid for BUFR decoded data:
       txt = read.fwf(file = temp, skip = sects[2] + 1, widths = 1000,
                      n = (sects[3] - (sects[2] + 2)), stringsAsFactors = FALSE)$V1

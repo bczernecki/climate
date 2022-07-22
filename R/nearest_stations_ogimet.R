@@ -30,7 +30,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
                                     add_map = FALSE, 
                                     point = c(2, 50), 
                                     no_of_stations = 10,
-                                    ...){
+                                    ...) {
 
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 

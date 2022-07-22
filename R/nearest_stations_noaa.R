@@ -28,9 +28,9 @@
 nearest_stations_nooa = function(country,
                                   date = Sys.Date(), 
                                   add_map = TRUE, point = NULL, 
-                                  no_of_stations = 10, ...){
+                                  no_of_stations = 10, ...) {
   
-  if(missing(country) | is.null(country)){
+  if (missing(country) | is.null(country)) {
     stop("No country provided!")
   }
   
@@ -52,7 +52,7 @@ nearest_stations_nooa = function(country,
   test_url(link = linkpl2, output = temp)
   
   # check connection:
-  if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
+  if (!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
   
   a = readLines(temp)
   a = trimws(a, which = "right")
@@ -64,25 +64,25 @@ nearest_stations_nooa = function(country,
   b1$countries = as.character(b1$countries)
   b2 = read.csv("https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.csv")
   stations_noaa = merge(b1,b2)
-  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11],1,4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
-  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12],1,4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
+  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
+  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
   result = stations_noaa
   
-  if (!is.null(country)){
-    result=result[result$countries==country,]
+  if (!is.null(country)) {
+    result = result[result$countries == country,]
   }
-  
-  if (dim(result)[1]==0) {
+
+  if (dim(result)[1] == 0) {
     stop("Wrong name of a country. Please check countries names at: 
          https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt")
   } 
-  result=result[(result$Begin_date<date & result$End_date<date), ]
-  if (dim(result)[1]==0) {
+  result = result[(result$Begin_date < date & result$End_date < date), ]
+  if (dim(result)[1] == 0) {
     stop("Propobly there is no data for this date. Please check available records:  
         https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
-  } 
+  }
   if (is.null(point)) {
-    point = c(round(mean(result$LON, na.rm=T), 2),round(mean(result$LAT, na.rm=T), 2))
+    point = c(round(mean(result$LON, na.rm = TRUE), 2),round(mean(result$LAT, na.rm = TRUE), 2))
   }
   point = as.data.frame(t(point))
   names(point) = c("LON", "LAT")
@@ -143,10 +143,8 @@ nearest_stations_nooa = function(country,
       cex = 0.6
     )
     maps::map(add = TRUE)
-    
   }
-  
-  
+
   } else { # end of checking connection
     cat(paste0("Service not working, wrong query or problems with internet connection.\n"))
     result = NULL

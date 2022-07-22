@@ -84,7 +84,7 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       day = format(dates[i], "%d")
       ndays = day
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep="")
-      if(month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
+      if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
       
       
       temp = tempfile()
