@@ -9,19 +9,24 @@ hydro_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
 \arguments{
 \item{data}{downloaded dataset with original column names}
 
-\item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
+\item{col_names}{three types of column names possible: "short" - default,
+values with shorten names,
+"full" - full English description,
+"polish" - original names in the dataset}
 
-\item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
+\item{remove_duplicates}{whether to remove duplicated column names
+(default TRUE - i.e., columns with duplicated names are deleted)}
 }
 \description{
-Shortening column names of hydrological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
+Shortening column names of hydrological parameters to improve the readability of downloaded dataset from
+the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 \examples{
 \donttest{
   monthly = hydro_imgw("monthly", year = 1969)
   colnames(monthly)
-  abbr = climate:::hydro_shortening_imgw(data = monthly, 
-      col_names = "full", 
+  abbr = climate:::hydro_shortening_imgw(data = monthly,
+      col_names = "full",
       remove_duplicates = TRUE)
   head(abbr)
 }

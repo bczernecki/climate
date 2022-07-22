@@ -15,27 +15,36 @@ hydro_imgw(
 )
 }
 \arguments{
-\item{interval}{temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")}
+\item{interval}{temporal resolution of the data ("daily" , "monthly",
+or "semiannual_and_annual")}
 
 \item{year}{vector of years (e.g., 1966:2000)}
 
 \item{coords}{add coordinates of the stations (logical value TRUE or FALSE)}
 
-\item{value}{type of data (can be: state - "H" (default), flow - "Q", or temperature - "T")}
+\item{value}{type of data (can be: state - "H" (default), flow - "Q", or
+temperature - "T")}
 
-\item{station}{vector of hydrological stations danepubliczne.imgw.pl; can be given as station name with CAPITAL LETTERS (character)
+\item{station}{vector of hydrological stations danepubliczne.imgw.pl;
+can be given as station name with CAPITAL LETTERS (character)
 It accepts either names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
-\item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
+\item{col_names}{three types of column names possible: "short" - default,
+values with shorten names, "full" - full English description,
+"polish" - original names in the dataset}
 
-\item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
+\item{...}{other parameters that may be passed to the 'shortening'
+function that shortens column names}
 }
 \value{
-A data.frame with columns describing the hydrological parameters (e.g. flow, water level) where each row represent a measurement,
-depending on the interval, at a given hour, month or year. If \code{coords = TRUE} additional two columns with geografic coordinates are added.
+A data.frame with columns describing the hydrological parameters
+(e.g. flow, water level) where each row represent a measurement,
+depending on the interval, at a given hour, month or year.
+If \code{coords = TRUE} additional two columns with geografic coordinates are added.
 }
 \description{
-Downloading daily, and monthly hydrological data from the measurement stations available in the danepubliczne.imgw.pl collection
+Downloading daily, and monthly hydrological data from the measurement stations
+available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
