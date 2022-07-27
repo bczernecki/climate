@@ -2,7 +2,7 @@
 #'
 #' Downloading hourly (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
 #'
-#' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )
+#' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ); By default last 30 days are taken
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param precip_split whether to split precipitation fields into 6/12/24h
@@ -21,7 +21,7 @@
 #' }
 #'
 
-ogimet_hourly = function(date = c(Sys.date() - 30, Sys.Date()), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
+ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 

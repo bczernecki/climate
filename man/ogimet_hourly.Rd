@@ -5,14 +5,14 @@
 \title{Scrapping hourly meteorological (Synop) data from the Ogimet webpage}
 \usage{
 ogimet_hourly(
-  date = c(Sys.date() - 30, Sys.Date()),
+  date = c(Sys.Date() - 30, Sys.Date()),
   coords = FALSE,
   station = c(12326, 12330),
   precip_split = TRUE
 )
 }
 \arguments{
-\item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )}
+\item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ); By default last 30 days are taken}
 
 \item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
