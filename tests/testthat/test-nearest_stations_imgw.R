@@ -31,4 +31,12 @@ test_that("nearest_stations_imgw", {
   )
   )
   
+  testthat::expect_error(nearest_stations_imgw(
+    type = "hydro",
+    year = 2099:2100,
+    point = c(0, 50),
+    add_map = FALSE
+  ))
+  
+  
 })

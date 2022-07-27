@@ -76,11 +76,10 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
        cat(paste0("  Check station name or year. The created link is not working properly:\n  ", address))
         
       }  # end of if statement for empty files
-                                                                                                                                                                                                                                                                                                                                      
-        
+
       all_data[[length(all_data) + 1]] = dat
       } # end of loop for years
-    
+
   if (is.list(all_data)) {
     all_data = do.call(rbind, all_data)
   }

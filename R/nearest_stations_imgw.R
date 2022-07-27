@@ -64,7 +64,7 @@ nearest_stations_imgw = function(type = "meteo",
   }
 
   if (dim(result)[1] == 0) {
-    stop("Propobly there is no data in the downloaded object. Please check available records:  
+    stop("Probably there is no data in the downloaded object. Please check available records:  
         https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
   

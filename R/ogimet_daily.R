@@ -65,7 +65,6 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       "VisKm" = character(),
       stringsAsFactors = FALSE
     )
-
   
   for (station_nr in station) {
     print(station_nr)
@@ -83,8 +82,8 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
       ndays = day
-      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep="")
-      if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep="")
+      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
+      if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep = "")
       
       
       temp = tempfile()
@@ -137,11 +136,9 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
                 paste(test[1, 5], test[2, 4:6], sep = "_"),
                 test[1, c(6:(length(test) - 4))]
               ))
-            } else if ((length(test[2, !is.na(test[2, ])]) == 2 &
-                        test[2, 2] == "Int.")) {
+            } else if ((length(test[2, !is.na(test[2, ])]) == 2 & test[2, 2] == "Int.")) {
               names_col = unlist(c(test[1, 1:2], paste(test[1, 3], test[2, 1:2], sep = "_"), test[1, c(4:(length(test) - 1))]))
-            } else if ((length(test[2, !is.na(test[2, ])]) == 5 &
-                        test[2, 5] == "Int.")) {
+            } else if ((length(test[2, !is.na(test[2, ])]) == 5 & test[2, 5] == "Int.")) {
               names_col = unlist(c(
                 test[1, 1],
                 paste(test[1, 2], test[2, 1:3], sep = "_"),
@@ -149,8 +146,7 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
                 paste(test[1, 5], test[2, 4:5], sep = "_"),
                 test[1, c(6:(length(test) - 3))]
               ))
-            } else if ((length(test[2, !is.na(test[2, ])]) == 3 &
-                        test[2, 2] == "Int.")) {
+            } else if ((length(test[2, !is.na(test[2, ])]) == 3 & test[2, 2] == "Int.")) {
               names_col = unlist(c(
                 test[1, 1:2],
                 paste(test[1, 3], test[2, 1:3], sep = "_"),
@@ -159,9 +155,7 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
             } else {
               names_col = "Error_column"
             }
-          
-          
-          
+
           names_col <-
             gsub("[^A-Za-z0-9]",
                  "",

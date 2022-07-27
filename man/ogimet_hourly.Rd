@@ -5,7 +5,7 @@
 \title{Scrapping hourly meteorological (Synop) data from the Ogimet webpage}
 \usage{
 ogimet_hourly(
-  date = c("2019-06-01", "2019-07-31"),
+  date = c(Sys.date() - 30, Sys.Date()),
   coords = FALSE,
   station = c(12326, 12330),
   precip_split = TRUE

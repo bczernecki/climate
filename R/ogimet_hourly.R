@@ -21,7 +21,7 @@
 #' }
 #'
 
-ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
+ogimet_hourly = function(date = c(Sys.date() - 30, Sys.Date()), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
@@ -60,21 +60,35 @@ ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, st
   for (station_nr in station) {
     print(station_nr)
     # adding progress bar if at least 3 iterations are needed
-    if (length(dates)*length(station) >=3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station)-1, style = 3)
+    if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
 #    print(station_nr)
     for (i in length(dates):1) {
       
-      if (length(dates) >=3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)),"\n")
+      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)), "\n")
       
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
       ndays = day
-      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=",ndays,"&ano=",year,"&mes=",month,"&day=",day,"&hora=23",sep="")
-      if (month=="01") linkpl2 = paste("http://ogimet.com/cgi-bin/gsynres?ind=",station_nr,"&lang=en&decoded=yes&ndays=31&ano=",year,"&mes=02&day=1&hora=00",sep="")
-      
-      
+      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?ind=",
+                      station_nr,
+                      "&lang=en&decoded=yes&ndays=",
+                      ndays,
+                      "&ano=",
+                      year,
+                      "&mes=",
+                      month,
+                      "&day=",
+                      day,
+                      "&hora=23",
+                      sep = "")
+      if (month == "01") linkpl2 = paste("http://ogimet.com/cgi-bin/gsynres?ind=",
+                                       station_nr,
+                                       "&lang=en&decoded=yes&ndays=31&ano=",
+                                       year,
+                                       "&mes=02&day=1&hora=00",
+                                       sep = "")
       
       temp = tempfile()
       test_url(linkpl2, temp)
@@ -93,10 +107,16 @@ ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, st
         if (is.null(b)) {
           warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
           return(data_station)
-          } 
-        
-        colnames(b) = gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))
-        colnames(b) = c("Date", "hour", colnames(b)[2:(ncol(b) - 1)]) # workaround for adding hour which is wrongly recognized
+        } 
+
+        cols = gsub("[^A-Za-z0-9]", "", as.character(lapply(b[1, ], as.character), stringsAsFactors = FALSE))
+        if (ncol(b) <= length(cols)) {
+          colnames(b) = cols
+          colnames(b) = c("Date", "hour", colnames(b)[2:(ncol(b) - 1)]) # workaround for adding hour which is wrongly recognized
+        } else {
+          stop("Could not detect proper column names. Please investigate the URL manually.")
+        }
+      
         b = b[-1, ]
         b["station_ID"] =  station_nr
         # to avoid gtools::smartbind function or similar from another package..
@@ -140,7 +160,7 @@ ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, st
     data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] = NA
   
     # changing time..
-    data_station$Date <-strptime(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
+    data_station$Date = strptime(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
     data_station$hour = NULL
   
     # other columns to numeric:
@@ -169,9 +189,15 @@ ogimet_hourly = function(date = c("2019-06-01","2019-07-31"), coords = FALSE, st
   
     # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
     if (precip_split) {
+      if (all(is.na(data_station$Precmm))) {
+        data_station$pr6 = NA
+        data_station$pr12 = NA
+        data_station$pr24 = NA
+      } else {
       data_station$pr6 = precip_split(data_station$Precmm, pattern = "/6")
       data_station$pr12 = precip_split(data_station$Precmm, pattern = "/12")
       data_station$pr24 = precip_split(data_station$Precmm, pattern = "/24")
+      }
     }
   
     # clipping to interesting period as we're downloading slightly more than needed:

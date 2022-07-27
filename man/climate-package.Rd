@@ -13,7 +13,7 @@ Automatize downloading of meteorological and hydrological data from publicly ava
     University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
     Polish Institute of Meterology and Water Management - National Research Institute (<https://danepubliczne.imgw.pl>),
     and National Oceanic & Atmospheric Administration (NOAA).
-    This package also allows for adding geographical coordinates for each observation.
+    This package also allows for searching geographical coordinates for each observation and calculate distances to the nearest stations.
 }
 \seealso{
 Useful links:

@@ -78,7 +78,7 @@ nearest_stations_nooa = function(country,
   } 
   result = result[(result$Begin_date < date & result$End_date < date), ]
   if (dim(result)[1] == 0) {
-    stop("Propobly there is no data for this date. Please check available records:  
+    stop("Probably there is no data for this date. Please check available records:  
         https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
   }
   if (is.null(point)) {

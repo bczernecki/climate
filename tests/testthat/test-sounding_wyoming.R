@@ -20,4 +20,12 @@ test_that("sounding_wyoming works!", {
                                           mm = 4,
                                           dd = 4,
                                           hh = 0))
+  
+  # expected error for bufr
+  testthat::expect_error(sounding_wyoming(wmo_id = 12375,
+                                          yy = 2019,
+                                          mm = 4,
+                                          dd = 4,
+                                          hh = 0,
+                                          bufr = TRUE))
 })
