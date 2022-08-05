@@ -15,7 +15,7 @@
 #'   stations_ogimet(country = "Australia", add_map = TRUE)
 #' }
 #'
-stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE){
+stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE) {
   
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
   
@@ -41,7 +41,7 @@ stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_ma
    
    
    # run only if downloaded file is valid
-   if(!is.na(file.size(temp)) & (file.size(temp) > 0)) {
+   if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
    
    a = readLines(temp)
    a = paste(a, sep="", collapse="") 
@@ -105,8 +105,8 @@ stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_ma
   
 if (!is.null(res)) {
   
-  if(add_map == TRUE){
-    if (!requireNamespace("maps", quietly = TRUE)){
+  if (add_map == TRUE) {
+    if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...

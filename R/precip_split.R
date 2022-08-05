@@ -12,7 +12,7 @@
 #'  climate:::precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
 #' }
 #'
-precip_split = function(precip,  pattern = "/12"){
+precip_split = function(precip,  pattern = "/12") {
   b = strsplit(precip, "h", fixed = TRUE)
   b = lapply(b, function(x) x[grepl(x, pattern = pattern, fixed = TRUE)])
   b = unlist(lapply(b, function(x) ifelse(length(x) > 0, gsub(x = x, pattern = pattern, replacement = ""), NA)))

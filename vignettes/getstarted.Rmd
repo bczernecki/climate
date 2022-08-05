@@ -115,7 +115,7 @@ df = meteo_noaa_hourly(station = "010080-99999",
 
 ```{r windrose2, echo=FALSE}
 library(knitr)
-kable(head(df[,c(-2:-5)],10), caption = "Examplary data frame of meteorological data.")
+kable(head(df[,c(-2:-5)], 10), caption = "Examplary data frame of meteorological data.")
 ```
 
 ### Example 4

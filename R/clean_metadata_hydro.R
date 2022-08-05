@@ -5,19 +5,18 @@
 #' @param interval temporal interval
 #' @importFrom utils read.fwf
 #' @keywords internal
-clean_metadata_hydro = function(address, interval){
-  
+clean_metadata_hydro = function(address, interval) {
   temp = tempfile()
-  
+
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
-  
+
   a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
   a = gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
-  
+
   # additional workarounds for mac os but not only...
-  a = gsub(x = a, pattern="'", replacement = "")
-  a = gsub(x = a, pattern="\\^", replacement = "")
+  a = gsub(x = a, pattern = "'", replacement = "")
+  a = gsub(x = a, pattern = "\\^", replacement = "")
 
   if (interval == "monthly") {
     b = list(data.frame(parameters = a[3:12])) # sklad danych jeszcze nie wiem jak ominąć problem kontroli

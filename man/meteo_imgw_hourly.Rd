@@ -19,19 +19,24 @@ meteo_imgw_hourly(
 
 \item{year}{vector of years (e.g., 1966:2000)}
 
-\item{status}{leave the columns with measurement and observation statuses (default status = FALSE - i.e. the status columns are deleted)}
+\item{status}{leave the columns with measurement and observation statuses
+(default status = FALSE - i.e. the status columns are deleted)}
 
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{name or ID of meteorological station(s).
 It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
-\item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
+\item{col_names}{three types of column names possible: "short" - default,
+values with shorten names, "full" - full English description,
+"polish" - original names in the dataset}
 
-\item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
+\item{...}{other parameters that may be passed to the 'shortening'
+function that shortens column names}
 }
 \description{
-Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations
+available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{

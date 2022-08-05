@@ -34,7 +34,6 @@
 #' @importFrom utils read.table
 #' @importFrom utils data
 #' @export
-#' 
 #'
 #' @examples \donttest{
 #'   #co2 = meteo_noaa_co2()
@@ -43,23 +42,23 @@
 #' }
 #'
 
-meteo_noaa_co2 = function(){
+meteo_noaa_co2 = function() {
   
-  base_url = "ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt"
+  base_url = "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt"
   temp = tempfile()
   test_url(link = base_url, output = temp)
   
   # run only if downloaded file is valid
   co2 = NULL
-  if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
-    
-    co2 = read.table(temp, na.strings = "-99.99")
-    colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays")
-    
+  if (!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
+
+    co2 = read.table(temp, na.strings = c("-9.99", "-0.99"))
+    colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays", "st_dev_days")
+
   } else {
     cat(paste0("Service not working or problems with internet connection. Check url:\n", base_url)) 
   }
-    
+
   unlink(temp)
   return(co2)
 }

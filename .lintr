@@ -1,0 +1,10 @@
+linters: with_defaults(
+   line_length_linter = line_length_linter(120),
+   commented_code_linter = NULL,
+   absolute_path_linter(),
+   object_name_linter = NULL,
+   object_length_linter(length = 50L),
+   object_usage_linter(source_file = NULL),
+   cyclocomp_linter(complexity_limit = 33L),
+   assignment_linter = NULL
+ )

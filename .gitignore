@@ -8,3 +8,5 @@ inst/doc
 .README.md.swp
 climate.Rproj
 .DS_Store
+covr_report.html
+lib

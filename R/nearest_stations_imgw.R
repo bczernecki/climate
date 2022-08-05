@@ -15,7 +15,7 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_imgw(type = "hydro", 
+#'   df =  nearest_stations_imgw(type = "meteo", 
 #'   rank = "synop",
 #'   year = 2018,
 #'   point = c(17, 52),
@@ -64,7 +64,7 @@ nearest_stations_imgw = function(type = "meteo",
   }
 
   if (dim(result)[1] == 0) {
-    stop("Propobly there is no data in the downloaded object. Please check available records:  
+    stop("Probably there is no data in the downloaded object. Please check available records:  
         https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
   
@@ -92,6 +92,11 @@ nearest_stations_imgw = function(type = "meteo",
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
   result = result[!apply(is.na(result), 1, sum) == ncol(result), ]
   
+  # adding units as attributes:
+  attr(result[["distance"]], "label") = "km"
+  attr(result[["X"]], "label") = "decimal degrees"
+  attr(result[["Y"]], "label") = "decimal degrees"
+
   if (add_map == TRUE) {
     if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")

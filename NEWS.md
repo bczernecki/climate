@@ -1,3 +1,11 @@
+# climate 1.0.5
+
+* `meteo_imgw` family of functions supports multiple names as argument - bug fix
+* unit tests and code coverage computed with CI/CD
+* units added to column labels for `nearest_stations_` set of functions instead of column names for easier processing (e.g. [km] are visible now only as attributes)
+* new functions follow lintr settings
+
+
 # climate 1.0.4
 
 * Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)

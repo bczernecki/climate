@@ -3,6 +3,8 @@
 <!-- badges: start -->
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate) [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/bczernecki/climate/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=dev)
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)

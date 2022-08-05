@@ -11,3 +11,4 @@
 ^vignettes/articles$
 ^\.github$
 ^\.Rhistory$
+^\.lintr$

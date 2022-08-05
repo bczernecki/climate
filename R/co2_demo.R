@@ -1,9 +1,7 @@
 #' @name co2_demo
-#' @title Examplary CO2 dataset from Mauna Loa Observatory (NOAA dataset) 
-#'
+#' @title Examplary CO2 dataset from Mauna Loa Observatory (NOAA dataset)
 #' @description The object contains pre-downloaded CO2 dataset from Mauna Loa observatory
 #' The snapshot was taken 2020/05/05.
-#' 
 #' @importFrom utils data
 #'
 #' @docType data

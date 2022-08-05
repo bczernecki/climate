@@ -12,7 +12,8 @@
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom XML readHTMLTable
 #' @export
-#' @return A data.frame with number of nearest station according to given point columns describing stations parameters (e.g.  ID station, distance from point,geografic coordinates) where each row represent a measurement,
+#' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
+#' (e.g.  ID station, distance from point, geographic coordinates, etc.) where each row represent a measurement,
 #'  each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
 #'  
 #' @examples 
@@ -27,9 +28,9 @@
 nearest_stations_nooa = function(country,
                                   date = Sys.Date(), 
                                   add_map = TRUE, point = NULL, 
-                                  no_of_stations = 10, ...){
+                                  no_of_stations = 10, ...) {
   
-  if(missing(country) | is.null(country)){
+  if (missing(country) | is.null(country)) {
     stop("No country provided!")
   }
   
@@ -51,7 +52,7 @@ nearest_stations_nooa = function(country,
   test_url(link = linkpl2, output = temp)
   
   # check connection:
-  if(!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
+  if (!is.na(file.size(temp)) & (file.size(temp) > 800)) { 
   
   a = readLines(temp)
   a = trimws(a, which = "right")
@@ -63,31 +64,31 @@ nearest_stations_nooa = function(country,
   b1$countries = as.character(b1$countries)
   b2 = read.csv("https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.csv")
   stations_noaa = merge(b1,b2)
-  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11],1,4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
-  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12],1,4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
+  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
+  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
   result = stations_noaa
   
-  if (!is.null(country)){
-    result=result[result$countries==country,]
+  if (!is.null(country)) {
+    result = result[result$countries == country,]
   }
-  
-  if (dim(result)[1]==0) {
+
+  if (dim(result)[1] == 0) {
     stop("Wrong name of a country. Please check countries names at: 
          https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt")
   } 
-  result=result[(result$Begin_date<date & result$End_date<date), ]
-  if (dim(result)[1]==0) {
-    stop("Propobly there is no data for this date. Please check available records:  
+  result = result[(result$Begin_date < date & result$End_date < date), ]
+  if (dim(result)[1] == 0) {
+    stop("Probably there is no data for this date. Please check available records:  
         https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
-  } 
-  if (is.null(point)){
-    point = c(round(mean(result$LON,na.rm=T),2),round(mean(result$LAT,na.rm=T),2))
+  }
+  if (is.null(point)) {
+    point = c(round(mean(result$LON, na.rm = TRUE), 2),round(mean(result$LAT, na.rm = TRUE), 2))
   }
   point = as.data.frame(t(point))
   names(point) = c("LON", "LAT")
   distmatrix = rbind(point,result[, 8:9])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
-  result["distance [km]"] = distance_points * 112.196672
+  result["distance"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]
   result = orderd_distance[1:no_of_stations, ]
   
@@ -95,16 +96,13 @@ nearest_stations_nooa = function(country,
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
   result = result[!apply(is.na(result), 1, sum) == ncol(result),]
   
+  # adding units as attributes:
+  attr(result[["distance"]], "label") = "km"
+  attr(result[["LON"]], "label") = "decimal degrees"
+  attr(result[["LAT"]], "label") = "decimal degrees"
  
-
-
- 
-
- 
-  
-  
-  if(add_map == TRUE){
-    if (!requireNamespace("maps", quietly = TRUE)){
+  if (add_map == TRUE) {
+    if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
     }
     # plot labels a little bit higher...
@@ -145,10 +143,8 @@ nearest_stations_nooa = function(country,
       cex = 0.6
     )
     maps::map(add = TRUE)
-    
   }
-  
-  
+
   } else { # end of checking connection
     cat(paste0("Service not working, wrong query or problems with internet connection.\n"))
     result = NULL

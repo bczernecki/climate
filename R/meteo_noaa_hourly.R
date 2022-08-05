@@ -18,7 +18,7 @@
 #' }
 #'
 
-meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
+meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
   
   stopifnot(is.character(station)) 
   #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
@@ -27,7 +27,7 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
   
   all_data = NULL
   
-  for (i in seq_along(year)){
+  for (i in seq_along(year)) {
 
       address = paste0(base_url, year[i], "/", station, "-", year[i], ".gz")
       temp = tempfile()
@@ -35,15 +35,15 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
       
       # run only if downloaded file is valid
       dat = NULL
-      if(!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
+      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
       
-      dat = read.fwf(gzfile(temp,'rt'),header=F,  
+      dat = read.fwf(gzfile(temp,'rt'),header = FALSE,
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
                      7, 5, 5, 5, 4, 3, 1, 1, 4, 1,
                      5, 1, 1, 1, 6, 1, 1, 1, 5, 1, 5, 1, 5, 1)) 
       unlink(temp)
-      
-      if(fm12){
+
+      if (fm12) {
       dat = dat[dat$V12 == "FM-12",] # take only FM-12 records
       }
       
@@ -56,15 +56,14 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
                              month = dat$month, 
                              day = dat$day, 
                              hour = dat$hour, 0, 0, tz = "UTC")
-                            
-      
+
       dat$t2m[dat$t2m == 9999] = NA
       dat$dpt2m[dat$dpt2m == 9999] = NA
       dat$ws[dat$ws == 9999] = NA
       dat$wd[dat$wd == 999] = NA
       dat$slp[dat$slp == 99999] = NA
       dat$visibility[dat$visibility == 999999] = NA
-      
+
       dat$lon = dat$lon/1000
       dat$lat = dat$lat/1000
       dat$ws = dat$ws/10
@@ -77,28 +76,22 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE){
        cat(paste0("  Check station name or year. The created link is not working properly:\n  ", address))
         
       }  # end of if statement for empty files
-                                                                                                                                                                                                                                                                                                                                      
-        
+
       all_data[[length(all_data) + 1]] = dat
       } # end of loop for years
-    
-  if(is.list(all_data)){
+
+  if (is.list(all_data)) {
     all_data = do.call(rbind, all_data)
   }
-  
-  
-  if(!is.null(all_data)){ # run only if there are some data downloaded:
-  
+
+  if (!is.null(all_data)) { # run only if there are some data downloaded:
+
     # order columns:
     all_data = all_data[, c("date","year", "month", "day", "hour", "lon", "lat", "alt",
                             "t2m", "dpt2m", "ws", "wd", "slp", "visibility") ]
-    
     # sort data
     all_data = all_data[order(all_data$date), ]
-    
-    #closeAllConnections() # just in case sth left while testing...
   }
-  
+
   return(all_data)
 } # koniec funkcji meteo_terminowe
-
