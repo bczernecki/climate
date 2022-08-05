@@ -22,7 +22,7 @@ Returns a list of meteorological stations with their coordinates from the Ogimet
 }
 \examples{
 \donttest{
-  stations_ogimet(country = "Australia", add_map = TRUE)
+  # stations_ogimet(country = "Australia", add_map = TRUE)
 }
 
 }

@@ -21,7 +21,7 @@
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
 #'                           no_of_stations = 60, 
-#'                           main = "Meteo stations in UK") -> a
+#'                           main = "Meteo stations in UK")
 #' }
 #'
 
@@ -136,7 +136,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
 
   point = as.data.frame(t(point))
   names(point) = c("lon", "lat")
-  distmatrix = rbind(point,result[, 3:4])
+  distmatrix = rbind(point, result[, 3:4])
   distance_points = stats::dist(distmatrix, method = "euclidean")[1:dim(result)[1]]
   result["distance"] = distance_points * 112.196672
   orderd_distance = result[order(result$distance), ]

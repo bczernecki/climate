@@ -41,7 +41,7 @@ The returned list is valid only for a given day.
                           point = c(-2, 50),
                           add_map = TRUE, 
                           no_of_stations = 60, 
-                          main = "Meteo stations in UK") -> a
+                          main = "Meteo stations in UK")
 }
 
 }

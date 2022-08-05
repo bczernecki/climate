@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(scipen=999)
+options(scipen = 999)
 ```
 
 The goal of the  **climate** R package is to automatize downloading of meteorological

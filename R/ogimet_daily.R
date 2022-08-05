@@ -15,11 +15,8 @@
 #' @keywords internal
 #'
 #' @examples \donttest{
-#'   # downloading data for Poznan-Lawica
-#'   poznan = ogimet_daily(station = 12330,
-#'       date = c("2019-01-01", "2019-03-31"),
-#'       coords = TRUE)
-#'   head(poznan)
+#'   ## downloading data for Poznan-Lawica
+#'   # poznan = ogimet_daily(station = 12330, coords = TRUE)
 #' }
 #'
 
