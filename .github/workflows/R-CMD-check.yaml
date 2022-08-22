@@ -130,4 +130,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: covr_report.html
+          path: |
+            covr_report.html
+            lib
