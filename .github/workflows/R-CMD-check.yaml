@@ -105,23 +105,32 @@ jobs:
         shell: bash
 
       - name: Upload check results
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Test coverage
+      - name: Codecov
         run: |
           covr::codecov()
-          covr_report = covr::package_coverage(wrap = TRUE); if(length(covr_report) > 0) covr::report(x = covr_report, file = "/home/runner/work/climate/covr_report.html")
         shell: Rscript {0}
         
       - name: Test coverage report
+        if: always()
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: my_path
+        run: |
+          covr_report <- covr::package_coverage(wrap = TRUE);
+          if(length(covr_report) > 0) covr::report(x = covr_report, file = "covr_report.html")'
+        shell: Rscript {0}
+
+        
+      - name: Upload test coverage report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: |
-            /home/runner/work/climate/log
-            /home/runner/work/climate/covr_report.html
+            my_path
