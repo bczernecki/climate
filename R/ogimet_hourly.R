@@ -6,6 +6,7 @@
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param precip_split whether to split precipitation fields into 6/12/24h
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #'  numeric fields (logical value TRUE (default) or FALSE)
 #' @importFrom XML readHTMLTable
 #' 
@@ -15,16 +16,39 @@
 #'
 #' @examples 
 #' \donttest{
-#'   # downloading data for Poznan-Lawica
-#'   # poznan = ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
-#'   # head(poznan)
+#'   # downloading data for Poznan-Lawica, Poland
+#'   poznan = ogimet_hourly(station = 12330, coords = TRUE)
 #' }
 #'
 
-ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
+ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), 
+                         coords = FALSE,
+                         station = 12330,
+                         precip_split = TRUE, 
+                         allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(ogimet_hourly_bp(date = date, coords = coords, 
+                              station = station, 
+                              precip_split = precip_split, hour = hour), 
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    ogimet_hourly_bp(date = date, coords = coords, 
+                     station = station, 
+                     precip_split = precip_split, hour = hour)
+  }
+}
 
-  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-
+#' @keywords Internal
+#' @noRd
+ogimet_hourly_bp = function(date = date,
+                            coords = coords,
+                            station = station,
+                            precip_split = precip_split) {
+  
   dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") - 1
   dates = unique(c(dates, as.Date(max(date))))
 
