@@ -9,6 +9,7 @@
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find 
 #' nearest stations to (e.g. c(80, 6)). If not provided the query will be based on a mean longitude and latitude among available dataset.
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates; default 30
+#' @param allow_failure logical - whether to allow or stop on failure. By default set to TRUE. For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
@@ -25,7 +26,6 @@
 #'   a = nearest_stations_noaa(country = "UNITED KINGDOM", no_of_stations = 100)
 #' }
 #'
-
 
 nearest_stations_noaa = function(country,
                                  date = Sys.Date(), 
@@ -54,6 +54,8 @@ nearest_stations_noaa = function(country,
   }
 }
 
+#' @keywords Internal
+#' @noRd
 nearest_stations_noaa_bp = function(country,
                                   date = date, 
                                   add_map = TRUE, point = NULL, 

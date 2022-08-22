@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![Build
 Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate) [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
+[![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/bczernecki/climate/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=dev)
 

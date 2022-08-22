@@ -1,8 +1,8 @@
 test_that("nearest_stations_noaa", {
-  x = tryCatch(nearest_stations_nooa(country = "SRI LANKA",
+  x = nearest_stations_noaa(country = "SRI LANKA",
                             point = c(80, 6),
                             add_map = TRUE,
-                            no_of_stations = 10), error = function(e) 0)
+                            no_of_stations = 10)
   if (is.data.frame(x)) {
   testthat::expect_true(nrow(x) <= 10)
   }
@@ -11,15 +11,18 @@ test_that("nearest_stations_noaa", {
 
 
 test_that("nearest_stations_noaa_errors", {
-  testthat::expect_error(nearest_stations_nooa())
-  testthat::expect_error(nearest_stations_nooa(country = "POLAND",
-                                               point = c(10, 20, 30)))
+  testthat::expect_message(nearest_stations_noaa(allow_failure = TRUE))
+  testthat::expect_error(nearest_stations_noaa(allow_failure = FALSE))
+  testthat::expect_error(nearest_stations_noaa(country = "POLAND",
+                                               point = c(10, 20, 30),
+                                               allow_failure = FALSE))
   
-  testthat::expect_error(nearest_stations_nooa(country = "POLAND",
-                                               point = 1))
+  testthat::expect_error(nearest_stations_noaa(country = "POLAND",
+                                               point = 1,
+                                               allow_failure = FALSE))
   
-  # check if this is Poland
-  x = tryCatch(nearest_stations_nooa(country = "POLAND", point = c(19, 52)), error = function(e) 0)
+  # check if this is query is retrieving data for Poland:
+  x = nearest_stations_noaa(country = "POLAND", point = c(19, 52))
   
   if (is.data.frame(x)) {
     testthat::expect_equal(unique(x$countries), "POLAND")
@@ -27,10 +30,12 @@ test_that("nearest_stations_noaa_errors", {
 
   testthat::expect_error(nearest_stations_nooa(country = "POLAND",
                                                point = c(30, 50), 
-                                               date = c(Sys.Date() - 7, Sys.Date() - 1)))
+                                               date = c(Sys.Date() - 7, Sys.Date() - 1), 
+                                               allow_failure = FALSE))
   
   testthat::expect_error(nearest_stations_nooa(country = "SOVIET UNION",
                                                point = c(30, 50), 
-                                               date = c(Sys.Date())))
+                                               date = c(Sys.Date()),
+                                               allow_failure = FALSE))
 
 })

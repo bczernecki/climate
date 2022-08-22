@@ -24,6 +24,8 @@ nearest_stations_noaa(
 nearest stations to (e.g. c(80, 6)). If not provided the query will be based on a mean longitude and latitude among available dataset.}
 
 \item{no_of_stations}{how many nearest stations will be returned from the given geographical coordinates; default 30}
+
+\item{allow_failure}{logical - whether to allow or stop on failure. By default set to TRUE. For debugging purposes change to FALSE}
 }
 \value{
 A data.frame with number of nearest station according to given point columns describing stations parameters
