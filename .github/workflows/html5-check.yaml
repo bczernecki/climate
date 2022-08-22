@@ -32,7 +32,7 @@ jobs:
         run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
 
       - name: Install tidy and pandoc
-        run: sudo apt install tidy pandoc iconv
+        run: sudo apt install tidy pandoc
         
       - name: Install dependencies
         run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "data.table", "maps", "dplyr", "tidyr", "xml2"))'
@@ -45,3 +45,4 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
           _R_CHECK_CRAN_INCOMING_: false
+          LANG: "en_US.UTF.8"

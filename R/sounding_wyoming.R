@@ -62,11 +62,11 @@ sounding_wyoming = function(wmo_id,
                             yy, mm, dd, hh, min = 00, 
                             bufr = FALSE) {
 
-  if (length(yy)!=1 || length(mm)!=1 || length(dd)!=1 || length(hh)!=1) {
+  if (length(yy) != 1 || length(mm) != 1 || length(dd) != 1 || length(hh) != 1) {
     stop("The function supports downloading data for a given day. Please change arguments yy, mm, dd, hh to single values")
   }
   
-  if (length(wmo_id)!=1) {
+  if (length(wmo_id) != 1) {
     stop("The function supports downloading data for one station at the time. Please change the `wmo_id` argument to a single value")
   }
   
@@ -113,21 +113,19 @@ sounding_wyoming = function(wmo_id,
     } else {
       # for bufr data try to read only the most essential metadata
       ind = grep(pattern = "Observations", txt$V1)
-      df2 = data.frame(bufr_metadata = gsub("<.*?>", "", txt$V1[ind:(ind+1)]), 
+      df2 = data.frame(bufr_metadata = gsub("<.*?>", "", txt$V1[ind:(ind + 1)]), 
                        stringsAsFactors = FALSE)
       # and convert m/s to knots to stay in alignment with the default format used:
       df$SKNT = round(df$SKNT * 1.9438, 1)
     }
-  
+
     df = list(df, df2)
   
-    
   } else { # end of checking file size / problems with internet connection
      cat(paste0("Service not working or wmo_id or date not correct. Check url:\n", url)) 
   }
-      
-  unlink(temp)
 
+  unlink(temp)
   return(df)
 }
 
