@@ -97,7 +97,10 @@ Summary of stations available in Ogimet repository for a selected country:
 ``` {r stations, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
 library(climate)
 PL = stations_ogimet(country = "Poland", add_map = TRUE)
-head(PL)
+
+if (is.data.frame(PL)) {
+    knitr::kable(head(PL))
+}
 ```
 
 ### Example 3
@@ -139,8 +142,7 @@ colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
 
 
 ```{r sonda2, echo=FALSE}
-library(knitr)
-kable(head(df2, 10), caption = "Exemplary data frame of sounding preprocessing")
+knitr::kable(head(df2, 10), caption = "Exemplary data frame of sounding preprocessing")
 ```
 
 ### Example 5

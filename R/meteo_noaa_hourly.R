@@ -14,8 +14,7 @@
 #' @examples 
 #' \donttest{
 #' # Poznan, Poland
-#'   noaa = tryCatch(meteo_noaa_hourly(station = "123300-99999", year = 2019),
-#'                   error = function(e) 0)  
+#'   noaa = meteo_noaa_hourly(station = "123300-99999", year = 2019)
 #' }
 #'
 

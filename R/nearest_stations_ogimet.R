@@ -3,11 +3,13 @@
 #' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the ogimet webpage. 
 #' The returned list is valid only for a given day. 
 #'
-#' @param country country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")
+#' @param country country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom").
+#' It is possible to provide more than one country combined into a vector
 #' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @importFrom XML readHTMLTable
 #' @export
@@ -17,22 +19,53 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   tryCatch(nearest_stations_ogimet(country = "United+Kingdom", 
+#'   nearest_stations_ogimet(country = "Uniced Kingdom", 
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
-#'                           no_of_stations = 60, 
-#'                           main = "Meteo stations in UK"), error = function(e) 0)
+#'                           no_of_stations = 0, 
+#'                           allow_failure = TRUE,
+#'                           main = "Meteo stations in UK")
 #' }
 #'
 
-nearest_stations_ogimet = function(country = "United+Kingdom", 
-                                    date = Sys.Date(), 
-                                    add_map = FALSE, 
-                                    point = c(2, 50), 
-                                    no_of_stations = 10,
-                                    ...) {
+nearest_stations_ogimet = function(country = "United Kingdom", 
+                                   date = Sys.Date(), 
+                                   add_map = FALSE, 
+                                   point = c(2, 50), 
+                                   no_of_stations = 10,
+                                   allow_failure = TRUE, 
+                                   ...) {
+  
+  if (allow_failure) {
+    tryCatch(nearest_stations_ogimet_bp(country = gsub(x = country, " ", "+"),
+                                      date = date,
+                                      add_map = add_map, 
+                                      point = point, 
+                                      no_of_stations = no_of_stations,
+                                      ...
+    ), error = function(e){
+      message(paste("Problems with downloading data.",
+                    "Run function with argument allow_failure = FALSE",
+                    "to see more details"))})
+  } else {
+    nearest_stations_ogimet_bp(country = gsub(x = country, " ", "+"),
+                             date = date,
+                             add_map = add_map, 
+                             point = point, 
+                             no_of_stations = no_of_stations,
+                             ...
+    )
+  }
+}
 
- # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+#' @keywords Internal
+#' @noRd
+nearest_stations_ogimet_bp = function(country = country,
+                                    date = date, 
+                                    add_map = add_map, 
+                                    point = point, 
+                                    no_of_stations = no_of_stations,
+                                    ...) {
 
   if (length(point) > 2 ) {
     stop("Too many points for the distance calculations. Please provide just one point")
@@ -47,7 +80,6 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   # initalizing empty data frame for storing results:
   result = NULL
   for (number_countries in country) {
-  #  print(number_countires)
 
   year = format(date, "%Y")
   month = format(date, "%m")
@@ -66,7 +98,6 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
       "&hora=06&ndays=1&Send=send"
     )
 
-  #a =  getURL(linkpl2)
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
   
@@ -144,7 +175,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   
   # removing rows with all NA records from the obtained dataset;
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
-  result = result[!apply(is.na(result), 1, sum) == ncol(result),]
+  result = result[!apply(is.na(result), 1, sum) == ncol(result), ]
   
   # adding units as attributes:
   attr(result[["distance"]], "label") = "km"

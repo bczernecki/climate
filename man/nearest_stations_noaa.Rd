@@ -43,7 +43,7 @@ The returned list is valid only for a given day.
   add_map = TRUE, 
   no_of_stations = 10)
   
-  a = nearest_stations_noaa(country = "UNITED KINGDOM", no_of_stations = 100)
+  uk_stations = nearest_stations_noaa(country = "UNITED KINGDOM", no_of_stations = 100)
 }
 
 }
