@@ -35,7 +35,7 @@ jobs:
         run: sudo apt install tidy pandoc
         
       - name: Install dependencies
-        run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "data.table"))'
+        run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "data.table", "maps", "dplyr"))'
         
       - uses: r-lib/actions/check-r-package@v2
         with:
