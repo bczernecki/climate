@@ -113,3 +113,15 @@ jobs:
       - name: Test coverage
         run: covr::codecov()
         shell: Rscript {0}
+        
+      - name: Test coverage report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: |
+            log
+            covr_report.html
+        run: |
+          R -e 'covr_report = covr::package_coverage(wrap = TRUE); if(length(covr_report) > 0) covr::report(x = covr_report, file = "covr_report.html")'
+        shell: bash
