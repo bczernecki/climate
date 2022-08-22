@@ -18,10 +18,11 @@ test_that("nearest_stations_noaa_errors", {
   testthat::expect_error(nearest_stations_nooa(country = "POLAND",
                                                point = 1))
   
-  x = tryCatch(nearest_stations_nooa(country = "POLAND", point = NULL), error = function(e) 0)
+  # check if this is Poland
+  x = tryCatch(nearest_stations_nooa(country = "POLAND", point = c(19, 52)), error = function(e) 0)
   
   if (is.data.frame(x)) {
-    testthat::expect_known_value(x$countries[1], "POLAND")
+    testthat::expect_equal(unique(x$countries), "POLAND")
   }
 
   testthat::expect_error(nearest_stations_nooa(country = "POLAND",
