@@ -31,8 +31,8 @@ jobs:
       - name: Install pdflatex
         run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
 
-      - name: Install tidy
-        run: sudo apt install tidy
+      - name: Install tidy and pandoc
+        run: sudo apt install tidy pandoc
         
       - name: Install dependencies
         run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "data.table"))'
