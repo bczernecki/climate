@@ -121,9 +121,7 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: my_path
-        run: |
-          covr_report <- covr::package_coverage(wrap = TRUE);
-          if(length(covr_report) > 0) covr::report(x = covr_report, file = "covr_report.html")'
+        run: covr_report <- covr::package_coverage(wrap = TRUE); if(length(covr_report) > 0) covr::report(x = covr_report, file = "covr_report.html")'
         shell: Rscript {0}
 
         
