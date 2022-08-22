@@ -17,11 +17,11 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_ogimet(country = "United+Kingdom", 
+#'   tryCatch(nearest_stations_ogimet(country = "United+Kingdom", 
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
 #'                           no_of_stations = 60, 
-#'                           main = "Meteo stations in UK")
+#'                           main = "Meteo stations in UK"), error = function(e) 0)
 #' }
 #'
 
@@ -71,7 +71,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
   test_url(link = linkpl2, output = temp)
   
   # run only if downloaded file is valid
-  if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
+  if (!is.na(file.size(temp)) & (file.size(temp) > 500)) {
   
     a = readLines(temp)
     a = paste(a, sep = "", collapse = "") 
@@ -102,7 +102,7 @@ nearest_stations_ogimet = function(country = "United+Kingdom",
     
     res = suppressWarnings(do.call("rbind", strsplit(res, " ")))
     
-    res1 = res[,c(1,3,5:7)]
+    res1 = res[, c(1, 3, 5:7)]
     
     lat = as.numeric(substr(res1[, 1], 1, 2)) +
       (as.numeric(substr(res1[,1], 4, 5))/100) * 1.6667

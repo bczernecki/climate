@@ -16,11 +16,12 @@
 #'
 #' @examples \donttest{
 #'   ## downloading data for Poznan-Lawica
-#'   # poznan = ogimet_daily(station = 12330, coords = TRUE)
+#'   poznan = tryCatch(ogimet_daily(station = 12330, coords = TRUE), error = function(e) 0)
 #' }
 #'
 
-ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()), 
+
+ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
                         coords = FALSE, 
                         station = c(12326, 12330), 
                         hour = 6) {
@@ -82,12 +83,11 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
       if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep = "")
       
-      
       temp = tempfile()
       test_url(linkpl2, temp)
       
       # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
+      if (!is.na(file.size(temp)) & (file.size(temp) > 500)) { 
         
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)
@@ -227,7 +227,6 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       ord1 = c(ord1, setdiff(names(data_station), c("station_ID", "Date", "TemperatureCAvg")))
       data_station = data_station[, ord1]
     }
-    # setdiff(names(df), c("station_ID", "Date", "TC"))
     
     # date to as.Date()
     data_station$Date = as.Date(as.character(data_station$Date), format = "%m/%d/%Y")
@@ -235,7 +234,6 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
     data_station = data_station[which(data_station$Date >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
 
   } # end of checking whether no. of rows > 0 
-  
   
   return(data_station)
 }

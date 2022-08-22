@@ -56,7 +56,6 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
       stringsAsFactors = FALSE
     )
 
-
   for (station_nr in station) {
     print(station_nr)
     # adding progress bar if at least 3 iterations are needed
@@ -94,18 +93,15 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
       test_url(linkpl2, temp)
       
       # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
-      
+      if (!is.na(file.size(temp)) & (file.size(temp) > 100)) {
         #a = getURL(linkpl2)
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)
-        
-        #a = readHTMLTable(a, stringsAsFactors=FALSE)
-  
-        b =  a[[length(a)]]
+        b = a[[length(a)]]
         
         if (is.null(b)) {
-          warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+          warning(paste0("Wrong station ID: ", station_nr, 
+                         " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
           return(data_station)
         } 
 
@@ -129,25 +125,18 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
             data_station = b
           } else {
             # adding missing columns
-            data_station = merge(b, data_station, all = TRUE)# joining data
+            data_station = merge(b, data_station, all = TRUE) # joining data
           }
-  
         }
   
-        #cat(paste(year, month, "\n"))
-  
-        # coords można lepiej na samym koncu dodać kolumne
-        # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
-        if (coords) {
-          coord = a[[1]][2,1]
+          if (coords) {
+          coord = a[[1]][2, 1]
           data_station["Lon"] = get_coord_from_string(coord, "Longitude")
           data_station["Lat"] = get_coord_from_string(coord, "Latitude")
         }
         
       } # end of checking for empty files / problems with connection
-      
     } # end of looping for dates
-    
   }# end of looping for stations
   
   if (nrow(data_station) > 0) {

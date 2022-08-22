@@ -34,20 +34,18 @@ nearest_stations_nooa = function(country,
     stop("No country provided!")
   }
   
-  if (length(point)>2) {
+  if (length(point) > 2) {
     stop("Too many points for the distance calculations. Please provide just one point")
-  } else if (length(point)<2) {
+  } else if (length(point) < 2) {
     message("The point should have two coordinates. \n We will provide nearest stations for mean location. \n To change it please change the `point` argument c(LON,LAT)" )
   }
   
-  if (length(date)!=1) {
+  if (length(date) != 1) {
     stop("You can check the available nearest stations for one day only. Please provide just one date")
   }
   
  # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-  linkpl2 <-"https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
-  
-  #a =  getURL(linkpl2)
+  linkpl2 = "https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
   
@@ -63,9 +61,13 @@ nearest_stations_nooa = function(country,
   b1$CTRY = as.character(b1$CTRY)
   b1$countries = as.character(b1$countries)
   b2 = read.csv("https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.csv")
-  stations_noaa = merge(b1,b2)
-  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
-  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
+  stations_noaa = merge(b1, b2)
+  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4), "-",
+                                               substr(stations_noaa[,11], 5, 6), "-",
+                                               substr(stations_noaa[,11], 7, 8)))
+  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4), "-",
+                                             substr(stations_noaa[,12], 5, 6), "-",
+                                             substr(stations_noaa[,12], 7, 8)))
   result = stations_noaa
   
   if (!is.null(country)) {

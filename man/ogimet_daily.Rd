@@ -27,7 +27,7 @@ The data are processed only if temperature or precipitation fields are present.
 \examples{
 \donttest{
   ## downloading data for Poznan-Lawica
-  # poznan = ogimet_daily(station = 12330, coords = TRUE)
+  poznan = tryCatch(ogimet_daily(station = 12330, coords = TRUE), error = function(e) 0)
 }
 
 }

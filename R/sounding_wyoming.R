@@ -53,8 +53,8 @@
 #'                              mm = sample(1:12,1), 
 #'                              dd = sample(1:20,1), 
 #'                              hh = 0)
-#'   head(profile)
-#'   plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
+#'   # head(profile)
+#'   # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 #' }
 #'
 

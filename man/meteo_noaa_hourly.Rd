@@ -21,9 +21,9 @@ Further details available at: https://www1.ncdc.noaa.gov/pub/data/noaa/readme.tx
 }
 \examples{
 \donttest{
-  noaa = meteo_noaa_hourly(station = "123300-99999", 
-                           year = 2019) # poznan, poland
-  head(noaa)
+# Poznan, Poland
+  noaa = tryCatch(meteo_noaa_hourly(station = "123300-99999", year = 2019),
+                  error = function(e) 0)  
 }
 
 }

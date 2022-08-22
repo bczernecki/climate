@@ -11,20 +11,18 @@
 #' @importFrom utils download.file unzip read.csv
 #' @export
 #'
-#' @examples \donttest{
-#'   noaa = meteo_noaa_hourly(station = "123300-99999", 
-#'                            year = 2019) # poznan, poland
-#'   head(noaa)
+#' @examples 
+#' \donttest{
+#' # Poznan, Poland
+#'   noaa = tryCatch(meteo_noaa_hourly(station = "123300-99999", year = 2019),
+#'                   error = function(e) 0)  
 #' }
 #'
 
 meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
   
-  stopifnot(is.character(station)) 
-  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-  
+  stopifnot(is.character(station))
   base_url = "https://www1.ncdc.noaa.gov/pub/data/noaa/"
-  
   all_data = NULL
   
   for (i in seq_along(year)) {
@@ -35,7 +33,7 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
       
       # run only if downloaded file is valid
       dat = NULL
-      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
+      if (!is.na(file.size(temp)) & (file.size(temp) > 100)) { 
       
       dat = read.fwf(gzfile(temp,'rt'),header = FALSE,
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
@@ -72,9 +70,7 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
       dat$slp = dat$slp/10
       
       } else {
-        
-       cat(paste0("  Check station name or year. The created link is not working properly:\n  ", address))
-        
+       cat(paste0("  Check station name or year. The URL is not working properly:\n  ", address))
       }  # end of if statement for empty files
 
       all_data[[length(all_data) + 1]] = dat
@@ -94,4 +90,4 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
   }
 
   return(all_data)
-} # koniec funkcji meteo_terminowe
+}
