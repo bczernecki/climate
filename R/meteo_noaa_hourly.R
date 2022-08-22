@@ -8,24 +8,43 @@
 #' @param station ID of meteorological station(s) (characters). Find your station's ID at: https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt
 #' @param year vector of years (e.g., 1966:2000)
 #' @param fm12 use only FM-12 (SYNOP) records (TRUE by default)
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom utils download.file unzip read.csv
 #' @export
 #'
 #' @examples 
 #' \donttest{
-#' # Poznan, Poland
-#'   noaa = meteo_noaa_hourly(station = "123300-99999", year = 2019)
+#' # London-Heathrow, United Kingdom
+#'   noaa = meteo_noaa_hourly(station = "037720-99999", year = 1949)
 #' }
 #'
 
-meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
+
+meteo_noaa_hourly = function(station = NULL,
+                             year = 2019,
+                             fm12 = TRUE, 
+                             allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(meteo_noaa_hourly_bp(station = station, year = year, fm12 = fm12), 
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                    "Run function with argument allow_failure = FALSE",
+                    "to see more details"))})
+  } else {
+    meteo_noaa_hourly_bp(station = station, year = year, fm12 = fm12)
+  }
+}
+
+#' @keywords Internal
+#' @noRd
+meteo_noaa_hourly_bp = function(station = station, year, fm12 = fm12) {
   
   stopifnot(is.character(station))
   base_url = "https://www1.ncdc.noaa.gov/pub/data/noaa/"
   all_data = NULL
   
   for (i in seq_along(year)) {
-
       address = paste0(base_url, year[i], "/", station, "-", year[i], ".gz")
       temp = tempfile()
       test_url(address, temp)
@@ -34,10 +53,11 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
       dat = NULL
       if (!is.na(file.size(temp)) & (file.size(temp) > 100)) { 
       
-      dat = read.fwf(gzfile(temp,'rt'),header = FALSE,
+      dat = read.fwf(gzfile(temp,'rt'), header = FALSE,
                    c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6, 
                      7, 5, 5, 5, 4, 3, 1, 1, 4, 1,
-                     5, 1, 1, 1, 6, 1, 1, 1, 5, 1, 5, 1, 5, 1)) 
+                     5, 1, 1, 1, 6, 1, 1, 1, 5, 1, 
+                     5, 1, 5, 1)) 
       unlink(temp)
 
       if (fm12) {
@@ -45,8 +65,10 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
       }
       
       dat = dat[, c(4:7, 10:11, 13, 16, 19, 25, 29, 31, 33)]
-      colnames(dat) = c("year", "month", "day", "hour", "lat", "lon", "alt",
-                        "wd", "ws",  "visibility", "t2m", "dpt2m", 
+      colnames(dat) = c("year", "month", "day", "hour", 
+                        "lat", "lon", "alt",
+                        "wd", "ws",  "visibility", 
+                        "t2m", "dpt2m", 
                         "slp")
       
       dat$date = ISOdatetime(year = dat$year, 
@@ -80,10 +102,11 @@ meteo_noaa_hourly = function(station = NULL, year, fm12 = TRUE) {
   }
 
   if (!is.null(all_data)) { # run only if there are some data downloaded:
-
     # order columns:
-    all_data = all_data[, c("date","year", "month", "day", "hour", "lon", "lat", "alt",
-                            "t2m", "dpt2m", "ws", "wd", "slp", "visibility") ]
+    all_data = all_data[, c("date","year", "month", "day", 
+                            "hour", "lon", "lat", "alt",
+                            "t2m", "dpt2m", "ws", "wd", 
+                            "slp", "visibility") ]
     # sort data
     all_data = all_data[order(all_data$date), ]
   }

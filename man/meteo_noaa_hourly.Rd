@@ -4,7 +4,12 @@
 \alias{meteo_noaa_hourly}
 \title{Hourly NOAA Integrated Surface Hourly (ISH) meteorological data}
 \usage{
-meteo_noaa_hourly(station = NULL, year, fm12 = TRUE)
+meteo_noaa_hourly(
+  station = NULL,
+  year = 2019,
+  fm12 = TRUE,
+  allow_failure = TRUE
+)
 }
 \arguments{
 \item{station}{ID of meteorological station(s) (characters). Find your station's ID at: https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt}
@@ -12,6 +17,8 @@ meteo_noaa_hourly(station = NULL, year, fm12 = TRUE)
 \item{year}{vector of years (e.g., 1966:2000)}
 
 \item{fm12}{use only FM-12 (SYNOP) records (TRUE by default)}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \description{
 Downloading hourly (meteorological) data from the SYNOP stations available in the NOAA ISD collection.
@@ -21,8 +28,8 @@ Further details available at: https://www1.ncdc.noaa.gov/pub/data/noaa/readme.tx
 }
 \examples{
 \donttest{
-# Poznan, Poland
-  noaa = meteo_noaa_hourly(station = "123300-99999", year = 2019)
+# London-Heathrow, United Kingdom
+  noaa = meteo_noaa_hourly(station = "037720-99999", year = 1949)
 }
 
 }

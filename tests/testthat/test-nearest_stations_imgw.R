@@ -14,7 +14,7 @@ test_that("nearest_stations_imgw", {
    testthat::expect_error(suppressWarnings(nearest_stations_imgw(
      type = "meteo",
      rank = "synop",
-     year = 2010,
+     year = 2010:2011,
      point = c(15, 50, 100),
      add_map = FALSE
    )
