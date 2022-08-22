@@ -193,7 +193,7 @@ h2 = h %>%
 
 ```{r filtering2, echo=FALSE}
 library(knitr)
-kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
+kable(head(h2), caption = "Exemplary data frame of hydrological preprocesssing.")
 ```
 
 ## Acknowledgment
