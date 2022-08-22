@@ -35,7 +35,7 @@ jobs:
         run: sudo apt install tidy
         
       - name: Install dependencies
-        run: R -e 'install.packages("knitr")'
+        run: R -e 'install.packages("knitr",  "XML", "httr", "data.table")'
         
       - uses: r-lib/actions/check-r-package@v2
         with:
