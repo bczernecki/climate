@@ -124,12 +124,10 @@ jobs:
         run: |
           covr_report <- covr::package_coverage(wrap = TRUE)
           covr::report(x = covr_report, file = 'covr_report.html')
-        shell: Rscript {0}
 
       - name: Upload test coverage report
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: |
-            my_path
+          path: my_path
