@@ -17,7 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(climate)
 library(ggplot2)
 library(dplyr)
-meteo_poz = meteo_imgw(interval = "monthly", rank = "synop", year = 1966:2019, station = c("POZNAŃ", "POZNAŃ-ŁAWICA")) %>% 
+meteo_poz = meteo_imgw(interval = "monthly", rank = "synop", year = 1966:2019) %>% 
+  filter(station %in% c("POZNAŃ", "POZNAŃ-ŁAWICA")) %>% 
   select(id, station, yy, mm, t2m_mean_mon) %>% 
   group_by(yy) %>%
   summarise(t2 = mean(t2m_mean_mon))

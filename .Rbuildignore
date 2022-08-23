@@ -12,3 +12,4 @@
 ^\.github$
 ^\.Rhistory$
 ^\.lintr$
+vignettes/articles/usecase.Rmd
