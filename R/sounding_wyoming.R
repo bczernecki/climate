@@ -39,9 +39,12 @@
 #' # download data for Station 45004 starting 1120Z 11 Jul 2021; Kowloon, HONG KONG, CHINA
 #' # using TEMP and BUFR sounding formats
 #' ##############################################################################
-#'   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00)
+#'   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
+#'                           hh = 12, min = 00)
 #'   #head(TEMP[[1]])
-#'   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00, bufr = TRUE)
+#'   
+#'   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
+#'                           hh = 12, min = 00, bufr = TRUE)
 #'   #head(BUFR[[1]])
 #' 
 #' 

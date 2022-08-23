@@ -72,29 +72,27 @@ Examples shows aplication of climate package with additional use of tools that h
 
 ### Example 1
 
-Finding a 50 nearest meteorological stations in a given country:
+Finding a 50 nearest meteorological stations for a given coordinates in a given country(ies):
 
-``` {r stations , eval=F, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
+``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-ns = nearest_stations_ogimet(country ="United+Kingdom",
-                             point = c(-4, 56),
+ns = nearest_stations_ogimet(country = c("United Kingdom", "France"),
+                             point = c(-3, 50),
                              no_of_stations = 50, 
                              add_map = TRUE)
-head(ns)
-#>    wmo_id       station_names       lon       lat alt  distance [km]
-#> 29  03144         Strathallan  -3.733348 56.31667  35      46.44794
-#> 32  03155           Drumalbin  -3.733348 55.61668 245      52.38975
-#> 30  03148           Glen Ogle  -4.316673 56.41667 564      58.71862
-#> 27  03134   Glasgow Bishopton  -4.533344 55.90002  59      60.88179
-#> 35  03166 Edinburgh Gogarbank  -3.350007 55.93335  57      73.30942
-#> 28  03136      Prestwick RNAS  -4.583345 55.51668  26      84.99537
 ```
+``` {r stations-2, eval=T}
+if(is.data.frame(ns)){
+ knitr::kable(head(ns, 20))
+}
+```
+
 
 ### Example 2
 
 Summary of stations available in Ogimet repository for a selected country:
 
-``` {r stations, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
+``` {r stations-3, eval=T, fig.width=7, fig.height=7, fig.fullwidth=T}
 library(climate)
 PL = stations_ogimet(country = "Poland", add_map = TRUE)
 
@@ -104,7 +102,7 @@ if (is.data.frame(PL)) {
 ```
 
 ### Example 3
-Downlading hourly meteorological data Svalbard in a random year from Ogimet
+Downlading hourly meteorological data from Svalbard (Norway) for year 2016 using NOAA service
   
 ``` {r windrose,eval=F}
 # downloading data with NOAA service:
@@ -125,7 +123,7 @@ df = meteo_noaa_hourly(station = "010080-99999", year = 2016)
 
 
 ### Example 4
-Downloading atmospheric (sounding) profile for Łeba, PL rawinsonde  station:
+Downloading atmospheric vertical profile (sounding) for Łeba, PL station:
 
 ```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
 library(climate)
@@ -172,7 +170,7 @@ colnames(monthly_summary) = month.abb
 
 ```{r imgw_meto2, echo=FALSE, error=TRUE}
 library(knitr)
-kable(head(monthly_summary), caption = "Examplary data frame of meteorological preprocessing.")
+kable(head(monthly_summary), caption = "Exemplary data frame of meteorological preprocessing.")
 ```
 
 ### Example 6
