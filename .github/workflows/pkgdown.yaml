@@ -20,7 +20,12 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v1
-
+        
+      - name: Checked for installed packages
+        run: |
+          R -e '.libPaths()'
+          R -e 'installed.packages()[, 1:3]'
+          
       - name: Build book
         run: |
           Rscript -e 'pkgdown::build_site()'
