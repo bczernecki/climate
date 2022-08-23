@@ -19,10 +19,9 @@ ogimet_hourly(
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
-\item{precip_split}{whether to split precipitation fields into 6/12/24h}
+\item{precip_split}{whether to split precipitation fields into 6/12/24h; default: TRUE}
 
-\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
-numeric fields (logical value TRUE (default) or FALSE)}
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \description{
 Downloading hourly (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository

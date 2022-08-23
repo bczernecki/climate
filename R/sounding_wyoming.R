@@ -9,6 +9,7 @@
 #' @param hh hour - single number denoting initial hour of sounding; for most stations this measurement is done twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day
 #' @param min minute - single number denoting initial minute of sounding; applies only to BUFR soundings. 
 #' @param bufr - BUFR or TEMP sounding to be decoded. By default TEMP is used. For BUFR soundings use `bufr = TRUE`
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom utils read.fwf
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 #' \enumerate{
@@ -38,10 +39,10 @@
 #' # download data for Station 45004 starting 1120Z 11 Jul 2021; Kowloon, HONG KONG, CHINA
 #' # using TEMP and BUFR sounding formats
 #' ##############################################################################
-#' TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00)
-#' head(TEMP[[1]])
-#' BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00, bufr = TRUE)
-#' head(BUFR[[1]])
+#'   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00)
+#'   #head(TEMP[[1]])
+#'   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, hh = 12, min = 00, bufr = TRUE)
+#'   #head(BUFR[[1]])
 #' 
 #' 
 #' ##############################################################################
@@ -60,7 +61,29 @@
 
 sounding_wyoming = function(wmo_id, 
                             yy, mm, dd, hh, min = 00, 
-                            bufr = FALSE) {
+                            bufr = FALSE,
+                            allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(sounding_wyoming_bp(wmo_id, 
+                               yy, mm, dd, hh, min, 
+                               bufr = bufr), 
+           error = function(e){
+             message(paste("Problems with downloading data.",
+                           "Run function with argument allow_failure = FALSE",
+                           "to see more details"))})
+} else {
+  sounding_wyoming_bp(wmo_id, 
+                      yy, mm, dd, hh, min, 
+                      bufr = bufr)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+sounding_wyoming_bp = function(wmo_id,
+                            yy, mm, dd, hh, min, 
+                            bufr = bufr) {
 
   if (length(yy) != 1 || length(mm) != 1 || length(dd) != 1 || length(hh) != 1) {
     stop("The function supports downloading data for a given day. Please change arguments yy, mm, dd, hh to single values")

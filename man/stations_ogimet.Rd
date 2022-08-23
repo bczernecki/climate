@@ -4,14 +4,21 @@
 \alias{stations_ogimet}
 \title{Scrapping a list of meteorological (Synop) stations for a defined country from the Ogimet webpage}
 \usage{
-stations_ogimet(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE)
+stations_ogimet(
+  country = "United+Kingdom",
+  date = Sys.Date(),
+  add_map = FALSE,
+  allow_failure = TRUE
+)
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")}
+\item{country}{country name; for more than two words they need to be separated with a plus character (e.g. "United+Kingdom")}
 
 \item{date}{a day when measurements were done in all available locations}
 
 \item{add_map}{logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \value{
 A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
@@ -22,7 +29,8 @@ Returns a list of meteorological stations with their coordinates from the Ogimet
 }
 \examples{
 \donttest{
-  # stations_ogimet(country = "Australia", add_map = TRUE)
+  stations_ogimet(country = "Australia", add_map = TRUE)
 }
+
 
 }

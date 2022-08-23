@@ -5,9 +5,8 @@
 #' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ); By default last 30 days are taken
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
-#' @param precip_split whether to split precipitation fields into 6/12/24h
+#' @param precip_split whether to split precipitation fields into 6/12/24h; default: TRUE
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
-#'  numeric fields (logical value TRUE (default) or FALSE)
 #' @importFrom XML readHTMLTable
 #' 
 #' @export
@@ -30,7 +29,7 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()),
   if (allow_failure) {
     tryCatch(ogimet_hourly_bp(date = date, coords = coords, 
                               station = station, 
-                              precip_split = precip_split, hour = hour), 
+                              precip_split = precip_split),
              error = function(e){
                message(paste("Problems with downloading data.",
                              "Run function with argument allow_failure = FALSE",
@@ -38,7 +37,7 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()),
   } else {
     ogimet_hourly_bp(date = date, coords = coords, 
                      station = station, 
-                     precip_split = precip_split, hour = hour)
+                     precip_split = precip_split)
   }
 }
 

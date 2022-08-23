@@ -2,9 +2,10 @@
 #'
 #' Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day
 #'
-#' @param country country name; for more than two words they need to be seperated with a plus character (e.g. "United+Kingdom")
+#' @param country country name; for more than two words they need to be separated with a plus character (e.g. "United+Kingdom")
 #' @param date a day when measurements were done in all available locations
 #' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
@@ -12,12 +13,26 @@
 #'
 #' @examples 
 #' \donttest{
-#'   # stations_ogimet(country = "Australia", add_map = TRUE)
+#'   stations_ogimet(country = "Australia", add_map = TRUE)
 #' }
 #'
-stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE) {
-  
-  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
+#'
+
+stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, allow_failure = TRUE) {
+  if (allow_failure) {
+    tryCatch(stations_ogimet_bp(country = country, date = date, add_map = add_map), 
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    stations_ogimet_bp(country = country, date = date, add_map = add_map)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+stations_ogimet_bp = function(country = country, date = date, add_map = add_map) {
   
   if (length(country) != 1) {
     stop("To many country selected. Please choose one country")
@@ -34,11 +49,8 @@ stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_ma
   ndays = 1
   linkpl2 = paste0("http://ogimet.com/cgi-bin/gsynres?lang=en&state=",country,"&osum=no&fmt=html&ord=REV&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ndays=1&Send=send")
   
-  
-   #a =  getURL(linkpl2)
    temp = tempfile()
    test_url(link = linkpl2, output = temp)
-   
    
    # run only if downloaded file is valid
    if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
