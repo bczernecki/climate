@@ -1,5 +1,6 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+name: pkgdown
 on:
   push:
     branches: [main, master, dev, devel]
@@ -9,8 +10,6 @@ on:
     types: [published]
   workflow_dispatch:
 
-name: pkgdown
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +18,12 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-        - name: Checkout Project
-          uses: actions/checkout@v1
+      - name: Checkout Project
+        uses: actions/checkout@v1
 
-        - name: Build book
-          run: |
-            Rscript -e 'pkgdown::build_site()'
-
+      - name: Build book
+        run: |
+          Rscript -e 'pkgdown::build_site()'
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
