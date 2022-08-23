@@ -12,31 +12,20 @@ on:
 name: pkgdown
 
 jobs:
-  pkgdown:
+  build:
     runs-on: ubuntu-latest
-    # Only restrict concurrency for non-PR jobs
-    concurrency:
-      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+    container: bczernecki/meteo:latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v2
+        - name: Checkout Project
+          uses: actions/checkout@v1
 
-      - uses: r-lib/actions/setup-pandoc@v2
+        - name: Build book
+          run: |
+            Rscript -e 'pkgdown::build_site()'
 
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::., knitr, rmarkdown, XML, httr, data.table, maps, dplyr, tidyr, xml2, testthat, DT, ggplot2
-          dependencies: 'character()'
-          needs: website
-
-      - name: Build site
-        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
-        shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
