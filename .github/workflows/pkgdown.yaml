@@ -31,6 +31,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::pkgdown, local::., knitr, rmarkdown, XML, httr, data.table, maps, dplyr, tidyr, xml2, testthat, DT, ggplot2
+          dependencies: 'character()'
           needs: website
 
       - name: Build site
