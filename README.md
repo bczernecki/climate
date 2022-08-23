@@ -77,7 +77,7 @@ coordinates, and ID numbers
 
 
 
-## Example 0
+## Example 1
 #### Download hourly dataset from NOAA ISH meteorological repository:
 
 ``` r0
@@ -94,7 +94,7 @@ head(noaa)
 
 
 
-## Example 1 
+## Example 2
 #### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
 
 ``` r1
@@ -121,7 +121,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 ![100 nearest stations to given coordinates in UK](http://iqdata.eu/kolokwium/uk.png)
 
 
-## Example 2 
+## Example 3
 #### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see also `nearest_stations_ogimet()`):
 ``` r
 library(climate)
@@ -145,7 +145,7 @@ head(o)
 #> 7        7.2          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
 ```
 
-## Example 3 
+## Example 4
 #### Downloading monthly/daily/hourly meteorological/hydrological data from the Polish (IMGW-PIB) repository:
 
 ``` r3
@@ -177,7 +177,7 @@ head(h)
 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA   NA
 ```
 
-## Example 4 
+## Example 5
 #### Create Walter & Lieth climatic diagram based on downloaded data
 
 
@@ -214,7 +214,7 @@ climatol::diagwl(monthly_summary, mlab = "en",
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](http://iqdata.eu/kolokwium/poznan.svg)
 
-## Example 5
+## Example 6
 #### Download monthly CO2 dataset from Mauna Loa observatory
 
 ``` r5
@@ -242,6 +242,34 @@ ggplot(co2, aes(date, co2_avg)) +
 ![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
 
 
+## Example 7
+#### Use "climate" inside python environment via rpy2
+
+```python
+# load required packages
+from rpy2.robjects.packages import importr
+from rpy2.robjects import r
+import rpy2.robjects as robjects
+import pandas as pd
+
+# load climate package (make sure that it was installed in R before)
+importr('climate')
+# test functionality e.g. with meteo_ogimet function for New York - La Guardia:
+df = robjects.r['meteo_ogimet'](interval = "daily", station = 72503)
+# optionally - transform object to pandas data frame and rename columns:
+res = pd.DataFrame(df).transpose()
+res.columns = df.colnames
+
+>>> res
+#   station_ID     Date TemperatureCAvg 
+#0     72503.0  19227.0            24.7 
+#1     72503.0  19226.0            25.1 
+#2     72503.0  19225.0            27.5 
+#3     72503.0  19224.0            26.8 
+#4     72503.0  19223.0            24.7 
+#5     72503.0  19222.0            23.3 
+#[178 rows x 23 columns]
+```
 
 ## Acknowledgment
 
