@@ -23,7 +23,7 @@ jobs:
         
       - name: Checked for installed packages
         run: |
-          sudo apt-get install -y libfontconfig1-dev libharfbuzz-dev libfribidi-dev
+          sudo apt-get install -y libfontconfig1-dev libharfbuzz-dev libfribidi-dev rsync
           R -e 'install.packages(c("pkgdown", "openair", "rnaturalearthdata"))'
           R -e 'installed.packages()[, 1:3]'
           
