@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Introduction to the climate package</h1>
                         <h4 data-toc-skip class="author">Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2022-08-23</h4>
+            <h4 data-toc-skip class="date">2022-08-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/HEAD/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -174,10 +174,10 @@
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file61012ce9a72</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file61071f31a44</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=24&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file444e716454</span></span>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=24&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4445a1ebea0</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
@@ -195,7 +195,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">127</td>
+<td align="left">128</td>
 <td align="left">03894</td>
 <td align="left">Guernsey Airport</td>
 <td align="right">-2.600012</td>
@@ -204,7 +204,7 @@
 <td align="right">77.82048</td>
 </tr>
 <tr class="even">
-<td align="left">121</td>
+<td align="left">122</td>
 <td align="left">03857</td>
 <td align="left">Isle Of Portland</td>
 <td align="right">-2.466676</td>
@@ -213,7 +213,7 @@
 <td align="right">83.31233</td>
 </tr>
 <tr class="odd">
-<td align="left">119</td>
+<td align="left">120</td>
 <td align="left">03844</td>
 <td align="left">Exeter Airport No2</td>
 <td align="right">-3.400008</td>
@@ -222,7 +222,16 @@
 <td align="right">93.72323</td>
 </tr>
 <tr class="even">
-<td align="left">120</td>
+<td align="left">119</td>
+<td align="left">03840</td>
+<td align="left">Dunkeswell Aerodrome</td>
+<td align="right">-3.233338</td>
+<td align="right">50.86668</td>
+<td align="right">252</td>
+<td align="right">100.70161</td>
+</tr>
+<tr class="odd">
+<td align="left">121</td>
 <td align="left">03853</td>
 <td align="left">Yeovilton</td>
 <td align="right">-2.633346</td>
@@ -230,8 +239,8 @@
 <td align="right">23</td>
 <td align="right">119.50052</td>
 </tr>
-<tr class="odd">
-<td align="left">143</td>
+<tr class="even">
+<td align="left">144</td>
 <td align="left">07020</td>
 <td align="left">La Hague</td>
 <td align="right">-1.933352</td>
@@ -239,8 +248,8 @@
 <td align="right">3</td>
 <td align="right">123.82404</td>
 </tr>
-<tr class="even">
-<td align="left">128</td>
+<tr class="odd">
+<td align="left">129</td>
 <td align="left">03895</td>
 <td align="left">Jersey Airport</td>
 <td align="right">-2.200004</td>
@@ -248,7 +257,7 @@
 <td align="right">84</td>
 <td align="right">125.62009</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">118</td>
 <td align="left">03827</td>
 <td align="left">Plymouth</td>
@@ -257,7 +266,7 @@
 <td align="right">50</td>
 <td align="right">131.29669</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">101</td>
 <td align="left">03710</td>
 <td align="left">Liscombe</td>
@@ -266,8 +275,8 @@
 <td align="right">348</td>
 <td align="right">138.94411</td>
 </tr>
-<tr class="odd">
-<td align="left">166</td>
+<tr class="even">
+<td align="left">167</td>
 <td align="left">07117</td>
 <td align="left">Ploumanac’h</td>
 <td align="right">-3.466676</td>
@@ -275,8 +284,8 @@
 <td align="right">50</td>
 <td align="right">140.97809</td>
 </tr>
-<tr class="even">
-<td align="left">167</td>
+<tr class="odd">
+<td align="left">168</td>
 <td align="left">07118</td>
 <td align="left">Lannion</td>
 <td align="right">-3.466676</td>
@@ -284,8 +293,8 @@
 <td align="right">87</td>
 <td align="right">149.69950</td>
 </tr>
-<tr class="odd">
-<td align="left">122</td>
+<tr class="even">
+<td align="left">123</td>
 <td align="left">03862</td>
 <td align="left">Bournemouth Airport</td>
 <td align="right">-1.833350</td>
@@ -293,7 +302,7 @@
 <td align="right">11</td>
 <td align="right">157.66359</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">102</td>
 <td align="left">03716</td>
 <td align="left">St. Athan</td>
@@ -302,8 +311,8 @@
 <td align="right">49</td>
 <td align="right">164.42872</td>
 </tr>
-<tr class="odd">
-<td align="left">168</td>
+<tr class="even">
+<td align="left">169</td>
 <td align="left">07120</td>
 <td align="left">Saint-Brieuc</td>
 <td align="right">-2.850017</td>
@@ -311,8 +320,8 @@
 <td align="right">138</td>
 <td align="right">165.41210</td>
 </tr>
-<tr class="even">
-<td align="left">144</td>
+<tr class="odd">
+<td align="left">145</td>
 <td align="left">07024</td>
 <td align="left">Cherbourg / Maupertus</td>
 <td align="right">-1.466676</td>
@@ -320,7 +329,7 @@
 <td align="right">138</td>
 <td align="right">176.45842</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">100</td>
 <td align="left">03707</td>
 <td align="left">Chivenor</td>
@@ -329,8 +338,8 @@
 <td align="right">8</td>
 <td align="right">177.26086</td>
 </tr>
-<tr class="even">
-<td align="left">137</td>
+<tr class="odd">
+<td align="left">138</td>
 <td align="left">03930</td>
 <td align="left">Almondsbury</td>
 <td align="right">-2.550011</td>
@@ -338,8 +347,8 @@
 <td align="right">52</td>
 <td align="right">181.08641</td>
 </tr>
-<tr class="odd">
-<td align="left">169</td>
+<tr class="even">
+<td align="left">170</td>
 <td align="left">07125</td>
 <td align="left">Dinard</td>
 <td align="right">-2.066668</td>
@@ -347,7 +356,7 @@
 <td align="right">65</td>
 <td align="right">190.33860</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">104</td>
 <td align="left">03743</td>
 <td align="left">Larkhill</td>
@@ -356,7 +365,7 @@
 <td align="right">132</td>
 <td align="right">190.40311</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">105</td>
 <td align="left">03746</td>
 <td align="left">Boscombe Down</td>
@@ -364,15 +373,6 @@
 <td align="right">51.16667</td>
 <td align="right">124</td>
 <td align="right">191.83929</td>
-</tr>
-<tr class="even">
-<td align="left">117</td>
-<td align="left">03823</td>
-<td align="left">Cardinham</td>
-<td align="right">-4.666680</td>
-<td align="right">50.50001</td>
-<td align="right">200</td>
-<td align="right">195.22970</td>
 </tr>
 </tbody>
 </table>
@@ -384,8 +384,8 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file6105e9895f5</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=08&amp;day=24&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4446b0019ac</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -648,15 +648,15 @@
 <span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_imgw.html">meteo_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, rank <span class="op">=</span> <span class="st">"synop"</span>, year <span class="op">=</span> <span class="fl">1991</span><span class="op">:</span><span class="fl">2000</span>, station <span class="op">=</span> <span class="st">"ŁEBA"</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file6101a87abd8</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file44440980b13</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file6102c20aee</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4444c51a0ea</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file61047ed576d</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file444ce2ebf8</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1991_1995/1991_1995_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file610406e71f7</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4441f7558b5</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1996_2000/1996_2000_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file610398189d7</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file444245a793b</span></span>
 <span><span class="co"># please note that sometimes 2 names are used for the same station in different years</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">station</span><span class="op">:</span><span class="va">t2m_mean_mon</span>, <span class="va">rr_monthly</span><span class="op">)</span></span>
@@ -762,13 +762,13 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2002</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file6102cc3207d</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4442f31ffca</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file61025549e91</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file44425ac645f</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2001/mies_2001.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file610436bd53a</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4443de88a32</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2002/mies_2002.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmpu7clTV/file6105c3c6fda</span></span>
+<span><span class="co">#&gt; /tmp/RtmptLiOMB/file4442e95678b</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
 <span><span class="co">#&gt;              id       X        Y station riv_or_lake  hyy idhyy idex   H   Q  T</span></span>
 <span><span class="co">#&gt; 18723 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    1 214 172 NA</span></span>
