@@ -11,8 +11,8 @@ clean_metadata_hydro = function(address, interval) {
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
 
-  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
-  a = gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
+  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # remove polish characters
+  a = gsub(a, pattern = "\\?", replacement = "") # removing extra characters after conversion
 
   # additional workarounds for mac os but not only...
   a = gsub(x = a, pattern = "'", replacement = "")

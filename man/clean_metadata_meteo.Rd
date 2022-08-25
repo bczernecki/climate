@@ -16,12 +16,4 @@ clean_metadata_meteo(address, rank = "synop", interval = "hourly")
 \description{
 Internal function for meteorological metadata cleaning
 }
-\examples{
-\donttest{
-  my_add = paste0("https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/",
-                  "dane_meteorologiczne/dobowe/synop/s_d_format.txt")
-  climate:::clean_metadata_meteo(address = my_add, rank = "synop", interval = "hourly")
-}
-
-}
 \keyword{internal}

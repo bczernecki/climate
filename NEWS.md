@@ -1,3 +1,11 @@
+# climate 1.0.9
+
+* A new approach for handling CRAN policy for resolving problems if network issues are detected or some of the external services are temporarily down. 
+* Adding `allow_failure` argument used by default that turns off automatic debugging but avoid warnings and errors for most typical use cases
+* re-factoring of unit tests
+* documentation build with CI/CD
+
+
 # climate 1.0.5
 
 * `meteo_imgw` family of functions supports multiple names as argument - bug fix

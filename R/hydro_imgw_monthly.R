@@ -10,6 +10,7 @@
 #' "short" - default, values with shorten names,
 #' "full" - full English description,
 #' "polish" - original names in the dataset
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
@@ -18,13 +19,43 @@
 #'
 #' @examples \donttest{
 #'   monthly = hydro_imgw_monthly(year = 2000)
-#'   head(monthly)
 #' }
 #'
-hydro_imgw_monthly = function(year, coords = FALSE, station = NULL, col_names= "short", ...) {
+hydro_imgw_monthly = function(year, 
+                              coords = FALSE, 
+                              station = NULL,
+                              col_names= "short", 
+                              allow_failure = TRUE,
+                              ...) {
+  
+  if (allow_failure) {
+    tryCatch(hydro_imgw_monthly_bp(year,
+                                 coords,
+                                 station,
+                                 col_names, 
+                                 ...),
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    hydro_imgw_monthly_bp(year,
+                        coords,
+                        station,
+                        col_names, 
+                        ...)
+  }
+}
 
+#' @keywords internal
+#' @noRd
+hydro_imgw_monthly_bp = function(year,
+                                 coords = FALSE,
+                                 station = NULL,
+                                 col_names= "short",
+                                 allow_failure = TRUE,
+                                 ...) {
   translit = check_locale()
-
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "monthly"
   interval_pl = "miesieczne"
