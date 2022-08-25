@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
       </span>
     </div>
 
@@ -74,6 +74,7 @@
 <span>  coords <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
+<span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -100,6 +101,10 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
 "polish" - original names in the dataset</p></dd>
 
 
+<dt>allow_failure</dt>
+<dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other parameters that may be passed to the 'shortening' function that shortens column names</p></dd>
 
@@ -110,52 +115,37 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="va">daily</span> <span class="op">=</span> <span class="fu">hydro_imgw_daily</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1867677d112</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1853cfbbb3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/codz_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18674798b30</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1854aa735db</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/zjaw_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1866fa2b410</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1854fd7908a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_01.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18632ae0e50</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1856b35eae0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_02.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file186665a2ed6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18562472d50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_03.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1866b294f24</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file185d5fbff6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_04.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18668f8ceca</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18564dff513</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_05.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1861d9e03e8</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1853978162</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_06.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file186400409db</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18538b42ec6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_07.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1863666d9e5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1852b775cb1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_08.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file186186aa10b</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1853c85ff6b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_09.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18676cfaff5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18560ccb7f5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_10.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file186679a5ed3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1856a7a3772</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_11.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1862910dc39</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file185b2fea59</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_12.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file186b60cca0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18536dd972b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/zjaw_2000.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18648ee4a43</span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              id station  hyy riv_or_lake idhyy dd   H   Q  T mm thick id_ice</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96136 150210180 ANNOPOL 2000   Wisła (2)     1  1 252 275 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96137 150210180 ANNOPOL 2000   Wisła (2)     1  2 247 259 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96138 150210180 ANNOPOL 2000   Wisła (2)     1  3 245 253 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96139 150210180 ANNOPOL 2000   Wisła (2)     1  4 245 253 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96140 150210180 ANNOPOL 2000   Wisła (2)     1  5 247 259 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96141 150210180 ANNOPOL 2000   Wisła (2)     1  6 239 235 NA 11    NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       p_ice id_over_grow</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96136    NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96137    NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96138    NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96139    NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96140    NA           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96141    NA           NA</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1852870e003</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

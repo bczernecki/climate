@@ -18,7 +18,7 @@ available in the danepubliczne.imgw.pl collection"><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
       </span>
     </div>
 
@@ -77,6 +77,7 @@ available in the danepubliczne.imgw.pl collection</p>
 <span>  value <span class="op">=</span> <span class="st">"H"</span>,</span>
 <span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
+<span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -107,6 +108,10 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
 "polish" - original names in the dataset</p></dd>
 
 
+<dt>allow_failure</dt>
+<dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other parameters that may be passed to the 'shortening' function that shortens column names</p></dd>
 
@@ -115,21 +120,13 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">yearly</span> <span class="op">=</span> <span class="fu">hydro_imgw_annual</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2000</span>, value <span class="op">=</span> <span class="st">"H"</span>, station <span class="op">=</span> <span class="st">"ANNOPOL"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hydro_yearly</span> <span class="op">=</span> <span class="fu">hydro_imgw_annual</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2000</span>, value <span class="op">=</span> <span class="st">"H"</span>, station <span class="op">=</span> <span class="st">"ANNOPOL"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/polroczne_i_roczne/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1864d3403a6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file1851229b42b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/polroczne_i_roczne/polr_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file1867752f9a0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file185600b8217</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/polroczne_i_roczne/2000/polr_H_2000.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpt3lIu2/file18612e5638c</span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">yearly</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             id station riv_or_lake  hyy idyy Mesu idex   H beyy bemm bedd behm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2588 150210180 ANNOPOL   Wisła (2) 2000   13    H    1 225 1999   11   24   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2589 150210180 ANNOPOL   Wisła (2) 2000   13    H    2 337   NA   NA   NA   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2590 150210180 ANNOPOL   Wisła (2) 2000   13    H    3 682 2000    4    9    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2591 150210180 ANNOPOL   Wisła (2) 2000   14    H    1 215 2000   10   21   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2592 150210180 ANNOPOL   Wisła (2) 2000   14    H    1 215 2000   10   26   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2593 150210180 ANNOPOL   Wisła (2) 2000   14    H    2 273   NA   NA   NA   NA</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpZvItzl/file18515eb82ce</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
