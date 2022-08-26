@@ -28,7 +28,7 @@ hydro_metadata_imgw = function(interval, allow_failure = TRUE) {
 
 #' @keywords internal
 #' @noRd
-hydro_metadata_imgw_bp = function(interval, allow_failure = TRUE) {
+hydro_metadata_imgw_bp = function(interval) {
 
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
 
