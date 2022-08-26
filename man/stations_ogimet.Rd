@@ -22,7 +22,7 @@ stations_ogimet(
 }
 \value{
 A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
-If \code{add_map = TRUE} additional map of downloaded data is added.
+If \code{add_map = TRUE} additional map of downloaded data is visualized.
 }
 \description{
 Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day

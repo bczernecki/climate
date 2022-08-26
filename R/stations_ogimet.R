@@ -9,7 +9,7 @@
 #' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with columns describing the synoptic stations in selected countries where each row represent a statation.
-#' If `add_map = TRUE` additional map of downloaded data is added.  
+#' If `add_map = TRUE` additional map of downloaded data is visualized.
 #'
 #' @examples 
 #' \donttest{
@@ -18,7 +18,10 @@
 #'
 #'
 
-stations_ogimet = function(country = "United+Kingdom", date = Sys.Date(), add_map = FALSE, allow_failure = TRUE) {
+stations_ogimet = function(country = "United+Kingdom",
+                           date = Sys.Date(),
+                           add_map = FALSE,
+                           allow_failure = TRUE) {
   if (allow_failure) {
     tryCatch(stations_ogimet_bp(country = country, date = date, add_map = add_map), 
              error = function(e){
