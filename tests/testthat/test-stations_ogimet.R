@@ -1,5 +1,5 @@
 test_that("stations_ogimet", {
-  x = stations_ogimet(country = "Australia", add_map = TRUE)
+  x = suppressWarnings(stations_ogimet(country = "Australia", add_map = TRUE))
   if (is.data.frame(x)) { 
     testthat::expect_true(nrow(x) >= 100)
     testthat::expect_equal(ncol(x), 5)
