@@ -78,6 +78,7 @@ available in the danepubliczne.imgw.pl collection</p>
 <span>  coords <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
+<span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -112,6 +113,10 @@ values with shorten names, "full" - full English description,
 "polish" - original names in the dataset</p></dd>
 
 
+<dt>allow_failure</dt>
+<dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
+
+
 <dt>...</dt>
 <dd><p>other parameters that may be passed to the 'shortening'
 function that shortens column names</p></dd>
@@ -123,21 +128,21 @@ function that shortens column names</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="va">hourly</span> <span class="op">=</span> <span class="fu">meteo_imgw_hourly</span><span class="op">(</span>rank <span class="op">=</span> <span class="st">"climate"</span>, year <span class="op">=</span> <span class="fl">1984</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/k_t_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file1827b845f17</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file1823ef2d93f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file18218337854</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file1827665e9c2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file18218337854</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file1827665e9c2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1981_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file182105d3072</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file18242c3d705</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1982_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file1823b13c81e</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file182337fd071</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1983_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file18275310b66</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file18255c8a12f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1984_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file182120bf4cd</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file1822fab53af</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1985_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpNSq9IG/file182775b5190</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpxqLddC/file1823e1ace19</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hourly</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               rank        id  station   yy mm day hour t2m t_wet ice_indicator</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 616231 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   1    0 3.0   0.0             W</span>
