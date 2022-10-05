@@ -175,9 +175,9 @@
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=05&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file44020fbc5db</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e35f2ef4a</span></span>
 <span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=05&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file4402d399ee5</span></span></code></pre></div>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e5b859ef</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
@@ -385,7 +385,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=05&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file44016284e31</span></span></code></pre></div>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e3dab0231</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -648,15 +648,15 @@
 <span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_imgw.html">meteo_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, rank <span class="op">=</span> <span class="st">"synop"</span>, year <span class="op">=</span> <span class="fl">1991</span><span class="op">:</span><span class="fl">2000</span>, station <span class="op">=</span> <span class="st">"ŁEBA"</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file44077b2deb3</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e78c7c1e7</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file440801c05e</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e4d5714dc</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file4402138d260</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e1a2facaf</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1991_1995/1991_1995_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file44052b3b545</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e447a023f</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1996_2000/1996_2000_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file4403c83b903</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e6cc7b670</span></span>
 <span><span class="co"># please note that sometimes 2 names are used for the same station in different years</span></span>
 <span></span>
 <span><span class="va">df2</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">station</span><span class="op">:</span><span class="va">t2m_mean_mon</span>, <span class="va">rr_monthly</span><span class="op">)</span></span>
@@ -762,13 +762,13 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2002</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file440550b1d61</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e5a1e4c3d</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file440784801c5</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e36b04471</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2001/mies_2001.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file4406597ed33</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e33f3a27b</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2002/mies_2002.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpqAjKp0/file440776b7918</span></span>
+<span><span class="co">#&gt; /tmp/Rtmp6av3bl/file43e12a84808</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
 <span><span class="co">#&gt;              id       X        Y station riv_or_lake  hyy idhyy idex   H   Q  T</span></span>
 <span><span class="co">#&gt; 18723 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    1 214 172 NA</span></span>
