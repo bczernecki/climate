@@ -113,8 +113,9 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
   
    } else {
      res = NULL
-     cat(paste("Wrong name of a country. Please check countries names at 
-         https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+     cat(paste("Wrong name of a country or problems with internet connection.",
+               "Please check countries names at:\n",
+         "https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
    } # end of checking problems with internet connection:
    
   

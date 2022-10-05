@@ -36,6 +36,43 @@ meteo_imgw_daily = function(rank = "synop",
                             col_names = "short", 
                             allow_failure = TRUE,
                             ...) {
+  
+  if (allow_failure) {
+    tryCatch(meteo_imgw_daily_bp(rank,
+                                 year,
+                                 status,
+                                 coords,
+                                 station,
+                                 col_names),
+             warning = function(w) {
+               message(paste("Potential problem(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))
+             },
+             error = function(e){
+               message(paste("Potential error(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    meteo_imgw_daily_bp(rank,
+                        year,
+                        status,
+                        coords,
+                        station,
+                        col_names,
+                        ...)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+meteo_imgw_daily_bp = function(rank,
+                               year,
+                               status,
+                               coords,
+                               station,
+                               col_names,
+                               ...) {
 
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"

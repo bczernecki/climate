@@ -41,7 +41,7 @@ A data.frame with columns describing the meteorological parameters
 (e.g. temperature, wind speed, precipitation) where each row represent a measurement,
 depending on the interval, at a given hour, month or year.
 If \code{coords = TRUE} additional two
-columns with geografic coordinates are added.
+columns with geographic coordinates are added.
 }
 \description{
 Downloading hourly, daily, and monthly meteorological data from the

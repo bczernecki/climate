@@ -15,8 +15,8 @@
 #' }
 
 meteo_metadata_imgw = function(interval, rank) { # interval moze byc: monthly, hourly, hourly
+  
   b = NULL
-
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
 
   # METADANE daily:

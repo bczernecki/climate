@@ -9,7 +9,7 @@
 #' @examples
 #' \donttest{
 #'  df = tryCatch(ogimet_hourly(station = 12330), error = function(e) 0)
-#'  if (is.data.frame(df)){
+#'  if (is.data.frame(df)) {
 #'    climate:::precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
 #'  }
 #' }
