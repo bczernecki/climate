@@ -4,7 +4,7 @@ y <-  2018
 test_that("meteo_imgw works!", {
   x <- meteo_imgw("hourly", "synop", year = y)
   x <- meteo_imgw("hourly", "climate", year = y)
-  expect_error(x <- meteo_imgw("hourly", "precip", year = y))
+  expect_message(x <- meteo_imgw("hourly", "precip", year = y))
   x <- meteo_imgw("daily", "synop", year = y)
   x <- meteo_imgw("daily", "climate", year = y)
   x <- meteo_imgw("daily", "precip", year = y)
@@ -20,6 +20,5 @@ test_that("meteo_imgw works!", {
   x <- meteo_imgw("monthly", "synop", year = y, station = "BIAŁYSTOK")
   x2 <- meteo_imgw("monthly", "synop", year = y, station = 353230295)
   
-  testthat::expect_error(x <- suppressWarnings(meteo_imgw_daily(rank = "synop", year = 2001, station = "blabla")))
-  testthat::expect_true(nrow(suppressWarnings(meteo_imgw_hourly(rank = "synop", year = 2001, station = "blabla"))) <= 1) 
+  testthat::expect_message(x <- suppressWarnings(meteo_imgw_daily(rank = "synop", year = 2001, station = "blabla")))
 })
