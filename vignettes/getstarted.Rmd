@@ -176,7 +176,7 @@ kable(head(monthly_summary), caption = "Exemplary data frame of meteorological p
 ### Example 6
 Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
-```{r data}
+```{r data, eval=FALSE, include=TRUE}
 library(climate)
 library(dplyr)
 library(tidyr)
@@ -185,7 +185,7 @@ head(h)
 ```
 
 
-```{r filtering, eval=TRUE, include=TRUE}
+```{r filtering, eval=FALSE, include=TRUE}
 h2 = h %>%
   filter(idex == 3) %>%
   select(id, station, X, Y, hyy, Q) %>%
@@ -194,7 +194,7 @@ h2 = h %>%
   pivot_wider(names_from = hyy, values_from = annual_mean_Q)
 ```
 
-```{r filtering2, echo=FALSE}
+```{r filtering2, echo=FALSE, eval=FALSE}
 library(knitr)
 kable(head(h2), caption = "Exemplary data frame of hydrological preprocesssing.")
 ```
