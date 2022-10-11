@@ -17,10 +17,10 @@ test_that("nearest_stations_noaa_errors", {
                                                point = c(10, 20, 30),
                                                allow_failure = FALSE))
   
-  testthat::expect_error(nearest_stations_noaa(country = "POLAND",
-                                               point = 1,
-                                               allow_failure = FALSE))
-  
+  # testthat::expect_message(nearest_stations_noaa(country = "POLAND",
+  #                                              point = 1,
+  #                                              allow_failure = FALSE))
+  # 
   # check if this is query is retrieving data for Poland:
   x = nearest_stations_noaa(country = "POLAND", point = c(19, 52))
   
@@ -33,9 +33,9 @@ test_that("nearest_stations_noaa_errors", {
                                                date = c(Sys.Date() - 7, Sys.Date() - 1), 
                                                allow_failure = FALSE))
   
-  testthat::expect_error(nearest_stations_noaa(country = "SOVIET UNION",
+  testthat::expect_message(nearest_stations_noaa(country = "SOVIET UNION",
                                                point = c(30, 50), 
                                                date = c(Sys.Date()),
-                                               allow_failure = FALSE))
+                                               allow_failure = TRUE))
 
 })

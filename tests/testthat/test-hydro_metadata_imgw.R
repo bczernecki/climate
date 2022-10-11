@@ -1,8 +1,8 @@
 context("hydro-metadata")
 
-h_d <- hydro_metadata_imgw("daily")
-h_m <- hydro_metadata_imgw("monthly")
-h_a <- hydro_metadata_imgw("semiannual_and_annual")
+h_d <- suppressWarnings(hydro_metadata_imgw("daily"))
+h_m <- suppressWarnings(hydro_metadata_imgw("monthly"))
+h_a <- suppressWarnings(hydro_metadata_imgw("semiannual_and_annual"))
 
 test_that("hydro-metadata works!", {
   if (is.list(h_d) && is.list(h_m) && is.list(h_a)) {
