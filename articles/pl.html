@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -147,29 +147,29 @@
 </h2>
 <p>Pokażemy, jak korzystać z naszego pakietu i przygotować dane do analizy przestrzennej z dodatkową pomocą paczek <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="external-link">dplyr</a> oraz <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html" class="external-link">tidyr</a>. Najpierw pobierzemy 10 lat (<strong>2001-2010</strong>) miesięcznych obserwacji hydrologicznych dla wszystkich dostępnych stacji i automatycznie dodają ich współrzędne przestrzenne.</p>
 <pre><code><span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c2631496e7</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c37f024767</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c24608857a</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c36b781284</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2001/mies_2001.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c27ed828a4</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c3c7a1736</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2002/mies_2002.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c26d47f17b</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c37235448</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2003/mies_2003.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c270484915</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c37baf8d5d</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2004/mies_2004.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c241d94a04</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c37e9de678</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2005/mies_2005.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c26ae85662</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c3114945c4</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2006/mies_2006.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c242bddfe8</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c375ed75f5</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2007/mies_2007.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c243a35400</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c34b52341a</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2008/mies_2008.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c242d5f1e5</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c357ad01fe</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2009/mies_2009.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c24c28eb67</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c3486aa904</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2010/mies_2010.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpVxoVWo/file3c224da4a1d</span></span>
+<span><span class="co">#&gt; /tmp/RtmpDQzGUv/file3c363fe3387</span></span>
 <span><span class="co">#&gt;              id       X        Y station riv_or_lake  hyy idhyy idex   H   Q  T</span></span>
 <span><span class="co">#&gt; 95158 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    1 214 172 NA</span></span>
 <span><span class="co">#&gt; 95159 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    2 228 207 NA</span></span>
