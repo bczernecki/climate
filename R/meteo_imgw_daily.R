@@ -15,6 +15,7 @@
 #' "short" - default, values with shorten names,
 #' "full" - full English description,
 #' "polish" - original names in the dataset
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that
 #' shortens column names
 #' @importFrom XML readHTMLTable
@@ -24,7 +25,6 @@
 #'
 #' @examples \donttest{
 #'   daily = meteo_imgw_daily(rank = "climate", year = 2000)
-#'   head(daily)
 #' }
 #'
 
@@ -33,11 +33,50 @@ meteo_imgw_daily = function(rank = "synop",
                             status = FALSE,
                             coords = FALSE,
                             station = NULL,
-                            col_names = "short", ...) {
+                            col_names = "short", 
+                            allow_failure = TRUE,
+                            ...) {
+  
+  if (allow_failure) {
+    tryCatch(meteo_imgw_daily_bp(rank,
+                                 year,
+                                 status,
+                                 coords,
+                                 station,
+                                 col_names),
+             warning = function(w) {
+               message(paste("Potential problem(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))
+             },
+             error = function(e){
+               message(paste("Potential error(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    meteo_imgw_daily_bp(rank,
+                        year,
+                        status,
+                        coords,
+                        station,
+                        col_names,
+                        ...)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+meteo_imgw_daily_bp = function(rank,
+                               year,
+                               status,
+                               coords,
+                               station,
+                               col_names,
+                               ...) {
 
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
-  interval = "daily" # to mozemy ustawic na sztywno
+  interval = "daily"
   interval_pl = "dobowe"
   meta = meteo_metadata_imgw(interval = "daily", rank = rank)
   rank_pl = switch(rank, synop = "synop", climate = "klimat", precip = "opad")
@@ -115,11 +154,8 @@ meteo_imgw_daily = function(rank = "synop",
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
-        # koniec proby z obejsciem
-
-      } # koniec petli po zipach do pobrania
-
-    } # koniec if'a dla synopa
+      } # end of looping for zip archives
+    } # end of if statement for SYNOP stations
 
     ######################
     ###### KLIMAT: #######

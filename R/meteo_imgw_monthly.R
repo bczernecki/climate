@@ -13,6 +13,7 @@
 #' @param col_names three types of column names possible: "short" - default,
 #' values with shorten names, "full" - full English description,
 #' "polish" - original names in the dataset
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the
 #' 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
@@ -40,7 +41,49 @@ meteo_imgw_monthly = function(rank = "synop",
                               status = FALSE,
                               coords = FALSE,
                               station = NULL,
-                              col_names = "short", ...) {
+                              col_names = "short", 
+                              allow_failure = TRUE,
+                              ...) {
+
+  if (allow_failure) {
+    tryCatch(meteo_imgw_monthly_bp(rank,
+                                   year,
+                                   status,
+                                   coords,
+                                   station,
+                                   col_names,
+                                   ...),
+             warning = function(w) {
+               message(paste("Potential problem(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))
+             },
+             error = function(e){
+               message(paste("Potential error(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))})
+    
+  } else {
+    meteo_imgw_monthly_bp(rank,
+                          year,
+                          status,
+                          coords,
+                          station,
+                          col_names,
+                          ...)
+  }
+}
+
+#' @noRd
+#' @keywords internal
+meteo_imgw_monthly_bp = function(rank,
+                                 year,
+                                 status,
+                                 coords,
+                                 station,
+                                 col_names,
+                                 ...) {
+
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   interval_pl = "miesieczne"

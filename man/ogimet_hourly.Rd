@@ -7,8 +7,9 @@
 ogimet_hourly(
   date = c(Sys.Date() - 30, Sys.Date()),
   coords = FALSE,
-  station = c(12326, 12330),
-  precip_split = TRUE
+  station = 12330,
+  precip_split = TRUE,
+  allow_failure = TRUE
 )
 }
 \arguments{
@@ -18,17 +19,17 @@ ogimet_hourly(
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
-\item{precip_split}{whether to split precipitation fields into 6/12/24h
-numeric fields (logical value TRUE (default) or FALSE)}
+\item{precip_split}{whether to split precipitation fields into 6/12/24h; default: TRUE}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \description{
 Downloading hourly (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
 }
 \examples{
 \donttest{
-  # downloading data for Poznan-Lawica
-  # poznan = ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
-  # head(poznan)
+  # downloading data for Poznan-Lawica, Poland
+  poznan = ogimet_hourly(station = 12330, coords = TRUE)
 }
 
 }

@@ -12,6 +12,7 @@
 #' "short" - default, values with shorten names,
 #' "full" - full English description,
 #' "polish" - original names in the dataset
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
@@ -19,17 +20,47 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
-#'   head(yearly)
+#' hydro_yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")
 #' }
 hydro_imgw_annual = function(year,
                              coords = FALSE,
                              value = "H",
                              station = NULL,
-                             col_names = "short", ...) {
- # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-  translit = check_locale()
+                             col_names = "short", 
+                             allow_failure = TRUE,
+                             ...) {
+  
+  if (allow_failure) {
+    tryCatch(hydro_imgw_annual_bp(year,
+                                  coords,
+                                  value,
+                                  station,
+                                  col_names, 
+                                  ...),
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    hydro_imgw_annual_bp(year,
+                         coords,
+                         value,
+                         station,
+                         col_names, 
+                         ...)
+  }
+}
 
+#' @keywords internal
+#' @noRd
+hydro_imgw_annual_bp = function(year = year,
+                                coords = coords,
+                                value = value,
+                                station = station,
+                                col_names = col_names,
+                                ...) {
+  
+  translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/"
   interval = "semiannual_and_annual"
   interval_pl = "polroczne_i_roczne"

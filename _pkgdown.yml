@@ -1,0 +1,5 @@
+title: climate
+url: https://bczernecki.github.io/climate/
+template:
+  params:
+    bootswatch: flatly

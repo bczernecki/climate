@@ -11,6 +11,7 @@ nearest_stations_imgw(
   add_map = TRUE,
   point = NULL,
   no_of_stations = 50,
+  allow_failure = TRUE,
   ...
 )
 }
@@ -26,6 +27,8 @@ nearest_stations_imgw(
 \item{point}{a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(15, 53)); If not provided calculated as a mean longitude and latitude for the entire dataset}
 
 \item{no_of_stations}{how many nearest stations will be returned from the given geographical coordinates. 50 used by default}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
 \item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
 }

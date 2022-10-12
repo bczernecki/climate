@@ -3,9 +3,9 @@
 \docType{data}
 \name{profile_demo}
 \alias{profile_demo}
-\title{Examplary sounding profile from University of Wyoming collection}
+\title{Exemplary sounding profile from University of Wyoming dataset}
 \format{
-The data contains list of two data.frames as derived from sounding_wyoming()
+The data contains list of two data.frames as derived using sounding_wyoming() function
 }
 \usage{
 profile_demo

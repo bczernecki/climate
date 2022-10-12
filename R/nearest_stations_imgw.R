@@ -9,6 +9,7 @@
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(15, 53)); If not provided calculated as a mean longitude and latitude for the entire dataset
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates. 50 used by default
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
 #' @export
 #' @return A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance in kilometers from a given coordinates). 
@@ -30,7 +31,45 @@ nearest_stations_imgw = function(type = "meteo",
                                  add_map = TRUE,
                                  point = NULL,
                                  no_of_stations = 50,
+                                 allow_failure = TRUE,
                                  ...) {
+  if (allow_failure) {
+    tryCatch(nearest_stations_imgw_bp(type,
+                                      rank,
+                                      year,
+                                      add_map,
+                                      point,
+                                      no_of_stations,
+                                      ...),
+             warning = function(w) {
+               message(paste("Potential problem(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))
+             },
+             error = function(e){
+               message(paste("Potential error(s) found. Problems with downloading data.\n",
+                             "\rRun function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    nearest_stations_imgw_bp(type,
+                             rank,
+                             year,
+                             add_map,
+                             point,
+                             no_of_stations,
+                             ...)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+nearest_stations_imgw_bp = function(type,
+                                    rank,
+                                    year,
+                                    add_map,
+                                    point,
+                                    no_of_stations,
+                                    ...){
   if (length(point) > 2) {
     stop(paste("Too many points for the distance calculations.",
                "Please provide just one pair of coordinates (e.g. point = c(17,53))"))

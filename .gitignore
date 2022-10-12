@@ -10,3 +10,5 @@ climate.Rproj
 .DS_Store
 covr_report.html
 lib
+docs
+pkgdown

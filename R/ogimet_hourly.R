@@ -5,8 +5,8 @@
 #' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ); By default last 30 days are taken
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
-#' @param precip_split whether to split precipitation fields into 6/12/24h
-#'  numeric fields (logical value TRUE (default) or FALSE)
+#' @param precip_split whether to split precipitation fields into 6/12/24h; default: TRUE
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' 
 #' @export
@@ -15,16 +15,39 @@
 #'
 #' @examples 
 #' \donttest{
-#'   # downloading data for Poznan-Lawica
-#'   # poznan = ogimet_hourly(station = 12330, coords = TRUE, precip_split = TRUE)
-#'   # head(poznan)
+#'   # downloading data for Poznan-Lawica, Poland
+#'   poznan = ogimet_hourly(station = 12330, coords = TRUE)
 #' }
 #'
 
-ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, station = c(12326, 12330),  precip_split = TRUE) {
+ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), 
+                         coords = FALSE,
+                         station = 12330,
+                         precip_split = TRUE, 
+                         allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(ogimet_hourly_bp(date = date, coords = coords, 
+                              station = station, 
+                              precip_split = precip_split),
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    ogimet_hourly_bp(date = date, coords = coords, 
+                     station = station, 
+                     precip_split = precip_split)
+  }
+}
 
-  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-
+#' @keywords Internal
+#' @noRd
+ogimet_hourly_bp = function(date = date,
+                            coords = coords,
+                            station = station,
+                            precip_split = precip_split) {
+  
   dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") - 1
   dates = unique(c(dates, as.Date(max(date))))
 
@@ -55,7 +78,6 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
       "W2" = character(),
       stringsAsFactors = FALSE
     )
-
 
   for (station_nr in station) {
     print(station_nr)
@@ -94,18 +116,15 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
       test_url(linkpl2, temp)
       
       # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
-      
+      if (!is.na(file.size(temp)) & (file.size(temp) > 100)) {
         #a = getURL(linkpl2)
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)
-        
-        #a = readHTMLTable(a, stringsAsFactors=FALSE)
-  
-        b =  a[[length(a)]]
+        b = a[[length(a)]]
         
         if (is.null(b)) {
-          warning(paste0("Wrong station ID: ", station_nr, " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+          warning(paste0("Wrong station ID: ", station_nr, 
+                         " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
           return(data_station)
         } 
 
@@ -129,25 +148,18 @@ ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), coords = FALSE, 
             data_station = b
           } else {
             # adding missing columns
-            data_station = merge(b, data_station, all = TRUE)# joining data
+            data_station = merge(b, data_station, all = TRUE) # joining data
           }
-  
         }
   
-        #cat(paste(year, month, "\n"))
-  
-        # coords można lepiej na samym koncu dodać kolumne
-        # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
-        if (coords) {
-          coord = a[[1]][2,1]
+          if (coords) {
+          coord = a[[1]][2, 1]
           data_station["Lon"] = get_coord_from_string(coord, "Longitude")
           data_station["Lat"] = get_coord_from_string(coord, "Latitude")
         }
         
       } # end of checking for empty files / problems with connection
-      
     } # end of looping for dates
-    
   }# end of looping for stations
   
   if (nrow(data_station) > 0) {

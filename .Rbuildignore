@@ -12,3 +12,7 @@
 ^\.github$
 ^\.Rhistory$
 ^\.lintr$
+vignettes/articles/usecase.Rmd
+^pkgdown$
+^.codecov.yml$
+    

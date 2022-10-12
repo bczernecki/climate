@@ -4,10 +4,12 @@
 \alias{hydro_metadata_imgw}
 \title{Hydrological metadata}
 \usage{
-hydro_metadata_imgw(interval)
+hydro_metadata_imgw(interval, allow_failure = TRUE)
 }
 \arguments{
 \item{interval}{temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \description{
 Downloading the description (metadata) to hydrological data available in the danepubliczne.imgw.pl repository.

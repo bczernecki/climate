@@ -1,6 +1,6 @@
 Package: climate
 Title: Interface to Download Meteorological (and Hydrological) Datasets
-Version: 1.0.5
+Version: 1.1.0
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",
            role = c("aut", "cre"),
@@ -27,9 +27,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Depends: 
-    R (>= 3.1)
+    R (>= 3.5.0)
 Imports: 
     XML,
     httr,

@@ -20,7 +20,7 @@
 #' (e.g. temperature, wind speed, precipitation) where each row represent a measurement,
 #'  depending on the interval, at a given hour, month or year.
 #'  If `coords = TRUE` additional two
-#'  columns with geografic coordinates are added.
+#'  columns with geographic coordinates are added.
 #' @examples
 #' \donttest{
 #'   x = meteo_imgw("monthly", year = 2018, coords = TRUE)
@@ -35,7 +35,7 @@ meteo_imgw = function(interval,
                       col_names = "short", ...) {
   if (interval == "daily") {
     # daily
-    calosc = meteo_imgw_daily(rank = rank,
+    result = meteo_imgw_daily(rank = rank,
                               year = year,
                               status = status,
                               coords = coords,
@@ -43,7 +43,7 @@ meteo_imgw = function(interval,
                               col_names = col_names, ...)
   } else if (interval == "monthly") {
     #monthly
-    calosc = meteo_imgw_monthly(rank = rank,
+    result = meteo_imgw_monthly(rank = rank,
                                 year = year,
                                 status = status,
                                 coords = coords,
@@ -51,14 +51,14 @@ meteo_imgw = function(interval,
                                 col_names = col_names, ...)
   } else if (interval == "hourly") {
     #hourly
-    calosc = meteo_imgw_hourly(rank = rank,
+    result = meteo_imgw_hourly(rank = rank,
                                year = year,
                                status = status,
                                coords = coords,
                                station = station,
                                col_names = col_names, ...)
-  } else{
+  } else {
     stop("Wrong `interval` value. It should be either 'hourly', 'daily', or 'monthly'.")
   }
-  return(calosc)
+  return(result)
 }
