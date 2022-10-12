@@ -46,7 +46,7 @@ install_github("bczernecki/climate")
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
@@ -59,7 +59,7 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` fro
 
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
 danepubliczne.imgw.pl collection.
-It is a wrapper for previously developed set of functions such as: `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the archived **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for previously developed set of functions such as: `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
 
 ### Auxiliary functions and datasets
 
