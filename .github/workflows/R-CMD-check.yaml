@@ -32,8 +32,9 @@ jobs:
         config:
           - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-18.04,   r: 'release'}
-          - {os: ubuntu-18.04,   r: '3.6'}
+          - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-20.04,   r: 'release'}
+          - {os: ubuntu-20.04,   r: '3.6'}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -74,7 +75,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
 
       - name: Install dependencies
         run: |
@@ -82,6 +83,7 @@ jobs:
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
+          remotes::install_cran("DT")
         shell: Rscript {0}
 
       - name: Session info
@@ -94,7 +96,7 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--run-donttest"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
       - name: Show testthat output
@@ -103,12 +105,31 @@ jobs:
         shell: bash
 
       - name: Upload check results
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Test coverage
-        run: covr::codecov()
+      - name: Codecov
+        run: |
+          covr::codecov()
         shell: Rscript {0}
+        
+      - name: Test coverage report
+        if: always()
+        run: |
+          covr_report <- covr::package_coverage(wrap = TRUE)
+          covr::report(x = covr_report, file = 'covr_report.html')
+          print(getwd())
+          print(dir())
+        shell: Rscript {0}
+
+      - name: Upload test coverage report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: |
+            covr_report.html
+            lib

@@ -27,7 +27,7 @@ get_coord_from_string = function(txt, pattern = "Longitude") {
   wsp = suppressWarnings(as.numeric(tmp)[1] + (as.numeric(tmp)[2] * 5 / 3) / 100)
 
   if (hemisphere %in% c("W", "S")) {
-    wsp = wsp * -1
+    wsp = wsp*-1
   }
 return(wsp)
 }

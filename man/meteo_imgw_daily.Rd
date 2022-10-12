@@ -11,6 +11,7 @@ meteo_imgw_daily(
   coords = FALSE,
   station = NULL,
   col_names = "short",
+  allow_failure = TRUE,
   ...
 )
 }
@@ -33,6 +34,8 @@ no longer valid}
 "full" - full English description,
 "polish" - original names in the dataset}
 
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
+
 \item{...}{other parameters that may be passed to the 'shortening' function that
 shortens column names}
 }
@@ -43,7 +46,6 @@ available in the danepubliczne.imgw.pl collection
 \examples{
 \donttest{
   daily = meteo_imgw_daily(rank = "climate", year = 2000)
-  head(daily)
 }
 
 }

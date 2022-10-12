@@ -5,16 +5,18 @@
 \title{List of nearby synop stations for a defined geographical location}
 \usage{
 nearest_stations_ogimet(
-  country = "United+Kingdom",
+  country = "United Kingdom",
   date = Sys.Date(),
   add_map = FALSE,
   point = c(2, 50),
   no_of_stations = 10,
+  allow_failure = TRUE,
   ...
 )
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom")}
+\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom").
+It is possible to provide more than one country combined into a vector}
 
 \item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
 
@@ -23,6 +25,8 @@ nearest_stations_ogimet(
 \item{point}{a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))}
 
 \item{no_of_stations}{how many nearest stations will be returned from the given geographical coordinates}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
 \item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
 }
@@ -37,11 +41,12 @@ The returned list is valid only for a given day.
 }
 \examples{
 \donttest{
-  nearest_stations_ogimet(country = "United+Kingdom", 
+  nearest_stations_ogimet(country = "Uniced Kingdom", 
                           point = c(-2, 50),
                           add_map = TRUE, 
-                          no_of_stations = 60, 
-                          main = "Meteo stations in UK") -> a
+                          no_of_stations = 0, 
+                          allow_failure = TRUE,
+                          main = "Meteo stations in UK")
 }
 
 }

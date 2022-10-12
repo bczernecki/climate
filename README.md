@@ -1,8 +1,9 @@
-# climate <img src="man/figures/logo.png" align="right" width="150" />
+# climate <img src="man/figures/logo.png" style="float:right" width="150" />
 
 <!-- badges: start -->
-[![Build
-Status](https://travis-ci.org/bczernecki/climate.png?branch=master)](https://travis-ci.org/bczernecki/climate) [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
+
+[![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
+[![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/bczernecki/climate/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=dev)
 
@@ -13,10 +14,10 @@ downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org
 [![](http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
-The goal of the  **climate** R package is to automatize downloading of meteorological
+The goal of the  **climate** R package is to automatize downloading of *in-situ* meteorological
 and hydrological data from publicly available repositories:
 
-- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
+- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) - up-to-date collection of SYNOP dataset
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratories - Global Monitoring Laboratory [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
 - Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
@@ -45,7 +46,7 @@ install_github("bczernecki/climate")
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
@@ -58,7 +59,7 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` fro
 
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
 danepubliczne.imgw.pl collection.
-It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for previously developed set of functions such as: `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
 
 ### Auxiliary functions and datasets
 
@@ -76,7 +77,7 @@ coordinates, and ID numbers
 
 
 
-## Example 0
+## Example 1
 #### Download hourly dataset from NOAA ISH meteorological repository:
 
 ``` r0
@@ -84,16 +85,16 @@ library(climate)
 noaa <- meteo_noaa_hourly(station = "123300-99999", year = 2018:2019) # station ID: Poznan, Poland
 head(noaa)
 
-#    year month day hour   lon    lat alt t2m dpt2m ws  wd    slp visibility
-# 1  2019     1   1    0 16.85 52.417  84 3.3   2.3  5 220 1025.0       6000
-# 4  2019     1   1    1 16.85 52.417  84 3.7   3.0  4 220 1024.2       1500
-# 7  2019     1   1    2 16.85 52.417  84 4.2   3.6  4 220 1022.5       1300
-# 10 2019     1   1    3 16.85 52.417  84 5.2   4.6  5 240 1021.2       1900
+#   year month day hour   lon    lat alt t2m dpt2m ws  wd    slp visibility
+#   2019     1   1    0 16.85 52.417  84 3.3   2.3  5 220 1025.0       6000
+#   2019     1   1    1 16.85 52.417  84 3.7   3.0  4 220 1024.2       1500
+#   2019     1   1    2 16.85 52.417  84 4.2   3.6  4 220 1022.5       1300
+#   2019     1   1    3 16.85 52.417  84 5.2   4.6  5 240 1021.2       1900
 ```
 
 
 
-## Example 1 
+## Example 2
 #### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
 
 ``` r1
@@ -107,21 +108,21 @@ nearest_stations_ogimet(country = "United+Kingdom",
   no_of_stations = 100
 )
 
-#     wmo_id                   station_names       lon      lat alt distance [km]
-# 66   03354      Nottingham Weather Centre  -1.250005 53.00000 117      28.04973
-# 69   03379                       Cranwell  -0.500010 53.03333  67      56.22175
-# 68   03377                     Waddington  -0.516677 53.16667  68      57.36093
-# 67   03373                       Scampton  -0.550011 53.30001  57      60.67897
-# 78   03462                      Wittering  -0.466676 52.61668  84      73.68934
-# 89   03544                 Church Lawford  -1.333340 52.36667 107      80.29844
+#  wmo_id                   station_names       lon      lat alt distance [km]
+#    03354      Nottingham Weather Centre  -1.250005 53.00000 117      28.04973
+#    03379                       Cranwell  -0.500010 53.03333  67      56.22175
+#    03377                     Waddington  -0.516677 53.16667  68      57.36093
+#    03373                       Scampton  -0.550011 53.30001  57      60.67897
+#    03462                      Wittering  -0.466676 52.61668  84      73.68934
+#    03544                 Church Lawford  -1.333340 52.36667 107      80.29844
 # ...
 ```
 
 ![100 nearest stations to given coordinates in UK](http://iqdata.eu/kolokwium/uk.png)
 
 
-## Example 2 
-#### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see `nearest_stations_ogimet()`):
+## Example 3
+#### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see also `nearest_stations_ogimet()`):
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
@@ -144,8 +145,8 @@ head(o)
 #> 7        7.2          NA     1010.8    0.1      6.2      4.6   <NA>  13.0      <NA>         NA
 ```
 
-## Example 3 
-#### Downloading meteorological/hydrological data from the Polish (IMGW-PIB) repository:
+## Example 4
+#### Downloading monthly/daily/hourly meteorological/hydrological data from the Polish (IMGW-PIB) repository:
 
 ``` r3
 m = meteo_imgw(interval = "monthly", rank = "synop", year = 2000, coords = TRUE)
@@ -176,7 +177,7 @@ head(h)
 3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA   NA
 ```
 
-## Example 4 
+## Example 5
 #### Create Walter & Lieth climatic diagram based on downloaded data
 
 
@@ -213,7 +214,7 @@ climatol::diagwl(monthly_summary, mlab = "en",
 
 ![Walter and Lieth climatic diagram for Poznan, Poland](http://iqdata.eu/kolokwium/poznan.svg)
 
-## Example 5
+## Example 6
 #### Download monthly CO2 dataset from Mauna Loa observatory
 
 ``` r5
@@ -241,6 +242,34 @@ ggplot(co2, aes(date, co2_avg)) +
 ![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
 
 
+## Example 7
+#### Use "climate" inside python environment via rpy2
+
+```python
+# load required packages
+from rpy2.robjects.packages import importr
+from rpy2.robjects import r
+import rpy2.robjects as robjects
+import pandas as pd
+
+# load climate package (make sure that it was installed in R before)
+importr('climate')
+# test functionality e.g. with meteo_ogimet function for New York - La Guardia:
+df = robjects.r['meteo_ogimet'](interval = "daily", station = 72503)
+# optionally - transform object to pandas data frame and rename columns:
+res = pd.DataFrame(df).transpose()
+res.columns = df.colnames
+
+>>> res
+#   station_ID     Date TemperatureCAvg 
+#0     72503.0  19227.0            24.7 
+#1     72503.0  19226.0            25.1 
+#2     72503.0  19225.0            27.5 
+#3     72503.0  19224.0            26.8 
+#4     72503.0  19223.0            24.7 
+#5     72503.0  19222.0            23.3 
+#[178 rows x 23 columns]
+```
 
 ## Acknowledgment
 

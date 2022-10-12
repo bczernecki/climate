@@ -6,14 +6,9 @@
 \alias{climate-package}
 \title{climate: Interface to Download Meteorological (and Hydrological) Datasets}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Automatize downloading of meteorological and hydrological data from publicly available repositories:
-    OGIMET (<http://ogimet.com/index.phtml.en>), 
-    University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
-    Polish Institute of Meterology and Water Management - National Research Institute (<https://danepubliczne.imgw.pl>),
-    and National Oceanic & Atmospheric Administration (NOAA).
-    This package also allows for searching geographical coordinates for each observation and calculate distances to the nearest stations.
+Automatize downloading of meteorological and hydrological data from publicly available repositories: OGIMET (\url{http://ogimet.com/index.phtml.en}), University of Wyoming - atmospheric vertical profiling data (\url{http://weather.uwyo.edu/upperair/}), Polish Institute of Meterology and Water Management - National Research Institute (\url{https://danepubliczne.imgw.pl}), and National Oceanic & Atmospheric Administration (NOAA). This package also allows for searching geographical coordinates for each observation and calculate distances to the nearest stations.
 }
 \seealso{
 Useful links:

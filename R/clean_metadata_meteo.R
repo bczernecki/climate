@@ -8,13 +8,6 @@
 #' @importFrom stats na.omit
 #' @keywords internal
 #'
-#' @examples
-#' \donttest{
-#'   my_add = paste0("https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/",
-#'                   "dane_meteorologiczne/dobowe/synop/s_d_format.txt")
-#'   climate:::clean_metadata_meteo(address = my_add, rank = "synop", interval = "hourly")
-#' }
-#'
 
 clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
 
@@ -22,8 +15,8 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
 
-  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # usuwamy polskie znaki, bo to robi spore "kuku"
-  a = gsub(a, pattern = "\\?", replacement = "") # usuwamy znaki zapytania powstale po konwersji
+  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT")
+  a = gsub(a, pattern = "\\?", replacement = "")
 
   # additional workarounds for mac os but not only...
   a = gsub(x = a, pattern = "'", replacement = "")

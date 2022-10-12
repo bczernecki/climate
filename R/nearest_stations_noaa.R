@@ -3,13 +3,13 @@
 #' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the noaa website. 
 #' The returned list is valid only for a given day. 
 #'
-#' @param country country name; use CAPITAL LETTERS (e.g., "SRI LANKA"), if not used function will found selected 
-#' number of nearest stations without country classification  
+#' @param country country name (e.g., "SRI LANKA"). Single entries allowed only.
 #' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
-#' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(80, 6))
-#' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
-#' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
+#' @param point a vector of two coordinates (longitude, latitude) for a point we want to find 
+#' nearest stations to (e.g. c(80, 6)). If not provided the query will be based on a mean longitude and latitude among available dataset.
+#' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates; default 30
+#' @param allow_failure logical - whether to allow or stop on failure. By default set to TRUE. For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
@@ -18,36 +18,65 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_nooa(country = "SRI LANKA", 
+#'   nearest_stations_noaa(country = "SRI LANKA", 
 #'   point = c(80, 6),
 #'   add_map = TRUE, 
 #'   no_of_stations = 10)
+#'   
+#'   uk_stations = nearest_stations_noaa(country = "UNITED KINGDOM", no_of_stations = 100)
 #' }
 #'
 
-nearest_stations_nooa = function(country,
-                                  date = Sys.Date(), 
+nearest_stations_noaa = function(country,
+                                 date = Sys.Date(), 
+                                 add_map = TRUE, 
+                                 point = NULL, 
+                                 no_of_stations = 10, 
+                                 allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(nearest_stations_noaa_bp(country = toupper(country),
+                                      date = date,
+                                      add_map = add_map, 
+                                      point = point, 
+                                      no_of_stations = no_of_stations
+                                      ), error = function(e){
+                                        message(paste("Problems with downloading data.",
+                                                "Run function with argument allow_failure = FALSE",
+                                                "to see the reason"))})
+  } else {
+    nearest_stations_noaa_bp(country = toupper(country),
+                             date = date,
+                             add_map = add_map, 
+                             point = point, 
+                             no_of_stations = no_of_stations
+    )
+  }
+}
+
+#' @keywords Internal
+#' @noRd
+nearest_stations_noaa_bp = function(country,
+                                  date = date, 
                                   add_map = TRUE, point = NULL, 
-                                  no_of_stations = 10, ...) {
+                                  no_of_stations = 10
+                                  ) {
   
   if (missing(country) | is.null(country)) {
     stop("No country provided!")
   }
   
-  if (length(point)>2) {
+  if (length(point) > 2) {
     stop("Too many points for the distance calculations. Please provide just one point")
-  } else if (length(point)<2) {
-    message("The point should have two coordinates. \n We will provide nearest stations for mean location. \n To change it please change the `point` argument c(LON,LAT)" )
+  } else if (length(point) < 2) {
+    message("The point argument should have two coordinates. \n We will provide nearest stations for mean location. \n To change it please change the `point` argument c(LON,LAT)" )
   }
   
-  if (length(date)!=1) {
+  if (length(date) != 1) {
     stop("You can check the available nearest stations for one day only. Please provide just one date")
   }
   
- # options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
-  linkpl2 <-"https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
-  
-  #a =  getURL(linkpl2)
+  linkpl2 = "https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
   
@@ -59,13 +88,17 @@ nearest_stations_nooa = function(country,
   b = strsplit(a, "          ")
   b1 = do.call(rbind, b)
   colnames(b1) = c("CTRY","countries")
-  b1 = as.data.frame(b1[2:dim(b1)[1],])
+  b1 = as.data.frame(b1[2:dim(b1)[1], ])
   b1$CTRY = as.character(b1$CTRY)
   b1$countries = as.character(b1$countries)
   b2 = read.csv("https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.csv")
-  stations_noaa = merge(b1,b2)
-  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4),"-",substr(stations_noaa[,11],5,6),"-",substr(stations_noaa[,11],7,8)))
-  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4),"-",substr(stations_noaa[,12],5,6),"-",substr(stations_noaa[,12],7,8)))
+  stations_noaa = merge(b1, b2)
+  stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4), "-",
+                                               substr(stations_noaa[,11], 5, 6), "-",
+                                               substr(stations_noaa[,11], 7, 8)))
+  stations_noaa["End_date"] = as.Date(paste0(substr(stations_noaa[,12], 1, 4), "-",
+                                             substr(stations_noaa[,12], 5, 6), "-",
+                                             substr(stations_noaa[,12], 7, 8)))
   result = stations_noaa
   
   if (!is.null(country)) {
@@ -94,7 +127,7 @@ nearest_stations_nooa = function(country,
   
   # removing rows with all NA records from the obtained dataset;
   # otherwise there might be problems with plotting infinite xlim, ylim, etc..
-  result = result[!apply(is.na(result), 1, sum) == ncol(result),]
+  result = result[!apply(is.na(result), 1, sum) == ncol(result), ]
   
   # adding units as attributes:
   attr(result[["distance"]], "label") = "km"
@@ -105,7 +138,7 @@ nearest_stations_nooa = function(country,
     if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
     }
-    # plot labels a little bit higher...
+    # plot labels a little bit higher
     addfactor = as.numeric(diff(stats::quantile(result$LAT, na.rm = TRUE, c(0.48, 0.51))))
     addfactor = ifelse(addfactor > 0.2, 0.2, addfactor)
     addfactor = ifelse(addfactor < 0.05, 0.05, addfactor)
@@ -126,7 +159,7 @@ nearest_stations_nooa = function(country,
         c(result$LAT, point$LAT)
       ) - 5, max(
         c(result$LAT, point$LAT)
-      ) + 5)), ...
+      ) + 5))
     )
     graphics::points(
       x = point[1],
@@ -135,6 +168,7 @@ nearest_stations_nooa = function(country,
       pch = 19,
       cex = 1
     )
+    if (nrow(result) < 70) {
     graphics::text(
       result$LON,
       result$LAT + addfactor,
@@ -142,6 +176,7 @@ nearest_stations_nooa = function(country,
       col = "grey70",
       cex = 0.6
     )
+    }
     maps::map(add = TRUE)
   }
 

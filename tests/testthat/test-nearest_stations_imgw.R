@@ -1,23 +1,25 @@
 test_that("nearest_stations_imgw", {
-  x = suppressWarnings(nearest_stations_imgw(
+  x = nearest_stations_imgw(
     type = "meteo",
     rank = "synop",
     year = 2018,
     add_map = TRUE,
     point = NULL,
     no_of_stations = 50
-  )) 
+  )
   # added suppresswarnings as encoding may give extra warnings:
+  if (is.data.frame(x)) {
   testthat::expect_true(nrow(x) <= 50)
+  }
 
   # too many values provided for points  
-   testthat::expect_error(suppressWarnings(nearest_stations_imgw(
+   testthat::expect_error(nearest_stations_imgw(
      type = "meteo",
      rank = "synop",
-     year = 2010,
+     year = 2010:2011,
      point = c(15, 50, 100),
-     add_map = FALSE
-   )
+     add_map = FALSE,
+     allow_failure = FALSE
    )
    )
   
@@ -27,16 +29,9 @@ test_that("nearest_stations_imgw", {
     rank = "synop",
     year = 2010,
     point = c(999, 999),
-    add_map = FALSE
+    add_map = FALSE, 
+    allow_failure = FALSE
   )
   )
-  
-  testthat::expect_error(nearest_stations_imgw(
-    type = "hydro",
-    year = 2099:2100,
-    point = c(0, 50),
-    add_map = FALSE
-  ))
-  
   
 })

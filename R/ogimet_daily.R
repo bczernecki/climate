@@ -3,10 +3,11 @@
 #' Downloading daily (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository.
 #' The data are processed only if temperature or precipitation fields are present.
 #'
-#' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") )
+#' @param date start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ). By default last 30 days.
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
-#' @param hour time for which the daily raport is generated. Set default as hour = 6
+#' @param hour time for which the daily raport is generated. Set default as hour = 6 (i.e. 6 UTC)
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' 
@@ -15,32 +16,44 @@
 #' @keywords internal
 #'
 #' @examples \donttest{
-#'   # downloading data for Poznan-Lawica
-#'   poznan = ogimet_daily(station = 12330,
-#'       date = c("2019-01-01", "2019-03-31"),
-#'       coords = TRUE)
-#'   head(poznan)
+#'   # downloading daily summaries for last 30 days. station: New York - La Guardia
+#'   new_york = ogimet_daily(station = 72503, coords = TRUE)
 #' }
 #'
 
-ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()), 
-                        coords = FALSE, 
-                        station = c(12326, 12330), 
-                        hour = 6) {
-  
-  #options(RCurlOptions = list(ssl.verifypeer = FALSE)) # required on windows for RCurl
 
+
+ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
+                        coords = FALSE, 
+                        station = NA, 
+                        hour = 6, 
+                        allow_failure = TRUE) {
+  
+  if (allow_failure) {
+    tryCatch(ogimet_daily_bp(date = date, coords = coords, station = station, hour = hour), 
+             error = function(e){
+               message(paste("Problems with downloading data.",
+                             "Run function with argument allow_failure = FALSE",
+                             "to see more details"))})
+  } else {
+    ogimet_daily_bp(date = date, coords = coords, station = station, hour = hour)
+  }
+}
+
+#' @keywords Internal
+#' @noRd
+ogimet_daily_bp = function(date = date,
+                        coords = coords, 
+                        station = station, 
+                        hour = hour) {
   dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") 
   dates = unique(c(dates, as.Date(max(date))))
 
   # initalizing empty data frame for storing results:
-
   message(
     paste(
-      "Daily raports were generated starting from",
-      hour,
-      "am each day. Use the hour argument to change it",
-      "\n"
+      "Daily raports will be generated for", hour, 
+      "UTC each day. Use the >>hour<< argument to change it \n"
     )
   )
   data_station <-
@@ -76,7 +89,7 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
 
     for (i in length(dates):1) {
       # update progressbar:
-      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)), "\n")
+      if (length(dates) >= 3) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)), "\n")
       
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
@@ -85,12 +98,11 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
       if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep = "")
       
-      
       temp = tempfile()
       test_url(linkpl2, temp)
       
       # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 0)) { 
+      if (!is.na(file.size(temp)) & (file.size(temp) > 500)) { 
         
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)
@@ -230,7 +242,6 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
       ord1 = c(ord1, setdiff(names(data_station), c("station_ID", "Date", "TemperatureCAvg")))
       data_station = data_station[, ord1]
     }
-    # setdiff(names(df), c("station_ID", "Date", "TC"))
     
     # date to as.Date()
     data_station$Date = as.Date(as.character(data_station$Date), format = "%m/%d/%Y")
@@ -238,7 +249,6 @@ ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
     data_station = data_station[which(data_station$Date >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
 
   } # end of checking whether no. of rows > 0 
-  
   
   return(data_station)
 }

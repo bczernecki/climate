@@ -4,18 +4,27 @@
 \alias{meteo_ogimet}
 \title{Scrapping meteorological (Synop) data from the Ogimet webpage}
 \usage{
-meteo_ogimet(interval, date, coords = FALSE, station, precip_split = TRUE)
+meteo_ogimet(
+  interval,
+  date = c(Sys.Date() - 30, Sys.Date()),
+  coords = FALSE,
+  station,
+  precip_split = TRUE,
+  allow_failure = TRUE
+)
 }
 \arguments{
 \item{interval}{'daily' or 'hourly' dataset to retrieve - given as character}
 
-\item{date}{start and finish date (e.g., date = c("2018-05-01", "2018-07-01")) - character or Date class object}
+\item{date}{start and finish date (e.g., date = c("2018-05-01", "2018-07-01")) - character or Date class object. If not provided last 30 days are used.}
 
 \item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
-\item{precip_split}{whether to split precipitation fields into 6/12/24h
+\item{precip_split}{whether to split precipitation fields into 6/12/24h}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step}
 }
 \value{
@@ -67,12 +76,10 @@ Downloading hourly or daily (meteorological) data from the Synop stations availa
 }
 \examples{
 \donttest{
-  # downloading data for Poznan-Lawica
-  # poznan = meteo_ogimet(interval = "daily", 
-  #                      date = c(Sys.Date()-30, Sys.Date()),
-  #                      station = 12330, 
-  #                      coords = TRUE)
-  # head(poznan)
+  # downloading daily data for New York - La Guardia (last 30 days by default)
+  new_york = meteo_ogimet(interval = "daily", 
+                          station = 72503, 
+                          coords = TRUE)
 }
 
 }
