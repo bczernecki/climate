@@ -94,7 +94,7 @@
       <h1 data-toc-skip>Introduction to the climate package</h1>
                         <h4 data-toc-skip class="author">Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2022-10-11</h4>
+            <h4 data-toc-skip class="date">2022-10-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/HEAD/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -123,8 +123,8 @@
 <h3 id="meteorological-data">Meteorological data<a class="anchor" aria-label="anchor" href="#meteorological-data"></a>
 </h3>
 <ul>
-<li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.</p></li>
-<li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, and <code>meteo_hourly()</code> from <a href="https://github.com/bczernecki/imgw" class="external-link">the <strong>imgw</strong> package</a>.</p></li>
+<li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton (WMO) framework after year 2000 should be accessible.</p></li>
+<li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, and <code>meteo_hourly()</code></p></li>
 <li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
 <li><p><strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 </ul>
@@ -134,7 +134,8 @@
 </h3>
 <ul>
 <li>
-<strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>hydro_annual()</code>, <code>hydro_monthly()</code>, and <code>hydro_daily()</code> from <a href="https://github.com/bczernecki/imgw" class="external-link">the <strong>imgw</strong> package</a>.</li>
+<strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>hydro_annual()</code>, <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
+</li>
 </ul>
 </div>
 <div class="section level3">
@@ -159,7 +160,7 @@
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Examples shows aplication of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.</p>
+<p>Examples shows application of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.</p>
 <ul>
 <li><a href="https://CRAN.R-project.org/package=dplyr" class="external-link">dplyr</a></li>
 <li><a href="https://CRAN.R-project.org/package=tidyr" class="external-link">tidyr</a></li>
@@ -174,14 +175,14 @@
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=11&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e621f2c7c</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=11&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e140978d7</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=12&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpH0CWyN/file43f257c990c</span></span>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=12&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpH0CWyN/file43f4d8e535c</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ns</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ns</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -329,51 +330,6 @@
 <td align="right">138</td>
 <td align="right">176.45842</td>
 </tr>
-<tr class="even">
-<td align="left">100</td>
-<td align="left">03707</td>
-<td align="left">Chivenor</td>
-<td align="right">-4.150003</td>
-<td align="right">51.08333</td>
-<td align="right">8</td>
-<td align="right">177.26086</td>
-</tr>
-<tr class="odd">
-<td align="left">138</td>
-<td align="left">03930</td>
-<td align="left">Almondsbury</td>
-<td align="right">-2.550011</td>
-<td align="right">51.55001</td>
-<td align="right">52</td>
-<td align="right">181.08641</td>
-</tr>
-<tr class="even">
-<td align="left">170</td>
-<td align="left">07125</td>
-<td align="left">Dinard</td>
-<td align="right">-2.066668</td>
-<td align="right">48.58335</td>
-<td align="right">65</td>
-<td align="right">190.33860</td>
-</tr>
-<tr class="odd">
-<td align="left">104</td>
-<td align="left">03743</td>
-<td align="left">Larkhill</td>
-<td align="right">-1.800016</td>
-<td align="right">51.20000</td>
-<td align="right">132</td>
-<td align="right">190.40311</td>
-</tr>
-<tr class="even">
-<td align="left">105</td>
-<td align="left">03746</td>
-<td align="left">Boscombe Down</td>
-<td align="right">-1.750015</td>
-<td align="right">51.16667</td>
-<td align="right">124</td>
-<td align="right">191.83929</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -384,8 +340,8 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=11&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e43fc47aa</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=12&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpH0CWyN/file43f4806db09</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -454,31 +410,146 @@
 <code class="sourceCode R"><span><span class="co"># downloading data with NOAA service:</span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_noaa_hourly.html">meteo_noaa_hourly</a></span><span class="op">(</span>station <span class="op">=</span> <span class="st">"010080-99999"</span>, year <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#|   |date                | year| month| day| hour|    lon|   lat| alt| t2m| dpt2m| ws|  wd|    slp| visibility|</span></span>
-<span><span class="co">#|:--|:-------------------|----:|-----:|---:|----:|------:|-----:|---:|---:|-----:|--:|---:|------:|----------:|</span></span>
-<span><span class="co">#|1  |2016-01-01 00:00:00 | 2016|     1|   1|    0| 15.467| 78.25|  29| 5.0|  -1.6|  5| 200| 1007.5|      65000|</span></span>
-<span><span class="co">#|3  |2016-01-01 01:00:00 | 2016|     1|   1|    1| 15.467| 78.25|  29| 5.2|  -1.7|  3| 180| 1008.2|         NA|</span></span>
-<span><span class="co">#|5  |2016-01-01 02:00:00 | 2016|     1|   1|    2| 15.467| 78.25|  29| 4.6|  -1.2|  6| 170| 1008.5|         NA|</span></span>
-<span><span class="co">#|7  |2016-01-01 03:00:00 | 2016|     1|   1|    3| 15.467| 78.25|  29| 4.3|  -0.9|  5| 190| 1008.6|      70001|</span></span>
-<span><span class="co">#|9  |2016-01-01 04:00:00 | 2016|     1|   1|    4| 15.467| 78.25|  29| 3.7|  -1.0|  5| 160| 1008.8|         NA|</span></span>
-<span><span class="co">#|11 |2016-01-01 05:00:00 | 2016|     1|   1|    5| 15.467| 78.25|  29| 3.2|  -1.0|  4| 150| 1008.6|         NA|</span></span>
-<span></span>
-<span><span class="co"># or you can download the same data with Ogimet.com (example for year 2016):</span></span>
-<span><span class="co"># df = meteo_ogimet(interval = "hourly", date = c("2016-01-01", "2016-12-31"), station = c("01008"))</span></span></code></pre></div>
+<span><span class="co"># You can also download the same (but more granular) data with Ogimet.com (example for year 2016):</span></span>
+<span><span class="co"># df = meteo_ogimet(interval = "hourly", </span></span>
+<span><span class="co">#                   date = c("2016-01-01", "2016-12-31"),</span></span>
+<span><span class="co">#                   station = c("01008"))</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">date</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="right">day</th>
+<th align="right">hour</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+<th align="right">alt</th>
+<th align="right">t2m</th>
+<th align="right">dpt2m</th>
+<th align="right">ws</th>
+<th align="right">wd</th>
+<th align="right">slp</th>
+<th align="right">visibility</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">2016-01-01 00:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">5.0</td>
+<td align="right">-1.6</td>
+<td align="right">5</td>
+<td align="right">200</td>
+<td align="right">1007.5</td>
+<td align="right">65000</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">2016-01-01 01:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">5.2</td>
+<td align="right">-1.7</td>
+<td align="right">3</td>
+<td align="right">180</td>
+<td align="right">1008.2</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">2016-01-01 02:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">4.6</td>
+<td align="right">-1.2</td>
+<td align="right">6</td>
+<td align="right">170</td>
+<td align="right">1008.5</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">2016-01-01 03:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">4.3</td>
+<td align="right">-0.9</td>
+<td align="right">5</td>
+<td align="right">190</td>
+<td align="right">1008.6</td>
+<td align="right">70001</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">2016-01-01 04:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">3.7</td>
+<td align="right">-1.0</td>
+<td align="right">5</td>
+<td align="right">160</td>
+<td align="right">1008.8</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="left">2016-01-01 05:00:00</td>
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">15.467</td>
+<td align="right">78.25</td>
+<td align="right">29</td>
+<td align="right">3.2</td>
+<td align="right">-1.0</td>
+<td align="right">4</td>
+<td align="right">150</td>
+<td align="right">1008.6</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="example-4">Example 4<a class="anchor" aria-label="anchor" href="#example-4"></a>
 </h3>
 <p>Downloading atmospheric vertical profile (sounding) for Łeba, PL station:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"profile_demo"</span><span class="op">)</span></span>
-<span><span class="co"># same as:</span></span>
-<span><span class="co"># profile_demo &lt;- sounding_wyoming(wmo_id = 12120,</span></span>
-<span><span class="co">#                                  yy = 2000,</span></span>
-<span><span class="co">#                                  mm = 3,</span></span>
-<span><span class="co">#                                  dd = 23,</span></span>
-<span><span class="co">#                                  hh = 0)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">profile_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sounding_wyoming.html">sounding_wyoming</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">12120</span>,</span>
+<span>                                 yy <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>                                 mm <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                                 dd <span class="op">=</span> <span class="fl">23</span>,</span>
+<span>                                 hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">df2</span> <span class="op">=</span> <span class="va">profile_demo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">df2</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PRESS"</span>, <span class="st">"TEMP"</span>, <span class="st">"DEWPT"</span><span class="op">)</span> <span class="co"># changing column names</span></span></code></pre></div>
 <table class="table">
@@ -634,39 +705,20 @@
 <h3 id="example-5">Example 5<a class="anchor" aria-label="anchor" href="#example-5"></a>
 </h3>
 <p>Preparing an annual summary of air temperature and precipitation using <strong>dplyr</strong> syntax for 10-years period (1991-2000)</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_imgw.html">meteo_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, rank <span class="op">=</span> <span class="st">"synop"</span>, year <span class="op">=</span> <span class="fl">1991</span><span class="op">:</span><span class="fl">2000</span>, station <span class="op">=</span> <span class="st">"ŁEBA"</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e497d320</span></span>
-<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e613c9cbe</span></span>
-<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e4a67d8bd</span></span>
-<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1991_1995/1991_1995_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e58247e34</span></span>
-<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/1996_2000/1996_2000_m_s.zip"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp3dL04f/file43e43ee4d21</span></span>
-<span><span class="co"># please note that sometimes 2 names are used for the same station in different years</span></span>
-<span></span>
-<span><span class="va">df2</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">station</span><span class="op">:</span><span class="va">t2m_mean_mon</span>, <span class="va">rr_monthly</span><span class="op">)</span></span>
+<span><span class="co"># please note that sometimes 2 names are used for the same station in different years</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df2</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">station</span><span class="op">:</span><span class="va">t2m_mean_mon</span>, <span class="va">rr_monthly</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">monthly_summary</span> <span class="op">=</span> <span class="va">df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">mm</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>tmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">tmax_abs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
-<span>            tmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">tmin_abs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>            tavg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">t2m_mean_mon</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
-<span>            precip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rr_monthly</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">yy</span><span class="op">)</span><span class="op">)</span>            </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">mm</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>tmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">tmax_abs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>                   tmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">tmin_abs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                   tavg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">t2m_mean_mon</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>                   precip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">rr_monthly</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">yy</span><span class="op">)</span><span class="op">)</span>            </span>
 <span></span>
 <span><span class="va">monthly_summary</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">monthly_summary</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">monthly_summary</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">monthly_summary</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -756,19 +808,193 @@
 <h3 id="example-6">Example 6<a class="anchor" aria-label="anchor" href="#example-6"></a>
 </h3>
 <p>Calculate the mean maximum value of the flow on the stations in each year with <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, and spread data by year using <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread()</a></code> to get the annual means of maximum flow in the consecutive columns.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2002</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2002</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">id</th>
+<th align="right">X</th>
+<th align="right">Y</th>
+<th align="left">station</th>
+<th align="left">riv_or_lake</th>
+<th align="right">hyy</th>
+<th align="right">idhyy</th>
+<th align="right">idex</th>
+<th align="right">H</th>
+<th align="right">Q</th>
+<th align="right">T</th>
+<th align="right">mm</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">18723</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">214</td>
+<td align="right">172</td>
+<td align="right">NA</td>
+<td align="right">11</td>
+</tr>
+<tr class="even">
+<td align="left">18724</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">228</td>
+<td align="right">207</td>
+<td align="right">NA</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">18725</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">250</td>
+<td align="right">272</td>
+<td align="right">NA</td>
+<td align="right">11</td>
+</tr>
+<tr class="even">
+<td align="left">18726</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">215</td>
+<td align="right">174</td>
+<td align="right">NA</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">18727</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">225</td>
+<td align="right">201</td>
+<td align="right">NA</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">18728</td>
+<td align="right">150210180</td>
+<td align="right">21.8335</td>
+<td align="right">50.88641</td>
+<td align="left">ANNOPOL</td>
+<td align="left">Wisła (2)</td>
+<td align="right">2001</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">258</td>
+<td align="right">297</td>
+<td align="right">NA</td>
+<td align="right">12</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h2</span> <span class="op">=</span> <span class="va">h</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">idex</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span>, <span class="va">hyy</span>, <span class="va">Q</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyy</span>, <span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>annual_mean_Q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Q</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">hyy</span>, values_from <span class="op">=</span> <span class="va">annual_mean_Q</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">idex</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span>, <span class="va">hyy</span>, <span class="va">Q</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyy</span>, <span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>annual_mean_Q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Q</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">hyy</span>, values_from <span class="op">=</span> <span class="va">annual_mean_Q</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `summarise()` has grouped output by 'hyy', 'id', 'station', 'X'. You can</span></span>
+<span><span class="co">#&gt; override using the `.groups` argument.</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">id</th>
+<th align="left">station</th>
+<th align="right">X</th>
+<th align="right">Y</th>
+<th align="right">2001</th>
+<th align="right">2002</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">149180010</td>
+<td align="left">KRZYŻANOWICE</td>
+<td align="right">18.28780</td>
+<td align="right">49.99301</td>
+<td align="right">200.5</td>
+<td align="right">147.4</td>
+</tr>
+<tr class="even">
+<td align="right">149180020</td>
+<td align="left">CHAŁUPKI</td>
+<td align="right">18.32752</td>
+<td align="right">49.92127</td>
+<td align="right">174.7</td>
+<td align="right">96.7</td>
+</tr>
+<tr class="odd">
+<td align="right">149180040</td>
+<td align="left">GOŁKOWICE</td>
+<td align="right">18.49640</td>
+<td align="right">49.92579</td>
+<td align="right">4.5</td>
+<td align="right">2.0</td>
+</tr>
+<tr class="even">
+<td align="right">149180050</td>
+<td align="left">ZEBRZYDOWICE</td>
+<td align="right">18.61326</td>
+<td align="right">49.88025</td>
+<td align="right">13.5</td>
+<td align="right">7.9</td>
+</tr>
+<tr class="odd">
+<td align="right">149180060</td>
+<td align="left">CIESZYN</td>
+<td align="right">18.62972</td>
+<td align="right">49.74616</td>
+<td align="right">57.2</td>
+<td align="right">57.7</td>
+</tr>
+<tr class="even">
+<td align="right">149180070</td>
+<td align="left">CIESZYN</td>
+<td align="right">18.63137</td>
+<td align="right">49.74629</td>
+<td align="right">NaN</td>
+<td align="right">NaN</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section level2">

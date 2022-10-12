@@ -78,6 +78,7 @@ The returned object is valid only for a given year and type of stations (e.g. "s
 <span>  add_map <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  point <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  no_of_stations <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,6 +109,10 @@ The returned object is valid only for a given year and type of stations (e.g. "s
 <dd><p>how many nearest stations will be returned from the given geographical coordinates. 50 used by default</p></dd>
 
 
+<dt>allow_failure</dt>
+<dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra arguments to be provided to the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">graphics::plot()</a></code> function (only if add_map = TRUE)</p></dd>
 
@@ -129,13 +134,13 @@ The returned object is valid only for a given year and type of stations (e.g. "s
 <span class="r-in"><span>  add_map <span class="op">=</span> <span class="cn">TRUE</span>, </span></span>
 <span class="r-in"><span>  no_of_stations <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpp0Ri4K/file1802a82e867</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpRGSeu8/file181613bdf0f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpp0Ri4K/file180300f6a7c</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpRGSeu8/file181458f3242</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpp0Ri4K/file1801110bd92</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpRGSeu8/file181714c5bd2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/2018/2018_m_s.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmpp0Ri4K/file1807a7fda24</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpRGSeu8/file181498e115f</span>
 <span class="r-plt img"><img src="nearest_stations_imgw-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
