@@ -34,13 +34,12 @@ The **climate** package consists of ten main functions - three for meteorologica
 ### Meteorological data
   
 - **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
-Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
+Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton  (WMO) framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
-
 
 - **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
 
@@ -48,7 +47,7 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()` fro
 
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
 danepubliczne.imgw.pl collection.
-It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` from [the **imgw** package](https://github.com/bczernecki/imgw).
+It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
 
 ### Auxiliary functions and datasets
 
@@ -56,16 +55,14 @@ It is a wrapper for `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()` fro
 country in the Ogimet repository
 - **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
 available for the selected country in the Ogimet repository
-- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
-coordinates, and ID numbers
-- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
-coordinates, and ID numbers
+- **imgw_meteo_stations** - Built-in metadata from the IMGW-PIB repository for meteorological   stations, their geographical coordinates, and ID numbers
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological   stations, their geographical coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
 ## Examples
 
-Examples shows aplication of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.  
+Examples shows application of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.  
 
 - [dplyr](https://CRAN.R-project.org/package=dplyr)
 - [tidyr](https://CRAN.R-project.org/package=tidyr)
@@ -81,9 +78,10 @@ ns = nearest_stations_ogimet(country = c("United Kingdom", "France"),
                              no_of_stations = 50, 
                              add_map = TRUE)
 ```
+
 ``` {r stations-2, eval=T}
-if(is.data.frame(ns)){
- knitr::kable(head(ns, 20))
+if (is.data.frame(ns)) {
+ knitr::kable(head(ns, 15))
 }
 ```
 
@@ -104,36 +102,40 @@ if (is.data.frame(PL)) {
 ### Example 3
 Downlading hourly meteorological data from Svalbard (Norway) for year 2016 using NOAA service
   
+```{r noaa_svalbard, include=FALSE}
+df = readRDS(system.file("extdata/vignettes/svalbard_noaa.rds", package = "climate"))
+```
+
 ``` {r windrose,eval=F}
 # downloading data with NOAA service:
 df = meteo_noaa_hourly(station = "010080-99999", year = 2016)
 
-#|   |date                | year| month| day| hour|    lon|   lat| alt| t2m| dpt2m| ws|  wd|    slp| visibility|
-#|:--|:-------------------|----:|-----:|---:|----:|------:|-----:|---:|---:|-----:|--:|---:|------:|----------:|
-#|1  |2016-01-01 00:00:00 | 2016|     1|   1|    0| 15.467| 78.25|  29| 5.0|  -1.6|  5| 200| 1007.5|      65000|
-#|3  |2016-01-01 01:00:00 | 2016|     1|   1|    1| 15.467| 78.25|  29| 5.2|  -1.7|  3| 180| 1008.2|         NA|
-#|5  |2016-01-01 02:00:00 | 2016|     1|   1|    2| 15.467| 78.25|  29| 4.6|  -1.2|  6| 170| 1008.5|         NA|
-#|7  |2016-01-01 03:00:00 | 2016|     1|   1|    3| 15.467| 78.25|  29| 4.3|  -0.9|  5| 190| 1008.6|      70001|
-#|9  |2016-01-01 04:00:00 | 2016|     1|   1|    4| 15.467| 78.25|  29| 3.7|  -1.0|  5| 160| 1008.8|         NA|
-#|11 |2016-01-01 05:00:00 | 2016|     1|   1|    5| 15.467| 78.25|  29| 3.2|  -1.0|  4| 150| 1008.6|         NA|
-
-# or you can download the same data with Ogimet.com (example for year 2016):
-# df = meteo_ogimet(interval = "hourly", date = c("2016-01-01", "2016-12-31"), station = c("01008"))
+# You can also download the same (but more granular) data with Ogimet.com (example for year 2016):
+# df = meteo_ogimet(interval = "hourly", 
+#                   date = c("2016-01-01", "2016-12-31"),
+#                   station = c("01008"))
 ```
 
+``` {r noaa-kable,eval=T}
+knitr::kable(head(df))
+```
 
 ### Example 4
 Downloading atmospheric vertical profile (sounding) for Łeba, PL station:
 
-```{r sonda,eval=T, fig.width=7, fig.height=7, fig.fullwidth=TRUE}
+```{r sonda-read, eval=T, include=F, echo=F}
 library(climate)
 data("profile_demo")
-# same as:
-# profile_demo <- sounding_wyoming(wmo_id = 12120,
-#                                  yy = 2000,
-#                                  mm = 3,
-#                                  dd = 23,
-#                                  hh = 0)
+df2 = profile_demo[[1]] 
+colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
+```
+
+```{r sonda, eval=F, include=T}
+profile_demo <- sounding_wyoming(wmo_id = 12120,
+                                 yy = 2000,
+                                 mm = 3,
+                                 dd = 23,
+                                 hh = 0)
 df2 = profile_demo[[1]] 
 colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
 ```
@@ -146,57 +148,71 @@ knitr::kable(head(df2, 10), caption = "Exemplary data frame of sounding preproce
 ### Example 5
 Preparing an annual summary of air temperature and precipitation using **dplyr** syntax for 10-years period (1991-2000)
 
-```{r imgw_meteo, fig.width=7, fig.height=7, fig.fullwidth=TRUE, error=TRUE}
-library(climate)
-library(dplyr)
+```{r imgw_meteo, include=FALSE}
+df = readRDS(system.file("extdata/vignettes/leba_monthly.rds", package = "climate"))
+```
 
+```{r imgw_meteo-2, eval=FALSE, include=TRUE}
+library(climate)
 df = meteo_imgw(interval = "monthly", rank = "synop", year = 1991:2000, station = "ŁEBA") 
 # please note that sometimes 2 names are used for the same station in different years
+```
 
-df2 = select(df, station:t2m_mean_mon, rr_monthly)
+```{r imgw_meteo-3, fig.width=7, fig.height=7, fig.fullwidth=TRUE, error=TRUE, eval=TRUE, include=TRUE}
+suppressMessages(library(dplyr))
+df2 = dplyr::select(df, station:t2m_mean_mon, rr_monthly)
 
 monthly_summary = df2 %>% 
-  group_by(mm) %>% 
-  summarise(tmax = mean(tmax_abs, na.rm = TRUE), 
-            tmin = mean(tmin_abs, na.rm = TRUE),
-            tavg = mean(t2m_mean_mon, na.rm = TRUE), 
-            precip = sum(rr_monthly) / n_distinct(yy))            
+  dplyr::group_by(mm) %>% 
+  dplyr::summarise(tmax = mean(tmax_abs, na.rm = TRUE), 
+                   tmin = mean(tmin_abs, na.rm = TRUE),
+                   tavg = mean(t2m_mean_mon, na.rm = TRUE), 
+                   precip = sum(rr_monthly) / n_distinct(yy))            
 
 monthly_summary = as.data.frame(t(monthly_summary[, c(5, 2, 3, 4)])) 
 monthly_summary = round(monthly_summary, 1)
 colnames(monthly_summary) = month.abb
-
 ```
 
-```{r imgw_meto2, echo=FALSE, error=TRUE}
-library(knitr)
-kable(head(monthly_summary), caption = "Exemplary data frame of meteorological preprocessing.")
+```{r imgw_meteo2, echo=FALSE, error=TRUE}
+knitr::kable(head(monthly_summary), 
+             caption = "Exemplary data frame of meteorological preprocessing.")
 ```
 
 ### Example 6
 Calculate the mean maximum value of the flow on the stations in each year with **dplyr**'s `summarise()`, and spread data by year using **tidyr**'s `spread()` to get the annual means of maximum flow in the consecutive columns.
 
-```{r data, eval=FALSE, include=TRUE}
+```{r data, eval=TRUE, include=FALSE, echo=FALSE}
+h = readRDS(system.file("extdata/vignettes/hydro_monthly.rds", package = "climate"))
+```
+
+```{r data-2, eval=FALSE, include=TRUE}
 library(climate)
 library(dplyr)
 library(tidyr)
 h = hydro_imgw(interval = "monthly", year = 2001:2002, coords = TRUE)
-head(h)
+```
+```{r data-3, eval=TRUE, include=TRUE, echo=TRUE}
+knitr::kable(head(h))
 ```
 
 
-```{r filtering, eval=FALSE, include=TRUE}
+
+```{r filtering, eval=TRUE, include=TRUE}
 h2 = h %>%
-  filter(idex == 3) %>%
-  select(id, station, X, Y, hyy, Q) %>%
-  group_by(hyy, id, station, X, Y) %>%
-  summarise(annual_mean_Q = round(mean(Q, na.rm = TRUE), 1)) %>% 
-  pivot_wider(names_from = hyy, values_from = annual_mean_Q)
+  dplyr::filter(idex == 3) %>%
+  dplyr::select(id, station, X, Y, hyy, Q) %>%
+  dplyr::group_by(hyy, id, station, X, Y) %>%
+  dplyr::summarise(annual_mean_Q = round(mean(Q, na.rm = TRUE), 1)) %>% 
+  tidyr::pivot_wider(names_from = hyy, values_from = annual_mean_Q)
+
+knitr::kable(head(h2))
 ```
 
 ```{r filtering2, echo=FALSE, eval=FALSE}
-library(knitr)
-kable(head(h2), caption = "Exemplary data frame of hydrological preprocesssing.")
+
+knitr::kable(head(h2),
+             caption = "Exemplary data frame of hydrological preprocesssing.")
 ```
 
 ## Acknowledgment

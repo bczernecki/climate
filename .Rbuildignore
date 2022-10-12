@@ -13,3 +13,4 @@
 ^\.Rhistory$
 ^\.lintr$
 vignettes/articles/usecase.Rmd
+^pkgdown$
