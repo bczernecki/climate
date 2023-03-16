@@ -14,16 +14,16 @@
 #'   #meta = climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
 #' }
 
-meteo_metadata_imgw = function(interval, rank) { # interval moze byc: monthly, hourly, hourly
+meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hourly, hourly
   
   b = NULL
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
 
-  # METADANE daily:
-  if (interval == "daily") { # uwaga! daily maja dla climateow i synopow po 2 pliki z metadanymi!!!
+  # METADATA daily:
+  if (interval == "daily") { # warning! daily for climates and synop have 2 files with metadata!!!
 
     if (rank == "synop") {
-      b[[1]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_format.txt"),
+      b[[1]] = clean_metadata_meteo(address = paste0(base_url,"dane_meteorologiczne/dobowe/synop/s_d_format.txt"),
                                rank = "synop", interval = "daily")
       b[[2]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_t_format.txt"),
                                               rank = "synop", interval = "daily")

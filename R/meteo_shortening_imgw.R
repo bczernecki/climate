@@ -20,6 +20,17 @@
 
 meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = TRUE) {
 
+  # removing duplicated column names:  (e.g. station's name)
+  if (remove_duplicates == TRUE) {
+    data = data[, !duplicated(colnames(data))]
+    
+    # fix for merged station names with suffixes
+    if (any(colnames(data) %in% c("Nazwa stacji.x", "Nazwa stacji.y"))) {
+      data$`Nazwa stacji.y` = NULL
+      colnames(data)[colnames(data) == "Nazwa stacji.x"] = "Nazwa stacji"
+    }
+  }
+  
   if (col_names != "polish") {
     abbrev = climate::imgw_meteo_abbrev
     orig_columns = trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
@@ -36,11 +47,6 @@ meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = 
       # full english names:
       colnames(data)[orig_columns %in% abbrev$fullname] = abbrev$fullname_eng[matches]
     }
-  }
-
-  # removing duplicated column names:  (e.g. station's name)
-  if (remove_duplicates == TRUE) {
-    data = data[, !duplicated(colnames(data))]
   }
 
   return(data)
