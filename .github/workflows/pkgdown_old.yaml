@@ -1,0 +1,39 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+name: pkgdown
+on:
+  push:
+    branches: [main, master, dev, devel]
+  pull_request:
+    branches: [main, master, dev, devel]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: bczernecki/meteo:latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v1
+        
+      - name: Checked for installed packages
+        run: |
+          sudo apt-get install -y libfontconfig1-dev libharfbuzz-dev libfribidi-dev rsync
+          R -e 'install.packages(c("pkgdown", "openair", "rnaturalearthdata"))'
+          R -e 'installed.packages()[, 1:3]'
+          
+      - name: Build book
+        run: |
+          Rscript -e 'pkgdown::build_site()'
+
+      - name: Deploy to GitHub pages 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
