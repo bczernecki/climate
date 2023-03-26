@@ -97,9 +97,13 @@ ogimet_daily_bp = function(date = date,
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
       temp = tempfile()
       test_url(linkpl2, temp)
-      
-      # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 500)) { 
+      if (is.na(file.size(temp)) | (file.size(temp) < 500)) { 
+        message("Problem with downloading data from:", linkpl2, "\n")
+        if (exists("data_station")) {
+          message("Returning results downloaded up to this point:\n")
+          return(data_station)
+        }
+      } else { # run only if downloaded file is valid
         
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)

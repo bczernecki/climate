@@ -1,3 +1,9 @@
+# climate 1.1.1
+
+* Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata
+* Bug fix for `ogimet_daily` if data contains more than one year
+
+
 # climate 1.1.0
 
 * A new approach for handling CRAN policy for resolving problems if network issues are detected or some of the external services are temporarily down. 
