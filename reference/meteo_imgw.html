@@ -18,7 +18,7 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -136,71 +136,81 @@ columns with geographic coordinates are added.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="va">x</span> <span class="op">=</span> <span class="fu">meteo_imgw</span><span class="op">(</span><span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2018</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Your system locale is: C.UTF-8 which may cause trouble.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Please consider changing it manually while working with climate, e.g.:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_d_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file18122805d33</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc23de379d6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1816f3eb626</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc261b6fcef</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815cd7c691</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc256229e59</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/2018/2018_m_s.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1814bef3a75</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc240902d4a</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           rank        id        X        Y       station   yy mm tmax_abs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  1     11.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  2      7.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  3     16.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  4     26.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  5     28.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIAŁA 2018  6     29.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    tmax_mean tmin_abs tmin_mean t2m_mean_mon t5cm_min rr_monthly rr_max_daily</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12       5.0     -7.7      -0.4          2.3    -10.8       23.5          6.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11      -1.4    -15.5      -6.0         -3.7    -23.3       34.1          9.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        4.8    -17.2      -3.0          1.0    -21.9       28.5         10.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       20.3     -1.0       8.2         14.3     -1.7       10.3          3.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       21.3      5.1      10.6         16.2      2.2       91.1         19.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       22.7      8.1      13.5         17.6      6.1      135.5         30.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first_day_max_rr last_day_max_rr insolation_monthly snowcover_max</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                8              NA               58.8             4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                4              NA               47.0            19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                16              NA              110.7            15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                23              NA              218.2             0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                17              NA              247.1             0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                 2              NA              164.1             0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    snowcover_days rain_days snow_days r_s_days hail_days fog_days</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12              5         7        10        4         0        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11             25         0        16        4         0        7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4              14         5         7        2         0        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5               0         7         1        1         0        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9               0        14         0        0         1        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6               0        16         1        0         0        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    fogginess_days rime_days glaze_days snowstorm_low_days snowstorm_high_days</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12             25         0          0                  0                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11             28         0          1                  6                   1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4              24         0          0                  2                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5               6         0          0                  0                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9              11         0          0                  0                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6              15         0          0                  0                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    hazyness_days ws_10ms_days ws_15ms_days thunder_days dew_days hoarfrost_days</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12             0           12            2            0        0              9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11             2            1            0            0        0              3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4              7            5            0            0        2              5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              0            4            0            1       17              2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9              0            1            0            9       26              0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6              0            0            0            9       15              0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cloud_mean_mon ws_mean_mon vapor_press_mean_mon rh_mean_mon press_mean_mon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12            6.4         4.6                  5.8        80.0          967.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11            6.8         2.9                  4.1        83.8          969.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4             5.5         3.6                  5.1        72.5          959.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5             4.2         3.8                  9.0        56.7          967.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9             4.4         3.1                 12.3        68.4          969.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6             5.7         2.6                 14.8        74.2          968.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    slp_mean_mon rr_daytime rr_nightime</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12       1017.2       13.5        10.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11       1019.9       17.4        16.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        1008.9       14.1        14.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        1015.0        5.3         5.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9        1016.8       40.6        50.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        1015.2       45.7        89.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  1     11.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  2      7.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  3     16.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  4     26.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  5     28.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  SYNOPTYCZNA 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  6     29.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    tmax_mean tmin_abs tmin_mean t2m_mean_mon t5cm_min rr_monthly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12       5.0     -7.7      -0.4          2.3    -10.8       23.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11      -1.4    -15.5      -6.0         -3.7    -23.3       34.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        4.8    -17.2      -3.0          1.0    -21.9       28.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       20.3     -1.0       8.2         14.3     -1.7       10.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       21.3      5.1      10.6         16.2      2.2       91.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       22.7      8.1      13.5         17.6      6.1      135.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Maksymalna dobowa suma opadow[mm] first_day_max_rr last_day_max_rr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                               6.5                8              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                               9.5                4              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                               10.1               16              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                3.5               23              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                               19.5               17              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                               30.4                2              NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Miesieczna suma uslonecznienia[godziny] snowcover_max snowcover_days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                                    58.8             4              5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                    47.0            19             25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                    110.7            15             14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                    218.2             0              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                                    247.1             0              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                    164.1             0              0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    rain_days snow_days r_s_days hail_days fog_days fogginess_days rime_days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12         7        10        4         0        5             25         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11         0        16        4         0        7             28         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4          5         7        2         0        2             24         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5          7         1        1         0        1              6         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9         14         0        0         1        1             11         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         16         1        0         0        2             15         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    glaze_days snowstorm_low_days snowstorm_high_days hazyness_days ws_10ms_days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12          0                  0                   0             0           12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11          1                  6                   1             2            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4           0                  2                   0             7            5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           0                  0                   0             0            4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9           0                  0                   0             0            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           0                  0                   0             0            0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ws_15ms_days thunder_days dew_days hoarfrost_days cloud_mean_mon ws_mean_mon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12            2            0        0              9            6.4         4.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11            0            0        0              3            6.8         2.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4             0            0        2              5            5.5         3.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5             0            1       17              2            4.2         3.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9             0            9       26              0            4.4         3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6             0            9       15              0            5.7         2.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    t2m_mean_mon vapor_press_mean_mon rh_mean_mon press_mean_mon slp_mean_mon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12          2.3                  5.8        80.0          967.9       1017.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11         -3.7                  4.1        83.8          969.5       1019.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4           1.0                  5.1        72.5          959.8       1008.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5          14.3                  9.0        56.7          967.9       1015.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9          16.2                 12.3        68.4          969.9       1016.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6          17.5                 14.8        74.2          968.6       1015.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    rr_daytime rr_nightime</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12       13.5        10.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11       17.4        16.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        14.1        14.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         5.3         5.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9        40.6        50.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        45.7        89.8</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -216,7 +226,7 @@ columns with geographic coordinates are added.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

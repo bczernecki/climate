@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -99,6 +99,7 @@
 <div class="page-header"><h1 id="climate-">climate <img src="reference/figures/logo.png" style="float:right" width="150"><a class="anchor" aria-label="anchor" href="#climate-"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p><a href="https://cran.r-project.org/package=climate" class="external-link"><img src="https://www.r-pkg.org/badges/version/climate" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=climate" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/climate" alt="CRAN RStudio mirror downloads"></a> <a href="https://cran.r-project.org/package=climate" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen"></a> <!-- badges: end --></p>
 <p>The goal of the <strong>climate</strong> R package is to automatize downloading of <em>in-situ</em> meteorological and hydrological data from publicly available repositories:</p>
 <ul>
@@ -120,7 +121,7 @@
 <p>It is highly recommended to install the most up-to-date development version of <strong>climate</strong> from <a href="https://github.com/bczernecki/climate" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"bczernecki/climate"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bczernecki/climate"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -139,9 +140,11 @@
 <div class="section level3">
 <h3 id="hydrological-data">Hydrological data<a class="anchor" aria-label="anchor" href="#hydrological-data"></a>
 </h3>
-<ul><li>
+<ul>
+<li>
 <strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for previously developed set of functions such as: <code>hydro_annual()</code>, <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
-</li></ul>
+</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="auxiliary-functions-and-datasets">Auxiliary functions and datasets<a class="anchor" aria-label="anchor" href="#auxiliary-functions-and-datasets"></a>
@@ -326,10 +329,10 @@ head(h)
 <span><span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="reference/meteo_noaa_co2.html">meteo_noaa_co2</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span></span>
 <span><span class="va">co2</span><span class="op">$</span><span class="va">date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ISOdatetime.html" class="external-link">ISOdate</a></span><span class="op">(</span><span class="va">co2</span><span class="op">$</span><span class="va">yy</span>, <span class="va">co2</span><span class="op">$</span><span class="va">mm</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">co2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">co2_avg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">co2</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">date</span>, <span class="va">co2_avg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span><span class="op">+</span> <span class="fu">geom_smooth</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Carbon Dioxide (CO2)"</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Mauna Loa Observatory "</span><span class="op">)</span>,</span>
 <span>    caption <span class="op">=</span> <span class="st">"data source: NOAA</span></span>
@@ -348,29 +351,29 @@ head(h)
 <div class="section level4">
 <h4 id="use-climate-inside-python-environment-via-rpy2">Use “climate” inside python environment via rpy2<a class="anchor" aria-label="anchor" href="#use-climate-inside-python-environment-via-rpy2"></a>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="co"># load required packages</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="im">from</span> rpy2.robjects.packages <span class="im">import</span> importr</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="im">from</span> rpy2.robjects <span class="im">import</span> r</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="im">import</span> rpy2.robjects <span class="im">as</span> robjects</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="co"># load climate package (make sure that it was installed in R before)</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>importr(<span class="st">'climate'</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="co"># test functionality e.g. with meteo_ogimet function for New York - La Guardia:</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>df <span class="op">=</span> robjects.r[<span class="st">'meteo_ogimet'</span>](interval <span class="op">=</span> <span class="st">"daily"</span>, station <span class="op">=</span> <span class="dv">72503</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a><span class="co"># optionally - transform object to pandas data frame and rename columns:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>res <span class="op">=</span> pd.DataFrame(df).transpose()</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>res.columns <span class="op">=</span> df.colnames</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> res</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a><span class="co">#   station_ID     Date TemperatureCAvg </span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="co">#0     72503.0  19227.0            24.7 </span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a><span class="co">#1     72503.0  19226.0            25.1 </span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a><span class="co">#2     72503.0  19225.0            27.5 </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a><span class="co">#3     72503.0  19224.0            26.8 </span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a><span class="co">#4     72503.0  19223.0            24.7 </span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a><span class="co">#5     72503.0  19222.0            23.3 </span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a><span class="co">#[178 rows x 23 columns]</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load required packages</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects.packages <span class="im">import</span> importr</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects <span class="im">import</span> r</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rpy2.robjects <span class="im">as</span> robjects</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load climate package (make sure that it was installed in R before)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>importr(<span class="st">'climate'</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># test functionality e.g. with meteo_ogimet function for New York - La Guardia:</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> robjects.r[<span class="st">'meteo_ogimet'</span>](interval <span class="op">=</span> <span class="st">"daily"</span>, station <span class="op">=</span> <span class="dv">72503</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># optionally - transform object to pandas data frame and rename columns:</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> pd.DataFrame(df).transpose()</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>res.columns <span class="op">=</span> df.colnames</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> res</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   station_ID     Date TemperatureCAvg </span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#0     72503.0  19227.0            24.7 </span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#1     72503.0  19226.0            25.1 </span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#2     72503.0  19225.0            27.5 </span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#3     72503.0  19224.0            26.8 </span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#4     72503.0  19223.0            24.7 </span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#5     72503.0  19222.0            23.3 </span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#[178 rows x 23 columns]</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -387,7 +390,7 @@ head(h)
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>To cite the <code>climate</code> package in publications, please use <a href="https://www.mdpi.com/2071-1050/12/1/394" class="external-link">this paper</a>:</p>
-<p>Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org/10.3390/su12010394" class="external-link uri">https://doi.org/10.3390/su12010394</a>"</p>
+<p>Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org/10.3390/su12010394" class="external-link uri">https://doi.org/10.3390/su12010394</a>”</p>
 <p>LaTeX/BibTeX version can be obtained with:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"climate"</span><span class="op">)</span></span></code></pre>
@@ -451,7 +454,7 @@ head(h)
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

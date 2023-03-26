@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -64,6 +64,11 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.1" id="climate-111">climate 1.1.1<a class="anchor" aria-label="anchor" href="#climate-111"></a></h2>
+<ul><li>Fix problems with downloading <code>precip</code> dataset from IMGW-PIB repository after recent changes in metadata</li>
+<li>Bug fix for <code>ogimet_daily</code> if data contains more than one year</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="climate-110">climate 1.1.0<a class="anchor" aria-label="anchor" href="#climate-110"></a></h2>
 <ul><li>A new approach for handling CRAN policy for resolving problems if network issues are detected or some of the external services are temporarily down.</li>
 <li>Adding <code>allow_failure</code> argument used by default that turns off automatic debugging but avoid warnings and errors for most typical use cases</li>
@@ -96,7 +101,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="climate-101">climate 1.0.1<small>2021-05-02</small><a class="anchor" aria-label="anchor" href="#climate-101"></a></h2>
-<ul><li>Adding <code>data.table</code> package to read CP1250 on machines that do not support this encoding (translit used instead)</li></ul></div>
+<ul><li>Adding <code>data.table</code> package to read CP1250 on machines that do not support this encoding (translit used instead)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.9" id="climate-099">climate 0.9.9<small>2021-01-08</small><a class="anchor" aria-label="anchor" href="#climate-099"></a></h2>
 <ul><li>Changing URL <code>danepubliczne.imgw.pl</code> to <code>dane.imgw.pl</code> where needed</li>
@@ -110,39 +116,57 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.7" id="climate-097">climate 0.9.7<small>2020-07-22</small><a class="anchor" aria-label="anchor" href="#climate-097"></a></h2>
-<ul><li>stop working if no internet connection detected</li></ul></div>
+<ul><li>stop working if no internet connection detected</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.6" id="climate-096">climate 0.9.6<small>2020-06-03</small><a class="anchor" aria-label="anchor" href="#climate-096"></a></h2>
-<ul><li>Adding nearest_stations_noaa for NOAA hourly dataset</li></ul></div>
+<ul><li>Adding nearest_stations_noaa for NOAA hourly dataset</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.5" id="climate-095">climate 0.9.5<small>2020-05-05</small><a class="anchor" aria-label="anchor" href="#climate-095"></a></h2>
-<ul><li>Following CRAN policies<ul><li>Adding information if connection issues detected or URL no accessible</li>
+<ul><li>Following CRAN policies
+<ul><li>Adding information if connection issues detected or URL no accessible</li>
 <li>RCurl dependency removal</li>
 <li>CO2 &amp; Wyoming examplary data can be loaded offline</li>
-</ul></li></ul></div>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.4" id="climate-094">climate 0.9.4<small>2020-04-20</small><a class="anchor" aria-label="anchor" href="#climate-094"></a></h2>
-<ul><li>New dataset:<ul><li>Hourly NOAA ISH (Integrated Surface Hourly) data - global meteorological dataset dated back up to 1900</li></ul></li></ul></div>
+<ul><li>New dataset:
+<ul><li>Hourly NOAA ISH (Integrated Surface Hourly) data - global meteorological dataset dated back up to 1900</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.3" id="climate-093">climate 0.9.3<small>2020-03-30</small><a class="anchor" aria-label="anchor" href="#climate-093"></a></h2>
-<ul><li>Bug fixes<ul><li>#27</li></ul></li>
-<li>New datasets:<ul><li>CO2 concentration from Mauna Loa observatory</li></ul></li>
+<ul><li>Bug fixes
+<ul><li>#27</li>
+</ul></li>
+<li>New datasets:
+<ul><li>CO2 concentration from Mauna Loa observatory</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.2" id="climate-092">climate 0.9.2<small>2020-03-21</small><a class="anchor" aria-label="anchor" href="#climate-092"></a></h2>
-<ul><li>Bug fixes<ul><li>#26</li></ul></li></ul></div>
+<ul><li>Bug fixes
+<ul><li>#26</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.1" id="climate-091">climate 0.9.1<small>2020-01-30</small><a class="anchor" aria-label="anchor" href="#climate-091"></a></h2>
 <ul><li>climate is independent of imgw package</li>
-<li>Bug fixes<ul><li>#24</li></ul></li>
+<li>Bug fixes
+<ul><li>#24</li>
+</ul></li>
 <li>restored possibility of downloading single station from Polish (IMGW) repository</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3" id="climate-03">climate 0.3<a class="anchor" aria-label="anchor" href="#climate-03"></a></h2>
-<ul><li>improves API</li></ul></div>
+<ul><li>improves API</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2" id="climate-02">climate 0.2<a class="anchor" aria-label="anchor" href="#climate-02"></a></h2>
-<ul><li>splits imgw into two packages: imgw and climate</li></ul></div>
+<ul><li>splits imgw into two packages: imgw and climate</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -157,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
 
       
 
-      </header><script src="usecase_ogimet_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Use Case - Ogimet database</h1>
@@ -105,8 +105,11 @@
 <h2 id="ogimet---download-and-visualize-wind-patterns-over-svalbard">Ogimet - download and visualize wind patterns over Svalbard<a class="anchor" aria-label="anchor" href="#ogimet---download-and-visualize-wind-patterns-over-svalbard"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li>Downloading hourly data from the Ogimet repository for the defined time frame (2018/01/01-2018/12/31); chosen station: Svalbard Lufthavn</li>
-<li>Using external package ‘openair’ to visualize the downloaded results</li>
+<li>Downloading hourly data from the Ogimet repository for the defined
+time frame (2018/01/01-2018/12/31); chosen station: Svalbard
+Lufthavn</li>
+<li>Using external package ‘openair’ to visualize the downloaded
+results</li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
@@ -118,55 +121,55 @@
 ## 
   |                                                                            
   |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=12&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe253af744</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f323bd349a7</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |======                                                                |   8%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=11&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe3609b62c</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f32509c288c</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |============                                                          |  17%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=10&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe48b45a8a</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f32289213fc</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |==================                                                    |  25%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=09&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe4b4adca7</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f324991d7df</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |=======================                                               |  33%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=08&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe1c139224</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f326675235a</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |=============================                                         |  42%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=07&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe469700f8</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f32fd5ffe0</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=06&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe75f20801</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f3269eee5ce</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |=========================================                             |  58%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=05&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe5e4ea21a</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f3264152ee7</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |===============================================                       |  67%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=04&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe1d29fd2a</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f324d68eb09</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |====================================================                  |  75%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=03&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fefb248a1</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f322db8f600</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |==========================================================            |  83%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=28&amp;ano=2018&amp;mes=02&amp;day=28&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe17c7611f</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f3275974455</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |================================================================      |  92%[1] "http://ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=02&amp;day=1&amp;hora=00"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe673e34bb</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f324ed5be2f</span></span></code></pre>
 <pre><code>## 
   |                                                                            
   |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2017&amp;mes=12&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/RtmpLG0j8c/file3fe2a72049d</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/Rtmp2UqKjs/file1f32384ca8c2</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># loading external packages:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
@@ -189,7 +192,7 @@
 <span><span class="va">df</span><span class="op">$</span><span class="va">Date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Date</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Date</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">wdir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining, by = "ddd"</span></span></code></pre>
+<pre><code><span><span class="co">## Joining with `by = join_by(ddd)`</span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">ws</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">ffkmh</span> <span class="op">/</span> <span class="fl">3.6</span> <span class="co"># conversion to m/s from km/h</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">gust</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Gustkmh</span> <span class="op">/</span> <span class="fl">3.6</span> <span class="co"># conversion to m/s from km/h</span></span>
@@ -199,10 +202,8 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># do we miss any data?</span></span>
 <span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/summaryPlot.html" class="external-link">summaryPlot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span> ,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"TC"</span>, <span class="st">"ws"</span>, <span class="st">"gust"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##     date1     date2        TC        ws      gust </span></span>
-<span><span class="co">## "POSIXct"  "POSIXt" "numeric" "numeric" "numeric"</span></span></code></pre>
 <p><img src="usecase_ogimet_files/figure-html/unnamed-chunk-1-2.png" width="700"></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># which sectors are responsible for warm/cold air mass advection:</span></span>
 <span><span class="fu"><a href="https://davidcarslaw.github.io/openair/reference/polarPlot.html" class="external-link">polarPlot</a></span><span class="op">(</span><span class="va">df</span>, pollutant <span class="op">=</span> <span class="st">"TC"</span>, x <span class="op">=</span> <span class="st">"ws"</span>, wd <span class="op">=</span> <span class="st">"dir"</span>, k <span class="op">=</span> <span class="fl">50</span>, force.positive <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>          type <span class="op">=</span> <span class="st">"season"</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>, resolution <span class="op">=</span> <span class="st">"fine"</span>,  normalise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -227,7 +228,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

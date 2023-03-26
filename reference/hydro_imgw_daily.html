@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -114,38 +114,41 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="va">daily</span> <span class="op">=</span> <span class="fu">hydro_imgw_daily</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Your system locale is: C.UTF-8 which may cause trouble.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Please consider changing it manually while working with climate, e.g.:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1816cae1164</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc278ad7192</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/codz_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815fb894c9</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc225034c07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/zjaw_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file18161ddb84e</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc21164c76b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_01.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181143d050a</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc27c21596e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_02.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181447ba9d0</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc21a2aef88</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_03.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1811da1b4e4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc223c89acf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_04.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1812c6ba3f3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc26756d32a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_05.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181f155c80</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc23120f5fa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_06.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181d46f9d</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc270807773</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_07.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815a54233c</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc2f1c929c</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_08.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181580cf91a</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc22b063a37</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_09.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file18158c8c100</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc21b905513</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_10.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181550ae274</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc269c33427</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_11.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1816db8e96c</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc27b27fb92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/codz_2000_12.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1816759b8d9</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc235bc0bbc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/2000/zjaw_2000.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815b8a8f8b</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc2574c6586</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -162,7 +165,7 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

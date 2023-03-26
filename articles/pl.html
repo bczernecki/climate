@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -88,13 +88,14 @@
 
       
 
-      </header><script src="pl_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Wstęp do pakietu ‘climate’ (PL)</h1>
-                        <h4 data-toc-skip class="author">Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
+                        <h4 data-toc-skip class="author">Bartosz
+Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2023-03-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/HEAD/vignettes/articles/pl.Rmd" class="external-link"><code>vignettes/articles/pl.Rmd</code></a></small>
       <div class="hidden name"><code>pl.Rmd</code></div>
@@ -103,88 +104,126 @@
 
     
     
-<p>Głównym celem pakietu <strong>climate</strong> jest zapewnienie wygodnego i programowalnego dostępu do danych meteorologicznych i hydrologicznych z publicznie dostępnych repozytoriów:</p>
+<p>Głównym celem pakietu <strong>climate</strong> jest zapewnienie
+wygodnego i programowalnego dostępu do danych meteorologicznych i
+hydrologicznych z publicznie dostępnych repozytoriów:</p>
 <ul>
-<li><p>Polski Instytut Metrologii i Gospodarki Wodnej - Państwowy Instytut Badawczy (IMGW-PIB)</p></li>
+<li><p>Polski Instytut Metrologii i Gospodarki Wodnej - Państwowy
+Instytut Badawczy (IMGW-PIB)</p></li>
 <li><p>OGIMET (ogimet.com)</p></li>
-<li><p>Strona University of Wyoming - dane atmosferycznego profilowania pionowego (<a href="http://weather.uwyo.edu/upperair/" class="external-link uri">http://weather.uwyo.edu/upperair/</a>).</p></li>
+<li><p>Strona University of Wyoming - dane atmosferycznego profilowania
+pionowego (<a href="http://weather.uwyo.edu/upperair/" class="external-link uri">http://weather.uwyo.edu/upperair/</a>).</p></li>
 </ul>
 <div class="section level2">
 <h2 id="funkcje">Funkcje<a class="anchor" aria-label="anchor" href="#funkcje"></a>
 </h2>
-<p>Pakiet <strong>climate</strong> składa się z czterech głównych funkcji - dwóch dla danych meteorologicznych, jednej dla danych hydrologicznych i jednej dla sondowania meteo:</p>
+<p>Pakiet <strong>climate</strong> składa się z czterech głównych
+funkcji - dwóch dla danych meteorologicznych, jednej dla danych
+hydrologicznych i jednej dla sondowania meteo:</p>
 <ol style="list-style-type: decimal">
 <li>Dane meteorologiczne</li>
 </ol>
 <ul>
 <li>
-<p><strong>meteo_ogimet()</strong> - Umożliwia pobieranie godzinnych i dziennych danych meteorologicznych ze stacji SYNOP dostępnych w repozytorium ogimet.com. Każda stacja meteorologiczna (Synoptyczna) pracująca w ramach World Meteorological framework powinna być dostępne po roku 2000 roku</p>
+<p><strong>meteo_ogimet()</strong> - Umożliwia pobieranie godzinnych
+i dziennych danych meteorologicznych ze stacji SYNOP dostępnych w
+repozytorium ogimet.com. Każda stacja meteorologiczna (Synoptyczna)
+pracująca w ramach World Meteorological framework powinna być dostępne
+po roku 2000 roku</p>
 <ul>
 <li>
-<strong>stations_ogimet()</strong> - Umożliwia uzyskiwanie współrzędnych geograficznych, położenia stacji nad poziomem morza oraz identyfikatora WMO i nazwy stacji dla kraju określonej przez użytkownika; opcjonalnie wykreśl wyniki na mapie</li>
+<strong>stations_ogimet()</strong> - Umożliwia uzyskiwanie
+współrzędnych geograficznych, położenia stacji nad poziomem morza oraz
+identyfikatora WMO i nazwy stacji dla kraju określonej przez
+użytkownika; opcjonalnie wykreśl wyniki na mapie</li>
 </ul>
 </li>
-<li><p><strong>meteo_imgw()</strong> - Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub miesięcznym o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji dane.imgw.pl. Jest to wrapper funckji <code>meteo_monthly()</code>, <code>meteo_daily()</code> oraz <code>meteo_hourly()</code>z pakietu <strong>imgw</strong> (poprzedniej wersji paczki).</p></li>
-<li><p><strong>meteo_shortening()</strong> - Skracanie nazw kolumn parametrów meteorologicznych poprawiając czytelność pobranego zestawu danych i usuwanie zduplikowanych nazw kolumn.</p></li>
+<li><p><strong>meteo_imgw()</strong> - Pozwala pobrać dane
+meteorologiczne interwale godzinowym, dziennym lub miesięcznym o danej
+randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji
+dane.imgw.pl. Jest to wrapper funckji <code>meteo_monthly()</code>,
+<code>meteo_daily()</code> oraz <code>meteo_hourly()</code>z pakietu
+<strong>imgw</strong> (poprzedniej wersji paczki).</p></li>
+<li><p><strong>meteo_shortening()</strong> - Skracanie nazw kolumn
+parametrów meteorologicznych poprawiając czytelność pobranego zestawu
+danych i usuwanie zduplikowanych nazw kolumn.</p></li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li>Dane hydrologiczne:</li>
 </ol>
 <ul>
 <li>
-<strong>hydro_imgw()</strong> - Pobieranie danych hydrologicznych o interwale dziennym, miesięcznym lub rocznym ze stacji dostępnych w repozytorium dane.imgw.pl. Jest to wrapper funckji <code>meteo_monthly()</code>, <code>meteo_daily()</code> oraz <code>meteo_hourly()</code>z pakietu <strong>imgw</strong> (poprzedniej wersji paczki).</li>
+<strong>hydro_imgw()</strong> - Pobieranie danych hydrologicznych o
+interwale dziennym, miesięcznym lub rocznym ze stacji dostępnych w
+repozytorium dane.imgw.pl. Jest to wrapper funckji
+<code>meteo_monthly()</code>, <code>meteo_daily()</code> oraz
+<code>meteo_hourly()</code>z pakietu <strong>imgw</strong> (poprzedniej
+wersji paczki).</li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li>Dane radiosondażowe :</li>
 </ol>
 <ul>
 <li>
-<strong>meteo_sounding()</strong> - Pobieranie pomiarów pionowych profil atmosfery (danych radiosondażowych)</li>
+<strong>meteo_sounding()</strong> - Pobieranie pomiarów pionowych
+profil atmosfery (danych radiosondażowych)</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="przykłady">Przykłady<a class="anchor" aria-label="anchor" href="#przyk%C5%82ady"></a>
 </h2>
-<p>Pokażemy, jak korzystać z naszego pakietu i przygotować dane do analizy przestrzennej z dodatkową pomocą paczek <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="external-link">dplyr</a> oraz <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html" class="external-link">tidyr</a>. Najpierw pobierzemy 10 lat (<strong>2001-2010</strong>) miesięcznych obserwacji hydrologicznych dla wszystkich dostępnych stacji i automatycznie dodają ich współrzędne przestrzenne.</p>
-<pre><code><span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c23d7ab546</span></span>
+<p>Pokażemy, jak korzystać z naszego pakietu i przygotować dane do
+analizy przestrzennej z dodatkową pomocą paczek <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="external-link">dplyr</a>
+oraz <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html" class="external-link">tidyr</a>.
+Najpierw pobierzemy 10 lat (<strong>2001-2010</strong>) miesięcznych
+obserwacji hydrologicznych dla wszystkich dostępnych stacji i
+automatycznie dodają ich współrzędne przestrzenne.</p>
+<pre><code><span><span class="co">#&gt;     Your system locale is: C.UTF-8 which may cause trouble.</span></span>
+<span><span class="co">#&gt;     Please consider changing it manually while working with climate, e.g.:</span></span>
+<span><span class="co">#&gt;     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8')</span></span>
+<span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee16b8eeeef</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c26b64b645</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee16191288f</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2001/mies_2001.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c25e73d89</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee149ea9456</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2002/mies_2002.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c231201905</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1c1193b7</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2003/mies_2003.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c231868d05</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1250410db</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2004/mies_2004.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c260308e4a</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1484e87df</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2005/mies_2005.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c2689784fc</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee119e89377</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2006/mies_2006.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c22cacf705</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1126f2314</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2007/mies_2007.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c26b60ce82</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee17167cd65</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2008/mies_2008.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c2318f3cf0</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1223c2a43</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2009/mies_2009.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c2508bad51</span></span>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee175d89439</span></span>
 <span><span class="co">#&gt; [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/2010/mies_2010.zip"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpvzOyWe/file3c2335faf99</span></span>
-<span><span class="co">#&gt;              id       X        Y station riv_or_lake  hyy idhyy idex   H   Q  T</span></span>
-<span><span class="co">#&gt; 95158 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    1 214 172 NA</span></span>
-<span><span class="co">#&gt; 95159 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    2 228 207 NA</span></span>
-<span><span class="co">#&gt; 95160 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     1    3 250 272 NA</span></span>
-<span><span class="co">#&gt; 95161 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     2    1 215 174 NA</span></span>
-<span><span class="co">#&gt; 95162 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     2    2 225 201 NA</span></span>
-<span><span class="co">#&gt; 95163 150210180 21.8335 50.88641 ANNOPOL   Wisła (2) 2001     2    3 258 297 NA</span></span>
-<span><span class="co">#&gt;       mm</span></span>
-<span><span class="co">#&gt; 95158 11</span></span>
-<span><span class="co">#&gt; 95159 11</span></span>
-<span><span class="co">#&gt; 95160 11</span></span>
-<span><span class="co">#&gt; 95161 12</span></span>
-<span><span class="co">#&gt; 95162 12</span></span>
-<span><span class="co">#&gt; 95163 12</span></span></code></pre>
-<p>Zmienna <code>idex</code> reprezentuje id ekstremum, gdzie “1” oznacza minimum, “2” oznacza średnią, a “3” maksimum. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas informacje, tj. identyfikator stacji - <code>id</code>, rok hydrologiczny (<code>hyy</code>), szerokość geograficzną <code>X</code> i długość geograficzną<code>Y</code>. Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w każdym roku za pomocą ** dplyr ** <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, oraz rozdzielimy dane według roku używając ** tidyr **’ <code>spread ()</code> aby uzyskać roczne średnie maksymalne przepływy w kolejnych kolumnach.</p>
+<span><span class="co">#&gt; /tmp/RtmpMiMT1A/file1ee1684de9f0</span></span>
+<span><span class="co">#&gt;               id  X  Y station riv_or_lake  hyy idhyy idex   H   Q  T mm</span></span>
+<span><span class="co">#&gt; 94896  150210180 NA NA ANNOPOL   Wisla (2) 2001     1    1 214 172 NA 11</span></span>
+<span><span class="co">#&gt; 94897  150210180 NA NA ANNOPOL   Wisla (2) 2001     1    2 228 207 NA 11</span></span>
+<span><span class="co">#&gt; 94898  150210180 NA NA ANNOPOL   Wisla (2) 2001     1    3 250 272 NA 11</span></span>
+<span><span class="co">#&gt; 94899  150210180 NA NA ANNOPOL   Wisla (2) 2001     2    1 215 174 NA 12</span></span>
+<span><span class="co">#&gt; 94900  150210180 NA NA ANNOPOL   Wisla (2) 2001     2    2 225 201 NA 12</span></span>
+<span><span class="co">#&gt; 94901  150210180 NA NA ANNOPOL   Wisla (2) 2001     2    3 258 297 NA 12</span></span></code></pre>
+<p>Zmienna <code>idex</code> reprezentuje id ekstremum, gdzie “1”
+oznacza minimum, “2” oznacza średnią, a “3” maksimum. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Analizy hydrologiczne
+często koncentrują się na jednej grupy zjawisk, np. związanych z
+przepływami maksymalnymi. W tym celu pozostaną w ramce danych tylko
+wartości przepływów maksymalnych oraz kolumny zawierające interesujące
+nas informacje, tj. identyfikator stacji - <code>id</code>, rok
+hydrologiczny (<code>hyy</code>), szerokość geograficzną <code>X</code>
+i długość geograficzną<code>Y</code>. Następnie obliczymy średnią
+maksymalną wartość przepływu na stacjach w każdym roku za pomocą **
+dplyr ** <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, oraz rozdzielimy dane według roku
+używając ** tidyr **’ <code>spread ()</code> aby uzyskać roczne średnie
+maksymalne przepływy w kolejnych kolumnach.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h2</span> <span class="op">=</span> <span class="va">h</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">idex</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -197,23 +236,23 @@
 <table style="width:100%;" class="table">
 <caption>Examplary data frame of hydrological preprocesssing.</caption>
 <colgroup>
-<col width="9%">
-<col width="12%">
-<col width="8%">
-<col width="8%">
+<col width="11%">
+<col width="14%">
+<col width="3%">
+<col width="3%">
+<col width="6%">
+<col width="6%">
 <col width="5%">
-<col width="5%">
-<col width="4%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
-<th align="right">id</th>
+<th align="left">id</th>
 <th align="left">station</th>
 <th align="right">X</th>
 <th align="right">Y</th>
@@ -230,10 +269,10 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">149180010</td>
-<td align="left">KRZYŻANOWICE</td>
-<td align="right">18.28780</td>
-<td align="right">49.99301</td>
+<td align="left">149180010</td>
+<td align="left">KRZYZANOWICE</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="right">200.5</td>
 <td align="right">147.4</td>
 <td align="right">87.9</td>
@@ -246,10 +285,10 @@
 <td align="right">461.1</td>
 </tr>
 <tr class="even">
-<td align="right">149180020</td>
-<td align="left">CHAŁUPKI</td>
-<td align="right">18.32752</td>
-<td align="right">49.92127</td>
+<td align="left">149180020</td>
+<td align="left">CHALUPKI</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="right">174.7</td>
 <td align="right">96.7</td>
 <td align="right">57.6</td>
@@ -262,10 +301,26 @@
 <td align="right">314.6</td>
 </tr>
 <tr class="odd">
-<td align="right">149180040</td>
-<td align="left">GOŁKOWICE</td>
-<td align="right">18.49640</td>
-<td align="right">49.92579</td>
+<td align="left">149180030</td>
+<td align="left">LAZISKA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">210.3</td>
+</tr>
+<tr class="even">
+<td align="left">149180040</td>
+<td align="left">GOLKOWICE</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="right">4.5</td>
 <td align="right">2.0</td>
 <td align="right">1.7</td>
@@ -277,11 +332,11 @@
 <td align="right">2.2</td>
 <td align="right">8.6</td>
 </tr>
-<tr class="even">
-<td align="right">149180050</td>
+<tr class="odd">
+<td align="left">149180050</td>
 <td align="left">ZEBRZYDOWICE</td>
-<td align="right">18.61326</td>
-<td align="right">49.88025</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="right">13.5</td>
 <td align="right">7.9</td>
 <td align="right">3.8</td>
@@ -293,11 +348,11 @@
 <td align="right">4.5</td>
 <td align="right">23.6</td>
 </tr>
-<tr class="odd">
-<td align="right">149180060</td>
+<tr class="even">
+<td align="left">149180060</td>
 <td align="left">CIESZYN</td>
-<td align="right">18.62972</td>
-<td align="right">49.74616</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 <td align="right">57.2</td>
 <td align="right">57.7</td>
 <td align="right">29.8</td>
@@ -309,56 +364,56 @@
 <td align="right">34.7</td>
 <td align="right">135.0</td>
 </tr>
-<tr class="even">
-<td align="right">149180070</td>
-<td align="left">CIESZYN</td>
-<td align="right">18.63137</td>
-<td align="right">49.74629</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">NaN</td>
-<td align="right">0.6</td>
-<td align="right">0.5</td>
-<td align="right">0.6</td>
-<td align="right">0.6</td>
-</tr>
 </tbody>
 </table>
-<p>Wynik pokazuje jak zmienia się maksymalna roczna średnia prędkość przepływu wody w ciągu dekady dla wszystkich dostępnych stacji w Polsce. Możemy zapisać to do:</p>
+<p>Wynik pokazuje jak zmienia się maksymalna roczna średnia prędkość
+przepływu wody w ciągu dekady dla wszystkich dostępnych stacji w Polsce.
+Możemy zapisać to do:</p>
 <ul>
-<li><p><strong>.csv</strong> przy pomocą funckcji: <code>write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = T, row.names = F)</code>. To polecenie zapisuje nasz wynik do pliku: <code>result.csv</code>, gdzie separatorem kolumn jest <code>;</code>, część dziesiętna liczby następuje po <code>.</code>, zachowujemy nagłówki kolumn i usuwamy nazwy wierszy, które są po prostu liczbami obserwacji.</p></li>
-<li><p><strong>.xlsx</strong> przy pomocą funckcji: <code>write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)</code> To polecenie zapisuje nasz wynik do pliku: <code>result.xlsx</code> o nazwie arkusza <code>Poland</code>. Argument <code>append=TRUE</code> dodaje arkusz do istniejącego pliku <code>.xlsx</code>. By zapisać dane do formatu<code>.xlsx</code> najpierw należy zaisntalować pakiet <strong>writexl</strong> przy pomocy komendy<code>install.packages("writexl")</code>, oraz dodać go do naszego środowiska: <code><a href="https://docs.ropensci.org/writexl/" class="external-link">library(writexl)</a></code>.</p></li>
+<li><p><strong>.csv</strong> przy pomocą funckcji:
+<code>write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = T, row.names = F)</code>.
+To polecenie zapisuje nasz wynik do pliku: <code>result.csv</code>,
+gdzie separatorem kolumn jest <code>;</code>, część dziesiętna liczby
+następuje po <code>.</code>, zachowujemy nagłówki kolumn i usuwamy nazwy
+wierszy, które są po prostu liczbami obserwacji.</p></li>
+<li><p><strong>.xlsx</strong> przy pomocą funckcji:
+<code>write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)</code>
+To polecenie zapisuje nasz wynik do pliku: <code>result.xlsx</code> o
+nazwie arkusza <code>Poland</code>. Argument <code>append=TRUE</code>
+dodaje arkusz do istniejącego pliku <code>.xlsx</code>. By zapisać dane
+do formatu<code>.xlsx</code> najpierw należy zaisntalować pakiet
+<strong>writexl</strong> przy pomocy
+komendy<code>install.packages("writexl")</code>, oraz dodać go do
+naszego środowiska: <code><a href="https://docs.ropensci.org/writexl/" class="external-link">library(writexl)</a></code>.</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap" class="external-link">tmap</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth" class="external-link">rnaturalearth</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rnaturalearth/" class="external-link">rnaturalearth</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearthdata" class="external-link">rnaturalearthdata</a></span><span class="op">)</span></span>
-<span><span class="va">world</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html" class="external-link">ne_countries</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="st">"medium"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
+<span><span class="va">world</span> <span class="op">=</span> <span class="fu">ne_countries</span><span class="op">(</span>scale <span class="op">=</span> <span class="st">"medium"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">h3</span> <span class="op">=</span> <span class="va">h2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">st_as_sf</span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_shape.html" class="external-link">tm_shape</a></span><span class="op">(</span><span class="va">h3</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_symbols.html" class="external-link">tm_symbols</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2001</span><span class="op">:</span><span class="fl">2010</span><span class="op">)</span><span class="op">)</span>,</span>
+<span><span class="fu">tm_shape</span><span class="op">(</span><span class="va">h3</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">tm_symbols</span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2001</span><span class="op">:</span><span class="fl">2010</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>             title.size <span class="op">=</span> <span class="st">"Średni przepływ maksymalny"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_facets.html" class="external-link">tm_facets</a></span><span class="op">(</span>free.scales <span class="op">=</span> <span class="cn">FALSE</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_shape.html" class="external-link">tm_shape</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_polygons.html" class="external-link">tm_borders</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_layout.html" class="external-link">tm_layout</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.25</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
+<span>  <span class="fu">tm_facets</span><span class="op">(</span>free.scales <span class="op">=</span> <span class="cn">FALSE</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">tm_shape</span><span class="op">(</span><span class="va">world</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">tm_borders</span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">tm_layout</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.25</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
 <span>            outer.margins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.05</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.25</span><span class="op">)</span>,</span>
 <span>            panel.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2001</span><span class="op">:</span><span class="fl">2010</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>Więcej informacji na ten temat można znaleźć w zestawie danych<code>hydro_abbrev</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Więcej informacji na ten temat można znaleźć w zestawie
+danych<code>hydro_abbrev</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -380,7 +435,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

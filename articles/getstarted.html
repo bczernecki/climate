@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -88,13 +88,14 @@
 
       
 
-      </header><script src="getstarted_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the climate package</h1>
-                        <h4 data-toc-skip class="author">Bartosz Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
+                        <h4 data-toc-skip class="author">Bartosz
+Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2023-03-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/HEAD/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -103,30 +104,48 @@
 
     
     
-<p>The goal of the <strong>climate</strong> R package is to automatize downloading of meteorological and hydrological data from publicly available repositories:</p>
+<p>The goal of the <strong>climate</strong> R package is to automatize
+downloading of meteorological and hydrological data from publicly
+available repositories:</p>
 <ul>
 <li>OGIMET <a href="http://ogimet.com/index.phtml.en" class="external-link">(ogimet.com)</a>
 </li>
 <li>University of Wyoming - atmospheric vertical profiling data (<a href="http://weather.uwyo.edu/upperair/" class="external-link uri">http://weather.uwyo.edu/upperair/</a>).</li>
-<li>Polish Institute of Meterology and Water Management - National Research Institute <a href="https://dane.imgw.pl/" class="external-link">(IMGW-PIB)</a>
+<li>Polish Institute of Meterology and Water Management - National
+Research Institute <a href="https://dane.imgw.pl/" class="external-link">(IMGW-PIB)</a>
 </li>
-<li>National Oceanic &amp; Atmospheric Administration - Earth System Research Laboratory - Global Monitoring Division <a href="https://gml.noaa.gov/ccgg/trends/" class="external-link">(NOAA)</a>
+<li>National Oceanic &amp; Atmospheric Administration - Earth System
+Research Laboratory - Global Monitoring Division <a href="https://gml.noaa.gov/ccgg/trends/" class="external-link">(NOAA)</a>
 </li>
-<li>National Oceanic &amp; Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) <a href="https://www1.ncdc.noaa.gov/pub/data/noaa/" class="external-link">(NOAA)</a>
+<li>National Oceanic &amp; Atmospheric Administration - National
+Climatic Data Center - Integrated Surface Hourly (ISH) <a href="https://www1.ncdc.noaa.gov/pub/data/noaa/" class="external-link">(NOAA)</a>
 </li>
 </ul>
 <div class="section level2">
 <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
 </h2>
-<p>The <strong>climate</strong> package consists of ten main functions - three for meteorological data, one for hydrological data and six auxiliary functions and datasets:</p>
+<p>The <strong>climate</strong> package consists of ten main functions -
+three for meteorological data, one for hydrological data and six
+auxiliary functions and datasets:</p>
 <div class="section level3">
 <h3 id="meteorological-data">Meteorological data<a class="anchor" aria-label="anchor" href="#meteorological-data"></a>
 </h3>
 <ul>
-<li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton (WMO) framework after year 2000 should be accessible.</p></li>
-<li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, and <code>meteo_hourly()</code></p></li>
-<li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
-<li><p><strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
+<li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily
+meteorological data from the SYNOP stations available in the ogimet.com
+collection. Any meteorological (aka SYNOP) station working under the
+World Meteorological Organizaton (WMO) framework after year 2000 should
+be accessible.</p></li>
+<li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and
+monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations
+available in the dane.imgw.pl collection. It is a wrapper for
+<code>meteo_monthly()</code>, <code>meteo_daily()</code>, and
+<code>meteo_hourly()</code></p></li>
+<li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NOAA
+Integrated Surface Hourly (ISH) meteorological data - Some stations have
+&gt; 100 years long history of observations</p></li>
+<li><p><strong>sounding_wyoming()</strong> - Downloading measurements of
+the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -134,7 +153,11 @@
 </h3>
 <ul>
 <li>
-<strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>hydro_annual()</code>, <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
+<strong>hydro_imgw()</strong> - Downloading hourly, daily, and
+monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations
+available in the danepubliczne.imgw.pl collection. It is a wrapper for
+<code>hydro_annual()</code>, <code>hydro_monthly()</code>, and
+<code>hydro_daily()</code>
 </li>
 </ul>
 </div>
@@ -143,24 +166,37 @@
 </h3>
 <ul>
 <li>
-<strong>stations_ogimet()</strong> - Downloading information about all stations available in the selected country in the Ogimet repository</li>
+<strong>stations_ogimet()</strong> - Downloading information about
+all stations available in the selected country in the Ogimet
+repository</li>
 <li>
-<strong>nearest_stations_ogimet()</strong> - Downloading information about nearest stations to the selected point available for the selected country in the Ogimet repository</li>
+<strong>nearest_stations_ogimet()</strong> - Downloading information
+about nearest stations to the selected point available for the selected
+country in the Ogimet repository</li>
 <li>
-<strong>imgw_meteo_stations</strong> - Built-in metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers</li>
+<strong>imgw_meteo_stations</strong> - Built-in metadata from the
+IMGW-PIB repository for meteorological stations, their geographical
+coordinates, and ID numbers</li>
 <li>
-<strong>imgw_hydro_stations</strong> - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers</li>
+<strong>imgw_hydro_stations</strong> - Built-in metadata from the
+IMGW-PIB repository for hydrological stations, their geographical
+coordinates, and ID numbers</li>
 <li>
-<strong>imgw_meteo_abbrev</strong> - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)</li>
+<strong>imgw_meteo_abbrev</strong> - Dictionary explaining variables
+available for meteorological stations (from the IMGW-PIB
+repository)</li>
 <li>
-<strong>imgw_hydro_abbrev</strong> - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)</li>
+<strong>imgw_hydro_abbrev</strong> - Dictionary explaining variables
+available for hydrological stations (from the IMGW-PIB repository)</li>
 </ul>
 </div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Examples shows application of climate package with additional use of tools that help with processing the data to increase legible of downloaded data.</p>
+<p>Examples shows application of climate package with additional use of
+tools that help with processing the data to increase legible of
+downloaded data.</p>
 <ul>
 <li><a href="https://CRAN.R-project.org/package=dplyr" class="external-link">dplyr</a></li>
 <li><a href="https://CRAN.R-project.org/package=tidyr" class="external-link">tidyr</a></li>
@@ -168,23 +204,33 @@
 <div class="section level3">
 <h3 id="example-1">Example 1<a class="anchor" aria-label="anchor" href="#example-1"></a>
 </h3>
-<p>Finding a 50 nearest meteorological stations for a given coordinates in a given country(ies):</p>
+<p>Finding a 50 nearest meteorological stations for a given coordinates
+in a given country(ies):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">ns</span> <span class="op">=</span> <span class="fu"><a href="../reference/nearest_stations_ogimet.html">nearest_stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"United Kingdom"</span>, <span class="st">"France"</span><span class="op">)</span>,</span>
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp8rKSQm/file43f525a7188</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp8rKSQm/file43f4236b053</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2023&amp;mes=03&amp;day=26&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpBW3OZh/file1f75166fb77e</span></span>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2023&amp;mes=03&amp;day=26&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpBW3OZh/file1f754fa7001</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ns</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="6%">
+<col width="10%">
+<col width="33%">
+<col width="15%">
+<col width="13%">
+<col width="6%">
+<col width="15%">
+</colgroup>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="left">wmo_id</th>
@@ -196,7 +242,7 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">127</td>
+<td align="left">125</td>
 <td align="left">03894</td>
 <td align="left">Guernsey Airport</td>
 <td align="right">-2.600012</td>
@@ -205,7 +251,7 @@
 <td align="right">77.82048</td>
 </tr>
 <tr class="even">
-<td align="left">121</td>
+<td align="left">119</td>
 <td align="left">03857</td>
 <td align="left">Isle Of Portland</td>
 <td align="right">-2.466676</td>
@@ -214,7 +260,7 @@
 <td align="right">83.31233</td>
 </tr>
 <tr class="odd">
-<td align="left">119</td>
+<td align="left">117</td>
 <td align="left">03844</td>
 <td align="left">Exeter Airport No2</td>
 <td align="right">-3.400008</td>
@@ -223,7 +269,7 @@
 <td align="right">93.72323</td>
 </tr>
 <tr class="even">
-<td align="left">118</td>
+<td align="left">116</td>
 <td align="left">03840</td>
 <td align="left">Dunkeswell Aerodrome</td>
 <td align="right">-3.233338</td>
@@ -232,7 +278,7 @@
 <td align="right">100.70161</td>
 </tr>
 <tr class="odd">
-<td align="left">120</td>
+<td align="left">118</td>
 <td align="left">03853</td>
 <td align="left">Yeovilton</td>
 <td align="right">-2.633346</td>
@@ -241,7 +287,7 @@
 <td align="right">119.50052</td>
 </tr>
 <tr class="even">
-<td align="left">144</td>
+<td align="left">142</td>
 <td align="left">07020</td>
 <td align="left">La Hague</td>
 <td align="right">-1.933352</td>
@@ -250,7 +296,7 @@
 <td align="right">123.82404</td>
 </tr>
 <tr class="odd">
-<td align="left">128</td>
+<td align="left">126</td>
 <td align="left">03895</td>
 <td align="left">Jersey Airport</td>
 <td align="right">-2.200004</td>
@@ -259,7 +305,7 @@
 <td align="right">125.62009</td>
 </tr>
 <tr class="even">
-<td align="left">117</td>
+<td align="left">115</td>
 <td align="left">03827</td>
 <td align="left">Plymouth</td>
 <td align="right">-4.116669</td>
@@ -268,7 +314,7 @@
 <td align="right">131.29669</td>
 </tr>
 <tr class="odd">
-<td align="left">100</td>
+<td align="left">98</td>
 <td align="left">03710</td>
 <td align="left">Liscombe</td>
 <td align="right">-3.600012</td>
@@ -277,7 +323,7 @@
 <td align="right">138.94411</td>
 </tr>
 <tr class="even">
-<td align="left">166</td>
+<td align="left">165</td>
 <td align="left">07117</td>
 <td align="left">Ploumanac’h</td>
 <td align="right">-3.466676</td>
@@ -286,7 +332,7 @@
 <td align="right">140.97809</td>
 </tr>
 <tr class="odd">
-<td align="left">167</td>
+<td align="left">166</td>
 <td align="left">07118</td>
 <td align="left">Lannion</td>
 <td align="right">-3.466676</td>
@@ -295,7 +341,7 @@
 <td align="right">149.69950</td>
 </tr>
 <tr class="even">
-<td align="left">122</td>
+<td align="left">120</td>
 <td align="left">03862</td>
 <td align="left">Bournemouth Airport</td>
 <td align="right">-1.833350</td>
@@ -304,7 +350,7 @@
 <td align="right">157.66359</td>
 </tr>
 <tr class="odd">
-<td align="left">101</td>
+<td align="left">99</td>
 <td align="left">03716</td>
 <td align="left">St. Athan</td>
 <td align="right">-3.433342</td>
@@ -313,7 +359,7 @@
 <td align="right">164.42872</td>
 </tr>
 <tr class="even">
-<td align="left">168</td>
+<td align="left">167</td>
 <td align="left">07120</td>
 <td align="left">Saint-Brieuc</td>
 <td align="right">-2.850017</td>
@@ -322,7 +368,7 @@
 <td align="right">165.41210</td>
 </tr>
 <tr class="odd">
-<td align="left">145</td>
+<td align="left">143</td>
 <td align="left">07024</td>
 <td align="left">Cherbourg / Maupertus</td>
 <td align="right">-1.466676</td>
@@ -336,12 +382,13 @@
 <div class="section level3">
 <h3 id="example-2">Example 2<a class="anchor" aria-label="anchor" href="#example-2"></a>
 </h3>
-<p>Summary of stations available in Ogimet repository for a selected country:</p>
+<p>Summary of stations available in Ogimet repository for a selected
+country:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2022&amp;mes=10&amp;day=23&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/Rtmp8rKSQm/file43f7abf050d</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2023&amp;mes=03&amp;day=26&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpBW3OZh/file1f7542c7a71</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -405,7 +452,8 @@
 <div class="section level3">
 <h3 id="example-3">Example 3<a class="anchor" aria-label="anchor" href="#example-3"></a>
 </h3>
-<p>Downlading hourly meteorological data from Svalbard (Norway) for year 2016 using NOAA service</p>
+<p>Downlading hourly meteorological data from Svalbard (Norway) for year
+2016 using NOAA service</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># downloading data with NOAA service:</span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_noaa_hourly.html">meteo_noaa_hourly</a></span><span class="op">(</span>station <span class="op">=</span> <span class="st">"010080-99999"</span>, year <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span>
@@ -417,6 +465,23 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="3%">
+<col width="21%">
+<col width="5%">
+<col width="6%">
+<col width="4%">
+<col width="5%">
+<col width="7%">
+<col width="6%">
+<col width="4%">
+<col width="4%">
+<col width="6%">
+<col width="3%">
+<col width="4%">
+<col width="7%">
+<col width="11%">
+</colgroup>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="left">date</th>
@@ -543,7 +608,8 @@
 <div class="section level3">
 <h3 id="example-4">Example 4<a class="anchor" aria-label="anchor" href="#example-4"></a>
 </h3>
-<p>Downloading atmospheric vertical profile (sounding) for Łeba, PL station:</p>
+<p>Downloading atmospheric vertical profile (sounding) for Łeba, PL
+station:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">profile_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sounding_wyoming.html">sounding_wyoming</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">12120</span>,</span>
 <span>                                 yy <span class="op">=</span> <span class="fl">2000</span>,</span>
@@ -704,7 +770,8 @@
 <div class="section level3">
 <h3 id="example-5">Example 5<a class="anchor" aria-label="anchor" href="#example-5"></a>
 </h3>
-<p>Preparing an annual summary of air temperature and precipitation using <strong>dplyr</strong> syntax for 10-years period (1991-2000)</p>
+<p>Preparing an annual summary of air temperature and precipitation
+using <strong>dplyr</strong> syntax for 10-years period (1991-2000)</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_imgw.html">meteo_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, rank <span class="op">=</span> <span class="st">"synop"</span>, year <span class="op">=</span> <span class="fl">1991</span><span class="op">:</span><span class="fl">2000</span>, station <span class="op">=</span> <span class="st">"ŁEBA"</span><span class="op">)</span> </span>
@@ -725,6 +792,21 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">monthly_summary</span><span class="op">)</span> <span class="op">=</span> <span class="va">month.abb</span></span></code></pre></div>
 <table class="table">
 <caption>Exemplary data frame of meteorological preprocessing.</caption>
+<colgroup>
+<col width="10%">
+<col width="8%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="8%">
+</colgroup>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="right">Jan</th>
@@ -807,7 +889,10 @@
 <div class="section level3">
 <h3 id="example-6">Example 6<a class="anchor" aria-label="anchor" href="#example-6"></a>
 </h3>
-<p>Calculate the mean maximum value of the flow on the stations in each year with <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, and spread data by year using <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread()</a></code> to get the annual means of maximum flow in the consecutive columns.</p>
+<p>Calculate the mean maximum value of the flow on the stations in each
+year with <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, and spread
+data by year using <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread()</a></code> to get
+the annual means of maximum flow in the consecutive columns.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -816,6 +901,21 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="7%">
+<col width="12%">
+<col width="9%">
+<col width="10%">
+<col width="9%">
+<col width="14%">
+<col width="6%">
+<col width="7%">
+<col width="6%">
+<col width="4%">
+<col width="4%">
+<col width="3%">
+<col width="3%">
+</colgroup>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="right">id</th>
@@ -1000,18 +1100,29 @@
 <div class="section level2">
 <h2 id="acknowledgment">Acknowledgment<a class="anchor" aria-label="anchor" href="#acknowledgment"></a>
 </h2>
-<p>Ogimet.com, University of Wyoming, and Institute of Meteorology and Water Management - National Research Institute (IMGW-PIB), National Oceanic &amp; Atmospheric Administration (NOAA) - Earth System Research Laboratories - Global Monitoring Laboratory, Global Monitoring Division and Integrated Surface Hourly (NOAA ISH) are the sources of the data.</p>
+<p>Ogimet.com, University of Wyoming, and Institute of Meteorology and
+Water Management - National Research Institute (IMGW-PIB), National
+Oceanic &amp; Atmospheric Administration (NOAA) - Earth System Research
+Laboratories - Global Monitoring Laboratory, Global Monitoring Division
+and Integrated Surface Hourly (NOAA ISH) are the sources of the
+data.</p>
 </div>
 <div class="section level2">
 <h2 id="contribution">Contribution<a class="anchor" aria-label="anchor" href="#contribution"></a>
 </h2>
-<p>Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Feel also free to contact us by creating <a href="https://github.com/bczernecki/climate/issues" class="external-link">an issue</a>.</p>
+<p>Contributions to this package are welcome. The preferred method of
+contribution is through a GitHub pull request. Feel also free to contact
+us by creating <a href="https://github.com/bczernecki/climate/issues" class="external-link">an
+issue</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>To cite the <code>climate</code> package in publications, please use <a href="https://www.mdpi.com/2071-1050/12/1/394" class="external-link">this paper</a>:</p>
-<p>Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org/10.3390/su12010394" class="external-link uri">https://doi.org/10.3390/su12010394</a>"</p>
+<p>To cite the <code>climate</code> package in publications, please use
+<a href="https://www.mdpi.com/2071-1050/12/1/394" class="external-link">this paper</a>:</p>
+<p>Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to
+Access Free In-Situ Meteorological and Hydrological Datasets for
+Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org/10.3390/su12010394" class="external-link uri">https://doi.org/10.3390/su12010394</a>”</p>
 <p>LaTeX version can be obtained with:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"climate"</span><span class="op">)</span></span></code></pre>
@@ -1036,7 +1147,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

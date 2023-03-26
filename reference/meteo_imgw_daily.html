@@ -18,7 +18,7 @@ available in the danepubliczne.imgw.pl collection"><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -129,24 +129,27 @@ shortens column names</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="va">daily</span> <span class="op">=</span> <span class="fu">meteo_imgw_daily</span><span class="op">(</span>rank <span class="op">=</span> <span class="st">"climate"</span>, year <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Your system locale is: C.UTF-8 which may cause trouble.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Please consider changing it manually while working with climate, e.g.:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/k_d_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file18175fc827b</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc21a406db5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/k_d_t_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815ee25c3e</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc23d9cc283</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815be239a4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc2121eb324</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1815be239a4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc2121eb324</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/1996_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181c46dd91</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc271abe8c8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/1997_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file18125144d57</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc237cedf60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/1998_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181cbc2d08</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc25cf7e8d6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/1999_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file181f70c31e</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc223c1f48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/klimat/1996_2000/2000_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp5RQela/file1811701ea96</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpwXKjiV/file1bc26ad5a0e6</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -163,7 +166,7 @@ shortens column names</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
