@@ -179,10 +179,10 @@ ogimet_daily_bp = function(date = date,
           b = b[-c(1:2), ]
           b["station_ID"] = station_nr
     
-          # adding year to date
-          # 1) - check if date is for last days and beginning of years 
-          # simultanously, e.g. "01/02" "01/01" "12/31" "12/30"
-          if (all(unique(unlist(lapply(strsplit(b$Date, "/"), "[[", 1))) == c("01", "12"))) {
+          # extra check if date is for December and January simultanously
+          # e.g. "01/02" "01/01" "12/31" "12/30"
+          uniq_mths = sort(unique(unlist(lapply(strsplit(b$Date, "/"), "[[", 1))))
+          if (sum(uniq_mths %in% c("01", "12")) == 2) {
             mth = unlist(lapply(strsplit(b$Date, "/"), "[[", 1))
             yr = ifelse(mth == "01", as.numeric(year), as.numeric(year) - 1)
             b$Date = as.character(paste0(b$Date, "/", yr))

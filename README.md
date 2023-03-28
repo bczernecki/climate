@@ -248,27 +248,29 @@ ggplot(co2, aes(date, co2_avg)) +
 ```python
 # load required packages
 from rpy2.robjects.packages import importr
-from rpy2.robjects import r
 import rpy2.robjects as robjects
 import pandas as pd
+import datetime as dt
 
 # load climate package (make sure that it was installed in R before)
 importr('climate')
 # test functionality e.g. with meteo_ogimet function for New York - La Guardia:
-df = robjects.r['meteo_ogimet'](interval = "daily", station = 72503)
-# optionally - transform object to pandas data frame and rename columns:
+df = robjects.r['meteo_ogimet'](interval = "daily", station = 72503,
+                                date = robjects.StrVector(['2022-05-01', '2022-06-15']))
+# optionally - transform object to pandas data frame and rename columns + fix datetime:
 res = pd.DataFrame(df).transpose()
 res.columns = df.colnames
+res['Date'] = pd.TimedeltaIndex(res['Date'], unit='d') + dt.datetime(1970,1,1)
+res.head
 
->>> res
-#   station_ID     Date TemperatureCAvg 
-#0     72503.0  19227.0            24.7 
-#1     72503.0  19226.0            25.1 
-#2     72503.0  19225.0            27.5 
-#3     72503.0  19224.0            26.8 
-#4     72503.0  19223.0            24.7 
-#5     72503.0  19222.0            23.3 
-#[178 rows x 23 columns]
+>>> res[res.columns[0:7]].head()
+#  station_ID       Date TemperatureCAvg  ... TemperatureCMin TdAvgC HrAvg
+#0    72503.0 2022-06-15            23.5  ...            19.4   10.9  45.2
+#1    72503.0 2022-06-14            25.0  ...            20.6   16.1  59.0
+#2    72503.0 2022-06-13            20.4  ...            17.8   16.0  74.8
+#3    72503.0 2022-06-12            21.3  ...            18.3   12.0  57.1
+#4    72503.0 2022-06-11            22.6  ...            17.8    8.1  40.1
+
 ```
 
 ## Acknowledgment
