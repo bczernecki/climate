@@ -100,13 +100,15 @@ sounding_wyoming_bp = function(wmo_id,
   dd = formatC(dd, width = 2, format = "d", flag = "0")
   hh = formatC(hh, width = 2, format = "d", flag = "0")
   min = formatC(min, width = 2, format = "d", flag = "0")
- 
+
   if (bufr) {
-    url = paste0("http://weather.uwyo.edu/cgi-bin/bufrraob.py?datetime=", 
-                 yy, "-", mm, "-", dd, "+", hh, ":", min, ":00&id=", wmo_id, "&type=TEXT:LIST")
+    url = paste0("http://weather.uwyo.edu/cgi-bin/bufrraob.py?src=bufr&datetime=", 
+                 yy, "-", mm, "-", dd, "+", hh, ":", min, ":00&id=", 
+                 sprintf("%05d", wmo_id), "&type=TEXT:LIST")
   } else {
     url = paste0("http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&YEAR=",
-                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=", wmo_id)
+                 yy, "&MONTH=", mm, "&FROM=", dd, hh, "&TO=", dd, hh, "&STNM=",
+                 sprintf("%05d", wmo_id))
   }
   
   temp = tempfile()
@@ -154,4 +156,3 @@ sounding_wyoming_bp = function(wmo_id,
   unlink(temp)
   return(df)
 }
-

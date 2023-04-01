@@ -14,8 +14,7 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   temp = tempfile()
   test_url(link = address, output = temp)
   a = readLines(temp, warn = FALSE)
-
-  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT")
+  a = iconv(a, from = "CP1250", to = "ASCII//TRANSLIT")
   a = gsub(a, pattern = "\\?", replacement = "")
 
   # additional workarounds for mac os but not only...
@@ -27,10 +26,10 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   #                                        fileEncoding = "CP1250", stringsAsFactors = FALSE)))
   length_char = max(nchar(a$V1), na.rm = TRUE)
 
-  if (rank == "precip" && interval == "hourly") length_char = 40 # wyjatek dla precipow
-  if (rank == "precip" && interval == "daily") length_char = 40 # wyjatek dla precipow dobowych
-  if (rank == "synop" && interval == "hourly") length_char = 60 # wyjatek dla synopow terminowych
-  if (rank == "climate" && interval == "monthly") length_char = 52 # wyjatek dla synopow terminowych
+  if (rank == "precip" && interval == "hourly") length_char = 40 # exception for precip / hourly
+  if (rank == "precip" && interval == "daily") length_char = 38 # exception for precip / daily
+  if (rank == "synop" && interval == "hourly") length_char = 60 # exception for synop / hourly
+  if (rank == "climate" && interval == "monthly") length_char = 52 # exception for climate / monthly
 
   field = substr(a$V1, length_char - 3, length_char)
 
@@ -43,8 +42,9 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   a$field2 = suppressWarnings(as.numeric(unlist(lapply(strsplit(field, "/"), function(x) x[2]))))
 
   a$V1 = trimws(substr(a$V1, 1, nchar(a$V1) - 3))
+  a$V1 = gsub(x = a$V1, pattern = "*  ", "")
 
-  strsplit(x = a$V1, split = "/")
+  #strsplit(x = a$V1, split = "/")
   #a = a[nchar(a$V1)>2,] # remove empty or almost empty rows
   a = a[!(is.na(a$field1) & is.na(a$field2)), ] # remove info about status
   colnames(a)[1] = "parameters"

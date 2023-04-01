@@ -21,8 +21,6 @@
 #' }
 #'
 
-
-
 ogimet_daily = function(date = c(Sys.Date() - 30, Sys.Date()),
                         coords = FALSE, 
                         station = NA, 
@@ -95,14 +93,17 @@ ogimet_daily_bp = function(date = date,
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
       ndays = day
+
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
-      if (month == 1) linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour, "&ord=REV&Send=Send", sep = "")
-      
       temp = tempfile()
       test_url(linkpl2, temp)
-      
-      # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 500)) { 
+      if (is.na(file.size(temp)) | (file.size(temp) < 500)) { 
+        message("Problem with downloading data from:", linkpl2, "\n")
+        if (exists("data_station")) {
+          message("Returning results downloaded up to this point:\n")
+          return(data_station)
+        }
+      } else { # run only if downloaded file is valid
         
         a = readHTMLTable(temp, stringsAsFactors = FALSE)
         unlink(temp)
@@ -124,7 +125,8 @@ ogimet_daily_bp = function(date = date,
           test = b[1:2, ]
           
           if (is.null(test) ) {
-            warning(paste0("Wrong station ID: ", station_nr, " You can check available stations ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
+            warning(paste0("Wrong station ID: ", station_nr,
+                           " You can check available stations ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
             return(data_station)
           } 
           
@@ -168,7 +170,7 @@ ogimet_daily_bp = function(date = date,
               names_col = "Error_column"
             }
 
-          names_col <-
+          names_col =
             gsub("[^A-Za-z0-9]",
                  "",
                  as.character(lapply(names_col, as.character), stringsAsFactors = FALSE))
@@ -177,10 +179,17 @@ ogimet_daily_bp = function(date = date,
           b = b[-c(1:2), ]
           b["station_ID"] = station_nr
     
-          # adding year to date
-          b$Date = as.character(paste0(b$Date, "/", year))
-          
-          
+          # extra check if date is for December and January simultanously
+          # e.g. "01/02" "01/01" "12/31" "12/30"
+          uniq_mths = sort(unique(unlist(lapply(strsplit(b$Date, "/"), "[[", 1))))
+          if (sum(uniq_mths %in% c("01", "12")) == 2) {
+            mth = unlist(lapply(strsplit(b$Date, "/"), "[[", 1))
+            yr = ifelse(mth == "01", as.numeric(year), as.numeric(year) - 1)
+            b$Date = as.character(paste0(b$Date, "/", yr))
+          } else {
+            b$Date = as.character(paste0(b$Date, "/", year))
+          }
+
           # to avoid gtools::smartbind function or similar from another package..
           if (ncol(data_station) >= ncol(b)) {
             b[setdiff(names(data_station), names(b))] = NA # adding missing columns
@@ -196,9 +205,6 @@ ogimet_daily_bp = function(date = date,
     
             }
     
-          # cat(paste(year,month,"\n"))
-          # coords można lepiej na samym koncu dodać kolumne
-          # wtedy jak zmienia się lokalizacja na dacie to tutaj tez
           if (coords) {
             coord = a[[1]][2, 1]
             data_station["Lon"] = get_coord_from_string(coord, "Longitude")
@@ -247,8 +253,10 @@ ogimet_daily_bp = function(date = date,
     data_station$Date = as.Date(as.character(data_station$Date), format = "%m/%d/%Y")
     # clipping to interesting period as we're downloading slightly more than needed:
     data_station = data_station[which(data_station$Date >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
-
+    
   } # end of checking whether no. of rows > 0 
   
+  # removing duplicates:
+  data_station = data_station[row.names(unique(data_station[, c("station_ID", "Date")])), ]
   return(data_station)
 }
