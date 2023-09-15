@@ -1,3 +1,8 @@
+# climate 1.2.0
+
+* Support for telemetry dataset from IMGW-PIB repository - currently only for air temperature
+* update for location of IMGW-PIB stations
+
 # climate 1.1.1
 
 * Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata
