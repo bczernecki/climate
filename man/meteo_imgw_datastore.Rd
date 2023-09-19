@@ -4,12 +4,17 @@
 \alias{meteo_imgw_datastore}
 \title{IMGW meteorological data from the IMGW datastore repository}
 \usage{
-meteo_imgw_datastore(year, allow_failure = TRUE, parameters = NULL, ...)
+meteo_imgw_datastore(
+  year,
+  parameters = NULL,
+  stations = NULL,
+  coords = TRUE,
+  allow_failure = TRUE,
+  ...
+)
 }
 \arguments{
 \item{year}{numeric vector of years to be downloaded (e.g., 2022:2023)}
-
-\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
 \item{parameters}{\itemize{
 \item character vector describing which parameters to be downloaded. Default \code{NULL} means to download all available.
@@ -28,19 +33,35 @@ meteo_imgw_datastore(year, allow_failure = TRUE, parameters = NULL, ...)
 }
 }}
 
-\item{...}{other parameters that may be passed to the 'shortening'
-function that shortens column names}
+\item{stations}{\itemize{
+\item character vector with station names as visible in the \code{meteo_imgw_telemetry_stations()}.
+Default \code{NULL} means to download data for all available stations.
+}}
+
+\item{coords}{\itemize{
+\item logical - whether to append the dataset with station full name, longitude, latitude and altitude. Default: TRUE
+}}
+
+\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
+
+\item{...}{other parameters that may be passed (for debugging purposes mostly)}
 }
 \description{
 Downloading hourly (meteorological) data from the telemetric stations
 available in the danepubliczne.imgw.pl/datastore collection since 2008.
-Most parameters are collected within 10 minutes interval and thus it is recommended to download only the mandatory years or parameters.
-For example, 1 year of data with all available parameters requires processing around 5GB of data.
-Data from the IMGW automated (telemetry) systems are non validated by experts and may contain not valid measurements.
+Most parameters are collected with 10 minutes interval and thus it is recommended to download only the mandatory years, parameters or stations.
+For example, 1 year of data with all available parameters requires processing around 4GB of uncompressed data.
+}
+\details{
+Data from the IMGW automated (telemetry) systems are non validated by experts and may contain invalid values.
 }
 \examples{
 \donttest{
-  imgw_telemetry = meteo_imgw_datastore(year = 2023, parameters = "t2m")
+# download only air temperature for selected 2 stations in years 2022-2023:
+imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
+                                     parameters = "t2m",
+                                     stations = c("HALA GĄSIENICOWA", "DOLINA PIĘCIU STAWÓW"),
+                                     coords = TRUE)
 }
 
 }
