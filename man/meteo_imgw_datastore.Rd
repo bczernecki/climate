@@ -9,8 +9,7 @@ meteo_imgw_datastore(
   parameters = NULL,
   stations = NULL,
   coords = TRUE,
-  allow_failure = TRUE,
-  ...
+  allow_failure = TRUE
 )
 }
 \arguments{
@@ -43,8 +42,6 @@ Default \code{NULL} means to download data for all available stations.
 }}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
-
-\item{...}{other parameters that may be passed (for debugging purposes mostly)}
 }
 \description{
 Downloading hourly (meteorological) data from the telemetric stations
@@ -59,10 +56,10 @@ Data from the IMGW automated (telemetry) systems are non validated by experts an
 \donttest{
 # download only air temperature for selected 2 stations in 2022-2023:
 imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
-                                     parameters = "t2m",
-                                     stations = c("HALA GĄSIENICOWA",
-                                                  "DOLINA PIĘCIU STAWÓW"),
-                                     coords = TRUE)
+                                      parameters = "t2m",
+                                      stations = c("HALA GĄSIENICOWA",
+                                                   "DOLINA PIĘCIU STAWÓW"),
+                                      coords = TRUE)
 }
 
 }

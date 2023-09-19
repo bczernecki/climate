@@ -27,17 +27,16 @@
 #' Default `NULL` means to download data for all available stations.
 #' @param coords - logical - whether to append the dataset with station full name, longitude, latitude and altitude. Default: TRUE
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
-#' @param ... other parameters that may be passed (for debugging purposes mostly)
 #' @import data.table
 #' @export
 #'
 #' @examples \donttest{
 #' # download only air temperature for selected 2 stations in 2022-2023:
 #' imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
-#'                                      parameters = "t2m",
-#'                                      stations = c("HALA GĄSIENICOWA",
-#'                                                   "DOLINA PIĘCIU STAWÓW"),
-#'                                      coords = TRUE)
+#'                                       parameters = "t2m",
+#'                                       stations = c("HALA GĄSIENICOWA",
+#'                                                    "DOLINA PIĘCIU STAWÓW"),
+#'                                       coords = TRUE)
 #' }
 #'
 
@@ -46,15 +45,13 @@ meteo_imgw_datastore = function(year,
                                 parameters = NULL,
                                 stations = NULL,
                                 coords = TRUE,
-                                allow_failure = TRUE,
-                                ...) {
+                                allow_failure = TRUE) {
   
   if (allow_failure) {
     tryCatch(meteo_imgw_datastore_bp(year,
                                      parameters,
                                      stations,
-                                     coords,
-                                     ...),
+                                     coords),
              warning = function(w) {
                message(paste("Potential problem(s) found. Problems with downloading data.\n",
                              "\rRun function with argument allow_failure = FALSE",
@@ -68,8 +65,7 @@ meteo_imgw_datastore = function(year,
     meteo_imgw_datastore_bp(year,
                             parameters,
                             stations,
-                            coords,
-                            ...)
+                            coords)
   }
 }
 
@@ -78,8 +74,7 @@ meteo_imgw_datastore = function(year,
 meteo_imgw_datastore_bp = function(year,
                                    parameters,
                                    stations,
-                                   coords,
-                                   ...) {
+                                   coords) {
   # read metadata for stations:
   telemetry_stations = meteo_imgw_telemetry_stations()
   telemetry_stations$river = NULL
@@ -111,6 +106,7 @@ meteo_imgw_datastore_bp = function(year,
   all_data = NULL
   
   for (i in seq_along(urls)) {
+    
     temp = tempfile()
     temp2 = tempfile()
     tmp_dir = file.path(tempdir(), basename(urls[i]))
@@ -124,8 +120,9 @@ meteo_imgw_datastore_bp = function(year,
     } else {
       message("IMGW datastore does not contain data for ", paste(basename(urls[i])), ". skipping\n")
     }
-    
+
     files_to_read = dir(tmp_dir, full.names = TRUE, pattern = paste0(dict$V2, collapse = "|"))
+    files_to_read = files_to_read[file.size(files_to_read) > 0]
     
     all_data[[i]] = data.table::rbindlist(
       lapply(files_to_read,
@@ -138,7 +135,10 @@ meteo_imgw_datastore_bp = function(year,
              )
       ),
       fill = TRUE)
-    all_data[[i]] = all_data[[i]]
+    
+    if (!is.null(stations)) {
+      all_data[[i]] = all_data[[i]][all_data[[i]]$V1 %in% telemetry_stations$id, ]
+    }
     
     unlink(c(temp, temp2, tmp_dir), recursive = TRUE)
   }
@@ -147,11 +147,14 @@ meteo_imgw_datastore_bp = function(year,
   all_data = all_data[dict, on = 'V2', param := i.parameter]
   all_data = data.table::dcast(all_data, V1 + V3  ~ param, value.var = "V4")
   all_data$V3 = as.POSIXct(all_data$V3, tz = "UTC")
+  
   if (coords) {
     class(telemetry_stations$id) = class(all_data$V1)     # equalise classes of objects:
     all_data = merge(all_data, telemetry_stations, by.x = "V1", by.y = "id", all = FALSE)
+    data.table::setcolorder(all_data, c("V1", "name", "lon", "lat", "alt"))
   }
-  colnames(all_data)[1:2] = c("id", "date_time")
+  
+  colnames(all_data)[which(colnames(all_data) %in% c("V1", "V3"))] = c("id", "date_time")
   
   return(all_data)
 }
