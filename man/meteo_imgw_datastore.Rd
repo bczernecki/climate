@@ -57,10 +57,11 @@ Data from the IMGW automated (telemetry) systems are non validated by experts an
 }
 \examples{
 \donttest{
-# download only air temperature for selected 2 stations in years 2022-2023:
+# download only air temperature for selected 2 stations in 2022-2023:
 imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
                                      parameters = "t2m",
-                                     stations = c("HALA GĄSIENICOWA", "DOLINA PIĘCIU STAWÓW"),
+                                     stations = c("HALA GĄSIENICOWA",
+                                                  "DOLINA PIĘCIU STAWÓW"),
                                      coords = TRUE)
 }
 
