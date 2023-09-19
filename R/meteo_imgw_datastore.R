@@ -2,13 +2,26 @@
 #'
 #' Downloading hourly (meteorological) data from the telemetric stations
 #' available in the danepubliczne.imgw.pl/datastore collection since 2008. 
-#' Most parameters are collected within 10 minutes interval and thus it is advised to download only the required subsets.
+#' Most parameters are collected within 10 minutes interval and thus it is recommended to download only the mandatory years or parameters.
+#' For example, 1 year of data with all available parameters requires processing around 5GB of data.
 #' Data from the IMGW automated (telemetry) systems are non validated by experts and may contain not valid measurements.
 #' 
 #'
-#' @param year vector of years (e.g., 1966:2000)
-#' @param parameters 
-
+#' @param year numeric vector of years to be downloaded (e.g., 2022:2023)
+#' @param parameters - character vector describing which parameters to be downloaded. Default `NULL` means to download all available.
+#' \enumerate{
+#'  \item "wd" - wind direction (degrees)
+#'  \item "t2m" - temperature at 2 metres above ground level (degree Celsius)
+#'  \item "t0m" - ground temperature (degree Celsius)
+#'  \item "rr_24h" - precipitation totals for last 24 hours (mm)
+#'  \item "rr_1h" - precipitation totals for last 1 hour (mm)
+#'  \item "rr_10min" - precipitation totals for last 10 minutes (mm)
+#'  \item "ws" - wind speed (m/s)
+#'  \item "ws_max" - maximum wind speed for last 10 minutes (m/s)
+#'  \item "gust" - wind gust (if present) (m/s)
+#'  \item "rh" - relative humidity (%)
+#'  \item "water_in_snow" - water equivalent of melted snow cover (mm)
+#'  }
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening'
 #' function that shortens column names
@@ -16,7 +29,7 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   #TODO
+#'   imgw_telemetry = meteo_imgw_datastore(year = 2023, parameters = "t2m")
 #' }
 #'
 
@@ -28,6 +41,7 @@ meteo_imgw_datastore = function(year,
   
   if (allow_failure) {
     tryCatch(meteo_imgw_datastore_bp(year,
+                                     parameters,
                                      ...),
              warning = function(w) {
                message(paste("Potential problem(s) found. Problems with downloading data.\n",
@@ -40,6 +54,7 @@ meteo_imgw_datastore = function(year,
                              "to see more details"))})
   } else {
     meteo_imgw_datastore_bp(year,
+                            parameters,
                             ...)
   }
 }
@@ -47,7 +62,7 @@ meteo_imgw_datastore = function(year,
 #' @keywords internal
 #' @noRd
 meteo_imgw_datastore_bp = function(year,
-                                   parameters = NULL,
+                                   parameters,
                                    ...) {
   
   urls = as.character(
@@ -66,6 +81,10 @@ meteo_imgw_datastore_bp = function(year,
                   "water_in_snow")
   )
   
+  if (!is.null(parameters)) {
+    dict = dict[dict$parameter %in% parameters,]
+  }
+  
   all_data = NULL
   
   for (i in seq_along(urls)) {
@@ -83,8 +102,10 @@ meteo_imgw_datastore_bp = function(year,
       message("IMGW datastore does not contain data for ", paste(basename(urls[i])), ". skipping\n")
     }
     
+    files_to_read = dir(tmp_dir, full.names = TRUE, pattern = paste0(dict$V2, collapse = "|"))
+    
     all_data[[i]] = data.table::rbindlist(
-      lapply(dir(tmp_dir, full.names = TRUE), 
+      lapply(files_to_read,
              function(x) data.table::fread(x,
                                            header = FALSE,
                                            stringsAsFactors = FALSE,
@@ -94,12 +115,7 @@ meteo_imgw_datastore_bp = function(year,
              )
       ),
       fill = TRUE)
-    
-    if (!is.null(parameters) && nrow(all_data[[i]])) {
-      params = dict[parameter %in% parameters, V2]
-      all_data[[i]] = all_data[[i]][V2 %in% params, ]
-    }
-    
+
     unlink(c(temp, temp2, tmp_dir), recursive = TRUE)
   }
   
@@ -107,66 +123,15 @@ meteo_imgw_datastore_bp = function(year,
   all_data[dict, on = 'V2', param := i.parameter]
   all_data = data.table::dcast(all_data, V1 + V3  ~ param, value.var = "V4")
   all_data$V3 = as.POSIXct(all_data$V3, tz = "UTC")
+  #### TODO #### join with station coordinates conditionally:
+  # if (coords) {
+  # }
+  telemetry_stations = meteo_imgw_telemetry_stations()
+  telemetry_stations$river = NULL
+  # equalise classes of objects:
+  class(telemetry_stations$id) = class(all_data$V1)
+  all_data = merge(all_data, telemetry_stations, by.x = "V1", by.y = "id", all = FALSE)
+  colnames(all_data)[1:2] = c("id", "date_time")
   
-  # polaczyc ze wspolrzednymi i nazwami stacji
-  
-  
-  unlink(c(temp, temp2, tmp_dir), recursive = TRUE)
-  all_data[[length(all_data) + 1]] = data1
-}
-
-all_data = as.data.frame(do.call(rbind, all_data))
-all_data = all_data[all_data$t2m > -100, ] # remove all unphysical measurements
-
-telemetry_stations = read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
-                              fileEncoding = "CP1250",
-                              sep = ";")
-colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
-telemetry_stations$lon = coordinates_to_decimal(telemetry_stations$lon)
-telemetry_stations$lat = coordinates_to_decimal(telemetry_stations$lat)
-telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))
-telemetry_stations = as.data.table(telemetry_stations[,-1])
-telemetry_stations$id = as.character(telemetry_stations$id)
-res = merge(all_data, telemetry_stations, by.x = "V1", by.y = "id", all = FALSE)
-# 
-# if (coords) {
-#   all_data = merge(meteo_telemetry_stations, all_data, by.x = "ID", by.y = "id", all.y = TRUE)
-# }
-
-#all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
-
-
-# sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
-
-#   all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
-return(all_data)
-} # end of function
-
-
-#' @keywords internal
-#' @noRd
-meteo_imgw_datastore_read = function(tmp_dir, pattern = "300S", param = "t2m") {
-  csv_path = dir(tmp_dir, full.names = TRUE, pattern = pattern)
-  if (length(csv_path) && file.exists(csv_path)) {
-    data = data.table::fread(csv_path,
-                             header = FALSE,
-                             stringsAsFactors = FALSE, dec = ",",
-                             sep = ";",
-                             select = c("V1", "V3", "V4"))
-    
-    colnames(data) = c("id", "date_time", param)
-    data$date_time = as.POSIXct(data$date_time, tz = "UTC")
-  } else {
-    data = data.frame(id = NA, date_time = NA, param = NA)
-    colnames(data) = c("id", "date_time", param)
-  }
-  return(data)
-}
-
-
-coordinates_to_decimal = function(lonlat) {
-  converted = unlist(lapply(strsplit(lonlat, " "), function(d) as.numeric(d[[1]]))) +
-    unlist(lapply(strsplit(lonlat, " "), function(m) as.numeric(m[[2]]) * 0.01667)) +
-    unlist(lapply(strsplit(lonlat, " "), function(s) as.numeric(s[[3]]) * 0.0001667))
-  return(converted)
+  return(all_data)
 }

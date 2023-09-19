@@ -2,27 +2,45 @@
 % Please edit documentation in R/meteo_imgw_datastore.R
 \name{meteo_imgw_datastore}
 \alias{meteo_imgw_datastore}
-\title{IMGW meteorological data from IMGW datastore repository}
+\title{IMGW meteorological data from the IMGW datastore repository}
 \usage{
-meteo_imgw_datastore(year, allow_failure = TRUE, ...)
+meteo_imgw_datastore(year, allow_failure = TRUE, parameters = NULL, ...)
 }
 \arguments{
-\item{year}{vector of years (e.g., 1966:2000)}
+\item{year}{numeric vector of years to be downloaded (e.g., 2022:2023)}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
+\item{parameters}{\itemize{
+\item character vector describing which parameters to be downloaded. Default \code{NULL} means to download all available.
+\enumerate{
+\item "wd" - wind direction (degrees)
+\item "t2m" - temperature at 2 metres above ground level (degree Celsius)
+\item "t0m" - ground temperature (degree Celsius)
+\item "rr_24h" - precipitation totals for last 24 hours (mm)
+\item "rr_1h" - precipitation totals for last 1 hour (mm)
+\item "rr_10min" - precipitation totals for last 10 minutes (mm)
+\item "ws" - wind speed (m/s)
+\item "ws_max" - maximum wind speed for last 10 minutes (m/s)
+\item "gust" - wind gust (if present) (m/s)
+\item "rh" - relative humidity (\%)
+\item "water_in_snow" - water equivalent of melted snow cover (mm)
+}
+}}
+
 \item{...}{other parameters that may be passed to the 'shortening'
 function that shortens column names}
-
-\item{rank}{rank of the stations: "synop" (default), "climate", or "precip"}
 }
 \description{
 Downloading hourly (meteorological) data from the telemetric stations
-available in the danepubliczne.imgw.pl/datastore collection since 2008
+available in the danepubliczne.imgw.pl/datastore collection since 2008.
+Most parameters are collected within 10 minutes interval and thus it is recommended to download only the mandatory years or parameters.
+For example, 1 year of data with all available parameters requires processing around 5GB of data.
+Data from the IMGW automated (telemetry) systems are non validated by experts and may contain not valid measurements.
 }
 \examples{
 \donttest{
-  #TODO
+  imgw_telemetry = meteo_imgw_datastore(year = 2023, parameters = "t2m")
 }
 
 }
