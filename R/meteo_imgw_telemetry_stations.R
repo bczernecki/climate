@@ -16,7 +16,8 @@ meteo_imgw_telemetry_stations = function() {
 
   telemetry_stations = read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
                                 fileEncoding = "CP1250",
-                                sep = ";")
+                                sep = ";",
+                                stringsAsFactors = FALSE)
   colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
   telemetry_stations$lon = coordinates_to_decimal(telemetry_stations$lon)
   telemetry_stations$lat = coordinates_to_decimal(telemetry_stations$lat)
