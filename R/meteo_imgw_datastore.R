@@ -47,6 +47,15 @@ meteo_imgw_datastore = function(year,
                                 coords = TRUE,
                                 allow_failure = TRUE) {
   
+  # assertions for year
+  if (!any(is.character(year) || is.numeric(year))) {
+    stop("year argument must be character or numeric")
+  }
+  
+  if (!all(as.numeric(year) >= 2008)) {
+    stop("year argument must be provided and all elements must be >= 2008")
+  }
+  
   if (allow_failure) {
     tryCatch(meteo_imgw_datastore_bp(year,
                                      parameters,
@@ -80,7 +89,7 @@ meteo_imgw_datastore_bp = function(year,
   telemetry_stations$river = NULL
   
   if (!is.null(stations)) {
-    telemetry_stations = telemetry_stations[telemetry_stations$name %in% stations, ]
+    telemetry_stations = telemetry_stations[telemetry_stations$name %in% toupper(stations), ]
   }
   
   urls = as.character(
