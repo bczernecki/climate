@@ -12,3 +12,4 @@ covr_report.html
 lib
 docs
 pkgdown
+.Renviron

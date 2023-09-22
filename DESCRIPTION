@@ -1,6 +1,6 @@
 Package: climate
 Title: Interface to Download Meteorological (and Hydrological) Datasets
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",
            role = c("aut", "cre"),

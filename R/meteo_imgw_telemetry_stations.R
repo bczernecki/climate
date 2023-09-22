@@ -1,0 +1,38 @@
+#' IMGW telemetry stations
+#'
+#' Retrieving current metadata for stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
+#' 
+#' @return data table with metadata for over 500 stations. Metadata contains: station ID, station name, river, latitude, longitude, altitude
+#' @importFrom data.table as.data.table
+#' @export
+#'
+#' @examples \donttest{
+#'   telemetry_stations = meteo_imgw_telemetry_stations()
+#' }
+#'
+
+
+meteo_imgw_telemetry_stations = function() {
+
+  telemetry_stations = read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
+                                fileEncoding = "CP1250",
+                                sep = ";",
+                                stringsAsFactors = FALSE)
+  colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
+  telemetry_stations$lon = coordinates_to_decimal(telemetry_stations$lon)
+  telemetry_stations$lat = coordinates_to_decimal(telemetry_stations$lat)
+  telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))
+  telemetry_stations = as.data.table(telemetry_stations[,-1])
+  telemetry_stations$id = as.character(telemetry_stations$id)
+  return(telemetry_stations)
+}
+
+
+#' @keywords internal
+#' @noRd
+coordinates_to_decimal = function(lonlat) {
+  converted = unlist(lapply(strsplit(lonlat, " "), function(d) as.numeric(d[[1]]))) +
+    unlist(lapply(strsplit(lonlat, " "), function(m) as.numeric(m[[2]]) * 0.01667)) +
+    unlist(lapply(strsplit(lonlat, " "), function(s) as.numeric(s[[3]]) * 0.0001667))
+  return(converted)
+}
