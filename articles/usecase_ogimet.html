@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -57,13 +57,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/getstarted.html">Introduction to the climate package</a>
+    </li>
+    <li>
       <a href="../articles/pl.html">Wstęp do pakietu 'climate' (PL)</a>
     </li>
     <li>
       <a href="../articles/usecase_ogimet.html">Use Case - Ogimet database</a>
-    </li>
-    <li>
-      <a href="../articles/getstarted.html">Introduction to the climate package</a>
     </li>
   </ul>
 </li>
@@ -117,59 +117,33 @@ results</li>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"hourly"</span>,</span>
 <span>                     date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2018-01-01"</span>, <span class="st">"2018-12-31"</span><span class="op">)</span>, </span>
 <span>                     station <span class="op">=</span> <span class="st">"01008"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "01008"
-## 
-  |                                                                            
-  |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=12&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f34262de20</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |======                                                                |   8%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=11&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f33205d347</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |============                                                          |  17%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=10&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f31d10b986</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |==================                                                    |  25%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=09&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f350aedd52</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |=======================                                               |  33%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=08&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f313a5bbf0</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |=============================                                         |  42%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=07&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f3ff7a98d</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=06&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f3528ca8aa</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |=========================================                             |  58%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=05&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f327bfe99d</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |===============================================                       |  67%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=04&amp;day=30&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f3310c5ca4</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |====================================================                  |  75%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=03&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f324f11b6a</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |==========================================================            |  83%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=28&amp;ano=2018&amp;mes=02&amp;day=28&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f32fef4397</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |================================================================      |  92%[1] "http://ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=02&amp;day=1&amp;hora=00"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f3520f0d27</span></span></code></pre>
-<pre><code>## 
-  |                                                                            
-  |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2017&amp;mes=12&amp;day=31&amp;hora=23"</code></pre>
-<pre><code><span><span class="co">## /tmp/Rtmp5wOtYR/file19f33c061a6d</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "01008"</span></span>
+<span><span class="co">##   |                                                                              |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=12&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c4163477421</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |======                                                                |   8%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=11&amp;day=30&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c41f0f95fd</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |============                                                          |  17%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=10&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c411c3df731</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |==================                                                    |  25%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=09&amp;day=30&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c41185e617f</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |=======================                                               |  33%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=08&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c41414cbac4</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |=============================                                         |  42%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=07&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c417ea35839</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=06&amp;day=30&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c416c51665f</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |=========================================                             |  58%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=05&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c416b5ce190</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |===============================================                       |  67%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=30&amp;ano=2018&amp;mes=04&amp;day=30&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c4160bb13d3</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |====================================================                  |  75%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=03&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c4119ccfec7</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |==========================================================            |  83%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=28&amp;ano=2018&amp;mes=02&amp;day=28&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c411a2ea878</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |================================================================      |  92%[1] "http://ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2018&amp;mes=02&amp;day=1&amp;hora=00"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c4153661337</span></span></code></pre>
+<pre><code><span><span class="co">##   |                                                                              |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=01008&amp;lang=en&amp;decoded=yes&amp;ndays=31&amp;ano=2017&amp;mes=12&amp;day=31&amp;hora=23"</span></span></code></pre>
+<pre><code><span><span class="co">## /tmp/RtmpQLWhD6/file1c41419d81d2</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># loading external packages:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
@@ -228,7 +202,7 @@ results</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
