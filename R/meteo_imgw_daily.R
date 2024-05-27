@@ -116,7 +116,6 @@ meteo_imgw_daily_bp = function(rank,
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
         if (translit) {
@@ -124,28 +123,28 @@ meteo_imgw_daily_bp = function(rank,
         } else {
           data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
         }
-
         colnames(data1) = meta[[1]]$parameters
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
         if (translit) {
-          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
+          data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
         } else {
           data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
         }
         colnames(data2) = meta[[2]]$parameters
+        unlink(c(temp, temp2))
 
-        # usuwa statusy
+        # remove statuses if not needed:
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
           data2[grep("^Status", colnames(data2))] = NULL
         }
 
-        unlink(c(temp, temp2))
-
-        # moja proba z obejsciem dla wyboru kodu
-        ttt = merge(data1, data2, by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
-                    all.x = TRUE)
+        ttt = base::merge(data1,
+                          data2,
+                          by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+                          all.x = TRUE)
+        
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
         ### ta część kodu powtarza sie po dużej petli od rank
         if (!is.null(station)) {
@@ -291,14 +290,15 @@ meteo_imgw_daily_bp = function(rank,
     }
   }
 
-  # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
+  # sort output
   if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
     all_data = all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
   } else {
     all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
   }
 
-  # # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  # remove duplicates and shorten colnames
+  rownames(all_data) = NULL
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)

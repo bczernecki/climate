@@ -19,6 +19,15 @@ meteo_imgw_telemetry_stations = function() {
                                 sep = ";",
                                 stringsAsFactors = FALSE)
   colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
+  
+  # extra fix for columns wrongly signed in IMGW datatabase (i.e. missing semicolon):
+  fix_needed = grep(x = substr(telemetry_stations$river, 1, 1), '^[0-9]$')
+  
+  telemetry_stations[fix_needed, "alt"] = telemetry_stations[fix_needed, "lon"]
+  telemetry_stations[fix_needed, "lon"] = telemetry_stations[fix_needed, "lat"]
+  telemetry_stations[fix_needed, "lat"] = telemetry_stations[fix_needed, "river"]
+  telemetry_stations[fix_needed, "river"] = NA
+  
   telemetry_stations$lon = coordinates_to_decimal(telemetry_stations$lon)
   telemetry_stations$lat = coordinates_to_decimal(telemetry_stations$lat)
   telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))

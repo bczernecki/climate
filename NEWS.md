@@ -1,8 +1,8 @@
 # climate 1.2.0
 
-* Support for telemetry dataset from IMGW-PIB repository
-    * `data.table` package used for efficient processing of large amount of data in this subrepository
-* Update for location of IMGW-PIB telemetry stations
+* Corrected encoding problems for some of platforms where IMGW-PIB metadata were not parsed correctly
+* Added location of IMGW-PIB telemetry stations within `meteo_imgw_telemetry_stations()`
+* Minor bug fixes
 
 
 # climate 1.1.1

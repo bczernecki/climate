@@ -75,8 +75,8 @@ meteo_imgw_hourly_bp = function(rank,
   translit = check_locale()
   stopifnot(rank == "synop" | rank == "climate") # dla terminowek tylko synopy i klimaty maja dane
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
-  interval = "hourly" # to mozemy ustawic na sztywno
-  interval_pl = "terminowe" # to mozemy ustawic na sztywno
+  interval = "hourly"
+  interval_pl = "terminowe"
   meta = meteo_metadata_imgw(interval = "hourly", rank = rank)
   rank_pl = switch(rank, synop = "synop", climate = "klimat", precip = "opad")
   temp = tempfile()
@@ -114,7 +114,6 @@ meteo_imgw_hourly_bp = function(rank,
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        #download.file(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
 
@@ -185,7 +184,6 @@ meteo_imgw_hourly_bp = function(rank,
   # dodaje rank
   rank_code = switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA")
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
-
   all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
 
   #station selection
@@ -217,7 +215,7 @@ meteo_imgw_hourly_bp = function(rank,
     all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
   }
 
-  # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  # extra option for shortening colnames and removing duplicates
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   return(all_data)
 } # end of function

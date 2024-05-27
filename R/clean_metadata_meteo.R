@@ -6,21 +6,27 @@
 #' @param interval temporal interval
 #' @importFrom utils read.fwf
 #' @importFrom stats na.omit
-#' @keywords internal
+#' @importFrom stringi stri_trans_general
+#' @keywords internal 
 #'
 
 clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
 
   temp = tempfile()
   test_url(link = address, output = temp)
-  a = readLines(temp, warn = FALSE)
-  a = iconv(a, from = "CP1250", to = "ASCII//TRANSLIT")
+  
+  # a = readLines(temp, warn = FALSE, encoding = "CP1250") # doesn't work on mac,
+  # thus:
+  # a = iconv(a, from = "CP1250", to = "ASCII//TRANSLIT")
+  a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE, 
+               fileEncoding = "CP1250")$V1
   a = gsub(a, pattern = "\\?", replacement = "")
+  a = stringi::stri_trans_general(a, 'LATIN-ASCII')
 
   # additional workarounds for mac os but not only...
   a = gsub(x = a, pattern = "'", replacement = "")
   a = gsub(x = a, pattern = "\\^0", replacement = "")
-  a = data.frame(V1 = a[nchar(a) > 0], stringsAsFactors = FALSE)
+  a = data.frame(V1 = a[nchar(a) > 3], stringsAsFactors = FALSE)
   # this one does not work on windows
   # a = suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
   #                                        fileEncoding = "CP1250", stringsAsFactors = FALSE)))
@@ -44,8 +50,6 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   a$V1 = trimws(substr(a$V1, 1, nchar(a$V1) - 3))
   a$V1 = gsub(x = a$V1, pattern = "*  ", "")
 
-  #strsplit(x = a$V1, split = "/")
-  #a = a[nchar(a$V1)>2,] # remove empty or almost empty rows
   a = a[!(is.na(a$field1) & is.na(a$field2)), ] # remove info about status
   colnames(a)[1] = "parameters"
   return(a)
