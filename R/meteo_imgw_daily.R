@@ -129,7 +129,7 @@ meteo_imgw_daily_bp = function(rank,
         if (translit) {
           data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
         } else {
-          data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+          data2 = suppressWarnings(read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
         }
         colnames(data2) = meta[[2]]$parameters
         unlink(c(temp, temp2))

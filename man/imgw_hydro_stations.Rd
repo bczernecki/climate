@@ -6,7 +6,7 @@
 \title{Location of the hydrological stations from the danepubliczne.imgw.pl collection}
 \format{
 The data contains a data.frame with 1304 obs. of 3 variables:
-\itemize{
+\describe{
 \item{id} {Station ID}
 \item{X} {Longitude}
 \item{Y} {Latitude}

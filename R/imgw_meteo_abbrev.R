@@ -7,7 +7,7 @@
 #' fullname, abbr_eng, and fullname_eng
 #'
 #' @format The data contains a data.frame with ca. 250 elements described in three ways:
-#' \itemize{
+#' \describe{
 #'     \item{fullname} {original column names as downloaded from the repository}
 #'     \item{abbr_eng} {shorten column names with abbreviations derived from the most
 #'     popular scheme used for meteorological parameters}

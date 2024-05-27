@@ -5,7 +5,7 @@
 #' coordinates, ID numbers, and elevations
 #'
 #' @format The data contains a data.frame with 1304 obs. of 3 variables:
-#' \itemize{
+#' \describe{
 #'     \item{id} {Station ID}
 #'     \item{X} {Longitude}
 #'     \item{Y} {Latitude}

@@ -61,11 +61,6 @@ meteo_imgw_datastore = function(year,
                                      parameters,
                                      stations,
                                      coords),
-             warning = function(w) {
-               message(paste("Potential problem(s) found. Problems with downloading data.\n",
-                             "\rRun function with argument allow_failure = FALSE",
-                             "to see more details"))
-             },
              error = function(e){
                message(paste("Potential error(s) found. Problems with downloading data.\n",
                              "\rRun function with argument allow_failure = FALSE",

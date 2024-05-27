@@ -133,7 +133,7 @@ meteo_imgw_monthly_bp = function(rank,
     if (translit) {
       data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
     } else {
-      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      data1 = suppressWarnings(read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
     }
 
     colnames(data1) = meta[[1]]$parameters
