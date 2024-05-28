@@ -12,12 +12,14 @@
 #'
 
 
-meteo_imgw_telemetry_stations = function() {
+stations_meteo_imgw_telemetry = function() {
 
-  telemetry_stations = read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
-                                fileEncoding = "CP1250",
-                                sep = ";",
-                                stringsAsFactors = FALSE)
+  telemetry_stations = suppressWarnings(
+    read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
+             fileEncoding = "CP1250",
+             sep = ";",
+             stringsAsFactors = FALSE)
+  )
   colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
   
   # extra fix for columns wrongly signed in IMGW datatabase (i.e. missing semicolon):
@@ -28,8 +30,8 @@ meteo_imgw_telemetry_stations = function() {
   telemetry_stations[fix_needed, "lat"] = telemetry_stations[fix_needed, "river"]
   telemetry_stations[fix_needed, "river"] = NA
   
-  telemetry_stations$lon = coordinates_to_decimal(telemetry_stations$lon)
-  telemetry_stations$lat = coordinates_to_decimal(telemetry_stations$lat)
+  telemetry_stations$lon = suppressWarnings(coordinates_to_decimal(telemetry_stations$lon))
+  telemetry_stations$lat = suppressWarnings(coordinates_to_decimal(telemetry_stations$lat))
   telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))
   telemetry_stations = as.data.table(telemetry_stations[,-1])
   telemetry_stations$id = as.character(telemetry_stations$id)
