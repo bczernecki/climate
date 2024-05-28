@@ -41,21 +41,25 @@ test_that("meteo_ogimet works!", {
 
     
   # only wind measurement are present:
-  testthat::expect_error(
-    meteo_ogimet(
-      date = c(as.Date("2020-02-01"), Sys.Date() - 1),
-      # date = c(Sys.Date() - 7, Sys.Date() - 1),
-      interval = "daily",
-      coords = FALSE,
-      station = "06683", allow_failure = FALSE)
-  )
-  
-  # check change between years:
-  multiyr = ogimet_daily(date = c( as.Date("2022-11-15"),
-                                   as.Date("2023-02-01")), 
-                         station = 12330)
-  if (is.data.frame(multiyr)) {
-    testthat::expect_true(nrow(multiyr) > 70)
+  if (!curl::has_internet()) {
+    message("No internet connection! \n")
+    return(invisible(NULL))
+  } else {
+    testthat::expect_error(
+      meteo_ogimet(
+        date = c(as.Date("2020-02-01"), Sys.Date() - 1),
+        # date = c(Sys.Date() - 7, Sys.Date() - 1),
+        interval = "daily",
+        coords = FALSE,
+        station = "06683", allow_failure = FALSE)
+    )
+    
+    # check change between years:
+    multiyr = ogimet_daily(date = c( as.Date("2022-11-15"),
+                                     as.Date("2023-02-01")), 
+                           station = 12330)
+    if (is.data.frame(multiyr)) {
+      testthat::expect_true(nrow(multiyr) > 70)
+    }
   }
-  
 })
