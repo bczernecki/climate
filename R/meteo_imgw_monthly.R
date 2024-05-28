@@ -169,7 +169,11 @@ meteo_imgw_monthly_bp = function(rank,
   all_data = all_data[all_data$Rok %in% year, ]
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
+    all_data = merge(climate::imgw_meteo_stations[, 1:3], 
+                     all_data, 
+                     by.x = "id", 
+                     by.y = "Kod stacji", 
+                     all.y = TRUE)
   }
 
   # add rank
@@ -203,6 +207,7 @@ meteo_imgw_monthly_bp = function(rank,
 
   # adding option to shorten columns and removing duplicates:
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  rownames(all_data) = NULL
 
   return(all_data) # clipping to selected years only
 }

@@ -103,6 +103,7 @@ meteo_imgw_hourly_bp = function(rank,
 
       ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
       files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
+      
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
@@ -173,7 +174,11 @@ meteo_imgw_hourly_bp = function(rank,
   all_data = do.call(rbind, all_data)
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations, all_data, by.x = "id", by.y = "Kod stacji", all.y = TRUE)
+    all_data = merge(climate::imgw_meteo_stations[,1:3], 
+                     all_data, 
+                     by.x = "id", 
+                     by.y = "Kod stacji", 
+                     all.y = TRUE)
   }
 
   # dodaje rank
@@ -212,5 +217,6 @@ meteo_imgw_hourly_bp = function(rank,
 
   # extra option for shortening colnames and removing duplicates
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  rownames(all_data) = NULL
   return(all_data)
-} # end of function
+}

@@ -245,7 +245,7 @@ meteo_imgw_daily_bp = function(rank,
   all_data = do.call(rbind, all_data)
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations,
+    all_data = merge(climate::imgw_meteo_stations[, 1:3],
                      all_data,
                      by.x = "id",
                      by.y = "Kod stacji",
@@ -293,8 +293,8 @@ meteo_imgw_daily_bp = function(rank,
   }
 
   # remove duplicates and shorten colnames
-  rownames(all_data) = NULL
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  rownames(all_data) = NULL
 
   return(all_data)
 }

@@ -9,6 +9,8 @@
 #' \item{id}{Station ID}
 #' \item{X}{Longitude}
 #' \item{Y}{Latitude}
+#' \item{station}{Station name}
+#' \item{id2}{IMGW-PIB ID for station rank}
 #' }
 #' The object is in the geographic coordinates using WGS84 (EPSG:4326).
 #'

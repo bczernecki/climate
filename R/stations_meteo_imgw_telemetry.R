@@ -11,7 +11,6 @@
 #' }
 #'
 
-
 stations_meteo_imgw_telemetry = function() {
 
   telemetry_stations = suppressWarnings(

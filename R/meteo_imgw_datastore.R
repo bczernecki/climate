@@ -80,7 +80,7 @@ meteo_imgw_datastore_bp = function(year,
                                    stations,
                                    coords) {
   # read metadata for stations:
-  telemetry_stations = meteo_imgw_telemetry_stations()
+  telemetry_stations = stations_meteo_imgw_telemetry()
   telemetry_stations$river = NULL
   
   if (!is.null(stations)) {
