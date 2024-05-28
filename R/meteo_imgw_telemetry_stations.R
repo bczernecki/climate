@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples \donttest{
-#'   telemetry_stations = meteo_imgw_telemetry_stations()
+#'   telemetry_stations = stations_meteo_imgw_telemetry()
 #' }
 #'
 

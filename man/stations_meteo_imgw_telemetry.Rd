@@ -14,7 +14,7 @@ Retrieving current metadata for stations used in the telemetric systems of the I
 }
 \examples{
 \donttest{
-  telemetry_stations = meteo_imgw_telemetry_stations()
+  telemetry_stations = stations_meteo_imgw_telemetry()
 }
 
 }
