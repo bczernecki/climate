@@ -8,10 +8,9 @@
 #'
 #' @format The data contains a data.frame with ca. 20 elements described in three ways:
 #' \describe{
-#'     \item{fullname} {original column names as downloaded from the repository}
-#'     \item{abbr_eng} {shorten column names with abbreviations derived from the most
-#'     popular scheme used for meteorological parameters}
-#'     \item{fullname_eng} {detailed description of downloaded meteorological variables}
+#' \item{fullname} {original column names as downloaded from the repository}
+#' \item{abbr_eng} {shorten column names with abbreviations derived from the most popular scheme used for meteorological parameters}
+#' \item{fullname_eng} {detailed description of downloaded meteorological variables}
 #' }
 #' The object is created mostly to be used altogether with the hydro_shortening_imgw() function
 #'
