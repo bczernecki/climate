@@ -20,7 +20,7 @@ and hydrological data from publicly available repositories:
 - OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) - up-to-date collection of SYNOP dataset
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratories - Global Monitoring Laboratory [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
-- Polish Institute of Meterology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
+- Polish Institute of Meteorology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 - National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
 
 ## Installation

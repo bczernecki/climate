@@ -109,7 +109,7 @@ nearest_stations_ogimet_bp = function(country = country,
     
     b = strsplit(a, "Decoded synops since")
     
-    b1 = lapply(b, function(x) substr(x, 1, 400))
+    b1 = lapply(b, function(x) substr(iconv(x, from = 'UTF-8', to = 'ASCII//TRANSLIT'), 1, 400))
     b1[[1]] = b1[[1]][-1] # header
     
     b21 = unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
