@@ -7,9 +7,9 @@
 \format{
 The data contains a data.frame with 1998 obs. of 3 variables:
 \describe{
-\item{id} {Station ID}
-\item{X} {Longitude}
-\item{Y} {Latitude}
+\item{id}{Station ID}
+\item{X}{Longitude}
+\item{Y}{Latitude}
 }
 The object is in the geographic coordinates using WGS84 (EPSG:4326).
 }
