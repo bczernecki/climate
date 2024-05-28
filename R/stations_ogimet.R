@@ -71,8 +71,8 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
   pattern = paste0(" (", gsub(x = country, pattern = "+", replacement = " ", fixed = TRUE))
   b22 = unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
   
-  b1 = data.frame(str = b1[[1]], start = b21, stop = b22, stringsAsFactors = FALSE)
-  
+  b1 = data.frame(str = b1[[1]], start = b21, stop = b22 - 1, stringsAsFactors = FALSE) 
+
   res = substr(b1$str, b1$start, b1$stop)
   
   station_names = unlist(lapply(strsplit(res, " - "), function(x) x[length(x)]))
