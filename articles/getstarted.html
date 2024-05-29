@@ -95,7 +95,7 @@
                         <h4 data-toc-skip class="author">Bartosz
 Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2024-05-10</h4>
+            <h4 data-toc-skip class="date">2024-05-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/HEAD/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -212,10 +212,10 @@ in a given country(ies):</p>
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=10&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmptaNv0P/file1bb53d3286b4</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=10&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmptaNv0P/file1bb51610db8a</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpKrwHWZ/file1a1719a41cf2</span></span>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpKrwHWZ/file1a171ee97b53</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -387,8 +387,8 @@ country:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=10&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmptaNv0P/file1bb55697266c</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpKrwHWZ/file1a177499480a</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -1032,8 +1032,9 @@ the annual means of maximum flow in the consecutive columns.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>annual_mean_Q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Q</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">hyy</span>, values_from <span class="op">=</span> <span class="va">annual_mean_Q</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'hyy', 'id', 'station', 'X'. You can</span></span>
-<span><span class="co">#&gt; override using the `.groups` argument.</span></span>
-<span></span>
+<span><span class="co">#&gt; override using the `.groups` argument.</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">

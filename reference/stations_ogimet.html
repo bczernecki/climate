@@ -107,8 +107,8 @@ If <code>add_map = TRUE</code> additional map of downloaded data is visualized.<
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="fu">stations_ogimet</span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Australia"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Australia&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=10&amp;hora=06&amp;ndays=1&amp;Send=send"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpAZrh4Q/file18ea665ca4fa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Australia&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=05&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmppzECVu/file1743da58372</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
 <span class="r-plt img"><img src="stations_ogimet-1.png" alt="" width="700" height="433"></span>
@@ -127,32 +127,32 @@ If <code>add_map = TRUE</code> additional map of downloaded data is visualized.<
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12   94121                        Channel Point 130.1167 -13.16667    3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13   94122    Bathurst Island Aws Cape Fourcroy 130.0167 -11.75001    7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14   94125                        Batchelor Aws 131.0167 -13.05000  104</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   94127                     Point Stuart Aws 131.8667 -12.23334    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   94128                        Douglas River 131.1833 -13.83335   43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17   94130                             Bradshaw 130.8000 -14.93335   75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   94131                           Tindal Aws 132.3667 -14.51668  135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   94135                   Mccluer Island Aws 132.9667 -11.03333    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   94137                       Jabiru Airport 132.8834 -12.65001   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   94139                              Warruwi 133.3667 -11.65001   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   94140                       Milingimbi Aws 134.8834 -12.08333   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   94141               Central Arnhem Plateau 133.0833 -13.31667  416</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   94143                           Bulman Aws 134.3333 -13.66668  103</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25   94147                      Cape Wessel Aws 136.7500 -11.00000   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26   94150                         Gove Airport 136.8167 -12.26667   63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27   94152                       Borroloola Aws 136.3000 -16.06667   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28   94153               Groote Eylandt Airport 136.4500 -13.96669   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29   94161                       Kangaroo Flats 130.8500 -12.78335   50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   94162                   Mount Bundey North 131.8500 -12.90002   83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31   94170                            Weipa Amo 141.9167 -12.66668   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32   94171                        Scherger Raaf 142.0833 -12.61668   40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   94174                      Horn Island Aws 142.2833 -10.58334    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34   94181                      Thursday Island 142.2167 -10.58334    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35   94182                   Coconut Island Aws 143.0667 -10.05000    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36   94183                         Coen Airport 143.1167 -13.75001  162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37   94186               Lockhart River Airport 143.3000 -12.78335   24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38   94188                        Cape Flattery 145.3000 -14.96669   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39   94200                              Mandora 120.8333 -19.73335    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40   94201                           Cygnet Bay 123.0000 -16.45001    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   94128                        Douglas River 131.1833 -13.83335   43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   94130                             Bradshaw 130.8000 -14.93335   75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   94131                           Tindal Aws 132.3667 -14.51668  135</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   94135                   Mccluer Island Aws 132.9667 -11.03333    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   94137                       Jabiru Airport 132.8834 -12.65001   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   94139                              Warruwi 133.3667 -11.65001   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   94140                       Milingimbi Aws 134.8834 -12.08333   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   94141               Central Arnhem Plateau 133.0833 -13.31667  416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   94143                           Bulman Aws 134.3333 -13.66668  103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   94147                      Cape Wessel Aws 136.7500 -11.00000   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   94150                         Gove Airport 136.8167 -12.26667   63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   94152                       Borroloola Aws 136.3000 -16.06667   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   94153               Groote Eylandt Airport 136.4500 -13.96669   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   94161                       Kangaroo Flats 130.8500 -12.78335   50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   94162                   Mount Bundey North 131.8500 -12.90002   83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   94170                            Weipa Amo 141.9167 -12.66668   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   94171                        Scherger Raaf 142.0833 -12.61668   40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   94174                      Horn Island Aws 142.2833 -10.58334    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   94181                      Thursday Island 142.2167 -10.58334    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   94182                   Coconut Island Aws 143.0667 -10.05000    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   94183                         Coen Airport 143.1167 -13.75001  162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   94186               Lockhart River Airport 143.3000 -12.78335   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37   94188                        Cape Flattery 145.3000 -14.96669   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38   94200                              Mandora 120.8333 -19.73335    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   94201                           Cygnet Bay 123.0000 -16.45001    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   94202                            La Grange 121.7667 -18.68335   11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 41   94203                       Broome Airport 122.2333 -17.93335   17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 42   94204                           Curtin Aws 123.8167 -17.56668   91</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 43   94206                Fitzroy Crossing Aero 125.5500 -18.16667  112</span>
@@ -160,663 +160,653 @@ If <code>add_map = TRUE</code> additional map of downloaded data is visualized.<
 <span class="r-out co"><span class="r-pr">#&gt;</span> 45   94210                     Adele Island Aws 123.1500 -15.50001    5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46   94212                  Halls Creek Airport 127.6500 -18.21667  410</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47   94213                         Turkey Creek 128.2167 -17.00000  203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48   94215                    King Edward River 126.3000 -15.36667  400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49   94216             Kununurra Kununurra Aws  128.7000 -15.76668   44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50   94217       Kununurra Argyle Aerodrome Aws 128.4500 -16.63335  159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51   94221                     Angallary Valley 130.5667 -15.43334   60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52   94225               Delamere Weapons Range 131.9167 -15.73335  221</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53   94231                             Lajamanu 130.6333 -18.31667  318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54   94232                 Victoria River Downs 131.0000 -16.40001   89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55   94234                      Daly Waters Aws 133.3667 -16.25001  210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56   94236                              Elliott 133.5333 -17.55001  220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57   94238                Tennant Creek Airport 134.1667 -19.63335  377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58   94239                       Mcarthur River 136.0667 -16.43334   40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59   94248                        Centre Island 136.8167 -15.73335   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60   94254            Mornington Island Airport 139.1500 -16.65001   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61   94255                            Camooweal 138.1167 -19.91669  231</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62   94257                        Sweers Island 139.5833 -17.10000    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63   94260                    Burketown Airport 139.5333 -17.73335    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64   94261                         Century Mine 138.7000 -18.75002  127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65   94266                    Normanton Airport 141.0667 -17.68335   22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66   94268                            Kowanyama 141.7333 -15.46668   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67   94271                    Air Weapons Range 146.2333 -19.30001  386</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68   94272                         Mount Stuart 146.7500 -19.40001  176</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69   94273                        Fanning River 146.5000 -19.76668  326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70   94274                   Georgetown Airport 143.5167 -18.30001  303</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71   94276                          Palmerville 144.0667 -16.00000  204</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72   94280                  Innisfail Aerodrome 146.0000 -17.55001   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73   94284                       Arlington Reef 146.1000 -16.71668    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74   94285                            Low Isles 145.5500 -16.38334    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75   94287                       Cairns Airport 145.7333 -16.86668    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76   94288                    Cairns Racecourse 145.7333 -16.93335    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77   94289                          Holmes Reef 147.8667 -16.46668    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78   94290                        Flinders Reef 148.4333 -17.71668    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79   94292                             Cardwell 146.0167 -18.25001    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80   94293                Lihou Reef Lighthouse 152.1333 -17.11667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81   94294                       Townsville Amo 146.7500 -19.23334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82   94295                    Lucinda Point Aws 146.3833 -18.51668   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83   94297                    Cape Ferguson Ntc 147.0500 -19.26667    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84   94298                          Marion Reef 152.3833 -19.08334    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85   94299                        Willis Island 149.9500 -16.28334    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86   94300                    Carnarvon Airport 113.6667 -24.88335    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87   94302                    Learmonth Airport 114.0833 -22.23334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88   94303                 Thevenard Island Aws 115.0167 -21.45001    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89   94306                               Mardie 115.9667 -21.18334   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90   94307            Karratha Legendre Isalnd  116.8333 -20.35001   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91   94308                       Roebourne Aero 117.1500 -20.75002   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92   94312                 Port Hedland Airport 118.6167 -20.36667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93   94315                      Balgo Hills Asa 127.9834 -20.13334  421</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94   94316                      Paraburdoo Aero 117.7333 -23.16667  429</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95   94317                     Newman Aerodrome 119.7833 -23.41668  526</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96   94318                                Nyang 115.0333 -23.01667  111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97   94319                               Telfer 122.2167 -21.70001  296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98   94321                           Wulungurru 129.3667 -23.26667  454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99   94323               Watarrka Kings Canyon  131.5333 -24.28334  614</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100  94326              Alice Springs Aerodrome 133.8834 -23.78335  545</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101  94327                              Jervois 136.1333 -22.93335  331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 102  94328         Territory Grape Farm Ti Tree 133.6333 -22.45001  566</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 103  94330                       Karijini North 118.4333 -22.30001  474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 104  94332                        Mount Isa Amo 139.4833 -20.66668  342</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 105  94334              Bedourie Police Station 139.4667 -24.35001   91</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 106  94335                    Cloncurry Airport 140.5000 -20.65001  188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 107  94336                 The Monument Airport 139.9167 -21.80002  280</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 108  94337                          Julia Creek 141.7167 -20.66668  123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 109  94338                      Trepell Airport 140.8834 -21.83335  271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 110  94341                     Richmond Airport 143.1000 -20.70001  206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 111  94342                       Winton Airport 143.0833 -22.35001  195</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 112  94343                            Hughenden 144.2167 -20.81668  318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113  94344                  Urandangi Aerodrome 138.3500 -21.58335  179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 114  94345                Isisford Post Office  144.4333 -24.25001  203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 115  94346                    Longreach Airport 144.2667 -23.43334  191</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 116  94347                         Carters Bore 139.2833 -20.93335  396</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 117  94348                      Lake Julius Aws 139.7167 -20.11667  237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 118  94349                        New May Downs 139.3333 -20.58335  392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 119  94350                           Barcaldine 145.2833 -23.55001  267</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 120  94352                   Ooralea Racecourse 149.1500 -21.16667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 121  94355                                Tambo 146.2500 -24.86668  395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122  94356              Charters Towers Airport 146.2667 -20.03333  291</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123  94360                         Collinsville 147.8333 -20.55001  196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 124  94363                      Emerald Airport 148.1667 -23.56668  190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 125  94365                   Proserpine Airport 148.5500 -20.48334   21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126  94367                            Mackay Mo 149.2167 -21.11667   30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127  94368                      Hamilton Island 148.9500 -20.35001    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128  94370                     Samuel Hill Aero 150.6500 -22.73335   32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129  94371                           Creal Reef 150.3667 -20.51668    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130  94372                  Middle Percy Island 150.2667 -21.65001  209</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131  94373                Yeppoon The Esplanade 150.7500 -23.13334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 132  94374                  Rockhampton Airport 150.4667 -23.36667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 133  94376             Biloela Thangool Airport 150.5667 -24.48334  196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 134  94377                        Monto Airport 151.1167 -24.85002  239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 135  94378                    Rundle Island Aws 151.2667 -23.51668   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136  94379                           Gannet Cay 152.4667 -21.96669    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 137  94380                            Gladstone 151.2500 -23.85002   75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 138  94381                Gladstone Airport Aws 151.2167 -23.86668   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139  94383                        Bowen Airport 148.2000 -20.00000    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140  94384                         Town Of 1770 151.8834 -24.15000   41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 141  94387                  Bundaberg Aerodrome 152.3167 -24.90002   33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142  94388                   Lady Elliot Island 152.7000 -24.10000    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143  94393                       Frederick Reef 154.4000 -20.93335    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144  94394                          Cato Island 155.5333 -23.25001    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 145  94395                     Clermont Airport 147.6167 -22.76668  272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 146  94396                    Rolleston Airport 148.6167 -24.45001  223</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147  94397                     Moranbah Airport 148.0667 -22.05000  235</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148  94398                   Blackwater Airport 148.8000 -23.60001  194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 149  94399                           Lochington 147.5167 -23.93335  267</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 150  94401                             Kalbarri 114.1500 -27.70001    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151  94403                    Geraldton Airport 114.6833 -28.80002   37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 152  94404                          Paynes Find 117.6833 -29.26667  339</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153  94405    Abrolhos Island North Island Aws  113.5833 -28.30001    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154  94406                        Billabong Asa 114.6000 -26.80002  135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155  94407                    borrona Downs Aws 143.1000 -29.75002  121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 156  94411                              Mullewa 115.5000 -28.53334  268</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 157  94415                             Carnamah 115.8834 -29.68335  268</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 158  94417                       Morawa Airport 116.0167 -29.20000  270</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 159  94418                             Canungra 153.1833 -28.03333  108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 160  94419                            Greenbank 152.9834 -27.68335   42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 161  94420                          Tin Can Bay 152.9500 -25.93335   31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 162  94422           Murchison Murchison Shire  115.9500 -26.88335  287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 163  94429                    Mount Magnet Aero 117.8333 -28.10000  411</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 164  94430                  Meekatharra Airport 118.5333 -26.60001  522</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 165  94444                          Bulga Downs 119.7333 -28.48334  439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 166  94449                         Laverton Aws 122.4167 -28.60001  465</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 167  94450                         Leonora Aero 121.3167 -28.86668  371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 168  94451                   Carnegie Carnegie  122.9667 -25.78335  452</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 169  94457                   Warburton Airfield 126.5833 -26.11667  457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 170  94461                                Giles 128.3000 -25.03333  580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 171  94462                           Yulara Aws 130.9667 -25.18334  496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 172  94463                       Curtin Springs 131.7500 -25.30001  490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 173  94474                              Pukatja 132.1667 -26.25001  707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 174  94476                   Oodnadatta Airport 135.4333 -27.55001  118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 175  94489                     Windorah Airport 142.6500 -25.40001  132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 176  94497               Wanaaring Post Office  144.1333 -29.70001  108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 177  94498        Lightning Ridge Central Scool 147.9667 -29.41668  154</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 178  94500               Cunnamulla Post Office 145.6667 -28.06667  189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 179  94510                  Charleville Airport 146.2500 -26.40001  306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 180  94511                  Injune Post Office  148.5667 -25.83335  390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 181  94513                               Bollon 147.4667 -28.03333  183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 182  94514                Mitchell Post Office  147.9667 -26.48334  337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 183  94515                         Roma Airport 148.7667 -26.53334  315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 184  94517                    St George Airport 148.5833 -28.03333  200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 185  94520                             Mungindi 148.9834 -28.96669  160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 186  94521                                Surat 149.0667 -27.15000  246</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 187  94525                               Taroom 149.7833 -25.63335  199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 188  94541                Inverell Post Office  151.0667 -29.76668  664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 189  94542                        Dalby Airport 151.2500 -27.15000  347</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 190  94544                          Pindari Dam 151.2333 -29.38334  462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 191  94549                             Kingaroy 151.8333 -26.56668  455</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 192  94550                           Stanthorpe 151.9334 -28.65001  784</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 193  94552                      Oakey Aerodrome 151.7333 -27.40001  405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 194  94553        Stanthorpe (Granite Belt Hrs) 151.9500 -28.61668  872</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 195  94555                          Warwick Aws 152.1000 -28.20000  475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 196  94556             Tenterfield Derby Street 152.0167 -29.03333  838</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 197  94561                      Alexandra Hills 153.2333 -27.53334   51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 198  94562      University Of Queensland Gatton 152.3333 -27.53334   89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 199  94564                        Rainbow Beach 153.0833 -25.90002   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 200  94566                     Gympie Forestry  152.6333 -26.16667   65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 201  94567                          Maryborough 152.7000 -25.50001    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 202  94568                   Amberley Aerodrome 152.7000 -27.61668   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 203  94569             Maroochydore Airport Aws 153.0833 -26.60001    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 204  94570                    Tewantin Rsl Park 153.0333 -26.38334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 205  94572                  Lismore Airport Aws 153.2500 -28.81668   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 206  94573                   Casino Airport Aws 153.0500 -28.86668   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 207  94575                Archerfield Aerodrome 153.0000 -27.56668   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 208  94576                     Brisbane Central 153.0333 -27.46668    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 209  94578                Brisbane Airport M. O 153.1167 -27.38334    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 210  94580                Gold Coast Seaway Aws 153.4167 -27.93335    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 211  94582                         Murwillumbah 153.3667 -28.33334    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 212  94584             Double Island Point Ligh 153.1833 -25.91669   96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 213  94585           Glen Innes Ag Research Stn 151.6833 -29.68335 1060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 214  94587                              Tabulam 152.4500 -28.75002  555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 215  94588                   Glen Innes Airport 151.6833 -29.66668 1046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 216  94589                                Yamba 153.3500 -29.41668   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 217  94590              Inner Reciprocal Marker 153.2500 -27.25001   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 218  94591                   Banana Bank Beacon 153.3333 -27.53334    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 219  94592              Coolangatta Airport Aws 153.5000 -28.16667    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 220  94593                        Point Lookout 153.5333 -27.43334   41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 221  94594                         Cape Moreton 153.4500 -27.01667  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 222  94596                  Ballina Airport Aws 153.5500 -28.83335    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 223  94598        Evans Head Raaf Bombing Range 153.3833 -29.16667   63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 224  94599                       Cape Byron Aws 153.6333 -28.63335   95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 225  94600                     Cape Naturaliste 115.0167 -33.53334  109</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 226  94601                         Cape Leeuwin 115.1333 -34.36667   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 227  94602                  Rottnest Island Aws 115.5000 -32.00000   43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 228  94603             Badgingarra Research Stn 115.5333 -30.33334  275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 229  94604                              Bunbury 115.6333 -33.35001    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 230  94605                         Mandurah Aws 115.7000 -32.51668    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 231  94607             Wanneroo Ocean Reef Aws  115.7167 -31.75002   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 232  94608         Mount Lawley Perth Metro Aws 115.8667 -31.91669   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 233  94609     Spearwood Jandakot Aerodrome Aws 115.8667 -32.10000   30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 234  94610               Belmont Perth Airport  115.9667 -31.91669   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 235  94612                Bullsbrook Pearce Amo 116.0167 -31.66668   45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 236  94614                       Swanbourne Aws 115.7500 -31.95002   41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 237  94615                            Kalamunda 116.0500 -31.93335  220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 238  94617                             Manjimup 116.1333 -34.25001  287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 239  94619                           Dalwallinu 116.6500 -30.26667  335</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 240  94620                           Dwellingup 116.0500 -32.70001  267</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 241  94621                    Northam Composite 116.6500 -31.65001  170</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 242  94622                         Wongan Hills 116.7167 -30.88335  283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 243  94623                                 York 116.7500 -31.88335  179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 244  94625                             Brookton 117.0000 -32.36667  250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 245  94627                             Narrogin 117.1667 -32.93335  338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 246  94628               Newdegate Res. Station 118.8333 -33.10000  320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 247  94631                          Rocky Gully 117.0000 -34.56668  250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 248  94633                             Corrigin 117.8667 -32.31667  295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 249  94637               Kalgoorlie Boulder Amo 121.4500 -30.78335  367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 250  94638                            Esperance 121.8834 -33.81668   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 251  94640                        Windy Harbour 116.0167 -34.83335    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 252  94641                            Katanning 117.6000 -33.68335  320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 253  94644                      Red Rocks Point 127.5167 -32.20000    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 254  94645                          Eyre Madura 126.3000 -32.23334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 255  94647                            Eucla Amo 128.8667 -31.66668    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 256  94648                         Ngayirdapira 138.5667 -34.91669   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 257  94650                 Maitland Airport Aws 151.4833 -32.70001   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 258  94651                            Nullarbor 130.8834 -31.43334   64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 259  94651                            Nullarbor 130.8834 -31.43334   64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 260  94653                       Ceduna Airport 133.6833 -32.11667   24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 261  94654                          Streaky Bay 134.2000 -32.78335   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 262  94655                             Tarcoola 134.5667 -30.70001  125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 263  94656                Elliston Post Office  134.8834 -33.63335    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 264  94657                            Kyancutta 135.5500 -33.11667   61</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 265  94659                    Woomera Aerodrome 136.8000 -31.15000  167</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 266  94660                            Mount Ive 136.0667 -32.43334  177</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 267  94661                                Cleve 136.4833 -33.70001  193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 268  94662                      Cleve Aerodrome 136.5000 -33.70001  180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 269  94665                             Maitland 137.6667 -34.36667  185</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 270  94666                       Warburto Point 137.5167 -34.00000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 271  94672                     Adelaide Airport 138.5167 -34.95002    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 272  94673                               Hawker 138.4333 -31.88335  315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 273  94674                  Leigh Creek Airport 138.4167 -30.58335  261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 274  94676                            Arkaroola 139.3333 -30.30001  318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 275  94677                       Goolwa Marina  138.8167 -35.51668   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 276  94678      Williamstown Mount Crawford Aws 138.9167 -34.71668  525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 277  94679                              Yongala 138.7333 -33.01667  521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 278  94680                              Eudunda 139.0833 -34.16667  415</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 279  94681                            Nuriootpa 139.0000 -34.46668  275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 280  94682                               Loxton 140.5833 -34.43334   30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 281  94683                Kuitpo Forest Reserve 138.6667 -35.16667  365</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 282  94684                                Yunta 139.5500 -32.56668  300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 283  94685                           Kadina Aws 137.6500 -33.96669   42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 284  94686                      Fowlers Gap Aws 141.7000 -31.08334  181</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 285  94690                        Austin Plains 140.5333 -35.36667  110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 286  94691                      Broken Hill Aws 141.4667 -32.00000  292</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 287  94692                Lake Victoria Storage 141.2500 -34.03333   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 288  94693                      Mildura Airport 142.0833 -34.23334   51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 289  94694                             Menindee 142.4167 -32.38334   61</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 290  94700                     Hillston Airport 145.5167 -33.48334  123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 291  94702                      Hay Airport Aws 144.8333 -34.53334   93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 292  94703                   Bourke Airport Aws 145.9500 -30.03333  107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 293  94710                    Cobar Airport Aws 145.7833 -31.53334  221</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 294  94711                                Cobar 145.8167 -31.48334  260</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 295  94712                            Young Aws 148.2333 -34.23334  383</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 296  94714                          Cootamundra 148.0333 -34.61668  338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 297  94715                   Forbes Airport Aws 147.9167 -33.35001  232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 298  94716                             Goulburn 149.7000 -34.73335  670</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 299  94721                            Peak Hill 148.1833 -32.71668  285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 300  94723                           Wellington 148.9500 -32.55001  305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 301  94725               Grenfell (Quondong Rd) 148.1500 -33.88335  390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 302  94727                           Mudgee Aws 149.6000 -32.55001  471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 303  94728           Coonabarabran Namoi Street 149.2667 -31.26667  505</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 304  94729                 Bathurst Airport Aws 149.6500 -33.40001  742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 305  94730       Bathurst Agricult. Res Station 149.5500 -33.41667  713</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 306  94732                  Gulgong Post Office 149.5167 -32.35001  475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 307  94735                 Taralga Post Office  149.8167 -34.40001  845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 308  94740                         Gunnedah Scs 150.2667 -31.01667  307</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 309  94741                              Lithgow 150.1167 -33.46668  900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 310  94743                      Mount Boyce Aws 150.2667 -33.61668 1080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 311  94744                             Katoomba 150.2833 -33.70001 1017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 312  94746                        Moss Vale Aws 150.4167 -34.51668  678</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 313  94749                         Bellambi Aws 150.9167 -34.36667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 314  94750                Nowra Ran Air Station 150.5333 -34.93335  122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 315  94751                  Jervis Bay Airfield 150.6833 -35.13334   58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 316  94752              Badgery'S Creek Airport 150.7167 -33.88335   81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 317  94754                  Nullo Mountains Aws 150.2167 -32.71668 1130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 318  94755                       Camden Airport 150.6833 -34.03333   70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 319  94757           Cambell Town (Mount Annan) 150.7667 -34.05000  112</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 320  94758                                Scone 150.8667 -32.05000  208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 321  94759                     Terrey Hills Aws 151.2167 -33.68335  199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 322  94760            Horsley Equestrian Centre 150.8500 -33.85002  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 323  94761                              Barraba 150.6000 -30.36667  500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 324  94763                              Penrith 150.6667 -33.71668   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 325  94764                     Parramatta North 151.0167 -33.78335   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 326  94765                Bankstown Airport Aws 150.9834 -33.91669    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 327  94766                           Canterbury 151.1000 -33.90002    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 328  94767                       Sydney Airport 151.1667 -33.93335    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 329  94768               Sydney Regional Office 151.2000 -33.85002   39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 330  94769                     Fort Denison Aws 151.2167 -33.85002    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 331  94772                       Guyra Hospital 151.6667 -30.20000 1329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 332  94773                             Armidale 151.6667 -30.51668  987</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 333  94774                            Newcastle 151.7833 -32.91669   33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 334  94775                             Paterson 151.5833 -32.61668   30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 335  94776                Williamtown Aerodrome 151.8333 -32.78335   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 336  94780     Little Bay (The Coast Golf Club) 151.2500 -33.96669   22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 337  94782                          Gosford Aws 151.3500 -33.43334    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 338  94783                 Yarras Mount Seaview 152.2333 -31.38334  155</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 339  94785                  Kempsey Airport Aws 152.7667 -31.06667   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 340  94789               Dorrigo Old Coramba Rd 152.7167 -30.33334  746</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 341  94793                           Brewon Aws 147.5167 -30.23334  130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 342  94794                             Okeh Aws 146.9167 -31.06667  178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 343  94795                          Swan Valley 116.0167 -31.80002   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 344  94796                       Smithville Aws 141.0000 -30.06667   94</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 345  94797                         Mulurulu Aws 143.4000 -33.33334   78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 346  94798                            Noona Aws 144.9167 -31.71668  179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 347  94799                Port Macquarie Aiport 152.8500 -31.43334    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 348  94801                               Albany 117.8667 -35.01667    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 349  94802                       Albany Airport 117.8000 -34.93335   71</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 350  94804                       Neptune Island 136.1167 -35.33334   32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 351  94806            Mount Barker Post Office  138.8500 -35.05000  359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 352  94807                     Parndana Cfs Aws 137.2333 -35.78335  165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 353  94808                            Noarlunga 138.5000 -35.15000   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 354  94809                       Edithburgh Aws 137.7333 -35.10000    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 355  94811      Parawa Second Valley Forest Aws 138.2833 -35.56668  341</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 356  94812                    Robe Post Office  139.7500 -37.15000    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 357  94813                       Cape Jaffa Aws 139.7000 -36.95002   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 358  94814               Strathalbyn Racecourse 138.8834 -35.28334   58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 359  94816                   Keith Post Office  140.3500 -36.08333   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 360  94817                           Coonawarra 140.8167 -37.28334   57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 361  94820                 Naracoorte Aerodrome 140.7167 -36.96669   50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 362  94821              Mount Gambier Aerodrome 140.7667 -37.73335   65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 363  94822                      Cape Willoughby 138.1167 -35.83335   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 364  94826                          Cape Nelson 141.5333 -38.41667   45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 365  94827                      Nhill Composite 141.6333 -36.30001  138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 366  94828                     Portland Airport 141.4667 -38.30001   81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 367  94828                     Portland Airport 141.4667 -38.30001   81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 368  94829                     Hamilton Airport 142.0500 -37.63335  245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 369  94830                       Port Fairy Aws 142.2333 -38.38334   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 370  94833                        Mount William 142.6000 -37.28334 1150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 371  94834                               Ararat 142.9667 -37.26667  295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 372  94835                            Ben Nevis 143.2000 -37.21667  875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 373  94836                    Stawell Aerodrome 142.7333 -37.06667  246</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 374  94837              Warrnambool Airport Ndb 142.4500 -38.28334   74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 375  94838                     Hopetoun Airport 142.3500 -35.70001   78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 376  94839                             Charlton 143.3333 -36.28334  132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 377  94840                         Mortlake Aws 142.7667 -38.06667  130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 378  94842                           Cape Otway 143.5000 -38.85002   82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 379  94843                            Swan Hill 143.5333 -35.36667   71</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 380  94844                               Kerang 143.9167 -35.71668   78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 381  94846                     Aireys Inlet Aws 144.0833 -38.45001   95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 382  94849                          Maryborough 143.7167 -37.05000  249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 383  94850                  King Island Airport 143.8667 -39.86668   40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 384  94852                             Ballarat 143.7833 -37.50001  437</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 385  94854                           Avalon Aws 144.4667 -38.01667   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 386  94855                  Bendigo Airport Aws 144.3167 -36.73335  215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 387  94856                              Geelong 144.3333 -38.08333   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 388  94857                   Geelong Racecourse 144.3667 -38.16667   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 389  94858                     West Channel Aws 144.7500 -38.20000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 390  94859                        Redesdale Aws 144.5167 -37.01667  290</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 391  94860                      Kilmore Gap Aws 144.9500 -37.36667  528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 392  94861                               Echuca 144.7500 -36.15000   99</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 393  94862                           Yarrawonga 146.0167 -36.01667  129</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 394  94863                          Sheoaks Aws 144.1167 -37.90002  237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 395  94864                       Goldstream Aws 145.4000 -37.71668   76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 396  94865                   Laverton Aerodrome 144.7500 -37.85002   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 397  94866                    Melbourne Airport 144.8167 -37.65001  132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 398  94870                Moorabbin Airport Aws 145.0833 -37.96669   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 399  94872                       Dunns Hill Aws 145.3333 -37.86668  513</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 400  94874                    Mangalore Airport 145.1833 -36.88335  142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 401  94875                   Shepparton Airport 145.3833 -36.41667  114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 402  94876                           Finley Aws 145.6167 -35.71668  110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 403  94878                     Hunters Hill Aws 147.5333 -36.20000  981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 404  94881                    Eildon Fire Tower 145.8333 -37.20000  637</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 405  94882                          Lake Eildon 145.9000 -37.21667  230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 406  94884                              Benalla 145.9834 -36.55001  173</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 407  94886                          Pound Creek 145.8000 -38.61668    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 408  94888                  Dartmouth Reservoir 147.4833 -36.53334  365</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 409  94889                 Wangaratta Aerodrome 146.3000 -36.41667  154</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 410  94891               Latrobe Valley Airport 146.4667 -38.20000   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 411  94892                           Rhyll Aws  145.3000 -38.45001   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 412  94893             Wilsons Promontory Light 146.4167 -39.11667   95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 413  94894                         Mount Buller 146.4333 -37.13334 1707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 414  94898                         Cerberus Aws 145.1667 -38.35001   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 415  94901                       Hume Reservoir 147.0167 -36.10000  184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 416  94903                      Falls Creek Aws 147.2667 -36.86668 1765</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 417  94905                    Mt Hotham Airport 147.3333 -37.03333 1298</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 418  94906                     Mount Hotham Aws 147.1333 -36.96669 1849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 419  94907                  East Sale Aerodrome 147.1167 -38.10000    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 420  94908                                 Omeo 147.6000 -37.10000  690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 421  94909                       Burrinjuck Dam 148.5833 -34.98335  390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 422  94910                        Wagga Airport 147.4500 -35.15000  221</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 423  94911                              Yanakie 146.1833 -38.80002   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 424  94912                   Bairnsdale Airport 147.5667 -37.86668   50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 425  94913                        Gelantipy Aws 148.2500 -37.21667  755</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 426  94914                       Combienbar Aws 149.0167 -37.33334  640</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 427  94915                      Perisher Valley 148.4000 -36.40001 1738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 428  94918                           Tumbarumba 148.0000 -35.76668  645</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 429  94919                            Khancoban 148.1333 -36.21667  339</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 430  94920                Warracknabeal Airport 142.4000 -36.31667  118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 431  94921                    Cooma Airport Aws 148.9667 -36.28334  947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 432  94923                                Cooma 149.1167 -36.21667  778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 433  94925          Tuggeranong Isabella Plains 149.0833 -35.41667  587</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 434  94926                             Canberra 149.2000 -35.30001  576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 435  94927             Braidwood Racecourse Aws 149.7833 -35.41667  665</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 436  94928                              Bombala 149.2333 -36.90002  705</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 437  94929                          Bombala Aws 149.2333 -37.00000  761</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 438  94930                         Mt Nowa Nowa 148.0833 -37.68335  350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 439  94933                          Gabo Island 149.9000 -37.56668   15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 440  94934                       Green Cape Aws 150.0500 -37.25001   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 441  94935                       Mallacoota Aws 149.7167 -37.58335   31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 442  94937                         Moruya Heads 150.1500 -35.90002   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 443  94938                        Ulladulla Aws 150.4667 -35.35001   36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 444  94939             Montague Island Lighthou 150.2167 -36.25001   52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 445  94943                          Nerriga Aws 150.0667 -35.10000  622</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 446  94944                              Kapooka 147.2500 -35.11667  187</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 447  94949                     Hogan Island Aws 146.9834 -39.21667  116</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 448  94950                             Marrawah 144.7000 -40.90002  107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 449  94951              Dunalley (Stroud Point) 147.7833 -42.90002   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 450  94953                   Smithton Aerodrome 145.0833 -40.83335   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 451  94955                Sheffield School Farm 146.3167 -41.38334  294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 452  94956                  Strahan Airport Aws 145.2833 -42.15000   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 453  94957                    Ouse Fire Station 146.7000 -42.48334   90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 454  94959                        Butlers Gorge 146.2667 -42.26667  667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 455  94960                  Tunnak Fire Station 147.4500 -42.45001  462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 456  94961                                Dover 147.0000 -43.31667   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 457  94962                    Maatsuyker Island 146.2667 -43.65001  147</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 458  94964                           Bushy Park 146.8834 -42.70001   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 459  94969                           Launceston 147.1167 -41.41667    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 460  94970              Hobart Regional Office  147.3167 -42.88335   51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 461  94972                    Scottsdale No. 2  147.4833 -41.16667  198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 462  94974                      Cape Sorell Aws 145.1667 -42.18334   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 463  94976      Lake Saint Clair National Park  146.1667 -42.11667  742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 464  94977                      Hartz Mountains 146.7667 -43.20000  831</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 465  94980              Flinders Island Airport 148.0000 -40.08333   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 466  94981                              Swansea 148.0667 -42.13334   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 467  94983           Eddystone Point Lighthouse 148.3333 -40.98335   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 468  94985                 Ross Waterloo Street 147.4833 -42.01667  186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 469  94987                     Friendly Beaches 148.2667 -41.98335   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 470  94988                         Dennes Point 147.3500 -43.05000    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 471  94995                     Lord Howe Island 159.0667 -31.53334    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 472  94996               Norfolk Island Airport 167.9334 -29.03333  113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 473  94998                     Macquarie Island 158.9334 -54.48334    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 474  95101                             Truscott 126.3833 -14.08333   51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 475  95111                      Port Keats Aero 129.5167 -14.23334   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 476  95121                     Middle Point Aws 131.2833 -12.60001   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 477  95122                       Darwin Ntc Aws 130.8333 -12.46668    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 478  95142                      Maningrida Aero 134.2333 -12.05000   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 479  95146                            Ngayawili 135.5667 -11.98335    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 480  95202                       Broome Ntc Aws 122.2167 -18.00000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 481  95205                  Derby Aerodrome Aws 123.6500 -17.36667    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 482  95208                          Yampi Sound 123.9667 -16.76668   41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 483  95214                         Wyndham Aero 128.1500 -15.50001    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 484  95283                     Cooktown Airport 145.1833 -15.43334    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 485  95284                         Walkamin Dpi 145.4167 -17.13334  594</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 486  95286                  Mareeba Airport Aws 145.4167 -17.06667  476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 487  95288                Bougainville Reef Aws 147.1167 -15.48334    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 488  95292              South Johnstone Exp Stn 145.9834 -17.60001   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 489  95295                 Ayr Dpi Research Stn 147.3667 -19.61668   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 490  95296                       Ayr Alva Beach 147.4667 -19.45001    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 491  95298                  Rosslyn Bay Ntc Aws 150.7833 -23.15000    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 492  95303                       Varanus Island 115.5667 -20.65001   24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 493  95304                Barrow Island Airport 115.4000 -20.86668    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 494  95305                       Onslow Airport 115.1000 -21.66668    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 495  95307               Karratha Aerodrome Aws 116.7667 -20.70001    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 496  95317                           Marble Bar 119.7333 -21.16667  182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 497  95322                          Rabbit Flat 130.0000 -20.16667  340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 498  95323                             Arltunga 134.6833 -23.45001  661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 499  95351                     Blackall Airport 145.4167 -24.41668  283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 500  95362              Springsure Post Office  148.0833 -24.11667  345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 501  95367                       Mackay Airport 149.1667 -21.16667    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 502  95369                          St Lawrence 149.5167 -22.33334    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 503  95370                           Williamson 150.1667 -22.46668   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 504  95402                    Shark Bay Airport 113.5667 -25.88335   34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 505  95439                      Balgo Hills Aws 120.2167 -26.61668  502</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 506  95448       Leonora Leinster Aerodrome Aws 120.7000 -27.83335  497</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 507  95458                      Coober Pedy Aws 134.7167 -29.03333  226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 508  95480                          Marree Aero 138.0667 -29.65001   50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 509  95481                       Moomba Airport 140.1833 -28.08334   44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 510  95482                   Birdsville Airport 139.3333 -25.88335   47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 511  95485                   Tibooburra Airport 142.0500 -29.43334  178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 512  95487                    Ballera Gas Field 141.8000 -27.40001  117</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 513  95492                 Thargomindah Airport 143.8000 -27.98335  132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 514  95512                  Brewarrina Hospital 146.8500 -29.95002  115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 515  95520                          Collarenbri 148.5667 -29.53334  145</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 516  95527                             Moree Mo 149.8333 -29.48334  214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 517  95529               Miles Constance Street 150.1667 -26.65001  305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 518  95533                   Texas Post Office  151.1667 -28.85002  295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 519  95543                      Gayndah Airport 151.6000 -25.61668  113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 520  95551                    Toowoomba Airport 151.9000 -27.53334  636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 521  95565                   Hervey Bay Airport 152.8667 -25.31667   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 522  95566                Beerburrum Forest Stn 152.9500 -26.95002   48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 523  95570                      Grafton Airport 153.0167 -29.75002   34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 524  95571                 Grafton Research Stn 152.9500 -29.61668   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 525  95572                              Nambour 152.9334 -26.63335   53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 526  95575            Beaudesert Drumley Street 152.9834 -27.96669   48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 527  95581                          Longan City 153.1833 -27.68335   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 528  95591                            Redcliffe 153.0833 -27.21667   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 529  95602                      Busselton Jetty 115.3333 -33.61668    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 530  95605             Fremantle East Fremantle 115.7667 -32.05000   15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 531  95607                    Garden Island Hsf 115.6833 -32.23334    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 532  95609                             Lancelin 115.2167 -30.83335    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 533  95610                     Kalamunda Bicley 116.1333 -32.00000  384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 534  95611                       Busselton Aero 115.4000 -33.68335   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 535  95612                          Gingin Aero 115.8500 -31.45001   74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 536  95613                            Pemberton 116.0333 -34.43334  174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 537  95614                               Karnet 116.0667 -32.43334  286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 538  95615                             Beverley 116.9167 -32.10000  199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 539  95616                             Pingelly 117.0667 -32.53334  297</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 540  95617             Northcliffe Shannon Calm 116.3333 -34.56668  210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 541  95618                                Wagin 117.3333 -33.30001  256</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 542  95620                  Outer Dolphin Pylon 115.8333 -31.98335    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 543  95621                          Collie East 116.1667 -33.35001  200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 544  95622                           Donnybrook 115.8167 -33.56668   63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 545  95623                           Jarrahwood 115.6500 -33.78335  130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 546  95624                             Merredin 118.2667 -31.46668  315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 547  95625                   Cunderdin Airfield 117.2167 -31.61668  213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 548  95627                                Hyden 118.8834 -32.43334  299</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 549  95629                           Dalwallinu 116.6667 -30.26667  325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 550  95631                           Goomalling 116.8167 -31.28334  239</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 551  95632                           Bridgetown 116.1167 -33.93335  179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 552  95634              Southern Cross Airfield 119.3500 -31.23334  355</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 553  95635            Ravensthorpe Hopetoun Aws 120.1167 -33.91669   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 554  95636                Jerramungup Jacup Aws 119.1000 -33.88335  305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 555  95637                           Lake Grace 118.4500 -33.10000  286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 556  95638              Esperance Aerodrome Aws 121.8167 -33.66668  143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 557  95639                 Salmon Gums Res. Stn 121.6167 -32.98335  249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 558  95640                            Wandering 116.6667 -32.66668  275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 559  95642                        Norseman Aero 121.7500 -32.20000  263</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 560  95644                            Cheadanup 120.6833 -33.55001  220</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 561  95645                          Caiguna Asa 125.4833 -32.25001  109</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 562  95646                          Forrest Aws 128.1000 -30.83335  156</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 563  95647                        North Walpole 116.7167 -34.93335   73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 564  95648                    Esperance Ntc Aws 121.8834 -33.86668    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 565  95649                          point Avoid 135.3333 -34.66668   35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 566  95652                    Thevenard Ntc Aws 133.6333 -32.13334    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 567  95654                         Wudinna Aero 135.4500 -33.03333   90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 568  95658                Olympic Dam Aerodrome 136.8667 -30.46668  105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 569  95659                        Minlaton Aero 137.5167 -34.73335   34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 570  95660                            Andamooka 137.1667 -30.43334   76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 571  95661           Port Lincoln Aerodrome Aws 135.8667 -34.58335   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 572  95662                          Minnipa Dpi 135.1500 -32.83335  165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 573  95663                         Cummins Aero 135.7000 -34.25001   60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 574  95664                 Whyalla Airport Aws  137.5167 -33.05000   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 575  95666                     Port Augusta Aws 137.7000 -32.50001   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 576  95667                    Clare High School 138.5833 -33.81668  395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 577  95668                              Gluepot 140.1167 -33.75001   57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 578  95669                  Cheetham Salt Works 138.0000 -34.28334    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 579  95670                        Rayville Park 138.2167 -33.76668  109</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 580  95671                Roseworthy Ag College 138.6667 -34.50001   65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 581  95675                           Black Pole 138.4500 -34.73335    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 582  95676                      Edinburgh M. O. 138.6167 -34.70001   20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 583  95677                    Parafield Airport 138.6167 -34.78335   17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 584  95678                      Mount Lofty Aws 138.7000 -34.96669  685</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 585  95679                 Mount Terrible Radar 138.5000 -35.31667  386</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 586  95681                            delta Aws 145.3333 -30.10000  109</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 587  95682                       mount Hope Aws 145.8667 -32.81668  209</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 588  95683                              Cultana 137.3667 -32.68335  171</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 589  95684               Holsworthy Defence Aws 150.9000 -34.06667  165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 590  95686                          Marrangaroo 150.1333 -33.43334  955</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 591  95687                    Renmark Aerodrome 140.6667 -34.18334   35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 592  95692                 Pooncarie Telecentre 142.5667 -33.38334   53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 593  95695              Wilcannia Aerodrome Aws 143.3833 -31.51668   95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 594  95697                Ivanhoe Aerodrome Aws 144.3000 -32.86668  101</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 595  95699                     White Cliffs Aws 143.0667 -30.85002  162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 596  95704                     Griffith Airport 146.0667 -34.23334  134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 597  95705         Yanco Agricultural Institute 146.4167 -34.61668  164</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 598  95706                   Narrandera Airport 146.5000 -34.70001  144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 599  95707              Lake Cargelligo Airport 146.3667 -33.26667  169</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 600  95708               Condobolin Airport Aws 147.2000 -33.06667  199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 601  95709             West Wyalong Airport Aws 147.1833 -33.93335  262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 602  95710             Trangie Research Station 147.9334 -31.98335  215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 603  95715                      Walgett Airport 148.1167 -30.03333  134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 604  95716                 Goulburn Airport Aws 149.7167 -34.80002  653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 605  95717                       Parkes Airport 148.2333 -33.11667  326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 606  95718                    Coonamble Airport 148.3667 -30.96669  184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 607  95719                    Dubbo Airport Aws 148.5667 -32.21667  285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 608  95721                    Cowra Airport Aws 148.6333 -33.83335  294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 609  95722                       Temora Airport 147.5000 -34.41667  281</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 610  95725        Orange Agricultural Institute 149.0667 -33.31667  922</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 611  95726                       Orange Airport 149.1167 -33.36667  950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 612  95728            Coonabarabran Airport Aws 149.2667 -31.31667  645</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 613  95729                Coffs Harbour Airport 153.1000 -30.31667    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 614  95734                 Narrabri Airport Aws 149.8167 -30.30001  240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 615  95740                 Gunnedah Airport Aws 150.2333 -30.95002  263</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 616  95745                  Port Kembla Ntc Aws 150.9000 -34.46668    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 617  95747                   Murrurundi Gap Aws 150.7833 -31.73335  729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 618  95748                   Wollongong Airport 150.7833 -34.55001   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 619  95749               Kiama (Bombo Headland) 150.8500 -34.65001   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 620  95752                       Wattamolla Aws 151.1167 -34.13334   44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 621  95753                     Richmond Amo Aws 150.7667 -33.60001   21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 622  95754                  Merriwa (Roscommon) 150.1667 -32.18334  375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 623  95756                          Kurnell Aws 151.2000 -34.00000    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 624  95758                    Scone Airport Aws 150.8167 -32.03333  227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 625  95761             Holsworthy Aerodrome Aws 150.9334 -33.98335   68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 626  95762                 Tamworth Airport Aws 150.8333 -31.06667  407</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 627  95765                             Homebush 151.0667 -33.83335    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 628  95767                   Lake Macquarie Aws 151.4500 -33.08333    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 629  95770                Norah Head Lighthouse 151.5667 -33.26667   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 630  95771                 Cessnock Airport Aws 151.3333 -32.78335   64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 631  95772                     Lostock Dam Site 151.4500 -32.31667  200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 632  95773                 Armidale Airport Aws 151.6000 -30.51668 1084</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 633  95774 Mangrove Mountain Aws Bloodtree Road 151.2000 -33.28334  305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 634  95784                    Taree Airport Aws 152.5000 -31.88335   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 635  95805                       Cape Borda Aws 136.5833 -35.75001  158</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 636  95806                        Stenhouse Bay 136.9334 -35.26667   42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 637  95807 Cygnet River Kingstone Aerodrome Aws 137.5167 -35.70001    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 638  95811                        Encounter Bay 138.5833 -35.55001    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 639  95812                        Murray Bridge 139.2500 -35.11667   33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 640  95813                             Karoonda 139.8834 -35.08333   72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 641  95815                              Munkora 140.3167 -36.10000   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 642  95816                        Robe Airfield 139.8000 -37.16667    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 643  95818                  Pallamana Aerodrome 139.2167 -35.05000   55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 644  95822                             Dartmoor 141.2500 -37.91669   51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 645  95823                      Padthaway South 140.5167 -36.65001   37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 646  95825                            Casterton 141.3333 -37.56668  131</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 647  95826                     Portland Ntc Aws 141.6000 -38.33334   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 648  95827                             Kanagulk 141.8000 -37.11667  189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 649  95831                     Walpeup Research 142.0000 -35.11667  105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 650  95832                     Edenhope Airport 141.2500 -37.01667  155</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 651  95833        Kyabram (Inst Sustainable Ag) 145.0500 -36.33334  105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 652  95835                          Longerenong 142.2833 -36.66668  133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 653  95836           Tatura Inst Sustainable Ag 145.2667 -36.43334  114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 654  95837                  Rutherglen Research 146.5000 -36.10000  175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 655  95839                    Horsham Aerodrome 142.1667 -36.66668  136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 656  95840                             Westmere 142.9334 -37.70001  226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 657  95843                          Strathbogie 145.7167 -36.83335  502</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 658  95845                        Mt Gellibrand 143.7833 -38.21667  261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 659  95866                     Essendon Airport 144.9000 -37.71668   86</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 660  95867          Scoresby Research Institute 145.2500 -37.86668   80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 661  95869               Deniliquin Airport Aws 144.9334 -35.55001   96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 662  95874                    Viewbank (Arpnsa) 145.0833 -37.73335   66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 663  95881                  Wonthaggi Composite 145.5833 -38.60001   52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 664  95890                       Yarram Airport 146.7333 -38.55001   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 665  95896                  Albury Aeroport Aws 146.9500 -36.06667  165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 666  95901                           Mt Baw Baw 146.2667 -37.83335 1561</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 667  95904             Lakes Entrance Composite 148.0000 -37.86668    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 668  95907                            Khancoban 148.1333 -36.21667  337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 669  95909                          Crackenback 148.2833 -36.48334 1957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 670  95913                   Mount Moornapa Aws 147.1333 -37.73335  480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 671  95916                     Cabramurra Smhea 148.3667 -35.93335 1482</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 672  95918                               Orbost 148.4667 -37.68335   63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 673  95925                         Mount Ginini 148.7667 -35.51668 1760</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 674  95929                    Merimbula Airport 149.8834 -36.90002    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 675  95931                             Bega Aws 149.8167 -36.66668   41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 676  95935                         Narooma Vrcp 150.1333 -36.20000   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 677  95936             Melbourne (Olympic Park) 144.9667 -37.81668    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 678  95937                       Moruya Airport 150.1333 -35.90002    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 679  95940                 Pt Perpendicular Aws 150.8000 -35.08333   85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 680  95952                           Mount Read 145.5333 -41.83335 1120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 681  95954                            Cape Grim 144.6833 -40.66668   86</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 682  95956              Luncheron Hill Forestry 145.1500 -41.13334  344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 683  95957                  Wynyard Airport Aws 145.7167 -40.98335   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 684  95958                      Scotts Peak Dam 146.2667 -43.03333  408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 685  95959                             Liawenee 146.6667 -41.88335 1057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 686  95960                Devonport Airport Aws 146.4167 -41.16667   10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 687  95961                 Low Rocky Point Aws  145.5000 -42.98335   34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 688  95962                                Warra 146.7000 -43.05000  495</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 689  95963                       Burnie Ntc Aws 145.9000 -41.05000    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 690  95964                             Low Head 146.7833 -41.05000    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 691  95966                   Launceston Airport 147.2000 -41.53334  171</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 692  95967              Cape Bruny (Cape Bruny) 147.1333 -43.48334   60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 693  95970                            Tarraleah 146.4333 -42.30001  589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 694  95972                   Campania (Kinkora) 147.4167 -42.68335   45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 695  95977             Grove (Research Station) 147.0667 -42.98335   65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 696  95979                     Mount Wellington 147.2333 -42.88335 1261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 697  95981                  St Helens Aerodrome 148.2667 -41.33334   48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 698  95985                      Swan Island Aws 148.1167 -40.71668   15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 699  95986                        Tasman Island 148.0000 -43.23334  240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 700  95987                   Spring Bay Ntc Aws 147.9167 -42.53334    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 701  95988         Maria Island (Point Lesueur) 148.0167 -42.65001   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 702  95989                              Bicheno 148.3000 -41.86668   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 703  95995         Lord Howe Island Windy Point 159.0667 -31.53334    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 704  96997                         Cocos Island       NA -12.11667    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   94216             Kununurra Kununurra Aws  128.7000 -15.76668   44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49   94217       Kununurra Argyle Aerodrome Aws 128.4500 -16.63335  159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   94221                     Angallary Valley 130.5667 -15.43334   60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51   94225               Delamere Weapons Range 131.9167 -15.73335  221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52   94231                             Lajamanu 130.6333 -18.31667  318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53   94232                 Victoria River Downs 131.0000 -16.40001   89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54   94234                      Daly Waters Aws 133.3667 -16.25001  210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55   94236                              Elliott 133.5333 -17.55001  220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56   94238                Tennant Creek Airport 134.1667 -19.63335  377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57   94239                       Mcarthur River 136.0667 -16.43334   40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58   94248                        Centre Island 136.8167 -15.73335   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59   94254            Mornington Island Airport 139.1500 -16.65001   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60   94255                            Camooweal 138.1167 -19.91669  231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61   94257                        Sweers Island 139.5833 -17.10000    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62   94260                    Burketown Airport 139.5333 -17.73335    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63   94261                         Century Mine 138.7000 -18.75002  127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64   94266                    Normanton Airport 141.0667 -17.68335   22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65   94268                            Kowanyama 141.7333 -15.46668   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66   94271                    Air Weapons Range 146.2333 -19.30001  386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67   94272                         Mount Stuart 146.7500 -19.40001  176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68   94273                        Fanning River 146.5000 -19.76668  326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69   94274                   Georgetown Airport 143.5167 -18.30001  303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70   94276                          Palmerville 144.0667 -16.00000  204</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71   94280                  Innisfail Aerodrome 146.0000 -17.55001   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72   94284                       Arlington Reef 146.1000 -16.71668    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73   94285                            Low Isles 145.5500 -16.38334    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74   94287                       Cairns Airport 145.7333 -16.86668    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75   94288                    Cairns Racecourse 145.7333 -16.93335    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76   94289                          Holmes Reef 147.8667 -16.46668    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77   94290                        Flinders Reef 148.4333 -17.71668    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78   94293                Lihou Reef Lighthouse 152.1333 -17.11667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79   94294                       Townsville Amo 146.7500 -19.23334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80   94295                    Lucinda Point Aws 146.3833 -18.51668   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81   94297                    Cape Ferguson Ntc 147.0500 -19.26667    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82   94298                          Marion Reef 152.3833 -19.08334    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83   94299                        Willis Island 149.9500 -16.28334    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84   94300                    Carnarvon Airport 113.6667 -24.88335    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85   94302                    Learmonth Airport 114.0833 -22.23334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86   94303                 Thevenard Island Aws 115.0167 -21.45001    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87   94306                               Mardie 115.9667 -21.18334   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88   94307            Karratha Legendre Isalnd  116.8333 -20.35001   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89   94308                       Roebourne Aero 117.1500 -20.75002   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90   94310       Port Hedland Bedout Island Aws 119.0833 -19.58335    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91   94312                 Port Hedland Airport 118.6167 -20.36667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92   94315                      Balgo Hills Asa 127.9834 -20.13334  421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93   94316                      Paraburdoo Aero 117.7333 -23.16667  429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94   94317                     Newman Aerodrome 119.7833 -23.41668  526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95   94318                                Nyang 115.0333 -23.01667  111</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96   94319                               Telfer 122.2167 -21.70001  296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97   94321                           Wulungurru 129.3667 -23.26667  454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98   94323               Watarrka Kings Canyon  131.5333 -24.28334  614</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99   94326              Alice Springs Aerodrome 133.8834 -23.78335  545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100  94327                              Jervois 136.1333 -22.93335  331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101  94328         Territory Grape Farm Ti Tree 133.6333 -22.45001  566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102  94330                       Karijini North 118.4333 -22.30001  474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103  94332                        Mount Isa Amo 139.4833 -20.66668  342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104  94335                    Cloncurry Airport 140.5000 -20.65001  188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105  94336                 The Monument Airport 139.9167 -21.80002  280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106  94337                          Julia Creek 141.7167 -20.66668  123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107  94338                      Trepell Airport 140.8834 -21.83335  271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108  94341                     Richmond Airport 143.1000 -20.70001  206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109  94342                       Winton Airport 143.0833 -22.35001  195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110  94343                            Hughenden 144.2167 -20.81668  318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111  94344                  Urandangi Aerodrome 138.3500 -21.58335  179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112  94345                Isisford Post Office  144.4333 -24.25001  203</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113  94346                    Longreach Airport 144.2667 -23.43334  191</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114  94347                         Carters Bore 139.2833 -20.93335  396</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115  94348                      Lake Julius Aws 139.7167 -20.11667  237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116  94349                        New May Downs 139.3333 -20.58335  392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117  94350                           Barcaldine 145.2833 -23.55001  267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118  94352                   Ooralea Racecourse 149.1500 -21.16667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119  94355                                Tambo 146.2500 -24.86668  395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120  94356              Charters Towers Airport 146.2667 -20.03333  291</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121  94363                      Emerald Airport 148.1667 -23.56668  190</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122  94365                   Proserpine Airport 148.5500 -20.48334   21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123  94367                            Mackay Mo 149.2167 -21.11667   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124  94368                      Hamilton Island 148.9500 -20.35001    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125  94370                     Samuel Hill Aero 150.6500 -22.73335   32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126  94371                           Creal Reef 150.3667 -20.51668    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127  94372                  Middle Percy Island 150.2667 -21.65001  209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128  94373                Yeppoon The Esplanade 150.7500 -23.13334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129  94374                  Rockhampton Airport 150.4667 -23.36667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130  94376             Biloela Thangool Airport 150.5667 -24.48334  196</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131  94377                        Monto Airport 151.1167 -24.85002  239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132  94378                    Rundle Island Aws 151.2667 -23.51668   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133  94379                           Gannet Cay 152.4667 -21.96669    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134  94380                            Gladstone 151.2500 -23.85002   75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135  94381                Gladstone Airport Aws 151.2167 -23.86668   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136  94383                        Bowen Airport 148.2000 -20.00000    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137  94384                         Town Of 1770 151.8834 -24.15000   41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138  94387                  Bundaberg Aerodrome 152.3167 -24.90002   33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139  94388                   Lady Elliot Island 152.7000 -24.10000    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140  94393                       Frederick Reef 154.4000 -20.93335    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141  94394                          Cato Island 155.5333 -23.25001    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142  94395                     Clermont Airport 147.6167 -22.76668  272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143  94396                    Rolleston Airport 148.6167 -24.45001  223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144  94397                     Moranbah Airport 148.0667 -22.05000  235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145  94398                   Blackwater Airport 148.8000 -23.60001  194</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146  94399                           Lochington 147.5167 -23.93335  267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147  94401                             Kalbarri 114.1500 -27.70001    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148  94403                    Geraldton Airport 114.6833 -28.80002   37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149  94404                          Paynes Find 117.6833 -29.26667  339</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150  94405    Abrolhos Island North Island Aws  113.5833 -28.30001    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151  94406                        Billabong Asa 114.6000 -26.80002  135</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152  94407                    borrona Downs Aws 143.1000 -29.75002  121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153  94411                              Mullewa 115.5000 -28.53334  268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154  94415                             Carnamah 115.8834 -29.68335  268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155  94417                       Morawa Airport 116.0167 -29.20000  270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156  94418                             Canungra 153.1833 -28.03333  108</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157  94419                            Greenbank 152.9834 -27.68335   42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158  94420                          Tin Can Bay 152.9500 -25.93335   31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159  94422           Murchison Murchison Shire  115.9500 -26.88335  287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160  94429                    Mount Magnet Aero 117.8333 -28.10000  411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161  94430                  Meekatharra Airport 118.5333 -26.60001  522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162  94444                          Bulga Downs 119.7333 -28.48334  439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163  94449                         Laverton Aws 122.4167 -28.60001  465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164  94450                         Leonora Aero 121.3167 -28.86668  371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165  94457                   Warburton Airfield 126.5833 -26.11667  457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166  94461                                Giles 128.3000 -25.03333  580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167  94462                           Yulara Aws 130.9667 -25.18334  496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168  94463                       Curtin Springs 131.7500 -25.30001  490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169  94474                              Pukatja 132.1667 -26.25001  707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170  94476                   Oodnadatta Airport 135.4333 -27.55001  118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171  94489                     Windorah Airport 142.6500 -25.40001  132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172  94498        Lightning Ridge Central Scool 147.9667 -29.41668  154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173  94500               Cunnamulla Post Office 145.6667 -28.06667  189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174  94510                  Charleville Airport 146.2500 -26.40001  306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175  94511                  Injune Post Office  148.5667 -25.83335  390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176  94514                Mitchell Post Office  147.9667 -26.48334  337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177  94515                         Roma Airport 148.7667 -26.53334  315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178  94517                    St George Airport 148.5833 -28.03333  200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179  94520                             Mungindi 148.9834 -28.96669  160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180  94521                                Surat 149.0667 -27.15000  246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181  94525                               Taroom 149.7833 -25.63335  199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182  94541                Inverell Post Office  151.0667 -29.76668  664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183  94542                        Dalby Airport 151.2500 -27.15000  347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184  94544                          Pindari Dam 151.2333 -29.38334  462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185  94549                             Kingaroy 151.8333 -26.56668  455</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186  94550                           Stanthorpe 151.9334 -28.65001  784</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187  94552                      Oakey Aerodrome 151.7333 -27.40001  405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188  94553        Stanthorpe (Granite Belt Hrs) 151.9500 -28.61668  872</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189  94555                          Warwick Aws 152.1000 -28.20000  475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190  94556             Tenterfield Derby Street 152.0167 -29.03333  838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191  94561                      Alexandra Hills 153.2333 -27.53334   51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192  94562      University Of Queensland Gatton 152.3333 -27.53334   89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193  94566                     Gympie Forestry  152.6333 -26.16667   65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194  94567                          Maryborough 152.7000 -25.50001    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195  94568                   Amberley Aerodrome 152.7000 -27.61668   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196  94569             Maroochydore Airport Aws 153.0833 -26.60001    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197  94570                    Tewantin Rsl Park 153.0333 -26.38334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198  94572                  Lismore Airport Aws 153.2500 -28.81668   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199  94573                   Casino Airport Aws 153.0500 -28.86668   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200  94575                Archerfield Aerodrome 153.0000 -27.56668   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201  94576                     Brisbane Central 153.0333 -27.46668    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202  94578                Brisbane Airport M. O 153.1167 -27.38334    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203  94580                Gold Coast Seaway Aws 153.4167 -27.93335    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204  94582                         Murwillumbah 153.3667 -28.33334    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205  94584             Double Island Point Ligh 153.1833 -25.91669   96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 206  94585           Glen Innes Ag Research Stn 151.6833 -29.68335 1060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207  94587                              Tabulam 152.4500 -28.75002  555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208  94588                   Glen Innes Airport 151.6833 -29.66668 1046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209  94589                                Yamba 153.3500 -29.41668   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210  94592              Coolangatta Airport Aws 153.5000 -28.16667    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211  94593                        Point Lookout 153.5333 -27.43334   41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212  94594                         Cape Moreton 153.4500 -27.01667  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213  94596                  Ballina Airport Aws 153.5500 -28.83335    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214  94598        Evans Head Raaf Bombing Range 153.3833 -29.16667   63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215  94599                       Cape Byron Aws 153.6333 -28.63335   95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216  94600                     Cape Naturaliste 115.0167 -33.53334  109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217  94601                         Cape Leeuwin 115.1333 -34.36667   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 218  94602                  Rottnest Island Aws 115.5000 -32.00000   43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219  94603             Badgingarra Research Stn 115.5333 -30.33334  275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220  94604                              Bunbury 115.6333 -33.35001    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 221  94605                         Mandurah Aws 115.7000 -32.51668    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 222  94607             Wanneroo Ocean Reef Aws  115.7167 -31.75002   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 223  94608         Mount Lawley Perth Metro Aws 115.8667 -31.91669   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 224  94609     Spearwood Jandakot Aerodrome Aws 115.8667 -32.10000   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 225  94610               Belmont Perth Airport  115.9667 -31.91669   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226  94612                Bullsbrook Pearce Amo 116.0167 -31.66668   45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 227  94614                       Swanbourne Aws 115.7500 -31.95002   41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 228  94615                            Kalamunda 116.0500 -31.93335  220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 229  94617                             Manjimup 116.1333 -34.25001  287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 230  94619                           Dalwallinu 116.6500 -30.26667  335</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 231  94620                           Dwellingup 116.0500 -32.70001  267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 232  94621                    Northam Composite 116.6500 -31.65001  170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 233  94622                         Wongan Hills 116.7167 -30.88335  283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 234  94623                                 York 116.7500 -31.88335  179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 235  94625                             Brookton 117.0000 -32.36667  250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 236  94627                             Narrogin 117.1667 -32.93335  338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 237  94628               Newdegate Res. Station 118.8333 -33.10000  320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 238  94631                          Rocky Gully 117.0000 -34.56668  250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 239  94632                            Bencubbin 117.8500 -30.80002  359</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 240  94636                         Ravensthorpe 120.0333 -33.56668  232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 241  94637               Kalgoorlie Boulder Amo 121.4500 -30.78335  367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 242  94638                            Esperance 121.8834 -33.81668   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 243  94640                        Windy Harbour 116.0167 -34.83335    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 244  94641                            Katanning 117.6000 -33.68335  320</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 245  94644                      Red Rocks Point 127.5167 -32.20000    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 246  94645                          Eyre Madura 126.3000 -32.23334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247  94647                            Eucla Amo 128.8667 -31.66668    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248  94648                         Ngayirdapira 138.5667 -34.91669   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249  94650                 Maitland Airport Aws 151.4833 -32.70001   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250  94651                            Nullarbor 130.8834 -31.43334   64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251  94651                            Nullarbor 130.8834 -31.43334   64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 252  94653                       Ceduna Airport 133.6833 -32.11667   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253  94654                          Streaky Bay 134.2000 -32.78335   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254  94655                             Tarcoola 134.5667 -30.70001  125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255  94656                Elliston Post Office  134.8834 -33.63335    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256  94657                            Kyancutta 135.5500 -33.11667   61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257  94659                    Woomera Aerodrome 136.8000 -31.15000  167</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258  94660                            Mount Ive 136.0667 -32.43334  177</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259  94661                                Cleve 136.4833 -33.70001  193</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 260  94662                      Cleve Aerodrome 136.5000 -33.70001  180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 261  94663                              Warooka 137.3833 -34.98335   53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262  94665                             Maitland 137.6667 -34.36667  185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263  94666                       Warburto Point 137.5167 -34.00000    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 264  94672                     Adelaide Airport 138.5167 -34.95002    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 265  94673                               Hawker 138.4333 -31.88335  315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266  94674                  Leigh Creek Airport 138.4167 -30.58335  261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 267  94676                            Arkaroola 139.3333 -30.30001  318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268  94677                       Goolwa Marina  138.8167 -35.51668   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269  94678      Williamstown Mount Crawford Aws 138.9167 -34.71668  525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270  94679                              Yongala 138.7333 -33.01667  521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 271  94681                            Nuriootpa 139.0000 -34.46668  275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 272  94682                               Loxton 140.5833 -34.43334   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 273  94683                Kuitpo Forest Reserve 138.6667 -35.16667  365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 274  94684                                Yunta 139.5500 -32.56668  300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 275  94685                           Kadina Aws 137.6500 -33.96669   42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 276  94686                      Fowlers Gap Aws 141.7000 -31.08334  181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 277  94690                        Austin Plains 140.5333 -35.36667  110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 278  94691                      Broken Hill Aws 141.4667 -32.00000  292</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 279  94692                Lake Victoria Storage 141.2500 -34.03333   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 280  94693                      Mildura Airport 142.0833 -34.23334   51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 281  94694                             Menindee 142.4167 -32.38334   61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 282  94700                     Hillston Airport 145.5167 -33.48334  123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 283  94702                      Hay Airport Aws 144.8333 -34.53334   93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 284  94703                   Bourke Airport Aws 145.9500 -30.03333  107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 285  94710                    Cobar Airport Aws 145.7833 -31.53334  221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 286  94711                                Cobar 145.8167 -31.48334  260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 287  94712                            Young Aws 148.2333 -34.23334  383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 288  94714                          Cootamundra 148.0333 -34.61668  338</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 289  94715                   Forbes Airport Aws 147.9167 -33.35001  232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 290  94716                             Goulburn 149.7000 -34.73335  670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 291  94721                            Peak Hill 148.1833 -32.71668  285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 292  94723                           Wellington 148.9500 -32.55001  305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 293  94725               Grenfell (Quondong Rd) 148.1500 -33.88335  390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 294  94727                           Mudgee Aws 149.6000 -32.55001  471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 295  94728           Coonabarabran Namoi Street 149.2667 -31.26667  505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 296  94729                 Bathurst Airport Aws 149.6500 -33.40001  742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 297  94730       Bathurst Agricult. Res Station 149.5500 -33.41667  713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298  94732                  Gulgong Post Office 149.5167 -32.35001  475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 299  94735                 Taralga Post Office  149.8167 -34.40001  845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 300  94740                         Gunnedah Scs 150.2667 -31.01667  307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301  94741                              Lithgow 150.1167 -33.46668  900</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 302  94743                      Mount Boyce Aws 150.2667 -33.61668 1080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 303  94744                             Katoomba 150.2833 -33.70001 1017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 304  94746                        Moss Vale Aws 150.4167 -34.51668  678</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 305  94749                         Bellambi Aws 150.9167 -34.36667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 306  94750                Nowra Ran Air Station 150.5333 -34.93335  122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 307  94751                  Jervis Bay Airfield 150.6833 -35.13334   58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 308  94752              Badgery'S Creek Airport 150.7167 -33.88335   81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 309  94754                  Nullo Mountains Aws 150.2167 -32.71668 1130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 310  94755                       Camden Airport 150.6833 -34.03333   70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 311  94757           Cambell Town (Mount Annan) 150.7667 -34.05000  112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 312  94758                                Scone 150.8667 -32.05000  208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313  94759                     Terrey Hills Aws 151.2167 -33.68335  199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 314  94760            Horsley Equestrian Centre 150.8500 -33.85002  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315  94761                              Barraba 150.6000 -30.36667  500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 316  94763                              Penrith 150.6667 -33.71668   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 317  94764                     Parramatta North 151.0167 -33.78335   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 318  94765                Bankstown Airport Aws 150.9834 -33.91669    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 319  94766                           Canterbury 151.1000 -33.90002    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 320  94767                       Sydney Airport 151.1667 -33.93335    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 321  94768               Sydney Regional Office 151.2000 -33.85002   39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 322  94772                       Guyra Hospital 151.6667 -30.20000 1329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 323  94773                             Armidale 151.6667 -30.51668  987</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 324  94774                            Newcastle 151.7833 -32.91669   33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 325  94775                             Paterson 151.5833 -32.61668   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 326  94776                Williamtown Aerodrome 151.8333 -32.78335   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 327  94782                          Gosford Aws 151.3500 -33.43334    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 328  94783                 Yarras Mount Seaview 152.2333 -31.38334  155</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 329  94785                  Kempsey Airport Aws 152.7667 -31.06667   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 330  94789               Dorrigo Old Coramba Rd 152.7167 -30.33334  746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 331  94792             Woolbrook Danglemah Road 151.3333 -30.96669  910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 332  94793                           Brewon Aws 147.5167 -30.23334  130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 333  94794                             Okeh Aws 146.9167 -31.06667  178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 334  94795                          Swan Valley 116.0167 -31.80002   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 335  94796                       Smithville Aws 141.0000 -30.06667   94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 336  94797                         Mulurulu Aws 143.4000 -33.33334   78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 337  94798                            Noona Aws 144.9167 -31.71668  179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 338  94799                Port Macquarie Aiport 152.8500 -31.43334    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 339  94801                               Albany 117.8667 -35.01667    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 340  94802                       Albany Airport 117.8000 -34.93335   71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 341  94804                       Neptune Island 136.1167 -35.33334   32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342  94806            Mount Barker Post Office  138.8500 -35.05000  359</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 343  94807                     Parndana Cfs Aws 137.2333 -35.78335  165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 344  94808                            Noarlunga 138.5000 -35.15000   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 345  94809                       Edithburgh Aws 137.7333 -35.10000    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 346  94811      Parawa Second Valley Forest Aws 138.2833 -35.56668  341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 347  94812                    Robe Post Office  139.7500 -37.15000    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 348  94813                       Cape Jaffa Aws 139.7000 -36.95002   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 349  94814               Strathalbyn Racecourse 138.8834 -35.28334   58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 350  94816                   Keith Post Office  140.3500 -36.08333   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 351  94817                           Coonawarra 140.8167 -37.28334   57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 352  94820                 Naracoorte Aerodrome 140.7167 -36.96669   50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 353  94821              Mount Gambier Aerodrome 140.7667 -37.73335   65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 354  94822                      Cape Willoughby 138.1167 -35.83335   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 355  94826                          Cape Nelson 141.5333 -38.41667   45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 356  94827                      Nhill Composite 141.6333 -36.30001  138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 357  94828                     Portland Airport 141.4667 -38.30001   81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 358  94828                     Portland Airport 141.4667 -38.30001   81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 359  94829                     Hamilton Airport 142.0500 -37.63335  245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 360  94830                       Port Fairy Aws 142.2333 -38.38334   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 361  94833                        Mount William 142.6000 -37.28334 1150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 362  94834                               Ararat 142.9667 -37.26667  295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 363  94835                            Ben Nevis 143.2000 -37.21667  875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 364  94836                    Stawell Aerodrome 142.7333 -37.06667  246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 365  94837              Warrnambool Airport Ndb 142.4500 -38.28334   74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 366  94838                     Hopetoun Airport 142.3500 -35.70001   78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 367  94839                             Charlton 143.3333 -36.28334  132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 368  94840                         Mortlake Aws 142.7667 -38.06667  130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 369  94842                           Cape Otway 143.5000 -38.85002   82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 370  94843                            Swan Hill 143.5333 -35.36667   71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 371  94844                               Kerang 143.9167 -35.71668   78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 372  94846                     Aireys Inlet Aws 144.0833 -38.45001   95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 373  94849                          Maryborough 143.7167 -37.05000  249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 374  94850                  King Island Airport 143.8667 -39.86668   40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 375  94852                             Ballarat 143.7833 -37.50001  437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 376  94854                           Avalon Aws 144.4667 -38.01667   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 377  94855                  Bendigo Airport Aws 144.3167 -36.73335  215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 378  94856                              Geelong 144.3333 -38.08333   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 379  94857                   Geelong Racecourse 144.3667 -38.16667   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 380  94858                     West Channel Aws 144.7500 -38.20000    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 381  94859                        Redesdale Aws 144.5167 -37.01667  290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 382  94860                      Kilmore Gap Aws 144.9500 -37.36667  528</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 383  94861                               Echuca 144.7500 -36.15000   99</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 384  94862                           Yarrawonga 146.0167 -36.01667  129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 385  94863                          Sheoaks Aws 144.1167 -37.90002  237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 386  94864                       Goldstream Aws 145.4000 -37.71668   76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 387  94865                   Laverton Aerodrome 144.7500 -37.85002   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 388  94866                    Melbourne Airport 144.8167 -37.65001  132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 389  94870                Moorabbin Airport Aws 145.0833 -37.96669   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 390  94872                       Dunns Hill Aws 145.3333 -37.86668  513</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 391  94874                    Mangalore Airport 145.1833 -36.88335  142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 392  94875                   Shepparton Airport 145.3833 -36.41667  114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 393  94876                           Finley Aws 145.6167 -35.71668  110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 394  94878                     Hunters Hill Aws 147.5333 -36.20000  981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 395  94881                    Eildon Fire Tower 145.8333 -37.20000  637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 396  94882                          Lake Eildon 145.9000 -37.21667  230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 397  94884                              Benalla 145.9834 -36.55001  173</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 398  94886                          Pound Creek 145.8000 -38.61668    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 399  94889                 Wangaratta Aerodrome 146.3000 -36.41667  154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 400  94891               Latrobe Valley Airport 146.4667 -38.20000   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 401  94892                           Rhyll Aws  145.3000 -38.45001   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 402  94893             Wilsons Promontory Light 146.4167 -39.11667   95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 403  94894                         Mount Buller 146.4333 -37.13334 1707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 404  94898                         Cerberus Aws 145.1667 -38.35001   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 405  94901                       Hume Reservoir 147.0167 -36.10000  184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 406  94903                      Falls Creek Aws 147.2667 -36.86668 1765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 407  94905                    Mt Hotham Airport 147.3333 -37.03333 1298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 408  94906                     Mount Hotham Aws 147.1333 -36.96669 1849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 409  94907                  East Sale Aerodrome 147.1167 -38.10000    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 410  94908                                 Omeo 147.6000 -37.10000  690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 411  94909                       Burrinjuck Dam 148.5833 -34.98335  390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 412  94910                        Wagga Airport 147.4500 -35.15000  221</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 413  94911                              Yanakie 146.1833 -38.80002   14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 414  94912                   Bairnsdale Airport 147.5667 -37.86668   50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 415  94913                        Gelantipy Aws 148.2500 -37.21667  755</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 416  94914                       Combienbar Aws 149.0167 -37.33334  640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 417  94915                      Perisher Valley 148.4000 -36.40001 1738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 418  94918                           Tumbarumba 148.0000 -35.76668  645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 419  94919                            Khancoban 148.1333 -36.21667  339</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 420  94920                Warracknabeal Airport 142.4000 -36.31667  118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 421  94921                    Cooma Airport Aws 148.9667 -36.28334  947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 422  94923                                Cooma 149.1167 -36.21667  778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 423  94925          Tuggeranong Isabella Plains 149.0833 -35.41667  587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 424  94926                             Canberra 149.2000 -35.30001  576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 425  94927             Braidwood Racecourse Aws 149.7833 -35.41667  665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 426  94928                              Bombala 149.2333 -36.90002  705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 427  94929                          Bombala Aws 149.2333 -37.00000  761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 428  94930                         Mt Nowa Nowa 148.0833 -37.68335  350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 429  94933                          Gabo Island 149.9000 -37.56668   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 430  94934                       Green Cape Aws 150.0500 -37.25001   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 431  94935                       Mallacoota Aws 149.7167 -37.58335   31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 432  94937                         Moruya Heads 150.1500 -35.90002   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 433  94938                        Ulladulla Aws 150.4667 -35.35001   36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 434  94939             Montague Island Lighthou 150.2167 -36.25001   52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 435  94943                          Nerriga Aws 150.0667 -35.10000  622</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 436  94944                              Kapooka 147.2500 -35.11667  187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 437  94949                     Hogan Island Aws 146.9834 -39.21667  116</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 438  94950                             Marrawah 144.7000 -40.90002  107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 439  94951              Dunalley (Stroud Point) 147.7833 -42.90002   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 440  94953                   Smithton Aerodrome 145.0833 -40.83335   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 441  94955                Sheffield School Farm 146.3167 -41.38334  294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 442  94956                  Strahan Airport Aws 145.2833 -42.15000   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 443  94957                    Ouse Fire Station 146.7000 -42.48334   90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 444  94959                        Butlers Gorge 146.2667 -42.26667  667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 445  94960                  Tunnak Fire Station 147.4500 -42.45001  462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 446  94961                                Dover 147.0000 -43.31667   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 447  94962                    Maatsuyker Island 146.2667 -43.65001  147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 448  94964                           Bushy Park 146.8834 -42.70001   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 449  94969                           Launceston 147.1167 -41.41667    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 450  94970              Hobart Regional Office  147.3167 -42.88335   51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 451  94972                    Scottsdale No. 2  147.4833 -41.16667  198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 452  94974                      Cape Sorell Aws 145.1667 -42.18334   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 453  94977                      Hartz Mountains 146.7667 -43.20000  831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 454  94980              Flinders Island Airport 148.0000 -40.08333   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 455  94981                              Swansea 148.0667 -42.13334   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 456  94983           Eddystone Point Lighthouse 148.3333 -40.98335   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 457  94985                 Ross Waterloo Street 147.4833 -42.01667  186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 458  94987                     Friendly Beaches 148.2667 -41.98335   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 459  94988                         Dennes Point 147.3500 -43.05000    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 460  94995                     Lord Howe Island 159.0667 -31.53334    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 461  94996               Norfolk Island Airport 167.9334 -29.03333  113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 462  94998                     Macquarie Island 158.9334 -54.48334    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 463  95101                             Truscott 126.3833 -14.08333   51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 464  95111                      Port Keats Aero 129.5167 -14.23334   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 465  95121                     Middle Point Aws 131.2833 -12.60001   14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 466  95122                       Darwin Ntc Aws 130.8333 -12.46668    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 467  95142                      Maningrida Aero 134.2333 -12.05000   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 468  95146                            Ngayawili 135.5667 -11.98335    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 469  95202                       Broome Ntc Aws 122.2167 -18.00000    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 470  95205                  Derby Aerodrome Aws 123.6500 -17.36667    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 471  95208                          Yampi Sound 123.9667 -16.76668   41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 472  95214                         Wyndham Aero 128.1500 -15.50001    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 473  95283                     Cooktown Airport 145.1833 -15.43334    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 474  95284                         Walkamin Dpi 145.4167 -17.13334  594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 475  95286                  Mareeba Airport Aws 145.4167 -17.06667  476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 476  95288                Bougainville Reef Aws 147.1167 -15.48334    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 477  95292              South Johnstone Exp Stn 145.9834 -17.60001   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 478  95295                 Ayr Dpi Research Stn 147.3667 -19.61668   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 479  95296                       Ayr Alva Beach 147.4667 -19.45001    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 480  95298                  Rosslyn Bay Ntc Aws 150.7833 -23.15000    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 481  95303                       Varanus Island 115.5667 -20.65001   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 482  95304                Barrow Island Airport 115.4000 -20.86668    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 483  95305                       Onslow Airport 115.1000 -21.66668    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 484  95307               Karratha Aerodrome Aws 116.7667 -20.70001    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 485  95317                           Marble Bar 119.7333 -21.16667  182</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 486  95322                          Rabbit Flat 130.0000 -20.16667  340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 487  95323                             Arltunga 134.6833 -23.45001  661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 488  95351                     Blackall Airport 145.4167 -24.41668  283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 489  95362              Springsure Post Office  148.0833 -24.11667  345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 490  95367                       Mackay Airport 149.1667 -21.16667    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 491  95369                          St Lawrence 149.5167 -22.33334    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 492  95370                           Williamson 150.1667 -22.46668   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 493  95402                    Shark Bay Airport 113.5667 -25.88335   34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 494  95439                      Balgo Hills Aws 120.2167 -26.61668  502</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 495  95448       Leonora Leinster Aerodrome Aws 120.7000 -27.83335  497</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 496  95458                      Coober Pedy Aws 134.7167 -29.03333  226</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 497  95480                          Marree Aero 138.0667 -29.65001   50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 498  95481                       Moomba Airport 140.1833 -28.08334   44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 499  95482                   Birdsville Airport 139.3333 -25.88335   47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 500  95485                   Tibooburra Airport 142.0500 -29.43334  178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 501  95487                    Ballera Gas Field 141.8000 -27.40001  117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 502  95492                 Thargomindah Airport 143.8000 -27.98335  132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 503  95512                  Brewarrina Hospital 146.8500 -29.95002  115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 504  95520                          Collarenbri 148.5667 -29.53334  145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 505  95527                             Moree Mo 149.8333 -29.48334  214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 506  95529               Miles Constance Street 150.1667 -26.65001  305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 507  95533                   Texas Post Office  151.1667 -28.85002  295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 508  95543                      Gayndah Airport 151.6000 -25.61668  113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 509  95551                    Toowoomba Airport 151.9000 -27.53334  636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 510  95565                   Hervey Bay Airport 152.8667 -25.31667   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 511  95566                Beerburrum Forest Stn 152.9500 -26.95002   48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 512  95570                      Grafton Airport 153.0167 -29.75002   34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 513  95571                 Grafton Research Stn 152.9500 -29.61668   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 514  95572                              Nambour 152.9334 -26.63335   53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 515  95575            Beaudesert Drumley Street 152.9834 -27.96669   48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 516  95591                            Redcliffe 153.0833 -27.21667   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 517  95602                      Busselton Jetty 115.3333 -33.61668    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 518  95605             Fremantle East Fremantle 115.7667 -32.05000   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 519  95607                    Garden Island Hsf 115.6833 -32.23334    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 520  95609                             Lancelin 115.2167 -30.83335    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 521  95610                     Kalamunda Bicley 116.1333 -32.00000  384</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 522  95611                       Busselton Aero 115.4000 -33.68335   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 523  95612                          Gingin Aero 115.8500 -31.45001   74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 524  95613                            Pemberton 116.0333 -34.43334  174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 525  95614                               Karnet 116.0667 -32.43334  286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 526  95615                             Beverley 116.9167 -32.10000  199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 527  95616                             Pingelly 117.0667 -32.53334  297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 528  95617             Northcliffe Shannon Calm 116.3333 -34.56668  210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 529  95618                                Wagin 117.3333 -33.30001  256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 530  95620                  Outer Dolphin Pylon 115.8333 -31.98335    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 531  95621                          Collie East 116.1667 -33.35001  200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 532  95622                           Donnybrook 115.8167 -33.56668   63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 533  95623                           Jarrahwood 115.6500 -33.78335  130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 534  95624                             Merredin 118.2667 -31.46668  315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 535  95625                   Cunderdin Airfield 117.2167 -31.61668  213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 536  95627                                Hyden 118.8834 -32.43334  299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 537  95629                           Dalwallinu 116.6667 -30.26667  325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 538  95631                           Goomalling 116.8167 -31.28334  239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 539  95632                           Bridgetown 116.1167 -33.93335  179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 540  95634              Southern Cross Airfield 119.3500 -31.23334  355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 541  95635            Ravensthorpe Hopetoun Aws 120.1167 -33.91669   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 542  95636                Jerramungup Jacup Aws 119.1000 -33.88335  305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 543  95637                           Lake Grace 118.4500 -33.10000  286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 544  95638              Esperance Aerodrome Aws 121.8167 -33.66668  143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 545  95639                 Salmon Gums Res. Stn 121.6167 -32.98335  249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 546  95640                            Wandering 116.6667 -32.66668  275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 547  95642                        Norseman Aero 121.7500 -32.20000  263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 548  95644                            Cheadanup 120.6833 -33.55001  220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 549  95645                          Caiguna Asa 125.4833 -32.25001  109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 550  95646                          Forrest Aws 128.1000 -30.83335  156</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 551  95647                        North Walpole 116.7167 -34.93335   73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 552  95648                    Esperance Ntc Aws 121.8834 -33.86668    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 553  95649                          point Avoid 135.3333 -34.66668   35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 554  95652                    Thevenard Ntc Aws 133.6333 -32.13334    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 555  95654                         Wudinna Aero 135.4500 -33.03333   90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 556  95658                Olympic Dam Aerodrome 136.8667 -30.46668  105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 557  95659                        Minlaton Aero 137.5167 -34.73335   34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 558  95660                            Andamooka 137.1667 -30.43334   76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 559  95661           Port Lincoln Aerodrome Aws 135.8667 -34.58335   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 560  95662                          Minnipa Dpi 135.1500 -32.83335  165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 561  95663                         Cummins Aero 135.7000 -34.25001   60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 562  95664                 Whyalla Airport Aws  137.5167 -33.05000   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 563  95666                     Port Augusta Aws 137.7000 -32.50001   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 564  95667                    Clare High School 138.5833 -33.81668  395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 565  95668                              Gluepot 140.1167 -33.75001   57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 566  95669                  Cheetham Salt Works 138.0000 -34.28334    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 567  95670                        Rayville Park 138.2167 -33.76668  109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 568  95671                Roseworthy Ag College 138.6667 -34.50001   65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 569  95675                           Black Pole 138.4500 -34.73335    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 570  95676                      Edinburgh M. O. 138.6167 -34.70001   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 571  95677                    Parafield Airport 138.6167 -34.78335   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 572  95678                      Mount Lofty Aws 138.7000 -34.96669  685</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 573  95679                 Mount Terrible Radar 138.5000 -35.31667  386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 574  95681                            delta Aws 145.3333 -30.10000  109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 575  95682                       mount Hope Aws 145.8667 -32.81668  209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 576  95683                              Cultana 137.3667 -32.68335  171</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 577  95684               Holsworthy Defence Aws 150.9000 -34.06667  165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 578  95686                          Marrangaroo 150.1333 -33.43334  955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 579  95687                    Renmark Aerodrome 140.6667 -34.18334   35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 580  95692                 Pooncarie Telecentre 142.5667 -33.38334   53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 581  95695              Wilcannia Aerodrome Aws 143.3833 -31.51668   95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 582  95697                Ivanhoe Aerodrome Aws 144.3000 -32.86668  101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 583  95699                     White Cliffs Aws 143.0667 -30.85002  162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 584  95704                     Griffith Airport 146.0667 -34.23334  134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 585  95705         Yanco Agricultural Institute 146.4167 -34.61668  164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 586  95706                   Narrandera Airport 146.5000 -34.70001  144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 587  95707              Lake Cargelligo Airport 146.3667 -33.26667  169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 588  95708               Condobolin Airport Aws 147.2000 -33.06667  199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 589  95709             West Wyalong Airport Aws 147.1833 -33.93335  262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 590  95710             Trangie Research Station 147.9334 -31.98335  215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 591  95715                      Walgett Airport 148.1167 -30.03333  134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 592  95716                 Goulburn Airport Aws 149.7167 -34.80002  653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 593  95717                       Parkes Airport 148.2333 -33.11667  326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 594  95718                    Coonamble Airport 148.3667 -30.96669  184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 595  95719                    Dubbo Airport Aws 148.5667 -32.21667  285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 596  95721                    Cowra Airport Aws 148.6333 -33.83335  294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 597  95722                       Temora Airport 147.5000 -34.41667  281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 598  95725        Orange Agricultural Institute 149.0667 -33.31667  922</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 599  95726                       Orange Airport 149.1167 -33.36667  950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 600  95727                              Dunedoo 149.3833 -32.00000  388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 601  95728            Coonabarabran Airport Aws 149.2667 -31.31667  645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 602  95729                Coffs Harbour Airport 153.1000 -30.31667    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 603  95734                 Narrabri Airport Aws 149.8167 -30.30001  240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 604  95740                 Gunnedah Airport Aws 150.2333 -30.95002  263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 605  95745                  Port Kembla Ntc Aws 150.9000 -34.46668    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 606  95746                             Quirindi 150.6667 -31.50001  390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 607  95747                   Murrurundi Gap Aws 150.7833 -31.73335  729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 608  95748                   Wollongong Airport 150.7833 -34.55001   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 609  95749               Kiama (Bombo Headland) 150.8500 -34.65001   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 610  95753                     Richmond Amo Aws 150.7667 -33.60001   21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 611  95754                  Merriwa (Roscommon) 150.1667 -32.18334  375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 612  95758                    Scone Airport Aws 150.8167 -32.03333  227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 613  95761             Holsworthy Aerodrome Aws 150.9334 -33.98335   68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 614  95762                 Tamworth Airport Aws 150.8333 -31.06667  407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 615  95765                             Homebush 151.0667 -33.83335    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 616  95767                   Lake Macquarie Aws 151.4500 -33.08333    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 617  95770                Norah Head Lighthouse 151.5667 -33.26667   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 618  95771                 Cessnock Airport Aws 151.3333 -32.78335   64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 619  95772                     Lostock Dam Site 151.4500 -32.31667  200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 620  95773                 Armidale Airport Aws 151.6000 -30.51668 1084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 621  95774 Mangrove Mountain Aws Bloodtree Road 151.2000 -33.28334  305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 622  95784                    Taree Airport Aws 152.5000 -31.88335   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 623  95805                       Cape Borda Aws 136.5833 -35.75001  158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 624  95806                        Stenhouse Bay 136.9334 -35.26667   42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 625  95807 Cygnet River Kingstone Aerodrome Aws 137.5167 -35.70001    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 626  95811                        Encounter Bay 138.5833 -35.55001    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 627  95812                        Murray Bridge 139.2500 -35.11667   33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 628  95813                             Karoonda 139.8834 -35.08333   72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 629  95815                              Munkora 140.3167 -36.10000   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 630  95816                        Robe Airfield 139.8000 -37.16667    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 631  95818                  Pallamana Aerodrome 139.2167 -35.05000   55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 632  95822                             Dartmoor 141.2500 -37.91669   51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 633  95823                      Padthaway South 140.5167 -36.65001   37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 634  95825                            Casterton 141.3333 -37.56668  131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 635  95826                     Portland Ntc Aws 141.6000 -38.33334   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 636  95827                             Kanagulk 141.8000 -37.11667  189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 637  95831                     Walpeup Research 142.0000 -35.11667  105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 638  95832                     Edenhope Airport 141.2500 -37.01667  155</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 639  95833        Kyabram (Inst Sustainable Ag) 145.0500 -36.33334  105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 640  95835                          Longerenong 142.2833 -36.66668  133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 641  95836           Tatura Inst Sustainable Ag 145.2667 -36.43334  114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 642  95837                  Rutherglen Research 146.5000 -36.10000  175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 643  95839                    Horsham Aerodrome 142.1667 -36.66668  136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 644  95840                             Westmere 142.9334 -37.70001  226</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 645  95843                          Strathbogie 145.7167 -36.83335  502</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 646  95845                        Mt Gellibrand 143.7833 -38.21667  261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 647  95853                          Castlemaine 144.2333 -37.06667  330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 648  95866                     Essendon Airport 144.9000 -37.71668   86</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 649  95867          Scoresby Research Institute 145.2500 -37.86668   80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 650  95869               Deniliquin Airport Aws 144.9334 -35.55001   96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 651  95874                    Viewbank (Arpnsa) 145.0833 -37.73335   66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 652  95881                  Wonthaggi Composite 145.5833 -38.60001   52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 653  95890                       Yarram Airport 146.7333 -38.55001   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 654  95896                  Albury Aeroport Aws 146.9500 -36.06667  165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 655  95901                           Mt Baw Baw 146.2667 -37.83335 1561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 656  95904             Lakes Entrance Composite 148.0000 -37.86668    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 657  95907                            Khancoban 148.1333 -36.21667  337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 658  95908                              Thredbo 148.3000 -36.50001 1380</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 659  95909                          Crackenback 148.2833 -36.48334 1957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 660  95913                   Mount Moornapa Aws 147.1333 -37.73335  480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 661  95916                     Cabramurra Smhea 148.3667 -35.93335 1482</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 662  95918                               Orbost 148.4667 -37.68335   63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 663  95925                         Mount Ginini 148.7667 -35.51668 1760</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 664  95929                    Merimbula Airport 149.8834 -36.90002    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 665  95931                             Bega Aws 149.8167 -36.66668   41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 666  95935                         Narooma Vrcp 150.1333 -36.20000   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 667  95936             Melbourne (Olympic Park) 144.9667 -37.81668    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 668  95937                       Moruya Airport 150.1333 -35.90002    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 669  95940                 Pt Perpendicular Aws 150.8000 -35.08333   85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 670  95952                           Mount Read 145.5333 -41.83335 1120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 671  95954                            Cape Grim 144.6833 -40.66668   86</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 672  95956              Luncheron Hill Forestry 145.1500 -41.13334  344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 673  95957                  Wynyard Airport Aws 145.7167 -40.98335   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 674  95958                      Scotts Peak Dam 146.2667 -43.03333  408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 675  95959                             Liawenee 146.6667 -41.88335 1057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 676  95960                Devonport Airport Aws 146.4167 -41.16667   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 677  95961                 Low Rocky Point Aws  145.5000 -42.98335   34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 678  95962                                Warra 146.7000 -43.05000  495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 679  95963                       Burnie Ntc Aws 145.9000 -41.05000    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 680  95964                             Low Head 146.7833 -41.05000    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 681  95966                   Launceston Airport 147.2000 -41.53334  171</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 682  95967              Cape Bruny (Cape Bruny) 147.1333 -43.48334   60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 683  95970                            Tarraleah 146.4333 -42.30001  589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 684  95972                   Campania (Kinkora) 147.4167 -42.68335   45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 685  95977             Grove (Research Station) 147.0667 -42.98335   65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 686  95979                     Mount Wellington 147.2333 -42.88335 1261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 687  95981                  St Helens Aerodrome 148.2667 -41.33334   48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 688  95985                      Swan Island Aws 148.1167 -40.71668   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 689  95986                        Tasman Island 148.0000 -43.23334  240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 690  95987                   Spring Bay Ntc Aws 147.9167 -42.53334    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 691  95988         Maria Island (Point Lesueur) 148.0167 -42.65001   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 692  95989                              Bicheno 148.3000 -41.86668   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 693  95995         Lord Howe Island Windy Point 159.0667 -31.53334    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 694  96997                         Cocos Island       NA -12.11667    1</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

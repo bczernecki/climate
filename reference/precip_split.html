@@ -88,25 +88,61 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span> <span class="va">df</span> <span class="op">=</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="fu"><a href="ogimet_hourly.html">ogimet_hourly</a></span><span class="op">(</span>station <span class="op">=</span> <span class="fl">12330</span><span class="op">)</span>, error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=10&amp;ano=2024&amp;mes=05&amp;day=10&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpAZrh4Q/file18ea187d4cab</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=09&amp;ano=2024&amp;mes=05&amp;day=09&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpAZrh4Q/file18ea3e563c21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=09&amp;ano=2024&amp;mes=04&amp;day=09&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpAZrh4Q/file18ea74406639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=29&amp;ano=2024&amp;mes=05&amp;day=29&amp;hora=23"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmppzECVu/file17434a9eb797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=28&amp;ano=2024&amp;mes=05&amp;day=28&amp;hora=23"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmppzECVu/file17433291995d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=28&amp;ano=2024&amp;mes=04&amp;day=28&amp;hora=23"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmppzECVu/file174367984af3</span>
 <span class="r-in"><span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>   <span class="fu">climate</span><span class="fu">:::</span><span class="fu">precip_split</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Precmm</span>, pattern <span class="op">=</span> <span class="st">"/12"</span><span class="op">)</span> <span class="co"># to get 12h precipitation amounts</span></span></span>
 <span class="r-in"><span> <span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  3 NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [126] NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176] NA NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [201] NA  0 NA NA NA NA NA NA NA NA NA NA NA  0 NA NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [226]  0 NA NA NA NA NA NA NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.4   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [16]   NA   NA   NA   NA   NA   NA 19.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [46]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [76]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [106]  7.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  1.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [136]   NA   NA   NA   NA   NA   NA  2.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [151]   NA   NA   NA  3.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [166]  1.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [181]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [196]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [211]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [226]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  7.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [241]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.1   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [256]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [271]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [286]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [301]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [316]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [331]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [346]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [361]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [376]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [391]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [406]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [421]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [436]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [451]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [466]  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [481]   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [496]   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [511]   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [526]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [541]   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [556]   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [571]   NA   NA  3.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [586]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [601]   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [616]   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [631]   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [646]   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [661]   NA   NA   NA   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [676]   NA   NA   NA   NA   NA  0.0   NA   NA   NA   NA   NA   NA   NA   NA</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
