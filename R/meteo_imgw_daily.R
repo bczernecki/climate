@@ -9,8 +9,7 @@
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
 #' @param station name of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS); stations' IDs (numeric) are
-#' no longer valid
+#' It accepts names (characters in CAPITAL LETTERS); Stations' IDs (numeric) are no longer valid
 #' @param col_names three types of column names possible:
 #' "short" - default, values with shorten names,
 #' "full" - full English description,
