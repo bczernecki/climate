@@ -13,27 +13,34 @@
 
 stations_meteo_imgw_telemetry = function() {
 
-  telemetry_stations = suppressWarnings(
-    read.csv("https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv",
+  url = "https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv"
+  
+  telemetry_stations = tryCatch(expr = suppressWarnings(
+      read.csv(url,
              fileEncoding = "CP1250",
              sep = ";",
              stringsAsFactors = FALSE)
-  )
-  colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
+      ), 
+      error = function(e) {
+        message(paste0("Problems with downloading data from:\n", url))
+      })
   
-  # extra fix for columns wrongly signed in IMGW datatabase (i.e. missing semicolon):
-  fix_needed = grep(x = substr(telemetry_stations$river, 1, 1), '^[0-9]$')
-  
-  telemetry_stations[fix_needed, "alt"] = telemetry_stations[fix_needed, "lon"]
-  telemetry_stations[fix_needed, "lon"] = telemetry_stations[fix_needed, "lat"]
-  telemetry_stations[fix_needed, "lat"] = telemetry_stations[fix_needed, "river"]
-  telemetry_stations[fix_needed, "river"] = NA
-  
-  telemetry_stations$lon = suppressWarnings(coordinates_to_decimal(telemetry_stations$lon))
-  telemetry_stations$lat = suppressWarnings(coordinates_to_decimal(telemetry_stations$lat))
-  telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))
-  telemetry_stations = as.data.table(telemetry_stations[,-1])
-  telemetry_stations$id = as.character(telemetry_stations$id)
+  if (!is.null(telemetry_stations)) {
+    colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
+    # extra fix for columns wrongly signed in IMGW datatabase (i.e. missing semicolon):
+    fix_needed = grep(x = substr(telemetry_stations$river, 1, 1), '^[0-9]$')
+    
+    telemetry_stations[fix_needed, "alt"] = telemetry_stations[fix_needed, "lon"]
+    telemetry_stations[fix_needed, "lon"] = telemetry_stations[fix_needed, "lat"]
+    telemetry_stations[fix_needed, "lat"] = telemetry_stations[fix_needed, "river"]
+    telemetry_stations[fix_needed, "river"] = NA
+    
+    telemetry_stations$lon = suppressWarnings(coordinates_to_decimal(telemetry_stations$lon))
+    telemetry_stations$lat = suppressWarnings(coordinates_to_decimal(telemetry_stations$lat))
+    telemetry_stations$alt = as.numeric(gsub(x = telemetry_stations$alt, " ", ""))
+    telemetry_stations = as.data.table(telemetry_stations[,-1])
+    telemetry_stations$id = as.character(telemetry_stations$id)
+  }
   return(telemetry_stations)
 }
 
