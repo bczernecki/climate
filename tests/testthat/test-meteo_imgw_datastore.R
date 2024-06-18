@@ -12,8 +12,8 @@ test_that("test-meteo_imgw_datastore", {
                                           stations = "PSZENNO")
     
     if (is.data.frame(imgw_telemetry) & nrow(imgw_telemetry) > 0) {
-      testthat::expect_true(is.data.frame(df))
-      testthat::expect_true(nrow(df) > 50000)
+      testthat::expect_true(is.data.frame(imgw_telemetry))
+      testthat::expect_true(nrow(imgw_telemetry) > 50000)
     }
   }
 })
