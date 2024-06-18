@@ -7,11 +7,11 @@
 for the meteorological data from the danepubliczne.imgw.pl collection}
 \format{
 The data contains a data.frame with ca. 250 elements described in three ways:
-\itemize{
-\item{fullname} {original column names as downloaded from the repository}
-\item{abbr_eng} {shorten column names with abbreviations derived from the most
+\describe{
+\item{fullname}{original column names as downloaded from the repository}
+\item{abbr_eng}{shorten column names with abbreviations derived from the most
 popular scheme used for meteorological parameters}
-\item{fullname_eng} {detailed description of downloaded meteorological variables}
+\item{fullname_eng}{detailed description of downloaded meteorological variables}
 }
 The object is created mostly to be used altogether with the meteo_shortening_imgw
 function

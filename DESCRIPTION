@@ -1,6 +1,6 @@
 Package: climate
 Title: Interface to Download Meteorological (and Hydrological) Datasets
-Version: 1.1.2
+Version: 1.2.0
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",
            role = c("aut", "cre"),
@@ -20,28 +20,29 @@ Authors@R: c(person(given = "Bartosz",
 Description: Automatize downloading of meteorological and hydrological data from publicly available repositories:
     OGIMET (<http://ogimet.com/index.phtml.en>), 
     University of Wyoming - atmospheric vertical profiling data (<http://weather.uwyo.edu/upperair/>),
-    Polish Institute of Meterology and Water Management - National Research Institute (<https://danepubliczne.imgw.pl>),
+    Polish Institute of Meteorology and Water Management - National Research Institute (<https://danepubliczne.imgw.pl>),
     and National Oceanic & Atmospheric Administration (NOAA).
     This package also allows for searching geographical coordinates for each observation and calculate distances to the nearest stations.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.0.0)
 Imports: 
     XML,
     httr,
     curl,
-    data.table
+    data.table,
+    stringi
 Suggests: 
-    testthat,
-    knitr,
-    rmarkdown,
     dplyr,
+    knitr,
+    maps,
+    testthat,
     tidyr,
-    maps
+    rmarkdown
 URL: https://github.com/bczernecki/climate
 BugReports: https://github.com/bczernecki/climate/issues
 VignetteBuilder: knitr

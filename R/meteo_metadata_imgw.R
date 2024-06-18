@@ -41,7 +41,7 @@ meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hou
                                rank = "precip", interval = "daily")
     }
 
-  }
+  } # end of daily interval
 
   if (interval == "monthly") {
 
@@ -66,7 +66,7 @@ meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hou
 
   } # koniec MIESIECZNYCH
 
-  ## rozpoczecie dla danych TERMINOWYCH:
+  ## hourly data section:
   if (interval == "hourly") {
     if (rank == "synop") b[[1]] = clean_metadata_meteo(paste0(base_url, "dane_meteorologiczne/terminowe/synop/s_t_format.txt"),
                                                  rank = "synop", interval = "hourly")
@@ -76,6 +76,5 @@ meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hou
       stop("The precipitation stations ('precip') does not provide hourly data.", call. = FALSE)
     }
   }
-
   return(b)
 }

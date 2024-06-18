@@ -26,8 +26,7 @@ meteo_imgw_daily(
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{name of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS); stations' IDs (numeric) are
-no longer valid}
+It accepts names (characters in CAPITAL LETTERS); Stations' IDs (numeric) are no longer valid}
 
 \item{col_names}{three types of column names possible:
 "short" - default, values with shorten names,

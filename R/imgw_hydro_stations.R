@@ -5,10 +5,10 @@
 #' coordinates, ID numbers, and elevations
 #'
 #' @format The data contains a data.frame with 1304 obs. of 3 variables:
-#' \itemize{
-#'     \item{id} {Station ID}
-#'     \item{X} {Longitude}
-#'     \item{Y} {Latitude}
+#' \describe{
+#'     \item{id}{Station ID}
+#'     \item{X}{Longitude}
+#'     \item{Y}{Latitude}
 #' }
 #' The object is in the geographic coordinates using WGS84 (EPSG:4326).
 #'

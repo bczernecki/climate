@@ -1,3 +1,10 @@
+# climate 1.2.0
+
+* Corrected encoding problems for some of platforms where IMGW-PIB metadata were not parsed correctly
+* Added location of IMGW-PIB telemetry stations within `meteo_imgw_telemetry_stations()`
+* Minor bug fixes
+
+
 # climate 1.1.1
 
 * Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata

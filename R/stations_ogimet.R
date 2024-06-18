@@ -38,7 +38,7 @@ stations_ogimet = function(country = "United+Kingdom",
 stations_ogimet_bp = function(country = country, date = date, add_map = add_map) {
   
   if (length(country) != 1) {
-    stop("To many country selected. Please choose one country")
+    stop("Too many countries selected. Please choose only one country")
   }
   
   if (length(date) != 1) {
@@ -52,64 +52,64 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
   ndays = 1
   linkpl2 = paste0("http://ogimet.com/cgi-bin/gsynres?lang=en&state=",country,"&osum=no&fmt=html&ord=REV&ano=",year,"&mes=",month,"&day=",day,"&hora=06&ndays=1&Send=send")
   
-   temp = tempfile()
-   test_url(link = linkpl2, output = temp)
+  temp = tempfile()
+  test_url(link = linkpl2, output = temp)
    
-   # run only if downloaded file is valid
-   if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
+  # run only if downloaded file is valid
+  if (!is.na(file.size(temp)) & (file.size(temp) > 0)) {
    
-   a = readLines(temp)
-   a = paste(a, sep = "", collapse = "")
+    a = readLines(temp)
+    a = paste(a, sep = "", collapse = "")
+    b = strsplit(a, "Decoded synops since")
+    
+    b1 = lapply(b, function(x) substr(x, 1, 400))
+    b1[[1]] = b1[[1]][-1] # header
+    
+    b21 = unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
+    
+    pattern = paste0(" (", gsub(x = country, pattern = "+", replacement = " ", fixed = TRUE))
+    b22 = unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
+    
+    b1 = data.frame(str = b1[[1]], start = b21, stop = b22 - 1, stringsAsFactors = FALSE) 
   
-  b = strsplit(a, "Decoded synops since")
-  
-  b1 = lapply(b, function(x) substr(x, 1, 400))
-  b1[[1]] = b1[[1]][-1] # header
-  
-  b21 = unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
-  
-  pattern = paste0(" (", gsub(x = country, pattern = "+", replacement = " ", fixed = TRUE))
-  b22 = unlist(lapply(gregexpr(pattern = pattern, b1[[1]], fixed = TRUE), function(x) x[1]))
-  
-  b1 = data.frame(str = b1[[1]], start = b21, stop = b22 - 1, stringsAsFactors = FALSE) 
-
-  res = substr(b1$str, b1$start, b1$stop)
-  
-  station_names = unlist(lapply(strsplit(res, " - "), function(x) x[length(x)]))
-  
-  
-  res = gsub(x = res, pattern = ", CAPTION, '", replacement = '', fixed = TRUE)
-  res = gsub(x = res, pattern = " m'", replacement = ' ', fixed = TRUE)
-  res = gsub(x = res, pattern = " - ", replacement = ' ', fixed = TRUE)
-  res = gsub(x = res, pattern = "Lat=", replacement = '', fixed = TRUE)
-  res = gsub(x = res, pattern = "Lon=", replacement = ' ', fixed = TRUE)
-  res = gsub(x = res, pattern = "Alt=", replacement = ' ', fixed = TRUE)
-  
-  res = suppressWarnings(do.call("rbind", strsplit(res, " ")))
-  
-  res1 = res[, c(1, 3, 5:7)]
-  
-  lat = as.numeric(substr(res1[, 1], 1, 2)) +
-    (as.numeric(substr(res1[,1], 4, 5))/100) * 1.6667
-  
-  lon_hemisphere =  gsub("[0-9]", "\\1", res1[, 2])
-  lon_hemisphere =  gsub("-", "", lon_hemisphere)
-  lon_hemisphere = ifelse(lon_hemisphere == "W", -1, 1)
-  
-  lat_hemisphere =  gsub("[0-9]", "\\1", res1[, 1])
-  lat_hemisphere =  gsub("-", "", lat_hemisphere)
-  lat_hemisphere = ifelse(lat_hemisphere == "S", -1, 1)
-  
-  lon = as.numeric(substr(res1[, 2], 1, 3)) + (as.numeric(substr(res1[, 2], 5, 6)) /
-                                                  100) * 1.6667
-  lon = lon * lon_hemisphere
-  
-  lat = as.numeric(substr(res1[, 1], 1, 2)) + (as.numeric(substr(res1[, 1], 4, 5)) /
-                                                  100) * 1.6667
-  lat = lat * lat_hemisphere
-  
-  res = data.frame(wmo_id = res1[, 4], station_names = station_names,
-                    lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
+    res = substr(b1$str, b1$start, b1$stop)
+    
+    station_names = unlist(lapply(strsplit(res, " - ", fixed = TRUE), function(x) x[length(x)]))
+    
+    res = gsub(x = res, pattern = ", CAPTION, '", replacement = '', fixed = TRUE)
+    res = gsub(x = res, pattern = " m'", replacement = ' ', fixed = TRUE)
+    res = gsub(x = res, pattern = " - ", replacement = ' ', fixed = TRUE)
+    res = gsub(x = res, pattern = "Lat=", replacement = '', fixed = TRUE)
+    res = gsub(x = res, pattern = "Lon=", replacement = ' ', fixed = TRUE)
+    res = gsub(x = res, pattern = "Alt=", replacement = ' ', fixed = TRUE)
+    res = gsub(x = res, pattern = " / ", replacement = '/', fixed = TRUE)
+    
+    res = suppressWarnings(do.call("rbind", strsplit(res, " ")))
+    res1 = matrix(res[, c(1, 3, 5:7)], ncol = 5)
+    
+    lat = suppressWarnings(
+      as.numeric(substr(res1[, 1], 1, 2)) +
+      (as.numeric(substr(res1[, 1], 4, 5)) / 100) * 1.6667
+      )
+    
+    lon_hemisphere =  gsub("[0-9]", "\\1", res1[, 2])
+    lon_hemisphere =  gsub("-", "", lon_hemisphere)
+    lon_hemisphere = ifelse(lon_hemisphere == "W", -1, 1)
+    
+    lat_hemisphere =  gsub("[0-9]", "\\1", res1[, 1])
+    lat_hemisphere =  gsub("-", "", lat_hemisphere)
+    lat_hemisphere = ifelse(lat_hemisphere == "S", -1, 1)
+    
+    lon = suppressWarnings(
+      as.numeric(substr(res1[, 2], 1, 3)) + 
+        (as.numeric(substr(res1[, 2], 5, 6)) / 100) * 1.6667
+      )
+    lon = lon * lon_hemisphere
+    
+    lat = lat * lat_hemisphere
+    
+    res = data.frame(wmo_id = res1[, 4], station_names = station_names,
+                      lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
   
    } else {
      res = NULL

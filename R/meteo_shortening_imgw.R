@@ -34,7 +34,9 @@ meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = 
   if (col_names != "polish") {
     abbrev = climate::imgw_meteo_abbrev
     orig_columns = trimws(gsub("\\s+", " ", colnames(data))) # remove double spaces
+    orig_columns = trimws(gsub("\\[.*?]", "", orig_columns)) # remove brackets and content inside
 
+    abbrev$fullname = trimws(gsub("\\[.*?]", "", abbrev$fullname))
     matches = match(orig_columns, abbrev$fullname)
     matches = matches[!is.na(matches)]
 
@@ -48,7 +50,6 @@ meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = 
       colnames(data)[orig_columns %in% abbrev$fullname] = abbrev$fullname_eng[matches]
     }
   }
-
+  
   return(data)
-
-} # end of function
+}
