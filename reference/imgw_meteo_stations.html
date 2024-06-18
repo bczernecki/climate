@@ -18,7 +18,7 @@ coordinates, ID numbers, and elevations"><meta property="og:image" content="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -76,25 +76,36 @@ coordinates, ID numbers, and elevations</p>
 
     <div id="format">
     <h2>Format</h2>
-    <p>The data contains a data.frame with 1998 obs. of 3 variables:</p><ul><li><p>id Station ID</p></li>
-<li><p>X Longitude</p></li>
-<li><p>Y Latitude</p></li>
-</ul><p>The object is in the geographic coordinates using WGS84 (EPSG:4326).</p>
+    <p>The data contains a data.frame with 1998 obs. of 3 variables:</p><dl><dt>id</dt>
+<dd><p>Station ID</p></dd>
+
+<dt>X</dt>
+<dd><p>Longitude</p></dd>
+
+<dt>Y</dt>
+<dd><p>Latitude</p></dd>
+
+<dt>station</dt>
+<dd><p>Station name</p></dd>
+
+<dt>id2</dt>
+<dd><p>IMGW-PIB ID for station rank</p></dd>
+
+
+</dl><p>The object is in the geographic coordinates using WGS84 (EPSG:4326).</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">imgw_meteo_stations</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">imgw_meteo_stations</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          id     X     Y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 249<span style="text-decoration: underline;">190</span>020  19.6  50.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 249<span style="text-decoration: underline;">199</span>999  19.3  49.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 249<span style="text-decoration: underline;">190</span>040  19.4  49.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 249<span style="text-decoration: underline;">190</span>050  19.8  49.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 249<span style="text-decoration: underline;">190</span>060  20.0  49.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 249<span style="text-decoration: underline;">190</span>070  19.2  49.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          id        X        Y      station   id2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 249190020 19.64124 49.96387    BRZEŹNICA 96576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 249199999 19.26644 49.94970        OSIEK 96574</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 249190040 19.37912 49.93805 GIERAŁTOWICE 96572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 249190050 19.81285 49.94243    RADZISZÓW 96573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 249190060 19.96480 49.90470      SIEPRAW 96571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 249190070 19.22531 49.87891         KĘTY 96568</span>
 </code></pre></div>
     </div>
   </div>

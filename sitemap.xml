@@ -85,6 +85,9 @@
     <loc>https://bczernecki.github.io/climate/reference/meteo_imgw_daily.html</loc>
   </url>
   <url>
+    <loc>https://bczernecki.github.io/climate/reference/meteo_imgw_datastore.html</loc>
+  </url>
+  <url>
     <loc>https://bczernecki.github.io/climate/reference/meteo_imgw_hourly.html</loc>
   </url>
   <url>
@@ -131,6 +134,9 @@
   </url>
   <url>
     <loc>https://bczernecki.github.io/climate/reference/spheroid_dist.html</loc>
+  </url>
+  <url>
+    <loc>https://bczernecki.github.io/climate/reference/stations_meteo_imgw_telemetry.html</loc>
   </url>
   <url>
     <loc>https://bczernecki.github.io/climate/reference/stations_ogimet.html</loc>
