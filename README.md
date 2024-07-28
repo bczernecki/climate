@@ -1,4 +1,4 @@
-# climate <img src="man/figures/logo.png" style="float:right" width="150" />
+# climate <img src="man/figures/logo.png" align="right" width="150" />
 
 <!-- badges: start -->
 
