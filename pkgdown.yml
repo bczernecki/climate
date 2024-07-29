@@ -1,12 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   getstarted: getstarted.html
-  pl: pl.html
-  usecase_ogimet: usecase_ogimet.html
-last_built: 2024-06-18T08:45Z
+  articles/pl: pl.html
+  articles/usecase_ogimet: usecase_ogimet.html
+last_built: 2024-07-29T10:11Z
 urls:
   reference: https://bczernecki.github.io/climate/reference
   article: https://bczernecki.github.io/climate/articles
-
