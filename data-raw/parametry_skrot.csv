@@ -58,7 +58,7 @@ Liczba dni z zamiecia sniezna wysoka,snowstorm_high_days,Days with high snowstor
 Liczba dni ze szronem,hoarfrost_days,Days with hoarfrost
 Liczba dni ze zmetnieniem,hazyness_days,Days with hazyness
 Maksymalna dobowa suma opadow [mm],rr_max_daily,Maximum daily preciptation [mm]
-Maksymalna temperatura dobowa [C],tmax_daily,Maximum daily air temperatury [C]
+Maksymalna temperatura dobowa [C],tmax_daily,Maximum daily air temperature [C]
 Maksymalna wysokosc pokrywy snieznej [cm],snowcover_max,Maximum daily snow cover [cm]
 Miesiac,mm,Month
 Miesieczna suma opadow [mm],rr_monthly,Total monthly precipitation [mm]
