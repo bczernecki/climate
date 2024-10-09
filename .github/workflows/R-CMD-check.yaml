@@ -111,14 +111,16 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Codecov
-        run: |
-          covr::codecov()
-        shell: Rscript {0}
-        
+       # Run covr to generate the coverage report
+      - name: Generate test coverage
+        run: R -e 'covr::codecov()'
+
+      # Upload coverage report to Codecov
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@54bcd8715eee62d40e33596ef5e8f0f48dbbccab # v4.1.0
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: unittests
+          name: code-coverage-report
           fail_ci_if_error: true
-        
