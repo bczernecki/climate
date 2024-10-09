@@ -35,7 +35,7 @@
 #' imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
 #'                                       parameters = "t2m",
 #'                                       stations = c("HALA GĄSIENICOWA",
-#'                                                    "DOLINA PIĘCIU STAWÓW"),
+#'                                                    "DOLINA 5 STAWÓW"),
 #'                                       coords = TRUE)
 #' }
 #'
@@ -84,7 +84,7 @@ meteo_imgw_datastore_bp = function(year,
   telemetry_stations$river = NULL
   
   if (!is.null(stations)) {
-    telemetry_stations = telemetry_stations[telemetry_stations$name %in% toupper(stations), ]
+    telemetry_stations = telemetry_stations[toupper(telemetry_stations$name) %in% toupper(stations), ]
   }
   
   urls = as.character(
