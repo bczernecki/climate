@@ -1,3 +1,8 @@
+# climate 1.2.1
+
+* Corrected duplicated column names for IMGW-PIB stations
+* Adjusted encoding changes and documentation updates in `meteo_imgw_telemetry_stations()`
+
 # climate 1.2.0
 
 * Corrected encoding problems for some of platforms where IMGW-PIB metadata were not parsed correctly

@@ -110,26 +110,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-      - name: Codecov
-        run: |
-          covr::codecov()
-        shell: Rscript {0}
-        
-      - name: Test coverage report
-        if: always()
-        run: |
-          covr_report <- covr::package_coverage(wrap = TRUE)
-          covr::report(x = covr_report, file = 'covr_report.html')
-          print(getwd())
-          print(dir())
-        shell: Rscript {0}
-
-      - name: Upload test coverage report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: |
-            covr_report.html
-            lib

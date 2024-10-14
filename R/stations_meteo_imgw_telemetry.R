@@ -14,10 +14,8 @@
 stations_meteo_imgw_telemetry = function() {
 
   url = "https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv"
-  
   telemetry_stations = tryCatch(expr = suppressWarnings(
       read.csv(url,
-             fileEncoding = "CP1250",
              sep = ";",
              stringsAsFactors = FALSE)
       ), 

@@ -25,17 +25,17 @@ test_that("meteo_ogimet works!", {
   
   # check if January is going to be downloaded not other dates are downloaded by accident:
   x = meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
-               station = 12001, coords = FALSE)
+               station = 12120, coords = FALSE)
   
-  if (is.data.frame(x) & nrow(df) > 0) {
+  if (is.data.frame(x) & nrow(x) > 0) {
     testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
   }
   
   # check precip_split on empty precipitation field
   petrobaltic = ogimet_hourly(station = 12001,
-                         date = c(as.Date("2019-01-01"), as.Date("2019-01-05")),
+                         date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),
                          coords = TRUE, precip_split = TRUE)
-  if (is.data.frame(petrobaltic) & nrow(df) > 0) {
+  if (is.data.frame(petrobaltic) & nrow(petrobaltic) > 0) {
     testthat::expect_true(all(is.na(petrobaltic$pr12)))
   }
 

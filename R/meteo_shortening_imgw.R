@@ -23,11 +23,16 @@ meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = 
   # removing duplicated column names:  (e.g. station's name)
   if (remove_duplicates == TRUE) {
     data = data[, !duplicated(colnames(data))]
-    
     # fix for merged station names with suffixes
     if (any(colnames(data) %in% c("Nazwa stacji.x", "Nazwa stacji.y"))) {
       data$`Nazwa stacji.y` = NULL
       colnames(data)[colnames(data) == "Nazwa stacji.x"] = "Nazwa stacji"
+    }
+    
+    # fix for mean air temperature which is stated sometimes in two files as:
+    # "Srednia dobowa temperatura[°C]" and "Srednia temperatura dobowa [°C]"
+    if (any(grepl(x = colnames(data), "Srednia dobowa temperatura"))) {
+      data[, which(grepl(x = colnames(data), "Srednia dobowa temperatura"))] = NULL
     }
   }
   
