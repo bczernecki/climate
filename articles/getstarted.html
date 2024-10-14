@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Bartosz
 Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2024-07-29</h4>
+            <h4 data-toc-skip class="date">2024-10-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -204,10 +204,10 @@ in a given country(ies):</p>
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
 <span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=07&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpTNPioJ/file1ada3ee25a29</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=07&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpTNPioJ/file1adac7a41a5</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=United+Kingdom&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=10&amp;day=14&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpUqRwre/file1aee7771223c</span></span>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=France&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=10&amp;day=14&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpUqRwre/file1aee28a134a6</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations%20-1.png" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -324,7 +324,7 @@ in a given country(ies):</p>
 <td align="right">138.94411</td>
 </tr>
 <tr class="odd">
-<td align="left">166</td>
+<td align="left">165</td>
 <td align="left">07117</td>
 <td align="left">Ploumanac’H</td>
 <td align="right">-3.466676</td>
@@ -333,7 +333,7 @@ in a given country(ies):</p>
 <td align="right">142.71600</td>
 </tr>
 <tr class="even">
-<td align="left">167</td>
+<td align="left">166</td>
 <td align="left">07118</td>
 <td align="left">Lannion</td>
 <td align="right">-3.466676</td>
@@ -360,7 +360,7 @@ in a given country(ies):</p>
 <td align="right">164.42872</td>
 </tr>
 <tr class="odd">
-<td align="left">168</td>
+<td align="left">167</td>
 <td align="left">07120</td>
 <td align="left">Saint-Brieuc</td>
 <td align="right">-2.850017</td>
@@ -379,8 +379,8 @@ country:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=07&amp;day=29&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
-<span><span class="co">#&gt; /tmp/RtmpTNPioJ/file1ada59e59c27</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "http://ogimet.com/cgi-bin/gsynres?lang=en&amp;state=Poland&amp;osum=no&amp;fmt=html&amp;ord=REV&amp;ano=2024&amp;mes=10&amp;day=14&amp;hora=06&amp;ndays=1&amp;Send=send"</span></span>
+<span><span class="co">#&gt; /tmp/RtmpUqRwre/file1aee1b743778</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/stations-3-1.png" width="672"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -1137,7 +1137,7 @@ Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
