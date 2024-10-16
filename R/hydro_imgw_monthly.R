@@ -123,7 +123,7 @@ hydro_imgw_monthly_bp = function(year,
 
   all_data = all_data[order(all_data$`Nazwa stacji`,
                             all_data$`Rok hydrologiczny`,
-                            all_data$`Wskaznik miesiaca w roku hydrologicznym`), ]
+                            all_data$`Wskaźnik miesiąca w roku hydrologicznym`), ]
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)

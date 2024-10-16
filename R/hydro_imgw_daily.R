@@ -133,7 +133,7 @@ hydro_imgw_daily_bp = function(year,
     all_data[[i]] = merge(data, data2,
                          by = c("Kod stacji", "Nazwa stacji",
                                "Rok hydrologiczny", "Nazwa rzeki/jeziora",
-                               "Wskaznik miesiaca w roku hydrologicznym", "Dzien"),
+                               "Wskaźnik miesiąca w roku hydrologicznym", "Dzień"),
                          all.x = TRUE)
   }
 
@@ -168,8 +168,8 @@ hydro_imgw_daily_bp = function(year,
 
   all_data = all_data[order(all_data$`Nazwa stacji`,
                             all_data$`Rok hydrologiczny`,
-                            all_data$`Wskaznik miesiaca w roku hydrologicznym`,
-                            all_data$`Dzien`), ]
+                            all_data$`Wskaźnik miesiąca w roku hydrologicznym`,
+                            all_data$`Dzień`), ]
   # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
