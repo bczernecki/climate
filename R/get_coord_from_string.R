@@ -8,12 +8,6 @@
 #' Negative values mean western or southern Hemisphere
 #' @keywords internal
 #'
-#' @examples
-#' \donttest{
-#'  txt = "12120:   Leba (Poland)\nLatitude: 54-45N    Longitude: 017-32E    Altitude: 2 m."
-#'  climate:::get_coord_from_string(txt, pattern = "Latitude")
-#' }
-#'
 get_coord_from_string = function(txt, pattern = "Longitude") {
   tt = gregexpr(pattern, txt)
   start = tt[[1]][1] + attributes(tt[[1]])$match.length + 1

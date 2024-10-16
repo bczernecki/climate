@@ -6,12 +6,6 @@
 #' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @keywords internal
-#' @examples
-#' \donttest{
-#'   meta = climate:::hydro_metadata_imgw(interval = "daily")
-#'   meta = climate:::hydro_metadata_imgw(interval = "monthly")
-#'   meta = climate:::hydro_metadata_imgw(interval = "semiannual_and_annual")
-#' }
 
 hydro_metadata_imgw = function(interval, allow_failure = TRUE) {
   

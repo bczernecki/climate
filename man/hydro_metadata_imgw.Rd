@@ -15,11 +15,4 @@ hydro_metadata_imgw(interval, allow_failure = TRUE)
 Downloading the description (metadata) to hydrological data available in the danepubliczne.imgw.pl repository.
 By default, the function returns a list or data frame for a selected subset
 }
-\examples{
-\donttest{
-  meta = climate:::hydro_metadata_imgw(interval = "daily")
-  meta = climate:::hydro_metadata_imgw(interval = "monthly")
-  meta = climate:::hydro_metadata_imgw(interval = "semiannual_and_annual")
-}
-}
 \keyword{internal}

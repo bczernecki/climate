@@ -5,13 +5,13 @@
 #' @param data downloaded dataset with original column names
 #' @param col_names three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset
 #' @param remove_duplicates whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)
-#' @keywords internal
+#' @export
 #' 
 #' @examples 
 #' \donttest{
 #'   monthly = meteo_imgw("monthly", rank = "climate", year = 1969)
-#'   colnames(monthly)
-#'   abbr = climate:::meteo_shortening_imgw(data = monthly,
+#'   # colnames(monthly)
+#'   abbr = meteo_shortening_imgw(data = monthly,
 #'       col_names = "full", 
 #'       remove_duplicates = TRUE)
 #'   head(abbr)

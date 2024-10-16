@@ -14,13 +14,4 @@ precip_split(precip, pattern = "/12")
 \description{
 Internal function for splitting precipitation field provided by Ogimet and converting string to numerical value
 }
-\examples{
-\donttest{
- df = tryCatch(ogimet_hourly(station = 12330), error = function(e) 0)
- if (is.data.frame(df)) {
-   climate:::precip_split(df$Precmm, pattern = "/12") # to get 12h precipitation amounts
- }
-}
-
-}
 \keyword{internal}

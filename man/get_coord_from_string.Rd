@@ -18,11 +18,4 @@ get_coord_from_string(txt, pattern = "Longitude")
 \description{
 Internal function for cleaning coordinates' metadata provided by Ogimet
 }
-\examples{
-\donttest{
- txt = "12120:   Leba (Poland)\nLatitude: 54-45N    Longitude: 017-32E    Altitude: 2 m."
- climate:::get_coord_from_string(txt, pattern = "Latitude")
-}
-
-}
 \keyword{internal}
