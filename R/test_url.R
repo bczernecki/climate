@@ -54,17 +54,4 @@ test_url = function(link, output, quiet = FALSE) {
     message(paste0("\nCheck: ", link, " in your browser!\n"))
     return(invisible(NULL))
   }
- 
 }
-
-# b = gracefully_fail("http://httpbin.org/status/404") # http >400
-# #> Not Found (HTTP 404).
-# gracefully_fail("http://httpbin.org/delay/11") # Timeout
-# #> Timeout was reached: [httpbin.org] Operation timed out after 1000 milliseconds with 0 bytes received
-# a = gracefully_fail("http://httpbin.org") #OK
-# 
-# b = curl_download(url = "http://httpbin.org", destfile = tempfile())
-# b = curl_download(url = "http://httpbin.org/status/404", destfile = tempfile())
-# 
-# url = "http://www2.census.gov/acs2011_5yr/pums/csv_pus.zip"
-# test_url(link = url, output = tempfile())

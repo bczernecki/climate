@@ -9,11 +9,14 @@
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
 #' @param station name or ID of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
+#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric).
+#' Please note that station names may change over time and thus sometimes 2 names 
+#' are required in some cases, e.g. `c("POZNAŃ", "POZNAŃ-ŁAWICA")`.
 #' @param col_names three types of column names possible: "short" - default,
 #' values with shorten names, "full" - full English description,
 #' "polish" - original names in the dataset
-#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
+#' @param allow_failure logical - whether to proceed or stop on failure. 
+#' By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the
 #' 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
@@ -21,7 +24,8 @@
 #' @importFrom data.table fread
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   monthly = meteo_imgw_monthly(rank = "climate", year = 1969)
 #'   head(monthly)
 #'
@@ -29,11 +33,6 @@
 #'   monthly2 = meteo_imgw_monthly(rank = "synop", year = 2018,
 #'          col_names = "full")
 #'   head(monthly2)
-#'
-#'   # please note that station names may change over time
-#'   # and thus 2 names are required in some cases:
-#'   # df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000,
-#'   #         coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA"))
 #' }
 #'
 meteo_imgw_monthly = function(rank = "synop",

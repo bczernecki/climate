@@ -2,9 +2,9 @@
 #'
 #' Returns a list of meteorological stations with their coordinates from the Ogimet webpage. The returned list is valid only for a given day
 #'
-#' @param country country name; for more than two words they need to be separated with a plus character (e.g. "United+Kingdom")
+#' @param country country name; Every word must be written with capital letters (e.g. "United Kingdom")
 #' @param date a day when measurements were done in all available locations
-#' @param add_map logical - whether to draw a map with downloaded metadata (requires maps/mapdata packages)
+#' @param add_map logical - whether to draw a map based on downloaded dataset (requires `maps` package)
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' @export
@@ -18,7 +18,7 @@
 #'
 #'
 
-stations_ogimet = function(country = "United+Kingdom",
+stations_ogimet = function(country = "United Kingdom",
                            date = Sys.Date(),
                            add_map = FALSE,
                            allow_failure = TRUE) {
@@ -40,6 +40,8 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
   if (length(country) != 1) {
     stop("Too many countries selected. Please choose only one country")
   }
+  
+  country = gsub(x = country, pattern = " ", replacement = "+")
   
   if (length(date) != 1) {
     stop("You can check available nearest stations for one day. Please chenge selection")

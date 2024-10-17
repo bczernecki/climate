@@ -17,8 +17,6 @@
 #' # London-Heathrow, United Kingdom
 #'   noaa = meteo_noaa_hourly(station = "037720-99999", year = 1949)
 #' }
-#'
-
 
 meteo_noaa_hourly = function(station = NULL,
                              year = 2019,

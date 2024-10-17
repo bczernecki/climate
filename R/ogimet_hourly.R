@@ -183,7 +183,6 @@ ogimet_hourly_bp = function(date = date,
     suppressWarnings(data_station[, columns] <-
       as.data.frame(sapply(data_station[,columns], as.numeric)))
   
-    #  TODO:
     # changing order of columns and removing blank records:
     if (coords) {
       ord1 = c("station_ID", "Lon", "Lat", "Date", "TC")

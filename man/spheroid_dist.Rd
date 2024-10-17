@@ -12,7 +12,7 @@ spheroid_dist(p1, p2)
 \item{p2}{coordinates of the second point in decimal degrees (LON, LAT)}
 }
 \value{
-distance between two locations in kilometers
+distance between two locations (in kilometers)
 }
 \description{
 Calculate the distance between two points on the surface of a spheroid

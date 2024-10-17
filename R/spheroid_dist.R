@@ -7,7 +7,7 @@
 #' @param p1 coordinates of the first point in decimal degrees (LON, LAT)
 #' @param p2 coordinates of the second point in decimal degrees (LON, LAT)
 #' 
-#' @return distance between two locations in kilometers
+#' @return distance between two locations (in kilometers)
 #' @export
 
 #' @examples 

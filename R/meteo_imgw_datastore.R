@@ -30,8 +30,8 @@
 #' @import data.table
 #' @export
 #'
-#' @examples \donttest{
-#' # download only air temperature for selected 2 stations in 2022-2023:
+#' @examples 
+#' \donttest{
 #' imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
 #'                                       parameters = "t2m",
 #'                                       stations = c("HALA GĄSIENICOWA",

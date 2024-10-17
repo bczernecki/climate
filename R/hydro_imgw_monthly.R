@@ -120,10 +120,7 @@ hydro_imgw_monthly_bp = function(year,
       stop("Selected station(s) are not in the proper format.", call. = FALSE)
     }
   }
-
-  all_data = all_data[order(all_data$`Nazwa stacji`,
-                            all_data$`Rok hydrologiczny`,
-                            all_data$`Wskaźnik miesiąca w roku hydrologicznym`), ]
+  all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydrologiczny|w roku hydro")]), ]
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)

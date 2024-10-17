@@ -31,5 +31,4 @@ Further details available at: https://www1.ncdc.noaa.gov/pub/data/noaa/readme.tx
 # London-Heathrow, United Kingdom
   noaa = meteo_noaa_hourly(station = "037720-99999", year = 1949)
 }
-
 }

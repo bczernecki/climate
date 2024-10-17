@@ -19,10 +19,10 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_ogimet(country = "Uniced Kingdom", 
+#'   nearest_stations_ogimet(country = "United Kingdom", 
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
-#'                           no_of_stations = 0, 
+#'                           no_of_stations = 50, 
 #'                           allow_failure = TRUE,
 #'                           main = "Meteo stations in UK")
 #' }

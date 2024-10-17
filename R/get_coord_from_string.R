@@ -7,7 +7,8 @@
 #' @format The returned object is the geographic coordinates using WGS84 (EPSG:4326) in decimal format.
 #' Negative values mean western or southern Hemisphere
 #' @keywords internal
-#'
+#' @noRd
+
 get_coord_from_string = function(txt, pattern = "Longitude") {
   tt = gregexpr(pattern, txt)
   start = tt[[1]][1] + attributes(tt[[1]])$match.length + 1

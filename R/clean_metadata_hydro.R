@@ -5,6 +5,7 @@
 #' @param interval temporal interval
 #' @importFrom utils read.fwf
 #' @keywords internal
+
 clean_metadata_hydro = function(address, interval) {
   temp = tempfile()
 
