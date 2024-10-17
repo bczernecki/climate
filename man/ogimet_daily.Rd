@@ -34,4 +34,3 @@ The data are processed only if temperature or precipitation fields are present.
 }
 
 }
-\keyword{internal}

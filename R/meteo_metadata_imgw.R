@@ -1,18 +1,13 @@
 #' Meteorological metadata
 #'
-#' Downloading the description (metadata) to the meteorological data available in the dane.imgw repository.imgw.pl.
+#' Downloading the description (metadata) to the meteorological data available in the 
+#' danepubliczne.imgw.pl collection.
 #' By default, the function returns a list or data frame for a selected subset
 #'
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
 #' @param rank rank of station ("synop", "climate", "precip")
 #' @keywords internal
-#'
-#' @examples
-#' \donttest{
-#'   #meta = climate:::meteo_metadata_imgw(interval = "hourly", rank = "synop")
-#'   #meta = climate:::meteo_metadata_imgw(interval = "daily", rank = "synop")
-#'   #meta = climate:::meteo_metadata_imgw(interval = "monthly", rank = "precip")
-#' }
+#' @noRd
 
 meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hourly, hourly
   
@@ -64,7 +59,7 @@ meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hou
                                rank = "precip", interval = "monthly")
     }
 
-  } # koniec MIESIECZNYCH
+  } # end of monthly interval
 
   ## hourly data section:
   if (interval == "hourly") {

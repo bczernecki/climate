@@ -23,10 +23,10 @@ the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 \examples{
 \donttest{
-  monthly = hydro_imgw("monthly", year = 1969)
+  monthly = data = hydro_imgw("monthly", year = 1969, col_names = "polish")
   
   if (is.data.frame(monthly)) {
-  abbr = climate:::hydro_shortening_imgw(data = monthly,
+  abbr = hydro_shortening_imgw(data = monthly,
       col_names = "full",
       remove_duplicates = TRUE)
   head(abbr)
@@ -34,4 +34,3 @@ the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 
 }
-\keyword{internal}

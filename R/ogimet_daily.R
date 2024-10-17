@@ -12,10 +12,9 @@
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' 
 #' @export
-#' 
-#' @keywords internal
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   # downloading daily summaries for last 30 days. station: New York - La Guardia
 #'   new_york = ogimet_daily(station = 72503, coords = TRUE)
 #' }

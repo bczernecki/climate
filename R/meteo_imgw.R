@@ -1,7 +1,7 @@
-#' Meteorological data from IMGW
+#' Meteorological data from the IMGW-PIB official repository
 #'
 #' Downloading hourly, daily, and monthly meteorological data from the
-#' SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection
+#' SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection.
 #'
 #' @param interval temporal resolution of the data ("hourly", "daily", "monthly")
 #' @param rank rank of the stations: "synop" (default), "climate" or "precip"

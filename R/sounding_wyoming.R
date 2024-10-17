@@ -2,7 +2,7 @@
 #'
 #' Downloading the measurements of the vertical profile of atmosphere (also known as sounding data). Data can be retrieved using TEMP and BUFR sounding formatting.
 #'
-#' @param wmo_id international WMO station code (World Meteorological Organization ID); For Polish stations: Łeba - 12120, Legionowo - 12374, Wrocław- 12425
+#' @param wmo_id international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław- 12425
 #' @param yy year - single number
 #' @param mm month - single number denoting month
 #' @param dd day - single number denoting day
@@ -41,11 +41,11 @@
 #' ##############################################################################
 #'   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
 #'                           hh = 12, min = 00)
-#'   #head(TEMP[[1]])
+#'   head(TEMP[[1]])
 #'   
 #'   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
 #'                           hh = 12, min = 00, bufr = TRUE)
-#'   #head(BUFR[[1]])
+#'   head(BUFR[[1]])
 #' 
 #' 
 #' ##############################################################################
@@ -57,8 +57,7 @@
 #'                              mm = sample(1:12,1), 
 #'                              dd = sample(1:20,1), 
 #'                              hh = 0)
-#'   # head(profile)
-#'   # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
+#'   plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 #' }
 #'
 

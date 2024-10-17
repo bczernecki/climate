@@ -7,7 +7,8 @@
 stations_meteo_imgw_telemetry()
 }
 \value{
-data table with metadata for over 500 stations. Metadata contains: station ID, station name, river, latitude, longitude, altitude
+data table with metadata for over 500 stations.
+Metadata contains: station ID, station name, river, latitude, longitude, altitude
 }
 \description{
 Retrieving current metadata for stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
