@@ -33,6 +33,9 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
 \item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
 }
+\value{
+data.frame with historical hydrological data for the semi-annual and annual period
+}
 \description{
 Downloading hydrological data for the semi-annual and annual period
 available in the danepubliczne.imgw.pl collection

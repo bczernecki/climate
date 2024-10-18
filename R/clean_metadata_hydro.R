@@ -5,38 +5,36 @@
 #' @param interval temporal interval
 #' @importFrom utils read.fwf
 #' @keywords internal
+#' @noRd
+
 clean_metadata_hydro = function(address, interval) {
   temp = tempfile()
 
   test_url(link = address, output = temp)
-  a = readLines(temp, warn = FALSE)
-
-  a = iconv(a, from = "cp1250", to = "ASCII//TRANSLIT") # remove polish characters
-  a = gsub(a, pattern = "\\?", replacement = "") # removing extra characters after conversion
-
-  # additional workarounds for mac os but not only...
+  a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE, 
+               fileEncoding = "CP1250", skip = 1, sep = "\t")$V1
+  a = gsub(a, pattern = "\\?", replacement = "") 
   a = gsub(x = a, pattern = "'", replacement = "")
-  a = gsub(x = a, pattern = "\\^", replacement = "")
+  a = trimws(gsub(x = a, pattern = "\\^", replacement = ""))
+  a = gsub(a, pattern = "\\s+", replacement = " ")
 
   if (interval == "monthly") {
-    b = list(data.frame(parameters = a[3:12])) # sklad danych jeszcze nie wiem jak ominąć problem kontroli
-    # ale on może się zmienić nie wiem czy nie lepiej wykluczyć ostatni rok
+    b = list(data.frame(parameters = a[1:10]))
   }
   if (interval == "daily") {
-    b = data.frame(parameters = a[3:12])
+    b = data.frame(parameters = a[1:10])
   }
   if (interval == "semiannual_and_annual") {
-    godzina = paste0(a[15], ":", a[16]) # nie jestem pewien czy tak bo w dokumentacji jest podzial na dwie kolumny,
-    #ale w pliku jest jedna kolumna a pomiaru brak
-    data = c(a[12:14], godzina)
+    godzina = paste0(a[13], ":", a[14])
+    data = c(a[10:12], godzina)
     data_od = paste0("wystapienie_od_", data)
-    data_do = paste0("wystapienie_od_", data)
-    SPT = unlist(strsplit(a[10], "]/")) # stan/przeplyw/temperatura
+    data_do = paste0("wystapienie_do_", data)
+    SPT = unlist(strsplit(a[8], "]/")) # stan/przeplyw/temperatura
     SPT[1] = paste0(SPT[1], "]")
     SPT[2] = paste0(SPT[2], "]")
     b = NULL
     for (i in seq_along(SPT)) {
-      tmp = c(a[3:9], SPT[i], data_od, data_do)
+      tmp = c(a[1:7], SPT[i], data_od, data_do)
       b = cbind(b, tmp)
     }
     b = list("H" = data.frame(parameters = b[, 1]),

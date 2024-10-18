@@ -16,7 +16,7 @@
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
-#'
+#' @returns data.frame with historical hydrological data for the daily time interval
 #' @examples \donttest{
 #'   daily = hydro_imgw_daily(year = 2000)
 #' }
@@ -76,7 +76,6 @@ hydro_imgw_daily_bp = function(year,
   all_data = vector("list", length = length(catalogs))
   for (i in seq_along(catalogs)) {
     catalog = catalogs[i]
-    # print(i)
     iterator = c("01", "02", "03", "04", "05", "06",
                 "07", "08", "09", "10", "11", "12")
     data = NULL
@@ -96,17 +95,9 @@ hydro_imgw_daily_bp = function(year,
       }
       # extra exception for a current year according to information provided by IMGW-PIB:
       # i.e.:
-      # "Do czasu zakończenia kontroli przepływów z roku hydrologicznego 2020 (do około poczatku sierpnia 2021),
-      # rekordy z  danymi z roku 2020 mają format:
-      #Kod stacji
-      #Nazwa stacji
-      #Nazwa rzeki/jeziora
-      #Rok hydrologiczny
-      #Wskaźnik miesiąca w roku hydrologicznym
-      #Dzień
-      #Stan wody [cm]
-      #Temperatura wody [st. C]
-      #Miesiąc kalendarzowy
+      # "Do czasu zakonczenia kontroli przeplywow rekordy z danymi z roku 2020 maja format:
+      #Kod stacji  #Nazwa stacji  #Nazwa rzeki/jeziora  #Rok hydrologiczny  #Wskaznik miesiaca w roku hydrologicznym
+      #Dzien  #Stan wody [cm]  #Temperatura wody [st. C]    #Miesiac kalendarzowy
       if (ncol(data1) == 9) {
         data1$flow = NA
         data1 = data1[, c(1:7, 10, 8:9)]
@@ -131,9 +122,7 @@ hydro_imgw_daily_bp = function(year,
 
     colnames(data2) = meta[[2]][, 1]
     all_data[[i]] = merge(data, data2,
-                         by = c("Kod stacji", "Nazwa stacji",
-                               "Rok hydrologiczny", "Nazwa rzeki/jeziora",
-                               "Wskaznik miesiaca w roku hydrologicznym", "Dzien"),
+                         by = intersect(colnames(data), colnames(data2)),
                          all.x = TRUE)
   }
 
@@ -166,11 +155,7 @@ hydro_imgw_daily_bp = function(year,
     }
   }
 
-  all_data = all_data[order(all_data$`Nazwa stacji`,
-                            all_data$`Rok hydrologiczny`,
-                            all_data$`Wskaznik miesiaca w roku hydrologicznym`,
-                            all_data$`Dzien`), ]
-  # dodanie opcji  dla skracania kolumn i usuwania duplikatow:
+  all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydro|w roku hydro|Dzie")]), ]
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)

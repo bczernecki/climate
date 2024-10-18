@@ -2,11 +2,13 @@
 #'
 #' Retrieving current metadata for stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
 #' 
-#' @return data table with metadata for over 500 stations. Metadata contains: station ID, station name, river, latitude, longitude, altitude
+#' @return data table with metadata for over 500 stations. 
+#' Metadata contains: station ID, station name, river, latitude, longitude, altitude
 #' @importFrom data.table as.data.table
 #' @export
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   telemetry_stations = stations_meteo_imgw_telemetry()
 #' }
 #'

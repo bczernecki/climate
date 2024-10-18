@@ -9,13 +9,14 @@
 #' "polish" - original names in the dataset
 #' @param remove_duplicates whether to remove duplicated column names
 #' (default TRUE - i.e., columns with duplicated names are deleted)
-#' @keywords internal
+#' @export
+#' @returns data.frame with shorten names of hydrological parameters
 #' @examples
 #' \donttest{
-#'   monthly = hydro_imgw("monthly", year = 1969)
+#'   monthly = data = hydro_imgw("monthly", year = 1969, col_names = "polish")
 #'   
 #'   if (is.data.frame(monthly)) {
-#'   abbr = climate:::hydro_shortening_imgw(data = monthly,
+#'   abbr = hydro_shortening_imgw(data = monthly,
 #'       col_names = "full",
 #'       remove_duplicates = TRUE)
 #'   head(abbr)

@@ -23,6 +23,9 @@ ogimet_hourly(
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
+\value{
+data.frame with historical meteorological data for hourly time interval
+}
 \description{
 Downloading hourly (meteorological) data from the Synop stations available in the https://www.ogimet.com/ repository
 }

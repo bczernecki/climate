@@ -19,7 +19,7 @@ sounding_wyoming(
 )
 }
 \arguments{
-\item{wmo_id}{international WMO station code (World Meteorological Organization ID); For Polish stations: Łeba - 12120, Legionowo - 12374, Wrocław- 12425}
+\item{wmo_id}{international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław- 12425}
 
 \item{yy}{year - single number}
 
@@ -68,11 +68,11 @@ Downloading the measurements of the vertical profile of atmosphere (also known a
 ##############################################################################
   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
                           hh = 12, min = 00)
-  #head(TEMP[[1]])
+  head(TEMP[[1]])
   
   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
                           hh = 12, min = 00, bufr = TRUE)
-  #head(BUFR[[1]])
+  head(BUFR[[1]])
 
 
 ##############################################################################
@@ -84,7 +84,6 @@ Downloading the measurements of the vertical profile of atmosphere (also known a
                              mm = sample(1:12,1), 
                              dd = sample(1:20,1), 
                              hh = 0)
-  # head(profile)
   # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 }
 

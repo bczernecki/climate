@@ -29,9 +29,9 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @import data.table
 #' @export
-#'
-#' @examples \donttest{
-#' # download only air temperature for selected 2 stations in 2022-2023:
+#' @returns data.frame with a raw meteorological measurements in 10-min intervals
+#' @examples 
+#' \donttest{
 #' imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
 #'                                       parameters = "t2m",
 #'                                       stations = c("HALA GĄSIENICOWA",

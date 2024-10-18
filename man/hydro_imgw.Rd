@@ -40,7 +40,7 @@ function that shortens column names}
 A data.frame with columns describing the hydrological parameters
 (e.g. flow, water level) where each row represent a measurement,
 depending on the interval, at a given hour, month or year.
-If \code{coords = TRUE} additional two columns with geografic coordinates are added.
+If \code{coords = TRUE} additional two columns with geographic coordinates are added.
 }
 \description{
 Downloading daily, and monthly hydrological data from the measurement stations

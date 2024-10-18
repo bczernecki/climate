@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(scipen = 999)
+old <- options(scipen = 999)
 ```
 
 The goal of the  **climate** R package is to automatize downloading of meteorological
@@ -237,3 +237,8 @@ library(climate)
 citation("climate")
 ```
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
+
+
+```{r setup_restore, include = FALSE}
+options(old)
+```

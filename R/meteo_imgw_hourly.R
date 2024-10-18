@@ -20,6 +20,7 @@
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
+#' @return meteorological data for the hourly time interval
 #'
 #' @examples \donttest{
 #'   hourly = meteo_imgw_hourly(rank = "climate", year = 1984)

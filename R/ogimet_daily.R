@@ -12,10 +12,10 @@
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' 
 #' @export
-#' 
-#' @keywords internal
+#' @returns data.frame with historical meteorological data for the daily summaries
 #'
-#' @examples \donttest{
+#' @examples 
+#' \donttest{
 #'   # downloading daily summaries for last 30 days. station: New York - La Guardia
 #'   new_york = ogimet_daily(station = 72503, coords = TRUE)
 #' }
@@ -78,7 +78,7 @@ ogimet_daily_bp = function(date = date,
     )
   
   for (station_nr in station) {
-    print(station_nr)
+    message(station_nr)
     
     # adding progress bar if at least 3 iterations are needed
     if (length(dates) * length(station) >= 3) {

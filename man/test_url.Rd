@@ -11,11 +11,16 @@ test_url(link, output, quiet = FALSE)
 
 \item{output}{character vector for output file name}
 
-\item{quiet}{logical vector (TRUE or FALSE) to be passed to curl_download function. FALSE by default}
+\item{quiet}{logical vector (TRUE or FALSE) to be passed to curl_download function.
+FALSE by default}
+}
+\value{
+No return value, called for side effects
 }
 \description{
 Function for downloading & testing url/internet connection according to CRAN policy
-Example solution strongly based on https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12
+Example solution strongly based on
+https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12
 as suggested by kvasilopoulos
 }
 \examples{

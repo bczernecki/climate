@@ -6,6 +6,8 @@
 #' in the Polish metservice's repository and therefore will be forced to
 #' use ASCII//TRANSLIT
 #' @noRd
+#' @keywords internal
+#' @return 1 if the locale is not UTF-8, 0 otherwise
 
 check_locale = function() {
 

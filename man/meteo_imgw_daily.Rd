@@ -38,6 +38,9 @@ It accepts names (characters in CAPITAL LETTERS); Stations' IDs (numeric) are no
 \item{...}{other parameters that may be passed to the 'shortening' function that
 shortens column names}
 }
+\value{
+data.frame with a daily meteorological measurements
+}
 \description{
 Downloading daily (meteorological) data from the SYNOP / CLIMATE / PRECIP stations
 available in the danepubliczne.imgw.pl collection

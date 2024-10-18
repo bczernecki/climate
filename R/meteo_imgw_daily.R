@@ -20,6 +20,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
+#' @returns data.frame with a daily meteorological measurements
 #' @export
 #'
 #' @examples \donttest{
@@ -88,7 +89,7 @@ meteo_imgw_daily_bp = function(rank,
                                split = "_")
   years_in_catalogs = lapply(years_in_catalogs, function(x) x[1]:x[length(x)])
   ind = lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
-  catalogs = catalogs[unlist(ind)] # to sa nasze prawdziwe catalogs do przemielenia
+  catalogs = catalogs[unlist(ind)]
 
   all_data = NULL
 
@@ -163,9 +164,6 @@ meteo_imgw_daily_bp = function(rank,
       ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
       files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
       addresses_to_download = paste0(address, files)
-      # w tym miejscu trzeba przemyslec fragment kodu
-      # do dodania dla pojedynczej stacji jesli tak sobie zazyczy uzytkownik:
-      # na podstawie zawartosci obiektu files
 
       for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
@@ -199,11 +197,11 @@ meteo_imgw_daily_bp = function(rank,
                                                  data2,
                                                  by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
                                                  all.x = TRUE)
-      } # koniec petli po zipach do pobrania
-    } # koniec if'a dla klimatu
+      } # end of looping for zip files
+    } # end of if statement for climate stations
 
-    ######################
-    ######## OPAD: #######
+    ########################
+    ######## PRECIP: #######
     if (rank == "precip") {
       address = paste0(base_url, "dane_meteorologiczne/dobowe/opad",
                         "/", catalog, "/")
@@ -236,10 +234,9 @@ meteo_imgw_daily_bp = function(rank,
 
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
-      } # koniec petli po zipach do pobrania
-    } # koniec if'a dla klimatu
-
-  } # koniec petli po glownych catalogach danych dobowych
+      } # end of loop for zip files
+    } # end of if statement for climate stations
+  } # end of looping over catalogs
 
   all_data = do.call(rbind, all_data)
 
@@ -251,11 +248,11 @@ meteo_imgw_daily_bp = function(rank,
                      all.y = TRUE)
   }
 
-  # dodaje rank
+  # add station rank:
   rank_code = switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA", precip = "OPADOWA")
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
 
-  all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
+  all_data = all_data[all_data$Rok %in% year, ] # clip only to selected years
 
   #station selection
   if (!is.null(station)) {

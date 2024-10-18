@@ -1,3 +1,9 @@
+# climate 1.2.2
+
+* Major fixes for adjusting code to stay in line with CRAN policies
+* Fixes for `hydro_imgw()` set of functions due to changes in encoding and metadata structure
+
+
 # climate 1.2.1
 
 * Corrected duplicated column names for IMGW-PIB stations

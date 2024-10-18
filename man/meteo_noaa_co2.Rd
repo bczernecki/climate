@@ -6,6 +6,9 @@
 \usage{
 meteo_noaa_co2()
 }
+\value{
+Data frame with historical CO2 concentrations
+}
 \description{
 Carbon Dioxide (CO2) monthly measurements from Mauna Loa observatory.
 The source file is available at: ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt with all further details.
@@ -38,9 +41,8 @@ CO2 expressed as a mole fraction in dry air, micromol/mol, abbreviated as ppm
 }
 \examples{
 \donttest{
-  #co2 = meteo_noaa_co2()
-  #head(co2)
-  #plot(co2$yy_d, co2$co2_avg, type='l')
+  co2 = meteo_noaa_co2()
+  head(co2)
 }
 
 }

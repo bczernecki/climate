@@ -37,6 +37,9 @@ values with shorten names, "full" - full English description,
 \item{...}{other parameters that may be passed to the 'shortening'
 function that shortens column names}
 }
+\value{
+meteorological data for the hourly time interval
+}
 \description{
 Downloading hourly (meteorological) data from the SYNOP / CLIMATE / PRECIP stations
 available in the danepubliczne.imgw.pl collection

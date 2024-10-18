@@ -11,14 +11,13 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom utils download.file unzip read.csv
 #' @export
+#' @returns data.frame with historical meteorological data in hourly intervals
 #'
 #' @examples 
 #' \donttest{
 #' # London-Heathrow, United Kingdom
 #'   noaa = meteo_noaa_hourly(station = "037720-99999", year = 1949)
 #' }
-#'
-
 
 meteo_noaa_hourly = function(station = NULL,
                              year = 2019,
@@ -91,7 +90,7 @@ meteo_noaa_hourly_bp = function(station = station, year, fm12 = fm12) {
       dat$slp = dat$slp/10
       
       } else {
-       cat(paste0("  Check station name or year. The URL is not working properly:\n  ", address))
+       message(paste0("  Check station name or year. The URL is not working properly:\n  ", address))
       }  # end of if statement for empty files
 
       all_data[[length(all_data) + 1]] = dat

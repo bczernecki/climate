@@ -26,16 +26,22 @@ meteo_imgw_monthly(
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{name or ID of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
+It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric).
+Please note that station names may change over time and thus sometimes 2 names
+are required in some cases, e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.}
 
 \item{col_names}{three types of column names possible: "short" - default,
 values with shorten names, "full" - full English description,
 "polish" - original names in the dataset}
 
-\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
+\item{allow_failure}{logical - whether to proceed or stop on failure.
+By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
 \item{...}{other parameters that may be passed to the
 'shortening' function that shortens column names}
+}
+\value{
+meteorological data with monthly summaries
 }
 \description{
 Downloading monthly (meteorological) data from the
@@ -50,11 +56,6 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
   monthly2 = meteo_imgw_monthly(rank = "synop", year = 2018,
          col_names = "full")
   head(monthly2)
-
-  # please note that station names may change over time
-  # and thus 2 names are required in some cases:
-  # df = meteo_imgw_monthly(rank = 'synop', year = 1991:2000,
-  #         coords = TRUE, station = c("POZNAŃ","POZNAŃ-ŁAWICA"))
 }
 
 }

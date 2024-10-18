@@ -12,6 +12,7 @@
 #' @export
 #' 
 #' @keywords internal
+#' @returns data.frame with historical meteorological data for hourly time interval
 #'
 #' @examples 
 #' \donttest{
@@ -80,14 +81,13 @@ ogimet_hourly_bp = function(date = date,
     )
 
   for (station_nr in station) {
-    print(station_nr)
+    message(station_nr)
     # adding progress bar if at least 3 iterations are needed
     if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
-#    print(station_nr)
     for (i in length(dates):1) {
       
-      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)), "\n")
+      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates) * length(station) - i)), "\n")
       
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
@@ -183,7 +183,6 @@ ogimet_hourly_bp = function(date = date,
     suppressWarnings(data_station[, columns] <-
       as.data.frame(sapply(data_station[,columns], as.numeric)))
   
-    #  TODO:
     # changing order of columns and removing blank records:
     if (coords) {
       ord1 = c("station_ID", "Lon", "Lat", "Date", "TC")

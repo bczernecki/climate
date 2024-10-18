@@ -19,10 +19,10 @@
 #'  
 #' @examples 
 #' \donttest{
-#'   nearest_stations_ogimet(country = "Uniced Kingdom", 
+#'   nearest_stations_ogimet(country = "United Kingdom", 
 #'                           point = c(-2, 50),
 #'                           add_map = TRUE, 
-#'                           no_of_stations = 0, 
+#'                           no_of_stations = 50, 
 #'                           allow_failure = TRUE,
 #'                           main = "Meteo stations in UK")
 #' }
@@ -157,7 +157,7 @@ nearest_stations_ogimet_bp = function(country = country,
     result = rbind(result,res)
   } else {
     result = NULL
-    cat(paste("Wrong name of a country. Please check countries names at 
+    message(paste("Wrong name of a country. Please check countries names at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
   } # end of checking internet connection
   
