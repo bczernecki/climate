@@ -6,7 +6,6 @@
 #'
 #' @docType data
 #' @keywords datasets meteo
-#' @examples
 #' @returns data.frame with historical CO2 concentrations
 #' data(co2_demo)
 #' head(co2_demo)
