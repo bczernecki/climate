@@ -32,5 +32,4 @@ Returns a list of meteorological stations with their coordinates from the Ogimet
   stations_ogimet(country = "Australia", add_map = TRUE)
 }
 
-
 }

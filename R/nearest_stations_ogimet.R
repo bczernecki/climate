@@ -157,7 +157,7 @@ nearest_stations_ogimet_bp = function(country = country,
     result = rbind(result,res)
   } else {
     result = NULL
-    cat(paste("Wrong name of a country. Please check countries names at 
+    message(paste("Wrong name of a country. Please check countries names at 
          https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
   } # end of checking internet connection
   

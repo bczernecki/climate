@@ -24,10 +24,7 @@
 #' }
 #'
 
-
-
 test_url = function(link, output, quiet = FALSE) {
-  #print(link)
   try_GET = function(x, ...) {
     tryCatch(
       curl::curl_download(url = link, destfile = output, mode = "wb", quiet = quiet, ...),

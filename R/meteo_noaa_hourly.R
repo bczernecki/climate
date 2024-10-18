@@ -90,7 +90,7 @@ meteo_noaa_hourly_bp = function(station = station, year, fm12 = fm12) {
       dat$slp = dat$slp/10
       
       } else {
-       cat(paste0("  Check station name or year. The URL is not working properly:\n  ", address))
+       message(paste0("  Check station name or year. The URL is not working properly:\n  ", address))
       }  # end of if statement for empty files
 
       all_data[[length(all_data) + 1]] = dat

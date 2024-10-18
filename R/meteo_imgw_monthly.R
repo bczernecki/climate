@@ -102,7 +102,6 @@ meteo_imgw_monthly_bp = function(rank,
   all_data = vector("list", length = length(catalogs))
 
   for (i in seq_along(catalogs)) {
-    # print(i)
     catalog = gsub(catalogs[i], pattern = "/", replacement = "")
 
     if (rank == "synop") {

@@ -57,7 +57,7 @@ meteo_noaa_co2 = function() {
     colnames(co2) = c("yy", "mm", "yy_d","co2_avg", "co2_interp", "co2_seas", "ndays", "st_dev_days")
 
   } else {
-    cat(paste0("Service not working or problems with internet connection. Check url:\n", base_url)) 
+    message(paste0("Service not working or problems with internet connection. Check url:\n", base_url)) 
   }
 
   unlink(temp)

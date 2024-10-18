@@ -76,7 +76,6 @@ hydro_imgw_daily_bp = function(year,
   all_data = vector("list", length = length(catalogs))
   for (i in seq_along(catalogs)) {
     catalog = catalogs[i]
-    # print(i)
     iterator = c("01", "02", "03", "04", "05", "06",
                 "07", "08", "09", "10", "11", "12")
     data = NULL

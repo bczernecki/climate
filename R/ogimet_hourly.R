@@ -81,14 +81,13 @@ ogimet_hourly_bp = function(date = date,
     )
 
   for (station_nr in station) {
-    print(station_nr)
+    message(station_nr)
     # adding progress bar if at least 3 iterations are needed
     if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
-#    print(station_nr)
     for (i in length(dates):1) {
       
-      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates)*length(station) - i)), "\n")
+      if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates) * length(station) - i)), "\n")
       
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
