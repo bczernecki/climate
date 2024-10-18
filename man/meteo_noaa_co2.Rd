@@ -40,11 +40,6 @@ CO2 expressed as a mole fraction in dry air, micromol/mol, abbreviated as ppm
 \donttest{
   co2 = meteo_noaa_co2()
   head(co2)
-  plot(x = co2$yy_d, y = co2$co2_avg, 
-       type='l', 
-       main = "CO2 concentration at Mauna Loa Observatory",
-       xlab = "years", 
-       ylab = "CO2 (ppm)")
 }
 
 }

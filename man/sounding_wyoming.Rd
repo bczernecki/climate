@@ -84,7 +84,7 @@ Downloading the measurements of the vertical profile of atmosphere (also known a
                              mm = sample(1:12,1), 
                              dd = sample(1:20,1), 
                              hh = 0)
-  plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
+  # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 }
 
 }
