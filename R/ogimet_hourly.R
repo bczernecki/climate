@@ -12,6 +12,7 @@
 #' @export
 #' 
 #' @keywords internal
+#' @returns data.frame with historical meteorological data for hourly time interval
 #'
 #' @examples 
 #' \donttest{

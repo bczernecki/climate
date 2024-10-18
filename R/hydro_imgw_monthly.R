@@ -16,6 +16,7 @@
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
+#' @returns data.frame with historical hydrological data for the monthly summaries
 #'
 #' @examples \donttest{
 #'   monthly = hydro_imgw_monthly(year = 2000)

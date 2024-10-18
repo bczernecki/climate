@@ -43,6 +43,9 @@ Default \code{NULL} means to download data for all available stations.
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
+\value{
+data.frame with a raw meteorological measurements in 10-min intervals
+}
 \description{
 Downloading hourly (meteorological) data from the telemetric stations
 available in the danepubliczne.imgw.pl/datastore collection since 2008.

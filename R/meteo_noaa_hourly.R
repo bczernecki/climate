@@ -11,6 +11,7 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom utils download.file unzip read.csv
 #' @export
+#' @returns data.frame with historical meteorological data in hourly intervals
 #'
 #' @examples 
 #' \donttest{

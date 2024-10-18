@@ -20,6 +20,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
+#' @returns data.frame with a daily meteorological measurements
 #' @export
 #'
 #' @examples \donttest{

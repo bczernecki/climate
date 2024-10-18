@@ -8,16 +8,12 @@
 #' @importFrom stats na.omit
 #' @importFrom stringi stri_trans_general
 #' @keywords internal 
-#'
+#' @noRd
 
 clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
 
   temp = tempfile()
   test_url(link = address, output = temp)
-  
-  # a = readLines(temp, warn = FALSE, encoding = "CP1250") # doesn't work on mac,
-  # thus:
-  # a = iconv(a, from = "CP1250", to = "ASCII//TRANSLIT")
   a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE, 
                fileEncoding = "CP1250")$V1
   a = gsub(a, pattern = "\\?", replacement = "")
@@ -27,9 +23,6 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   a = gsub(x = a, pattern = "'", replacement = "")
   a = gsub(x = a, pattern = "\\^0", replacement = "")
   a = data.frame(V1 = a[nchar(a) > 3], stringsAsFactors = FALSE)
-  # this one does not work on windows
-  # a = suppressWarnings(na.omit(read.fwf(address, widths = c(1000),
-  #                                        fileEncoding = "CP1250", stringsAsFactors = FALSE)))
   length_char = max(nchar(a$V1), na.rm = TRUE)
 
   if (rank == "precip" && interval == "hourly") length_char = 40 # exception for precip / hourly

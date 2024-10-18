@@ -34,6 +34,7 @@
 #' @importFrom utils read.table
 #' @importFrom utils data
 #' @export
+#' @returns Data frame with historical CO2 concentrations
 #'
 #' @examples
 #' \donttest{

@@ -10,6 +10,7 @@
 #' @param remove_duplicates whether to remove duplicated column names
 #' (default TRUE - i.e., columns with duplicated names are deleted)
 #' @export
+#' @returns data.frame with shorten names of hydrological parameters
 #' @examples
 #' \donttest{
 #'   monthly = data = hydro_imgw("monthly", year = 1969, col_names = "polish")

@@ -1,17 +1,19 @@
 #' Download file in a graceful way
 #'
 #' Function for downloading & testing url/internet connection according to CRAN policy
-#' Example solution strongly based on https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12
+#' Example solution strongly based on 
+#' https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12
 #' as suggested by kvasilopoulos
 #' 
 #' @param link character vector with URL to check
 #' @param output character vector for output file name
-#' @param quiet logical vector (TRUE or FALSE) to be passed to curl_download function. FALSE by default
+#' @param quiet logical vector (TRUE or FALSE) to be passed to curl_download function. 
+#' FALSE by default
 #'
 #' @importFrom curl curl_download 
 #' @importFrom curl has_internet
 #' @import httr
-#' 
+#' @return No return value, called for side effects
 #' @export
 #'
 #' @examples
@@ -25,7 +27,7 @@
 
 
 test_url = function(link, output, quiet = FALSE) {
-  print(link)
+  #print(link)
   try_GET = function(x, ...) {
     tryCatch(
       curl::curl_download(url = link, destfile = output, mode = "wb", quiet = quiet, ...),

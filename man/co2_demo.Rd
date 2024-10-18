@@ -10,13 +10,14 @@ An object of class \code{data.frame} with 745 rows and 7 columns.
 \usage{
 co2_demo
 }
+\value{
+data.frame with historical CO2 concentrations
+data(co2_demo)
+head(co2_demo)
+}
 \description{
 The object contains pre-downloaded CO2 dataset from Mauna Loa observatory
 The snapshot was taken 2020/05/05.
-}
-\examples{
-data(co2_demo)
-head(co2_demo)
 }
 \keyword{datasets}
 \keyword{meteo}

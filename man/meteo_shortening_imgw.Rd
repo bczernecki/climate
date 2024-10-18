@@ -13,6 +13,9 @@ meteo_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
 
 \item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
 }
+\value{
+data.frame with modified names of meteorological parameters
+}
 \description{
 Shortening column names of meteorological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
 }

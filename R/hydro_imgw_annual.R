@@ -18,6 +18,7 @@
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
+#' @returns data.frame with historical hydrological data for the semi-annual and annual period
 #' @examples
 #' \donttest{
 #' hydro_yearly = hydro_imgw_annual(year = 2000, value = "H", station = "ANNOPOL")

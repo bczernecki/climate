@@ -40,6 +40,9 @@ By default set to TRUE (i.e. don't stop on error). For debugging purposes change
 \item{...}{other parameters that may be passed to the
 'shortening' function that shortens column names}
 }
+\value{
+meteorological data with monthly summaries
+}
 \description{
 Downloading monthly (meteorological) data from the
 SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection

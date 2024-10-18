@@ -16,7 +16,7 @@
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
-#'
+#' @returns data.frame with historical hydrological data for the daily time interval
 #' @examples \donttest{
 #'   daily = hydro_imgw_daily(year = 2000)
 #' }

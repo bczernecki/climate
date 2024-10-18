@@ -23,6 +23,7 @@
 #' @importFrom utils unzip read.csv
 #' @importFrom data.table fread
 #' @export
+#' @return meteorological data with monthly summaries
 #'
 #' @examples 
 #' \donttest{

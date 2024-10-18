@@ -12,6 +12,7 @@
 #' @importFrom utils setTxtProgressBar txtProgressBar
 #' 
 #' @export
+#' @returns data.frame with historical meteorological data for the daily summaries
 #'
 #' @examples 
 #' \donttest{
