@@ -123,6 +123,10 @@ Default <code>NULL</code> means to download data for all available stations.</p>
 <dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>data.frame with a raw meteorological measurements in 10-min intervals</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>Data from the IMGW automated (telemetry) systems are non validated by experts and may contain invalid values.</p>
@@ -131,12 +135,14 @@ Default <code>NULL</code> means to download data for all available stations.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># download only air temperature for selected 2 stations in 2022-2023:</span></span></span>
 <span class="r-in"><span><span class="va">imgw_telemetry</span> <span class="op">=</span> <span class="fu">meteo_imgw_datastore</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span><span class="op">:</span><span class="fl">2023</span>,</span></span>
 <span class="r-in"><span>                                      parameters <span class="op">=</span> <span class="st">"t2m"</span>,</span></span>
 <span class="r-in"><span>                                      stations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HALA GĄSIENICOWA"</span>,</span></span>
 <span class="r-in"><span>                                                   <span class="st">"DOLINA 5 STAWÓW"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                      coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>URL 'https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/2022/Meteo_2022-05.zip': Timeout of 60 seconds was reached</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Potential error(s) found. Problems with downloading data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  Run function with argument allow_failure = FALSE to see more details</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -90,13 +90,13 @@ for calculating distance are not available.</p>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>distance between two locations in kilometers</p>
+    <p>numerical vector with distance between two locations (in kilometers)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">p1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18.633333</span>, <span class="fl">54.366667</span><span class="op">)</span> <span class="co"># longitude and latitude for Gdansk</span></span></span>
-<span class="r-in"><span> <span class="va">p2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">17.016667</span>, <span class="fl">54.466667</span><span class="op">)</span> <span class="co"># longitude and latitude for Slupsk</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">p1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18.633333</span>, <span class="fl">54.366667</span><span class="op">)</span> <span class="co"># longitude and latitude for Gdansk, PL</span></span></span>
+<span class="r-in"><span> <span class="va">p2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">17.016667</span>, <span class="fl">54.466667</span><span class="op">)</span> <span class="co"># longitude and latitude for Slupsk, PL</span></span></span>
 <span class="r-in"><span> <span class="fu">spheroid_dist</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 105.19</span>
 <span class="r-in"><span> </span></span>

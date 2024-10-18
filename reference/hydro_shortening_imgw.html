@@ -94,34 +94,49 @@ values with shorten names,
 (default TRUE - i.e., columns with duplicated names are deleted)</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>data.frame with shorten names of hydrological parameters</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span>  <span class="va">monthly</span> <span class="op">=</span> <span class="fu"><a href="hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span><span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">1969</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">monthly</span> <span class="op">=</span> <span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span><span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">1969</span>, col_names <span class="op">=</span> <span class="st">"polish"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Your system locale is: C.UTF-8 which may cause trouble.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Please consider changing it manually while working with climate, e.g.:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c952e1cabc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/mies_info.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c938d2f203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/1969/mies_1969.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c91aa9a41a</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e861e2987c</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e828a1424c</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e8103d8f3</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">monthly</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">abbr</span> <span class="op">=</span> <span class="fu">climate</span><span class="fu">:::</span><span class="fu">hydro_shortening_imgw</span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly</span>,</span></span>
+<span class="r-in"><span>  <span class="va">abbr</span> <span class="op">=</span> <span class="fu">hydro_shortening_imgw</span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly</span>,</span></span>
 <span class="r-in"><span>      col_names <span class="op">=</span> <span class="st">"full"</span>,</span></span>
 <span class="r-in"><span>      remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">abbr</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              id station riv_or_lake  hyy idhyy idex   H       Q  T mm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7165  150210180 ANNOPOL   Wisla (2) 1969     1    1 258 288.000 NA 11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7166  150210180 ANNOPOL   Wisla (2) 1969     1    2 287 413.266 NA 11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7167  150210180 ANNOPOL   Wisla (2) 1969     1    3 323 582.000 NA 11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7168  150210180 ANNOPOL   Wisla (2) 1969     2    1 239 188.000 NA 12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7169  150210180 ANNOPOL   Wisla (2) 1969     2    2 270 316.806 NA 12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7170  150210180 ANNOPOL   Wisla (2) 1969     2    3 296 452.000 NA 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ID Station River_or_Lake Hydrologic year Hydrologic year ID</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7165  150210180 ANNOPOL     Wisla (2)            1969                  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7166  150210180 ANNOPOL     Wisla (2)            1969                  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7167  150210180 ANNOPOL     Wisla (2)            1969                  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7168  150210180 ANNOPOL     Wisla (2)            1969                  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7169  150210180 ANNOPOL     Wisla (2)            1969                  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7170  150210180 ANNOPOL     Wisla (2)            1969                  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Extreme ID [min - 1, mean - 2, Max - 3] State [cm] Flow [m3_s]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7165                                       1        258     288.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7166                                       2        287     413.266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7167                                       3        323     582.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7168                                       1        239     188.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7169                                       2        270     316.806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7170                                       3        296     452.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Temperature [C] Month</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7165              NA    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7166              NA    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7167              NA    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7168              NA    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7169              NA    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7170              NA    12</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -88,6 +88,10 @@
 <dd><p>whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>data.frame with modified names of meteorological parameters</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -96,22 +100,12 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Your system locale is: C.UTF-8 which may cause trouble.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Please consider changing it manually while working with climate, e.g.:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     Sys.setlocale(category = 'LC_ALL', locale = 'en_US.UTF-8') </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/k_m_d_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c966f99e37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/k_m_t_format.txt"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c93f0a824f</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c979f6e92a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/1966_1970/1966_1970_m_k.zip"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c951e54cc6</span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">monthly</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "rank"             "id"               "station"          "yy"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "mm"               "tmax_abs"         "tmax_mean"        "tmin_abs"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "tmin_mean"        "t2m_mean_mon"     "t5cm_min"         "rr_monthly"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "rr_max_daily"     "first_day_max_rr" "last_day_max_rr"  "snowcover_max"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "snowcover_days"   "rain_days"        "snow_days"        "t2m_mean_mon"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "rh_mean_mon"      "ws_mean_mon"      "cloud_mean_mon"  </span>
-<span class="r-in"><span>  <span class="va">abbr</span> <span class="op">=</span> <span class="fu">climate</span><span class="fu">:::</span><span class="fu">meteo_shortening_imgw</span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly</span>,</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e8436d56f6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e859841909</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e8330f05a6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e850866d9b</span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span>  <span class="va">abbr</span> <span class="op">=</span> <span class="fu">meteo_shortening_imgw</span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly</span>,</span></span>
 <span class="r-in"><span>      col_names <span class="op">=</span> <span class="st">"full"</span>, </span></span>
 <span class="r-in"><span>      remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">abbr</span><span class="op">)</span></span></span>

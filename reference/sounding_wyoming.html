@@ -90,7 +90,7 @@
 
 
 <dl><dt id="arg-wmo-id">wmo_id<a class="anchor" aria-label="anchor" href="#arg-wmo-id"></a></dt>
-<dd><p>international WMO station code (World Meteorological Organization ID); For Polish stations: Łeba - 12120, Legionowo - 12374, Wrocław- 12425</p></dd>
+<dd><p>international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław- 12425</p></dd>
 
 
 <dt id="arg-yy">yy<a class="anchor" aria-label="anchor" href="#arg-yy"></a></dt>
@@ -149,15 +149,27 @@ depending on the height. Second data.frame presents a description of the conditi
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
 <span class="r-in"><span>  <span class="va">TEMP</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
 <span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2021&amp;MONTH=07&amp;FROM=1712&amp;TO=1712&amp;STNM=45004"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c91fe1fb79</span>
-<span class="r-in"><span>  <span class="co">#head(TEMP[[1]])</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e85264769</span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">TEMP</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  998   66 27.6 23.6   79 18.78    0    0 300.9 356.4 304.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  975  272 25.9 22.8   83 18.34  105   10 301.3 355.5 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  925  737 22.2 21.1   93 17.36  120   19 302.0 353.4 305.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  921  775 22.1 20.9   93 17.22  120   21 302.2 353.3 305.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  907  909 21.6 20.2   92 16.73  114   20 303.1 352.9 306.1</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">BUFR</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
 <span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span>, bufr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://weather.uwyo.edu/cgi-bin/bufrraob.py?src=bufr&amp;datetime=2021-07-17+12:00:00&amp;id=45004&amp;type=TEXT:LIST"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c94c10851b</span>
-<span class="r-in"><span>  <span class="co">#head(BUFR[[1]])</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e859d85389</span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">BUFR</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000.0   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  998.2   66 27.7 23.7   79 18.85   27  0.4 301.0 356.7 304.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  996.1   84 27.7 23.8   79 19.00  120  4.7 301.2 357.4 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  995.1   93 27.7 23.8   79 18.96  120  5.6 301.3 357.4 304.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  993.9  104 27.6 23.6   79 18.76  120  6.0 301.3 356.8 304.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  992.7  115 27.5 23.5   79 18.69  120  6.4 301.3 356.6 304.6</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
@@ -169,9 +181,7 @@ depending on the height. Second data.frame presents a description of the conditi
 <span class="r-in"><span>                             mm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                             dd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                             hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2012&amp;MONTH=07&amp;FROM=1200&amp;TO=1200&amp;STNM=12120"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c912e457c9</span>
-<span class="r-in"><span>  <span class="co"># head(profile)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e81fc4a33b</span>
 <span class="r-in"><span>  <span class="co"># plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>

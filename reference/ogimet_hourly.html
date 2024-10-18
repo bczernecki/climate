@@ -102,19 +102,23 @@
 <dd><p>logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>data.frame with historical meteorological data for hourly time interval</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="co"># downloading data for Poznan-Lawica, Poland</span></span></span>
 <span class="r-in"><span>  <span class="va">poznan</span> <span class="op">=</span> <span class="fu">ogimet_hourly</span><span class="op">(</span>station <span class="op">=</span> <span class="fl">12330</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=14&amp;ano=2024&amp;mes=10&amp;day=14&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c97f2afaf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |===================================                                   |  50%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=13&amp;ano=2024&amp;mes=10&amp;day=13&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c92f7f023b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%[1] "https://www.ogimet.com/cgi-bin/gsynres?ind=12330&amp;lang=en&amp;decoded=yes&amp;ndays=13&amp;ano=2024&amp;mes=09&amp;day=13&amp;hora=23"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpkNQMXO/file17c928f9c84d</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 12330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e8435a4d4f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |===================================                                   |  50%</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e84707114b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |======================================================================| 100%</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpWCv8r5/file15e828cde2d7</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
