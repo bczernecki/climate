@@ -94,7 +94,10 @@ ogimet_daily_bp = function(date = date,
       day = format(dates[i], "%d")
       ndays = day
 
-      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", station_nr, "&ndays=32&ano=", year, "&mes=", month, "&day=", day, "&hora=", hour,"&ord=REV&Send=Send", sep = "")
+      linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", 
+                      station_nr, "&ndays=32&ano=", 
+                      year, "&mes=", month, "&day=", day, 
+                      "&hora=", hour,"&ord=REV&Send=Send", sep = "")
       temp = tempfile()
       test_url(linkpl2, temp)
       if (is.na(file.size(temp)) | (file.size(temp) < 500)) { 
@@ -137,8 +140,9 @@ ogimet_daily_bp = function(date = date,
             
             # number of columns contain weird/non-standard data (e.g. only wind speed)
             if (ncol(test) <= 4) {
-              stop(paste0("Mandatory meteorological parameters (i.e. Temperature or precipitations) are not present. \nCheck content of the data using current URL:\n",
+              message(paste0("Mandatory meteorological parameters (i.e. Temperature or precipitations) are not present. \nCheck content of the data using current URL:\n",
                              linkpl2))
+              return(test)
             }
             
             if ((length(test[2, !is.na(test[2, ])]) == 6 &

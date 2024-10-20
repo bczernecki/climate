@@ -1,16 +1,13 @@
-# climate 1.2.3
-
-* Major fixes for adjusting code to recognize different encoding and directory structure for (IMGW) hydrological datasets
-
-
 # climate 1.2.2
 
-* Major fixes for adjusting code to stay in line with CRAN policies
-* Fixes for `hydro_imgw()` set of functions due to changes in encoding and metadata structure
-
+* Fixes for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets
+    * adjusting code to recognize different encoding and directory structure
+    * adjusting changes in metadata
+* Fix unit tests for ogimet-related datasets
 
 # climate 1.2.1
 
+* Major fixes for adjusting code to stay in line with CRAN policies
 * Corrected duplicated column names for IMGW-PIB stations
 * Adjusted encoding changes and documentation updates in `meteo_imgw_telemetry_stations()`
 
