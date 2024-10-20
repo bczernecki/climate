@@ -6,7 +6,7 @@ test_that("meteo_imgw_daily", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    y <-  1900 # year not supported
+    y = 1900 # year not supported
     expect_message(meteo_imgw_daily(rank = "synop", year = y, status = TRUE,
                                   coords = TRUE, allow_failure = TRUE))
   }

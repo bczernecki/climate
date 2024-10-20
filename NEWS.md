@@ -1,3 +1,8 @@
+# climate 1.2.3
+
+* Major fixes for adjusting code to recognize different encoding and directory structure for (IMGW) hydrological datasets
+
+
 # climate 1.2.2
 
 * Major fixes for adjusting code to stay in line with CRAN policies
