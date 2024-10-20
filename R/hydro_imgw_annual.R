@@ -93,9 +93,13 @@ hydro_imgw_annual_bp = function(year = year,
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
 
     if (translit) {
-      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
+      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file1)))
     } else {
-      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+      data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
+                                       fileEncoding = "CP1250"),
+                       warning = function(w) {
+                         read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
+                       })
     }
 
     colnames(data1) = meta[[value]]$parameters
