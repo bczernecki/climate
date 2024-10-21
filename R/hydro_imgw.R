@@ -3,8 +3,7 @@
 #' Downloading daily, and monthly hydrological data from the measurement stations
 #' available in the danepubliczne.imgw.pl collection
 #'
-#' @param interval temporal resolution of the data ("daily" , "monthly",
-#' or "semiannual_and_annual")
+#' @param interval temporal resolution of the data ("daily" or "monthly")
 #' @param year vector of years (e.g., 1966:2000)
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
 #' @param value type of data (can be: state - "H" (default), flow - "Q", or
@@ -38,20 +37,13 @@ hydro_imgw = function(interval,
     # dobowe
     calosc = hydro_imgw_daily(year = year, coords = coords, station = station, col_names = col_names, ...)
   } else if (interval == "monthly") {
-    #miesieczne
+    # miesieczne
     calosc = hydro_imgw_monthly(year = year,
                                 coords = coords,
                                 station = station,
                                 col_names = col_names, ...)
-  } else if (interval == "semiannual_and_annual") {
-    # polroczne_i_roczne
-    calosc = hydro_imgw_annual(year = year,
-                               coords = coords,
-                               value = value,
-                               station = station,
-                               col_names = col_names, ...)
   } else{
-    stop("Wrong `interval` value. It should be either 'daily', 'monthly', or 'semiannual_and_annual'.", call. = FALSE)
+    stop("Wrong `interval` value. It should be either 'daily' or 'monthly'", call. = FALSE)
   }
   return(calosc)
 }

@@ -3,7 +3,7 @@
 #' Downloading the description (metadata) to hydrological data available in the danepubliczne.imgw.pl repository.
 #' By default, the function returns a list or data frame for a selected subset
 #`
-#' @param interval temporal resolution of the data ("daily" , "monthly", or "semiannual_and_annual")
+#' @param interval temporal resolution of the data ("daily" or "monthly")
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @keywords internal
 #' @noRd
@@ -37,12 +37,8 @@ hydro_metadata_imgw_bp = function(interval) {
     #miesieczne
     address_meta = paste0(base_url, "miesieczne/mies_info.txt")
     meta = clean_metadata_hydro(address_meta, interval)
-  } else if (interval == "semiannual_and_annual") {
-    # polroczne_i_roczne
-    address_meta = paste0(base_url, "polroczne_i_roczne/polr_info.txt")
-    meta = clean_metadata_hydro(address_meta, interval)
   } else {
-    stop("Wrong `interval` value. It should be either 'daily', 'monthly', or 'semiannual_and_annual'.")
+    stop("Wrong `interval` value. It should be either 'daily' or 'monthly'.")
   }
 
   return(meta)

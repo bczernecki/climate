@@ -15,8 +15,7 @@ hydro_imgw(
 )
 }
 \arguments{
-\item{interval}{temporal resolution of the data ("daily" , "monthly",
-or "semiannual_and_annual")}
+\item{interval}{temporal resolution of the data ("daily" or "monthly")}
 
 \item{year}{vector of years (e.g., 1966:2000)}
 

@@ -2,7 +2,6 @@
 
 export(.onAttach)
 export(hydro_imgw)
-export(hydro_imgw_annual)
 export(hydro_imgw_daily)
 export(hydro_imgw_monthly)
 export(hydro_shortening_imgw)
