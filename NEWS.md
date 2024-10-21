@@ -1,8 +1,9 @@
 # climate 1.2.2
 
-* Fixes for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets
+* Fixes and modifications for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets
     * adjusting code to recognize different encoding and directory structure
     * adjusting changes in metadata
+    * removed option to download data for "semiannual and annual" time resolutions due to inconsistencies in the data
 * Fix unit tests for ogimet-related datasets
 
 # climate 1.2.1

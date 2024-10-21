@@ -59,7 +59,7 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
 
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
 danepubliczne.imgw.pl collection.
-It is a wrapper for previously developed set of functions such as: `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
+It is a wrapper for previously developed set of functions such as: `hydro_monthly()`, and `hydro_daily()`
 
 ### Auxiliary functions and datasets
 
@@ -166,15 +166,15 @@ head(m)
 #> 580      21.3     -4.3       5.7         13.8     -8.3        9.4
 #> 581      23.1      1.0       9.6         16.6     -1.8       36.4
 
-h = hydro_imgw(interval = "semiannual_and_annual", year = 2010:2011)
+h = hydro_imgw(interval = "daily", year = 2010:2011)
 head(h)
-            id station riv_or_lake  hyy idyy Mesu idex   H beyy bemm bedd behm
-3223 150210180 ANNOPOL   Wisła (2) 2010   13    H    1 227 2009   12   19   NA
-3224 150210180 ANNOPOL   Wisła (2) 2010   13    H    2 319   NA   NA   NA   NA
-3225 150210180 ANNOPOL   Wisła (2) 2010   13    H    3 531 2010    3    3   18
-3226 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010    8   29   NA
-3227 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010   10   27   NA
-3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA   NA
+              id station riv_or_lake  hyy idhyy dd   H   Q  T mm thick id_ice p_ice
+97843  150210180 ANNOPOL   Wisła (2) 2010     1  1 287 436 NA 11    NA     NA    NA
+507527 150210180 ANNOPOL   Wisła (2) 2010     1  1 287 436 NA 11    NA     NA    NA
+97844  150210180 ANNOPOL   Wisła (2) 2010     1  2 282 412 NA 11    NA     NA    NA
+507528 150210180 ANNOPOL   Wisła (2) 2010     1  2 282 412 NA 11    NA     NA    NA
+97845  150210180 ANNOPOL   Wisła (2) 2010     1  3 272 368 NA 11    NA     NA    NA
+507529 150210180 ANNOPOL   Wisła (2) 2010     1  3 272 368 NA 11    NA     NA    NA
 ```
 
 ## Example 5
