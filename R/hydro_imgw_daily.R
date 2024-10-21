@@ -64,11 +64,11 @@ hydro_imgw_daily_bp = function(year,
   all_data = NULL
   codz_data = NULL
   zjaw_data = NULL
-
+  
   temp = tempfile()
   test_url(link = paste0(base_url, interval_pl, "/"), output = temp)
   a = readLines(temp, warn = FALSE)
-
+  
   ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
   catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
   catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
@@ -78,7 +78,7 @@ hydro_imgw_daily_bp = function(year,
     stop("Selected year(s) is/are not available in the database.", call. = FALSE)
   }
   meta = hydro_metadata_imgw(interval)
-
+  
   for (i in seq_along(catalogs)) {
     catalog = catalogs[i]
     
@@ -105,13 +105,20 @@ hydro_imgw_daily_bp = function(year,
         
         if (translit) {
           data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file1)))
-          } else {
-            data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
-                                             fileEncoding = "CP1250"),
+        } else {
+          data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
+                                           fileEncoding = "CP1250"),
+                           warning = function(w) {
+                             read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
+                           })
+          if (ncol(data1) == 1) {
+            data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
+                                             fileEncoding = "UTF-8"),
                              warning = function(w) {
                                read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
                              })
           }
+        }
         # extra exception for a current year according to information provided by IMGW-PIB:, i.e.:
         # "Do czasu zakonczenia kontroli przeplywow rekordy z danymi z roku 2020 maja format:
         # Kod stacji  #Nazwa stacji  #Nazwa rzeki/jeziora  #Rok hydrologiczny  #Wskaznik miesiaca w roku hydrologicznym
@@ -120,12 +127,12 @@ hydro_imgw_daily_bp = function(year,
           data1$flow = NA
           data1 = data1[, c(1:7, 10, 8:9)]
         }
-
+        
         colnames(data1) = meta[[1]][, 1]
         codz_data = rbind(codz_data, data1)
       } # end of codz_
       
-    
+      
       # start of zjaw_ section:
       if (grepl(x = iterator[j], "zjaw")) {
         address = paste0(base_url, interval_pl, "/", catalog, "/", iterator[j])
@@ -134,17 +141,22 @@ hydro_imgw_daily_bp = function(year,
         test_url(address, temp)
         unzip(zipfile = temp, exdir = temp2)
         file2 = paste(temp2, dir(temp2), sep = "/")[1]
-  
         if (translit) {
-          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file1)))
+          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file2)))
         } else {
           data2 = tryCatch(expr = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
                                            fileEncoding = "CP1250"),
                            warning = function(w) {
                              read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";")
                            })
+          if (ncol(data2) == 1) {
+            data2 = tryCatch(expr = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
+                                             fileEncoding = "UTF-8"),
+                             warning = function(w) {
+                               read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";")
+                             })
+          }
         }
-  
         colnames(data2) = meta[[2]][, 1]
         zjaw_data = rbind(zjaw_data, data2)
       }
@@ -152,17 +164,17 @@ hydro_imgw_daily_bp = function(year,
     } #end of loop for (usually monthly) zip files in a given year
     
     all_data[[length(all_data) + 1]] = merge(codz_data, zjaw_data,
-                          by = intersect(colnames(codz_data), colnames(zjaw_data)),
-                          all.x = TRUE)
+                                             by = intersect(colnames(codz_data), colnames(zjaw_data)),
+                                             all.x = TRUE)
     
   } # end of loop for years (if more than 1 specified)
-
+  
   all_data = do.call(rbind, all_data)
   all_data[all_data == 9999] = NA
   all_data[all_data == 99999.999] = NA
   all_data[all_data == 99.9] = NA
   all_data[all_data == 999] = NA
-
+  
   if (coords) {
     all_data = merge(climate::imgw_hydro_stations, all_data,
                      by.x = "id",
@@ -177,7 +189,7 @@ hydro_imgw_daily_bp = function(year,
       if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
-  } else if (is.numeric(station)) {
+    } else if (is.numeric(station)) {
       all_data = all_data[all_data$`Kod stacji` %in% station, ]
       if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
@@ -189,6 +201,6 @@ hydro_imgw_daily_bp = function(year,
   
   all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydro|w roku hydro|Dzie")]), ]
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
-    
+  
   return(all_data)
 }

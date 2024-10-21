@@ -94,6 +94,13 @@ hydro_imgw_monthly_bp = function(year,
                        warning = function(w) {
                          read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
                        })
+      if (ncol(data1) == 1) {
+        data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
+                                         fileEncoding = "UTF-8"),
+                         warning = function(w) {
+                           read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
+                         })
+      }
     }
 
     colnames(data1) = meta[[1]][, 1]
