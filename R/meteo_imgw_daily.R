@@ -121,12 +121,15 @@ meteo_imgw_daily_bp = function(rank,
         colnames(data1) = meta[[1]]$parameters
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        if (translit) {
-          data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
-        } else {
-          data2 = suppressWarnings(read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
+        if (file.exists(file2)) {
+          if (translit) {
+            data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
+          } else {
+            data2 = suppressWarnings(read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
+          }
+          colnames(data2) = meta[[2]]$parameters
         }
-        colnames(data2) = meta[[2]]$parameters
+        
         unlink(c(temp, temp2))
 
         # remove statuses if not needed:

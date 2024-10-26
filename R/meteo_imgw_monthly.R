@@ -134,14 +134,15 @@ meteo_imgw_monthly_bp = function(rank,
 
     if (rank != "precip") { # w opadowkach jest tylko jeden plik
       file2 = paste(temp2, dir(temp2), sep = "/")[2]
-
-      if (translit) {
-        data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
-      } else {
-        data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-      }
+      if (file.exists(file2)) {
+        if (translit) {
+          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
+        } else {
+          data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
+        }
 
       colnames(data2) = meta[[2]]$parameters
+      }
     }
 
     # removing status if set
