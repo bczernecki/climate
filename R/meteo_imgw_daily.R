@@ -206,6 +206,7 @@ meteo_imgw_daily_bp = function(rank,
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
+        file1 = paste(temp2, dir(temp2), sep = "/")[1]
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
         # remove status

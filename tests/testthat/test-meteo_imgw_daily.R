@@ -22,7 +22,7 @@ test_that("check_column_with_coordinates", {
     station_with_coordinates = meteo_imgw_daily(rank = "precip",
                                                 year = 2002,
                                                 coords = TRUE,
-                                                station = "IMBRAMOWICE")
+                                                station = "IMBRAMOWICE", allow_failure = FALSE)
     if (is.data.frame(station_with_coordinates)) {
       expect_true(any(colnames(station_with_coordinates) %in% c("X", "Y")))
     }
