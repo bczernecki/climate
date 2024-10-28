@@ -85,24 +85,7 @@ hydro_imgw_monthly_bp = function(year,
     test_url(adres, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
-
-    if (translit) {
-      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file1)))
-    } else {
-      data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
-                                       fileEncoding = "CP1250"),
-                       warning = function(w) {
-                         read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                       })
-      if (ncol(data1) == 1) {
-        data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
-                                         fileEncoding = "UTF-8"),
-                         warning = function(w) {
-                           read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                         })
-      }
-    }
-
+    data1 = imgw_read(translit, file1)
     colnames(data1) = meta[[1]][, 1]
     all_data[[i]] = data1
   }

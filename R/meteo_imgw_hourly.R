@@ -113,12 +113,7 @@ meteo_imgw_hourly_bp = function(rank,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
-
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = suppressWarnings(read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
-        }
+        data1 = imgw_read(translit, file1)
 
         colnames(data1) = meta[[1]]$parameters
 
@@ -153,24 +148,19 @@ meteo_imgw_hourly_bp = function(rank,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
-
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        }
-
+        data1 = imgw_read(translit, file1)
+        
         colnames(data1) = meta[[1]]$parameters
-        # usuwa statusy
+        # remove status
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
 
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
-      } # koniec petli po zipach do pobrania
-    } # koniec if'a dla klimatu
-  } # koniec petli po glownych catalogach danych dobowych
+      } # end of looping for zip files
+    } # end of if statement for climate
+  } # end of loop over directories
 
   all_data = do.call(rbind, all_data)
 

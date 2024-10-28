@@ -4,7 +4,7 @@
     * adjusting code to recognize different encoding and directory structure
     * adjusting changes in metadata
     * removed option to download data for "semiannual and annual" time resolutions due to inconsistencies in the data
-* Fix unit tests for ogimet-related datasets
+* Fix unit tests for ogimet- and IMGW-related datasets
 
 # climate 1.2.1
 

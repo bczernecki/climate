@@ -25,7 +25,7 @@
 hydro_imgw_daily = function(year,
                             coords = FALSE,
                             station = NULL,
-                            col_names= "short",
+                            col_names = "short",
                             allow_failure = TRUE,
                             ...) {
   
@@ -103,22 +103,7 @@ hydro_imgw_daily_bp = function(year,
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
         
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
-                                           fileEncoding = "CP1250"),
-                           warning = function(w) {
-                             read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                           })
-          if (ncol(data1) == 1) {
-            data1 = tryCatch(expr = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
-                                             fileEncoding = "UTF-8"),
-                             warning = function(w) {
-                               read.csv(file1, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                             })
-          }
-        }
+        data1 = imgw_read(translit, file1)
         # extra exception for a current year according to information provided by IMGW-PIB:, i.e.:
         # "Do czasu zakonczenia kontroli przeplywow rekordy z danymi z roku 2020 maja format:
         # Kod stacji  #Nazwa stacji  #Nazwa rzeki/jeziora  #Rok hydrologiczny  #Wskaznik miesiaca w roku hydrologicznym
@@ -141,22 +126,7 @@ hydro_imgw_daily_bp = function(year,
         test_url(address, temp)
         unzip(zipfile = temp, exdir = temp2)
         file2 = paste(temp2, dir(temp2), sep = "/")[1]
-        if (translit) {
-          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", file2)))
-        } else {
-          data2 = tryCatch(expr = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ",", 
-                                           fileEncoding = "CP1250"),
-                           warning = function(w) {
-                             read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                           })
-          if (ncol(data2) == 1) {
-            data2 = tryCatch(expr = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";", 
-                                             fileEncoding = "UTF-8"),
-                             warning = function(w) {
-                               read.csv(file2, header = FALSE, stringsAsFactors = FALSE, sep = ";")
-                             })
-          }
-        }
+        data2 = imgw_read(translit, file2)
         colnames(data2) = meta[[2]][, 1]
         zjaw_data = rbind(zjaw_data, data2)
       }
