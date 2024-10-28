@@ -24,6 +24,7 @@ test_that("hydro_imgw_not_available", {
     if (is.data.frame(h2022_2023) & nrow(h2022_2023 > 50000)) {
       testthat::expect_true(is.data.frame(h2022_2023))
       testthat::expect_true(nrow(h2022_2023) > 50000)
+      testthat::expect_true(class(h2022_2023$date) == "Date")
     }
   }
   
@@ -35,6 +36,7 @@ test_that("hydro_imgw_not_available", {
     if (is.data.frame(h2022_2023d) & nrow(h2022_2023d > 50000)) {
       testthat::expect_true(is.data.frame(h2022_2023d))
       testthat::expect_true(nrow(h2022_2023d) > 50000)
+      testthat::expect_true(class(h2022_2023d$date) == "Date")
     }
   }
   

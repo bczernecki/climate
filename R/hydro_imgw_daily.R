@@ -170,6 +170,15 @@ hydro_imgw_daily_bp = function(year,
   }
   
   all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydro|w roku hydro|Dzie")]), ]
+  # fix dates and add as seperate column:
+  yy_ind = grep(x = colnames(all_data), "Rok hydrologiczny")
+  mm_ind = grep(x = colnames(all_data), "kalendarzowy")
+  dd_ind = grep(x = colnames(all_data), "Dzie")
+  data_df = all_data[, c(yy_ind, mm_ind, dd_ind)]
+  data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
+  all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df[, 3]))
+  all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
+  
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
   
   return(all_data)

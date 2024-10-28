@@ -5,6 +5,7 @@
     * adjusting changes in metadata
     * removed option to download data for "semiannual and annual" time resolutions due to inconsistencies in the data
 * Fix unit tests for ogimet- and IMGW-related datasets
+* Resolving date formatting for hydrological data - the Date column represents calendar date
 
 # climate 1.2.1
 
