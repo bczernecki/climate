@@ -5,13 +5,13 @@
 [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
 [![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bczernecki/climate/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
+coverage](https://codecov.io/gh/bczernecki/climate/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
+downloads](https://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
 The goal of the  **climate** R package is to automatize downloading of *in-situ* meteorological
@@ -46,7 +46,7 @@ install_github("bczernecki/climate")
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
@@ -68,10 +68,8 @@ country in the Ogimet repository
 - **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
 - **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
 - **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
-- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
-coordinates, and ID numbers
-- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
-coordinates, and ID numbers
+- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 
