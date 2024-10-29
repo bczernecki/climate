@@ -166,13 +166,13 @@ head(m)
 
 h = hydro_imgw(interval = "daily", year = 2010:2011)
 head(h)
-              id station riv_or_lake  hyy idhyy dd   H   Q  T mm thick id_ice p_ice
-97843  150210180 ANNOPOL   Wisła (2) 2010     1  1 287 436 NA 11    NA     NA    NA
-507527 150210180 ANNOPOL   Wisła (2) 2010     1  1 287 436 NA 11    NA     NA    NA
-97844  150210180 ANNOPOL   Wisła (2) 2010     1  2 282 412 NA 11    NA     NA    NA
-507528 150210180 ANNOPOL   Wisła (2) 2010     1  2 282 412 NA 11    NA     NA    NA
-97845  150210180 ANNOPOL   Wisła (2) 2010     1  3 272 368 NA 11    NA     NA    NA
-507529 150210180 ANNOPOL   Wisła (2) 2010     1  3 272 368 NA 11    NA     NA    NA
+          id station riv_or_lake       date  hyy idhyy dd   H   Q  T mm thick
+1  150210180 ANNOPOL   Wisła (2) 2009-11-01 2010     1  1 287 436 NA 11    NA
+2  150210180 ANNOPOL   Wisła (2) 2009-11-02 2010     1  2 282 412 NA 11    NA
+3  150210180 ANNOPOL   Wisła (2) 2009-11-03 2010     1  3 272 368 NA 11    NA
+4  150210180 ANNOPOL   Wisła (2) 2009-11-04 2010     1  4 268 352 NA 11    NA
+5  150210180 ANNOPOL   Wisła (2) 2009-11-05 2010     1  5 264 336 NA 11    NA
+6  150210180 ANNOPOL   Wisła (2) 2009-11-06 2010     1  6 260 320 NA 11    NA
 ```
 
 ## Example 5
