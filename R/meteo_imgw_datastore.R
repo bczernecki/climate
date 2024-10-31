@@ -29,7 +29,8 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @import data.table
 #' @export
-#' @returns data.frame with a raw meteorological measurements in 10-min intervals
+#' @returns data.frame with a raw meteorological measurements in 10-min intervals. 
+#' Please note that this dataset is not validated by experts and may contain invalid values.
 #' @examples 
 #' \donttest{
 #' imgw_telemetry = meteo_imgw_datastore(year = 2022:2023,
@@ -160,5 +161,5 @@ meteo_imgw_datastore_bp = function(year,
   
   colnames(all_data)[which(colnames(all_data) %in% c("V1", "V3"))] = c("id", "date_time")
   
-  return(all_data)
+  return(as.data.frame(all_data))
 }
