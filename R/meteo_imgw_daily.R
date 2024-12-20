@@ -113,20 +113,15 @@ meteo_imgw_daily_bp = function(rank,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        }
+        data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        if (translit) {
-          data2 = data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2))
-        } else {
-          data2 = suppressWarnings(read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250"))
+        if (file.exists(file2)) {
+          data2 = imgw_read(translit, file2)
+          colnames(data2) = meta[[2]]$parameters
         }
-        colnames(data2) = meta[[2]]$parameters
+        
         unlink(c(temp, temp2))
 
         # remove statuses if not needed:
@@ -171,19 +166,11 @@ meteo_imgw_daily_bp = function(rank,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        }
+        data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        if (translit) {
-          data2 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file2)))
-        } else {
-          data2 = read.csv(file2, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        }
+        data2 = imgw_read(translit, file2)
         colnames(data2) = meta[[2]]$parameters
 
         # usuwa statusy
@@ -220,14 +207,9 @@ meteo_imgw_daily_bp = function(rank,
         test_url(addresses_to_download[j], temp)
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        if (translit) {
-          data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-        } else {
-          data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-        }
-
+        data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
-        # usuwa statusy
+        # remove status
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }

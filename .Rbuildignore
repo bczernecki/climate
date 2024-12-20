@@ -16,4 +16,4 @@ vignettes/articles/usecase.Rmd
 ^pkgdown$
 ^.codecov.yml$
 ^tests$
-    
+^.covrignore$

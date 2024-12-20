@@ -10,10 +10,11 @@ test_that("test-meteo_imgw_datastore", {
     imgw_telemetry = meteo_imgw_datastore(year = 2023, 
                                           parameters = "t2m", 
                                           stations = "PSZENNO")
-    
-    if (is.data.frame(imgw_telemetry) & nrow(imgw_telemetry) > 0) {
-      testthat::expect_true(is.data.frame(imgw_telemetry))
-      testthat::expect_true(nrow(imgw_telemetry) > 50000)
+    if (!is.null(imgw_telemetry)) {
+      if (is.data.frame(imgw_telemetry) & nrow(imgw_telemetry) > 0) {
+        testthat::expect_true(is.data.frame(imgw_telemetry))
+        testthat::expect_true(nrow(imgw_telemetry) > 50000)
+      }
     }
   }
 })

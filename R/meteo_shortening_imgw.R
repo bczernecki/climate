@@ -56,6 +56,7 @@ meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = 
       colnames(data)[orig_columns %in% abbrev$fullname] = abbrev$fullname_eng[matches]
     }
   }
-  
+  data = unique(data)
+  rownames(data) = NULL
   return(data)
 }

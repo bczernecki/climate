@@ -6,7 +6,8 @@
 #' @param coords add geographical coordinates of the station (logical value TRUE or FALSE)
 #' @param station WMO ID of meteorological station(s). Character or numeric vector
 #' @param precip_split whether to split precipitation fields into 6/12/24h; default: TRUE
-#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
+#' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). 
+#' For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
 #' 
 #' @export
@@ -51,9 +52,10 @@ ogimet_hourly_bp = function(date = date,
   
   dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") - 1
   dates = unique(c(dates, as.Date(max(date))))
+  diff_dates = diff(dates)
 
   # initalizing empty data frame for storing results:
-  data_station <-
+  data_station =
     data.frame(
       "Date" = character(),
       "hour" = character(),
@@ -92,7 +94,10 @@ ogimet_hourly_bp = function(date = date,
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
-      ndays = day
+      ndays = as.numeric(diff_dates[i - 1])
+      ndays = ifelse(ndays == 0, 1, ndays)
+      ndays = sprintf("%02d", ndays)
+      
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?ind=",
                       station_nr,
                       "&lang=en&decoded=yes&ndays=",
@@ -105,12 +110,14 @@ ogimet_hourly_bp = function(date = date,
                       day,
                       "&hora=23",
                       sep = "")
-      if (month == "01") linkpl2 = paste("http://ogimet.com/cgi-bin/gsynres?ind=",
+      if (month == "01") {
+        linkpl2 = paste("http://ogimet.com/cgi-bin/gsynres?ind=",
                                        station_nr,
                                        "&lang=en&decoded=yes&ndays=31&ano=",
                                        year,
                                        "&mes=02&day=1&hora=00",
                                        sep = "")
+      }
       
       temp = tempfile()
       test_url(linkpl2, temp)
@@ -163,23 +170,17 @@ ogimet_hourly_bp = function(date = date,
   }# end of looping for stations
   
   if (nrow(data_station) > 0) {
-  
-      data_station = data_station[!duplicated(data_station), ]
-  
+    data_station = data_station[!duplicated(data_station), ]
     # converting character to proper field representation:
-  
     # get rid off "---" standing for missing/blank fields:
     data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] = NA
-  
     # changing time..
     data_station$Date = strptime(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
     data_station$hour = NULL
-  
     # other columns to numeric:
     columns = c("TC", "TdC", "ffkmh",  "Gustkmh", "P0hPa", "PseahPa", "PTnd", "Nt", "Nh",
                 "HKm", "InsoD1", "Viskm", "Snowcm", "station_ID")
     columns = colnames(data_station)[(colnames(data_station) %in% columns)]
-    
     suppressWarnings(data_station[, columns] <-
       as.data.frame(sapply(data_station[,columns], as.numeric)))
   
@@ -216,6 +217,7 @@ ogimet_hourly_bp = function(date = date,
   
     } # end of checking whether object is empty
 
+  data_station = unique(data_station)
+  rownames(data_station) = NULL
   return(data_station)
-
 }

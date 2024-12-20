@@ -97,7 +97,7 @@ nearest_stations_imgw_bp = function(type,
   if (type == "meteo") {
     result = unique(meteo_imgw_monthly(rank = rank, year = year, coords = TRUE)[, c(2:5)])
   } else if (type == "hydro") {
-    result = unique(hydro_imgw_annual(year = year, coords = TRUE)[, c(1:4)])
+    result = unique(hydro_imgw_monthly(year = year, coords = TRUE)[, c(1:4)])
   } else {
     stop("You've provided wrong type argument; please use: \"meteo\", or \"hydro\"")
   }

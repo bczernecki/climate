@@ -8,8 +8,10 @@ test_that("test-stations_meteo_imgw_telemetry", {
   } else {
     
     df = stations_meteo_imgw_telemetry()
-    if (is.data.frame(df) & nrow(df) > 0) {
-      testthat::expect_true(is.data.frame(df))
+    if (!is.null(df)) {
+      if (is.data.frame(df) & nrow(df) > 0) {
+        testthat::expect_true(is.data.frame(df))
+      }
     }
     
   }

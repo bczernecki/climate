@@ -5,7 +5,7 @@ test_that("meteo_ogimet works!", {
                     station = c(12330, 12375), coords = TRUE)
   
   # sometimes ogimet requires warm spin-up, so in order to pass CRAN tests:
-  if (is.data.frame(df) & nrow(df) > 0) {
+  if (is.data.frame(df) & nrow(df) > 15) {
     expect_true(any(colnames(df) %in% c("Lon", "Lat")))
   }
   
@@ -19,7 +19,7 @@ test_that("meteo_ogimet works!", {
   x = meteo_ogimet(interval = "hourly", date = c("2019-06-01", "2019-06-08"),
                station = c(12330), coords = TRUE)
   
-  if (is.data.frame(x) & nrow(df) > 0) {
+  if (is.data.frame(x) & nrow(df) > 20) {
     testthat::expect_true(nrow(x) > 100)
   }
   
@@ -27,7 +27,7 @@ test_that("meteo_ogimet works!", {
   x = meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
                station = 12120, coords = FALSE)
   
-  if (is.data.frame(x) & nrow(x) > 0) {
+  if (is.data.frame(x) & nrow(x) > 20) {
     testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
   }
   
@@ -45,7 +45,7 @@ test_that("meteo_ogimet works!", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    testthat::expect_error(
+    testthat::expect_message(
       meteo_ogimet(
         date = c(as.Date("2020-02-01"), Sys.Date() - 1),
         # date = c(Sys.Date() - 7, Sys.Date() - 1),

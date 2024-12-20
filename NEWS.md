@@ -1,11 +1,16 @@
 # climate 1.2.2
 
-* Major fixes for adjusting code to stay in line with CRAN policies
-* Fixes for `hydro_imgw()` set of functions due to changes in encoding and metadata structure
-
+* Fixes and modifications for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets
+    * adjusting code to recognize different encoding and directory structure
+    * adjusting changes in metadata
+    * removed option to download data for "semiannual and annual" time resolutions due to inconsistencies in the data
+* Fix unit tests for ogimet- and IMGW-related datasets
+* Resolving date formatting for hydrological data - the Date column represents calendar date
+* Corrected logic in downloading hourly OGIMET dataset
 
 # climate 1.2.1
 
+* Major fixes for adjusting code to stay in line with CRAN policies
 * Corrected duplicated column names for IMGW-PIB stations
 * Adjusted encoding changes and documentation updates in `meteo_imgw_telemetry_stations()`
 

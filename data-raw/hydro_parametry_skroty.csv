@@ -1,5 +1,6 @@
 fullname;abbr_eng;fullname_eng;;
 Kod stacji;id;ID;;
+Data;date;Date;;
 Dzien;dd;Day;;
 Dzień;dd;Day;;
 Miesiąc kalendarzowy;mm;Month;;

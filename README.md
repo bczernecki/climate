@@ -5,13 +5,13 @@
 [![R-CMD-check](https://github.com/bczernecki/climate/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/climate/actions)
 [![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bczernecki/climate/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
+coverage](https://codecov.io/gh/bczernecki/climate/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
+downloads](https://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
 The goal of the  **climate** R package is to automatize downloading of *in-situ* meteorological
@@ -25,7 +25,7 @@ and hydrological data from publicly available repositories:
 
 ## Installation
 
-The stable release of the **climate** package from the [CRAN](https://CRAN.R-project.org) reposity can be installed with:
+The stable release of the **climate** package from the [CRAN](https://CRAN.R-project.org) repository can be installed with:
 
 ``` r
 install.packages("climate")
@@ -46,7 +46,7 @@ install_github("bczernecki/climate")
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
@@ -59,7 +59,7 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
 
 - **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
 danepubliczne.imgw.pl collection.
-It is a wrapper for previously developed set of functions such as: `hydro_annual()`, `hydro_monthly()`, and `hydro_daily()`
+It is a wrapper for previously developed set of functions such as: `hydro_monthly()`, and `hydro_daily()`
 
 ### Auxiliary functions and datasets
 
@@ -68,14 +68,10 @@ country in the Ogimet repository
 - **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
 - **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
 - **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
-- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for   meteorological   stations,   their   geographical
-coordinates, and ID numbers
-- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for   hydrological   stations,    their   geographical
-coordinates, and ID numbers
+- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
-
-
 
 ## Example 1
 #### Download hourly dataset from NOAA ISH meteorological repository:
@@ -91,8 +87,6 @@ head(noaa)
 #   2019     1   1    2 16.85 52.417  84 4.2   3.6  4 220 1022.5       1300
 #   2019     1   1    3 16.85 52.417  84 5.2   4.6  5 240 1021.2       1900
 ```
-
-
 
 ## Example 2
 #### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
@@ -120,9 +114,9 @@ nearest_stations_ogimet(country = "United+Kingdom",
 
 ![100 nearest stations to given coordinates in UK](http://iqdata.eu/kolokwium/uk.png)
 
-
 ## Example 3
 #### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see also `nearest_stations_ogimet()`):
+
 ``` r
 library(climate)
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
@@ -166,26 +160,25 @@ head(m)
 #> 580      21.3     -4.3       5.7         13.8     -8.3        9.4
 #> 581      23.1      1.0       9.6         16.6     -1.8       36.4
 
-h = hydro_imgw(interval = "semiannual_and_annual", year = 2010:2011)
+h = hydro_imgw(interval = "daily", year = 2010:2011)
 head(h)
-            id station riv_or_lake  hyy idyy Mesu idex   H beyy bemm bedd behm
-3223 150210180 ANNOPOL   Wisła (2) 2010   13    H    1 227 2009   12   19   NA
-3224 150210180 ANNOPOL   Wisła (2) 2010   13    H    2 319   NA   NA   NA   NA
-3225 150210180 ANNOPOL   Wisła (2) 2010   13    H    3 531 2010    3    3   18
-3226 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010    8   29   NA
-3227 150210180 ANNOPOL   Wisła (2) 2010   14    H    1 271 2010   10   27   NA
-3228 150210180 ANNOPOL   Wisła (2) 2010   14    H    2 392   NA   NA   NA   NA
+          id station riv_or_lake       date  hyy idhyy dd   H   Q  T mm thick
+1  150210180 ANNOPOL   Wisła (2) 2009-11-01 2010     1  1 287 436 NA 11    NA
+2  150210180 ANNOPOL   Wisła (2) 2009-11-02 2010     1  2 282 412 NA 11    NA
+3  150210180 ANNOPOL   Wisła (2) 2009-11-03 2010     1  3 272 368 NA 11    NA
+4  150210180 ANNOPOL   Wisła (2) 2009-11-04 2010     1  4 268 352 NA 11    NA
+5  150210180 ANNOPOL   Wisła (2) 2009-11-05 2010     1  5 264 336 NA 11    NA
+6  150210180 ANNOPOL   Wisła (2) 2009-11-06 2010     1  6 260 320 NA 11    NA
 ```
 
 ## Example 5
 #### Create Walter & Lieth climatic diagram based on downloaded data
 
-
 ``` r4
 library(climate)
 library(dplyr)
 
-df = meteo_imgw(interval = 'monthly', rank='synop', year = 1991:2019, station = "POZNAŃ") 
+df = meteo_imgw(interval = "monthly", rank = "synop", year = 1991:2019, station = "POZNAŃ") 
 df2 = select(df, station:t2m_mean_mon, rr_monthly)
 
 monthly_summary = df2 %>% 
@@ -241,7 +234,6 @@ ggplot(co2, aes(date, co2_avg)) +
 
 ![CO2 monthly concentration, Mauna Loa observatory](http://iqdata.eu/kolokwium/co2_chart.svg)
 
-
 ## Example 7
 #### Use "climate" inside python environment via rpy2
 
@@ -253,14 +245,14 @@ import pandas as pd
 import datetime as dt
 
 # load climate package (make sure that it was installed in R before)
-importr('climate')
+importr("climate")
 # test functionality e.g. with meteo_ogimet function for New York - La Guardia:
-df = robjects.r['meteo_ogimet'](interval = "daily", station = 72503,
-                                date = robjects.StrVector(['2022-05-01', '2022-06-15']))
+df = robjects.r["meteo_ogimet"](interval = "daily", station = 72503,
+                                date = robjects.StrVector(["2022-05-01", "2022-06-15"]))
 # optionally - transform object to pandas data frame and rename columns + fix datetime:
 res = pd.DataFrame(df).transpose()
 res.columns = df.colnames
-res['Date'] = pd.TimedeltaIndex(res['Date'], unit='d') + dt.datetime(1970,1,1)
+res["Date"] = pd.TimedeltaIndex(res["Date"], unit="d") + dt.datetime(1970,1,1)
 res.head
 
 >>> res[res.columns[0:7]].head()
@@ -295,4 +287,3 @@ LaTeX/BibTeX version can be obtained with:
 library(climate)
 citation("climate")
 ```
-

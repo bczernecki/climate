@@ -75,9 +75,9 @@ hydro_imgw_monthly_bp = function(year,
   meta = hydro_metadata_imgw(interval)
 
   all_data = vector("list", length = length(catalogs))
+  
   for (i in seq_along(catalogs)) {
     catalog = catalogs[i]
-
     adres = paste0(base_url, interval_pl, "/", catalog, "/mies_", catalog, ".zip")
 
     temp = tempfile()
@@ -85,13 +85,7 @@ hydro_imgw_monthly_bp = function(year,
     test_url(adres, temp)
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
-
-    if (translit) {
-      data1 = as.data.frame(data.table::fread(cmd = paste("iconv -f CP1250 -t ASCII//TRANSLIT", file1)))
-    } else {
-      data1 = read.csv(file1, header = FALSE, stringsAsFactors = FALSE, fileEncoding = "CP1250")
-    }
-
+    data1 = imgw_read(translit, file1)
     colnames(data1) = meta[[1]][, 1]
     all_data[[i]] = data1
   }
@@ -122,6 +116,15 @@ hydro_imgw_monthly_bp = function(year,
     }
   }
   all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydrologiczny|w roku hydro")]), ]
+  # fix dates and add as seperate column:
+  yy_ind = grep(x = colnames(all_data), "Rok hydrologiczny")
+  mm_ind = grep(x = colnames(all_data), "kalendarzowy")
+  data_df = all_data[, c(yy_ind, mm_ind)]
+  data_df$day = 1
+  data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
+  all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df$day))
+  all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
+
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)

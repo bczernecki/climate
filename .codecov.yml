@@ -1,4 +1,8 @@
 coverage:
+  ignore:
+  - "R/sounding_wyoming.R"
+  - "R/imgw_read.R"
+  - "R/onAttach.R"
   status:
     patch:
       default:

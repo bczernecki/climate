@@ -54,6 +54,7 @@ hydro_shortening_imgw = function(data,
   if (remove_duplicates == TRUE) {
     data = data[, !duplicated(colnames(data))]
   }
-
+  data = unique(data)
+  rownames(data) = NULL
   return(data)
 }

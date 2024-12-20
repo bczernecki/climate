@@ -13,3 +13,4 @@ lib
 docs
 pkgdown
 .Renviron
+test-out.txt
