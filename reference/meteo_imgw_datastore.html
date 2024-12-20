@@ -20,7 +20,7 @@ For example, 1 year of data with all available parameters requires processing ar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.2</span>
       </span>
     </div>
 
@@ -125,7 +125,8 @@ Default <code>NULL</code> means to download data for all available stations.</p>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data.frame with a raw meteorological measurements in 10-min intervals</p>
+    <p>data.frame with a raw meteorological measurements in 10-min intervals.
+Please note that this dataset is not validated by experts and may contain invalid values.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -140,9 +141,6 @@ Default <code>NULL</code> means to download data for all available stations.</p>
 <span class="r-in"><span>                                      stations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HALA GĄSIENICOWA"</span>,</span></span>
 <span class="r-in"><span>                                                   <span class="st">"DOLINA 5 STAWÓW"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                      coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>URL 'https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/2022/Meteo_2022-05.zip': Timeout of 60 seconds was reached</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Potential error(s) found. Problems with downloading data.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Run function with argument allow_failure = FALSE to see more details</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

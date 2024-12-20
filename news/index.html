@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.2</span>
       </span>
     </div>
 
@@ -65,12 +65,19 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2" id="climate-122">climate 1.2.2<a class="anchor" aria-label="anchor" href="#climate-122"></a></h2>
-<ul><li>Major fixes for adjusting code to stay in line with CRAN policies</li>
-<li>Fixes for <code><a href="../reference/hydro_imgw.html">hydro_imgw()</a></code> set of functions due to changes in encoding and metadata structure</li>
+<ul><li>Fixes and modifications for <code><a href="../reference/hydro_imgw.html">hydro_imgw()</a></code> set of functions due to changes in the IMGW-PIB hydrological datasets
+<ul><li>adjusting code to recognize different encoding and directory structure</li>
+<li>adjusting changes in metadata</li>
+<li>removed option to download data for “semiannual and annual” time resolutions due to inconsistencies in the data</li>
+</ul></li>
+<li>Fix unit tests for ogimet- and IMGW-related datasets</li>
+<li>Resolving date formatting for hydrological data - the Date column represents calendar date</li>
+<li>Corrected logic in downloading hourly OGIMET dataset</li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.1" id="climate-121">climate 1.2.1<a class="anchor" aria-label="anchor" href="#climate-121"></a></h2>
-<ul><li>Corrected duplicated column names for IMGW-PIB stations</li>
+<h2 class="page-header" data-toc-text="1.2.1" id="climate-121">climate 1.2.1<small>2024-10-19</small><a class="anchor" aria-label="anchor" href="#climate-121"></a></h2>
+<ul><li>Major fixes for adjusting code to stay in line with CRAN policies</li>
+<li>Corrected duplicated column names for IMGW-PIB stations</li>
 <li>Adjusted encoding changes and documentation updates in <code>meteo_imgw_telemetry_stations()</code>
 </li>
 </ul></div>
