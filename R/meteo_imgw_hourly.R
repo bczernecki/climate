@@ -143,29 +143,36 @@ meteo_imgw_hourly_bp = function(rank,
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
-        temp = tempfile()
+        temp = tempfile(fileext = ".zip")
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")
-        data1 = imgw_read(translit, file1)
-        
-        colnames(data1) = meta[[1]]$parameters
-        # remove status
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-        }
-
-        unlink(c(temp, temp2))
-        all_data[[length(all_data) + 1]] = data1
+        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) message("Detected problems in: ", 
+                                                   addresses_to_download[j], 
+                                                   " - skipping"))
+        if (!is.null(d)) {
+          file1 = paste(temp2, dir(temp2), sep = "/")
+          data1 = imgw_read(translit, file1)
+          colnames(data1) = meta[[1]]$parameters
+          # remove status
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+          }
+          unlink(c(temp, temp2))
+          all_data[[length(all_data) + 1]] = data1
+        } # end of checking for corrupted zip files
       } # end of looping for zip files
     } # end of if statement for climate
   } # end of loop over directories
 
-  all_data = do.call(rbind, all_data)
+  if (!is.null(all_data)) {
+    all_data = do.call(rbind, all_data)
+  } else {
+    stop("No data found. Quitting", call. = FALSE)
+  }
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations[,1:3], 
+    all_data = merge(climate::imgw_meteo_stations[, 1:3], 
                      all_data, 
                      by.x = "id", 
                      by.y = "Kod stacji", 
