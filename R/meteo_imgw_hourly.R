@@ -117,7 +117,7 @@ meteo_imgw_hourly_bp = function(rank,
 
         colnames(data1) = meta[[1]]$parameters
 
-        # usuwa statusy
+        # remove statuses
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
@@ -179,12 +179,12 @@ meteo_imgw_hourly_bp = function(rank,
                      all.y = TRUE)
   }
 
-  # dodaje rank
+  # add rank
   rank_code = switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA")
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
   all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
 
-  #station selection
+  # station selection
   if (!is.null(station)) {
     if (is.character(station)) {
       inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
