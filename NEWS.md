@@ -1,3 +1,10 @@
+# climate 1.2.3
+
+* Fixes and modifications for `meteo_imgw_daily()` and `meteo_imgw_hourly()` due
+to changes in the IMGW-PIB meteorological datasets since 2024
+    * adjusting code to recognize whether downloaded zip file is not corrupted
+    * skipping corrupted files without breaking the download
+
 # climate 1.2.2
 
 * Fixes and modifications for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets

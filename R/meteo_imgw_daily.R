@@ -161,29 +161,43 @@ meteo_imgw_daily_bp = function(rank,
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
-        temp = tempfile()
+        temp = tempfile(fileext = ".zip")
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = imgw_read(translit, file1)
-        colnames(data1) = meta[[1]]$parameters
+        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) message("Detected problems in: ", 
+                                                   addresses_to_download[j], 
+                                                   " - skipping"))
+        if (!is.null(d)) {
+          unzip(zipfile = temp, exdir = temp2)
+          file1 = paste(temp2, dir(temp2), sep = "/")[1]
+          data1 = imgw_read(translit, file1)
+          colnames(data1) = meta[[1]]$parameters
 
-        file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        data2 = imgw_read(translit, file2)
-        colnames(data2) = meta[[2]]$parameters
+          file2 = paste(temp2, dir(temp2), sep = "/")[2]
+          if (file.exists(file2)) {
+            data2 = imgw_read(translit, file2)
+            colnames(data2) = meta[[2]]$parameters
+          }
+        
+          # usuwa statusy
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+            if (file.exists(file2)) {
+            data2[grep("^Status", colnames(data2))] = NULL
+            }
+          }
 
-        # usuwa statusy
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-          data2[grep("^Status", colnames(data2))] = NULL
-        }
-
-        unlink(c(temp, temp2))
-        all_data[[length(all_data) + 1]] = merge(data1,
-                                                 data2,
-                                                 by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
-                                                 all.x = TRUE)
+          unlink(c(temp, temp2))
+          if (file.exists(file2)) {
+          all_data[[length(all_data) + 1]] = merge(data1,
+                                                   data2,
+                                                   by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+                                                   all.x = TRUE)
+          } else {
+            all_data[[length(all_data) + 1]] = data1
+          }
+        } # end of corrupted zips
       } # end of looping for zip files
     } # end of if statement for climate stations
 
@@ -205,22 +219,28 @@ meteo_imgw_daily_bp = function(rank,
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = imgw_read(translit, file1)
-        colnames(data1) = meta[[1]]$parameters
-        # remove status
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-        }
+        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) message("Detected problems in: ", 
+                                                   addresses_to_download[j], 
+                                                   " - skipping"))
+        if (!is.null(d)) {
+          unzip(zipfile = temp, exdir = temp2)
+          file1 = paste(temp2, dir(temp2), sep = "/")[1]
+          data1 = imgw_read(translit, file1)
+          colnames(data1) = meta[[1]]$parameters
+          # remove status
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+          }
 
-        unlink(c(temp, temp2))
-        all_data[[length(all_data) + 1]] = data1
+          unlink(c(temp, temp2))
+          all_data[[length(all_data) + 1]] = data1
+        } # end of corrupted zips
       } # end of loop for zip files
     } # end of if statement for climate stations
   } # end of looping over catalogs
 
-  all_data = do.call(rbind, all_data)
+  all_data = data.table::rbindlist(all_data, fill = TRUE)
 
   if (coords) {
     all_data = merge(climate::imgw_meteo_stations[, 1:3],

@@ -6,7 +6,6 @@
 [![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/bczernecki/climate/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
-
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
