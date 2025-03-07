@@ -24,7 +24,16 @@ imgw_read = function(translit, fpath) {
                       warning = function(w) {
                         read.csv(fpath, header = FALSE, stringsAsFactors = FALSE, sep = ";")
                       })
-      }
+    }
+    
+    # if still one column try the default option:
+    if (ncol(data) == 1) {
+      data = suppressWarnings(read.csv(fpath, 
+                                       header = FALSE, 
+                                       stringsAsFactors = FALSE, 
+                                       sep = ",",
+                                       fileEncoding = "CP1250"))
+    }
     
     }
   return(data)

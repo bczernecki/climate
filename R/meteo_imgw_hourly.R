@@ -114,7 +114,6 @@ meteo_imgw_hourly_bp = function(rank,
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
         data1 = imgw_read(translit, file1)
-
         colnames(data1) = meta[[1]]$parameters
 
         # remove statuses
