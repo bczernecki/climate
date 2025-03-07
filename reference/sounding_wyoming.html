@@ -149,15 +149,19 @@ depending on the height. Second data.frame presents a description of the conditi
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
 <span class="r-in"><span>  <span class="va">TEMP</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
 <span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> HTTP response code said error [weather.uwyo.edu]: The requested URL returned error: 503</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Service not working or wmo_id or date not correct. Check url:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2021&amp;MONTH=07&amp;FROM=1712&amp;TO=1712&amp;STNM=45004</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp2Ayl9k/file1ccb22bcef1b</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">TEMP</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  998   66 27.6 23.6   79 18.78    0    0 300.9 356.4 304.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  975  272 25.9 22.8   83 18.34  105   10 301.3 355.5 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  925  737 22.2 21.1   93 17.36  120   19 302.0 353.4 305.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  921  775 22.1 20.9   93 17.22  120   21 302.2 353.3 305.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  907  909 21.6 20.2   92 16.73  114   20 303.1 352.9 306.1</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">BUFR</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
 <span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span>, bufr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp95w7yv/file17d024f99bf4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/Rtmp2Ayl9k/file1ccb2957c0dc</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">BUFR</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000.0   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
