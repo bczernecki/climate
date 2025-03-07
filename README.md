@@ -6,12 +6,12 @@
 [![HTML5 check](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml/badge.svg?branch=master)](https://github.com/bczernecki/climate/actions/workflows/html5-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/bczernecki/climate/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/climate?branch=master)
-
 [![CRAN
 status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/climate?color=brightgreen)](https://cran.r-project.org/package=climate)
+[![R-CMD-check](https://github.com/bczernecki/climate/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bczernecki/climate/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of the  **climate** R package is to automatize downloading of *in-situ* meteorological
