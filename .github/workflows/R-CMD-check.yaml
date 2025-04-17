@@ -33,8 +33,8 @@ jobs:
           - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-20.04,   r: 'release'}
-          - {os: ubuntu-20.04,   r: '4.0'}
+          - {os: ubuntu-22.04,   r: 'release'}
+          - {os: ubuntu-22.04,   r: '4.0'}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
