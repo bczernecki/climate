@@ -31,11 +31,12 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.0.0)
 Imports: 
-    XML,
-    httr,
+    archive,
     curl,
     data.table,
-    stringi
+    httr,
+    stringi,
+    XML
 Suggests: 
     dplyr,
     knitr,

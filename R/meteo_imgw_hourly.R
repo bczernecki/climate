@@ -19,6 +19,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
+#' @importFrom archive archive_read
 #' @export
 #' @return meteorological data for the hourly time interval
 #'
@@ -146,20 +147,31 @@ meteo_imgw_hourly_bp = function(rank,
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
-                     warning = function(w) message("Detected problems in: ", 
-                                                   addresses_to_download[j], 
-                                                   " - skipping"))
-        if (!is.null(d)) {
+                     warning = function(w) {
+                       env$logs = c(env$logs, 
+                                    paste("Warning: ", w$message, " ",
+                                          addresses_to_download[j], sep = ""))
+                       # try to read it with archive package:
+                       data = archive_read(temp, file = paste0("k_t_", sprintf("%02d", j), "_", year, ".csv"), format = "zip")
+                       csv_data = read.csv(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", fileEncoding = "UTF-8")
+                       colnames(csv_data) = meta[[1]]$parameters
+                       return(csv_data)
+                       })
+
+        if (!is.null(d) & !is.data.frame(d)) {
           file1 = paste(temp2, dir(temp2), sep = "/")
           data1 = imgw_read(translit, file1)
-          colnames(data1) = meta[[1]]$parameters
-          # remove status
-          if (status == FALSE) {
-            data1[grep("^Status", colnames(data1))] = NULL
+        } else if (is.data.frame(d)) {
+          data1 = d
+        }
+        
+        colnames(data1) = meta[[1]]$parameters
+        # remove status
+        if (status == FALSE) {
+          data1[grep("^Status", colnames(data1))] = NULL
           }
-          unlink(c(temp, temp2))
-          all_data[[length(all_data) + 1]] = data1
-        } # end of checking for corrupted zip files
+        unlink(c(temp, temp2))
+        all_data[[length(all_data) + 1]] = data1
       } # end of looping for zip files
     } # end of if statement for climate
   } # end of loop over directories
@@ -215,5 +227,12 @@ meteo_imgw_hourly_bp = function(rank,
   # extra option for shortening colnames and removing duplicates
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
+  
+  # check if there any messages gathered in env$logs and if it is not empty then print them:
+  if (length(env$logs) > 0) {
+    message("\nPotential error(s) found.\nPlease carefully check content of files derived from:\n",
+            paste(env$logs, collapse = "\n"))
+    env$logs = NULL
+  }
   return(all_data)
 }

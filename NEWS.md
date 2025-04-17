@@ -2,7 +2,7 @@
 
 * Fixes and modifications for `meteo_imgw_daily()` and `meteo_imgw_hourly()` due
 to changes in the IMGW-PIB meteorological datasets since 2024
-    * adjusting code to recognize whether downloaded zip file is not corrupted
+    * adjusting code to recognize whether downloaded zip file is not corrupted and use archive package to resolve some of found edge cases
     * skipping corrupted files without breaking the download
 
 # climate 1.2.2

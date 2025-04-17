@@ -138,8 +138,7 @@ meteo_imgw_daily_bp = function(rank,
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
         ### ta część kodu powtarza sie po dużej petli od rank
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[substr(ttt$`Nazwa stacji.x`, 1,
-                                                        nchar(station)) %in% station, ]
+          all_data[[length(all_data) + 1]] = ttt[ttt$`Nazwa stacji.x` %in% station, ]
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
@@ -220,9 +219,12 @@ meteo_imgw_daily_bp = function(rank,
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
         d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
-                     warning = function(w) message("Detected problems in: ", 
-                                                   addresses_to_download[j], 
-                                                   " - skipping"))
+                     warning = function(w) {
+                       env$logs = c(env$logs, 
+                                    paste("Warning: ", w$message, " ",
+                                          addresses_to_download[j], sep = ""))
+                     })
+        
         if (!is.null(d)) {
           unzip(zipfile = temp, exdir = temp2)
           file1 = paste(temp2, dir(temp2), sep = "/")[1]
@@ -293,6 +295,13 @@ meteo_imgw_daily_bp = function(rank,
   # remove duplicates and shorten colnames
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
+  
+  # check if there any messages gathered in env$logs and if it is not empty then print them:
+  if (length(env$logs) > 0) {
+    message("\nPotential error(s) found.\nPlease carefully check content of files derived from:\n",
+            paste(env$logs, collapse = "\n"))
+    env$logs = NULL
+  }
 
   return(all_data)
 }

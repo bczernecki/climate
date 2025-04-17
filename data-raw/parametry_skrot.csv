@@ -251,3 +251,4 @@ Zachmurzenie ogolne [oktanty],cl_tot,Total cloudiness [octants]
 Nazwa stacji.x,station,Station
 Nazwa stacji.y,station,Station
 rank_code,rank,Station rank code
+Zapas wody w sniegu [mm],water_in_snow,Water content in snow [mm]
