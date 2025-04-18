@@ -7,6 +7,7 @@ to changes in the IMGW-PIB meteorological datasets since 2024
     * removed possibility to download stations from IMGW-PIB repository based on stations' ID
 * Returning all available IMGW-PIB meteorological dataset if provided station name(s) was not found
 * Logging errors in package environment and providing summary at the end of downloading instead of instant messaging
+* Minor changes in unit-tests to adjust for most recent changes
 
 # climate 1.2.2
 

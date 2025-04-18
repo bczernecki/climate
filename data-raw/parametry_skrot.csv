@@ -241,6 +241,7 @@ Wysokosc pokrywy snieznej [cm],snowcover_height,Snow cover height [cm]
 Wysokosc probki [cm],sample_height,Height of a sample [cm]
 Wysokosc sniegu na poletku [cm],snowcover_field_height,Fresh snow cover on a field [cm]
 Wysokosc swiezo spadlego sniegu [cm,fresh_snow,Fresh snow cover [cm]
+Wysokosc swiezospalego sniegu [cm,fresh_snow,Fresh snow cover [cm]
 Wysokosc swiezo spadlego sniegu [cm],fresh_snow,Fresh snow cover [cm]
 Wystapienie blyskawicy [0/1],lightning,Ligthning occurrence
 Wystapienie pokrywy snieznej [0/1],snowcover_occur,Snow cover occurrence [0/1]

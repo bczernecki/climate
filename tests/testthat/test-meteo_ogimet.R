@@ -9,12 +9,6 @@ test_that("meteo_ogimet works!", {
     expect_true(any(colnames(df) %in% c("Lon", "Lat")))
   }
   
-  # expected warning
-  # testthat::expect_message(
-  #   meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-06-08"),
-  #                   station = c(22222), coords = FALSE, allow_failure = TRUE)
-  # )
-  
   # expected at least 100 rows in hourly dataset:
   x = meteo_ogimet(interval = "hourly", date = c("2019-06-01", "2019-06-08"),
                station = c(12330), coords = TRUE)
@@ -55,11 +49,10 @@ test_that("meteo_ogimet works!", {
     )
     
     # check change between years:
-    multiyr = ogimet_daily(date = c( as.Date("2022-11-15"),
-                                     as.Date("2023-02-01")), 
+    multiyr = ogimet_daily(date = c(as.Date("2022-12-15"), as.Date("2023-01-21")), 
                            station = 12330)
     if (is.data.frame(multiyr)) {
-      testthat::expect_true(nrow(multiyr) > 70)
+      testthat::expect_true(nrow(multiyr) > 35)
     }
   }
 })
