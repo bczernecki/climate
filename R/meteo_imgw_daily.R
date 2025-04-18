@@ -273,8 +273,6 @@ meteo_imgw_daily_bp = function(rank,
   } # end of looping over catalogs
 
   all_data = as.data.frame(data.table::rbindlist(all_data, fill = TRUE))
-  
-  browser()
 
   # fix order of columns if needed and entries in stations' names if more than 1 available:
   col_inds = grep(pattern = "Nazwa stacji", colnames(all_data), value = TRUE)
