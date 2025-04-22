@@ -156,6 +156,7 @@ meteo_imgw_hourly_bp = function(rank,
                        csv_data = read.csv(data, header = FALSE, sep = ",")
                        csv_data = convert_encoding(csv_data)
                        colnames(csv_data) = meta[[1]]$parameters
+                       csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
                        return(csv_data)
                        })
 
