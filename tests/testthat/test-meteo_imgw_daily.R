@@ -52,13 +52,17 @@ test_that("check_encoding_in_non_synop", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    non_synop = meteo_imgw_daily(year = 2024, 
+    non_synop = suppressWarnings(
+      suppressMessages(meteo_imgw_daily(year = 2024, 
                                  rank = "precip", 
-                                 allow_failure = FALSE)
+                                 allow_failure = FALSE))
+    )
     expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
-    non_synop = meteo_imgw_daily(year = 2024, 
+    non_synop = suppressWarnings(
+      suppressMessages(meteo_imgw_daily(year = 2024, 
                                  rank = "climate", 
-                                 allow_failure = FALSE)
+                                 allow_failure = FALSE))
+    )
     expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
   }
 })
