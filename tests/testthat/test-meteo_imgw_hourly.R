@@ -7,13 +7,11 @@ test_that("check_hourly_imgw_climate", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    clim = suppressMessages(
-      meteo_imgw_hourly(year = 2024,
-                             rank = "climate", 
-                             coords = TRUE, 
-                             allow_failure = FALSE, 
-                             station = "DOLINA PIĘCIU STAWÓW")
-    )
-    expect_true(nrow(clim) > 1000)
+    hourly = meteo_imgw_hourly(year = 2024,
+                               rank = "climate", 
+                               coords = TRUE, 
+                               station = "WARSZAWA-FILTRY",
+                               allow_failure = FALSE)
+    expect_true(nrow(hourly) > 1000)
   }
 })
