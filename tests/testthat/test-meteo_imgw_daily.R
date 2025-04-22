@@ -46,6 +46,8 @@ test_that("check_message_for_non_existing_station", {
 
 test_that("check_encoding_in_non_synop", {
   
+  skip_on_cran()
+  
   if (!curl::has_internet()) {
     message("No internet connection! \n")
     return(invisible(NULL))

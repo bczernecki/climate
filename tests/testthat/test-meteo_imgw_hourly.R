@@ -1,6 +1,8 @@
 
 test_that("check_hourly_imgw_climate", {
   
+  skip_on_cran()
+  
   if (!curl::has_internet()) {
     message("No internet connection! \n")
     return(invisible(NULL))
