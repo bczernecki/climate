@@ -171,6 +171,7 @@ meteo_imgw_daily_bp = function(rank,
                        # try to read it with archive package:
                        data = archive_read(temp, file = paste0("k_d_", sprintf("%02d", j), "_", catalog, ".csv"), format = "zip")
                        csv_data = read.csv(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", fileEncoding = "CP1250")
+                       csv_data = convert_encoding(csv_data)
                        colnames(csv_data) = meta[[1]]$parameters
                        return(csv_data)
                      })
@@ -235,15 +236,16 @@ meteo_imgw_daily_bp = function(rank,
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        print(addresses_to_download[j])
-        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+
+                d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
                      warning = function(w) {
                        env$logs = c(env$logs, 
                                     paste("Warning: ", w$message, " ",
                                           addresses_to_download[j], sep = ""))
                        # try to read it with archive package:
                        data = archive_read(temp, file = paste0("o_d_", sprintf("%02d", j), "_", catalog, ".csv"), format = "zip")
-                       csv_data = read.csv(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", fileEncoding = "CP1250")
+                       csv_data = read.table(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", encoding = "CP1250")
+                       csv_data = convert_encoding(csv_data)
                        colnames(csv_data) = meta[[1]]$parameters
                        return(csv_data)
                      })
@@ -299,7 +301,7 @@ meteo_imgw_daily_bp = function(rank,
 
   all_data = all_data[all_data$Rok %in% year, ] # clip only to selected years
 
-  #station selection
+  # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
         inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
@@ -311,6 +313,7 @@ meteo_imgw_daily_bp = function(rank,
         }
     }
   }
+  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
 
   # sort output
   if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
