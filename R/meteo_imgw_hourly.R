@@ -19,6 +19,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
+#' @importFrom archive archive_read
 #' @export
 #' @return meteorological data for the hourly time interval
 #'
@@ -114,10 +115,9 @@ meteo_imgw_hourly_bp = function(rank,
         unzip(zipfile = temp, exdir = temp2)
         file1 = paste(temp2, dir(temp2), sep = "/")
         data1 = imgw_read(translit, file1)
-
         colnames(data1) = meta[[1]]$parameters
 
-        # usuwa statusy
+        # remove statuses
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
         }
@@ -143,41 +143,61 @@ meteo_imgw_hourly_bp = function(rank,
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
-        temp = tempfile()
+        temp = tempfile(fileext = ".zip")
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")
-        data1 = imgw_read(translit, file1)
+        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) {
+                       env$logs = c(env$logs, 
+                                    paste("Warning: ", w$message, " ",
+                                          addresses_to_download[j], sep = ""))
+                       # try to read it with archive package:
+                       data = archive_read(temp, file = paste0("k_t_", sprintf("%02d", j), "_", year, ".csv"), format = "zip")
+                       csv_data = read.csv(data, header = FALSE, sep = ",")
+                       csv_data = convert_encoding(csv_data)
+                       colnames(csv_data) = meta[[1]]$parameters
+                       csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+                       return(csv_data)
+                       })
+
+        if (!is.null(d) & !is.data.frame(d)) {
+          file1 = paste(temp2, dir(temp2), sep = "/")
+          data1 = imgw_read(translit, file1)
+        } else if (is.data.frame(d)) {
+          data1 = d
+        }
         
         colnames(data1) = meta[[1]]$parameters
         # remove status
         if (status == FALSE) {
           data1[grep("^Status", colnames(data1))] = NULL
-        }
-
+          }
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
       } # end of looping for zip files
     } # end of if statement for climate
   } # end of loop over directories
 
-  all_data = do.call(rbind, all_data)
+  if (!is.null(all_data)) {
+    all_data = do.call(rbind, all_data)
+  } else {
+    stop("No data found. Quitting", call. = FALSE)
+  }
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations[,1:3], 
+    all_data = merge(climate::imgw_meteo_stations[, 1:3], 
                      all_data, 
                      by.x = "id", 
                      by.y = "Kod stacji", 
                      all.y = TRUE)
   }
 
-  # dodaje rank
+  # add rank
   rank_code = switch(rank, synop = "SYNOPTYCZNA", climate = "KLIMATYCZNA")
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
   all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
 
-  #station selection
+  # station selection
   if (!is.null(station)) {
     if (is.character(station)) {
       inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
@@ -194,6 +214,7 @@ meteo_imgw_hourly_bp = function(rank,
       stop("Selected station(s) are not in the proper format.", call. = FALSE)
     }
   }
+  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
 
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
   if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
@@ -209,5 +230,12 @@ meteo_imgw_hourly_bp = function(rank,
   # extra option for shortening colnames and removing duplicates
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
+  
+  # check if there any messages gathered in env$logs and if it is not empty then print them:
+  if (length(env$logs) > 0) {
+    message("\nPotential error(s) found.\nPlease carefully check content of files derived from:\n",
+            paste(env$logs, collapse = "\n"))
+    env$logs = NULL
+  }
   return(all_data)
 }

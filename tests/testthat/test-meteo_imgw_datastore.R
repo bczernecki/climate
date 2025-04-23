@@ -2,6 +2,9 @@ context("meteo-imgw-datastore")
 
 
 test_that("test-meteo_imgw_datastore", {
+  
+  skip_on_cran()
+  
   if (!curl::has_internet()) {
     message("No internet connection! \n")
     return(invisible(NULL))

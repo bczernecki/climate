@@ -41,3 +41,28 @@ test_that("check_message_for_non_existing_station", {
                                   station = 9999))
   }
 })
+
+
+
+test_that("check_encoding_in_non_synop", {
+  
+  skip_on_cran()
+  
+  if (!curl::has_internet()) {
+    message("No internet connection! \n")
+    return(invisible(NULL))
+  } else {
+    non_synop = suppressWarnings(
+      suppressMessages(meteo_imgw_daily(year = 2024, 
+                                 rank = "precip", 
+                                 allow_failure = FALSE))
+    )
+    expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
+    non_synop = suppressWarnings(
+      suppressMessages(meteo_imgw_daily(year = 2024, 
+                                 rank = "climate", 
+                                 allow_failure = FALSE))
+    )
+    expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
+  }
+})

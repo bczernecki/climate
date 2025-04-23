@@ -138,8 +138,7 @@ meteo_imgw_daily_bp = function(rank,
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
         ### ta część kodu powtarza sie po dużej petli od rank
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[substr(ttt$`Nazwa stacji.x`, 1,
-                                                        nchar(station)) %in% station, ]
+          all_data[[length(all_data) + 1]] = ttt[ttt$`Nazwa stacji.x` %in% station, ]
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
@@ -161,29 +160,61 @@ meteo_imgw_daily_bp = function(rank,
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
-        temp = tempfile()
+        temp = tempfile(fileext = ".zip")
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = imgw_read(translit, file1)
-        colnames(data1) = meta[[1]]$parameters
-
-        file2 = paste(temp2, dir(temp2), sep = "/")[2]
-        data2 = imgw_read(translit, file2)
-        colnames(data2) = meta[[2]]$parameters
-
-        # usuwa statusy
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-          data2[grep("^Status", colnames(data2))] = NULL
+        d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) {
+                       env$logs = c(env$logs, 
+                                    paste("Warning: ", w$message, " ",
+                                          addresses_to_download[j], sep = ""))
+                       # try to read it with archive package:
+                       data = archive_read(temp, file = paste0("k_d_", sprintf("%02d", j), "_", catalog, ".csv"), format = "zip")
+                       csv_data = read.csv(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", fileEncoding = "CP1250")
+                       csv_data = convert_encoding(csv_data)
+                       colnames(csv_data) = meta[[1]]$parameters
+                       return(csv_data)
+                     })
+        
+        if (is.data.frame(d)) {
+          data1 = d
+          colnames(data1) = meta[[1]]$parameters
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+          }
         }
+        
+        if (!is.null(d) & !is.data.frame(d)) {
+          unzip(zipfile = temp, exdir = temp2)
+          file1 = paste(temp2, dir(temp2), sep = "/")[1]
+          data1 = imgw_read(translit, file1)
+          colnames(data1) = meta[[1]]$parameters
 
-        unlink(c(temp, temp2))
-        all_data[[length(all_data) + 1]] = merge(data1,
-                                                 data2,
-                                                 by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
-                                                 all.x = TRUE)
+          file2 = paste(temp2, dir(temp2), sep = "/")[2]
+          if (file.exists(file2)) {
+            data2 = imgw_read(translit, file2)
+            colnames(data2) = meta[[2]]$parameters
+          }
+        }
+        
+          # usuwa statusy
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+            if (file.exists(file2)) {
+            data2[grep("^Status", colnames(data2))] = NULL
+            }
+          }
+
+          unlink(c(temp, temp2))
+          if (file.exists(file2)) {
+          all_data[[length(all_data) + 1]] = merge(data1,
+                                                   data2,
+                                                   by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+                                                   all.x = TRUE)
+          } else {
+            all_data[[length(all_data) + 1]] = data1
+          }
+        #} # end of corrupted zips
       } # end of looping for zip files
     } # end of if statement for climate stations
 
@@ -205,22 +236,56 @@ meteo_imgw_daily_bp = function(rank,
         temp = tempfile()
         temp2 = tempfile()
         test_url(addresses_to_download[j], temp)
-        unzip(zipfile = temp, exdir = temp2)
-        file1 = paste(temp2, dir(temp2), sep = "/")[1]
-        data1 = imgw_read(translit, file1)
-        colnames(data1) = meta[[1]]$parameters
-        # remove status
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-        }
 
+                d = tryCatch(expr = unzip(zipfile = temp, exdir = temp2), 
+                     warning = function(w) {
+                       env$logs = c(env$logs, 
+                                    paste("Warning: ", w$message, " ",
+                                          addresses_to_download[j], sep = ""))
+                       # try to read it with archive package:
+                       data = archive_read(temp, file = paste0("o_d_", sprintf("%02d", j), "_", catalog, ".csv"), format = "zip")
+                       csv_data = read.table(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", encoding = "CP1250")
+                       csv_data = convert_encoding(csv_data)
+                       colnames(csv_data) = meta[[1]]$parameters
+                       return(csv_data)
+                     })
+        
+        if (is.data.frame(d)) {
+          data1 = d
+          colnames(data1) = meta[[1]]$parameters
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+          }
+        }
+        
+        if (!is.null(d) & !is.data.frame(d)) {
+          unzip(zipfile = temp, exdir = temp2)
+          file1 = paste(temp2, dir(temp2), sep = "/")[1]
+          data1 = imgw_read(translit, file1)
+          colnames(data1) = meta[[1]]$parameters
+          # remove status
+          if (status == FALSE) {
+            data1[grep("^Status", colnames(data1))] = NULL
+          }
+        } # end of corrupted zips
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
       } # end of loop for zip files
     } # end of if statement for climate stations
   } # end of looping over catalogs
 
-  all_data = do.call(rbind, all_data)
+  all_data = as.data.frame(data.table::rbindlist(all_data, fill = TRUE))
+
+  # fix order of columns if needed and entries in stations' names if more than 1 available:
+  col_inds = grep(pattern = "Nazwa stacji", colnames(all_data), value = TRUE)
+  if (length(col_inds) > 1) {
+    all_data$`Nazwa stacji` = apply(all_data[, col_inds], 1, function(x) na.omit(unique(x))[1])
+    all_data$`Nazwa stacji.x` = NULL
+    all_data$`Nazwa stacji.y` = NULL
+    if (colnames(all_data)[ncol(all_data)] == "Nazwa stacji") { # re-order columns if needed
+      all_data = all_data[ , c(1, ncol(all_data), 2:(ncol(all_data) - 1))] 
+    }
+  }
 
   if (coords) {
     all_data = merge(climate::imgw_meteo_stations[, 1:3],
@@ -236,32 +301,19 @@ meteo_imgw_daily_bp = function(rank,
 
   all_data = all_data[all_data$Rok %in% year, ] # clip only to selected years
 
-  #station selection
+  # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-      if (rank == "synop" | rank == "climate") {
-        inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji.x`)))
-        all_data = all_data[inds, ]
-      }
-
-      # exception for column names in precipitation data:
-      if (rank == "precip") {
         inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
-        all_data = all_data[inds, ]
-      }
-
-      if (nrow(all_data) == 0) {
-        stop("Selected station(s) is not available in the database.", call. = FALSE)
-      }
-    } else if (is.numeric(station)) {
-      all_data = all_data[all_data$`Kod stacji` %in% station, ]
-      if (nrow(all_data) == 0) {
-        stop("Selected station(s) is not available in the database.", call. = FALSE)
-      }
-    } else {
-      stop("Selected station(s) are not in the proper format.", call. = FALSE)
+        if (any(is.na(inds))) {
+          env$logs = c(env$logs, 
+                       paste("At least one of selected station(s) is not available in the database. Returning all available stations"))
+        } else {
+          all_data = all_data[inds, ]
+        }
     }
   }
+  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
 
   # sort output
   if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
@@ -273,6 +325,15 @@ meteo_imgw_daily_bp = function(rank,
   # remove duplicates and shorten colnames
   all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
+  
+  # check if there any messages gathered in env$logs and if it is not empty then print them:
+  if (length(env$logs) > 0) {
+    message("\n================================================
+    \rPotential warning(s) or error(s) found.
+    \rPlease carefully check content of files derived from the list below or check for the potential problems found:\n",
+            paste(unique(env$logs), collapse = "\n"))
+    env$logs = NULL
+  }
 
   return(all_data)
 }

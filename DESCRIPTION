@@ -1,6 +1,6 @@
 Package: climate
 Title: Interface to Download Meteorological (and Hydrological) Datasets
-Version: 1.2.2
+Version: 1.2.3
 Authors@R: c(person(given = "Bartosz",
            family = "Czernecki",
            role = c("aut", "cre"),
@@ -31,11 +31,12 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.0.0)
 Imports: 
-    XML,
-    httr,
+    archive,
     curl,
     data.table,
-    stringi
+    httr,
+    stringi,
+    XML
 Suggests: 
     dplyr,
     knitr,
