@@ -1,3 +1,8 @@
+# climate 1.2.4
+
+* Bug fixes for ogimet-related functionalities due to changes in the OGIMET service
+
+
 # climate 1.2.3
 
 * Fixes and modifications for `meteo_imgw_daily()` and `meteo_imgw_hourly()` due

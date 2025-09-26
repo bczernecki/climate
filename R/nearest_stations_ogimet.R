@@ -98,13 +98,21 @@ nearest_stations_ogimet_bp = function(country = country,
       "&hora=06&ndays=1&Send=send"
     )
 
-  temp = tempfile()
-  test_url(link = linkpl2, output = temp)
+  body = httr::GET(linkpl2,
+                   httr::add_headers(
+                     `User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0",
+                     `Accept` = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                     `Accept-Language` = "pl,en-US;q=0.7,en;q=0.3",
+                     `Referer` = "https://ogimet.com/resynops.phtml.en",
+                     `Cookie` = "cookieconsent_status=dismiss; ogimet_serverid=huracan|aNaPt|aNaPj"
+                   ))
+  body = httr::content(body, as = "text", encoding = "UTF-8")
+  
   
   # run only if downloaded file is valid
-  if (!is.na(file.size(temp)) & (file.size(temp) > 500)) {
+  if (!is.na(body) & (object.size(body) > 500)) {
   
-    a = readLines(temp)
+    a = readLines(body)
     a = paste(a, sep = "", collapse = "") 
     
     b = strsplit(a, "Decoded synops since")

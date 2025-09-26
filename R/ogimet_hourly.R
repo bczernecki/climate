@@ -25,7 +25,7 @@
 ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), 
                          coords = FALSE,
                          station = 12330,
-                         precip_split = TRUE, 
+                         precip_split = TRUE,
                          allow_failure = TRUE) {
   
   if (allow_failure) {
@@ -119,14 +119,19 @@ ogimet_hourly_bp = function(date = date,
                                        sep = "")
       }
       
-      temp = tempfile()
-      test_url(linkpl2, temp)
+      body = httr::GET(linkpl2,
+                    httr::add_headers(
+                      `User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0",
+                      `Accept` = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                      `Accept-Language` = "pl,en-US;q=0.7,en;q=0.3",
+                      `Referer` = "https://ogimet.com/resynops.phtml.en",
+                      `Cookie` = "cookieconsent_status=dismiss; ogimet_serverid=huracan|aNaPt|aNaPj"
+                      ))
+      body = httr::content(body, as = "text", encoding = "UTF-8")
       
-      # run only if downloaded file is valid
-      if (!is.na(file.size(temp)) & (file.size(temp) > 100)) {
-        #a = getURL(linkpl2)
-        a = readHTMLTable(temp, stringsAsFactors = FALSE)
-        unlink(temp)
+      # run only if downloaded object is valid
+      if (object.size(body) > 1000) {
+        a = readHTMLTable(body)
         b = a[[length(a)]]
         
         if (is.null(b)) {
@@ -148,7 +153,9 @@ ogimet_hourly_bp = function(date = date,
         # to avoid gtools::smartbind function or similar from another package..
         if (ncol(data_station) >= ncol(b)) {
           b[setdiff(names(data_station), names(b))] = NA # adding missing columns
-          data_station = rbind(data_station, b)  # joining data
+          data_station = data.table::rbindlist(
+            list(data_station, b), fill = TRUE) |> 
+            as.data.frame() # joining data
   
         } else { # when b have more columns then data_station
           if (nrow(data_station) == 0) {
@@ -161,8 +168,8 @@ ogimet_hourly_bp = function(date = date,
   
           if (coords) {
           coord = a[[1]][2, 1]
-          data_station["Lon"] = get_coord_from_string(coord, "Longitude")
-          data_station["Lat"] = get_coord_from_string(coord, "Latitude")
+          data_station$Lon = get_coord_from_string(coord, "Longitude")
+          data_station$Lat = get_coord_from_string(coord, "Latitude")
         }
         
       } # end of checking for empty files / problems with connection
