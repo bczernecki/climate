@@ -29,15 +29,33 @@ test_that("meteo_ogimet works!", {
   
   
   # check error for non existing station or problem with downloading any reasonable data:
+  
+  # wrong station ID:
   expect_warning(meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
                        station = 999999, coords = FALSE, allow_failure = FALSE))
-  
-  expect_null(meteo_ogimet(interval = "hourly", 
-               date = c(NA, NA),
-               station = 12120, coords = FALSE, allow_failure = TRUE))
+  # no date:
   expect_message(meteo_ogimet(interval = "hourly", 
                            date = c(NA, NA),
                            station = 12120, coords = FALSE, allow_failure = TRUE))
+  
+  # no values for the selected station
+  expect_message(meteo_ogimet(station = "64551", interval = "daily",
+                              date = c("2025-09-26", "2025-09-26")))
+  
+  # not all elements available:
+  expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
+               date = c("2025-09-26", "2025-09-26"))), 1)
+  
+  # no interval provided:
+  expect_error(meteo_ogimet(station = "06683",
+                            date = c("2020-02-01", "2020-02-01"),
+                            coords = FALSE, allow_failure = TRUE))
+  # split works only for daily:
+  expect_warning(meteo_ogimet(station = "06683",
+                            date = c("2020-02-01", "2020-02-01"),
+                            precip_split = FALSE, 
+                            interval = "daily",
+                            coords = FALSE, allow_failure = TRUE))
   
   
   if (is.data.frame(x) & nrow(x) > 20) {
