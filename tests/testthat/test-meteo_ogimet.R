@@ -46,6 +46,9 @@ test_that("meteo_ogimet works!", {
   expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
                date = c("2025-09-26", "2025-09-26"))), 1)
   
+  expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
+                                 date = c("2025-09-26", "2025-09-26"))), 1)
+  
   # no interval provided:
   expect_error(meteo_ogimet(station = "06683",
                             date = c("2020-02-01", "2020-02-01"),

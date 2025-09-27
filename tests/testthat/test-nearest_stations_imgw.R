@@ -34,4 +34,15 @@ test_that("nearest_stations_imgw", {
   )
   )
   
+  # date in a future (other error)
+  testthat::expect_error(nearest_stations_imgw(
+    type = "meteo",
+    rank = "synop",
+    year = c(9999, 9999),
+    point = c(52, 17),
+    add_map = FALSE, 
+    allow_failure = FALSE
+  )
+  )
+  
 })

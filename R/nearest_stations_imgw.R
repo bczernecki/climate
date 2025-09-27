@@ -34,6 +34,11 @@ nearest_stations_imgw = function(type = "meteo",
                                  allow_failure = TRUE,
                                  ...) {
   if (allow_failure) {
+    
+    msg = paste("Potential problem(s) found. Problems with downloading data.\n",
+                "\rRun function with argument allow_failure = FALSE",
+                "to see more details")
+    
     tryCatch(nearest_stations_imgw_bp(type,
                                       rank,
                                       year,
@@ -42,14 +47,11 @@ nearest_stations_imgw = function(type = "meteo",
                                       no_of_stations,
                                       ...),
              warning = function(w) {
-               message(paste("Potential problem(s) found. Problems with downloading data.\n",
-                             "\rRun function with argument allow_failure = FALSE",
-                             "to see more details"))
+               message(msg)
              },
-             error = function(e){
-               message(paste("Potential error(s) found. Problems with downloading data.\n",
-                             "\rRun function with argument allow_failure = FALSE",
-                             "to see more details"))})
+             error = function(e) {
+               message(msg)
+               })
   } else {
     nearest_stations_imgw_bp(type,
                              rank,
@@ -72,11 +74,11 @@ nearest_stations_imgw_bp = function(type,
                                     ...){
   if (length(point) > 2) {
     stop(paste("Too many points for the distance calculations.",
-               "Please provide just one pair of coordinates (e.g. point = c(17,53))"))
+               "Please provide just one pair of coordinates (e.g. point = c(17, 53))"))
   } else if (length(point) < 2) {
     msg = paste("The point argument should have two coordinates.",
                  "We will provide nearest stations for mean location of all available stations.",
-                 "To change it please change the `point` argument c(LON,LAT)",
+                 "To change it please change the `point` argument c(LON, LAT)",
                  sep = "\n")
     message(msg)
     Sys.sleep(2) # display message for 2 sec
