@@ -15,10 +15,9 @@ nearest_stations_ogimet(
 )
 }
 \arguments{
-\item{country}{country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom").
-It is possible to provide more than one country combined into a vector}
+\item{country}{country name; It is possible to provide more than one country combined into a vector}
 
-\item{date}{optionally, a day when measurements were done in all available locations; current Sys.Date used by default}
+\item{date}{optionally, a day when measurements were done in all available locations; \code{Sys.Date} used by default}
 
 \item{add_map}{logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)}
 
