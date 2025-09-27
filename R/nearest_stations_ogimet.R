@@ -14,6 +14,8 @@
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
 #' (e.g. ID station, distance from point in km, geographic coordinates, etc.). Each row represent a measurement,
 #' each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
+#' 
+#' @importFrom utils object.size
 #'  
 #' @examples 
 #' \donttest{

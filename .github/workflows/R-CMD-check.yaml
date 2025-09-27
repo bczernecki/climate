@@ -48,7 +48,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Query dependencies
         run: |
@@ -84,6 +84,9 @@ jobs:
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
           remotes::install_cran("DT")
+          remotes::install_cran("tidyr")
+          remotes::install_cran("purrr")
+          
         shell: Rscript {0}
 
       - name: Session info
