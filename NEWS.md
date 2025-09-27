@@ -1,13 +1,13 @@
 # climate 1.2.4
 
-* Bug fixes for ogimet-related functionalities due to changes in the OGIMET service
-
+* Major bug fixes for ogimet-related retrievals due to changes in the OGIMET service
+* Minor fixes for reading stations' coordinates from `ogimet_stations()`. Increased accuracy and changed logic for detecting hemisphere
 
 # climate 1.2.3
 
 * Fixes and modifications for `meteo_imgw_daily()` and `meteo_imgw_hourly()` due
 to changes in the IMGW-PIB meteorological datasets since 2024
-    * adjusting code to recognize whether downloaded zip file is not corrupted and use the "archive"" package to resolve some of found edge cases
+    * adjusting code to recognize whether downloaded zip file is not corrupted and use the "archive" package to resolve some of found edge cases
     * skipping corrupted files without breaking the download
     * removed possibility to download stations from IMGW-PIB repository using stations' ID for daily intervals
 * Returning all available IMGW-PIB meteorological dataset if provided station name(s) was not found
