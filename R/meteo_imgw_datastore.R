@@ -139,7 +139,7 @@ meteo_imgw_datastore_bp = function(year,
                                            select = c("V1", "V2", "V3", "V4")
              )
       ),
-      fill = TRUE)
+      fill = TRUE, use.names = TRUE)
     
     if (!is.null(stations)) {
       all_data[[i]] = all_data[[i]][all_data[[i]]$V1 %in% telemetry_stations$id, ]
@@ -148,7 +148,7 @@ meteo_imgw_datastore_bp = function(year,
     unlink(c(temp, temp2, tmp_dir), recursive = TRUE)
   }
 
-  all_data = data.table::rbindlist(all_data, fill = TRUE)
+  all_data = data.table::rbindlist(all_data, fill = TRUE, use.names = TRUE)
   all_data = all_data[dict, on = 'V2', param := i.parameter]
   all_data = data.table::dcast(all_data, V1 + V3  ~ param, value.var = "V4")
   all_data$V3 = as.POSIXct(all_data$V3, tz = "UTC")

@@ -154,7 +154,7 @@ ogimet_hourly_bp = function(date = date,
         if (ncol(data_station) >= ncol(b)) {
           b[setdiff(names(data_station), names(b))] = NA # adding missing columns
           data_station = data.table::rbindlist(
-            list(data_station, b), fill = TRUE) |> 
+            list(data_station, b), fill = TRUE, use.names = TRUE) |> 
             as.data.frame() # joining data
   
         } else { # when b have more columns then data_station
