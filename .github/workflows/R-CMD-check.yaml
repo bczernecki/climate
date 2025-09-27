@@ -34,7 +34,7 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-22.04,   r: 'release'}
-          - {os: ubuntu-22.04,   r: '4.0'}
+          - {os: ubuntu-22.04,   r: '4.1'}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -84,7 +84,6 @@ jobs:
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
           remotes::install_cran("DT")
-          ifelse(substr(x = getRversion(), 1, 3) >= "4.1", remotes::install_cran("purrr"), install.packages("https://cran.r-project.org/src/contrib/Archive/purrr/purrr_1.0.4.tar.gz", repos = NULL))
           remotes::install_cran("tidyr")
           
         shell: Rscript {0}

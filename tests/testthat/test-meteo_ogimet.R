@@ -27,6 +27,23 @@ test_that("meteo_ogimet works!", {
     testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
   }
   
+  
+  # check error for non existing station or problem with downloading any reasonable data:
+  expect_warning(meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
+                       station = 999999, coords = FALSE, allow_failure = FALSE))
+  
+  expect_null(meteo_ogimet(interval = "hourly", 
+               date = c(NA, NA),
+               station = 12120, coords = FALSE, allow_failure = TRUE))
+  expect_message(meteo_ogimet(interval = "hourly", 
+                           date = c(NA, NA),
+                           station = 12120, coords = FALSE, allow_failure = TRUE))
+  
+  
+  if (is.data.frame(x) & nrow(x) > 20) {
+    testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
+  }
+  
   # check precip_split on empty precipitation field
   petrobaltic = ogimet_hourly(station = 12001,
                          date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),

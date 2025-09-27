@@ -84,7 +84,7 @@ ogimet_hourly_bp = function(date = date,
     )
 
   for (station_nr in station) {
-    message(station_nr)
+    message(paste("station: ", station_nr))
     # adding progress bar if at least 3 iterations are needed
     if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
