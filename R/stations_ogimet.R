@@ -69,8 +69,7 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
   # run only if downloaded file is valid
   if (!is.na(body) & (object.size(body) > 0)) {
    
-    a = readLines(body)
-    a = paste(a, sep = "", collapse = "")
+    a = paste(body, sep = "", collapse = "")
     b = strsplit(a, "Decoded synops since")
     
     b1 = lapply(b, function(x) substr(x, 1, 400))

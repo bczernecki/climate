@@ -1,4 +1,6 @@
 test_that("stations_ogimet", {
+  skip_on_cran()
+  skip_if_offline()
   x = suppressWarnings(stations_ogimet(country = "Australia", add_map = TRUE))
   if (is.data.frame(x)) { 
     testthat::expect_true(nrow(x) >= 100)
