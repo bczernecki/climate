@@ -84,8 +84,8 @@ jobs:
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
           remotes::install_cran("DT")
-          remotes::install_cran("tidyr")
           ifelse(substr(x = getRversion(), 1, 3) >= "4.1", remotes::install_cran("purrr"), install.packages("https://cran.r-project.org/src/contrib/Archive/purrr/purrr_1.0.4.tar.gz", repos = NULL))
+          remotes::install_cran("tidyr")
           
         shell: Rscript {0}
 
