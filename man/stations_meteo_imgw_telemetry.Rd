@@ -2,7 +2,7 @@
 % Please edit documentation in R/stations_meteo_imgw_telemetry.R
 \name{stations_meteo_imgw_telemetry}
 \alias{stations_meteo_imgw_telemetry}
-\title{IMGW telemetry stations}
+\title{IMGW meteorological telemetry stations}
 \usage{
 stations_meteo_imgw_telemetry()
 }
@@ -11,11 +11,11 @@ data table with metadata for over 500 stations.
 Metadata contains: station ID, station name, river, latitude, longitude, altitude
 }
 \description{
-Retrieving current metadata for stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
+Retrieving current metadata for meteorological stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
 }
 \examples{
 \donttest{
-  telemetry_stations = stations_meteo_imgw_telemetry()
+  meteo_telemetry_stations = stations_meteo_imgw_telemetry()
 }
 
 }

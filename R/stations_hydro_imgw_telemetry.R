@@ -1,29 +1,29 @@
-#' IMGW meteorological telemetry stations
+#' IMGW hydrological telemetry stations
 #'
-#' Retrieving current metadata for meteorological stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
+#' Retrieving current metadata for hydrological stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
 #' 
-#' @return data table with metadata for over 500 stations. 
+#' @return data table with metadata for over 850 stations. 
 #' Metadata contains: station ID, station name, river, latitude, longitude, altitude
 #' @importFrom data.table as.data.table
 #' @export
 #'
 #' @examples 
 #' \donttest{
-#'   meteo_telemetry_stations = stations_meteo_imgw_telemetry()
+#'   hydro_telemetry_stations = stations_hydro_imgw_telemetry()
 #' }
 #'
 
-stations_meteo_imgw_telemetry = function() {
-
-  url = "https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Meteo/kody_stacji.csv"
+stations_hydro_imgw_telemetry = function() {
+  
+  url = "https://danepubliczne.imgw.pl/datastore/getfiledown/Arch/Telemetria/Hydro/kody_stacji.csv"
   telemetry_stations = tryCatch(expr = suppressWarnings(
-      read.csv(url,
+    read.csv(url,
              sep = ";",
              stringsAsFactors = FALSE)
-      ), 
-      error = function(e) {
-        message(paste0("Problems with downloading data from:\n", url))
-      })
+  ), 
+  error = function(e) {
+    message(paste0("Problems with downloading data from:\n", url))
+  })
   
   if (!is.null(telemetry_stations)) {
     colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")

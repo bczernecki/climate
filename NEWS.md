@@ -2,6 +2,8 @@
 
 * Major bug fixes for ogimet-related retrievals due to changes in the OGIMET service
 * Minor fixes for reading stations' coordinates from `ogimet_stations()`. Increased accuracy and changed logic for detecting hemisphere
+* Adding `hydro_imgw_datastore()` to retrieve data for hydrological stations from IMGW-PIB repository datastore (telemetry system)
+    * Adding `stations_hydro_imgw_telemetry()` to retrieve coordinates metadata for hydrological telemetry stations from IMGW-PIB
 
 # climate 1.2.3
 
