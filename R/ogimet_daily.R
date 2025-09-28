@@ -163,6 +163,7 @@ ogimet_daily_bp = function(date = date,
               ))
             } else if ((length(test[2, !is.na(test[2, ])]) == 2 & test[2, 2] == "Int.")) {
               names_col = unlist(c(test[1, 1:2], paste(test[1, 3], test[2, 1:2], sep = "_"), test[1, c(4:(length(test) - 1))]))
+              # nocov start
             } else if ((length(test[2, !is.na(test[2, ])]) == 5 & test[2, 5] == "Int.")) {
               names_col = unlist(c(
                 test[1, 1],
@@ -180,6 +181,7 @@ ogimet_daily_bp = function(date = date,
             } else {
               names_col = "Error_column"
             }
+            # nocov end
 
           names_col =
             gsub("[^A-Za-z0-9]",

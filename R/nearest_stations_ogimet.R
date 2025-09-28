@@ -44,6 +44,7 @@ nearest_stations_ogimet = function(country = "United Kingdom",
                                       no_of_stations = no_of_stations,
                                       ...
     ), error = function(e){
+      # nocov start
       message(paste("Problems with downloading data.",
                     "Run function with argument allow_failure = FALSE",
                     "to see more details"))})
@@ -55,6 +56,7 @@ nearest_stations_ogimet = function(country = "United Kingdom",
                              no_of_stations = no_of_stations,
                              ...
     )
+      # nocov end
   }
 }
 

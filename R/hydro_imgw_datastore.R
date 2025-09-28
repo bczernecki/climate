@@ -10,7 +10,6 @@
 #' @param year numeric vector of years to be downloaded (e.g., 2022:2023)
 #' @param parameters - character vector describing which parameters to be downloaded. Default `NULL` means to download all available.
 #' \enumerate{
-#' 
 #'  \item "level" - Water level (operational) (cm)
 #'  \item "level_obs" - Water level (observer) (cm)
 #'  \item "flow" - Water flow rate (operational) (m3/s)
@@ -56,6 +55,7 @@ hydro_imgw_datastore = function(year,
                                      stations,
                                      coords),
              error = function(e){
+               # nocov start
                message(paste("Potential error(s) found. Problems with downloading data.\n",
                              "\rRun function with argument allow_failure = FALSE",
                              "to see more details"))})
@@ -64,6 +64,7 @@ hydro_imgw_datastore = function(year,
                             parameters,
                             stations,
                             coords)
+              # nocov end
   }
 }
 

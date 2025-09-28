@@ -18,12 +18,11 @@ hydro_imgw_datastore(
 \item{parameters}{\itemize{
 \item character vector describing which parameters to be downloaded. Default \code{NULL} means to download all available.
 \enumerate{
-}
-
 \item "level" - Water level (operational) (cm)
 \item "level_obs" - Water level (observer) (cm)
 \item "flow" - Water flow rate (operational) (m3/s)
 \item "temp" - Water temperature (observer) (degree C)
+}
 }}
 
 \item{stations}{\itemize{

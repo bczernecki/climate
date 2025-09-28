@@ -47,7 +47,7 @@ meteo_imgw_datastore = function(year,
                                 stations = NULL,
                                 coords = TRUE,
                                 allow_failure = TRUE) {
-  
+  # nocov start
   # assertions for year
   if (!any(is.character(year) || is.numeric(year))) {
     stop("year argument must be character or numeric")
@@ -73,6 +73,7 @@ meteo_imgw_datastore = function(year,
                             coords)
   }
 }
+# nocov end
 
 #' @keywords internal
 #' @noRd

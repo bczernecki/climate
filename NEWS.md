@@ -1,5 +1,6 @@
 # climate 1.2.4
 
+* R version >= 4.1 is now required
 * Major bug fixes for ogimet-related retrievals due to changes in the OGIMET service
 * Minor fixes for reading stations' coordinates from `ogimet_stations()`. Increased accuracy and changed logic for detecting hemisphere
 * Adding `hydro_imgw_datastore()` to retrieve data for hydrological stations from IMGW-PIB repository datastore (telemetry system)
