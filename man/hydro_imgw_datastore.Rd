@@ -37,7 +37,7 @@ Default \code{NULL} means to download data for all available stations.
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 }
 \value{
-data.frame with a raw hydrorological measurements in 10-min or 60-min intervals.
+data.table with a raw hydrorological measurements in 10-min or 60-min intervals.
 Please note that this dataset is not validated by experts and may contain invalid values.
 }
 \description{
@@ -53,7 +53,7 @@ Data from the IMGW automated (telemetry) systems are non validated by experts an
 \donttest{
 imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
                                             parameters = "flow",
-                                            stations = "FORDON",
+                                            stations = c("FORDON", "PILCHOWICE"),
                                             coords = TRUE)
 }
 

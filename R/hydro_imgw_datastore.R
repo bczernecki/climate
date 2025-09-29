@@ -21,13 +21,13 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @import data.table
 #' @export
-#' @returns data.frame with a raw hydrorological measurements in 10-min or 60-min intervals.
+#' @returns data.table with a raw hydrorological measurements in 10-min or 60-min intervals.
 #' Please note that this dataset is not validated by experts and may contain invalid values.
 #' @examples 
 #' \donttest{
 #' imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
 #'                                             parameters = "flow",
-#'                                             stations = "FORDON",
+#'                                             stations = c("FORDON", "PILCHOWICE"),
 #'                                             coords = TRUE)
 #' }
 #'
@@ -146,9 +146,8 @@ hydro_imgw_datastore_bp = function(year,
   
   colnames(all_data)[which(colnames(all_data) %in% c("V1", "V3"))] = c("id", "date_time")
   # change class of columns in data.frame to numeric:
-  all_data = as.data.frame(all_data)
   cnames_to_change = colnames(all_data)[colnames(all_data) %in% dict$parameter]
-  all_data[, cnames_to_change] = lapply(all_data[, cnames_to_change], as.numeric)
+  all_data[, (cnames_to_change) := lapply(.SD, as.numeric), .SDcols = cnames_to_change]
   
   return(all_data)
 }
