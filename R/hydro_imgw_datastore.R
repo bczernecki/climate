@@ -27,9 +27,8 @@
 #' \donttest{
 #' imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
 #'                                             parameters = "flow",
-#'                                             stations = c("HALA GĄSIENICOWA",
-#'                                                    "DOLINA 5 STAWÓW"),
-#'                                       coords = TRUE)
+#'                                             stations = "FORDON",
+#'                                             coords = TRUE)
 #' }
 #'
 
@@ -112,7 +111,7 @@ hydro_imgw_datastore_bp = function(year,
       message("IMGW datastore does not contain data for ", paste(basename(urls[i])), ". skipping\n")
     }
     
-    files_to_read = dir(tmp_dir, full.names = TRUE, pattern = paste0(dict$V2, collapse = "|"))
+    files_to_read = dir(tmp_dir, full.names = TRUE, pattern = paste0(dict$V2, collapse = "|"), recursive = TRUE)
     files_to_read = files_to_read[file.size(files_to_read) > 0]
     
     all_data[[i]] = data.table::rbindlist(
@@ -146,6 +145,10 @@ hydro_imgw_datastore_bp = function(year,
   }
   
   colnames(all_data)[which(colnames(all_data) %in% c("V1", "V3"))] = c("id", "date_time")
+  # change class of columns in data.frame to numeric:
+  all_data = as.data.frame(all_data)
+  cnames_to_change = colnames(all_data)[colnames(all_data) %in% dict$parameter]
+  all_data[, cnames_to_change] = lapply(all_data[, cnames_to_change], as.numeric)
   
-  return(as.data.frame(all_data))
+  return(all_data)
 }

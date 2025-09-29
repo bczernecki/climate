@@ -53,9 +53,8 @@ Data from the IMGW automated (telemetry) systems are non validated by experts an
 \donttest{
 imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
                                             parameters = "flow",
-                                            stations = c("HALA GĄSIENICOWA",
-                                                   "DOLINA 5 STAWÓW"),
-                                      coords = TRUE)
+                                            stations = "FORDON",
+                                            coords = TRUE)
 }
 
 }
