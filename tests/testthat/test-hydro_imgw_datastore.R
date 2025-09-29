@@ -10,9 +10,9 @@ test_that("hydro-meteo_imgw_datastore", {
     return(invisible(NULL))
   } else {
     
-    imgw_telemetry = hydro_imgw_datastore(year = 2023, 
+    imgw_telemetry = hydro_imgw_datastore(year = 2024,
                                           parameters = "flow", 
-                                          stations = "FORDON")
+                                          stations = "PILCHOWICE")
     if (!is.null(imgw_telemetry)) {
       if (is.data.frame(imgw_telemetry) & nrow(imgw_telemetry) > 0) {
         testthat::expect_true(is.data.frame(imgw_telemetry))

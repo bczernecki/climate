@@ -26,7 +26,7 @@ hydro_imgw_datastore(
 }}
 
 \item{stations}{\itemize{
-\item character vector with station names as visible in the \code{hydro_imgw_telemetry_stations()}.
+\item character vector with station name(s) as visible in the \code{hydro_imgw_telemetry_stations()}.
 Default \code{NULL} means to download data for all available stations.
 }}
 
@@ -51,9 +51,9 @@ Data from the IMGW automated (telemetry) systems are non validated by experts an
 }
 \examples{
 \donttest{
-imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
+imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022,
                                             parameters = "flow",
-                                            stations = c("FORDON", "PILCHOWICE"),
+                                            stations = "FORDON",
                                             coords = TRUE)
 }
 

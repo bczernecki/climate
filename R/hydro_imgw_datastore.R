@@ -15,7 +15,7 @@
 #'  \item "flow" - Water flow rate (operational) (m3/s)
 #'  \item "temp" - Water temperature (observer) (degree C)
 #'  }
-#' @param stations - character vector with station names as visible in the `hydro_imgw_telemetry_stations()`.
+#' @param stations - character vector with station name(s) as visible in the `hydro_imgw_telemetry_stations()`.
 #' Default `NULL` means to download data for all available stations.
 #' @param coords - logical - whether to append the dataset with station full name, longitude, latitude and altitude. Default: TRUE
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
@@ -25,9 +25,9 @@
 #' Please note that this dataset is not validated by experts and may contain invalid values.
 #' @examples 
 #' \donttest{
-#' imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022:2023,
+#' imgw_hydro_telemetry = hydro_imgw_datastore(year = 2022,
 #'                                             parameters = "flow",
-#'                                             stations = c("FORDON", "PILCHOWICE"),
+#'                                             stations = "FORDON",
 #'                                             coords = TRUE)
 #' }
 #'
