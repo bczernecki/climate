@@ -27,7 +27,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends: 
     R (>= 4.1.0)
 Imports: 
@@ -44,6 +44,6 @@ Suggests:
     testthat,
     tidyr,
     rmarkdown
-URL: https://github.com/bczernecki/climate
+URL: https://github.com/bczernecki/climate, https://bczernecki.github.io/climate/
 BugReports: https://github.com/bczernecki/climate/issues
 VignetteBuilder: knitr

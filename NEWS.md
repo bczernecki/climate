@@ -39,12 +39,10 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Added location of IMGW-PIB telemetry stations within `meteo_imgw_telemetry_stations()`
 * Minor bug fixes
 
-
 # climate 1.1.1
 
 * Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata
 * Bug fix for `ogimet_daily` if data contains more than one year
-
 
 # climate 1.1.0
 
@@ -62,13 +60,11 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * units added to column labels for `nearest_stations_` set of functions instead of column names for easier processing (e.g. [km] are visible now only as attributes)
 * new functions follow lintr settings
 
-
 # climate 1.0.4
 
 * Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)
 * Function `nearest_stations_imgw()` now uses the Vincenty's formula in `spheroid_dist` to calculate the distance between points on a spheroid, not the Euclidean distance (previously results were inaccurate for some specific cases)
 * minor bugs fixes and improvements
-
 
 # climate 1.0.3
 

@@ -49,10 +49,9 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
-- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
-
 - **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
 
+- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
   
 ### Hydrological data
 
@@ -60,7 +59,6 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If
 danepubliczne.imgw.pl collection.
 It is a wrapper for previously developed set of functions such as: `hydro_monthly()`, and `hydro_daily()`
 - **hydro_imgw_datastore()** - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.
-
 
 ### Auxiliary functions and datasets
 
