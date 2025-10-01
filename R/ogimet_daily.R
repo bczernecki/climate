@@ -9,7 +9,7 @@
 #' @param hour time for which the daily raport is generated. Set default as hour = 6 (i.e. 6 UTC)
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom XML readHTMLTable
-#' @importFrom utils setTxtProgressBar txtProgressBar
+#' @importFrom utils setTxtProgressBar txtProgressBar object.size
 #' 
 #' @export
 #' @returns data.frame with historical meteorological data for the daily summaries
@@ -78,7 +78,7 @@ ogimet_daily_bp = function(date = date,
     )
   
   for (station_nr in station) {
-    message(station_nr)
+    message(paste("station:", station_nr))
     
     # adding progress bar if at least 3 iterations are needed
     if (length(dates) * length(station) >= 3) {
@@ -98,9 +98,18 @@ ogimet_daily_bp = function(date = date,
                       station_nr, "&ndays=32&ano=", 
                       year, "&mes=", month, "&day=", day, 
                       "&hora=", hour,"&ord=REV&Send=Send", sep = "")
-      temp = tempfile()
-      test_url(linkpl2, temp)
-      if (is.na(file.size(temp)) | (file.size(temp) < 500)) { 
+      
+      body = httr::GET(linkpl2,
+                       httr::add_headers(
+                         `User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0",
+                         `Accept` = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                         `Accept-Language` = "pl,en-US;q=0.7,en;q=0.3",
+                         `Referer` = "https://ogimet.com/resynops.phtml.en",
+                         `Cookie` = "cookieconsent_status=dismiss; ogimet_serverid=huracan|aNaPt|aNaPj"
+                       ))
+      body = httr::content(body, as = "text", encoding = "UTF-8")
+
+      if (is.na(body) | (object.size(body) < 500)) { 
         message("Problem with downloading data from:", linkpl2, "\n")
         if (exists("data_station")) {
           message("Returning results downloaded up to this point:\n")
@@ -108,9 +117,7 @@ ogimet_daily_bp = function(date = date,
         }
       } else { # run only if downloaded file is valid
         
-        a = readHTMLTable(temp, stringsAsFactors = FALSE)
-        unlink(temp)
-        
+        a = readHTMLTable(body, stringsAsFactors = FALSE)
         b = a[[length(a)]]
         
         # check no data situations:
@@ -156,6 +163,7 @@ ogimet_daily_bp = function(date = date,
               ))
             } else if ((length(test[2, !is.na(test[2, ])]) == 2 & test[2, 2] == "Int.")) {
               names_col = unlist(c(test[1, 1:2], paste(test[1, 3], test[2, 1:2], sep = "_"), test[1, c(4:(length(test) - 1))]))
+              # nocov start
             } else if ((length(test[2, !is.na(test[2, ])]) == 5 & test[2, 5] == "Int.")) {
               names_col = unlist(c(
                 test[1, 1],
@@ -173,6 +181,7 @@ ogimet_daily_bp = function(date = date,
             } else {
               names_col = "Error_column"
             }
+            # nocov end
 
           names_col =
             gsub("[^A-Za-z0-9]",

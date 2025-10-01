@@ -1,8 +1,16 @@
+# climate 1.2.4
+
+* R version >= 4.1 is now required
+* Major bug fixes for ogimet-related retrievals due to changes in the OGIMET service
+* Minor fixes for reading stations' coordinates from `ogimet_stations()`. Increased accuracy and changed logic for detecting hemisphere
+* Adding `hydro_imgw_datastore()` to retrieve data for hydrological stations from IMGW-PIB repository datastore (telemetry system)
+    * Adding `stations_hydro_imgw_telemetry()` to retrieve coordinates metadata for hydrological telemetry stations from IMGW-PIB
+
 # climate 1.2.3
 
 * Fixes and modifications for `meteo_imgw_daily()` and `meteo_imgw_hourly()` due
 to changes in the IMGW-PIB meteorological datasets since 2024
-    * adjusting code to recognize whether downloaded zip file is not corrupted and use the "archive"" package to resolve some of found edge cases
+    * adjusting code to recognize whether downloaded zip file is not corrupted and use the "archive" package to resolve some of found edge cases
     * skipping corrupted files without breaking the download
     * removed possibility to download stations from IMGW-PIB repository using stations' ID for daily intervals
 * Returning all available IMGW-PIB meteorological dataset if provided station name(s) was not found
@@ -31,12 +39,10 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Added location of IMGW-PIB telemetry stations within `meteo_imgw_telemetry_stations()`
 * Minor bug fixes
 
-
 # climate 1.1.1
 
 * Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata
 * Bug fix for `ogimet_daily` if data contains more than one year
-
 
 # climate 1.1.0
 
@@ -54,13 +60,11 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * units added to column labels for `nearest_stations_` set of functions instead of column names for easier processing (e.g. [km] are visible now only as attributes)
 * new functions follow lintr settings
 
-
 # climate 1.0.4
 
 * Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)
 * Function `nearest_stations_imgw()` now uses the Vincenty's formula in `spheroid_dist` to calculate the distance between points on a spheroid, not the Euclidean distance (previously results were inaccurate for some specific cases)
 * minor bugs fixes and improvements
-
 
 # climate 1.0.3
 

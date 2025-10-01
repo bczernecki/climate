@@ -3,19 +3,19 @@
 #' Returns a data frame of meteorological stations with their coordinates and distance from a given location based on the ogimet webpage. 
 #' The returned list is valid only for a given day. 
 #'
-#' @param country country name; for more than two words they need to be seperated with a plus character (e.g., "United+Kingdom").
-#' It is possible to provide more than one country combined into a vector
-#' @param date optionally, a day when measurements were done in all available locations; current Sys.Date used by default
+#' @param country country name; It is possible to provide more than one country combined into a vector
+#' @param date optionally, a day when measurements were done in all available locations; `Sys.Date` used by default
 #' @param add_map logical - whether to draw a map for a returned data frame (requires maps/mapdata packages)
 #' @param point a vector of two coordinates (longitude, latitude) for a point we want to find nearest stations to (e.g. c(0, 0))
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... extra arguments to be provided to the [graphics::plot()] function (only if add_map = TRUE)
-#' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
 #' (e.g. ID station, distance from point in km, geographic coordinates, etc.). Each row represent a measurement,
 #' each station which has a measurements on selected date. If `add_map = TRUE` additional map of downloaded data is added. 
+#' 
+#' @importFrom utils object.size
 #'  
 #' @examples 
 #' \donttest{
@@ -44,6 +44,7 @@ nearest_stations_ogimet = function(country = "United Kingdom",
                                       no_of_stations = no_of_stations,
                                       ...
     ), error = function(e){
+      # nocov start
       message(paste("Problems with downloading data.",
                     "Run function with argument allow_failure = FALSE",
                     "to see more details"))})
@@ -55,6 +56,7 @@ nearest_stations_ogimet = function(country = "United Kingdom",
                              no_of_stations = no_of_stations,
                              ...
     )
+      # nocov end
   }
 }
 
@@ -87,8 +89,8 @@ nearest_stations_ogimet_bp = function(country = country,
   ndays = 1
   linkpl2 =
     paste0(
-      "http://ogimet.com/cgi-bin/gsynres?lang=en&state=",
-      number_countries,
+      "https://ogimet.com/cgi-bin/gsynres?lang=en&state=",
+      gsub(x = number_countries, " ", "+", fixed = TRUE),
       "&osum=no&fmt=html&ord=REV&ano=",
       year,
       "&mes=",
@@ -98,20 +100,23 @@ nearest_stations_ogimet_bp = function(country = country,
       "&hora=06&ndays=1&Send=send"
     )
 
-  temp = tempfile()
-  test_url(link = linkpl2, output = temp)
+  body = httr::GET(linkpl2,
+                   httr::add_headers(
+                     `User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0",
+                     `Accept` = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                     `Accept-Language` = "pl,en-US;q=0.7,en;q=0.3",
+                     `Referer` = "https://ogimet.com/resynops.phtml.en",
+                     `Cookie` = "cookieconsent_status=dismiss; ogimet_serverid=huracan|aNaPt|aNaPj"
+                   ))
+  body = httr::content(body, as = "text", encoding = "UTF-8")
+  
   
   # run only if downloaded file is valid
-  if (!is.na(file.size(temp)) & (file.size(temp) > 500)) {
-  
-    a = readLines(temp)
-    a = paste(a, sep = "", collapse = "") 
-    
+  if (!is.na(body) & (object.size(body) > 500)) {
+    a = paste(body, sep = "", collapse = "") 
     b = strsplit(a, "Decoded synops since")
-    
     b1 = lapply(b, function(x) substr(iconv(x, from = 'UTF-8', to = 'ASCII//TRANSLIT'), 1, 400))
     b1[[1]] = b1[[1]][-1] # header
-    
     b21 = unlist(lapply(gregexpr('Lat=', b1[[1]], fixed = TRUE), function(x) x[1]))
     
     pattern = paste0(" (", gsub(x = number_countries, pattern = "+", replacement = " ", fixed = TRUE))
@@ -122,7 +127,6 @@ nearest_stations_ogimet_bp = function(country = country,
     res = substr(b1$str, b1$start, b1$stop)
     
     station_names = unlist(lapply(strsplit(res, " - "), function(x) x[length(x)]))
-    
     
     res = gsub(x = res, pattern = ", CAPTION, '", replacement = '', fixed = TRUE)
     res = gsub(x = res, pattern = " m'", replacement = ' ', fixed = TRUE)

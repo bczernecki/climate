@@ -49,16 +49,16 @@ It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If
 
 - **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
-- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
-
 - **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
 
+- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
   
 ### Hydrological data
 
-- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
+- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from stations available in the
 danepubliczne.imgw.pl collection.
 It is a wrapper for previously developed set of functions such as: `hydro_monthly()`, and `hydro_daily()`
+- **hydro_imgw_datastore()** - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.
 
 ### Auxiliary functions and datasets
 
@@ -69,6 +69,8 @@ country in the Ogimet repository
 - **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
 - **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
 - **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
+- **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
+- **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
 - **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
 - **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
 

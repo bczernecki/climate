@@ -29,6 +29,7 @@ hydro_imgw_daily = function(year,
                             allow_failure = TRUE,
                             ...) {
   
+  # nocov start
   if (allow_failure) {
     tryCatch(hydro_imgw_daily_bp(year,
                                  coords,
@@ -39,6 +40,7 @@ hydro_imgw_daily = function(year,
                message(paste("Problems with downloading data.",
                              "Run function with argument allow_failure = FALSE",
                              "to see more details"))})
+  # nocov end
   } else {
     hydro_imgw_daily_bp(year,
                         coords,
