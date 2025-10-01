@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.4</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Scrapping hourly meteorological (Synop) data from the Ogimet webpage</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.2.3/R/ogimet_hourly.R" class="external-link"><code>R/ogimet_hourly.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/R/ogimet_hourly.R" class="external-link"><code>R/ogimet_hourly.R</code></a></small>
     <div class="hidden name"><code>ogimet_hourly.Rd</code></div>
     </div>
 
@@ -113,9 +113,8 @@ For debugging purposes change to FALSE</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="co"># downloading data for Poznan-Lawica, Poland</span></span></span>
 <span class="r-in"><span>  <span class="va">poznan</span> <span class="op">=</span> <span class="fu">ogimet_hourly</span><span class="op">(</span>station <span class="op">=</span> <span class="fl">12330</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 12330</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpW8Zm2W/file1c30669b054c</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpW8Zm2W/file1c3023f2ff97</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> station:  12330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -132,7 +131,7 @@ For debugging purposes change to FALSE</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

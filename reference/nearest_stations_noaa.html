@@ -18,7 +18,7 @@ The returned list is valid only for a given day."><meta property="og:image" cont
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.4</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ The returned list is valid only for a given day."><meta property="og:image" cont
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>List of nearby SYNOP stations for a defined geographical location</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.2.3/R/nearest_stations_noaa.R" class="external-link"><code>R/nearest_stations_noaa.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/R/nearest_stations_noaa.R" class="external-link"><code>R/nearest_stations_noaa.R</code></a></small>
     <div class="hidden name"><code>nearest_stations_noaa.Rd</code></div>
     </div>
 
@@ -124,36 +124,36 @@ each station which has a measurements on selected date. If <code>add_map = TRUE<
 <span class="r-in"><span>  point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">6</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  add_map <span class="op">=</span> <span class="cn">TRUE</span>, </span></span>
 <span class="r-in"><span>  no_of_stations <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpW8Zm2W/file1c307725ff97</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpHgRl1L/file1f9e5921237c</span>
 <span class="r-plt img"><img src="nearest_stations_noaa-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      CTRY countries   USAF  WBAN              STATION.NAME STATE ICAO   LAT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6056   CE SRI LANKA 434950 99999                     GALLE            6.033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6050   CE SRI LANKA 434950 99999                     GALLE            6.033</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6046   CE SRI LANKA 434860 99999                 RATNAPURA            6.683</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6059   CE SRI LANKA 434670 99999         COLOMBO RATMALANA       VCCC 6.822</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6050   CE SRI LANKA 434660 99999                   COLOMBO            6.900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6053   CE SRI LANKA 434970 99999                HAMBANTOTA       VCRI 6.117</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6052   CE SRI LANKA 434500 99999 BANDARANAIKE INTL COLOMBO       VCBI 7.181</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6057   CE SRI LANKA 434730 99999              NUWARA ELIYA            6.967</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6064   CE SRI LANKA 434760 99999                DIYATALAWA            6.817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6063   CE SRI LANKA 434790 99999                   BADULLA            6.983</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6062   CE SRI LANKA 434440 99999                     KANDY            7.333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6040   CE SRI LANKA 434670 99999         COLOMBO RATMALANA       VCCC 6.822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6035   CE SRI LANKA 434660 99999                   COLOMBO            6.900</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6047   CE SRI LANKA 434970 99999                HAMBANTOTA       VCRI 6.117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6036   CE SRI LANKA 434500 99999 BANDARANAIKE INTL COLOMBO       VCBI 7.181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6048   CE SRI LANKA 434730 99999              NUWARA ELIYA            6.967</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6045   CE SRI LANKA 434760 99999                DIYATALAWA            6.817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6043   CE SRI LANKA 434790 99999                   BADULLA            6.983</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6033   CE SRI LANKA 434440 99999                     KANDY            7.333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         LON ELEV.M.    BEGIN      END Begin_date   End_date  distance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6056 80.217    13.0 20020116 20250421 2002-01-16 2025-04-21  24.62659</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6046 80.400    88.0 20020116 20250421 2002-01-16 2025-04-21  88.80485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6059 79.886     6.7 19440513 20250421 1944-05-13 2025-04-21  93.10837</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6050 79.867     7.0 19440101 20250421 1944-01-01 2025-04-21 102.07363</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6053 81.133    20.0 19450801 20250421 1945-08-01 2025-04-21 127.79482</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6052 79.866     8.8 19620101 20250421 1962-01-01 2025-04-21 133.35446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6057 80.767  1880.0 19570701 20250421 1957-07-01 2025-04-21 138.47897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6064 80.967  1250.0 20050714 20250421 2005-07-14 2025-04-21 142.03310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6063 81.050   667.0 20030112 20250421 2003-01-12 2025-04-21 161.37568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6062 80.633   477.0 20030111 20250421 2003-01-11 2025-04-21 165.56435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6050 80.217    13.0 20020116 20250824 2002-01-16 2025-08-24  24.62659</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6046 80.400    88.0 20020116 20250824 2002-01-16 2025-08-24  88.80485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6040 79.886     6.7 19440513 20250824 1944-05-13 2025-08-24  93.10837</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6035 79.867     7.0 19440101 20250824 1944-01-01 2025-08-24 102.07363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6047 81.133    20.0 19450801 20250824 1945-08-01 2025-08-24 127.79482</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6036 79.866     8.8 19620101 20250824 1962-01-01 2025-08-24 133.35446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6048 80.767  1880.0 19570701 20250824 1957-07-01 2025-08-24 138.47897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6045 80.967  1250.0 20050714 20250824 2005-07-14 2025-08-24 142.03310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6043 81.050   667.0 20030112 20250824 2003-01-12 2025-08-24 161.37568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6033 80.633   477.0 20030111 20250824 2003-01-11 2025-08-24 165.56435</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">uk_stations</span> <span class="op">=</span> <span class="fu">nearest_stations_noaa</span><span class="op">(</span>country <span class="op">=</span> <span class="st">"UNITED KINGDOM"</span>, no_of_stations <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The point argument should have two coordinates. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  We will provide nearest stations for mean location. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  To change it please change the `point` argument c(LON,LAT)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpW8Zm2W/file1c30371ba275</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpHgRl1L/file1f9e38178382</span>
 <span class="r-plt img"><img src="nearest_stations_noaa-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
@@ -171,7 +171,7 @@ each station which has a measurements on selected date. If <code>add_map = TRUE<
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

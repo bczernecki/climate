@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.4</span>
       </span>
     </div>
 
@@ -121,8 +121,8 @@
 <li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.</p></li>
 <li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, and <code>meteo_hourly()</code>. If 10-min dataset is needed then consider using <strong><code><a href="reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code></strong></p></li>
 <li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
-<li><p><strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 <li><p><strong>meteo_noaa_co2()</strong> - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
+<li><p><strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -130,8 +130,10 @@
 </h3>
 <ul>
 <li>
-<strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for previously developed set of functions such as: <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
+<strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from stations available in the danepubliczne.imgw.pl collection. It is a wrapper for previously developed set of functions such as: <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
 </li>
+<li>
+<strong>hydro_imgw_datastore()</strong> - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -150,6 +152,10 @@
 <strong>imgw_meteo_stations</strong> - Built-in metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers</li>
 <li>
 <strong>imgw_hydro_stations</strong> - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers</li>
+<li>
+<strong>stations_meteo_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations</li>
+<li>
+<strong>stations_hydro_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations</li>
 <li>
 <strong>imgw_meteo_abbrev</strong> - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)</li>
 <li>
@@ -416,9 +422,9 @@ head(h)
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Bartosz Czernecki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-6496-1386" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Arkadiusz Głogowski <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7587-8892" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Jakub Nowosad <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1057-3721" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Bartosz Czernecki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-6496-1386" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Arkadiusz Głogowski <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7587-8892" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Jakub Nowosad <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1057-3721" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -446,7 +452,7 @@ head(h)
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>
