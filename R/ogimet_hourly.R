@@ -89,6 +89,7 @@ ogimet_hourly_bp = function(date = date,
     if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
     for (i in length(dates):1) {
+      print(i)
       
       if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates) * length(station) - i)), "\n")
       
@@ -135,6 +136,11 @@ ogimet_hourly_bp = function(date = date,
         a = readHTMLTable(body)
         b = a[[length(a)]]
         
+        # TODO:
+        # check if b$V2 does not contain wording like:
+        # "gsynres: Limit for old data queries exceeded. Permitted a query per 20 seconds per IP"
+        
+        
         if (is.null(b)) {
           warning(paste0("Wrong station ID: ", station_nr, 
                          " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
@@ -175,6 +181,7 @@ ogimet_hourly_bp = function(date = date,
         }
         
       } # end of checking for empty files / problems with connection
+      print(i)
     } # end of looping for dates
   }# end of looping for stations
   
