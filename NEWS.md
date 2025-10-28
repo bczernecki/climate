@@ -1,6 +1,7 @@
-# climate 1.2.4
+# climate 1.2.5
 
-* `meteo_imgw_daily` fix for current year
+* `meteo_imgw_daily` fix for current year data retrieval from IMGW-PIB repository
+* `imgw_read` - fix for wrongly formatted input CSVs for hydrological data in the IMGW-PIB repository
 
 # climate 1.2.4
 

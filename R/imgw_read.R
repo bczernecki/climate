@@ -8,7 +8,7 @@
 #' @noRd
 
 imgw_read = function(translit, fpath) {
-  
+
   if (translit) {
     data = as.data.frame(data.table::fread(cmd = paste("iconv -f ISO-8859-2 -t ASCII//TRANSLIT", fpath)))
   } else {
@@ -32,8 +32,14 @@ imgw_read = function(translit, fpath) {
                                        header = FALSE, 
                                        stringsAsFactors = FALSE, 
                                        sep = ",",
+                                       quote = "\"",
                                        fileEncoding = "CP1250"))
     }
+    
+    # if still one column but data inside, then try to split it by commas with read.csv:
+    if (ncol(data) == 1) {
+      data = read.csv(text = data$V1, header = FALSE, stringsAsFactors = FALSE)
+      }
     
     }
   return(data)
