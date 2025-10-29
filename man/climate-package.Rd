@@ -14,6 +14,7 @@ Automatize downloading of meteorological and hydrological data from publicly ava
 Useful links:
 \itemize{
   \item \url{https://github.com/bczernecki/climate}
+  \item \url{https://bczernecki.github.io/climate/}
   \item Report bugs at \url{https://github.com/bczernecki/climate/issues}
 }
 

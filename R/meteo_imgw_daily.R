@@ -18,7 +18,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that
 #' shortens column names
 #' @importFrom XML readHTMLTable
-#' @importFrom utils download.file unzip read.csv
+#' @importFrom utils download.file unzip read.csv head
 #' @importFrom data.table fread
 #' @returns data.frame with a daily meteorological measurements
 #' @export
@@ -120,6 +120,8 @@ meteo_imgw_daily_bp = function(rank,
         if (file.exists(file2)) {
           data2 = imgw_read(translit, file2)
           colnames(data2) = meta[[2]]$parameters
+        } else {
+          data2 = head(data1, 0)[, 1:min(5, ncol(data1))]
         }
         
         unlink(c(temp, temp2))

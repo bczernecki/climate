@@ -89,6 +89,17 @@ ogimet_hourly_bp = function(date = date,
     if (length(dates)*length(station) >= 3 ) pb = txtProgressBar(min = 0, max = length(dates)*length(station) - 1, style = 3)
     
     for (i in length(dates):1) {
+      if (length(dates) >= 2 && i == length(dates)) {
+        msg = "\n INFO: Please note that the Ogimet has recently limited number of queries that are accepted
+        \r by the server from a single IP address. Therefore, downloading more than approx. 1 day of data
+        \r for a single station requires 20 seconds pause between subsequent queries and
+        \r may take a while. Thank you for your patience."
+        message(trimws(msg))
+      }
+      
+      if (i != length(dates)) {
+        Sys.sleep(20) # to avoid ogimet server overload
+      }
       
       if (length(dates) >= 3 ) paste(setTxtProgressBar(pb, abs(length(dates) * length(station) - i)), "\n")
       
@@ -176,7 +187,7 @@ ogimet_hourly_bp = function(date = date,
         
       } # end of checking for empty files / problems with connection
     } # end of looping for dates
-  }# end of looping for stations
+  } # end of looping for stations
   
   if (nrow(data_station) > 0) {
     data_station = data_station[!duplicated(data_station), ]
@@ -206,7 +217,6 @@ ogimet_hourly_bp = function(date = date,
       data_station = data_station[, ord1]
     }
     # setdiff(names(df), c("station_ID", "Date", "TC"))
-  
   
     # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
     if (precip_split) {
