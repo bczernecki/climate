@@ -9,6 +9,7 @@ test_that("meteo_ogimet works!", {
   # sometimes ogimet requires warm spin-up, so in order to pass CRAN tests:
   if (is.data.frame(df) & nrow(df) > 15) {
     expect_true(any(colnames(df) %in% c("Lon", "Lat")))
+    Sys.sleep(20)
   }
   
   # expected at least 100 rows in hourly dataset:
@@ -17,6 +18,7 @@ test_that("meteo_ogimet works!", {
   
   if (is.data.frame(x) & nrow(df) > 20) {
     testthat::expect_true(nrow(x) > 100)
+    Sys.sleep(20)
   }
   
   # check if January is going to be downloaded not other dates are downloaded by accident:
@@ -25,6 +27,7 @@ test_that("meteo_ogimet works!", {
   
   if (is.data.frame(x) & nrow(x) > 20) {
     testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
+    Sys.sleep(20)
   }
   
   
@@ -63,6 +66,7 @@ test_that("meteo_ogimet works!", {
   
   if (is.data.frame(x) & nrow(x) > 20) {
     testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
+    Sys.sleep(20)
   }
   
   # check precip_split on empty precipitation field
@@ -71,6 +75,7 @@ test_that("meteo_ogimet works!", {
                          coords = TRUE, precip_split = TRUE)
   if (is.data.frame(petrobaltic) & nrow(petrobaltic) > 0) {
     testthat::expect_true(all(is.na(petrobaltic$pr12)))
+    Sys.sleep(20)
   }
 
     
@@ -87,7 +92,7 @@ test_that("meteo_ogimet works!", {
         coords = FALSE,
         station = "06683", allow_failure = FALSE)
     )
-    
+    Sys.sleep(20)
     # check change between years:
     multiyr = ogimet_daily(date = c(as.Date("2022-12-15"), as.Date("2023-01-21")), 
                            station = 12330)

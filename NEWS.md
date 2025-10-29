@@ -1,5 +1,7 @@
 # climate 1.2.5
 
+* Added 20 sec. pause between subsequent requests to the OGIMET server to avoid server overload. 
+This is a temporary solution and it is planned to replace it by parsing SYNOP messages (which can be downloaded in a bigger chunks).
 * `meteo_imgw_daily` fix for current year data retrieval from IMGW-PIB repository
 * `imgw_read` - fix for wrongly formatted input CSVs for hydrological data in the IMGW-PIB repository
 
