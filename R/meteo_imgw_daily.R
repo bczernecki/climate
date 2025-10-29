@@ -18,7 +18,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that
 #' shortens column names
 #' @importFrom XML readHTMLTable
-#' @importFrom utils download.file unzip read.csv
+#' @importFrom utils download.file unzip read.csv head
 #' @importFrom data.table fread
 #' @returns data.frame with a daily meteorological measurements
 #' @export
