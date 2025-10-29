@@ -22,11 +22,11 @@ test_that("meteo_ogimet works!", {
   }
   
   # check if January is going to be downloaded not other dates are downloaded by accident:
-  x = meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
+  y = meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
                station = 12120, coords = FALSE)
   
-  if (is.data.frame(x) & nrow(x) > 20) {
-    testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
+  if (is.data.frame(y) & nrow(y) > 20) {
+    testthat::expect_equal(unique(format(y$Date, "%Y")), "2019")
     Sys.sleep(20)
   }
   
@@ -53,10 +53,13 @@ test_that("meteo_ogimet works!", {
                                  date = c("2025-09-26", "2025-09-26"))), 1)
   
   # no interval provided:
+  Sys.sleep(20)
   expect_error(meteo_ogimet(station = "06683",
                             date = c("2020-02-01", "2020-02-01"),
                             coords = FALSE, allow_failure = TRUE))
+  
   # split works only for daily:
+  Sys.sleep(20)
   expect_warning(meteo_ogimet(station = "06683",
                             date = c("2020-02-01", "2020-02-01"),
                             precip_split = FALSE, 
@@ -64,12 +67,8 @@ test_that("meteo_ogimet works!", {
                             coords = FALSE, allow_failure = TRUE))
   
   
-  if (is.data.frame(x) & nrow(x) > 20) {
-    testthat::expect_equal(unique(format(x$Date, "%Y")), "2019")
-    Sys.sleep(20)
-  }
-  
   # check precip_split on empty precipitation field
+  Sys.sleep(20)
   petrobaltic = ogimet_hourly(station = 12001,
                          date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),
                          coords = TRUE, precip_split = TRUE)
@@ -93,7 +92,8 @@ test_that("meteo_ogimet works!", {
         station = "06683", allow_failure = FALSE)
     )
     Sys.sleep(20)
-    # check change between years:
+    
+    # check dates between 2 years and check whether number of days is OK:
     multiyr = ogimet_daily(date = c(as.Date("2022-12-15"), as.Date("2023-01-21")), 
                            station = 12330)
     if (is.data.frame(multiyr)) {
