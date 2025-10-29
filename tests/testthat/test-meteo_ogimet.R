@@ -9,46 +9,50 @@ test_that("meteo_ogimet works!", {
   # sometimes ogimet requires warm spin-up, so in order to pass CRAN tests:
   if (is.data.frame(df) & nrow(df) > 15) {
     expect_true(any(colnames(df) %in% c("Lon", "Lat")))
-    Sys.sleep(20)
   }
   
   # expected at least 100 rows in hourly dataset:
+  Sys.sleep(20)
   x = meteo_ogimet(interval = "hourly", date = c("2019-06-01", "2019-06-08"),
                station = c(12330), coords = TRUE)
   
-  if (is.data.frame(x) & nrow(x) > 20) {
+  if (is.data.frame(x)) {
     testthat::expect_true(nrow(x) > 100)
-    Sys.sleep(20)
   }
   
   # check if January is going to be downloaded not other dates are downloaded by accident:
+  Sys.sleep(20)
   y = meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
                station = 12120, coords = FALSE)
   
-  if (is.data.frame(y) & nrow(y) > 20) {
+  if (is.data.frame(y)) {
     testthat::expect_equal(unique(format(y$Date, "%Y")), "2019")
-    Sys.sleep(20)
   }
   
   
   # check error for non existing station or problem with downloading any reasonable data:
   
   # wrong station ID:
+  Sys.sleep(20)
   expect_warning(meteo_ogimet(interval = "hourly", date = c("2019-01-01", "2019-01-05"),
                        station = 999999, coords = FALSE, allow_failure = FALSE))
   # no date:
+  Sys.sleep(20)
   expect_message(meteo_ogimet(interval = "hourly", 
                            date = c(NA, NA),
                            station = 12120, coords = FALSE, allow_failure = TRUE))
   
   # no values for the selected station
+  Sys.sleep(20)
   expect_message(meteo_ogimet(station = "64551", interval = "daily",
                               date = c("2025-09-26", "2025-09-26")))
   
   # not all elements available:
+  Sys.sleep(20)
   expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
                date = c("2025-09-26", "2025-09-26"))), 1)
   
+  Sys.sleep(20)
   expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
                                  date = c("2025-09-26", "2025-09-26"))), 1)
   
@@ -91,9 +95,9 @@ test_that("meteo_ogimet works!", {
         coords = FALSE,
         station = "06683", allow_failure = FALSE)
     )
-    Sys.sleep(20)
     
     # check dates between 2 years and check whether number of days is OK:
+    Sys.sleep(20)
     multiyr = ogimet_daily(date = c(as.Date("2022-12-15"), as.Date("2023-01-21")), 
                            station = 12330)
     if (is.data.frame(multiyr)) {
