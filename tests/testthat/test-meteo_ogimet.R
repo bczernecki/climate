@@ -16,7 +16,7 @@ test_that("meteo_ogimet works!", {
   x = meteo_ogimet(interval = "hourly", date = c("2019-06-01", "2019-06-08"),
                station = c(12330), coords = TRUE)
   
-  if (is.data.frame(x) & nrow(df) > 20) {
+  if (is.data.frame(x) & nrow(x) > 20) {
     testthat::expect_true(nrow(x) > 100)
     Sys.sleep(20)
   }
