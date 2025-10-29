@@ -146,11 +146,6 @@ ogimet_hourly_bp = function(date = date,
         a = readHTMLTable(body)
         b = a[[length(a)]]
         
-        # TODO:
-        # check if b$V2 does not contain wording like:
-        # "gsynres: Limit for old data queries exceeded. Permitted a query per 20 seconds per IP"
-        
-        
         if (is.null(b)) {
           warning(paste0("Wrong station ID: ", station_nr, 
                          " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
@@ -191,9 +186,8 @@ ogimet_hourly_bp = function(date = date,
         }
         
       } # end of checking for empty files / problems with connection
-      # print(i)
     } # end of looping for dates
-  }# end of looping for stations
+  } # end of looping for stations
   
   if (nrow(data_station) > 0) {
     data_station = data_station[!duplicated(data_station), ]
@@ -223,7 +217,6 @@ ogimet_hourly_bp = function(date = date,
       data_station = data_station[, ord1]
     }
     # setdiff(names(df), c("station_ID", "Date", "TC"))
-  
   
     # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
     if (precip_split) {
