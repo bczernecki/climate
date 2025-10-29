@@ -91,7 +91,7 @@ ogimet_hourly_bp = function(date = date,
     for (i in length(dates):1) {
       if (length(dates) >= 2 && i == length(dates)) {
         msg = "\n INFO: Please note that the Ogimet has recently limited number of queries that are accepted
-        \r by the server from a single IP address. Therefore, downloading more than approx. 1 month of data
+        \r by the server from a single IP address. Therefore, downloading more than approx. 1 day of data
         \r for a single station requires 20 seconds pause between subsequent queries and
         \r may take a while. Thank you for your patience."
         message(trimws(msg))
