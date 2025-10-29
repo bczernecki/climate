@@ -121,7 +121,7 @@ meteo_imgw_daily_bp = function(rank,
           data2 = imgw_read(translit, file2)
           colnames(data2) = meta[[2]]$parameters
         } else {
-          data2 = head(data1, 0)[,1:5]
+          data2 = head(data1, 0)[, 1:min(5, ncol(data1))]
         }
         
         unlink(c(temp, temp2))
