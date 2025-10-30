@@ -18,7 +18,7 @@ The data are processed only if temperature or precipitation fields are present."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.5</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ The data are processed only if temperature or precipitation fields are present."
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Scrapping daily meteorological (Synop) data from the Ogimet webpage</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.2.4/R/ogimet_daily.R" class="external-link"><code>R/ogimet_daily.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/R/ogimet_daily.R" class="external-link"><code>R/ogimet_daily.R</code></a></small>
     <div class="hidden name"><code>ogimet_daily.Rd</code></div>
     </div>
 
@@ -116,6 +116,10 @@ The data are processed only if temperature or precipitation fields are present.<
 <span class="r-in"><span>  <span class="va">new_york</span> <span class="op">=</span> <span class="fu">ogimet_daily</span><span class="op">(</span>station <span class="op">=</span> <span class="fl">72503</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Daily raports will be generated for 6 UTC each day. Use the &gt;&gt;hour&lt;&lt; argument to change it </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> station: 72503</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Please note that the Ogimet has recently limited number of queries that are accepted</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>          by the server from a single IP address. Therefore, downloading more than 1 month of data</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>          for a single station requires 20 seconds pause between subsequent queries and</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>          may take a while. Thank you for your patience.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

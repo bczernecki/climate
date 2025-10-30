@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.5</span>
       </span>
     </div>
 
@@ -60,11 +60,21 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/bczernecki/climate/blob/v1.2.4/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/bczernecki/climate/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.4" id="climate-124">climate 1.2.4<a class="anchor" aria-label="anchor" href="#climate-124"></a></h2>
+<h2 class="page-header" data-toc-text="1.2.5" id="climate-125">climate 1.2.5<a class="anchor" aria-label="anchor" href="#climate-125"></a></h2>
+<ul><li>Added 20 sec. pause between subsequent requests to the OGIMET server to avoid server overload.
+<ul><li>This is a temporary solution and it is planned to implement SYNOP parsing engine. SYNOP messages can be downloaded in a bigger chunks for approx. dozens of records in a single query.</li>
+</ul></li>
+<li>
+<code>meteo_imgw_daily</code> fix for current year data retrieval from IMGW-PIB repository</li>
+<li>
+<code>imgw_read</code> - fix for wrongly formatted input CSVs for hydrological data in the IMGW-PIB repository</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.4" id="climate-124">climate 1.2.4<small>2025-10-01</small><a class="anchor" aria-label="anchor" href="#climate-124"></a></h2>
 <ul><li>R version &gt;= 4.1 is now required</li>
 <li>Major bug fixes for ogimet-related retrievals due to changes in the OGIMET service</li>
 <li>Minor fixes for reading stations’ coordinates from <code>ogimet_stations()</code>. Increased accuracy and changed logic for detecting hemisphere</li>
