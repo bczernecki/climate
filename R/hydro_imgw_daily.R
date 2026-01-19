@@ -135,7 +135,7 @@ hydro_imgw_daily_bp = function(year,
       
     } #end of loop for (usually monthly) zip files in a given year
     
-    all_data[[length(all_data) + 1]] = merge(codz_data, zjaw_data,
+    all_data[[length(all_data) + 1]] = data.table::merge(codz_data, zjaw_data,
                                              by = intersect(colnames(codz_data), colnames(zjaw_data)),
                                              all.x = TRUE)
     
@@ -148,7 +148,7 @@ hydro_imgw_daily_bp = function(year,
   all_data[all_data == 999] = NA
   
   if (coords) {
-    all_data = merge(climate::imgw_hydro_stations, all_data,
+    all_data = data.table::merge(climate::imgw_hydro_stations, all_data,
                      by.x = "id",
                      by.y = "Kod stacji",
                      all.y = TRUE)
