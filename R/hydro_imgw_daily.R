@@ -182,6 +182,7 @@ hydro_imgw_daily_bp = function(year,
   all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
   
   all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
+  gc()
   
   return(all_data)
 }
