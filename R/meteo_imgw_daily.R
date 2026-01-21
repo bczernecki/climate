@@ -9,7 +9,11 @@
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
 #' @param station name of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS); Stations' IDs (numeric) are no longer valid
+#' It accepts vector of names (characters in CAPITAL LETTERS); 
+#' Important: Some stations may have changed names over time in the IMGW-PIB 
+#' database and thus providing both names is needed 
+#' (e.g. `station = c("POZNAŃ", "POZNAŃ-ŁAWICA", "WARSZAWA", "WARSZAWA-OKĘCIE)`).
+#' Stations' IDs (numeric) are no longer valid
 #' @param col_names three types of column names possible:
 #' "short" - default, values with shorten names,
 #' "full" - full English description,
@@ -68,7 +72,18 @@ meteo_imgw_daily_bp = function(rank,
                                station,
                                col_names,
                                ...) {
-
+  
+  # match WMO ID of a given station(s) to download selectively for SYNOP stations
+  if (!is.null(station) && rank == "synop") {
+    pattern_combined = paste(station, collapse = "|")
+    ids_to_download = grep(pattern = pattern_combined, 
+                           x = climate::imgw_meteo_stations$station, 
+                           ignore.case = TRUE)
+    ids_to_download = climate::imgw_meteo_stations[ids_to_download, "id2"]
+    # take only these that are 3 digits in field id2:
+    ids_to_download = ids_to_download[nchar(ids_to_download) == 3]
+  }
+  
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
   interval = "daily"
@@ -106,6 +121,18 @@ meteo_imgw_daily_bp = function(rank,
       ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
       files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
       addresses_to_download = paste0(address, files)
+      
+      # check against names in ids_to_download if station is not NULL:
+      if (exists("ids_to_download") && !is.null(ids_to_download)) {
+        remote_files_ids = unlist(lapply(strsplit(gsub(x = basename(addresses_to_download), "_s.zip", ""), "_"), function(x) x[[2]]))
+        inds = which(remote_files_ids %in% ids_to_download)
+        if (length(inds) > 0) {
+          addresses_to_download = addresses_to_download[inds]
+        }
+      } else {
+        addresses_to_download = addresses_to_download
+        print(addresses_to_download)
+      }
 
       for (j in seq_along(addresses_to_download)) {
         temp = tempfile()
@@ -115,13 +142,16 @@ meteo_imgw_daily_bp = function(rank,
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
+        data1$`Nazwa stacji` = trimws(data1$`Nazwa stacji`)
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
         if (file.exists(file2)) {
           data2 = imgw_read(translit, file2)
           colnames(data2) = meta[[2]]$parameters
+          data2$`Nazwa stacji` = trimws(data2$`Nazwa stacji`)
         } else {
           data2 = head(data1, 0)[, 1:min(5, ncol(data1))]
+          data2$`Nazwa stacji` = trimws(data2$`Nazwa stacji`)
         }
         
         unlink(c(temp, temp2))
@@ -132,10 +162,10 @@ meteo_imgw_daily_bp = function(rank,
           data2[grep("^Status", colnames(data2))] = NULL
         }
 
-        ttt = base::merge(data1,
-                          data2,
-                          by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
-                          all.x = TRUE)
+        ttt = merge(data1,
+                    data2,
+                    by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+                    all.x = TRUE)
         
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
         ### ta część kodu powtarza sie po dużej petli od rank
@@ -175,6 +205,8 @@ meteo_imgw_daily_bp = function(rank,
                        csv_data = read.csv(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", fileEncoding = "CP1250")
                        csv_data = convert_encoding(csv_data)
                        colnames(csv_data) = meta[[1]]$parameters
+                       csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+                       
                        return(csv_data)
                      })
         
@@ -249,6 +281,7 @@ meteo_imgw_daily_bp = function(rank,
                        csv_data = read.table(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", encoding = "CP1250")
                        csv_data = convert_encoding(csv_data)
                        colnames(csv_data) = meta[[1]]$parameters
+                       csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
                        return(csv_data)
                      })
         
@@ -306,7 +339,7 @@ meteo_imgw_daily_bp = function(rank,
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-        inds = as.numeric(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))
+        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = all_data$`Nazwa stacji`)))))
         if (any(is.na(inds))) {
           env$logs = c(env$logs, 
                        paste("At least one of selected station(s) is not available in the database. Returning all available stations"))

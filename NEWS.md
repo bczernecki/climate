@@ -1,3 +1,9 @@
+# climate 1.2.6
+
+* speeding up selective download for given station names in `meteo_imgw_daily`
+* minor fix for `meteo_imgw_daily` to handle cases with station names with extra spaces
+
+
 # climate 1.2.5
 
 * Added 20 sec. pause between subsequent requests to the OGIMET server to avoid server overload. 
