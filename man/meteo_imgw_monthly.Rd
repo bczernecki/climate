@@ -53,7 +53,7 @@ monthly <- meteo_imgw_monthly(rank = "climate", year = 1969)
 head(monthly)
 
 # a descriptive (long) column names:
-monthly2 <- meteo_imgw_monthly(
+monthly2 = meteo_imgw_monthly(
   rank = "synop", year = 2018,
   col_names = "full"
 )

@@ -51,7 +51,7 @@ available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-daily <- meteo_imgw_daily(rank = "climate", year = 2000)
+daily = meteo_imgw_daily(rank = "climate", year = 2000)
 }
 
 }

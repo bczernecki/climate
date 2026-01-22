@@ -46,7 +46,7 @@ available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-hourly <- meteo_imgw_hourly(rank = "climate", year = 1984)
+hourly = meteo_imgw_hourly(rank = "climate", year = 1984)
 head(hourly)
 }
 

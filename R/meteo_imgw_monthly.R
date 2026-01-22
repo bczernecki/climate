@@ -31,14 +31,14 @@
 #' head(monthly)
 #'
 #' # a descriptive (long) column names:
-#' monthly2 <- meteo_imgw_monthly(
+#' monthly2 = meteo_imgw_monthly(
 #'   rank = "synop", year = 2018,
 #'   col_names = "full"
 #' )
 #' head(monthly2)
 #' }
 #'
-meteo_imgw_monthly <- function(rank = "synop",
+meteo_imgw_monthly = function(rank = "synop",
                                year,
                                status = FALSE,
                                coords = FALSE,
@@ -211,7 +211,7 @@ meteo_imgw_monthly_bp <- function(rank,
     }
   }
   all_data$`Nazwa stacji` <- trimws(all_data$`Nazwa stacji`)
-  
+
   # sorting data accordingly to column names - (could be "kod stacji" or "id")
   if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
     all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac), ]

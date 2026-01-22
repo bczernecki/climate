@@ -18,12 +18,12 @@
 #'
 #' @examples
 #' \donttest{
-#' link <- "https://www1.ncdc.noaa.gov/pub/data/noaa/2019/123300-99999-2019.gz"
-#' output <- tempfile()
+#' link = "https://www1.ncdc.noaa.gov/pub/data/noaa/2019/123300-99999-2019.gz"
+#' output = tempfile()
 #' test_url(link = link, output = output)
 #' }
 #'
-test_url <- function(link, output, quiet = TRUE) {
+test_url= function(link, output, quiet = TRUE) {
   # First check internet connection
   message(link)
   if (!curl::has_internet()) {
@@ -33,7 +33,7 @@ test_url <- function(link, output, quiet = TRUE) {
 
   # Attempt download; on success curl_download returns the destfile path.
   # Only emit a message if the output file was NOT created (error/warning).
-  resp <- tryCatch(
+  resp = tryCatch(
     curl::curl_download(url = link, destfile = output, mode = "wb", quiet = quiet),
     error = function(e) conditionMessage(e),
     warning = function(w) conditionMessage(w)
