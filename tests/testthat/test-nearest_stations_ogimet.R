@@ -8,6 +8,7 @@ test_that("nearest_stations_ogimet works!", {
     testthat::expect_equal(nrow(x), 10)
   }
   
+  Sys.sleep(21)
   x <- nearest_stations_ogimet(country = "Poland", point = c(10, 50), add_map = TRUE, no_of_stations = 10)
   
   if (is.data.frame(x) && ncol(x) > 5) {
