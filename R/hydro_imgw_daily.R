@@ -139,6 +139,21 @@ hydro_imgw_daily_bp = function(year,
                                              by = intersect(colnames(codz_data), colnames(zjaw_data)),
                                              all.x = TRUE)
     
+    # station selection and names cleaning:
+    if (!is.null(station)) {
+      if (is.character(station)) {
+        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data[[length(all_data)]]$`Nazwa stacji`))))))
+        if (any(is.na(inds)) || length(inds) == 0) {
+          env$logs = c(
+            env$logs,
+            paste("At least one of selected station(s) is not available in the database. Returning all available stations")
+          )
+        } else {
+          all_data[[length(all_data)]] = all_data[[length(all_data)]][inds, ]
+        }
+      }
+    }
+    
   } # end of loop for years (if more than 1 specified)
   
   all_data = do.call(rbind, all_data)
