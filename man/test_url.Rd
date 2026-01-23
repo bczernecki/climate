@@ -25,7 +25,7 @@ as suggested by kvasilopoulos
 }
 \examples{
 \donttest{
-link = "https://www1.ncdc.noaa.gov/pub/data/noaa/2019/123300-99999-2019.gz"
+link = "https://www.ncei.noaa.gov/pub/data/noaa/2019/123300-99999-2019.gz"
 output = tempfile()
 test_url(link = link, output = output)
 }

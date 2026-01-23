@@ -12,7 +12,7 @@ meteo_noaa_hourly(
 )
 }
 \arguments{
-\item{station}{ID of meteorological station(s) (characters). Find your station's ID at: https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt}
+\item{station}{ID of meteorological station(s) (characters). Find your station's ID at: https://www.ncei.noaa.gov/pub/data/noaa/isd-history.txt}
 
 \item{year}{vector of years (e.g., 1966:2000)}
 
@@ -27,7 +27,7 @@ data.frame with historical meteorological data in hourly intervals
 Downloading hourly (meteorological) data from the SYNOP stations available in the NOAA ISD collection.
 Some stations in the dataset are dated back even up to 1900.
 By default only records that follow FM-12 (SYNOP) convention are processed.
-Further details available at: https://www1.ncdc.noaa.gov/pub/data/noaa/readme.txt
+Further details available at: https://www.ncei.noaa.gov/pub/data/noaa/readme.txt
 }
 \examples{
 \donttest{

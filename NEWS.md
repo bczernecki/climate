@@ -1,8 +1,9 @@
-# climate 1.2.6
+# climate 1.2.7
 
 * speeding up selective download for given station names in `meteo_imgw_*` and `hydro_imgw_daily()` functions that simultaneously reduce use of memory
 * minor fix for `meteo_imgw_daily` to handle cases with station names containing extra spaces or non-parsable characters
 * verbosing currently processed url for easier detection of problematic or corrupted datasets
+* change of NOAA NCDC's url from www1.ncdc.noaa.gov/pub/data/noaa/ to: www.ncei.noaa.gov
 
 
 # climate 1.2.5
