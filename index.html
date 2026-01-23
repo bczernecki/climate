@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.7</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@
 </li>
 <li>Polish Institute of Meteorology and Water Management - National Research Institute <a href="https://dane.imgw.pl/" class="external-link">(IMGW-PIB)</a>
 </li>
-<li>National Oceanic &amp; Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) <a href="https://www1.ncdc.noaa.gov/pub/data/noaa/" class="external-link">(NOAA)</a>
+<li>National Centers for Environmental Information, National Oceanic &amp; Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) <a href="https://www.ncei.noaa.gov/pub/data/noaa/" class="external-link">(NOAA)</a>
 </li>
 </ul>
 <div class="section level2">
@@ -120,7 +120,7 @@
 <ul>
 <li><p><strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.</p></li>
 <li><p><strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, and <code>meteo_hourly()</code>. If 10-min dataset is needed then consider using <strong><code><a href="reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code></strong></p></li>
-<li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
+<li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
 <li><p><strong>meteo_noaa_co2()</strong> - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
 <li><p><strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 </ul>
@@ -163,7 +163,7 @@
 <h2 id="example-1">Example 1<a class="anchor" aria-label="anchor" href="#example-1"></a>
 </h2>
 <div class="section level4">
-<h4 id="download-hourly-dataset-from-noaa-ish-meteorological-repository">Download hourly dataset from NOAA ISH meteorological repository:<a class="anchor" aria-label="anchor" href="#download-hourly-dataset-from-noaa-ish-meteorological-repository"></a>
+<h4 id="download-hourly-dataset-from-nceinoaa-ish-meteorological-repository">Download hourly dataset from NCEI/NOAA ISH meteorological repository:<a class="anchor" aria-label="anchor" href="#download-hourly-dataset-from-nceinoaa-ish-meteorological-repository"></a>
 </h4>
 <pre class="r0"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">noaa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/meteo_noaa_hourly.html">meteo_noaa_hourly</a></span><span class="op">(</span>station <span class="op">=</span> <span class="st">"123300-99999"</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span> <span class="co"># station ID: Poznan, Poland</span></span>
@@ -180,7 +180,7 @@
 <h2 id="example-2">Example 2<a class="anchor" aria-label="anchor" href="#example-2"></a>
 </h2>
 <div class="section level4">
-<h4 id="finding-a-nearest-meteorological-stations-in-a-given-country-using-noaa-ish-data-source">Finding a nearest meteorological stations in a given country using NOAA ISH data source:<a class="anchor" aria-label="anchor" href="#finding-a-nearest-meteorological-stations-in-a-given-country-using-noaa-ish-data-source"></a>
+<h4 id="finding-a-nearest-meteorological-stations-in-a-given-country-using-nceinoaa-ish-data-source">Finding a nearest meteorological stations in a given country using NCEI/NOAA ISH data source:<a class="anchor" aria-label="anchor" href="#finding-a-nearest-meteorological-stations-in-a-given-country-using-nceinoaa-ish-data-source"></a>
 </h4>
 <pre class="r1"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="co"># find 100 nearest UK stations to longitude 1W and latitude 53N :</span></span>
@@ -380,7 +380,7 @@ head(h)
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<p>To cite the <code>climate</code> package in publications, please use <a href="https://www.mdpi.com/2071-1050/12/1/394" class="external-link">this paper</a>:</p>
+<p>To cite the <code>climate</code> package in publications, please use <a href="https://doi.org/10.3390/su12010394" class="external-link">this paper</a>:</p>
 <p>Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org/10.3390/su12010394" class="external-link uri">https://doi.org/10.3390/su12010394</a>”</p>
 <p>LaTeX/BibTeX version can be obtained with:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
