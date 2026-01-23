@@ -227,7 +227,7 @@ Feel also free to contact us by creating [an issue](https://github.com/bczerneck
 
 ## Citation
 
-To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
+To cite the `climate` package in publications, please use [this paper](https://doi.org/10.3390/su12010394):
   
   Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. https://doi.org/10.3390/su12010394"
 
