@@ -1,4 +1,4 @@
-# climate 1.2.7
+# climate 1.2.8
 
 * speeding up selective download for given station names in `meteo_imgw_*` and `hydro_imgw_daily()` functions that simultaneously reduce use of memory
 * minor fix for `meteo_imgw_daily` to handle cases with station names containing extra spaces or non-parsable characters

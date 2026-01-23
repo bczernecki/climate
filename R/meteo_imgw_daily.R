@@ -91,6 +91,8 @@ meteo_imgw_daily_bp = function(rank,
   # match WMO ID of a given station(s) to download selectively for SYNOP stations
   if (!is.null(station) && rank == "synop") {
     ids_to_download = match_imgw_wmoid_inds(station)
+  } else {
+    ids_to_download = NULL
   }
 
   temp = tempfile()
