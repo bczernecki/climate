@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.6</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
                         <h4 data-toc-skip class="author">Bartosz
 Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2025-10-30</h4>
+            <h4 data-toc-skip class="date">2026-01-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
@@ -202,15 +202,169 @@ in a given country(ies):</p>
 <span><span class="va">ns</span> <span class="op">=</span> <span class="fu"><a href="../reference/nearest_stations_ogimet.html">nearest_stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"United Kingdom"</span>, <span class="st">"France"</span><span class="op">)</span>,</span>
 <span>                             point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>                             no_of_stations <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Wrong name of a country. Please check countries names at </span></span>
-<span><span class="co">#&gt;          https://ogimet.com/display_stations.php?lang=en&amp;tipo=AND&amp;isyn=&amp;oaci=&amp;nombre=&amp;estado=&amp;Send=Send</span></span>
-<span><span class="co">#&gt; Wrong name of a country. Please check countries names at </span></span>
-<span><span class="co">#&gt;          https://ogimet.com/display_stations.php?lang=en&amp;tipo=AND&amp;isyn=&amp;oaci=&amp;nombre=&amp;estado=&amp;Send=Send</span></span></code></pre></div>
+<span>                             add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getstarted_files/figure-html/stations%20-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">ns</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ns</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="10%">
+<col width="32%">
+<col width="15%">
+<col width="13%">
+<col width="6%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">wmo_id</th>
+<th align="left">station_names</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+<th align="right">alt</th>
+<th align="right">distance</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">124</td>
+<td align="left">03894</td>
+<td align="left">Guernsey Airport</td>
+<td align="right">-2.583345</td>
+<td align="right">49.41667</td>
+<td align="right">102</td>
+<td align="right">80.42783</td>
+</tr>
+<tr class="even">
+<td align="left">118</td>
+<td align="left">03857</td>
+<td align="left">Isle Of Portland</td>
+<td align="right">-2.450009</td>
+<td align="right">50.51668</td>
+<td align="right">52</td>
+<td align="right">84.66540</td>
+</tr>
+<tr class="odd">
+<td align="left">116</td>
+<td align="left">03844</td>
+<td align="left">Exeter Airport No2</td>
+<td align="right">-3.400008</td>
+<td align="right">50.73335</td>
+<td align="right">31</td>
+<td align="right">93.72323</td>
+</tr>
+<tr class="even">
+<td align="left">115</td>
+<td align="left">03840</td>
+<td align="left">Dunkeswell Aerodrome</td>
+<td align="right">-3.233338</td>
+<td align="right">50.85002</td>
+<td align="right">252</td>
+<td align="right">98.89712</td>
+</tr>
+<tr class="odd">
+<td align="left">117</td>
+<td align="left">03853</td>
+<td align="left">Yeovilton</td>
+<td align="right">-2.633346</td>
+<td align="right">51.00000</td>
+<td align="right">23</td>
+<td align="right">119.50052</td>
+</tr>
+<tr class="even">
+<td align="left">142</td>
+<td align="left">07020</td>
+<td align="left">La Hague</td>
+<td align="right">-1.933352</td>
+<td align="right">49.71668</td>
+<td align="right">6</td>
+<td align="right">123.82404</td>
+</tr>
+<tr class="odd">
+<td align="left">125</td>
+<td align="left">03895</td>
+<td align="left">Jersey Airport</td>
+<td align="right">-2.183337</td>
+<td align="right">49.20000</td>
+<td align="right">84</td>
+<td align="right">128.26450</td>
+</tr>
+<tr class="even">
+<td align="left">114</td>
+<td align="left">03827</td>
+<td align="left">Plymouth</td>
+<td align="right">-4.116669</td>
+<td align="right">50.35001</td>
+<td align="right">50</td>
+<td align="right">131.29669</td>
+</tr>
+<tr class="odd">
+<td align="left">126</td>
+<td align="left">03896</td>
+<td align="left">Saint Helier</td>
+<td align="right">-2.100002</td>
+<td align="right">49.20000</td>
+<td align="right">54</td>
+<td align="right">135.10222</td>
+</tr>
+<tr class="even">
+<td align="left">99</td>
+<td align="left">03710</td>
+<td align="left">Liscombe</td>
+<td align="right">-3.600012</td>
+<td align="right">51.08333</td>
+<td align="right">348</td>
+<td align="right">138.94411</td>
+</tr>
+<tr class="odd">
+<td align="left">162</td>
+<td align="left">07117</td>
+<td align="left">Ploumanac’H</td>
+<td align="right">-3.466676</td>
+<td align="right">48.81668</td>
+<td align="right">55</td>
+<td align="right">142.71600</td>
+</tr>
+<tr class="even">
+<td align="left">163</td>
+<td align="left">07118</td>
+<td align="left">Lannion</td>
+<td align="right">-3.466676</td>
+<td align="right">48.75001</td>
+<td align="right">88</td>
+<td align="right">149.69950</td>
+</tr>
+<tr class="odd">
+<td align="left">119</td>
+<td align="left">03862</td>
+<td align="left">Bournemouth Airport</td>
+<td align="right">-1.833350</td>
+<td align="right">50.76668</td>
+<td align="right">12</td>
+<td align="right">156.62887</td>
+</tr>
+<tr class="even">
+<td align="left">100</td>
+<td align="left">03716</td>
+<td align="left">St. Athan</td>
+<td align="right">-3.433342</td>
+<td align="right">51.40001</td>
+<td align="right">50</td>
+<td align="right">164.42872</td>
+</tr>
+<tr class="odd">
+<td align="left">164</td>
+<td align="left">07120</td>
+<td align="left">Saint-Brieuc</td>
+<td align="right">-2.850017</td>
+<td align="right">48.53334</td>
+<td align="right">138</td>
+<td align="right">165.41210</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="example-2">Example 2<a class="anchor" aria-label="anchor" href="#example-2"></a>
@@ -219,19 +373,73 @@ in a given country(ies):</p>
 country:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
-<span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Problems with downloading data. Run function with argument allow_failure = FALSE to see more details</span></span>
-<span></span>
+<span><span class="va">PL</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, add_map <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="getstarted_files/figure-html/stations-3-1.png" class="r-plt" alt="" width="672"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">is.data.frame</a></span><span class="op">(</span><span class="va">PL</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">PL</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">wmo_id</th>
+<th align="left">station_names</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+<th align="right">alt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">12001</td>
+<td align="left">Petrobaltic Beta</td>
+<td align="right">18.16667</td>
+<td align="right">55.46668</td>
+<td align="right">46</td>
+</tr>
+<tr class="even">
+<td align="left">12100</td>
+<td align="left">Kolobrzeg</td>
+<td align="right">15.56668</td>
+<td align="right">54.16667</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">12105</td>
+<td align="left">Koszalin</td>
+<td align="right">16.15000</td>
+<td align="right">54.20000</td>
+<td align="right">33</td>
+</tr>
+<tr class="even">
+<td align="left">12115</td>
+<td align="left">Ustka</td>
+<td align="right">16.85002</td>
+<td align="right">54.58335</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">12120</td>
+<td align="left">Leba</td>
+<td align="right">17.53334</td>
+<td align="right">54.75001</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">12125</td>
+<td align="left">Lebork</td>
+<td align="right">17.75002</td>
+<td align="right">54.55001</td>
+<td align="right">39</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="example-3">Example 3<a class="anchor" aria-label="anchor" href="#example-3"></a>
 </h3>
 <p>Downlading hourly meteorological data from Svalbard (Norway) for year
 2016 using NOAA service</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># downloading data with NOAA service:</span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_noaa_hourly.html">meteo_noaa_hourly</a></span><span class="op">(</span>station <span class="op">=</span> <span class="st">"010080-99999"</span>, year <span class="op">=</span> <span class="fl">2016</span><span class="op">)</span></span>
 <span></span>
@@ -239,7 +447,7 @@ country:</p>
 <span><span class="co"># df = meteo_ogimet(interval = "hourly", </span></span>
 <span><span class="co">#                   date = c("2016-01-01", "2016-12-31"),</span></span>
 <span><span class="co">#                   station = c("01008"))</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -387,7 +595,7 @@ country:</p>
 </h3>
 <p>Downloading atmospheric vertical profile (sounding) for Łeba, PL
 station:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">profile_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sounding_wyoming.html">sounding_wyoming</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">12120</span>,</span>
 <span>                                 yy <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>                                 mm <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -549,11 +757,11 @@ station:</p>
 </h3>
 <p>Preparing an annual summary of air temperature and precipitation
 using <strong>dplyr</strong> syntax for 10-years period (1991-2000)</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_imgw.html">meteo_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, rank <span class="op">=</span> <span class="st">"synop"</span>, year <span class="op">=</span> <span class="fl">1991</span><span class="op">:</span><span class="fl">2000</span>, station <span class="op">=</span> <span class="st">"ŁEBA"</span><span class="op">)</span> </span>
 <span><span class="co"># please note that sometimes 2 names are used for the same station in different years</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df2</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">station</span><span class="op">:</span><span class="va">t2m_mean_mon</span>, <span class="va">rr_monthly</span><span class="op">)</span></span>
 <span></span>
@@ -670,12 +878,12 @@ using <strong>dplyr</strong> syntax for 10-years period (1991-2000)</p>
 year with <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code>, and spread
 data by year using <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread()</a></code> to get
 the annual means of maximum flow in the consecutive columns.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2002</span>, coords <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -801,7 +1009,7 @@ the annual means of maximum flow in the consecutive columns.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h2</span> <span class="op">=</span> <span class="va">h</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">idex</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span>, <span class="va">hyy</span>, <span class="va">Q</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -922,7 +1130,7 @@ Environmental Assessment. Sustainability 2020, 12, 394. <a href="https://doi.org
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
