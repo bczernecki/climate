@@ -14,7 +14,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
-#' @importFrom data.table fread
+#' @importFrom data.table fread data.table
 #' @export
 #' @returns data.frame with historical hydrological data for the daily time interval
 #' @examples \donttest{
@@ -135,9 +135,25 @@ hydro_imgw_daily_bp = function(year,
       
     } #end of loop for (usually monthly) zip files in a given year
     
-    all_data[[length(all_data) + 1]] = merge(codz_data, zjaw_data,
+    all_data[[length(all_data) + 1]] = merge(data.table(codz_data), 
+                                             data.table(zjaw_data),
                                              by = intersect(colnames(codz_data), colnames(zjaw_data)),
                                              all.x = TRUE)
+    
+    # station selection and names cleaning:
+    if (!is.null(station)) {
+      if (is.character(station)) {
+        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data[[length(all_data)]]$`Nazwa stacji`))))))
+        if (any(is.na(inds)) || length(inds) == 0) {
+          env$logs = c(
+            env$logs,
+            paste("At least one of selected station(s) is not available in the database. Returning all available stations")
+          )
+        } else {
+          all_data[[length(all_data)]] = all_data[[length(all_data)]][inds, ]
+        }
+      }
+    }
     
   } # end of loop for years (if more than 1 specified)
   
@@ -171,6 +187,7 @@ hydro_imgw_daily_bp = function(year,
     }
   }
   
+  all_data = as.data.frame(all_data)
   all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydro|w roku hydro|Dzie")]), ]
   # fix dates and add as seperate column:
   yy_ind = grep(x = colnames(all_data), "Rok hydrologiczny")

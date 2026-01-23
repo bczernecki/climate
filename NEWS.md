@@ -1,3 +1,10 @@
+# climate 1.2.6
+
+* speeding up selective download for given station names in `meteo_imgw_*` and `hydro_imgw_daily()` functions that simultaneously reduce use of memory
+* minor fix for `meteo_imgw_daily` to handle cases with station names containing extra spaces or non-parsable characters
+* verbosing currently processed url for easier detection of problematic or corrupted datasets
+
+
 # climate 1.2.5
 
 * Added 20 sec. pause between subsequent requests to the OGIMET server to avoid server overload. 
