@@ -35,6 +35,7 @@ Imports:
     curl,
     data.table,
     httr,
+    R6,
     stringi,
     XML
 Suggests: 

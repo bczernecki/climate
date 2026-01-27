@@ -177,7 +177,7 @@ meteo_imgw_daily_bp = function(rank,
         ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
 
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[ttt$`Nazwa stacji.x` %in% station, ]
+          all_data[[length(all_data) + 1]] = ttt[trimws(ttt$`Nazwa stacji.x`) %in% station, ]
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
