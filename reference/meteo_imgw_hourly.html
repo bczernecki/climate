@@ -18,7 +18,7 @@ available in the danepubliczne.imgw.pl collection"><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.9</span>
       </span>
     </div>
 
@@ -145,20 +145,22 @@ function that shortens column names</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1984_k.zip</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/terminowe/klimat/1981_1985/1985_k.zip</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hourly</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          rank        id  station   yy mm day hour t2m t_wet ice_indicator</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   1    0 3.0   0.0             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   1    6 4.2   2.4             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   1   12 6.8   4.1             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   1   18 5.2   3.0             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   2    0 4.3   0.0             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 KLIMATYCZNA 249180010 PSZCZYNA 1984  1   2    6 6.4   3.2             W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ventil_indicator rh wd_code ws cl_tot visibility_code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  78          0      0               0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  71      SW  9      5               7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  61     WSW  8      6               7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  66      SW  8      8               7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  62          0      0               0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  53     WSW 12      6               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          NSP     POST   ROK    MC    DZ    GG  TEMP  TTZW   TWLW   WENT  WLGW</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;   &lt;char&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt; &lt;num&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 249180010 PSZCZYNA  1984     1     1     0   3.0   0.0      W           78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 249180010 PSZCZYNA  1984     1     1     6   4.2   2.4      W           71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 249180010 PSZCZYNA  1984     1     1    12   6.8   4.1      W           61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 249180010 PSZCZYNA  1984     1     1    18   5.2   3.0      W           66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 249180010 PSZCZYNA  1984     1     2     0   4.3   0.0      W           62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 249180010 PSZCZYNA  1984     1     2     6   6.4   3.2      W           53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      DKDK   FWR  ZOGK   WID</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;char&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:            0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     SW     9     5     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    WSW     8     6     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     SW     8     8     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:            0     0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    WSW    12     6     7</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

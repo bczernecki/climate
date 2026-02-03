@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.9</span>
       </span>
     </div>
 
@@ -104,39 +104,14 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/k_m_t_format.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/1966_1970/1966_1970_m_k.zip</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Potential error(s) found. Problems with downloading data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  Run function with argument allow_failure = FALSE to see more details</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">abbr</span> <span class="op">=</span> <span class="fu">meteo_shortening_imgw</span><span class="op">(</span>data <span class="op">=</span> <span class="va">monthly</span>,</span></span>
 <span class="r-in"><span>      col_names <span class="op">=</span> <span class="st">"full"</span>, </span></span>
 <span class="r-in"><span>      remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">abbr</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          rank        id  station   yy mm tmax_abs tmax_mean tmin_abs tmin_mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 KLIMATYCZNA 249180010 PSZCZYNA 1969  1      9.5      -1.3    -20.0      -9.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 KLIMATYCZNA 249180010 PSZCZYNA 1969  2      7.4       0.4    -16.6      -4.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 KLIMATYCZNA 249180010 PSZCZYNA 1969  3     11.4       2.5    -10.6      -3.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 KLIMATYCZNA 249180010 PSZCZYNA 1969  4     27.5      13.1     -4.4       2.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 KLIMATYCZNA 249180010 PSZCZYNA 1969  5     30.0      21.3      2.0       9.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 KLIMATYCZNA 249180010 PSZCZYNA 1969  6     28.9      20.9      6.1      10.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   t2m_mean_mon t5cm_min rr_monthly rr_max_daily first_day_max_rr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         -5.1    -22.4       34.9         12.0               23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         -2.3    -17.5       47.2         15.9                8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         -0.8    -11.3       44.8         10.1               11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4          7.1     -6.2       15.7          4.0                1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         14.8     -0.1       69.2         30.0               29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         15.4      4.4      101.2         35.0               21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   last_day_max_rr snowcover_max snowcover_days rain_days snow_days rh_mean_mon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1              NA            10             21         4         6           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              NA            18             16         4         7           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3              NA             2              3         3         8           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4              NA             0              0         6         4           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              NA             0              0         9         0           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6              NA             0              0        16         0           0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ws_mean_mon cloud_mean_mon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         2.1            5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         2.2            6.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         2.7            5.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         2.1            3.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         2.0            4.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         1.8            5.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
