@@ -157,10 +157,10 @@ meteo_imgw_monthly_bp <- function(rank,
 
     # removing status if set
     if (status == FALSE) {
-      data1[grep("^Status", colnames(data1))] <- NULL
+      data1[grep("^W", colnames(data1))] <- NULL
 
       if (rank != "precip") { # in precipitation station only 1 file
-        data2[grep("^Status", colnames(data2))] <- NULL
+        data2[grep("^W", colnames(data2))] <- NULL
       }
     }
 
@@ -168,7 +168,7 @@ meteo_imgw_monthly_bp <- function(rank,
 
     if (rank != "precip") {
       all_data[[i]] <- merge(data1, data2,
-        by = c("Kod stacji", "Nazwa stacji", "Rok", "Miesiac"),
+        by = c("NSP", "POST", "ROK", "MC"),
         all.x = TRUE
       )
     } else {
@@ -177,13 +177,13 @@ meteo_imgw_monthly_bp <- function(rank,
   }
 
   all_data <- do.call(rbind, all_data)
-  all_data <- all_data[all_data$Rok %in% year, ]
+  all_data <- all_data[all_data$ROK %in% year, ]
 
   if (coords) {
     all_data <- merge(climate::imgw_meteo_stations[, 1:3],
       all_data,
       by.x = "id",
-      by.y = "Kod stacji",
+      by.y = "NSP",
       all.y = TRUE
     )
   }
@@ -199,7 +199,7 @@ meteo_imgw_monthly_bp <- function(rank,
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-      inds <- unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$`Nazwa stacji`))))))
+      inds <- unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$POST))))))
       if (any(is.na(inds)) || length(inds) == 0) {
         env$logs <- c(
           env$logs,
@@ -210,13 +210,13 @@ meteo_imgw_monthly_bp <- function(rank,
       }
     }
   }
-  all_data$`Nazwa stacji` <- trimws(all_data$`Nazwa stacji`)
+  all_data$POST <- trimws(all_data$POST)
 
   # sorting data accordingly to column names - (could be "kod stacji" or "id")
-  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
-    all_data <- all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac), ]
+  if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
+    all_data <- all_data[order(all_data$NSP, all_data$ROK, all_data$MC), ]
   } else {
-    all_data <- all_data[order(all_data$id, all_data$Rok, all_data$Miesiac), ]
+    all_data <- all_data[order(all_data$id, all_data$ROK, all_data$MC), ]
   }
 
   # adding option to shorten columns and removing duplicates:

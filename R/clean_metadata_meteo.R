@@ -16,13 +16,13 @@ clean_metadata_meteo = function(address, rank = "synop", interval = "hourly") {
   test_url(link = address, output = temp)
   a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE, 
                fileEncoding = "CP1250")$V1
-  
+
   inds = grepl("^[A-Z]{2}.{5}", a)
   
   code = trimws(substr(a, 1, 7))[inds]
   name = trimws(substr(a, 8, nchar(a)))[inds]
-  a = data.frame(parameters = code, V1 = name)
-  a$V1 = stringi::stri_trans_general(a$V1, 'LATIN-ASCII')
+  a = data.frame(parameters = code, label = name)
+  a$label = stringi::stri_trans_general(a$label, 'LATIN-ASCII')
   return(a)
   
   #a = gsub(a, pattern = "\\?", replacement = "")

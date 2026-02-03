@@ -152,7 +152,7 @@ meteo_imgw_hourly_bp = function(rank,
 
         # remove statuses
         if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
+          data1[grep("^W", colnames(data1))] = NULL
         }
 
         unlink(c(temp, temp2))
@@ -196,7 +196,7 @@ meteo_imgw_hourly_bp = function(rank,
             csv_data = read.csv(data, header = FALSE, sep = ",")
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
-            csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+            csv_data$POST = trimws(csv_data$POST)
             return(csv_data)
           }
         )
@@ -229,7 +229,7 @@ meteo_imgw_hourly_bp = function(rank,
     all_data = merge(climate::imgw_meteo_stations[, 1:3],
       all_data,
       by.x = "id",
-      by.y = "Kod stacji",
+      by.y = "NSP",
       all.y = TRUE
     )
   }
@@ -240,12 +240,12 @@ meteo_imgw_hourly_bp = function(rank,
     climate = "KLIMATYCZNA"
   )
   all_data = cbind(data.frame(rank_code = rank_code), all_data)
-  all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
+  all_data = all_data[all_data$ROK %in% year, ] # clip only to selected years
 
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$`Nazwa stacji`))))))
+      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$POST))))))
       if (any(is.na(inds)) || length(inds) == 0) {
         env$logs = c(
           env$logs,
@@ -256,19 +256,19 @@ meteo_imgw_hourly_bp = function(rank,
       }
     }
   }
-  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
+  all_data$POST = trimws(all_data$POST)
 
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
-  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
+  if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
     all_data = all_data[order(
-      all_data$`Kod stacji`,
-      all_data$Rok,
-      all_data$Miesiac,
-      all_data$Dzien,
-      all_data$Godzina
+      all_data$NSP,
+      all_data$ROK,
+      all_data$MC,
+      all_data$DZ,
+      all_data$GG
     ), ]
   } else {
-    all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
+    all_data = all_data[order(all_data$id, all_data$ROK, all_data$MC, all_data$DZ, all_data$GG), ]
   }
 
   # extra option for shortening colnames and removing duplicates
