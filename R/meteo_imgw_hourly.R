@@ -149,11 +149,8 @@ meteo_imgw_hourly_bp = function(rank,
         file1 = paste(temp2, dir(temp2), sep = "/")
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
-
-        # remove statuses
-        if (status == FALSE) {
-          data1[grep("^W", colnames(data1))] = NULL
-        }
+        data1$POST = trimws(data1$POST)
+        data.table::setDT(data1)
 
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
@@ -209,10 +206,8 @@ meteo_imgw_hourly_bp = function(rank,
         }
 
         colnames(data1) = meta[[1]]$parameters
-        # remove status
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-        }
+        data1$POST = trimws(data1$POST)
+        data.table::setDT(data1)
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
       } # end of looping for zip files
@@ -220,13 +215,13 @@ meteo_imgw_hourly_bp = function(rank,
   } # end of loop over directories
 
   if (!is.null(all_data)) {
-    all_data = do.call(rbind, all_data)
+    all_data = data.table::rbindlist(all_data, fill = TRUE)
   } else {
     stop("No data found. Quitting", call. = FALSE)
   }
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations[, 1:3],
+    all_data = merge(data.table::setDT(climate::imgw_meteo_stations[, 1:3]),
       all_data,
       by.x = "id",
       by.y = "NSP",
@@ -235,11 +230,12 @@ meteo_imgw_hourly_bp = function(rank,
   }
 
   # add rank
-  rank_code = switch(rank,
-    synop = "SYNOPTYCZNA",
-    climate = "KLIMATYCZNA"
-  )
-  all_data = cbind(data.frame(rank_code = rank_code), all_data)
+  # add station rank (temporarily disabled to align with daily)
+  # rank_code = switch(rank,
+  #   synop = "SYNOPTYCZNA",
+  #   climate = "KLIMATYCZNA"
+  # )
+  # all_data = cbind(data.frame(rank_code = rank_code), all_data)
   all_data = all_data[all_data$ROK %in% year, ] # clip only to selected years
 
   # station selection and names cleaning:
@@ -260,19 +256,14 @@ meteo_imgw_hourly_bp = function(rank,
 
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
   if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
-    all_data = all_data[order(
-      all_data$NSP,
-      all_data$ROK,
-      all_data$MC,
-      all_data$DZ,
-      all_data$GG
-    ), ]
+    data.table::setorder(all_data, NSP, ROK, MC, DZ, GG)
   } else {
-    all_data = all_data[order(all_data$id, all_data$ROK, all_data$MC, all_data$DZ, all_data$GG), ]
+    data.table::setorder(all_data, id, ROK, MC, DZ, GG)
   }
 
   # extra option for shortening colnames and removing duplicates
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  # TODO: turned off temporarily, consistent with daily implementation
+  # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
