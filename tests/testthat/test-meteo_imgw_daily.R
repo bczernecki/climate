@@ -7,13 +7,12 @@ test_that("meteo_imgw_daily_single_station", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    station = c("POZNAŃ", "POZNAŃ-ŁAWICA") # year not supported
-    poznan = meteo_imgw_daily(rank = "synop", 
-                              year = 2024, 
-                              station = station,
-                              status = FALSE,
-                              coords = TRUE)
-    expect_true(nrow(poznan) > 360)
+    single_station = meteo_imgw_daily(rank = "synop", 
+                                      year = 2024, 
+                                      station = "LESZNO",
+                                      status = FALSE,
+                                      coords = TRUE)
+    expect_true(nrow(single_station) > 360)
   }
 })
 
