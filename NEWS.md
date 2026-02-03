@@ -1,3 +1,8 @@
+# climate 1.2.9
+
+* fixes for corrupted header files in `meteo_imgw_` family of functions due to changes in the IMGW-PIB repository
+
+
 # climate 1.2.8
 
 * speeding up selective download for given station names in `meteo_imgw_*` and `hydro_imgw_daily()` functions that simultaneously reduce use of memory

@@ -148,42 +148,45 @@ meteo_imgw_daily_bp = function(rank,
         file1 = paste(temp2, dir(temp2), sep = "/")[1]
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
-        data1$`Nazwa stacji` = trimws(data1$`Nazwa stacji`)
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+        }
+        data1$POST = trimws(data1$POST)
 
         file2 = paste(temp2, dir(temp2), sep = "/")[2]
         if (file.exists(file2)) {
           data2 = imgw_read(translit, file2)
           colnames(data2) = meta[[2]]$parameters
-          data2$`Nazwa stacji` = trimws(data2$`Nazwa stacji`)
+          for (labs in seq_along(meta[[2]]$parameters)) {
+            attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
+          }
+          data2$POST = trimws(data2$POST)
         } else {
           data2 = head(data1, 0)[, 1:min(5, ncol(data1))]
-          data2$`Nazwa stacji` = trimws(data2$`Nazwa stacji`)
+          data2$POST = trimws(data2$POST)
         }
 
         unlink(c(temp, temp2))
 
-        # remove statuses if not needed:
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-          data2[grep("^Status", colnames(data2))] = NULL
-        }
-
-        ttt = merge(data1,
+        data.table::setDT(data1)
+        data.table::setDT(data2)
+        
+        ttt = merge(
+          data1,
           data2,
-          by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+          by = c("NSP", "ROK", "MC", "DZ"),
           all.x = TRUE
         )
-
-        ttt = ttt[order(ttt$`Nazwa stacji.x`, ttt$Rok, ttt$Miesiac, ttt$Dzien), ]
+        
+        data.table::setorder(ttt, POST.x, ROK, MC, DZ)
 
         if (!is.null(station)) {
-          all_data[[length(all_data) + 1]] = ttt[ttt$`Nazwa stacji.x` %in% station, ]
+          all_data[[length(all_data) + 1]] = ttt[ttt$POST.x %in% station, ]
         } else {
           all_data[[length(all_data) + 1]] = ttt
         }
       } # end of looping for zip archives
     } # end of if statement for SYNOP stations
-
     ######################
     ###### KLIMAT: #######
     if (rank == "climate") {
@@ -220,7 +223,10 @@ meteo_imgw_daily_bp = function(rank,
             if (!is.null(csv_data)) {
               csv_data = convert_encoding(csv_data)
               colnames(csv_data) = meta[[1]]$parameters
-              csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+              for (labs in seq_along(meta[[1]]$parameters)) {
+                attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
+              }
+              csv_data$POST = trimws(csv_data$POST)
             }
             return(csv_data)
           }
@@ -229,8 +235,8 @@ meteo_imgw_daily_bp = function(rank,
         if (is.data.frame(d)) {
           data1 = d
           colnames(data1) = meta[[1]]$parameters
-          if (status == FALSE) {
-            data1[grep("^Status", colnames(data1))] = NULL
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
           }
         }
 
@@ -239,19 +245,17 @@ meteo_imgw_daily_bp = function(rank,
           file1 = paste(temp2, dir(temp2), sep = "/")[1]
           data1 = imgw_read(translit, file1)
           colnames(data1) = meta[[1]]$parameters
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+          }
 
           file2 = paste(temp2, dir(temp2), sep = "/")[2]
           if (file.exists(file2)) {
             data2 = imgw_read(translit, file2)
             colnames(data2) = meta[[2]]$parameters
-          }
-        }
-
-        # remove statuses
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
-          if (file.exists(file2)) {
-            data2[grep("^Status", colnames(data2))] = NULL
+            for (labs in seq_along(meta[[2]]$parameters)) {
+              attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
+            }
           }
         }
 
@@ -259,7 +263,7 @@ meteo_imgw_daily_bp = function(rank,
         if (file.exists(file2)) {
           all_data[[length(all_data) + 1]] = merge(data1,
             data2,
-            by = c("Kod stacji", "Rok", "Miesiac", "Dzien"),
+            by = c("NSP", "ROK", "MC", "DZ"),
             all.x = TRUE
           )
         } else {
@@ -304,7 +308,10 @@ meteo_imgw_daily_bp = function(rank,
             csv_data = read.table(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", encoding = "CP1250")
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
-            csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+            for (labs in seq_along(meta[[1]]$parameters)) {
+              attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
+            }
+            csv_data$POST = trimws(csv_data$POST)
             return(csv_data)
           }
         )
@@ -312,8 +319,8 @@ meteo_imgw_daily_bp = function(rank,
         if (is.data.frame(d)) {
           data1 = d
           colnames(data1) = meta[[1]]$parameters
-          if (status == FALSE) {
-            data1[grep("^Status", colnames(data1))] = NULL
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
           }
         }
 
@@ -322,10 +329,6 @@ meteo_imgw_daily_bp = function(rank,
           file1 = paste(temp2, dir(temp2), sep = "/")[1]
           data1 = imgw_read(translit, file1)
           colnames(data1) = meta[[1]]$parameters
-          # remove status
-          if (status == FALSE) {
-            data1[grep("^Status", colnames(data1))] = NULL
-          }
         } # end of corrupted zips
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
@@ -333,63 +336,66 @@ meteo_imgw_daily_bp = function(rank,
     } # end of if statement for climate stations
   } # end of looping over catalogs
 
-  all_data = as.data.frame(data.table::rbindlist(all_data, fill = TRUE))
+  all_data = data.table::rbindlist(all_data, fill = TRUE)
 
   # fix order of columns if needed and entries in stations' names if more than 1 available:
-  col_inds = grep(pattern = "Nazwa stacji", colnames(all_data), value = TRUE)
+  col_inds = grep(pattern = "POST", colnames(all_data), value = TRUE)
+  
   if (length(col_inds) > 1) {
-    all_data$`Nazwa stacji` = apply(all_data[, col_inds], 1, function(x) na.omit(unique(x))[1])
-    all_data$`Nazwa stacji.x` = NULL
-    all_data$`Nazwa stacji.y` = NULL
-    if (colnames(all_data)[ncol(all_data)] == "Nazwa stacji") { # re-order columns if needed
-      all_data = all_data[, c(1, ncol(all_data), 2:(ncol(all_data) - 1))]
+    all_data$POST = apply(
+      all_data[, col_inds, with = FALSE],
+      1,
+      function(x) na.omit(unique(x))[1]
+    )
+    all_data$POST.x = NULL
+    all_data$POST.y = NULL
+    if (colnames(all_data)[ncol(all_data)] == "POST") { # re-order columns if needed
+      data.table::setcolorder(all_data, c(1, ncol(all_data), 2:(ncol(all_data) - 1)))
     }
   }
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations[, 1:3],
+    all_data = merge(setDT(climate::imgw_meteo_stations[, 1:3]),
       all_data,
       by.x = "id",
-      by.y = "Kod stacji",
+      by.y = "NSP",
       all.y = TRUE
     )
   }
 
-  # add station rank:
-  rank_code = switch(rank,
-    synop = "SYNOPTYCZNA",
-    climate = "KLIMATYCZNA",
-    precip = "OPADOWA"
-  )
-  all_data = cbind(data.frame(rank_code = rank_code), all_data)
-
-  all_data = all_data[all_data$Rok %in% year, ] # clip only to selected years
+  all_data = all_data[all_data$ROK %in% year, ] # clip only to selected years
 
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$`Nazwa stacji`))))))
+      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$POST))))))
       if (any(is.na(inds)) || length(inds) == 0) {
         env$logs = c(
           env$logs,
           paste("At least one of selected station(s) is not available in the database. Returning all available stations")
         )
       } else {
-        all_data = all_data[inds, ]
+        all_data = all_data[inds]
       }
     }
   }
-  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
-
+  all_data$POST = trimws(all_data$POST)
+  
   # sort output
-  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
-    all_data = all_data[order(all_data$`Kod stacji`, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
+  if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
+    all_data = all_data[order(all_data$NSP, all_data$ROK, all_data$MC, all_data$DZ), ]
   } else {
-    all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien), ]
+    all_data = all_data[order(all_data$id, all_data$ROK, all_data$MC, all_data$DZ), ]
+  }
+  
+  # remove status:
+  if (status == FALSE) {
+    all_data = remove_status(all_data)
   }
 
   # remove duplicates and shorten colnames
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  # turned off temporarily:
+  # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:

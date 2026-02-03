@@ -149,11 +149,11 @@ meteo_imgw_hourly_bp = function(rank,
         file1 = paste(temp2, dir(temp2), sep = "/")
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
-
-        # remove statuses
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
         }
+        data1$POST = trimws(data1$POST)
+        data.table::setDT(data1)
 
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
@@ -196,7 +196,10 @@ meteo_imgw_hourly_bp = function(rank,
             csv_data = read.csv(data, header = FALSE, sep = ",")
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
-            csv_data$`Nazwa stacji` = trimws(csv_data$`Nazwa stacji`)
+            for (labs in seq_along(meta[[1]]$parameters)) {
+              attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
+            }
+            csv_data$POST = trimws(csv_data$POST)
             return(csv_data)
           }
         )
@@ -209,10 +212,11 @@ meteo_imgw_hourly_bp = function(rank,
         }
 
         colnames(data1) = meta[[1]]$parameters
-        # remove status
-        if (status == FALSE) {
-          data1[grep("^Status", colnames(data1))] = NULL
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
         }
+        data1$POST = trimws(data1$POST)
+        data.table::setDT(data1)
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
       } # end of looping for zip files
@@ -220,32 +224,33 @@ meteo_imgw_hourly_bp = function(rank,
   } # end of loop over directories
 
   if (!is.null(all_data)) {
-    all_data = do.call(rbind, all_data)
+    all_data = data.table::rbindlist(all_data, fill = TRUE)
   } else {
     stop("No data found. Quitting", call. = FALSE)
   }
 
   if (coords) {
-    all_data = merge(climate::imgw_meteo_stations[, 1:3],
+    all_data = merge(data.table::setDT(climate::imgw_meteo_stations[, 1:3]),
       all_data,
       by.x = "id",
-      by.y = "Kod stacji",
+      by.y = "NSP",
       all.y = TRUE
     )
   }
 
   # add rank
-  rank_code = switch(rank,
-    synop = "SYNOPTYCZNA",
-    climate = "KLIMATYCZNA"
-  )
-  all_data = cbind(data.frame(rank_code = rank_code), all_data)
-  all_data = all_data[all_data$Rok %in% year, ] # przyciecie tylko do wybranych lat gdyby sie pobralo za duzo
+  # add station rank (temporarily disabled to align with daily)
+  # rank_code = switch(rank,
+  #   synop = "SYNOPTYCZNA",
+  #   climate = "KLIMATYCZNA"
+  # )
+  # all_data = cbind(data.frame(rank_code = rank_code), all_data)
+  all_data = all_data[all_data$ROK %in% year, ] # clip only to selected years
 
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
-      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$`Nazwa stacji`))))))
+      inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$POST))))))
       if (any(is.na(inds)) || length(inds) == 0) {
         env$logs = c(
           env$logs,
@@ -256,23 +261,23 @@ meteo_imgw_hourly_bp = function(rank,
       }
     }
   }
-  all_data$`Nazwa stacji` = trimws(all_data$`Nazwa stacji`)
+  all_data$POST = trimws(all_data$POST)
 
   # sortowanie w zaleznosci od nazw kolumn - raz jest "kod stacji", raz "id"
-  if (sum(grepl(x = colnames(all_data), pattern = "Kod stacji"))) {
-    all_data = all_data[order(
-      all_data$`Kod stacji`,
-      all_data$Rok,
-      all_data$Miesiac,
-      all_data$Dzien,
-      all_data$Godzina
-    ), ]
+  if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
+    data.table::setorder(all_data, NSP, ROK, MC, DZ, GG)
   } else {
-    all_data = all_data[order(all_data$id, all_data$Rok, all_data$Miesiac, all_data$Dzien, all_data$Godzina), ]
+    data.table::setorder(all_data, id, ROK, MC, DZ, GG)
+  }
+  
+  # remove status:
+  if (status == FALSE) {
+    all_data = remove_status(all_data)
   }
 
   # extra option for shortening colnames and removing duplicates
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  # TODO: turned off temporarily, consistent with daily implementation
+  # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
