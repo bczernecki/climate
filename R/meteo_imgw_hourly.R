@@ -149,6 +149,9 @@ meteo_imgw_hourly_bp = function(rank,
         file1 = paste(temp2, dir(temp2), sep = "/")
         data1 = imgw_read(translit, file1)
         colnames(data1) = meta[[1]]$parameters
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+        }
         data1$POST = trimws(data1$POST)
         data.table::setDT(data1)
 
@@ -193,6 +196,9 @@ meteo_imgw_hourly_bp = function(rank,
             csv_data = read.csv(data, header = FALSE, sep = ",")
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
+            for (labs in seq_along(meta[[1]]$parameters)) {
+              attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+            }
             csv_data$POST = trimws(csv_data$POST)
             return(csv_data)
           }
@@ -206,6 +212,9 @@ meteo_imgw_hourly_bp = function(rank,
         }
 
         colnames(data1) = meta[[1]]$parameters
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+        }
         data1$POST = trimws(data1$POST)
         data.table::setDT(data1)
         unlink(c(temp, temp2))

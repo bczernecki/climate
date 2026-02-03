@@ -144,6 +144,9 @@ meteo_imgw_monthly_bp = function(rank,
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
     data1 = imgw_read(translit, file1)
     colnames(data1) = meta[[1]]$parameters
+    for (labs in seq_along(meta[[1]]$parameters)) {
+      attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+    }
     data1$POST = trimws(data1$POST)
     data.table::setDT(data1)
 
@@ -152,6 +155,9 @@ meteo_imgw_monthly_bp = function(rank,
       if (file.exists(file2)) {
         data2 = imgw_read(translit, file2)
         colnames(data2) = meta[[2]]$parameters
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+        }
         data2$POST = trimws(data2$POST)
         data.table::setDT(data2)
       }
