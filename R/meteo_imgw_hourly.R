@@ -260,6 +260,11 @@ meteo_imgw_hourly_bp = function(rank,
   } else {
     data.table::setorder(all_data, id, ROK, MC, DZ, GG)
   }
+  
+  # remove status:
+  if (status == FALSE) {
+    all_data = remove_status(all_data)
+  }
 
   # extra option for shortening colnames and removing duplicates
   # TODO: turned off temporarily, consistent with daily implementation

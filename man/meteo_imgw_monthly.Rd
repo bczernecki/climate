@@ -49,7 +49,7 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
 }
 \examples{
 \donttest{
-monthly <- meteo_imgw_monthly(rank = "climate", year = 1969)
+monthly = meteo_imgw_monthly(rank = "climate", year = 1969)
 head(monthly)
 
 # a descriptive (long) column names:

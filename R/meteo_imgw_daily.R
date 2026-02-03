@@ -160,7 +160,6 @@ meteo_imgw_daily_bp = function(rank,
           for (labs in seq_along(meta[[2]]$parameters)) {
             attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
           }
-          
           data2$POST = trimws(data2$POST)
         } else {
           data2 = head(data1, 0)[, 1:min(5, ncol(data1))]
@@ -343,7 +342,7 @@ meteo_imgw_daily_bp = function(rank,
   col_inds = grep(pattern = "POST", colnames(all_data), value = TRUE)
   
   if (length(col_inds) > 1) {
-    all_data$POST <- apply(
+    all_data$POST = apply(
       all_data[, col_inds, with = FALSE],
       1,
       function(x) na.omit(unique(x))[1]
@@ -364,15 +363,6 @@ meteo_imgw_daily_bp = function(rank,
     )
   }
 
-  # add station rank:
-  # rank_code = switch(rank,
-  #   synop = "SYNOPTYCZNA",
-  #   climate = "KLIMATYCZNA",
-  #   precip = "OPADOWA"
-  # )
-  # 
-  # all_data = cbind(data.frame(rank_code = rank_code), all_data)
-
   all_data = all_data[all_data$ROK %in% year, ] # clip only to selected years
 
   # station selection and names cleaning:
@@ -390,11 +380,17 @@ meteo_imgw_daily_bp = function(rank,
     }
   }
   all_data$POST = trimws(all_data$POST)
+  
   # sort output
   if (sum(grepl(x = colnames(all_data), pattern = "NSP"))) {
     all_data = all_data[order(all_data$NSP, all_data$ROK, all_data$MC, all_data$DZ), ]
   } else {
     all_data = all_data[order(all_data$id, all_data$ROK, all_data$MC, all_data$DZ), ]
+  }
+  
+  # remove status:
+  if (status == FALSE) {
+    all_data = remove_status(all_data)
   }
 
   # remove duplicates and shorten colnames

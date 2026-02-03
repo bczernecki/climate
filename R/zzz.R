@@ -3,3 +3,5 @@
 #' @keywords internal
 #' @noRd
 env <- new.env(parent = emptyenv())
+
+globalVariables(c("DZ", "GG", "MC", "NSP", "POST.x", "ROK", "id"))
