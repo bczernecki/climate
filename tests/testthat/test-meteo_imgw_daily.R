@@ -7,7 +7,7 @@ test_that("meteo_imgw_daily", {
     return(invisible(NULL))
   } else {
     y = 1900 # year not supported
-    expect_message(meteo_imgw_daily(rank = "synop", year = y, status = TRUE,
+    expect_warning(meteo_imgw_daily(rank = "synop", year = y, status = TRUE,
                                   coords = TRUE, allow_failure = TRUE))
   }
 })
@@ -35,10 +35,13 @@ test_that("check_message_for_non_existing_station", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    expect_message(meteo_imgw_daily(rank = "precip",
+    expect_true(
+      nrow(
+        meteo_imgw_daily(rank = "precip",
                                   year = 2002,
                                   coords = TRUE,
-                                  station = 9999))
+                                  station = 9999)
+      ) > 160000)
   }
 })
 
@@ -52,17 +55,13 @@ test_that("check_encoding_in_non_synop", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    non_synop = suppressWarnings(
-      suppressMessages(meteo_imgw_daily(year = 2024, 
+    non_synop = meteo_imgw_daily(year = 2024, 
                                  rank = "precip", 
-                                 allow_failure = FALSE))
-    )
+                                 allow_failure = FALSE)
     expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
-    non_synop = suppressWarnings(
-      suppressMessages(meteo_imgw_daily(year = 2024, 
+    non_synop = meteo_imgw_daily(year = 2024, 
                                  rank = "climate", 
-                                 allow_failure = FALSE))
-    )
+                                 allow_failure = FALSE)
     expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
   }
 })

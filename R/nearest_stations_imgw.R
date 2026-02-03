@@ -90,16 +90,16 @@ nearest_stations_imgw_bp = function(type,
     stop("y should be latitude")
   }
 
-  if (max(year) >= as.integer(substr(Sys.Date(), 1, 4)) - 1) {
-    message("Data cannot be provided for this repository. Please check the available records at: \n
-            https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
+  if (max(year) >= as.integer(substr(Sys.Date(), 1, 4)) - 1 | length(year) == 1) {
+    stop("Data cannot be provided for this repository. Please check the available records at: \n
+            https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/ or the syntax used for the year argument. \n")
     Sys.sleep(2)
   }
   
   if (type == "meteo") {
-    result = unique(meteo_imgw_monthly(rank = rank, year = year, coords = TRUE)[, c(2:5)])
+    result = as.data.frame(unique(meteo_imgw_monthly(rank = rank, year = year, coords = TRUE)[, c(2:5)]))
   } else if (type == "hydro") {
-    result = unique(hydro_imgw_monthly(year = year, coords = TRUE)[, c(1:4)])
+    result = as.data.frame(unique(hydro_imgw_monthly(year = year, coords = TRUE)[, c(1:4)]))
   } else {
     stop("You've provided wrong type argument; please use: \"meteo\", or \"hydro\"")
   }
