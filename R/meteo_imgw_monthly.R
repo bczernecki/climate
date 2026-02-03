@@ -156,7 +156,7 @@ meteo_imgw_monthly_bp = function(rank,
         data2 = imgw_read(translit, file2)
         colnames(data2) = meta[[2]]$parameters
         for (labs in seq_along(meta[[1]]$parameters)) {
-          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+          attr(data2[[labs]], "label") = meta[[1]]$label[[labs]]
         }
         data2$POST = trimws(data2$POST)
         data.table::setDT(data2)

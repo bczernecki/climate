@@ -90,10 +90,9 @@ nearest_stations_imgw_bp = function(type,
     stop("y should be latitude")
   }
 
-  if (max(year) >= as.integer(substr(Sys.Date(), 1, 4)) - 1 | length(year) == 1) {
+  if (max(year) >= as.integer(substr(Sys.Date(), 1, 4)) - 1 | length(year) > 1) {
     stop("Data cannot be provided for this repository. Please check the available records at: \n
             https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/ or the syntax used for the year argument. \n")
-    Sys.sleep(2)
   }
   
   if (type == "meteo") {
@@ -109,6 +108,7 @@ nearest_stations_imgw_bp = function(type,
         https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/")
   }
   
+  # nocov start
   if (is.null(point)) {
   # workaround for different column names:
     if ("LON" %in% colnames(result))
@@ -183,5 +183,6 @@ nearest_stations_imgw_bp = function(type,
     message(paste0("Please provide only one year. For more years station's metadata",
                    "may change (name, location or station may stop collecting data)"))
   }
+  # nocov end
   return(result)
 }

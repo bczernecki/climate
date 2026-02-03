@@ -1,6 +1,22 @@
 context("meteo_imgw_daily")
 
 
+
+test_that("meteo_imgw_daily_single_station", {
+  if (!curl::has_internet()) {
+    message("No internet connection! \n")
+    return(invisible(NULL))
+  } else {
+    station = c("POZNAŃ", "POZNAŃ-ŁAWICA") # year not supported
+    poznan = meteo_imgw_daily(rank = "synop", 
+                              year = 2024, 
+                              station = station,
+                              status = FALSE,
+                              coords = TRUE)
+    expect_true(nrow(poznan) > 360)
+  }
+})
+
 test_that("meteo_imgw_daily", {
   if (!curl::has_internet()) {
     message("No internet connection! \n")
@@ -58,10 +74,10 @@ test_that("check_encoding_in_non_synop", {
     non_synop = meteo_imgw_daily(year = 2024, 
                                  rank = "precip", 
                                  allow_failure = FALSE)
-    expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
+    expect_identical(nchar(non_synop$NSP), nchar(trimws(non_synop$NSP)))
     non_synop = meteo_imgw_daily(year = 2024, 
                                  rank = "climate", 
                                  allow_failure = FALSE)
-    expect_identical(nchar(non_synop$station), nchar(trimws(non_synop$station)))
+    expect_identical(nchar(non_synop$NSP), nchar(trimws(non_synop$NSP)))
   }
 })

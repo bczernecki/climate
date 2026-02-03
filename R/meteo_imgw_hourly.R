@@ -197,7 +197,7 @@ meteo_imgw_hourly_bp = function(rank,
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
             for (labs in seq_along(meta[[1]]$parameters)) {
-              attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+              attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
             }
             csv_data$POST = trimws(csv_data$POST)
             return(csv_data)

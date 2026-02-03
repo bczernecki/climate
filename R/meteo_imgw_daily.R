@@ -223,6 +223,9 @@ meteo_imgw_daily_bp = function(rank,
             if (!is.null(csv_data)) {
               csv_data = convert_encoding(csv_data)
               colnames(csv_data) = meta[[1]]$parameters
+              for (labs in seq_along(meta[[1]]$parameters)) {
+                attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
+              }
               csv_data$POST = trimws(csv_data$POST)
             }
             return(csv_data)
@@ -232,8 +235,8 @@ meteo_imgw_daily_bp = function(rank,
         if (is.data.frame(d)) {
           data1 = d
           colnames(data1) = meta[[1]]$parameters
-          if (status == FALSE) {
-            data1[grep("^W", colnames(data1))] = NULL
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
           }
         }
 
@@ -242,19 +245,17 @@ meteo_imgw_daily_bp = function(rank,
           file1 = paste(temp2, dir(temp2), sep = "/")[1]
           data1 = imgw_read(translit, file1)
           colnames(data1) = meta[[1]]$parameters
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+          }
 
           file2 = paste(temp2, dir(temp2), sep = "/")[2]
           if (file.exists(file2)) {
             data2 = imgw_read(translit, file2)
             colnames(data2) = meta[[2]]$parameters
-          }
-        }
-
-        # remove statuses
-        if (status == FALSE) {
-          data1[grep("^W", colnames(data1))] = NULL
-          if (file.exists(file2)) {
-            data2[grep("^W", colnames(data2))] = NULL
+            for (labs in seq_along(meta[[2]]$parameters)) {
+              attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
+            }
           }
         }
 
@@ -307,6 +308,9 @@ meteo_imgw_daily_bp = function(rank,
             csv_data = read.table(data, header = FALSE, stringsAsFactors = FALSE, sep = ",", encoding = "CP1250")
             csv_data = convert_encoding(csv_data)
             colnames(csv_data) = meta[[1]]$parameters
+            for (labs in seq_along(meta[[1]]$parameters)) {
+              attr(csv_data[[labs]], "label") = meta[[1]]$label[[labs]]
+            }
             csv_data$POST = trimws(csv_data$POST)
             return(csv_data)
           }
@@ -315,8 +319,8 @@ meteo_imgw_daily_bp = function(rank,
         if (is.data.frame(d)) {
           data1 = d
           colnames(data1) = meta[[1]]$parameters
-          if (status == FALSE) {
-            data1[grep("^W", colnames(data1))] = NULL
+          for (labs in seq_along(meta[[1]]$parameters)) {
+            attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
           }
         }
 
@@ -325,10 +329,6 @@ meteo_imgw_daily_bp = function(rank,
           file1 = paste(temp2, dir(temp2), sep = "/")[1]
           data1 = imgw_read(translit, file1)
           colnames(data1) = meta[[1]]$parameters
-          # remove status
-          if (status == FALSE) {
-            data1[grep("^W", colnames(data1))] = NULL
-          }
         } # end of corrupted zips
         unlink(c(temp, temp2))
         all_data[[length(all_data) + 1]] = data1
@@ -394,7 +394,6 @@ meteo_imgw_daily_bp = function(rank,
   }
 
   # remove duplicates and shorten colnames
-  # TODO:
   # turned off temporarily:
   # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
   rownames(all_data) = NULL
