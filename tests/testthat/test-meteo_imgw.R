@@ -32,7 +32,7 @@ test_that("meteo_imgw monthly works!", {
     message("No internet connection! \n")
     return(invisible(NULL))
   } else {
-    x = meteo_imgw(interval = "monthly", rank = "synop", year = 2020:2021, station = "BIAŁYSTOK")
+    x = meteo_imgw(interval = "monthly", rank = "synop", year = 2020:2021, station = "LESZNO")
     testthat::expect_equal(nrow(x), 24)
   }
 })
