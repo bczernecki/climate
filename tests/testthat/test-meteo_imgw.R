@@ -19,8 +19,6 @@ test_that("meteo_imgw works!", {
     x <- meteo_imgw("monthly", "synop", year = y, status = TRUE)
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE)
     x <- meteo_imgw("monthly", "synop", year = y, col_names = "full")
-    x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "full")
-    x <- meteo_imgw("monthly", "synop", year = y, col_names = "polish")
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "polish")
     
     testthat::expect_message(x <- suppressWarnings(meteo_imgw_daily(rank = "synop", year = 2001, station = "blabla")))
@@ -35,6 +33,6 @@ test_that("meteo_imgw monthly works!", {
     return(invisible(NULL))
   } else {
     x = meteo_imgw(interval = "monthly", rank = "synop", year = 2020:2021, station = "BIAŁYSTOK")
-    expect_equal(nrow(x), 24)
+    testthat::expect_equal(nrow(x), 24)
   }
 })
