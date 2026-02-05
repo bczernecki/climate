@@ -22,9 +22,19 @@ test_that("meteo_imgw works!", {
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "full")
     x <- meteo_imgw("monthly", "synop", year = y, col_names = "polish")
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "polish")
-    x <- meteo_imgw("monthly", "synop", year = y, station = "BIAŁYSTOK")
-    x2 <- meteo_imgw("monthly", "synop", year = y, station = 353230295)
     
     testthat::expect_message(x <- suppressWarnings(meteo_imgw_daily(rank = "synop", year = 2001, station = "blabla")))
+  }
+})
+
+
+test_that("meteo_imgw monthly works!", {
+  
+  if (!curl::has_internet()) {
+    message("No internet connection! \n")
+    return(invisible(NULL))
+  } else {
+    x = meteo_imgw(interval = "monthly", rank = "synop", year = 2020:2021, station = "BIAŁYSTOK")
+    expect_equal(nrow(x), 24)
   }
 })

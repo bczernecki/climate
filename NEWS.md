@@ -1,3 +1,8 @@
+# climate 1.3.0
+
+* fixes for bugs in `meteo_imgw_monthly()`
+
+
 # climate 1.2.9
 
 * fixes for corrupted header files in `meteo_imgw_` family of functions due to changes in the IMGW-PIB repository
