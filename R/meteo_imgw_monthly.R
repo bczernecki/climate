@@ -39,13 +39,13 @@
 #' }
 #'
 meteo_imgw_monthly = function(rank = "synop",
-                               year,
-                               status = FALSE,
-                               coords = FALSE,
-                               station = NULL,
-                               col_names = "short",
-                               allow_failure = TRUE,
-                               ...) {
+                              year,
+                              status = FALSE,
+                              coords = FALSE,
+                              station = NULL,
+                              col_names = "short",
+                              allow_failure = TRUE,
+                              ...) {
   if (allow_failure) {
     tryCatch(
       meteo_imgw_monthly_bp(
