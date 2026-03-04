@@ -1,4 +1,4 @@
-# climate 1.3.0
+# climate 1.2.9.9001
 
 * fixes for bugs in `meteo_imgw_monthly()`
 
