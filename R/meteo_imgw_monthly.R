@@ -248,7 +248,6 @@ meteo_imgw_monthly_bp = function(rank,
   # adding option to shorten columns and removing duplicates:
   # TODO: turned off temporarily, consistent with daily implementation
   # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
-  rownames(all_data) = NULL
-
+  rownames(all_data) = 1:nrow(all_data)
   return(all_data) # clipping to selected years only
 }

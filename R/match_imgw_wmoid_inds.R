@@ -1,5 +1,5 @@
 #' Match WMO station IDs for IMGW SYNOP
-#' @param station vector or station names provided to imgw_meteo_ family of functions
+#' @param station vector or station names provided to meteo_imgw_ family of functions
 #' @keywords internal
 #' @noRd
 match_imgw_wmoid_inds = function(station) {

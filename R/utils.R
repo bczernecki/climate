@@ -49,3 +49,36 @@ remove_status = function(df) {
   
   return(df)
 }
+
+
+
+#' Find all variants of station' names
+#' 
+#' For IMGW-PIB stations different naming were used historically. For example,
+#' `POZNAŃ` and ``POZNAŃ-ŁAWICA, thus both names should be used when searching
+#'for the station. This function finds all variants of station' names
+#' status information and expand the created object
+#' 
+#' @param station_name character vector of station names
+#' @export
+#' @returns character vector of station names with all variants of station's names
+#' @examples {
+#' find_all_station_names(c("WARSZAWA", "POZNAŃ"))
+#' }
+
+find_all_station_names = function(station_name) {
+  
+  pattern = paste0("(?=.*", toupper(station_name), ")(?=.*-)")
+  matches = unlist(
+    sapply(pattern, function(x) {
+      grep(x, climate::imgw_meteo_stations$station,
+          perl = TRUE,
+          ignore.case = TRUE,
+          value = TRUE)
+      }
+    )
+  )
+  names(matches) = NULL
+
+  return(sort(unique(c(station_name, matches))))
+}

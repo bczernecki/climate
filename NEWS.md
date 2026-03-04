@@ -3,7 +3,12 @@
 * adapting code to most recent changes in the IMGW-PIB repository:
   * fixes for `meteo_imgw_monthly()` 
   * changes in metadata and downloading functions for hydrological datasets
-  * ppdated Polish vignette for hydro dataset
+  * updated Polish vignette for hydro dataset
+  * added `find_all_station_names()` function to find all station names in the IMGW-PIB
+  repository that match the provided name(s) and return all available datasets for 
+  those stations (e.g.entry "WARSZAWA" will also search for: "WARSZAWA-BIELANY", 
+  "WARSZAWA-OKECIE", "WARSZAWA-OBSERWATORIUM", etc.)
+
 
 
 # climate 1.2.9
