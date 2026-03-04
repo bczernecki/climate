@@ -27,9 +27,10 @@ meteo_imgw(
 
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
-\item{station}{vector of hydrological stations danepubliczne.imgw.pl
-can be name of station CAPITAL LETTERS(character).
-It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
+\item{station}{name of meteorological station(s).
+It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
+Please note that station names may change over time and thus sometimes 2 names
+are required in some cases, e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.}
 
 \item{col_names}{three types of column names possible: "short" - default, values with shorten names,
 "full" - full English description, "polish" - original names in the dataset}

@@ -135,6 +135,12 @@ hydro_imgw_daily_bp = function(year,
       
     } #end of loop for (usually monthly) zip files in a given year
     
+    # rename colnames starting with ^ZJ to be changed to ^CO:
+    # to adjust colnames in zjaw_data to match those in codz_data before merging:
+    colnames(zjaw_data)[grepl(x = colnames(zjaw_data), "^ZJ")] = 
+      gsub(x = colnames(zjaw_data)[grepl(x = colnames(zjaw_data), "^ZJ")],
+           pattern = "^ZJ", replacement = "CO")
+    
     all_data[[length(all_data) + 1]] = merge(data.table(codz_data), 
                                              data.table(zjaw_data),
                                              by = intersect(colnames(codz_data), colnames(zjaw_data)),
@@ -143,7 +149,7 @@ hydro_imgw_daily_bp = function(year,
     # station selection and names cleaning:
     if (!is.null(station)) {
       if (is.character(station)) {
-        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data[[length(all_data)]]$`Nazwa stacji`))))))
+        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data[[length(all_data)]]$PSNZWP))))))
         if (any(is.na(inds)) || length(inds) == 0) {
           env$logs = c(
             env$logs,
@@ -163,6 +169,7 @@ hydro_imgw_daily_bp = function(year,
   all_data[all_data == 99.9] = NA
   all_data[all_data == 999] = NA
   
+  # TODO:
   if (coords) {
     all_data = merge(climate::imgw_hydro_stations, all_data,
                      by.x = "id",
@@ -173,12 +180,12 @@ hydro_imgw_daily_bp = function(year,
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
-      all_data = all_data[substr(all_data$`Nazwa stacji`, 1, nchar(station)) == station, ]
+      all_data = all_data[substr(all_data$PSNZWP, 1, nchar(station)) == station, ]
       if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }
     } else if (is.numeric(station)) {
-      all_data = all_data[all_data$`Kod stacji` %in% station, ]
+      all_data = all_data[all_data$PSKDSZS %in% station, ]
       if (nrow(all_data) == 0) {
         stop("Selected station(s) is not available in the database.", call. = FALSE)
       }

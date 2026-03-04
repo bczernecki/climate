@@ -8,8 +8,8 @@
 #' @param status leave the columns with measurement and observation statuses
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
-#' @param station name or ID of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric).
+#' @param station name of meteorological station(s).
+#' It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
 #' Please note that station names may change over time and thus sometimes 2 names
 #' are required in some cases, e.g. `c("POZNAŃ", "POZNAŃ-ŁAWICA")`.
 #' @param col_names three types of column names possible: "short" - default,
