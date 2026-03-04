@@ -34,9 +34,14 @@ jobs:
       - name: Install tidy and pandoc
         run: sudo apt install tidy pandoc
         
+      - name: Remove cached R libraries
+        run: rm -rf /home/runner/work/_temp/Library/data.table
+        
       - name: Install dependencies
         run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "maps", "dplyr", "tidyr", "xml2", "testthat", "archive"))'
-        run: R -e 'install.packages("data.table", type = "source")'
+      
+      - name: Install data.table from source
+        run: Rscript -e 'install.packages("data.table", type = "source")'
         
       - uses: r-lib/actions/check-r-package@v2
         with:
