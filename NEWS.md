@@ -1,6 +1,8 @@
 # climate 1.2.9.9001
 
-* fixes for bugs in `meteo_imgw_monthly()`
+* adapting code to most recent changes in the IMGW-PIB repository:
+  * fixes for `meteo_imgw_monthly()` 
+  * changes in metadata and downloading functions for hydrological datasets
 
 
 # climate 1.2.9
