@@ -33,7 +33,7 @@ df$date <- df$Date
 df <- left_join(df, wdir)
 
 df$ws <- df$ffkmh / 3.6 # conversion to m/s from km/h
-df$gust <- df$Gustkmh / 3.6 # conversion to m/s from km/h
+df$gust <- as.numeric(df$Gustmax) / 3.6 # conversion to m/s from km/h
 windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE, 
          main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
 

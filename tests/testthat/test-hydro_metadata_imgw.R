@@ -4,9 +4,11 @@ h_d <- suppressWarnings(hydro_metadata_imgw("daily"))
 h_m <- suppressWarnings(hydro_metadata_imgw("monthly"))
 
 test_that("hydro-metadata works!", {
-  if (is.list(h_d) && is.list(h_m)) {
-    expect_equal(dim(h_d[[1]]), c(10, 1))
-    expect_equal(dim(h_d[[2]]), c(10, 1))
-    expect_equal(dim(h_m[[1]]), c(10, 1))
+  if (is.list(h_d)) {
+    expect_equal(dim(h_d[[1]]), c(10, 2))
+    expect_equal(dim(h_d[[2]]), c(10, 2))
+  } 
+  if (is.data.frame(h_m)) {
+    expect_equal(dim(h_m), c(10, 2))
   }
 })

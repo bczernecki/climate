@@ -12,9 +12,10 @@
 #' @param col_names three types of column names possible: "short" - default, values with shorten names,
 #' "full" - full English description, "polish" - original names in the dataset
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
-#' @param station vector of hydrological stations danepubliczne.imgw.pl
-#' can be name of station CAPITAL LETTERS(character).
-#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
+#' @param station name of meteorological station(s).
+#' It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
+#' Please note that station names may change over time and thus sometimes 2 names
+#' are required in some cases, e.g. `c("POZNAŃ", "POZNAŃ-ŁAWICA")`.
 #' @export
 #' @return A data.frame with columns describing the meteorological parameters
 #' (e.g. temperature, wind speed, precipitation) where each row represent a measurement,

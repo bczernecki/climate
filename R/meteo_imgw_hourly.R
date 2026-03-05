@@ -8,8 +8,7 @@
 #' @param status leave the columns with measurement and observation statuses
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
-#' @param station name or ID of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
+#' @param station name of meteorological station(s) (character vector)
 #' @param col_names three types of column names possible: "short" - default,
 #' values with shorten names, "full" - full English description,
 #' "polish" - original names in the dataset
@@ -250,6 +249,7 @@ meteo_imgw_hourly_bp = function(rank,
   # station selection and names cleaning:
   if (!is.null(station)) {
     if (is.character(station)) {
+      find_all_station_names(station)
       inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data$POST))))))
       if (any(is.na(inds)) || length(inds) == 0) {
         env$logs = c(

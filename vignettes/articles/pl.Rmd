@@ -48,18 +48,11 @@ framework powinna być dostępne po roku 2000 roku
 
 - **meteo_imgw()** - Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub 
 miesięcznym  o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji dane.imgw.pl. 
-Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej wersji paczki).
-
-- **meteo\_shortening()** - Skracanie nazw kolumn parametrów meteorologicznych
-    poprawiając czytelność pobranego zestawu danych i usuwanie zduplikowanych nazw kolumn.
 
 2. Dane hydrologiczne: 
 
 - **hydro_imgw()** -  Pobieranie danych hydrologicznych o interwale dziennym, miesięcznym lub  rocznym ze 
 stacji dostępnych w repozytorium dane.imgw.pl.
-Jest to wrapper funckji  `meteo_monthly()`, `meteo_daily()` oraz  `meteo_hourly()`z pakietu **imgw** (poprzedniej
-wersji paczki).
-
 
 3. Dane radiosondażowe : 
 
@@ -79,22 +72,22 @@ h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
 
-Zmienna  `idex` reprezentuje id ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
+Zmienna  `MCWSKEX` reprezentuje id ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
 Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym
 celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas 
-informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (` hyy`), szerokość geograficzną `X` i długość 
+informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (`MCROKH`), szerokość geograficzną `X` i długość 
 geograficzną` Y`.
 Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w każdym roku za pomocą ** dplyr ** `summarise()`,
-oraz rozdzielimy dane według roku używając ** tidyr **' `spread ()` aby uzyskać roczne średnie maksymalne przepływy w 
+oraz rozdzielimy dane według roku używając ** tidyr **' `spread ()` aby uzyskać roczne średnie maksymalne przepływy (`MCPRZP`) w 
 kolejnych kolumnach.
   
 ```{r filtering, eval=TRUE, include=TRUE}
 h2 = h %>%
-  filter(idex == 3) %>%
-  select(id, station, X, Y, hyy, Q) %>%
-  group_by(hyy, id, station, X, Y) %>%
-  summarise(srednie_roczne_Q = round(mean(Q, na.rm = TRUE),1)) %>% 
-  spread(hyy, srednie_roczne_Q)
+  filter(MCWSKEX == 3) %>%
+  select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
+  group_by(MCROKH, id, PSNZWP, X, Y) %>%
+  summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
+  spread(MCROKH, srednie_roczne_Q)
 ```
 
 ```{r filtering2, echo=FALSE}
@@ -126,7 +119,7 @@ world = ne_countries(scale = "medium", returnclass = "sf")
 
 h3 = h2 %>% 
   filter(!is.na(X)) %>% 
-  st_as_sf(coords = c("X", "Y"))
+  st_as_sf(coords = c("X", "Y"), crs = 4326)
 
 tm_shape(h3) + 
   tm_symbols(size = as.character(c(2001:2010)),

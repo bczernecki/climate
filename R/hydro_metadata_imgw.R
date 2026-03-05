@@ -29,13 +29,13 @@ hydro_metadata_imgw_bp = function(interval) {
 
   if (interval == "daily") {
     # dobowe
-    address_meta1 = paste0(base_url, "dobowe/codz_info.txt")
-    address_meta2 = paste0(base_url, "dobowe/zjaw_info.txt")
+    address_meta1 = paste0(base_url, "dobowe/CODZ_publiczne_format.txt")
+    address_meta2 = paste0(base_url, "dobowe/ZJAW_publiczne_format.txt")
     meta = list(clean_metadata_hydro(address_meta1, interval),
                  clean_metadata_hydro(address_meta2, interval))
   } else if (interval == "monthly") {
     #miesieczne
-    address_meta = paste0(base_url, "miesieczne/mies_info.txt")
+    address_meta = paste0(base_url, "miesieczne/MIES_publiczne_format.txt")
     meta = clean_metadata_hydro(address_meta, interval)
   } else {
     stop("Wrong `interval` value. It should be either 'daily' or 'monthly'.")

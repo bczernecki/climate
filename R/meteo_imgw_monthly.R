@@ -8,8 +8,8 @@
 #' @param status leave the columns with measurement and observation statuses
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
-#' @param station name or ID of meteorological station(s).
-#' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric).
+#' @param station name of meteorological station(s).
+#' It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
 #' Please note that station names may change over time and thus sometimes 2 names
 #' are required in some cases, e.g. `c("POZNAŃ", "POZNAŃ-ŁAWICA")`.
 #' @param col_names three types of column names possible: "short" - default,
@@ -39,13 +39,13 @@
 #' }
 #'
 meteo_imgw_monthly = function(rank = "synop",
-                               year,
-                               status = FALSE,
-                               coords = FALSE,
-                               station = NULL,
-                               col_names = "short",
-                               allow_failure = TRUE,
-                               ...) {
+                              year,
+                              status = FALSE,
+                              coords = FALSE,
+                              station = NULL,
+                              col_names = "short",
+                              allow_failure = TRUE,
+                              ...) {
   if (allow_failure) {
     tryCatch(
       meteo_imgw_monthly_bp(
@@ -113,7 +113,7 @@ meteo_imgw_monthly_bp = function(rank,
   ind = lapply(years_in_catalogs, function(x) sum(x %in% year) > 0)
   catalogs = catalogs[unlist(ind)]
 
-  all_data = vector("list", length = length(catalogs))
+  all_data = NULL
 
   for (i in seq_along(catalogs)) {
     catalog = gsub(catalogs[i], pattern = "/", replacement = "")
@@ -155,8 +155,8 @@ meteo_imgw_monthly_bp = function(rank,
       if (file.exists(file2)) {
         data2 = imgw_read(translit, file2)
         colnames(data2) = meta[[2]]$parameters
-        for (labs in seq_along(meta[[1]]$parameters)) {
-          attr(data2[[labs]], "label") = meta[[1]]$label[[labs]]
+        for (labs in seq_along(meta[[2]]$parameters)) {
+          attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
         }
         data2$POST = trimws(data2$POST)
         data.table::setDT(data2)
@@ -248,7 +248,6 @@ meteo_imgw_monthly_bp = function(rank,
   # adding option to shorten columns and removing duplicates:
   # TODO: turned off temporarily, consistent with daily implementation
   # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
-  rownames(all_data) = NULL
-
+  rownames(all_data) = 1:nrow(all_data)
   return(all_data) # clipping to selected years only
 }

@@ -8,21 +8,15 @@
 #' @noRd
 
 clean_metadata_hydro = function(address, interval) {
+
   temp = tempfile()
-
   test_url(link = address, output = temp)
-  a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE, 
-               fileEncoding = "CP1250", skip = 1, sep = "\t")$V1
-  a = gsub(a, pattern = "\\?", replacement = "") 
-  a = gsub(x = a, pattern = "'", replacement = "")
-  a = trimws(gsub(x = a, pattern = "\\^", replacement = ""))
-  a = gsub(a, pattern = "\\s+", replacement = " ")
-
-  if (interval == "monthly") {
-    b = list(data.frame(parameters = a[1:10]))
-  }
-  if (interval == "daily") {
-    b = data.frame(parameters = a[1:10])
-  }
-  return(b)
+  a = read.csv(temp, header = FALSE, stringsAsFactors = FALSE)$V1
+  
+  inds = grepl("^[A-Z]{2}.{5}", a)
+  
+  code = trimws(substr(a, 1, 7))[inds]
+  name = trimws(substr(a, 10, nchar(a)))[inds]
+  a = data.frame(parameters = code, label = name)
+  return(a)
 }
