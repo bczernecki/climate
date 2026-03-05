@@ -18,7 +18,7 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Monthly IMGW meteorological data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.2.9/R/meteo_imgw_monthly.R" class="external-link"><code>R/meteo_imgw_monthly.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/R/meteo_imgw_monthly.R" class="external-link"><code>R/meteo_imgw_monthly.R</code></a></small>
     <div class="hidden name"><code>meteo_imgw_monthly.Rd</code></div>
     </div>
 
@@ -105,8 +105,8 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
 
 
 <dt id="arg-station">station<a class="anchor" aria-label="anchor" href="#arg-station"></a></dt>
-<dd><p>name or ID of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric).
+<dd><p>name of meteorological station(s).
+It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
 Please note that station names may change over time and thus sometimes 2 names
 are required in some cases, e.g. <code>c("POZNAŃ", "POZNAŃ-ŁAWICA")</code>.</p></dd>
 
@@ -143,10 +143,23 @@ By default set to TRUE (i.e. don't stop on error). For debugging purposes change
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/k_m_t_format.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/klimat/1966_1970/1966_1970_m_k.zip</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Potential error(s) found. Problems with downloading data.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Run function with argument allow_failure = FALSE to see more details</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">monthly</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          NSP     POST   ROK    MC  TMAX  TMXS  TMIN  TMNS   STM  TMNG  SUMM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;   &lt;char&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 249180010 PSZCZYNA  1969     1   9.5  -1.3 -20.0  -9.3  -5.1 -22.4  34.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 249180010 PSZCZYNA  1969     2   7.4   0.4 -16.6  -4.7  -2.3 -17.5  47.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 249180010 PSZCZYNA  1969     3  11.4   2.5 -10.6  -3.5  -0.8 -11.3  44.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 249180010 PSZCZYNA  1969     4  27.5  13.1  -4.4   2.0   7.1  -6.2  15.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 249180010 PSZCZYNA  1969     5  30.0  21.3   2.0   9.0  14.8  -0.1  69.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 249180010 PSZCZYNA  1969     6  28.9  20.9   6.1  10.5  15.4   4.4 101.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     OPMX   DN1   DN2  PKSN  PSDN  DESD  SNID  TEMP  WLGS   FWS   NOS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;num&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  12.0    23    NA    10    21     4     6  -5.1     0   2.1   5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  15.9     8    NA    18    16     4     7  -2.3     0   2.2   6.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  10.1    11    NA     2     3     3     8  -0.8     0   2.7   5.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   4.0     1    NA     0     0     6     4   7.1     0   2.1   3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:  30.0    29    NA     0     0     9     0  14.8     0   2.0   4.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:  35.0    21    NA     0     0    16     0  15.4     0   1.8   5.3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a descriptive (long) column names:</span></span></span>
 <span class="r-in"><span><span class="va">monthly2</span> <span class="op">=</span> <span class="fu">meteo_imgw_monthly</span><span class="op">(</span></span></span>
@@ -160,10 +173,39 @@ By default set to TRUE (i.e. don't stop on error). For debugging purposes change
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/s_m_t_format.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/2018/2018_m_s.zip</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Potential error(s) found. Problems with downloading data.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Run function with argument allow_failure = FALSE to see more details</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">monthly2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          NSP          POST   ROK    MC  TMAX  TMXS  TMIN  TMNS   STM  TMNG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        &lt;int&gt;        &lt;char&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: 349190600 BIELSKO-BIALA  2018     1  11.6   5.0  -7.7  -0.4   2.3 -10.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: 349190600 BIELSKO-BIALA  2018     2   7.2  -1.4 -15.5  -6.0  -3.7 -23.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: 349190600 BIELSKO-BIALA  2018     3  16.5   4.8 -17.2  -3.0   1.0 -21.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: 349190600 BIELSKO-BIALA  2018     4  26.7  20.3  -1.0   8.2  14.3  -1.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: 349190600 BIELSKO-BIALA  2018     5  28.0  21.3   5.1  10.6  16.2   2.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 349190600 BIELSKO-BIALA  2018     6  29.5  22.7   8.1  13.5  17.6   6.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     SUMM  OPMX   DN1   DN2  SUUS  PKSN  PSDN  DESD  SNID  DSND  GRDD  MGLD</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;num&gt; &lt;num&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  23.5   6.5     8    NA  58.8     4     5     7    10     4     0     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:  34.1   9.5     4    NA  47.0    19    25     0    16     4     0     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:  28.5  10.1    16    NA 110.7    15    14     5     7     2     0     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:  10.3   3.5    23    NA 218.2     0     0     7     1     1     0     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:  91.1  19.5    17    NA 247.1     0     0    14     0     0     1     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: 135.5  30.4     2    NA 164.1     0     0    16     1     0     0     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ZAMD  SADD  GOLD  ZAND  ZAWD  ZMED  BURD  ROSD  SZRD   NA. NA..1   NOS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:    25     0     0     0     0     0     2     0     0     9    NA   6.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:    28     0     1     6     1     2     0     0     0     3    NA   6.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:    24     0     0     2     0     7     0     0     2     5    NA   5.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:     6     0     0     0     0     0     0     1    17     2    NA   4.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:    11     0     0     0     0     0     0     9    26     0    NA   4.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:    15     0     0     0     0     0     0     9    15     0    NA   5.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      FWS  TEMP   CPW  WLGS  PPPS   PPPM  WODZ  WONO</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;  &lt;num&gt; &lt;num&gt; &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1:   4.6   2.3   5.8  80.0 967.9 1017.2  13.5  10.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:   2.9  -3.7   4.1  83.8 969.5 1019.9  17.4  16.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:   3.6   1.0   5.1  72.5 959.8 1008.9  14.1  14.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:   3.8  14.3   9.0  56.7 967.9 1015.0   5.3   5.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:   3.1  16.2  12.3  68.4 969.9 1016.8  40.6  50.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6:   2.6  17.5  14.8  74.2 968.6 1015.2  45.7  89.8</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
