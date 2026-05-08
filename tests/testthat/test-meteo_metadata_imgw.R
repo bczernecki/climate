@@ -19,18 +19,18 @@ test_that("meteo_metadata_imgw tests", {
     
     if (is.list(m_hs) && is.list(m_ds) && is.list(m_ds) && is.list(m_dc) && 
         is.list(m_dp) && is.list(m_ms) && is.list(m_mc) && is.list(m_mp)) {
-      expect_equal(dim(m_hs[[1]]), c(107, 3))
-      expect_equal(dim(m_hc[[1]]), c(22, 3))
-      expect_equal(dim(m_ds[[1]]), c(65, 3))
-      expect_equal(dim(m_ds[[2]]), c(23, 3))
-      expect_equal(dim(m_dc[[1]]), c(18, 3))
-      expect_equal(dim(m_dc[[2]]), c(13, 3))
-      expect_equal(dim(m_dp[[1]]), c(16, 3))
-      expect_equal(dim(m_ms[[1]]), c(60, 3))
-      expect_equal(dim(m_ms[[2]]), c(22, 3))
-      expect_equal(dim(m_mc[[1]]), c(27, 3))
-      expect_equal(dim(m_mc[[2]]), c(12, 3))
-      expect_equal(dim(m_mp[[1]]), c(14, 3))
+      expect_equal(dim(m_hs[[1]]), c(107, 2))
+      expect_equal(dim(m_hc[[1]]), c(22, 2))
+      expect_equal(dim(m_ds[[1]]), c(65, 2))
+      expect_equal(dim(m_ds[[2]]), c(23, 2))
+      expect_equal(dim(m_dc[[1]]), c(18, 2))
+      expect_equal(dim(m_dc[[2]]), c(13, 2))
+      expect_equal(dim(m_dp[[1]]), c(16, 2))
+      expect_equal(dim(m_ms[[1]]), c(58, 2))
+      expect_equal(dim(m_ms[[2]]), c(22, 2))
+      expect_equal(dim(m_mc[[1]]), c(27, 2))
+      expect_equal(dim(m_mc[[2]]), c(12, 2))
+      expect_equal(dim(m_mp[[1]]), c(14, 2))
     }
   }
 })

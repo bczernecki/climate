@@ -20,8 +20,9 @@ and hydrological data from publicly available repositories:
 - University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratories - Global Monitoring Laboratory [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
 - Polish Institute of Meteorology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
-- National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
+- National Centers for Environmental Information, National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www.ncei.noaa.gov/pub/data/noaa/)
 
+ 
 ## Installation
 
 The stable release of the **climate** package from the [CRAN](https://CRAN.R-project.org) repository can be installed with:
@@ -47,7 +48,7 @@ Any meteorological (aka SYNOP) station working under the World Meteorological Or
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
 
-- **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
+- **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
 - **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
 
@@ -73,7 +74,7 @@ country in the Ogimet repository
 - **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
 
 ## Example 1
-#### Download hourly dataset from NOAA ISH meteorological repository:
+#### Download hourly dataset from NCEI/NOAA ISH meteorological repository:
 
 ``` r0
 library(climate)
@@ -88,7 +89,7 @@ head(noaa)
 ```
 
 ## Example 2
-#### Finding a nearest meteorological stations in a given country using NOAA ISH data source:
+#### Finding a nearest meteorological stations in a given country using NCEI/NOAA ISH data source:
 
 ``` r1
 library(climate)
@@ -277,7 +278,7 @@ Feel also free to contact us by creating [an issue](https://github.com/bczerneck
 
 ## Citation
 
-To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
+To cite the `climate` package in publications, please use [this paper](https://doi.org/10.3390/su12010394):
 
 Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. https://doi.org/10.3390/su12010394"
 

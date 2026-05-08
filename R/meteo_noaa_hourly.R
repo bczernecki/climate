@@ -3,9 +3,9 @@
 #' Downloading hourly (meteorological) data from the SYNOP stations available in the NOAA ISD collection.
 #' Some stations in the dataset are dated back even up to 1900.
 #' By default only records that follow FM-12 (SYNOP) convention are processed.
-#' Further details available at: https://www1.ncdc.noaa.gov/pub/data/noaa/readme.txt
+#' Further details available at: https://www.ncei.noaa.gov/pub/data/noaa/readme.txt
 #'
-#' @param station ID of meteorological station(s) (characters). Find your station's ID at: https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt
+#' @param station ID of meteorological station(s) (characters). Find your station's ID at: https://www.ncei.noaa.gov/pub/data/noaa/isd-history.txt
 #' @param year vector of years (e.g., 1966:2000)
 #' @param fm12 use only FM-12 (SYNOP) records (TRUE by default)
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
@@ -40,7 +40,7 @@ meteo_noaa_hourly = function(station = NULL,
 meteo_noaa_hourly_bp = function(station = station, year, fm12 = fm12) {
   
   stopifnot(is.character(station))
-  base_url = "https://www1.ncdc.noaa.gov/pub/data/noaa/"
+  base_url = "https://www.ncei.noaa.gov/pub/data/noaa/"
   all_data = NULL
   
   for (i in seq_along(year)) {

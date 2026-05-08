@@ -25,8 +25,7 @@ meteo_imgw_hourly(
 
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
-\item{station}{name or ID of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
+\item{station}{name of meteorological station(s) (character vector)}
 
 \item{col_names}{three types of column names possible: "short" - default,
 values with shorten names, "full" - full English description,
@@ -46,8 +45,8 @@ available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-  hourly = meteo_imgw_hourly(rank = "climate", year = 1984)
-  head(hourly)
+hourly = meteo_imgw_hourly(rank = "climate", year = 1984)
+head(hourly)
 }
 
 }

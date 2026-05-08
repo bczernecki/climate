@@ -76,7 +76,7 @@ nearest_stations_noaa_bp = function(country,
     stop("You can check the available nearest stations for one day only. Please provide just one date")
   }
   
-  linkpl2 = "https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt"
+  linkpl2 = "https://www.ncei.noaa.gov/pub/data/noaa/country-list.txt"
   temp = tempfile()
   test_url(link = linkpl2, output = temp)
   
@@ -91,7 +91,7 @@ nearest_stations_noaa_bp = function(country,
   b1 = as.data.frame(b1[2:dim(b1)[1], ])
   b1$CTRY = as.character(b1$CTRY)
   b1$countries = as.character(b1$countries)
-  b2 = read.csv("https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.csv")
+  b2 = read.csv("https://www.ncei.noaa.gov/pub/data/noaa/isd-history.csv")
   stations_noaa = merge(b1, b2)
   stations_noaa["Begin_date"] = as.Date(paste0(substr(stations_noaa[,11], 1, 4), "-",
                                                substr(stations_noaa[,11], 5, 6), "-",
@@ -107,12 +107,12 @@ nearest_stations_noaa_bp = function(country,
 
   if (dim(result)[1] == 0) {
     stop("Wrong name of a country. Please check countries names at: 
-         https://www1.ncdc.noaa.gov/pub/data/noaa/country-list.txt")
+         https://www.ncei.noaa.gov/pub/data/noaa/country-list.txt")
   } 
   result = result[(result$Begin_date < date & result$End_date < date), ]
   if (dim(result)[1] == 0) {
     stop("Probably there is no data for this date. Please check available records:  
-        https://www1.ncdc.noaa.gov/pub/data/noaa/isd-history.txt")
+        https://www.ncei.noaa.gov/pub/data/noaa/isd-history.txt")
   }
   if (is.null(point)) {
     point = c(round(mean(result$LON, na.rm = TRUE), 2),round(mean(result$LAT, na.rm = TRUE), 2))

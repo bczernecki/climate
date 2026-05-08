@@ -26,7 +26,11 @@ meteo_imgw_daily(
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{name of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS); Stations' IDs (numeric) are no longer valid}
+It accepts vector of names (characters in CAPITAL LETTERS);
+Important: Some stations may have changed names over time in the IMGW-PIB
+database and thus providing both names is needed
+(e.g. \code{station = c("POZNAŃ", "POZNAŃ-ŁAWICA", "WARSZAWA", "WARSZAWA-OKĘCIE")}).
+Stations' IDs (numeric) are no longer valid}
 
 \item{col_names}{three types of column names possible:
 "short" - default, values with shorten names,
@@ -47,7 +51,7 @@ available in the danepubliczne.imgw.pl collection
 }
 \examples{
 \donttest{
-  daily = meteo_imgw_daily(rank = "climate", year = 2000)
+daily = meteo_imgw_daily(rank = "climate", year = 2000)
 }
 
 }

@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      NOT_CRAN: true  # to enforce also tests that are skipped on cran and reduce code coverage
 
     steps:
       - uses: actions/checkout@v4

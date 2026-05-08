@@ -25,7 +25,7 @@ and hydrological data from publicly available repositories:
 - Polish Institute of Meteorology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
 - National Oceanic & Atmospheric Administration - Earth System Research Laboratory - Global
   Monitoring Division [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
-- National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www1.ncdc.noaa.gov/pub/data/noaa/)
+- National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www.ncei.noaa.gov/pub/data/noaa/)
 
 ## Functions 
 
@@ -227,7 +227,7 @@ Feel also free to contact us by creating [an issue](https://github.com/bczerneck
 
 ## Citation
 
-To cite the `climate` package in publications, please use [this paper](https://www.mdpi.com/2071-1050/12/1/394):
+To cite the `climate` package in publications, please use [this paper](https://doi.org/10.3390/su12010394):
   
   Czernecki, B.; Głogowski, A.; Nowosad, J. Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets for Environmental Assessment. Sustainability 2020, 12, 394. https://doi.org/10.3390/su12010394"
 

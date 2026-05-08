@@ -14,7 +14,7 @@
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
 #' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
-#' @importFrom data.table fread
+#' @importFrom data.table fread data.table
 #' @export
 #' @returns data.frame with historical hydrological data for the daily time interval
 #' @examples \donttest{
@@ -129,7 +129,7 @@ hydro_imgw_daily_bp = function(year,
         unzip(zipfile = temp, exdir = temp2)
         file2 = paste(temp2, dir(temp2), sep = "/")[1]
         data2 = imgw_read(translit, file2)
-        colnames(data2) = meta[[2]][, 1]
+        colnames(data2) = gsub(x = meta[[2]][, 1], "^ZJ", "CO") # rename colnames starting with ^ZJ to be changed to ^CO:
         zjaw_data = rbind(zjaw_data, data2)
       }
       
@@ -139,6 +139,20 @@ hydro_imgw_daily_bp = function(year,
                                              data.table(zjaw_data),
                                              by = intersect(colnames(codz_data), colnames(zjaw_data)),
                                              all.x = TRUE)
+    
+    if (!is.null(station)) {
+      if (is.character(station)) {
+        inds = unique(as.numeric(unlist(sapply(station, function(x) grep(pattern = x, x = trimws(all_data[[length(all_data)]]$PSNZWP))))))
+        if (any(is.na(inds)) || length(inds) == 0) {
+          env$logs = c(
+            env$logs,
+            paste("At least one of selected station(s) is not available in the database. Returning all available stations")
+          )
+        } else {
+          all_data[[length(all_data)]] = all_data[[length(all_data)]][inds, ]
+        }
+      }
+    }
     
   } # end of loop for years (if more than 1 specified)
   
@@ -151,37 +165,22 @@ hydro_imgw_daily_bp = function(year,
   if (coords) {
     all_data = merge(climate::imgw_hydro_stations, all_data,
                      by.x = "id",
-                     by.y = "Kod stacji",
+                     by.y = "PSKDSZS",
                      all.y = TRUE)
   }
   
-  #station selection
-  if (!is.null(station)) {
-    if (is.character(station)) {
-      all_data = all_data[substr(all_data$`Nazwa stacji`, 1, nchar(station)) == station, ]
-      if (nrow(all_data) == 0) {
-        stop("Selected station(s) is not available in the database.", call. = FALSE)
-      }
-    } else if (is.numeric(station)) {
-      all_data = all_data[all_data$`Kod stacji` %in% station, ]
-      if (nrow(all_data) == 0) {
-        stop("Selected station(s) is not available in the database.", call. = FALSE)
-      }
-    } else {
-      stop("Selected station(s) are not in the proper format.", call. = FALSE)
-    }
-  }
-  
-  all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "Nazwa stacji|Rok hydro|w roku hydro|Dzie")]), ]
+  all_data = as.data.frame(all_data)
+  all_data = all_data[do.call(order, all_data[grep(x = colnames(all_data), "PSNZWP|COROKH|COMSCH|CODZIEN")]), ]
   # fix dates and add as seperate column:
-  yy_ind = grep(x = colnames(all_data), "Rok hydrologiczny")
-  mm_ind = grep(x = colnames(all_data), "kalendarzowy")
-  dd_ind = grep(x = colnames(all_data), "Dzie")
+  yy_ind = grep(x = colnames(all_data), "COROKH")
+  mm_ind = grep(x = colnames(all_data), "COMSCK")
+  dd_ind = grep(x = colnames(all_data), "CODZIEN")
   data_df = all_data[, c(yy_ind, mm_ind, dd_ind)]
   data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
   all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df[, 3]))
-  all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
-  all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
-  
+  #all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
+  #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data = unique(all_data)
+  rownames(all_data) = 1:nrow(all_data)
   return(all_data)
 }

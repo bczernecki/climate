@@ -19,12 +19,9 @@ test_that("meteo_imgw works!", {
     x <- meteo_imgw("monthly", "synop", year = y, status = TRUE)
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE)
     x <- meteo_imgw("monthly", "synop", year = y, col_names = "full")
-    x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "full")
-    x <- meteo_imgw("monthly", "synop", year = y, col_names = "polish")
     x <- meteo_imgw("monthly", "synop", year = y, coords = TRUE, col_names = "polish")
-    x <- meteo_imgw("monthly", "synop", year = y, station = "BIAŁYSTOK")
-    x2 <- meteo_imgw("monthly", "synop", year = y, station = 353230295)
-    
     testthat::expect_message(x <- suppressWarnings(meteo_imgw_daily(rank = "synop", year = 2001, station = "blabla")))
+    leszno = meteo_imgw(interval = "monthly", rank = "synop", year = 2020:2021, station = "LESZNO")
+    testthat::expect_equal(nrow(leszno), 24)
   }
 })

@@ -18,6 +18,7 @@ meteo_metadata_imgw = function(interval, rank) { # interval can be: monthly, hou
   if (interval == "daily") { # warning! daily for climates and synop have 2 files with metadata!!!
 
     if (rank == "synop") {
+      
       b[[1]] = clean_metadata_meteo(address = paste0(base_url,"dane_meteorologiczne/dobowe/synop/s_d_format.txt"),
                                rank = "synop", interval = "daily")
       b[[2]] = clean_metadata_meteo(address = paste0(base_url, "dane_meteorologiczne/dobowe/synop/s_d_t_format.txt"),

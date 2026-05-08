@@ -1,3 +1,36 @@
+# climate 1.4.0
+
+## TODO/in progress:
+* adding parser for SYNOP messages from OGIMET webportal to speed up downloading and avoid server overload; 
+the new parser allows to download data for multiple stations in a single query
+
+
+
+# climate 1.3.0
+
+* adapting code to most recent changes in the IMGW-PIB repository:
+  * fixes for `meteo_imgw_monthly()` 
+  * changes in metadata and downloading functions for hydrological datasets
+  * updated Polish vignette for hydro dataset
+  * added `find_all_station_names()` function to find all station names in the IMGW-PIB
+  repository that match the provided name(s) and return all available datasets for 
+  those stations (e.g.entry "WARSZAWA" will also search for: "WARSZAWA-BIELANY", 
+  "WARSZAWA-OKECIE", "WARSZAWA-OBSERWATORIUM", etc.)
+
+
+# climate 1.2.9
+
+* fixes for corrupted header files in `meteo_imgw_` family of functions due to changes in the IMGW-PIB repository
+
+
+# climate 1.2.8
+
+* speeding up selective download for given station names in `meteo_imgw_*` and `hydro_imgw_daily()` functions that simultaneously reduce use of memory
+* minor fix for `meteo_imgw_daily` to handle cases with station names containing extra spaces or non-parsable characters
+* verbosing currently processed url for easier detection of problematic or corrupted datasets
+* change of NOAA NCDC's url from www1.ncdc.noaa.gov/pub/data/noaa/ to: www.ncei.noaa.gov
+
+
 # climate 1.2.5
 
 * Added 20 sec. pause between subsequent requests to the OGIMET server to avoid server overload. 

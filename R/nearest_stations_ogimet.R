@@ -187,6 +187,7 @@ nearest_stations_ogimet_bp = function(country = country,
   attr(result[["lat"]], "label") = "decimal degrees"
   attr(result[["alt"]], "label") = "metres AGL"
   
+  # nocov start
   if (add_map == TRUE) {
     if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")
@@ -229,6 +230,7 @@ nearest_stations_ogimet_bp = function(country = country,
       cex = 0.6
     )
     maps::map(add = TRUE)
+    # nocov end
     
   }
   
