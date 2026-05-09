@@ -38,9 +38,9 @@ windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE,
          main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
 
 # do we miss any data?
-summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
+openair::summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
 
 # which sectors are responsible for warm/cold air mass advection:
-polarPlot(df, pollutant = "TC", x = "ws", wd = "dir", k = 50, force.positive = FALSE, 
+openair::polarPlot(df, pollutant = "TC", x = "ws", wd = "dir", k = 50, force.positive = FALSE, 
           type = "season", layout = c(4, 1), resolution = "fine",  normalise = FALSE)
 ```
