@@ -1,4 +1,4 @@
-#' Parse SYNOP messages into structured lists
+#' Parse SYNOP messages into structured lists or a data frame
 #'
 #' This function wraps the SYNOP decoding logic that was previously distributed
 #' with the package in `inst/extdata`. It parses one or more SYNOP messages and
@@ -6,21 +6,38 @@
 #' decoder.
 #'
 #' @param message Character vector with SYNOP messages.
-#' @param country Optional single character value passed to the precipitation
+#' @param country Optional; A single character value passed to the precipitation
 #'   indicator decoder to adjust country-specific behaviour (e.g. `"RU"`).
 #' @param simplify Logical. If `TRUE` (default) and a single message is
 #'   provided, the function returns the decoded list directly instead of a
-#'   length-one list.
+#'   length-one list. Ignored when `as_data_frame = TRUE`.
+#' @param as_data_frame Logical. If `TRUE`, return a `data.frame` with one row
+#'   per message and commonly-used decoded fields as columns. Missing or
+#'   unparsed fields are filled with `NA`. Default is `FALSE`.
 #'
-#' @return A list of decoded SYNOP messages. When `simplify = TRUE` and a single
-#'   message is supplied, the corresponding decoded list is returned directly.
+#' @return When `as_data_frame = FALSE` (default): a list of decoded SYNOP
+#'   messages, or the decoded list directly when `simplify = TRUE` and a single
+#'   message is supplied. When `as_data_frame = TRUE`: a `data.frame` with one
+#'   row per message and the following columns (all numeric/character as
+#'   appropriate, `NA` when not present in the message):
+#'   `station_type`, `station_id`, `region`, `obs_day`, `obs_hour`,
+#'   `wind_unit`, `wind_estimated`, `visibility`, `cloud_cover`,
+#'   `wind_direction`, `wind_speed`, `air_temperature`, `dewpoint_temperature`,
+#'   `station_pressure`, `sea_level_pressure`, `pressure_tendency`,
+#'   `pressure_change`, `precipitation_amount`, `precipitation_time`,
+#'   `cloud_base_min`, `cloud_base_max`, `low_cloud_type`,
+#'   `middle_cloud_type`, `high_cloud_type`, `low_cloud_amount`,
+#'   `source` (the original SYNOP message string).
+#'   Row names are sequential integers.
 #' @examples
 #' synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 #' parser(synop_code)
 #' parser(rep(synop_code, 2), simplify = FALSE)
+#' parser(synop_code, as_data_frame = TRUE)
+#' parser(rep(synop_code, 2), as_data_frame = TRUE)
 #' @import R6
 #' @export
-parser = function(message, country = NULL, simplify = TRUE) {
+parser = function(message, country = NULL, simplify = TRUE, as_data_frame = FALSE) {
   if (missing(message) || length(message) == 0) {
     stop("`message` must contain at least one SYNOP string.")
   }
@@ -52,11 +69,62 @@ parser = function(message, country = NULL, simplify = TRUE) {
     SIMPLIFY = FALSE
   )
 
+  if (as_data_frame) {
+    rows = Map(.synop_to_row, results, message)
+    df   = do.call(rbind, rows)
+    rownames(df) = NULL
+    return(df)
+  }
+
   if (simplify && length(results) == 1) {
     return(results[[1]])
   }
 
   results
+}
+
+# Internal helper: extract a deeply-nested value safely, returning NA on failure.
+.sg = function(lst, ...) {
+  keys = c(...)
+  for (k in keys) {
+    if (is.null(lst) || !is.list(lst) || is.null(lst[[k]])) return(NA)
+    lst = lst[[k]]
+  }
+  lst
+}
+
+# Internal helper: flatten one decoded SYNOP list into a single-row data.frame.
+# `source` is the original SYNOP message string, added as the last column.
+.synop_to_row = function(x, source = NA_character_) {
+  data.frame(
+    station_type         = .sg(x, "station_type",    "value"),
+    station_id           = .sg(x, "station_id",      "value"),
+    region               = .sg(x, "region",          "value"),
+    obs_day              = .sg(x, "obs_time",         "day",       "value"),
+    obs_hour             = .sg(x, "obs_time",         "hour",      "value"),
+    wind_unit            = .sg(x, "wind_indicator",   "unit"),
+    wind_estimated       = .sg(x, "wind_indicator",   "estimated"),
+    visibility           = .sg(x, "visibility",       "value"),
+    cloud_cover          = .sg(x, "cloud_cover",      "value"),
+    wind_direction       = .sg(x, "surface_wind",     "direction", "value"),
+    wind_speed           = .sg(x, "surface_wind",     "speed",     "value"),
+    air_temperature      = .sg(x, "air_temperature",  "value"),
+    dewpoint_temperature = .sg(x, "dewpoint_temperature", "value"),
+    station_pressure     = .sg(x, "station_pressure", "value"),
+    sea_level_pressure   = .sg(x, "sea_level_pressure", "value"),
+    pressure_tendency    = .sg(x, "pressure_tendency", "tendency", "value"),
+    pressure_change      = .sg(x, "pressure_tendency", "change",   "value"),
+    precipitation_amount = .sg(x, "precipitation_s1", "amount",   "value"),
+    precipitation_time   = .sg(x, "precipitation_s1", "time_before_obs", "value"),
+    cloud_base_min       = .sg(x, "lowest_cloud_base", "min"),
+    cloud_base_max       = .sg(x, "lowest_cloud_base", "max"),
+    low_cloud_type       = .sg(x, "cloud_types",      "low_cloud_type",    "value"),
+    middle_cloud_type    = .sg(x, "cloud_types",      "middle_cloud_type", "value"),
+    high_cloud_type      = .sg(x, "cloud_types",      "high_cloud_type",   "value"),
+    low_cloud_amount     = .sg(x, "cloud_types",      "low_cloud_amount",  "value"),
+    source               = source,
+    stringsAsFactors = FALSE
+  )
 }
 
 ################################################################################

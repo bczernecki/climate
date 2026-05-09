@@ -72,6 +72,7 @@ country in the Ogimet repository
 - **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
 - **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
 - **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
+- **parser()** - Decoding raw SYNOP meteorological messages into structured R lists or data frames
 
 ## Example 1
 #### Download hourly dataset from NCEI/NOAA ISH meteorological repository:
@@ -263,6 +264,56 @@ res.head
 #3    72503.0 2022-06-12            21.3  ...            18.3   12.0  57.1
 #4    72503.0 2022-06-11            22.6  ...            17.8    8.1  40.1
 
+```
+
+## Example 8
+#### Decode raw SYNOP messages with `parser()`
+
+The `parser()` function decodes FM-12 SYNOP meteorological messages into structured R objects.
+
+```r
+library(climate)
+
+synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
+
+# Decode a single message — returns a named list
+result = parser(synop_code)
+result$station_id$value        #> "88889"
+result$air_temperature$value   #> 9.4
+result$wind_speed$value        #> 6
+result$visibility$value        #> 40000
+result$sea_level_pressure$value #> 1019.7
+```
+
+```r
+# Return a tidy data frame with one row per message
+df = parser(synop_code, as_data_frame = TRUE)
+df
+#>   station_type station_id region obs_day obs_hour wind_unit wind_estimated
+#> 1         AAXX      88889    III       1        0        KT          FALSE
+#>   visibility cloud_cover wind_direction wind_speed air_temperature
+#> 1      40000           6            150          6             9.4
+#>   dewpoint_temperature station_pressure sea_level_pressure pressure_tendency
+#> 1                  4.7           1011.1             1019.7                 0
+#>   pressure_change precipitation_amount precipitation_time cloud_base_min
+#> 1               7                    0                  6           1500
+#>   cloud_base_max low_cloud_type middle_cloud_type high_cloud_type
+#> 1           2000              5                 4               1
+#>   low_cloud_amount                                                    source
+#> 1                1 AAXX 01004 88889 12782 61506 10094 20047 30111 40197 ...
+```
+
+```r
+# Decode multiple SYNOP messages at once
+msgs = c(
+  "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541",
+  "AAXX 10124 26477 32560 83102 10156 20106 38528 40128 52003 60001 333 56017"
+)
+df2 = parser(msgs, as_data_frame = TRUE)
+nrow(df2)       #> 2
+df2$station_id  #> c("88889", "26477")
+df2$source      # original SYNOP strings preserved in last column
+...
 ```
 
 ## Acknowledgment

@@ -2,23 +2,39 @@
 % Please edit documentation in R/parser.R
 \name{parser}
 \alias{parser}
-\title{Parse SYNOP messages into structured lists}
+\title{Parse SYNOP messages into structured lists or a data frame}
 \usage{
-parser(message, country = NULL, simplify = TRUE)
+parser(message, country = NULL, simplify = TRUE, as_data_frame = FALSE)
 }
 \arguments{
 \item{message}{Character vector with SYNOP messages.}
 
-\item{country}{Optional single character value passed to the precipitation
+\item{country}{Optional; A single character value passed to the precipitation
 indicator decoder to adjust country-specific behaviour (e.g. \code{"RU"}).}
 
 \item{simplify}{Logical. If \code{TRUE} (default) and a single message is
 provided, the function returns the decoded list directly instead of a
-length-one list.}
+length-one list. Ignored when \code{as_data_frame = TRUE}.}
+
+\item{as_data_frame}{Logical. If \code{TRUE}, return a \code{data.frame} with one row
+per message and commonly-used decoded fields as columns. Missing or
+unparsed fields are filled with \code{NA}. Default is \code{FALSE}.}
 }
 \value{
-A list of decoded SYNOP messages. When \code{simplify = TRUE} and a single
-message is supplied, the corresponding decoded list is returned directly.
+When \code{as_data_frame = FALSE} (default): a list of decoded SYNOP
+messages, or the decoded list directly when \code{simplify = TRUE} and a single
+message is supplied. When \code{as_data_frame = TRUE}: a \code{data.frame} with one
+row per message and the following columns (all numeric/character as
+appropriate, \code{NA} when not present in the message):
+\code{station_type}, \code{station_id}, \code{region}, \code{obs_day}, \code{obs_hour},
+\code{wind_unit}, \code{wind_estimated}, \code{visibility}, \code{cloud_cover},
+\code{wind_direction}, \code{wind_speed}, \code{air_temperature}, \code{dewpoint_temperature},
+\code{station_pressure}, \code{sea_level_pressure}, \code{pressure_tendency},
+\code{pressure_change}, \code{precipitation_amount}, \code{precipitation_time},
+\code{cloud_base_min}, \code{cloud_base_max}, \code{low_cloud_type},
+\code{middle_cloud_type}, \code{high_cloud_type}, \code{low_cloud_amount},
+\code{source} (the original SYNOP message string).
+Row names are sequential integers.
 }
 \description{
 This function wraps the SYNOP decoding logic that was previously distributed
@@ -30,4 +46,6 @@ decoder.
 synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 parser(synop_code)
 parser(rep(synop_code, 2), simplify = FALSE)
+parser(synop_code, as_data_frame = TRUE)
+parser(rep(synop_code, 2), as_data_frame = TRUE)
 }
