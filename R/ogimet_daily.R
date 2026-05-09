@@ -54,7 +54,7 @@ ogimet_daily_bp = function(date = date,
       "UTC each day. Use the >>hour<< argument to change it \n"
     )
   )
-  data_station <-
+  data_station =
     data.frame(
       "Date" = character(),
       "TemperatureCMax" = character(),
@@ -247,7 +247,6 @@ ogimet_daily_bp = function(date = date,
     }# end of looping for stations
     
     if (nrow(data_station) > 0) {
-      
       data_station =  data_station[!duplicated(data_station), ]
       
     # converting character to proper field representation:
@@ -255,13 +254,11 @@ ogimet_daily_bp = function(date = date,
     # get rid off "---" standing for missing/blank fields:
     data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] = NA
   
+    cnames = c("TemperatureCMax", "TemperatureCMin", "TemperatureCAvg","TdAvgC" ,"HrAvg",
+               "WindkmhInt","WindkmhGust" ,"PresslevHp", "Precmm" ,
+               "TotClOct", "lowClOct" ,"VisKm","station_ID")
     # other columns to numeric:
-    suppressWarnings(data_station[,c("TemperatureCMax", "TemperatureCMin", "TemperatureCAvg","TdAvgC" ,"HrAvg",
-                                     "WindkmhInt","WindkmhGust" ,"PresslevHp", "Precmm" ,
-                                     "TotClOct", "lowClOct" ,"VisKm","station_ID")] <-
-                       as.data.frame(sapply(data_station[,c("TemperatureCMax", "TemperatureCMin", "TemperatureCAvg","TdAvgC" ,"HrAvg",
-                                                            "WindkmhInt","WindkmhGust" ,"PresslevHp", "Precmm" ,
-                                                            "TotClOct", "lowClOct" ,"VisKm","station_ID")], as.numeric)))
+    data_station[, cnames] = as.data.frame(sapply(data_station[, cnames], as.numeric))
     
     # changing order of columns and removing blank records:
     if (coords) {

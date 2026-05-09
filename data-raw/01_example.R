@@ -1,5 +1,5 @@
 library(climate)
-df <- meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),
+df = meteo_ogimet(interval = "hourly", date = c("2018-01-01", "2018-12-31"),
                    station = "01008") 
 #> [1]  "01008" 
 #> |======================================================================| 100 % 

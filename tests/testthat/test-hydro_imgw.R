@@ -1,5 +1,5 @@
 context("hydro_imgw")
-y <- 2017
+y = 2017
 
 test_that("hydro_imgw_not_available", {
   

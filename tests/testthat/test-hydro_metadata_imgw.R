@@ -1,7 +1,7 @@
 context("hydro-metadata")
 
-h_d <- suppressWarnings(hydro_metadata_imgw("daily"))
-h_m <- suppressWarnings(hydro_metadata_imgw("monthly"))
+h_d = suppressWarnings(hydro_metadata_imgw("daily"))
+h_m = suppressWarnings(hydro_metadata_imgw("monthly"))
 
 test_that("hydro-metadata works!", {
   if (is.list(h_d)) {

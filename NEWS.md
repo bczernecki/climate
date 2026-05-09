@@ -4,6 +4,7 @@
 * adding parser for SYNOP messages from OGIMET webportal to speed up downloading and avoid server overload; 
 the new parser allows to download data for multiple stations in a single query
 * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
+* minor fixes in R code syntax and documentation
 
 
 

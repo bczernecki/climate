@@ -202,7 +202,7 @@ ogimet_hourly_bp = function(date = date,
                 "HKm", "InsoD1", "Viskm", "Snowcm", "station_ID")
     columns = colnames(data_station)[(colnames(data_station) %in% columns)]
     suppressWarnings(data_station[, columns] <-
-      as.data.frame(sapply(data_station[,columns], as.numeric)))
+      as.data.frame(sapply(data_station[, columns], as.numeric)))
   
     # changing order of columns and removing blank records:
     if (coords) {
