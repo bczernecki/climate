@@ -20,4 +20,4 @@ vignettes/articles/usecase.Rmd
 ^.covrignore$
 ^\.positai$
 ^\.claude$
-^\.CLAUDE.md$
+CLAUDE.md$

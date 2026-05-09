@@ -16,26 +16,31 @@ knitr::opts_chunk$set(echo = TRUE)
 library(climate)
 # downloading data
 df = meteo_ogimet(interval = "hourly",
-                     date = c("2018-01-01", "2018-12-31"), 
-                     station = "01008")
+                  date = c("2018-01-01", "2018-12-31"), 
+                  station = "01008")
 
 # loading external packages:
 library(dplyr)
 library(openair) # external package for plotting wind roses
+print(paste("dplyr version:", packageVersion("dplyr")))
+print(paste("openair version:", packageVersion("openair")))
 
 # converting wind direction from character into degress required by most 
 wdir = data.frame(ddd = c("CAL","N","NNE","NE","ENE","E","ESE","SE","SSE",
-                           "S","SSW","SW","WSW","W","WNW","NW","NNW"),
+                          "S","SSW","SW","WSW","W","WNW","NW","NNW"),
                    dir = c(NA, 0:15 * 22.5), stringsAsFactors = FALSE)
 # changing date column to the format required by openair package:
 df$Date = as.POSIXct(df$Date, tz = "UTC")
 df$date = df$Date
-df = left_join(df, wdir)
+df = dplyr::left_join(df, wdir)
 
 df$ws = df$ffkmh / 3.6 # conversion to m/s from km/h
 df$gust = as.numeric(df$Gustmax) / 3.6 # conversion to m/s from km/h
-windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE, 
-         main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
+openair::windRose(mydata = df, ws = "ws", wd = "dir", 
+                  type = "season", paddle = FALSE, 
+                  main = "Svalbard Lufthavn (2018)",
+                  ws.int = 3, dig.lab = 3,
+                  layout = c(4, 1))
 
 # do we miss any data?
 openair::summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
