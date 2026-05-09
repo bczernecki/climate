@@ -43,7 +43,7 @@ openair::windRose(mydata = df, ws = "ws", wd = "dir",
                   layout = c(4, 1))
 
 # do we miss any data?
-openair::summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
+openair::timePlot(df, pollutant = c("TC", "ws"))
 
 # which sectors are responsible for warm/cold air mass advection:
 openair::polarPlot(df, pollutant = "TC", x = "ws", wd = "dir", k = 50, force.positive = FALSE, 
