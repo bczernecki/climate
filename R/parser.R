@@ -571,27 +571,29 @@ CodeTable0500 <- R6Class("CodeTable0500",
 CodeTable0700 <- R6Class("CodeTable0700",
   inherit = CodeTable,
   public = list(
-    directions = c(NULL, "NE", "E", "SE", "S", "SW", "W", "NW", "N", NULL),
-    
+    # NA placeholders preserve indexing: 0 = calm, 9 = allDirections (no compass value)
+    directions = c(NA_character_, "NE", "E", "SE", "S", "SW", "W", "NW", "N", NA_character_),
+
     initialize = function() {
       self$table_name <- "0700"
     },
-    
+
     decode_internal = function(D, ...) {
       if (D == "/") {
         return(list(value = NULL, isCalmOrStationary = NULL, allDirections = NULL))
       }
-      
+
       d <- as.integer(D)
       isCalmOrStationary <- (d == 0)
       allDirections <- (d == 9)
-      
+
       direction <- if (d >= 0 && d < length(self$directions)) {
-        self$directions[d + 1]
+        v <- self$directions[d + 1]
+        if (is.na(v)) NULL else v
       } else {
         NULL
       }
-      
+
       list(
         value = direction,
         isCalmOrStationary = isCalmOrStationary,
@@ -1262,6 +1264,22 @@ SYNOP <- R6Class("SYNOP",
               if (!is.null(result)) {
                 data$minimum_temperature <- result
               }
+            } else if (header == 5) {
+              # Section 3 group 5: only 55SSS (daily sunshine in 1/10 h) is implemented.
+              # Pressure-change subgroups (j1 in 1..4) and radiation (j1 in 6..9) are skipped.
+              if (substr(next_grp, 2, 2) == "5" && nchar(next_grp) >= 5) {
+                sss <- substr(next_grp, 3, 5)
+                if (sss != "///") {
+                  sss_int <- suppressWarnings(as.integer(sss))
+                  if (!is.na(sss_int) && sss_int >= 0 && sss_int <= 240) {
+                    data$sunshine <- list(
+                      value = sss_int / 10,
+                      unit = "h",
+                      time_before_obs = list(value = 24, unit = "h")
+                    )
+                  }
+                }
+              }
             }
           }, error = function(e) {
             warning(paste("Error decoding group:", next_grp, "-", e$message))
@@ -1501,18 +1519,22 @@ CodeTable1600 <- R6Class("CodeTable1600",
       c(0, 50), c(50, 100), c(100, 200), c(200, 300), c(300, 600),
       c(600, 1000), c(1000, 1500), c(1500, 2000), c(2000, 2500), c(2500, Inf)
     ),
-    
+
     initialize = function() {
       self$table_name <- "1600"
     },
-    
+
     decode_internal = function(h, ...) {
       h_int <- as.integer(h)
       if (h_int >= 0 && h_int < length(self$ranges)) {
         range <- self$ranges[[h_int + 1]]
-        quantifier <- ifelse(is.infinite(range[2]), "isGreaterOrEqual", NULL)
-        list(min = range[1], max = ifelse(is.infinite(range[2]), NULL, range[2]), 
-             quantifier = quantifier)
+        # ifelse(test, yes, NULL) raises a warning that gets caught upstream and
+        # silently drops the result, so use plain if/else here.
+        if (is.infinite(range[2])) {
+          list(min = range[1], max = NULL, quantifier = "isGreaterOrEqual")
+        } else {
+          list(min = range[1], max = range[2], quantifier = NULL)
+        }
       } else {
         stop(paste("Invalid cloud base code:", h))
       }

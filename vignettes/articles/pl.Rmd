@@ -83,10 +83,10 @@ kolejnych kolumnach.
   
 ```{r filtering, eval=TRUE, include=TRUE}
 h2 = h %>%
-  filter(MCWSKEX == 3) %>%
-  select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
-  group_by(MCROKH, id, PSNZWP, X, Y) %>%
-  summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
+  dplyr::filter(MCWSKEX == 3) %>%
+  dplyr::select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
+  dplyr::group_by(MCROKH, id, PSNZWP, X, Y) %>%
+  dplyr::summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
   spread(MCROKH, srednie_roczne_Q)
 ```
 

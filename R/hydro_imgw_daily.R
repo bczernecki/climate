@@ -115,7 +115,10 @@ hydro_imgw_daily_bp = function(year,
           data1 = data1[, c(1:7, 10, 8:9)]
         }
         
-        colnames(data1) = meta[[1]][, 1]
+        colnames(data1) = meta[[1]]$parameters
+        for (labs in seq_along(meta[[1]]$parameters)) {
+          attr(data1[[labs]], "label") = meta[[1]]$label[[labs]]
+        }
         codz_data = rbind(codz_data, data1)
       } # end of codz_
       
@@ -129,7 +132,10 @@ hydro_imgw_daily_bp = function(year,
         unzip(zipfile = temp, exdir = temp2)
         file2 = paste(temp2, dir(temp2), sep = "/")[1]
         data2 = imgw_read(translit, file2)
-        colnames(data2) = gsub(x = meta[[2]][, 1], "^ZJ", "CO") # rename colnames starting with ^ZJ to be changed to ^CO:
+        colnames(data2) = gsub(x = meta[[2]]$parameters, "^ZJ", "CO") # rename colnames starting with ^ZJ to be changed to ^CO:
+        for (labs in seq_along(meta[[2]]$parameters)) {
+          attr(data2[[labs]], "label") = meta[[2]]$label[[labs]]
+        }
         zjaw_data = rbind(zjaw_data, data2)
       }
       
@@ -157,9 +163,9 @@ hydro_imgw_daily_bp = function(year,
   } # end of loop for years (if more than 1 specified)
   
   all_data = do.call(rbind, all_data)
-  all_data[all_data == 9999] = NA
-  all_data[all_data == 99999.999] = NA
-  all_data[all_data == 99.9] = NA
+  all_data[all_data == 9999] = NA            
+  all_data[all_data == 99999.999] = NA            
+  all_data[all_data == 99.9] = NA            
   all_data[all_data == 999] = NA
   
   if (coords) {
@@ -182,5 +188,20 @@ hydro_imgw_daily_bp = function(year,
   #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
   all_data = unique(all_data)
   rownames(all_data) = 1:nrow(all_data)
+
+  # Final pass: re-apply label attributes (rbind / data.table conversions / merge can drop them).
+  for (i in seq_len(nrow(meta[[1]]))) {
+    p = meta[[1]]$parameters[i]
+    if (p %in% colnames(all_data)) {
+      attr(all_data[[p]], "label") = meta[[1]]$label[i]
+    }
+  }
+  for (i in seq_len(nrow(meta[[2]]))) {
+    p = gsub("^ZJ", "CO", meta[[2]]$parameters[i])
+    if (p %in% colnames(all_data)) {
+      attr(all_data[[p]], "label") = meta[[2]]$label[i]
+    }
+  }
+
   return(all_data)
 }

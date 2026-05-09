@@ -86,14 +86,18 @@ hydro_imgw_monthly_bp = function(year,
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
     data1 = imgw_read(translit, file1)
-    colnames(data1) = meta[, 1]
+    colnames(data1) = meta$parameters
+    for (labs in seq_along(meta$parameters)) {
+      attr(data1[[labs]], "label") = meta$label[[labs]]
+    }
     all_data[[i]] = data1
   }
   all_data = do.call(rbind, all_data)
-
-  all_data[all_data == 9999] = NA
-  all_data[all_data == 99999.999] = NA
-  all_data[all_data == 99.9] = NA
+  all_data[all_data == 9999] = NA            
+  all_data[all_data == 99999.999] = NA            
+  all_data[all_data == 99.9] = NA            
+  all_data[all_data == 999] = NA
+  
   colnames(all_data) = meta[, 1]
   # coords
   if (coords) {
@@ -126,6 +130,14 @@ hydro_imgw_monthly_bp = function(year,
   all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
 
   #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
+
+  # Final pass: re-apply label attributes (rbind / merge can drop them).
+  for (i in seq_len(nrow(meta))) {
+    p = meta$parameters[i]
+    if (p %in% colnames(all_data)) {
+      attr(all_data[[p]], "label") = meta$label[i]
+    }
+  }
 
   return(all_data)
 }
