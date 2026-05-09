@@ -20,7 +20,6 @@
 #' parser(rep(synop_code, 2), simplify = FALSE)
 #' @import R6
 #' @export
-
 parser = function(message, country = NULL, simplify = TRUE) {
   if (missing(message) || length(message) == 0) {
     stop("`message` must contain at least one SYNOP string.")
@@ -416,7 +415,7 @@ SignedTemperature = R6Class("SignedTemperature",
     initialize = function() {
       super$initialize()
       self$code_len = 4
-      self$unit = "Cel"
+      self$unit = "Celsius"
     },
     
     decode_internal = function(raw, ...) {
@@ -942,7 +941,7 @@ SYNOP = R6Class("SYNOP",
       get_next_group = function() {
         if (group_idx <= length(groups)) {
           group = groups[group_idx]
-          group_idx <= group_idx + 1
+          group_idx <<- group_idx + 1
           return(group)
         }
         return(NULL)
@@ -1107,11 +1106,11 @@ SYNOP = R6Class("SYNOP",
           as.integer(substr(next_grp, 1, 1))
         }, error = function(e) {
           warning(paste("Unable to parse header from group:", next_grp))
-          next_grp <= next_group()
+          next_grp <<- next_group()
           return(NULL)
         }, warning = function(w) {
           warning(paste("Warning parsing header from group:", next_grp))
-          next_grp <= next_group()
+          next_grp <<- next_group()
           return(NULL)
         })
         
@@ -1359,10 +1358,10 @@ SYNOP = R6Class("SYNOP",
               }
             }, error = function(e) {
               warning(paste("Error decoding group 9 code:", g, "-", e$message))
-              idx <= idx + 1
+              idx <<- idx + 1
             }, warning = function(w) {
               warning(paste("Warning decoding group 9 code:", g, "-", w$message))
-              idx <= idx + 1
+              idx <<- idx + 1
             })
           }
         }
