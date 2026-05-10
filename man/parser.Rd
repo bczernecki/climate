@@ -33,6 +33,15 @@ appropriate, \code{NA} when not present in the message):
 \code{pressure_change}, \code{precipitation_amount}, \code{precipitation_time},
 \code{cloud_base_min}, \code{cloud_base_max}, \code{low_cloud_type},
 \code{middle_cloud_type}, \code{high_cloud_type}, \code{low_cloud_amount},
+\code{maximum_temperature} (Section 3 daily maximum, °C),
+\code{minimum_temperature} (Section 3 daily minimum, °C),
+\code{gust} (highest gust speed from Section 3 group 910ff/911ff, in the wind unit of the message),
+\code{cloudiness_height} (cloud cover in oktas of the highest cloud layer reported in Section 3,
+i.e. cirrus/cirrocumulus/cirrostratus; \code{NA} when absent),
+\code{sunshine_duration} (daily sunshine in hours, from Section 3 group 55SSS),
+\code{snow_depth} (total snow depth in cm; 0 for trace amounts, \code{NA} for non-continuous cover or
+unmeasurable depth), \code{snow_depth_state} (descriptive state of ground with snow/ice per WMO
+code table 0975, e.g. \code{"Even layer of loose dry snow covering ground completely"}),
 \code{source} (the original SYNOP message string).
 Row names are sequential integers.
 }

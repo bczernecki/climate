@@ -27,6 +27,15 @@
 #'   `pressure_change`, `precipitation_amount`, `precipitation_time`,
 #'   `cloud_base_min`, `cloud_base_max`, `low_cloud_type`,
 #'   `middle_cloud_type`, `high_cloud_type`, `low_cloud_amount`,
+#'   `maximum_temperature` (Section 3 daily maximum, °C),
+#'   `minimum_temperature` (Section 3 daily minimum, °C),
+#'   `gust` (highest gust speed from Section 3 group 910ff/911ff, in the wind unit of the message),
+#'   `cloudiness_height` (cloud cover in oktas of the highest cloud layer reported in Section 3,
+#'   i.e. cirrus/cirrocumulus/cirrostratus; `NA` when absent),
+#'   `sunshine_duration` (daily sunshine in hours, from Section 3 group 55SSS),
+#'   `snow_depth` (total snow depth in cm; 0 for trace amounts, `NA` for non-continuous cover or
+#'   unmeasurable depth), `snow_depth_state` (descriptive state of ground with snow/ice per WMO
+#'   code table 0975, e.g. `"Even layer of loose dry snow covering ground completely"`),
 #'   `source` (the original SYNOP message string).
 #'   Row names are sequential integers.
 #' @examples
@@ -60,7 +69,7 @@ parser = function(message, country = NULL, simplify = TRUE, as_data_frame = FALS
         synop$country = cntry
         synop$decode(msg)
       } else {
-        warning("Empty SYNOP message supplied; returning NULL.")
+        message("Empty SYNOP message supplied; returning NULL.")
         NULL
       }
     },
@@ -122,6 +131,27 @@ parser = function(message, country = NULL, simplify = TRUE, as_data_frame = FALS
     middle_cloud_type    = .sg(x, "cloud_types",      "middle_cloud_type", "value"),
     high_cloud_type      = .sg(x, "cloud_types",      "high_cloud_type",   "value"),
     low_cloud_amount     = .sg(x, "cloud_types",      "low_cloud_amount",  "value"),
+    maximum_temperature  = .sg(x, "maximum_temperature", "value"),
+    minimum_temperature  = .sg(x, "minimum_temperature", "value"),
+    gust                 = {
+      gusts = x[["highest_gust"]]
+      if (!is.null(gusts) && length(gusts) > 0) .sg(gusts[[1]], "speed", "value") else NA_real_
+    },
+    cloudiness_height    = {
+      layers = x[["cloud_layer"]]
+      high_genera = c("Ci", "Cc", "Cs")
+      if (!is.null(layers) && length(layers) > 0) {
+        high_idx = which(vapply(layers, function(l) {
+          isTRUE(l[["cloud_genus"]][["value"]] %in% high_genera)
+        }, logical(1)))
+        if (length(high_idx) > 0) {
+          as.numeric(layers[[high_idx[1L]]][["cloud_cover"]][["value"]])
+        } else NA_real_
+      } else NA_real_
+    },
+    sunshine_duration    = .sg(x, "sunshine",         "value"),
+    snow_depth           = .sg(x, "snow_depth",       "depth",             "value"),
+    snow_depth_state     = .sg(x, "snow_depth",       "state_of_ground"),
     source               = source,
     stringsAsFactors = FALSE
   )
@@ -200,7 +230,7 @@ Observation = R6Class("Observation",
       tryCatch({
         self$decode_internal(raw, ...)
       }, error = function(e) {
-        warning(paste("Unable to decode:", raw))
+        message(paste("Unable to decode:", raw))
         NULL
       })
     },
@@ -221,7 +251,7 @@ Observation = R6Class("Observation",
           self$encode_internal(data, ...)
         }
       }, error = function(e) {
-        warning(paste("Unable to encode:", toString(data)))
+        message(paste("Unable to encode:", toString(data)))
         paste(rep(self$null_char, self$code_len), collapse = "")
       })
     },
@@ -279,10 +309,13 @@ Observation = R6Class("Observation",
         out_val = tryCatch({
           self$code_table$decode(val, ...)
         }, error = function(e) {
-          warning(paste("Error decoding with code table:", val, "-", e$message))
+          message(paste("Error decoding with code table:", val, "-", e$message))
           NULL
         }, warning = function(w) {
-          warning(paste("Warning decoding with code table:", val, "-", w$message))
+          message(paste("Warning decoding with code table:", val, "-", w$message))
+          NULL
+        }, message = function(m) {
+          message(paste("Warning decoding with code table:", val, "-", trimws(conditionMessage(m))))
           NULL
         })
         
@@ -556,7 +589,7 @@ CodeTable = R6Class("CodeTable",
         }
         result
       }, error = function(e) {
-        warning(paste("Unable to decode", value, "in", class(self)[1]))
+        message(paste("Unable to decode", value, "in", class(self)[1]))
         NULL
       })
     },
@@ -857,7 +890,7 @@ Temperature = R6Class("Temperature",
       }
       
       if (!sn %in% c("0", "1", "/")) {
-        warning(paste(group, "is an invalid temperature group"))
+        message(paste(group, "is an invalid temperature group"))
         return(NULL)
       }
       
@@ -916,7 +949,7 @@ SurfaceWind = R6Class("SurfaceWind",
       # Sanity check: if wind is calm, it can't have a speed
       if (!is.null(direction) && !is.null(direction$calm) && direction$calm &&
           !is.null(speed) && !is.null(speed$value) && speed$value > 0) {
-        warning(paste("Wind is calm, yet has a speed (dd:", dd, ", ff:", ff, ")"))
+        message(paste("Wind is calm, yet has a speed (dd:", dd, ", ff:", ff, ")"))
         speed = NULL
       }
       
@@ -1057,7 +1090,7 @@ SYNOP = R6Class("SYNOP",
           data$region = result
         }
       }, error = function(e) {
-        warning(paste("Error decoding region:", e$message))
+        message(paste("Error decoding region:", e$message))
       })
       
       # Check if next group is NIL (station did not send data)
@@ -1087,7 +1120,7 @@ SYNOP = R6Class("SYNOP",
       section1 = next_check  # Use the group we already got
       if (is.null(section1) || nchar(section1) < 5) {
         # If section1 is invalid, try to continue anyway
-        warning("Invalid or missing section 1")
+        message("Invalid or missing section 1")
         return(data)
       }
       
@@ -1099,7 +1132,7 @@ SYNOP = R6Class("SYNOP",
           data$precipitation_indicator = result
         }
       }, error = function(e) {
-        warning(paste("Error decoding precipitation indicator:", e$message))
+        message(paste("Error decoding precipitation indicator:", e$message))
       })
       
       tryCatch({
@@ -1109,7 +1142,7 @@ SYNOP = R6Class("SYNOP",
           data$weather_indicator = result
         }
       }, error = function(e) {
-        warning(paste("Error decoding weather indicator:", e$message))
+        message(paste("Error decoding weather indicator:", e$message))
       })
       
       tryCatch({
@@ -1119,7 +1152,7 @@ SYNOP = R6Class("SYNOP",
           data$lowest_cloud_base = result
         }
       }, error = function(e) {
-        warning(paste("Error decoding lowest cloud base:", e$message))
+        message(paste("Error decoding lowest cloud base:", e$message))
       })
       
       tryCatch({
@@ -1129,7 +1162,7 @@ SYNOP = R6Class("SYNOP",
           data$visibility = result
         }
       }, error = function(e) {
-        warning(paste("Error decoding visibility:", e$message))
+        message(paste("Error decoding visibility:", e$message))
       })
       
       # Get cloud cover and wind (Nddff)
@@ -1142,7 +1175,9 @@ SYNOP = R6Class("SYNOP",
             data$cloud_cover = result
           }
         }, error = function(e) {
-          warning(paste("Error decoding cloud cover from:", nddff, "-", e$message))
+          message(paste("Error decoding cloud cover from:", nddff, "-", e$message))
+        }, message = function(m) {
+          message(paste("Warning decoding group:", nddff, "-", trimws(conditionMessage(m))))
         })
         
         tryCatch({
@@ -1157,7 +1192,9 @@ SYNOP = R6Class("SYNOP",
             data$surface_wind = wind_data
           }
         }, error = function(e) {
-          warning(paste("Error decoding surface wind from:", nddff, "-", e$message))
+          message(paste("Error decoding surface wind from:", nddff, "-", e$message))
+        }, message = function(m) {
+          message(paste("Warning decoding group:", nddff, "-", trimws(conditionMessage(m))))
         })
       }
       
@@ -1173,11 +1210,11 @@ SYNOP = R6Class("SYNOP",
         header = tryCatch({
           as.integer(substr(next_grp, 1, 1))
         }, error = function(e) {
-          warning(paste("Unable to parse header from group:", next_grp))
+          message(paste("Unable to parse header from group:", next_grp))
           next_grp <<- next_group()
           return(NULL)
         }, warning = function(w) {
-          warning(paste("Warning parsing header from group:", next_grp))
+          message(paste("Warning parsing header from group:", next_grp))
           next_grp <<- next_group()
           return(NULL)
         })
@@ -1272,10 +1309,13 @@ SYNOP = R6Class("SYNOP",
             }
           }
         }, error = function(e) {
-          warning(paste("Error decoding group:", next_grp, "-", e$message))
+          message(paste("Error decoding group:", next_grp, "-", e$message))
           # Continue to next group
         }, warning = function(w) {
-          warning(paste("Warning decoding group:", next_grp, "-", w$message))
+          message(paste("Warning decoding group:", next_grp, "-", w$message))
+          # Continue to next group
+        }, message = function(m) {
+          message(paste("Warning decoding group:", next_grp, "-", trimws(conditionMessage(m))))
           # Continue to next group
         })
         
@@ -1294,10 +1334,10 @@ SYNOP = R6Class("SYNOP",
           header = tryCatch({
             as.integer(substr(next_grp, 1, 1))
           }, error = function(e) {
-            warning(paste("Unable to parse header from group:", next_grp))
+            message(paste("Unable to parse header from group:", next_grp))
             return(NULL)
           }, warning = function(w) {
-            warning(paste("Warning parsing header from group:", next_grp))
+            message(paste("Warning parsing header from group:", next_grp))
             return(NULL)
           })
           
@@ -1333,6 +1373,56 @@ SYNOP = R6Class("SYNOP",
               if (!is.null(result)) {
                 data$minimum_temperature = result
               }
+            } else if (header == 4) {
+              # Snow depth: 4E'sss  (WMO No. 306, Section 3)
+              # E' = state of ground with snow/ice (code table 0975)
+              # sss = total snow depth in whole cm, or special values:
+              #   000 / 997 -> trace (< 0.5 cm)
+              #   998       -> snow cover not continuous
+              #   999       -> depth cannot be measured (drifts)
+              .snow_ground_states = c(
+                "0" = "Ground predominantly covered by ice",
+                "1" = "Compact or wet snow covering less than one-half of the ground",
+                "2" = "Compact or wet snow covering at least one-half of the ground but not completely",
+                "3" = "Even layer of compact or wet snow covering ground completely",
+                "4" = "Uneven layer of compact or wet snow covering ground completely",
+                "5" = "Loose dry snow covering less than one-half of the ground",
+                "6" = "Loose dry snow covering at least one-half of the ground but not completely",
+                "7" = "Even layer of loose dry snow covering ground completely",
+                "8" = "Uneven layer of loose dry snow covering ground completely",
+                "9" = "Snow covering ground completely; deep drifts within or nearby"
+              )
+              if (nchar(next_grp) >= 5) {
+                e_prime = substr(next_grp, 2, 2)
+                sss_raw = substr(next_grp, 3, 5)
+                if (sss_raw != "///") {
+                  sss_int = suppressWarnings(as.integer(sss_raw))
+                  if (!is.na(sss_int)) {
+                    depth_val = if (sss_int %in% c(0L, 997L)) {
+                      0
+                    } else if (sss_int %in% c(998L, 999L)) {
+                      NA_real_
+                    } else {
+                      as.numeric(sss_int)
+                    }
+                    special_val = switch(as.character(sss_int),
+                      "0"   = , "997" = "trace",
+                      "998" = "not_continuous",
+                      "999" = "unmeasurable",
+                      NULL
+                    )
+                    state_desc = unname(.snow_ground_states[e_prime])
+                    data$snow_depth = list(
+                      state_of_ground = if (!is.na(state_desc)) state_desc else NA_character_,
+                      depth = list(
+                        value   = depth_val,
+                        unit    = "cm",
+                        special = special_val
+                      )
+                    )
+                  }
+                }
+              }
             } else if (header == 5) {
               # Section 3 group 5: only 55SSS (daily sunshine in 1/10 h) is implemented.
               # Pressure-change subgroups (j1 in 1..4) and radiation (j1 in 6..9) are skipped.
@@ -1351,10 +1441,13 @@ SYNOP = R6Class("SYNOP",
               }
             }
           }, error = function(e) {
-            warning(paste("Error decoding group:", next_grp, "-", e$message))
+            message(paste("Error decoding group:", next_grp, "-", e$message))
             # Continue to next group
           }, warning = function(w) {
-            warning(paste("Warning decoding group:", next_grp, "-", w$message))
+            message(paste("Warning decoding group:", next_grp, "-", w$message))
+            # Continue to next group
+          }, message = function(m) {
+            message(paste("Warning decoding group:", next_grp, "-", trimws(conditionMessage(m))))
             # Continue to next group
           })
           
@@ -1425,10 +1518,13 @@ SYNOP = R6Class("SYNOP",
                 idx = idx + 1
               }
             }, error = function(e) {
-              warning(paste("Error decoding group 9 code:", g, "-", e$message))
+              message(paste("Error decoding group 9 code:", g, "-", e$message))
               idx <<- idx + 1
             }, warning = function(w) {
-              warning(paste("Warning decoding group 9 code:", g, "-", w$message))
+              message(paste("Warning decoding group 9 code:", g, "-", w$message))
+              idx <<- idx + 1
+            }, message = function(m) {
+              message(paste("Warning decoding group 9 code:", g, "-", trimws(conditionMessage(m))))
               idx <<- idx + 1
             })
           }

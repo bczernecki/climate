@@ -29,8 +29,8 @@ test_that("parser stops on non-character input", {
   expect_error(parser(12345), "`message` must be a character vector.")
 })
 
-test_that("parser warns and returns NULL for empty string", {
-  expect_warning(parser(""), "Empty SYNOP message supplied")
+test_that("parser emits message and returns NULL for empty string", {
+  expect_message(parser(""), "Empty SYNOP message supplied")
 })
 
 test_that("parser stops when country length mismatches message length", {
@@ -397,8 +397,8 @@ test_that("visibility VV=99 gives isGreaterOrEqual 50000m", {
   expect_equal(result$visibility$quantifier, "isGreaterOrEqual")
 })
 
-test_that("invalid visibility code 51-55 emits a warning", {
-  expect_warning(result <- parser("AAXX 01004 88889 12753 61506 10094"))
+test_that("invalid visibility code 51-55 emits a message", {
+  expect_message(result <- parser("AAXX 01004 88889 12753 61506 10094"))
   expect_null(result$visibility)
 })
 
@@ -420,8 +420,8 @@ test_that("precipitation code 993 gives 0.3 mm", {
   expect_equal(result$precipitation_s1$amount$value, 0.3)
 })
 
-test_that("calm wind with nonzero speed triggers a warning", {
-  expect_warning(parser("AAXX 01004 88889 12782 60015 10094"))
+test_that("calm wind with nonzero speed triggers a message", {
+  expect_message(parser("AAXX 01004 88889 12782 60015 10094"))
 })
 
 test_that("wind direction dd=99 (variable, all directions) is decoded", {
@@ -445,8 +445,8 @@ test_that("is_valid returns FALSE for non-numeric value when range set", {
 
 # ── decode error path ──────────────────────────────────────────────────────────
 
-test_that("decode warns and returns NULL on internal error", {
-  expect_warning(result <- SignedTemperature$new()$decode("094", sign = "X"))
+test_that("decode emits message and returns NULL on internal error", {
+  expect_message(result <- SignedTemperature$new()$decode("094", sign = "X"))
   expect_null(result)
 })
 
@@ -464,9 +464,9 @@ test_that("encode calls encode_internal for NULL data when code_table present", 
   expect_equal(result, "9")
 })
 
-test_that("encode warns and returns null char when encode_internal errors", {
+test_that("encode emits message and returns null char when encode_internal errors", {
   # CodeTable2700 stops when value=NULL and obscured=FALSE
-  expect_warning(result <- CloudCover$new()$encode(list(value = NULL, obscured = FALSE)))
+  expect_message(result <- CloudCover$new()$encode(list(value = NULL, obscured = FALSE)))
   expect_equal(result, "/")
 })
 
@@ -492,9 +492,9 @@ test_that("decode_value returns NULL for unavailable value '/'", {
   expect_null(result)
 })
 
-test_that("decode_value warns and returns NULL when code_table decode fails", {
-  # Code "10" exceeds CodeTable0500's index range → stop → warning chain
-  expect_warning(result <- CloudGenus$new()$decode("10"))
+test_that("decode_value emits message and returns NULL when code_table decode fails", {
+  # Code "10" exceeds CodeTable0500's index range → stop → message chain
+  expect_message(result <- CloudGenus$new()$decode("10"))
   expect_null(result)
 })
 
@@ -615,8 +615,8 @@ test_that("CloudGenus encodes Sc to code 6", {
   expect_equal(result, "6")
 })
 
-test_that("CloudGenus warns on invalid genus name", {
-  expect_warning(result <- CloudGenus$new()$encode(list(value = "XX")))
+test_that("CloudGenus emits message on invalid genus name", {
+  expect_message(result <- CloudGenus$new()$encode(list(value = "XX")))
   expect_equal(result, "/")
 })
 
@@ -653,8 +653,8 @@ test_that("DirectionCardinal encodes NE to '1'", {
   expect_equal(result, "1")
 })
 
-test_that("DirectionCardinal warns on unresolvable direction", {
-  expect_warning(result <- DirectionCardinal$new()$encode(
+test_that("DirectionCardinal emits message on unresolvable direction", {
+  expect_message(result <- DirectionCardinal$new()$encode(
     list(isCalmOrStationary = FALSE, allDirections = FALSE, value = NULL)
   ))
   expect_equal(result, "/")
@@ -684,8 +684,8 @@ test_that("DirectionDegrees encodes a degree value", {
   expect_equal(result, "15")
 })
 
-test_that("DirectionDegrees warns on invalid direction code", {
-  expect_warning(DirectionDegrees$new()$decode("37"))
+test_that("DirectionDegrees emits message on invalid direction code", {
+  expect_message(DirectionDegrees$new()$decode("37"))
 })
 
 # ── CodeTable4377 decode edge cases ───────────────────────────────────────────
@@ -738,8 +738,8 @@ test_that("CodeTable4377 decodes VV=99 to isGreaterOrEqual 50000m", {
   expect_equal(result$quantifier, "isGreaterOrEqual")
 })
 
-test_that("CodeTable4377 warns on invalid code 53", {
-  expect_warning(result <- CodeTable4377$new()$decode("53"))
+test_that("CodeTable4377 emits message on invalid code 53", {
+  expect_message(result <- CodeTable4377$new()$decode("53"))
   expect_null(result)
 })
 
@@ -778,8 +778,8 @@ test_that("Height decodes hh=99 to isGreater 21000m", {
   expect_equal(result$quantifier, "isGreater")
 })
 
-test_that("Height warns on invalid code 55 (gap between ranges)", {
-  expect_warning(result <- Height$new()$decode("55"))
+test_that("Height emits message on invalid code 55 (gap between ranges)", {
+  expect_message(result <- Height$new()$decode("55"))
   expect_null(result)
 })
 
@@ -808,17 +808,17 @@ test_that("Precipitation decodes with tenths=TRUE using Amount24", {
 
 # ── LowestCloudBase decode with invalid code ───────────────────────────────────
 
-test_that("LowestCloudBase warns on out-of-range code", {
+test_that("LowestCloudBase emits message on out-of-range code", {
   # CodeTable1600 only has 10 entries (codes 0-9); code 10 is out of range
-  # LowestCloudBase.decode("9") returns the last valid entry without warning
+  # LowestCloudBase.decode("9") returns the last valid entry without message
   # so use two-digit code which as.integer truncates to the first character anyway;
   # instead test via CodeTable1600 directly with an out-of-range integer string
-  expect_warning(result <- LowestCloudBase$new()$decode_value("a"))
+  expect_message(result <- LowestCloudBase$new()$decode_value("a"))
   expect_null(result)  # non-numeric string → NA integer → NULL via decode_value path
 })
 
-test_that("Region warns on station ID outside all defined ranges", {
-  expect_warning(result <- Region$new()$decode("99999"))
+test_that("Region emits message on station ID outside all defined ranges", {
+  expect_message(result <- Region$new()$decode("99999"))
   expect_null(result)
 })
 
@@ -932,4 +932,55 @@ test_that("WindIndicator decodes iw=3 as KT estimated", {
 test_that("Hour encode_convert passes through via encode", {
   result = Hour$new()$encode(list(value = 12L))
   expect_equal(result, "12")
+})
+
+# ── Snow depth (Section 3, group 4E'sss) ─────────────────────────────────────
+
+test_that("snow depth: trace (sss=997) is decoded to 0 with correct state", {
+  msg = "AAXX 15061 12530 11225 80000 11012 21012 39997 40204 56006 69902 72022 885// 333 11011 21017 3/102 47997 79999 93097="
+  row = parser(msg, as_data_frame = TRUE)
+  expect_equal(row$snow_depth, 0)
+  expect_equal(row$snow_depth_state, "Even layer of loose dry snow covering ground completely")
+})
+
+test_that("snow depth: actual depth is decoded correctly", {
+  msg = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541 333 40055="
+  row = parser(msg, as_data_frame = TRUE)
+  expect_equal(row$snow_depth, 55)
+  expect_equal(row$snow_depth_state, "Ground predominantly covered by ice")
+})
+
+test_that("snow depth: non-continuous (sss=998) returns NA", {
+  msg = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541 333 42998="
+  row = parser(msg, as_data_frame = TRUE)
+  expect_true(is.na(row$snow_depth))
+  expect_equal(row$snow_depth_state, "Compact or wet snow covering at least one-half of the ground but not completely")
+})
+
+test_that("snow depth: unmeasurable (sss=999) returns NA", {
+  msg = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541 333 43999="
+  row = parser(msg, as_data_frame = TRUE)
+  expect_true(is.na(row$snow_depth))
+})
+
+test_that("snow depth: absent in message gives NA columns", {
+  msg = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
+  row = parser(msg, as_data_frame = TRUE)
+  expect_true(is.na(row$snow_depth))
+  expect_true(is.na(row$snow_depth_state))
+})
+
+# ── Nddff message chain ────────────────────────────────────────────────────────
+
+test_that("invalid wind direction in Nddff emits full context message chain", {
+  # Group 88695: N=8 (cloud cover), dd=86 (invalid direction), ff=95 (wind speed)
+  # Expected chain: "Warning decoding group: 88695 - Warning decoding with code table: 86 - ..."
+  expect_message(
+    parser("AAXX 10061 11035 11234 88695 11020 21015="),
+    "Warning decoding group: 88695"
+  )
+  expect_message(
+    parser("AAXX 10061 11035 11234 88695 11020 21015="),
+    "Warning decoding with code table: 86"
+  )
 })
