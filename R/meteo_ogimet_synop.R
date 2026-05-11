@@ -305,6 +305,8 @@ meteo_ogimet_synop_bp = function(station, date, country, country_name, simplifie
     return(NULL)
   }
 
+  message(sprintf("Downloaded %d SYNOP messages for: %s", length(lines), label))
+
   # Each line: station_id,year,month,day,hour,minute,<SYNOP message>
   # Older records may omit the minute field (6 fields instead of 7).
   parsed_lines = lapply(lines, function(line) {
@@ -348,14 +350,32 @@ meteo_ogimet_synop_bp = function(station, date, country, country_name, simplifie
   dates       = do.call(c, lapply(parsed_lines, `[[`, "Date"))
   station_ids = vapply(parsed_lines, `[[`, character(1), "station_id")
 
-  decoded = tryCatch(
-    parser(synop_msgs, country = country, as_data_frame = TRUE),
-    error = function(e) {
-      message(paste("SYNOP decoding failed for", label, ":", conditionMessage(e)))
-      NULL
-    }
-  )
-  if (is.null(decoded)) return(NULL)
+  n_msgs = length(synop_msgs)
+  pb = utils::txtProgressBar(min = 0L, max = n_msgs, style = 3L, file = stderr())
+  on.exit(close(pb), add = TRUE)
+
+  country_vec = if (is.null(country)) rep(list(NULL), n_msgs) else as.list(rep(country, length.out = n_msgs))
+
+  decoded_rows = vector("list", n_msgs)
+  for (i in seq_len(n_msgs)) {
+    decoded_rows[[i]] = tryCatch(
+      suppressMessages(parser(synop_msgs[[i]], country = country_vec[[i]], as_data_frame = TRUE)),
+      error = function(e) NULL
+    )
+    utils::setTxtProgressBar(pb, i)
+  }
+  close(pb)
+  on.exit(NULL)     # clear the on.exit so close() isn't called twice
+
+  valid = !vapply(decoded_rows, is.null, logical(1))
+  if (!any(valid)) {
+    message(paste("SYNOP decoding failed for all messages for:", label))
+    return(NULL)
+  }
+
+  decoded     = do.call(rbind, decoded_rows[valid])
+  dates       = dates[valid]
+  station_ids = station_ids[valid]
 
   decoded$station_id = station_ids
 

@@ -59,7 +59,8 @@ test_that("meteo_ogimet_synop station mode returns a data.frame with expected co
   skip_on_cran()
 
   result = meteo_ogimet_synop(station = 12330,
-                               date = c("2009-12-01", "2009-12-04"))
+                               date = c("2009-12-01", "2009-12-04"),
+                               simplified = FALSE)
 
   if (is.null(result)) return(invisible(NULL))
 
@@ -68,6 +69,20 @@ test_that("meteo_ogimet_synop station mode returns a data.frame with expected co
   expect_true("Date" %in% names(result))
   expect_true("air_temperature" %in% names(result))
   expect_true("wind_speed" %in% names(result))
+  expect_true(nrow(result) > 0)
+})
+
+test_that("meteo_ogimet_synop simplified station mode returns expected columns", {
+  if (!curl::has_internet()) return(invisible(NULL))
+  skip_on_cran()
+
+  result = meteo_ogimet_synop(station = 12330,
+                               date = c("2009-12-01", "2009-12-04"))
+
+  if (is.null(result)) return(invisible(NULL))
+
+  expect_s3_class(result, "data.frame")
+  expect_true(all(c("date", "station", "t2m", "ws", "Nt") %in% names(result)))
   expect_true(nrow(result) > 0)
 })
 
@@ -80,8 +95,8 @@ test_that("meteo_ogimet_synop station mode Date column is POSIXct UTC", {
 
   if (is.null(result) || nrow(result) == 0) return(invisible(NULL))
 
-  expect_s3_class(result$Date, "POSIXct")
-  expect_equal(attr(result$Date, "tzone"), "UTC")
+  expect_s3_class(result$date, "POSIXct")
+  expect_equal(attr(result$date, "tzone"), "UTC")
 })
 
 test_that("meteo_ogimet_synop station mode clips to requested date range", {
@@ -93,8 +108,8 @@ test_that("meteo_ogimet_synop station mode clips to requested date range", {
 
   if (is.null(result) || nrow(result) == 0) return(invisible(NULL))
 
-  expect_true(all(as.Date(result$Date) >= as.Date("2009-12-01")))
-  expect_true(all(as.Date(result$Date) <= as.Date("2009-12-04")))
+  expect_true(all(as.Date(result$date) >= as.Date("2009-12-01")))
+  expect_true(all(as.Date(result$date) <= as.Date("2009-12-04")))
 })
 
 test_that("meteo_ogimet_synop station mode handles allow_failure gracefully", {
@@ -112,7 +127,8 @@ test_that("meteo_ogimet_synop station mode source column contains SYNOP strings"
   skip_on_cran()
 
   result = meteo_ogimet_synop(station = 12330,
-                               date = c("2009-12-01", "2009-12-04"))
+                               date = c("2009-12-01", "2009-12-04"),
+                               simplified = FALSE)
 
   if (is.null(result) || nrow(result) == 0) return(invisible(NULL))
 
@@ -125,7 +141,8 @@ test_that("meteo_ogimet_synop country mode returns a data.frame for one day", {
   skip_on_cran()
 
   result = meteo_ogimet_synop(country_name = "Poland",
-                               date = c("2009-12-15", "2009-12-15"))
+                               date = c("2009-12-15", "2009-12-15"),
+                               simplified = FALSE)
 
   if (is.null(result)) return(invisible(NULL))
 
@@ -146,8 +163,8 @@ test_that("meteo_ogimet_synop country mode Date column is POSIXct UTC", {
 
   if (is.null(result) || nrow(result) == 0) return(invisible(NULL))
 
-  expect_s3_class(result$Date, "POSIXct")
-  expect_equal(attr(result$Date, "tzone"), "UTC")
+  expect_s3_class(result$date, "POSIXct")
+  expect_equal(attr(result$date, "tzone"), "UTC")
 })
 
 test_that("meteo_ogimet_synop country mode clips to the requested date", {
@@ -159,7 +176,7 @@ test_that("meteo_ogimet_synop country mode clips to the requested date", {
 
   if (is.null(result) || nrow(result) == 0) return(invisible(NULL))
 
-  expect_true(all(as.Date(result$Date) == as.Date("2009-12-15")))
+  expect_true(all(as.Date(result$date) == as.Date("2009-12-15")))
 })
 
 
