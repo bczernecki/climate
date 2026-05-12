@@ -23,7 +23,7 @@
 #'  \item "rh" - relative humidity (%)
 #'  \item "water_in_snow" - water equivalent of melted snow cover (mm)
 #'  }
-#' @param stations - character vector with station names as visible in the `meteo_imgw_telemetry_stations()`.
+#' @param stations - character vector with station names as visible in the `stations_meteo_imgw_telemetry()`.
 #' Default `NULL` means to download data for all available stations.
 #' @param coords - logical - whether to append the dataset with station full name, longitude, latitude and altitude. Default: TRUE
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE

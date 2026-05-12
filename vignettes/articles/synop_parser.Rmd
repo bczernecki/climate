@@ -1,5 +1,5 @@
 ---
-title: "SYNOP Messages - parsing and/or downloading raw messages"
+title: "SYNOP Messages"
 ---
 
 ```{r setup, include=FALSE}
@@ -8,21 +8,28 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 ## Overview
 
+SYNOP is a standardized format for reporting weather observations usually every hour. 
 This vignette demonstrates how to work with SYNOP meteorological messages using the
-**climate** package. SYNOP is a standardized format for reporting weather observations usually every hour. The package provides two complementary functions:
+**climate** package. 
+
+The package provides two complementary functions for handling SYNOP data:
 
 - **`parser()`** — parse raw SYNOP message strings into structured data
-- **`meteo_ogimet_synop()`** — download SYNOP messages from Ogimet and decode them automatically
+- **`meteo_ogimet_synop()`** — download raw SYNOP messages from Ogimet and decode them automatically
 
 ## The `parser()` Function
 
 The `parser()` function decodes raw SYNOP messages into either a nested list structure or a tidy data frame.
 
-### Basic Usage
+### Basic Usage - list output:
+
 
 ```{r}
-library(climate)
+suppressMessages(library(climate))
+```
 
+
+```{r echo=TRUE}
 # A simple SYNOP message
 synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 
@@ -35,7 +42,7 @@ str(decoded, max.level = 2)
 
 To parse multiple SYNOP messages at once:
 
-```{r}
+```{r echo=TRUE}
 # Parse multiple messages
 messages = c(
   "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541",
@@ -53,7 +60,7 @@ decoded_list[[1]]
 
 For analysis and visualization, use `as_data_frame = TRUE` to get a tidy data frame:
 
-```{r}
+```{r echo=TRUE}
 # Single message as a data frame
 df_single = parser(synop_code, as_data_frame = TRUE)
 head(df_single)
@@ -113,7 +120,7 @@ When `as_data_frame = TRUE`, the returned data frame includes the following colu
 
 Some SYNOP groups (e.g., precipitation indicators) are country-specific. Pass the `country` parameter to adjust decoding:
 
-```{r}
+```{r echo=TRUE}
 # Parse with Russia-specific precipitation decoding
 decoded_ru = parser(synop_code, country = "RU", as_data_frame = TRUE)
 
@@ -129,15 +136,8 @@ The `meteo_ogimet_synop()` function downloads SYNOP messages from [Ogimet](http:
 
 Fetch SYNOP data for one or more WMO station IDs:
 
-```{r}
-# Single station: Poznan-Lawica (Poland), WMO ID 12330
-poznan = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-10")
-)
-head(poznan)
-
-# Multiple stations
+```{r echo=TRUE}
+# can be used with multiple stations:
 two_stations = meteo_ogimet_synop(
   station = c(12330, 12375),
   date = c("2024-01-01", "2024-01-10")
@@ -145,9 +145,9 @@ two_stations = meteo_ogimet_synop(
 head(two_stations)
 ```
 
-### Country Mode: All Stations in a Country
+### Country mode: all stations in a country
 
-Fetch SYNOP data for all Ogimet stations in a country:
+Fetch SYNOP data for all Ogimet stations in a country for a given time range:
 
 ```{r}
 # All Polish stations for a single day
@@ -156,13 +156,11 @@ poland = meteo_ogimet_synop(
   date = c("2024-01-15", "2024-01-15")
 )
 head(poland)
-
-# Typically returns fewer rows than expected due to missing observations
 ```
 
-### Simplified vs. Full Output
+### Simplified vs. full data frame output
 
-By default, `meteo_ogimet_synop()` returns a simplified 20-column data frame with the most commonly used variables:
+By default, `meteo_ogimet_synop()` returns a simplified several-column data frame with the most commonly used variables:
 
 ```{r}
 # Simplified output (default)
@@ -174,9 +172,9 @@ simplified = meteo_ogimet_synop(
 colnames(simplified)
 ```
 
-To get all decoded SYNOP fields, use `simplified = FALSE`:
+To get more detailed info from decoded SYNOP fields, use `simplified = FALSE`:
 
-```{r}
+```{r echo=TRUE}
 # Full parser output
 full = meteo_ogimet_synop(
   station = 12330,
@@ -256,7 +254,7 @@ russia = meteo_ogimet_synop(
 - **Ogimet server limits:** The Ogimet server caps responses at 200,000 rows. If a date range would exceed this, the function automatically splits the range and recursively fetches each half.
 - **Station delays:** When fetching multiple stations in station mode, a 20-second delay is inserted between requests to avoid overloading the Ogimet server.
 - **Missing observations:** Not all SYNOP variables are reported at all times. Missing fields are returned as `NA`.
-- **Historical data:** Ogimet typically provides several years of historical SYNOP data; availability varies by station and country.
+- **Historical data:** Ogimet typically provides historical SYNOP data since approx. 1999/2000; availability varies by station and country.
 
 ## See Also
 
