@@ -42,37 +42,37 @@ install_github("bczernecki/climate")
 
 ### Meteorological data
 
-- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
+- 🌍 **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
 Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
 
-- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
+- 🇵🇱 **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
 
-- **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
+- 🌍 **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
-- **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
+- 🌍 **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
 
-- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+- 🌍 **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
   
 ### Hydrological data
 
-- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from stations available in the
+- 🇵🇱 **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from stations available in the
 danepubliczne.imgw.pl collection.
 It is a wrapper for previously developed set of functions such as: `hydro_monthly()`, and `hydro_daily()`
-- **hydro_imgw_datastore()** - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.
+- 🇵🇱 **hydro_imgw_datastore()** - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.
 
 ### Auxiliary functions and datasets
 
-- **stations_ogimet()** - Downloading information about all stations available in the selected
+- 🌍 **stations_ogimet()** - Downloading information about all stations available in the selected
 country in the Ogimet repository
-- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
-- **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
-- **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
-- **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
-- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
-- **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
-- **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
-- **parser()** - Decoding raw SYNOP meteorological messages into structured R lists or data frames
+- 🌍 **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point using Ogimet repository
+- 🌍 **nearest_stations_noaa()** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
+- 🇵🇱 **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
+- 🇵🇱 **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
+- 🇵🇱 **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
+- 🇵🇱 **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
+- 🇵🇱 **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
+- 🌍 **parser()** - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ## Example 1
 #### Download hourly dataset from NCEI/NOAA ISH meteorological repository:
@@ -268,6 +268,7 @@ res.head
 #### Decode raw SYNOP messages with `parser()`
 
 The `parser()` function decodes FM-12 SYNOP meteorological messages into structured R objects.
+For a detailed guide including all parameters and output formats, see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ```r
 library(climate)

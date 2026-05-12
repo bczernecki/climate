@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ## Overview
 
 SYNOP is a standardized format for reporting weather observations usually every hour. 
-This vignette demonstrates how to work with SYNOP meteorological messages using the
+This vignette demonstrates how to work with SYNOP FM-12 meteorological messages using the
 **climate** package. 
 
 The package provides two complementary functions for handling SYNOP data:
@@ -19,9 +19,9 @@ The package provides two complementary functions for handling SYNOP data:
 
 ## The `parser()` Function
 
-The `parser()` function decodes raw SYNOP messages into either a nested list structure or a tidy data frame.
+The `parser()` function decodes raw SYNOP messages into either a tidy data frame or a nested list structure.
 
-### Basic Usage - list output:
+### Basic Usage - data frame output:
 
 
 ```{r}
@@ -33,9 +33,9 @@ suppressMessages(library(climate))
 # A simple SYNOP message
 synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 
-# Parse into a nested list
-decoded = parser(synop_code)
-str(decoded, max.level = 2)
+# Parse into a data frame (default for analysis)
+df_single = parser(synop_code, as_data_frame = TRUE)
+head(df_single)
 ```
 
 ### Multiple Messages
@@ -48,22 +48,6 @@ messages = c(
   "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541",
   "AAXX 01006 12330 32782 61506 10094 20047 30111 40197 53007 60001 81541"
 )
-
-# Returns a list of two decoded messages
-decoded_list = parser(messages, simplify = FALSE)
-
-# Access the first message
-decoded_list[[1]]
-```
-
-### Data Frame Output
-
-For analysis and visualization, use `as_data_frame = TRUE` to get a tidy data frame:
-
-```{r echo=TRUE}
-# Single message as a data frame
-df_single = parser(synop_code, as_data_frame = TRUE)
-head(df_single)
 
 # Multiple messages as a data frame
 df_multiple = parser(messages, as_data_frame = TRUE)
@@ -116,6 +100,26 @@ When `as_data_frame = TRUE`, the returned data frame includes the following colu
 - `snow_depth` — total snow depth (cm)
 - `snow_depth_state` — descriptive snow/ground state
 
+### Nested List Output
+
+For more granular access most of decoded field, use the default list output:
+
+```{r echo=TRUE}
+# Single message as a nested list
+decoded = parser(synop_code)
+str(decoded)
+```
+
+To parse multiple messages and keep each as a separate list element:
+
+```{r}
+# Returns a list of two decoded messages
+decoded_list = parser(messages, simplify = FALSE)
+
+# Access the first message
+decoded_list[[1]]
+```
+
 ### Country-Specific Decoding
 
 Some SYNOP groups (e.g., precipitation indicators) are country-specific. Pass the `country` parameter to adjust decoding:
@@ -160,19 +164,7 @@ head(poland)
 
 ### Simplified vs. full data frame output
 
-By default, `meteo_ogimet_synop()` returns a simplified several-column data frame with the most commonly used variables:
-
-```{r}
-# Simplified output (default)
-simplified = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-05"),
-  simplified = TRUE
-)
-colnames(simplified)
-```
-
-To get more detailed info from decoded SYNOP fields, use `simplified = FALSE`:
+By default, `meteo_ogimet_synop()` returns a simplified several-column data frame with the most commonly used variables. To get more detailed info from decoded SYNOP fields, use `simplified = FALSE`:
 
 ```{r echo=TRUE}
 # Full parser output
@@ -181,73 +173,10 @@ full = meteo_ogimet_synop(
   date = c("2024-01-01", "2024-01-05"),
   simplified = FALSE
 )
-colnames(full)
+head(full)
 ```
 
-### Handling Network Failures
 
-By default, network errors are caught and a message is printed instead of stopping:
-
-```{r}
-# Network-robust by default
-result = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-05"),
-  allow_failure = TRUE  # default
-)
-
-# To see full error details, set allow_failure = FALSE
-result = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-05"),
-  allow_failure = FALSE
-)
-```
-
-## Practical Example: Temperature and Humidity Analysis
-
-Combine simplified output with standard data manipulation:
-
-```{r}
-library(dplyr)
-
-# Download SYNOP data for a week
-data = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-07"),
-  simplified = TRUE
-)
-
-# Basic statistics
-data %>%
-  summarise(
-    mean_temp = mean(t2m, na.rm = TRUE),
-    max_temp = max(t2m, na.rm = TRUE),
-    min_temp = min(t2m, na.rm = TRUE),
-    mean_rh = mean(rel_hum, na.rm = TRUE)
-  )
-
-# Track pressure changes
-data %>%
-  arrange(date) %>%
-  mutate(slp_change = slp - lag(slp)) %>%
-  select(date, slp, slp_change) %>%
-  head()
-```
-
-## Country-Specific Precipitation
-
-When downloading from a specific country, use the `country` parameter for accurate precipitation decoding:
-
-```{r}
-# Russian stations with Russia-specific precipitation decoding
-russia = meteo_ogimet_synop(
-  country_name = "Russia",
-  country = "RU",
-  date = c("2024-01-15", "2024-01-15"),
-  simplified = FALSE
-)
-```
 
 ## Notes and Limitations
 
@@ -258,5 +187,5 @@ russia = meteo_ogimet_synop(
 
 ## See Also
 
-- Older OGIMET data (hourly/daily reanalysis): `meteo_ogimet()`
-- WMO SYNOP documentation: [FM 12-XIII Ext. SYNOP](https://library.wmo.int/doc_num.php?explnum_id=3457)
+- Older OGIMET data (hourly/daily) downloaded from the tabular form presented in the OGIMET service: `meteo_ogimet()`
+- WMO SYNOP documentation for FM-12: [FM 12-XIII Ext. SYNOP](https://library.wmo.int/records/item/35713-manual-on-codes-volume-i-1-international-codes)
