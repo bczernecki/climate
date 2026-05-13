@@ -37,7 +37,6 @@ Two backends are available and selected automatically: raw **SYNOP decoding** (`
 default for `interval = "hourly"`) and **HTML scraping** (`source = "html"`, default for
 `interval = "daily"`). Country-level bulk downloads are supported via the `country_name` argument
 (SYNOP backend only).  
-*Note: `meteo_ogimet_synop()` is deprecated; use `meteo_ogimet(source = "synop")` instead.*
 
 - **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the
 SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection.

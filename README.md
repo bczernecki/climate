@@ -46,7 +46,6 @@ install_github("bczernecki/climate")
 Any meteorological (aka SYNOP) station working under the World Meteorological Organization framework after year 2000 should be accessible.
 Two backends are available and selected automatically: raw **SYNOP decoding** (`source = "synop"`, default for `interval = "hourly"`) and **HTML scraping** (`source = "html"`, default for `interval = "daily"`).
 Country-level bulk downloads are supported via the `country_name` argument (SYNOP backend only).
-*Note: `meteo_ogimet_synop()` is deprecated; use `meteo_ogimet(source = "synop")` instead.*
 
 - 🌍 **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
