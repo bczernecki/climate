@@ -2,84 +2,145 @@
 % Please edit documentation in R/meteo_ogimet.R
 \name{meteo_ogimet}
 \alias{meteo_ogimet}
-\title{Scrapping meteorological (Synop) data from the Ogimet webpage}
+\title{Download meteorological (Synop) data from the Ogimet service}
 \usage{
 meteo_ogimet(
   interval,
   date = c(Sys.Date() - 30, Sys.Date()),
   coords = FALSE,
-  station,
+  station = NULL,
   precip_split = TRUE,
-  allow_failure = TRUE
+  allow_failure = TRUE,
+  source = NULL,
+  country_name = NULL,
+  simplified = TRUE,
+  return_list = FALSE
 )
 }
 \arguments{
-\item{interval}{'daily' or 'hourly' dataset to retrieve - given as character}
+\item{interval}{\code{"hourly"} or \code{"daily"} — time resolution to retrieve.}
 
-\item{date}{start and finish date (e.g., date = c("2018-05-01", "2018-07-01")) - character or Date class object. If not provided last 30 days are used.}
+\item{date}{Length-2 character or Date vector giving the start and end of
+the requested period, e.g. \code{c("2018-05-01", "2018-07-01")}. Defaults to
+the last 30 days.}
 
-\item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
+\item{coords}{Logical. Add geographical coordinates (\code{Lon}, \code{Lat}) to the
+output. Applies to \code{source = "html"} only; silently ignored for
+\code{source = "synop"}.}
 
-\item{station}{WMO ID of meteorological station(s). Character or numeric vector}
+\item{station}{WMO ID(s) of the station(s) to download. Character or numeric
+vector. Not required when \code{country_name} is provided (SYNOP path only).}
 
-\item{precip_split}{whether to split precipitation fields into 6/12/24h}
+\item{precip_split}{Logical. Split the precipitation field into separate
+\code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
+\code{interval = "hourly"} with \code{source = "html"}; a warning is emitted
+otherwise. Default \code{TRUE}.}
 
-\item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
-numeric fields (logical value TRUE (default) or FALSE); valid only for hourly time step}
+\item{allow_failure}{Logical. When \code{TRUE} (default) network or parsing
+errors are caught and a message is emitted; when \code{FALSE} errors propagate.}
+
+\item{source}{Character. Backend to use: \code{"synop"} (raw SYNOP decoding) or
+\code{"html"} (HTML scraping). When \code{NULL} (default) the backend is chosen
+automatically: \code{"synop"} for \code{interval = "hourly"}, \code{"html"} for
+\code{interval = "daily"}.}
+
+\item{country_name}{Optional character string. When provided, the SYNOP path
+downloads all Ogimet stations for the named country in a single request
+(e.g. \code{"Poland"}, \code{"Germany"}), and \code{station} is ignored. Valid only with
+\code{source = "synop"} (or the default hourly path).}
+
+\item{simplified}{Logical. Applies to \code{source = "synop"} only. When \code{TRUE}
+(default) a compact 20-column \code{data.frame} is returned (see \strong{synop
+output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is returned with
+30+ columns.}
+
+\item{return_list}{Logical. Applies to \code{source = "synop"} only. When \code{TRUE}
+a named list is returned instead of a \code{data.frame}:
+\describe{
+\item{\code{data}}{Compact 20-column simplified \code{data.frame}.}
+\item{\code{full}}{Full parser output \code{data.frame} (30+ columns).}
+}
+A warning is emitted when \code{return_list = TRUE} is used with
+\code{source = "html"}.}
 }
 \value{
-A data.frame of measured values with columns describing the meteorological parameters (e.g. air temperature, wind speed, cloudines).
-Depending on the interval, at a given hour or day. Different parameters are returned for daily and hourly datasets.
-\enumerate{
-\item station_ID - WMO station identifier
-\item Lon - longitude
-\item Lat - latitude
-\item Date - date (and time) of observations
-\item TC - air temperature at 2 metres  above ground level. Values given in Celsius degrees
-\item TdC - dew point temperature at 2 metres  above ground level. Values given in Celsius degrees
-\item TmaxC - maximum air temperature at 2 metres  above ground level. Values given in Celsius degrees
-\item TminC - minimum air temperature at 2 metres  above ground level. Values given in Celsius degrees
-\item ddd - wind direction
-\item ffkmh - wind speed in km/h
-\item Gustkmh - wind gust in km/h
-\item P0hpa - air pressure at elevation of the station in hPa
-\item PseahPa - sea level pressure in hPa
-\item PTnd - pressure tendency in hPa
-\item Nt - total cloud cover
-\item Nh - cloud cover by high-level cloud fraction
-\item HKm - height of cloud base
-\item InsoD1 - insolation in hours
-\item Viskm - visibility in kilometres
-\item Snowcm - depth of snow cover in centimetres
-\item pr6 - precicipitation totals in 6 hours
-\item pr12 - precicipitation totals in 12 hours
-\item pr24 - precicipitation totals in 24 hours
-\item TemperatureCAvg - average air temperature at 2 metres above ground level. Values given in Celsius degrees
-\item TemperatureCMax - maximum air temperature at 2 metres above ground level. Values given in Celsius degrees
-\item TemperatureCMin - minimum air temperature at 2 metres above ground level. Values given in Celsius degrees
-\item TdAvgC - average dew point temperature at 2 metres above ground level. Values given in Celsius degrees
-\item HrAvg - average relative humidity. Values given in \%
-\item WindkmhDir - wind direction
-\item WindkmhInt - wind speed in km/h
-\item WindkmhGust - wind gust in km/h
-\item PresslevHp - Sea level pressure in hPa
-\item Precmm - precipitation totals in mm
-\item TotClOct - total cloudiness in octants
-\item lowClOct - cloudiness by low level clouds in octants
-\item SunD1h - sunshine duration in hours
-\item PreselevHp - atmospheric pressure measured at altitude of station in hPa
-\item SnowDepcm - depth of snow cover in centimetres
-}
+\strong{synop output} (\code{source = "synop"}, \code{simplified = TRUE} or \code{return_list = TRUE} \verb{$data}):
+A \code{data.frame} with one row per decoded SYNOP observation and 20 columns:
+\code{date} (POSIXct UTC), \code{station}, \code{t2m}, \code{dpt2m}, \code{rel_hum}, \code{tmax},
+\code{tmin}, \code{wd}, \code{ws}, \code{gust}, \code{press}, \code{slp}, \code{press_tend}, \code{precip},
+\code{Nt}, \code{Nh}, \code{N_base}, \code{insol}, \code{visibility}, \code{snow}.
+
+\strong{synop output} (\code{source = "synop"}, \code{simplified = FALSE}):
+A \code{data.frame} with 30+ columns from \code{\link[=parser]{parser()}}, prefixed by \code{station_id}
+and \code{Date}.
+
+\strong{html output} (\code{source = "html"}, \code{interval = "hourly"}):
+A \code{data.frame} with columns: \code{station_ID}, optionally \code{Lon}/\code{Lat},
+\code{Date}, \code{TC}, \code{TdC}, \code{TmaxC}, \code{TminC}, \code{ddd}, \code{ffkmh}, \code{Gustkmh},
+\code{P0hPa}, \code{PseahPa}, \code{PTnd}, \code{Nt}, \code{Nh}, \code{HKm}, \code{InsoD1}, \code{Viskm},
+\code{Snowcm}, and (when \code{precip_split = TRUE}) \code{pr6}, \code{pr12}, \code{pr24}.
+
+\strong{html output} (\code{source = "html"}, \code{interval = "daily"}):
+A \code{data.frame} with columns: \code{station_ID}, optionally \code{Lon}/\code{Lat},
+\code{Date}, \code{TemperatureCAvg}, \code{TemperatureCMax}, \code{TemperatureCMin},
+\code{TdAvgC}, \code{HrAvg}, \code{WindkmhDir}, \code{WindkmhInt}, \code{WindkmhGust},
+\code{PresslevHp}, \code{PreselevHp}, \code{Precmm}, \code{SunD1h}, \code{SnowDepcm},
+\code{TotClOct}, \code{lowClOct}, \code{VisKm}.
+
+Returns \code{NULL} invisibly on failure when \code{allow_failure = TRUE}.
 }
 \description{
-Downloading hourly or daily (meteorological) data from the Synop stations available at https://www.ogimet.com/
+Unified entry point for downloading hourly or daily meteorological data
+from \href{https://www.ogimet.com/}{Ogimet}. Two backends are supported:
+}
+\details{
+\itemize{
+\item \strong{\code{"synop"}} (default for hourly): Downloads raw SYNOP messages from the
+Ogimet \code{getsynop} endpoint and decodes them with \code{\link[=parser]{parser()}}. Supports
+station mode (one or more WMO IDs) and country mode (\code{country_name}).
+Output columns are described in the \strong{synop output} section below.
+\item \strong{\code{"html"}} (default for daily): Scrapes pre-formatted summary tables
+from the Ogimet \code{gsynres} endpoint using \code{\link[XML:readHTMLTable]{XML::readHTMLTable()}}.
+Output columns are described in the \strong{html output} section below.
+}
 }
 \examples{
 \donttest{
-  # downloading daily data for New York - La Guardia (last 30 days by default)
-  new_york = meteo_ogimet(interval = "daily", 
-                          station = 72503, 
-                          coords = TRUE)
+  # Hourly SYNOP data for Poznan-Lawica (default source = "synop")
+  poznan_h = meteo_ogimet(interval = "hourly",
+                           station  = 12330,
+                           date     = c("2009-12-01", "2009-12-04"))
+
+  # Daily HTML summaries for New York - La Guardia (default source = "html")
+  new_york = meteo_ogimet(interval = "daily",
+                           station  = 72503,
+                           coords   = TRUE)
+
+  # Hourly with full parser output as a list
+  poznan_list = meteo_ogimet(interval     = "hourly",
+                              station      = 12330,
+                              date         = c("2009-12-01", "2009-12-04"),
+                              return_list  = TRUE)
+  head(poznan_list$data)  # simplified
+  head(poznan_list$full)  # all parser columns
+
+  # Country mode: all Polish stations for one day
+  poland = meteo_ogimet(interval      = "hourly",
+                         country_name  = "Poland",
+                         date          = c("2009-12-15", "2009-12-15"))
+
+  # Force SYNOP backend for daily data
+  poznan_d = meteo_ogimet(interval = "daily",
+                           station  = 12330,
+                           date     = c("2009-12-01", "2009-12-04"),
+                           source   = "synop")
+
+  # Force HTML backend for hourly data
+  poznan_h2 = meteo_ogimet(interval = "hourly",
+                            station  = 12330,
+                            date     = c("2019-06-01", "2019-06-08"),
+                            source   = "html",
+                            coords   = TRUE)
 }
 
 }

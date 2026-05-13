@@ -43,7 +43,10 @@ install_github("bczernecki/climate")
 ### Meteorological data
 
 - 🌍 **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
-Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton framework after year 2000 should be accessible.
+Any meteorological (aka SYNOP) station working under the World Meteorological Organization framework after year 2000 should be accessible.
+Two backends are available and selected automatically: raw **SYNOP decoding** (`source = "synop"`, default for `interval = "hourly"`) and **HTML scraping** (`source = "html"`, default for `interval = "daily"`).
+Country-level bulk downloads are supported via the `country_name` argument (SYNOP backend only).
+*Note: `meteo_ogimet_synop()` is deprecated; use `meteo_ogimet(source = "synop")` instead.*
 
 - 🇵🇱 **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
@@ -120,6 +123,7 @@ nearest_stations_ogimet(country = "United+Kingdom",
 #### Downloading daily (or hourly) data from a global (OGIMET) repository knowing its ID (see also `nearest_stations_ogimet()`):
 
 ``` r
+# Daily summary — uses HTML backend by default
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
                  interval = "daily",
                  coords = FALSE, 
@@ -134,6 +138,29 @@ head(o)
 | 12330      | 2019-12-19 | 3.8      | 10.3     | -3.0     | 1.9    | 89.6  | SW      | 7.1     | NA       | 1020.4  | 0.0    | 5.2      | 5.9      | 2.5    | 14.1  |
 | 12330      | 2019-12-18 | 6.3      | 9.0      | 2.2      | 4.1    | 84.8  | S       | 9.2     | NA       | 1009.2  | 0.0    | 5.7      | 2.7      | 1.4    | 12.2  |
 | 12330      | 2019-12-17 | 4.9      | 7.6      | 0.3      | 2.9    | 87.2  | SSE     | 7.2     | NA       | 1010.8  | 0.1    | 6.2      | 4.6      | NA     | 13.0  |
+
+``` r
+# Hourly observations — decoded from raw SYNOP messages by default
+h = meteo_ogimet(date = c("2009-12-01", "2009-12-04"),
+                 interval = "hourly",
+                 station  = 12330)
+head(h)
+```
+
+| date                | station | t2m  | dpt2m | rel_hum | tmax | tmin | wd  | ws  | gust | press  | slp    | precip | Nt | snow |
+|---------------------|---------|------|-------|---------|------|------|-----|-----|------|--------|--------|--------|----|------|
+| 2009-12-01 00:00:00 | 12330   | 2.0  | 0.0   | 93      | NA   | NA   | 210 | 5   | NA   | 1007.4 | 1016.3 | NA     | 8  | NA   |
+| 2009-12-01 06:00:00 | 12330   | 1.0  | -1.0  | 92      | NA   | NA   | 200 | 3   | NA   | 1009.8 | 1018.8 | NA     | 8  | NA   |
+| 2009-12-01 12:00:00 | 12330   | 3.0  | 1.0   | 93      | NA   | NA   | 230 | 4   | NA   | 1011.5 | 1020.4 | NA     | 8  | NA   |
+| 2009-12-01 18:00:00 | 12330   | 2.0  | 0.0   | 93      | NA   | NA   | 240 | 3   | NA   | 1013.3 | 1022.1 | NA     | 7  | NA   |
+
+``` r
+# Country-level bulk download — all stations in a country for a given day
+poland = meteo_ogimet(interval      = "hourly",
+                      country_name  = "Poland",
+                      date          = c("2009-12-15", "2009-12-15"))
+nrow(poland)  #> several hundred rows (one per observation per station)
+```
 
 ## Example 4
 #### Downloading monthly/daily/hourly meteorological/hydrological data from the Polish (IMGW-PIB) repository:

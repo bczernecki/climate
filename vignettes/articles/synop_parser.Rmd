@@ -15,7 +15,9 @@ This vignette demonstrates how to work with SYNOP FM-12 meteorological messages 
 The package provides two complementary functions for handling SYNOP data:
 
 - **`parser()`** — parse raw SYNOP message strings into structured data
-- **`meteo_ogimet_synop()`** — download raw SYNOP messages from Ogimet and decode them automatically
+- **`meteo_ogimet(source = "synop")`** — download raw SYNOP messages from Ogimet and decode them automatically
+
+> **Note:** The older `meteo_ogimet_synop()` function is deprecated. Use `meteo_ogimet(source = "synop")` instead.
 
 ## The `parser()` Function
 
@@ -132,9 +134,10 @@ decoded_ru = parser(synop_code, country = "RU", as_data_frame = TRUE)
 decoded_default = parser(synop_code, as_data_frame = TRUE)
 ```
 
-## The `meteo_ogimet_synop()` Function
+## The `meteo_ogimet()` Function — SYNOP Backend
 
-The `meteo_ogimet_synop()` function downloads SYNOP messages from [Ogimet](http://www.ogimet.com) and automatically decodes them using `parser()`.
+The `meteo_ogimet()` function (with `source = "synop"`) downloads SYNOP messages from
+[Ogimet](http://www.ogimet.com) and automatically decodes them using `parser()`.
 
 ### Station Mode: Single or Multiple Stations
 
@@ -142,9 +145,10 @@ Fetch SYNOP data for one or more WMO station IDs:
 
 ```{r echo=TRUE}
 # can be used with multiple stations:
-two_stations = meteo_ogimet_synop(
+two_stations = meteo_ogimet(
+  source  = "synop",
   station = c(12330, 12375),
-  date = c("2024-01-01", "2024-01-10")
+  date    = c("2024-01-01", "2024-01-10")
 )
 head(two_stations)
 ```
@@ -155,25 +159,43 @@ Fetch SYNOP data for all Ogimet stations in a country for a given time range:
 
 ```{r}
 # All Polish stations for a single day
-poland = meteo_ogimet_synop(
+poland = meteo_ogimet(
+  source       = "synop",
   country_name = "Poland",
-  date = c("2024-01-15", "2024-01-15")
+  date         = c("2024-01-15", "2024-01-15")
 )
 head(poland)
 ```
 
 ### Simplified vs. full data frame output
 
-By default, `meteo_ogimet_synop()` returns a simplified several-column data frame with the most commonly used variables. To get more detailed info from decoded SYNOP fields, use `simplified = FALSE`:
+By default, `meteo_ogimet()` returns a simplified data frame with the most commonly used variables.
+To get all decoded SYNOP fields, use `simplified = FALSE`:
 
 ```{r echo=TRUE}
 # Full parser output
-full = meteo_ogimet_synop(
-  station = 12330,
-  date = c("2024-01-01", "2024-01-05"),
+full = meteo_ogimet(
+  source     = "synop",
+  station    = 12330,
+  date       = c("2024-01-01", "2024-01-05"),
   simplified = FALSE
 )
 head(full)
+```
+
+To obtain both the simplified and full data frames in one call, use `return_list = TRUE`:
+
+```{r echo=TRUE}
+result = meteo_ogimet(
+  source      = "synop",
+  station     = 12330,
+  date        = c("2024-01-01", "2024-01-05"),
+  return_list = TRUE
+)
+# Compact 20-column view
+names(result$data)
+# Full 30+ column parser output
+names(result$full)
 ```
 
 
@@ -187,5 +209,5 @@ head(full)
 
 ## See Also
 
-- Older OGIMET data (hourly/daily) downloaded from the tabular form presented in the OGIMET service: `meteo_ogimet()`
+- Daily and hourly OGIMET data via the HTML backend: `meteo_ogimet(source = "html")`
 - WMO SYNOP documentation for FM-12: [FM 12-XIII Ext. SYNOP](https://library.wmo.int/records/item/35713-manual-on-codes-volume-i-1-international-codes)

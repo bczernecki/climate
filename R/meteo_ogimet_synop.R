@@ -110,6 +110,9 @@ meteo_ogimet_synop = function(station = NULL,
                                country_name = NULL,
                                simplified = TRUE,
                                allow_failure = TRUE) {
+  .Deprecated("meteo_ogimet",
+              msg = paste0("'meteo_ogimet_synop()' is deprecated. ",
+                           "Use 'meteo_ogimet(source = \"synop\")' instead."))
   if (allow_failure) {
     tryCatch(
       meteo_ogimet_synop_bp(station = station, date = date,
@@ -196,33 +199,41 @@ meteo_ogimet_synop_bp = function(station, date, country, country_name, simplifie
   rownames(out) = NULL
 
   if (simplified) {
-    out = data.frame(
-      date              = out$Date,
-      station           = out$station_id,
-      t2m               = out$air_temperature,
-      dpt2m             = out$dewpoint_temperature,
-      rel_hum           = round(compute_relative_humidity(out$air_temperature,
-                                                         out$dewpoint_temperature), 1),
-      tmax              = out$maximum_temperature,
-      tmin              = out$minimum_temperature,
-      wd                = out$wind_direction,
-      ws                = out$wind_speed,
-      gust              = out$gust,
-      press             = out$station_pressure,
-      slp               = out$sea_level_pressure,
-      press_tend        = out$pressure_change,
-      precip            = out$precipitation_amount,
-      Nt                = out$cloud_cover,
-      Nh                = out$low_cloud_amount,
-      N_base            = out$cloud_base_min,
-      insol             = out$sunshine_duration,
-      visibility        = out$visibility,
-      snow              = out$snow_depth,
-      stringsAsFactors  = FALSE
-    )
+    out = .synop_simplify(out)
   }
 
   out
+}
+
+# Internal helper: convert full SYNOP parser output to the compact 20-column data.frame.
+# Used both by meteo_ogimet_synop_bp (simplified=TRUE) and by meteo_ogimet (return_list=TRUE).
+#' @keywords internal
+#' @noRd
+.synop_simplify = function(out) {
+  data.frame(
+    date             = out$Date,
+    station          = out$station_id,
+    t2m              = out$air_temperature,
+    dpt2m            = out$dewpoint_temperature,
+    rel_hum          = round(compute_relative_humidity(out$air_temperature,
+                                                       out$dewpoint_temperature), 1),
+    tmax             = out$maximum_temperature,
+    tmin             = out$minimum_temperature,
+    wd               = out$wind_direction,
+    ws               = out$wind_speed,
+    gust             = out$gust,
+    press            = out$station_pressure,
+    slp              = out$sea_level_pressure,
+    press_tend       = out$pressure_change,
+    precip           = out$precipitation_amount,
+    Nt               = out$cloud_cover,
+    Nh               = out$low_cloud_amount,
+    N_base           = out$cloud_base_min,
+    insol            = out$sunshine_duration,
+    visibility       = out$visibility,
+    snow             = out$snow_depth,
+    stringsAsFactors = FALSE
+  )
 }
 
 # Recursive raw-line fetcher.
