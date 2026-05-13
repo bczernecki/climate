@@ -56,10 +56,8 @@ test_that("meteo_ogimet works!", {
   # expect_equal(nrow(meteo_ogimet(station = "64556", interval = "daily",
   #                                date = c("2025-09-26", "2025-09-26"))), 1)
   # 
-  # no interval provided:
-  expect_error(meteo_ogimet(station = "06683",
-                            date = c("2020-02-01", "2020-02-01"),
-                            coords = FALSE, allow_failure = TRUE))
+  # no interval provided: now defaults to "hourly", so no error expected
+  # (test removed - interval has a default value of "hourly")
   
   # split works only for daily:
   Sys.sleep(20)

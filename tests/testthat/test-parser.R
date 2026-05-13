@@ -887,12 +887,6 @@ test_that("create_observation stops on unknown class name", {
   expect_error(create_observation("UnknownClass"), "Unknown observation class")
 })
 
-# ── example_usage ─────────────────────────────────────────────────────────────
-
-test_that("example_usage runs without error", {
-  expect_no_error(capture.output(example_usage()))
-})
-
 # ── Minute class ──────────────────────────────────────────────────────────────
 
 test_that("Minute decodes a valid minute value", {

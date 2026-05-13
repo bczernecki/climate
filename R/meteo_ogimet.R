@@ -5,48 +5,51 @@
 #'
 #' - **`"synop"`** (default for hourly): Downloads raw SYNOP messages from the
 #'   Ogimet `getsynop` endpoint and decodes them with [parser()]. Supports
-#'   station mode (one or more WMO IDs) and country mode (`country_name`).
-#'   Output columns are described in the **synop output** section below.
+#'   station mode (one or more WMO IDs) and/or country mode (`country_name`).
+#'   A default output columns are described in the **synop output** section below, but 
+#'   can be enhanced optionally with `simplified = FALSE` or `return_list = TRUE`
+#'   to include more of decoded SYNOP fields.
 #'
 #' - **`"html"`** (default for daily): Scrapes pre-formatted summary tables
 #'   from the Ogimet `gsynres` endpoint using [XML::readHTMLTable()].
 #'   Output columns are described in the **html output** section below.
 #'
-#' @param interval `"hourly"` or `"daily"` — time resolution to retrieve.
+#' @param interval `"hourly"` (default) or `"daily"` — time resolution to retrieve.
 #' @param date Length-2 character or Date vector giving the start and end of
 #'   the requested period, e.g. `c("2018-05-01", "2018-07-01")`. Defaults to
 #'   the last 30 days.
-#' @param coords Logical. Add geographical coordinates (`Lon`, `Lat`) to the
-#'   output. Applies to `source = "html"` only; silently ignored for
-#'   `source = "synop"`.
 #' @param station WMO ID(s) of the station(s) to download. Character or numeric
 #'   vector. Not required when `country_name` is provided (SYNOP path only).
-#' @param precip_split Logical. Split the precipitation field into separate
-#'   `pr6`, `pr12`, and `pr24` columns. Valid only for
-#'   `interval = "hourly"` with `source = "html"`; a warning is emitted
-#'   otherwise. Default `TRUE`.
-#' @param allow_failure Logical. When `TRUE` (default) network or parsing
-#'   errors are caught and a message is emitted; when `FALSE` errors propagate.
-#' @param source Character. Backend to use: `"synop"` (raw SYNOP decoding) or
-#'   `"html"` (HTML scraping). When `NULL` (default) the backend is chosen
-#'   automatically: `"synop"` for `interval = "hourly"`, `"html"` for
-#'   `interval = "daily"`.
 #' @param country_name Optional character string. When provided, the SYNOP path
 #'   downloads all Ogimet stations for the named country in a single request
 #'   (e.g. `"Poland"`, `"Germany"`), and `station` is ignored. Valid only with
 #'   `source = "synop"` (or the default hourly path).
-#' @param simplified Logical. Applies to `source = "synop"` only. When `TRUE`
-#'   (default) a compact 20-column `data.frame` is returned (see **synop
-#'   output** below). When `FALSE` the full [parser()] output is returned with
-#'   30+ columns.
-#' @param return_list Logical. Applies to `source = "synop"` only. When `TRUE`
-#'   a named list is returned instead of a `data.frame`:
+#' @param source Character. Backend to use: `"synop"` (raw SYNOP decoding) or
+#'   `"html"` (HTML scraping). When `NULL` (default) the backend is chosen
+#'   automatically: `"synop"` for `interval = "hourly"`, `"html"` for
+#'   `interval = "daily"`.
+#' @param ... Optional named arguments:
 #'   \describe{
-#'     \item{`data`}{Compact 20-column simplified `data.frame`.}
-#'     \item{`full`}{Full parser output `data.frame` (30+ columns).}
+#'     \item{`allow_failure`}{Logical. When `TRUE` (default) network or parsing
+#'       errors are caught and a message is emitted; when `FALSE` errors
+#'       propagate.}
+#'     \item{`simplified`}{Logical. Applies to `source = "synop"` only. When
+#'       `TRUE` (default) a compact 20-column `data.frame` is returned (see
+#'       **synop output** below). When `FALSE` the full [parser()] output is
+#'       returned with 30+ columns.}
+#'     \item{`coords`}{Logical. Add geographical coordinates (`Lon`, `Lat`) to
+#'       the output. Applies to `source = "html"` only; a warning is emitted
+#'       for `source = "synop"`. Default `FALSE`.}
+#'     \item{`precip_split`}{Logical. Split the precipitation field into
+#'       separate `pr6`, `pr12`, and `pr24` columns. Valid only for
+#'       `interval = "hourly"` with `source = "html"`; a warning is emitted
+#'       otherwise. Default `TRUE`.}
+#'     \item{`return_list`}{Logical. Applies to `source = "synop"` only. When
+#'       `TRUE` a named list with elements `data` (compact 20-column
+#'       `data.frame`) and `full` (30+ column parser output) is returned
+#'       instead of a `data.frame`. A warning is emitted when used with
+#'       `source = "html"`. Default `FALSE`.}
 #'   }
-#'   A warning is emitted when `return_list = TRUE` is used with
-#'   `source = "html"`.
 #'
 #' @importFrom XML readHTMLTable
 #'
@@ -82,8 +85,8 @@
 #' \donttest{
 #'   # Hourly SYNOP data for Poznan-Lawica (default source = "synop")
 #'   poznan_h = meteo_ogimet(interval = "hourly",
-#'                            station  = 12330,
-#'                            date     = c("2009-12-01", "2009-12-04"))
+#'                           station  = 12330,
+#'                           date     = c("2009-12-01", "2009-12-04"))
 #'
 #'   # Daily HTML summaries for New York - La Guardia (default source = "html")
 #'   new_york = meteo_ogimet(interval = "daily",
@@ -92,41 +95,44 @@
 #'
 #'   # Hourly with full parser output as a list
 #'   poznan_list = meteo_ogimet(interval     = "hourly",
-#'                               station      = 12330,
-#'                               date         = c("2009-12-01", "2009-12-04"),
-#'                               return_list  = TRUE)
+#'                              station      = 12330,
+#'                              date         = c("2009-12-01", "2009-12-04"),
+#'                              return_list  = TRUE)
 #'   head(poznan_list$data)  # simplified
 #'   head(poznan_list$full)  # all parser columns
 #'
 #'   # Country mode: all Polish stations for one day
-#'   poland = meteo_ogimet(interval      = "hourly",
-#'                          country_name  = "Poland",
+#'   germany = meteo_ogimet(interval      = "hourly",
+#'                          country_name  = "Germany",
 #'                          date          = c("2009-12-15", "2009-12-15"))
 #'
 #'   # Force SYNOP backend for daily data
 #'   poznan_d = meteo_ogimet(interval = "daily",
-#'                            station  = 12330,
-#'                            date     = c("2009-12-01", "2009-12-04"),
-#'                            source   = "synop")
+#'                           station  = 12330,
+#'                           date     = c("2009-12-01", "2009-12-04"),
+#'                           source   = "synop")
 #'
 #'   # Force HTML backend for hourly data
 #'   poznan_h2 = meteo_ogimet(interval = "hourly",
-#'                             station  = 12330,
-#'                             date     = c("2019-06-01", "2019-06-08"),
-#'                             source   = "html",
-#'                             coords   = TRUE)
+#'                            station  = 12330,
+#'                            date     = c("2019-06-01", "2019-06-08"),
+#'                            source   = "html",
+#'                            coords   = TRUE)
 #' }
 #'
-meteo_ogimet = function(interval,
+meteo_ogimet = function(interval     = "hourly",
                         date         = c(Sys.Date() - 30, Sys.Date()),
-                        coords       = FALSE,
                         station      = NULL,
-                        precip_split = TRUE,
-                        allow_failure = TRUE,
-                        source       = NULL,
                         country_name = NULL,
-                        simplified   = TRUE,
-                        return_list  = FALSE) {
+                        source       = NULL,
+                        ...) {
+
+  dots          = list(...)
+  allow_failure = if (!is.null(dots$allow_failure)) dots$allow_failure else TRUE
+  simplified    = if (!is.null(dots$simplified))    dots$simplified    else TRUE
+  coords        = if (!is.null(dots$coords))        dots$coords        else FALSE
+  precip_split  = if (!is.null(dots$precip_split))  dots$precip_split  else TRUE
+  return_list   = if (!is.null(dots$return_list))   dots$return_list   else FALSE
 
   if (!interval %in% c("hourly", "daily")) {
     stop("Wrong `interval` value. It should be either 'hourly' or 'daily'")

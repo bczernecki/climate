@@ -48,16 +48,18 @@ Two backends are available and selected automatically: raw **SYNOP decoding** (`
 Country-level bulk downloads are supported via the `country_name` argument (SYNOP backend only).
 *Note: `meteo_ogimet_synop()` is deprecated; use `meteo_ogimet(source = "synop")` instead.*
 
-- 🇵🇱 **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`. If 10-min dataset is needed then consider using **`meteo_imgw_datastore()`**
-
 - 🌍 **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
 - 🌍 **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory
 
 - 🌍 **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+
+- 🇵🇱 **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the Polish met service across 
+all types of stations (i.e. SYNOP/CLIMATE/PRECIP ) available in the danepubliczne.imgw.pl collection. 
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, `meteo_hourly()` and `meteo_imgw_datastore()` which gives access from montly to even to 10-min dataset.
+
   
-### Hydrological data
+### (Polish) Hydrological data
 
 - 🇵🇱 **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from stations available in the
 danepubliczne.imgw.pl collection.
@@ -75,6 +77,7 @@ country in the Ogimet repository
 - 🇵🇱 **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
 - 🇵🇱 **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
 - 🇵🇱 **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
+
 - 🌍 **parser()** - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ## Example 1
@@ -147,12 +150,12 @@ h = meteo_ogimet(date = c("2009-12-01", "2009-12-04"),
 head(h)
 ```
 
-| date                | station | t2m  | dpt2m | rel_hum | tmax | tmin | wd  | ws  | gust | press  | slp    | precip | Nt | snow |
-|---------------------|---------|------|-------|---------|------|------|-----|-----|------|--------|--------|--------|----|------|
-| 2009-12-01 00:00:00 | 12330   | 2.0  | 0.0   | 93      | NA   | NA   | 210 | 5   | NA   | 1007.4 | 1016.3 | NA     | 8  | NA   |
-| 2009-12-01 06:00:00 | 12330   | 1.0  | -1.0  | 92      | NA   | NA   | 200 | 3   | NA   | 1009.8 | 1018.8 | NA     | 8  | NA   |
-| 2009-12-01 12:00:00 | 12330   | 3.0  | 1.0   | 93      | NA   | NA   | 230 | 4   | NA   | 1011.5 | 1020.4 | NA     | 8  | NA   |
-| 2009-12-01 18:00:00 | 12330   | 2.0  | 0.0   | 93      | NA   | NA   | 240 | 3   | NA   | 1013.3 | 1022.1 | NA     | 7  | NA   |
+| date                | station | t2m  | dpt2m | rel_hum | tmax  | tmin  | wd  | ws  | gust | press  | slp    | precip | Nt | snow |
+|---------------------|---------|------|-------|---------|-------|-------|-----|-----|------|--------|--------|--------|----|------|
+| 2009-12-01 00:00:00 | 12330   | 2.0  | 0.0   | 93      | NA    | NA    | 210 | 5   | NA   | 1007.4 | 1016.3 | NA     | 8  | NA   |
+| 2009-12-01 06:00:00 | 12330   | 1.0  | -1.0  | 92      | NA    | NA    | 200 | 3   | NA   | 1009.8 | 1018.8 | NA     | 8  | NA   |
+| 2009-12-01 12:00:00 | 12330   | 3.0  | 1.0   | 93      | 5.8   | 2.9   | 230 | 4   | NA   | 1011.5 | 1020.4 | NA     | 8  | NA   |
+| 2009-12-01 18:00:00 | 12330   | 2.0  | 0.0   | 93      | NA    | NA    | 240 | 3   | NA   | 1013.3 | 1022.1 | NA     | 7  | NA   |
 
 ``` r
 # Country-level bulk download — all stations in a country for a given day

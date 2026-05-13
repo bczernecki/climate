@@ -5,63 +5,56 @@
 \title{Download meteorological (Synop) data from the Ogimet service}
 \usage{
 meteo_ogimet(
-  interval,
+  interval = "hourly",
   date = c(Sys.Date() - 30, Sys.Date()),
-  coords = FALSE,
   station = NULL,
-  precip_split = TRUE,
-  allow_failure = TRUE,
-  source = NULL,
   country_name = NULL,
-  simplified = TRUE,
-  return_list = FALSE
+  source = NULL,
+  ...
 )
 }
 \arguments{
-\item{interval}{\code{"hourly"} or \code{"daily"} — time resolution to retrieve.}
+\item{interval}{\code{"hourly"} (default) or \code{"daily"} — time resolution to retrieve.}
 
 \item{date}{Length-2 character or Date vector giving the start and end of
 the requested period, e.g. \code{c("2018-05-01", "2018-07-01")}. Defaults to
 the last 30 days.}
 
-\item{coords}{Logical. Add geographical coordinates (\code{Lon}, \code{Lat}) to the
-output. Applies to \code{source = "html"} only; silently ignored for
-\code{source = "synop"}.}
-
 \item{station}{WMO ID(s) of the station(s) to download. Character or numeric
 vector. Not required when \code{country_name} is provided (SYNOP path only).}
-
-\item{precip_split}{Logical. Split the precipitation field into separate
-\code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
-\code{interval = "hourly"} with \code{source = "html"}; a warning is emitted
-otherwise. Default \code{TRUE}.}
-
-\item{allow_failure}{Logical. When \code{TRUE} (default) network or parsing
-errors are caught and a message is emitted; when \code{FALSE} errors propagate.}
-
-\item{source}{Character. Backend to use: \code{"synop"} (raw SYNOP decoding) or
-\code{"html"} (HTML scraping). When \code{NULL} (default) the backend is chosen
-automatically: \code{"synop"} for \code{interval = "hourly"}, \code{"html"} for
-\code{interval = "daily"}.}
 
 \item{country_name}{Optional character string. When provided, the SYNOP path
 downloads all Ogimet stations for the named country in a single request
 (e.g. \code{"Poland"}, \code{"Germany"}), and \code{station} is ignored. Valid only with
 \code{source = "synop"} (or the default hourly path).}
 
-\item{simplified}{Logical. Applies to \code{source = "synop"} only. When \code{TRUE}
-(default) a compact 20-column \code{data.frame} is returned (see \strong{synop
-output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is returned with
-30+ columns.}
+\item{source}{Character. Backend to use: \code{"synop"} (raw SYNOP decoding) or
+\code{"html"} (HTML scraping). When \code{NULL} (default) the backend is chosen
+automatically: \code{"synop"} for \code{interval = "hourly"}, \code{"html"} for
+\code{interval = "daily"}.}
 
-\item{return_list}{Logical. Applies to \code{source = "synop"} only. When \code{TRUE}
-a named list is returned instead of a \code{data.frame}:
+\item{...}{Optional named arguments:
 \describe{
-\item{\code{data}}{Compact 20-column simplified \code{data.frame}.}
-\item{\code{full}}{Full parser output \code{data.frame} (30+ columns).}
-}
-A warning is emitted when \code{return_list = TRUE} is used with
-\code{source = "html"}.}
+\item{\code{allow_failure}}{Logical. When \code{TRUE} (default) network or parsing
+errors are caught and a message is emitted; when \code{FALSE} errors
+propagate.}
+\item{\code{simplified}}{Logical. Applies to \code{source = "synop"} only. When
+\code{TRUE} (default) a compact 20-column \code{data.frame} is returned (see
+\strong{synop output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is
+returned with 30+ columns.}
+\item{\code{coords}}{Logical. Add geographical coordinates (\code{Lon}, \code{Lat}) to
+the output. Applies to \code{source = "html"} only; a warning is emitted
+for \code{source = "synop"}. Default \code{FALSE}.}
+\item{\code{precip_split}}{Logical. Split the precipitation field into
+separate \code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
+\code{interval = "hourly"} with \code{source = "html"}; a warning is emitted
+otherwise. Default \code{TRUE}.}
+\item{\code{return_list}}{Logical. Applies to \code{source = "synop"} only. When
+\code{TRUE} a named list with elements \code{data} (compact 20-column
+\code{data.frame}) and \code{full} (30+ column parser output) is returned
+instead of a \code{data.frame}. A warning is emitted when used with
+\code{source = "html"}. Default \code{FALSE}.}
+}}
 }
 \value{
 \strong{synop output} (\code{source = "synop"}, \code{simplified = TRUE} or \code{return_list = TRUE} \verb{$data}):
@@ -97,8 +90,10 @@ from \href{https://www.ogimet.com/}{Ogimet}. Two backends are supported:
 \itemize{
 \item \strong{\code{"synop"}} (default for hourly): Downloads raw SYNOP messages from the
 Ogimet \code{getsynop} endpoint and decodes them with \code{\link[=parser]{parser()}}. Supports
-station mode (one or more WMO IDs) and country mode (\code{country_name}).
-Output columns are described in the \strong{synop output} section below.
+station mode (one or more WMO IDs) and/or country mode (\code{country_name}).
+A default output columns are described in the \strong{synop output} section below, but
+can be enhanced optionally with \code{simplified = FALSE} or \code{return_list = TRUE}
+to include more of decoded SYNOP fields.
 \item \strong{\code{"html"}} (default for daily): Scrapes pre-formatted summary tables
 from the Ogimet \code{gsynres} endpoint using \code{\link[XML:readHTMLTable]{XML::readHTMLTable()}}.
 Output columns are described in the \strong{html output} section below.
@@ -108,8 +103,8 @@ Output columns are described in the \strong{html output} section below.
 \donttest{
   # Hourly SYNOP data for Poznan-Lawica (default source = "synop")
   poznan_h = meteo_ogimet(interval = "hourly",
-                           station  = 12330,
-                           date     = c("2009-12-01", "2009-12-04"))
+                          station  = 12330,
+                          date     = c("2009-12-01", "2009-12-04"))
 
   # Daily HTML summaries for New York - La Guardia (default source = "html")
   new_york = meteo_ogimet(interval = "daily",
@@ -118,29 +113,29 @@ Output columns are described in the \strong{html output} section below.
 
   # Hourly with full parser output as a list
   poznan_list = meteo_ogimet(interval     = "hourly",
-                              station      = 12330,
-                              date         = c("2009-12-01", "2009-12-04"),
-                              return_list  = TRUE)
+                             station      = 12330,
+                             date         = c("2009-12-01", "2009-12-04"),
+                             return_list  = TRUE)
   head(poznan_list$data)  # simplified
   head(poznan_list$full)  # all parser columns
 
   # Country mode: all Polish stations for one day
-  poland = meteo_ogimet(interval      = "hourly",
-                         country_name  = "Poland",
+  germany = meteo_ogimet(interval      = "hourly",
+                         country_name  = "Germany",
                          date          = c("2009-12-15", "2009-12-15"))
 
   # Force SYNOP backend for daily data
   poznan_d = meteo_ogimet(interval = "daily",
-                           station  = 12330,
-                           date     = c("2009-12-01", "2009-12-04"),
-                           source   = "synop")
+                          station  = 12330,
+                          date     = c("2009-12-01", "2009-12-04"),
+                          source   = "synop")
 
   # Force HTML backend for hourly data
   poznan_h2 = meteo_ogimet(interval = "hourly",
-                            station  = 12330,
-                            date     = c("2019-06-01", "2019-06-08"),
-                            source   = "html",
-                            coords   = TRUE)
+                           station  = 12330,
+                           date     = c("2019-06-01", "2019-06-08"),
+                           source   = "html",
+                           coords   = TRUE)
 }
 
 }

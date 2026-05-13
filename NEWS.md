@@ -1,10 +1,11 @@
 # climate 1.4.0
 
-* adding the `parser()` function for SYNOP messages
+* adding the `parser()` function for reading raw SYNOP messages
+* updating the `meteo_ogimet()` function to use the new `parser()`, but also keep possibility to use HTML scraping engine
 * minor fixes
   * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
-  * updated documentation
-  * unified R code syntax for assignement
+  * updated documentation and vignettes to reflect changes in the code and new features
+  * unified R code syntax for assignments
 
 
 # climate 1.3.0

@@ -1,5 +1,5 @@
 ---
-title: "Use Case - Ogimet database"
+title: "Ogimet meteorological database"
 output: html_document
 ---
 
@@ -7,14 +7,16 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
+Most of meteorological stations working under the umbrella of the World Meteorlogical Organization (WMO) report their observations in the SYNOP format. The **climate** package provides a convenient interface to download and decode SYNOP messages from the [Ogimet](https://www.ogimet.com/) database, which aggregates data from thousands of stations worldwide. Therefore, it is often the most preferable source of meteorological information being a valuable resource for researchers, students, and weather enthusiasts looking to access historical and real-time meteorological data for analysis, visualization, and educational purposes. This information is most often used as a complementary source to national meteorological services that is delivered free of charge and without any API key requirements.
+
 The `meteo_ogimet()` function is the unified entry point for downloading data from [Ogimet](https://www.ogimet.com/).
-It uses two backends automatically selected by the `interval` argument:
+It uses two backends (automatically) selected by the `interval` argument:
 
 - **`interval = "hourly"`** → **SYNOP backend** (default): downloads and decodes raw SYNOP messages via
-  the Ogimet `getsynop` endpoint. Returns clean SI-unit columns (`ws` in m/s, `wd` in degrees, `t2m`
+  the Ogimet `getsynop` endpoint. Returns clean units used in meteorology (`ws` in m/s, `wd` in degrees, `t2m`
   in °C, POSIXct `date` in UTC).
 - **`interval = "daily"`** → **HTML backend** (default): scrapes pre-formatted daily summary tables
-  from the Ogimet `gsynres` endpoint.
+  generated in the Ogimet web service.
 
 Use `source = "synop"` or `source = "html"` to override the default for any interval.
 
@@ -32,7 +34,7 @@ With the SYNOP backend the output already contains:
 - `t2m` — air temperature in °C
 - `date` — POSIXct timestamp in UTC (the column name openair expects)
 
-```{r svalbard-download}
+```{r svalbard-download, echo=TRUE}
 library(climate)
 
 # Download hourly data for Svalbard Lufthavn (WMO 01008)
@@ -42,7 +44,7 @@ df = meteo_ogimet(interval = "hourly",
 head(df[, c("date", "station", "t2m", "ws", "wd")])
 ```
 
-```{r svalbard-windrose, message=FALSE, warning=FALSE}
+```{r svalbard-windrose, echo=TRUE, message=FALSE, warning=FALSE}
 library(openair)
 
 # Wind rose by season — no unit conversion needed
@@ -57,12 +59,12 @@ windRose(mydata  = df,
          layout  = c(4, 1))
 ```
 
-```{r svalbard-timeplot}
+```{r svalbard-timeplot, echo=TRUE}
 # Temporal overview of temperature and wind speed
 timePlot(df, pollutant = c("t2m", "ws"))
 ```
 
-```{r svalbard-polar}
+```{r svalbard-polar, echo=TRUE}
 # Which wind sectors bring warm / cold air masses?
 polarPlot(df,
           pollutant     = "t2m",
@@ -83,7 +85,7 @@ polarPlot(df,
 The HTML backend (`interval = "daily"`) returns pre-aggregated daily statistics (Tmax, Tmin, Tavg,
 precipitation, etc.) for one or more stations.
 
-```{r daily-download}
+```{r daily-download, echo=TRUE}
 library(climate)
 
 # Daily summaries for two Polish stations: Poznan (12330) and Warsaw (12375)
@@ -94,7 +96,7 @@ daily = meteo_ogimet(interval = "daily",
 head(daily)
 ```
 
-```{r daily-plot, message=FALSE}
+```{r daily-plot, echo=TRUE, message=FALSE}
 library(ggplot2)
 
 # Compare average temperatures between the two stations
@@ -115,7 +117,7 @@ ggplot(daily, aes(x = as.Date(Date), y = TemperatureCAvg,
 The SYNOP backend supports downloading all Ogimet stations for an entire country in a single
 request via the `country_name` argument. This is useful for spatial analysis.
 
-```{r country-download}
+```{r country-download, echo=TRUE}
 library(climate)
 
 # All stations in Poland for a single day
@@ -128,7 +130,7 @@ cat("Observations:", nrow(poland), "\n")
 head(poland[, c("date", "station", "t2m", "ws", "slp")])
 ```
 
-```{r country-map, message=FALSE, warning=FALSE}
+```{r country-map, echo=TRUE, message=FALSE, warning=FALSE}
 # Quick spatial overview — requires coordinates from stations_ogimet()
 library(dplyr)
 
@@ -157,7 +159,7 @@ Setting `return_list = TRUE` returns a named list with two data frames: `$data` 
 20-column simplified view) and `$full` (the complete parser output with 30+ columns including
 cloud types, precipitation period, snow state, etc.).
 
-```{r return-list}
+```{r return-list, echo=TRUE}
 library(climate)
 
 result = meteo_ogimet(interval     = "hourly",
@@ -182,23 +184,23 @@ result$full[1, c("low_cloud_type", "middle_cloud_type", "high_cloud_type",
 
 Override the automatic backend selection with the `source` argument:
 
-```{r backend-override}
+```{r backend-override, echo=TRUE}
 library(climate)
 
 # Force SYNOP backend for daily data
 poznan_synop = meteo_ogimet(interval = "daily",
-                             station  = 12330,
-                             date     = c("2023-06-01", "2023-06-07"),
-                             source   = "synop")
+                            station  = 12330,
+                            date     = c("2023-06-01", "2023-06-07"),
+                            source   = "synop")
 head(poznan_synop[, c("date", "station", "t2m", "tmax", "tmin", "precip")])
 
 # Force HTML backend for hourly data (returns km/h wind speed, character wind direction, etc.)
 poznan_html = meteo_ogimet(interval = "hourly",
-                            station  = 12330,
-                            date     = c("2023-06-01", "2023-06-03"),
-                            source   = "html",
-                            coords   = TRUE,
-                            precip_split = TRUE)
+                           station  = 12330,
+                           date     = c("2023-06-01", "2023-06-03"),
+                           source   = "html",
+                           coords   = TRUE,
+                           precip_split = TRUE)
 head(poznan_html[, c("station_ID", "Date", "TC", "ffkmh", "ddd", "pr6", "pr12", "pr24")])
 ```
 
