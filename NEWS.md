@@ -8,6 +8,9 @@
   repository that match the provided name(s) and return all available datasets for 
   those stations (e.g.entry "WARSZAWA" will also search for: "WARSZAWA-BIELANY", 
   "WARSZAWA-OKECIE", "WARSZAWA-OBSERWATORIUM", etc.)
+* `check_locale()` now detects any non-Polish locale instead of only two
+  hardcoded ones, so IMGW files read correctly under locales such as
+  `en_GB.UTF-8`
 
 
 
