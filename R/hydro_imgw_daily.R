@@ -185,23 +185,11 @@ hydro_imgw_daily_bp = function(year,
   data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
   all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df[, 3]))
   #all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
-  #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
-  all_data = unique(all_data)
-  rownames(all_data) = 1:nrow(all_data)
-
-  # Final pass: re-apply label attributes (rbind / data.table conversions / merge can drop them).
-  for (i in seq_len(nrow(meta[[1]]))) {
-    p = meta[[1]]$parameters[i]
-    if (p %in% colnames(all_data)) {
-      attr(all_data[[p]], "label") = meta[[1]]$label[i]
-    }
-  }
-  for (i in seq_len(nrow(meta[[2]]))) {
-    p = gsub("^ZJ", "CO", meta[[2]]$parameters[i])
-    if (p %in% colnames(all_data)) {
-      attr(all_data[[p]], "label") = meta[[2]]$label[i]
-    }
-  }
+  # zjaw parameters were renamed ZJ → CO earlier; mirror that in the label map
+  meta_co = meta[[2]]
+  meta_co$parameters = gsub("^ZJ", "CO", meta_co$parameters)
+  all_data = imgw_rename_params_to_labels(all_data, rbind(meta[[1]], meta_co))
+  all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)
 }

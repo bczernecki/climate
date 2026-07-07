@@ -394,10 +394,8 @@ meteo_imgw_daily_bp = function(rank,
     all_data = remove_status(all_data)
   }
 
-  # remove duplicates and shorten colnames
-  # turned off temporarily:
-  # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
-  rownames(all_data) = NULL
+  all_data = imgw_rename_params_to_labels(all_data, meta)
+  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
   if (length(env$logs) > 0) {

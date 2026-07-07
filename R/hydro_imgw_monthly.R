@@ -128,16 +128,8 @@ hydro_imgw_monthly_bp = function(year,
   data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
   all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df$day))
   all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
-
-  #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
-
-  # Final pass: re-apply label attributes (rbind / merge can drop them).
-  for (i in seq_len(nrow(meta))) {
-    p = meta$parameters[i]
-    if (p %in% colnames(all_data)) {
-      attr(all_data[[p]], "label") = meta$label[i]
-    }
-  }
+  all_data = imgw_rename_params_to_labels(all_data, meta)
+  all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
 
   return(all_data)
 }
