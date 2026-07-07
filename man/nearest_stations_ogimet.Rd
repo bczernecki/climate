@@ -27,7 +27,7 @@ nearest_stations_ogimet(
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
-\item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
+\item{...}{extra arguments to be provided to the \code{\link[graphics:plot]{graphics::plot()}} function (only if add_map = TRUE)}
 }
 \value{
 A data.frame with number of nearest station according to given point columns describing stations parameters
