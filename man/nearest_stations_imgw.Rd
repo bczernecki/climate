@@ -30,7 +30,7 @@ nearest_stations_imgw(
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
-\item{...}{extra arguments to be provided to the \code{\link[graphics:plot]{graphics::plot()}} function (only if add_map = TRUE)}
+\item{...}{extra arguments to be provided to the \code{\link[graphics:plot.default]{graphics::plot()}} function (only if add_map = TRUE)}
 }
 \value{
 A data.frame with a list of nearest stations. Each row represents metadata for station which collected measurements in a given year. Particular columns contain stations metadata (e.g. station ID, geographical coordinates, official name, distance in kilometers from a given coordinates).

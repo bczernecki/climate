@@ -48,3 +48,4 @@ URL: https://github.com/bczernecki/climate, https://bczernecki.github.io/climate
 BugReports: https://github.com/bczernecki/climate/issues
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3
