@@ -51,7 +51,7 @@ meteorological data - some stations have > 100 years of observations.
 - **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere
 (aka rawinsonde data).
 
-- **parser()** - Decoding raw FM-12 SYNOP meteorological messages into structured R lists or
+- **synop_parser()** - Decoding raw FM-12 SYNOP meteorological messages into structured R lists or
 data frames. For a full walkthrough see the
 [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
@@ -216,7 +216,7 @@ h = readRDS(system.file("extdata/vignettes/hydro_monthly.rds", package = "climat
 library(climate)
 library(dplyr)
 library(tidyr)
-h = hydro_imgw(interval = "monthly", year = 2001:2002, coords = TRUE)
+h = hydro_imgw(interval = "monthly", year = 2001:2002)
 ```
 ```{r data-3, eval=TRUE, include=TRUE, echo=TRUE}
 knitr::kable(head(h))
@@ -261,15 +261,15 @@ ggplot(co2, aes(date, co2_avg)) +
 ```
 
 ### Example 8
-Decoding raw SYNOP meteorological messages with **parser()**:
+Decoding raw SYNOP meteorological messages with **synop_parser()**:
 
-```{r parser, eval=TRUE, include=TRUE}
+```{r synop_parser, eval=TRUE, include=TRUE}
 library(climate)
 
 synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 
 # Decode a single message — returns a named list
-result = parser(synop_code)
+result = synop_parser(synop_code)
 result$air_temperature$value   # 9.4°C
 result$wind_speed$value        # 6 kt
 result$sea_level_pressure$value # 1019.7 hPa
@@ -277,7 +277,7 @@ result$sea_level_pressure$value # 1019.7 hPa
 
 ```{r parser-df, eval=TRUE, include=TRUE}
 # Return a tidy data frame with one row per message
-df_parser = parser(synop_code, as_data_frame = TRUE)
+df_parser = synop_parser(synop_code, as_data_frame = TRUE)
 knitr::kable(df_parser[, 1:8])
 ```
 
