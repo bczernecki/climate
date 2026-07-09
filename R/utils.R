@@ -9,6 +9,7 @@
 #' @param meta data.frame with \code{$parameters} and \code{$label} columns,
 #'   or a list of such data.frames (all are combined before matching)
 #' @keywords internal
+#' @importFrom stats setNames
 #' @noRd
 imgw_rename_params_to_labels = function(data, meta) {
   if (is.list(meta) && !is.data.frame(meta)) {

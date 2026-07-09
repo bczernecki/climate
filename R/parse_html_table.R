@@ -18,6 +18,7 @@
 #         auto-converted where possible. Any column made up entirely of
 #         <img> cells (e.g. weather icons) is dropped automatically.
 #' @keywords internal
+#' @importFrom stats ave
 
 parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
   

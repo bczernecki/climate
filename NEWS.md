@@ -6,6 +6,8 @@
   * data source used by OGIMET engine can be specified by setting `parser = "html"` or `parser = "synop"` argument; more details in the documentation, e.g:
     * SYNOP parser is now used by default for hourly data, and HTML for daily summaries; 
   * XML parsing engine is now replaced by in-house solutions to reduce dependencies and improve performance in future
+* major changes in the `sounding_wyoming()` function due to shutting down the legacy interface
+  * thermodynamic and dynamic indices are no longer calculated on the server side, but can be manually obtained using the `thundeR` package
 * minor fixes:
   * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
   * updated columns in IMGW telemetry datasets
