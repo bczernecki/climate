@@ -82,7 +82,6 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("covr")
-          remotes::install_cran("xml2")
           remotes::install_cran("DT")
           remotes::install_cran("tidyr")
           

@@ -38,7 +38,7 @@ jobs:
         run: rm -rf /home/runner/work/_temp/Library/data.table
         
       - name: Install dependencies
-        run: R -e 'install.packages(c("knitr", "rmarkdown", "XML", "httr", "maps", "dplyr", "tidyr", "xml2", "testthat", "archive" , "V8"))'
+        run: R -e 'install.packages(c("knitr", "rmarkdown", "httr", "maps", "dplyr", "tidyr", "testthat", "archive" , "V8"))'
       
       - name: Install data.table from source
         run: Rscript -e 'install.packages("data.table", type = "source")'

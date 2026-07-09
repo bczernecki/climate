@@ -35,8 +35,7 @@ Imports:
     data.table,
     httr,
     R6,
-    stringi,
-    XML
+    stringi
 Suggests: 
     dplyr,
     knitr,
