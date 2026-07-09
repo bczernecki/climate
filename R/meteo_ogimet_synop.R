@@ -1,7 +1,7 @@
 #' Download and decode raw SYNOP messages from the Ogimet getsynop service
 #'
 #' Downloads raw SYNOP messages from the Ogimet `getsynop` endpoint and decodes
-#' them into a tidy `data.frame` using the [parser()] function. Two retrieval
+#' them into a tidy `data.frame` using the [synop_parser()] function. Two retrieval
 #' modes are supported:
 #'
 #' - **Station mode** (`station` provided): fetches messages for one or more
@@ -17,14 +17,14 @@
 #'
 #' Each line of the response is a comma-separated record:
 #' `station_id,year,month,day,hour,minute,<SYNOP message>`.
-#' The SYNOP message is decoded via [parser()] with `as_data_frame = TRUE`.
+#' The SYNOP message is decoded via [synop_parser()] with `as_data_frame = TRUE`.
 #'
 #' @param station Numeric or character vector of WMO station IDs. Optional when
 #'   `country_name` is provided; required otherwise.
 #' @param date Character or Date vector of length 2 giving the start and end of
 #'   the requested period, e.g. `c("2009-12-01", "2009-12-04")`. Defaults to
 #'   the last 30 days.
-#' @param country Optional; passed to [parser()] for country-specific
+#' @param country Optional; passed to [synop_parser()] for country-specific
 #'   precipitation indicator decoding (e.g. `"RU"`). Single string or `NULL`
 #'   (default). This is distinct from `country_name`.
 #' @param country_name Optional character string naming the country whose
@@ -65,7 +65,7 @@
 #'
 #'   When `simplified = FALSE`, a `data.frame` with the first two columns
 #'   `station_id` (WMO identifier, character) and `Date` (`POSIXct`, UTC),
-#'   followed by all columns produced by [parser()] with `as_data_frame = TRUE`:
+#'   followed by all columns produced by [synop_parser()] with `as_data_frame = TRUE`:
 #'   `station_type`, `region`, `obs_day`, `obs_hour`, `wind_unit`,
 #'   `wind_estimated`, `visibility`, `cloud_cover`, `wind_direction`,
 #'   `wind_speed`, `air_temperature`, `dewpoint_temperature`,
@@ -370,7 +370,7 @@ meteo_ogimet_synop_bp = function(station, date, country, country_name, simplifie
   decoded_rows = vector("list", n_msgs)
   for (i in seq_len(n_msgs)) {
     decoded_rows[[i]] = tryCatch(
-      suppressMessages(parser(synop_msgs[[i]], country = country_vec[[i]], as_data_frame = TRUE)),
+      suppressMessages(synop_parser(synop_msgs[[i]], country = country_vec[[i]], as_data_frame = TRUE)),
       error = function(e) NULL
     )
     utils::setTxtProgressBar(pb, i)

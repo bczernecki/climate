@@ -21,7 +21,7 @@ meteo_ogimet_synop(
 the requested period, e.g. \code{c("2009-12-01", "2009-12-04")}. Defaults to
 the last 30 days.}
 
-\item{country}{Optional; passed to \code{\link[=parser]{parser()}} for country-specific
+\item{country}{Optional; passed to \code{\link[=synop_parser]{synop_parser()}} for country-specific
 precipitation indicator decoding (e.g. \code{"RU"}). Single string or \code{NULL}
 (default). This is distinct from \code{country_name}.}
 
@@ -67,7 +67,7 @@ from Section 1 group \verb{8NhCLCMCH}; \code{NA} when not reported.
 
 When \code{simplified = FALSE}, a \code{data.frame} with the first two columns
 \code{station_id} (WMO identifier, character) and \code{Date} (\code{POSIXct}, UTC),
-followed by all columns produced by \code{\link[=parser]{parser()}} with \code{as_data_frame = TRUE}:
+followed by all columns produced by \code{\link[=synop_parser]{synop_parser()}} with \code{as_data_frame = TRUE}:
 \code{station_type}, \code{region}, \code{obs_day}, \code{obs_hour}, \code{wind_unit},
 \code{wind_estimated}, \code{visibility}, \code{cloud_cover}, \code{wind_direction},
 \code{wind_speed}, \code{air_temperature}, \code{dewpoint_temperature},
@@ -82,7 +82,7 @@ Returns \code{NULL} invisibly when the download fails and \code{allow_failure = 
 }
 \description{
 Downloads raw SYNOP messages from the Ogimet \code{getsynop} endpoint and decodes
-them into a tidy \code{data.frame} using the \code{\link[=parser]{parser()}} function. Two retrieval
+them into a tidy \code{data.frame} using the \code{\link[=synop_parser]{synop_parser()}} function. Two retrieval
 modes are supported:
 }
 \details{
@@ -100,7 +100,7 @@ precedence and a warning is issued.
 
 Each line of the response is a comma-separated record:
 \verb{station_id,year,month,day,hour,minute,<SYNOP message>}.
-The SYNOP message is decoded via \code{\link[=parser]{parser()}} with \code{as_data_frame = TRUE}.
+The SYNOP message is decoded via \code{\link[=synop_parser]{synop_parser()}} with \code{as_data_frame = TRUE}.
 }
 \examples{
 \donttest{

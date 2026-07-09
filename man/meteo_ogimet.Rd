@@ -40,7 +40,7 @@ errors are caught and a message is emitted; when \code{FALSE} errors
 propagate.}
 \item{\code{simplified}}{Logical. Applies to \code{source = "synop"} only. When
 \code{TRUE} (default) a compact 20-column \code{data.frame} is returned (see
-\strong{synop output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is
+\strong{synop output} below). When \code{FALSE} the full \code{\link[=synop_parser]{synop_parser()}} output is
 returned with 30+ columns.}
 \item{\code{precip_split}}{Logical. Split the precipitation field into
 separate \code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
@@ -61,7 +61,7 @@ A \code{data.frame} with one row per decoded SYNOP observation and approx. 20 co
 \code{Nt}, \code{Nh}, \code{N_base}, \code{insol}, \code{visibility}, \code{snow}.
 
 \strong{synop output} (\code{source = "synop"}, \code{simplified = FALSE}):
-A \code{data.frame} with 30+ columns from \code{\link[=parser]{parser()}}, prefixed by \code{station_id}
+A \code{data.frame} with 30+ columns from \code{\link[=synop_parser]{synop_parser()}}, prefixed by \code{station_id}
 and \code{Date}.
 
 \strong{html output} (\code{source = "html"}, \code{interval = "hourly"}):
@@ -86,7 +86,7 @@ from \href{https://www.ogimet.com/}{Ogimet}. Two backends are supported:
 \details{
 \itemize{
 \item \strong{\code{"synop"}} (default for hourly): Downloads raw SYNOP messages from the
-Ogimet \code{getsynop} endpoint and decodes them with \code{\link[=parser]{parser()}}. Supports
+Ogimet \code{getsynop} endpoint and decodes them with \code{\link[=synop_parser]{synop_parser()}}. Supports
 station mode (one or more WMO IDs) and/or country mode (\code{country_name}).
 A default output columns are described in the \strong{synop output} section below, but
 can be enhanced optionally with \code{simplified = FALSE} or \code{return_list = TRUE}

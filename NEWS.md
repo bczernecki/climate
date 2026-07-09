@@ -1,6 +1,6 @@
 # climate 1.4.0
 
-* adding the `parser()` function for reading raw SYNOP messages
+* adding the `synop_parser()` function for reading raw SYNOP messages
 * major changes in the `meteo_ogimet()` set of functions:
   * cleaning up and refactoring the code
   * data source used by OGIMET engine can be specified by setting `parser = "html"` or `parser = "synop"` argument; more details in the documentation, e.g:
@@ -10,7 +10,9 @@
   * thermodynamic and dynamic indices are no longer calculated on the server side, but can be manually obtained using the `thundeR` package
 * minor fixes:
   * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
-  * updated columns in IMGW telemetry datasets
+    * therefore argument `col_names` is now removed
+  * station coordinates are automatically added by default
+  * updated columns in IMGW telemetry datasets due to changes in IMGW repository
   * updated documentation and vignettes to reflect changes in the code and new features
   * unified R code syntax for assignments
 

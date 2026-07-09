@@ -4,7 +4,7 @@
 #' from [Ogimet](https://www.ogimet.com/). Two backends are supported:
 #'
 #' - **`"synop"`** (default for hourly): Downloads raw SYNOP messages from the
-#'   Ogimet `getsynop` endpoint and decodes them with [parser()]. Supports
+#'   Ogimet `getsynop` endpoint and decodes them with [synop_parser()]. Supports
 #'   station mode (one or more WMO IDs) and/or country mode (`country_name`).
 #'   A default output columns are described in the **synop output** section below, but 
 #'   can be enhanced optionally with `simplified = FALSE` or `return_list = TRUE`
@@ -35,7 +35,7 @@
 #'       propagate.}
 #'     \item{`simplified`}{Logical. Applies to `source = "synop"` only. When
 #'       `TRUE` (default) a compact 20-column `data.frame` is returned (see
-#'       **synop output** below). When `FALSE` the full [parser()] output is
+#'       **synop output** below). When `FALSE` the full [synop_parser()] output is
 #'       returned with 30+ columns.}
 #'     \item{`precip_split`}{Logical. Split the precipitation field into
 #'       separate `pr6`, `pr12`, and `pr24` columns. Valid only for
@@ -58,7 +58,7 @@
 #' `Nt`, `Nh`, `N_base`, `insol`, `visibility`, `snow`.
 #'
 #' **synop output** (`source = "synop"`, `simplified = FALSE`):
-#' A `data.frame` with 30+ columns from [parser()], prefixed by `station_id`
+#' A `data.frame` with 30+ columns from [synop_parser()], prefixed by `station_id`
 #' and `Date`.
 #'
 #' **html output** (`source = "html"`, `interval = "hourly"`):

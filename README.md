@@ -128,7 +128,6 @@ nearest_stations_ogimet(country = "United+Kingdom",
 # Daily summary — uses HTML backend by default
 o = meteo_ogimet(date = c(Sys.Date() - 5, Sys.Date() - 1), 
                  interval = "daily",
-                 coords = FALSE, 
                  station = 12330)
 head(o)
 ```
@@ -294,9 +293,9 @@ res.head
 | 72503.0    | 2022-06-11 | 22.6            | 17.8            | 8.1    | 40.1  |
 
 ## Example 8
-#### Decode raw SYNOP messages with `parser()`
+#### Decode raw SYNOP messages with `synop_parser()`
 
-The `parser()` function decodes FM-12 SYNOP meteorological messages into structured R objects.
+The `synop_parser()` function decodes FM-12 SYNOP meteorological messages into structured R objects.
 For a detailed guide including all parameters and output formats, see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ```r

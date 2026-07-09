@@ -14,14 +14,13 @@ This vignette demonstrates how to work with SYNOP FM-12 meteorological messages 
 
 The package provides two complementary functions for handling SYNOP data:
 
-- **`parser()`** — parse raw SYNOP message strings into structured data
+- **`synop_parser()`** — parse raw SYNOP message strings into structured data
 - **`meteo_ogimet(source = "synop")`** — download raw SYNOP messages from Ogimet and decode them automatically
 
-> **Note:** The older `meteo_ogimet_synop()` function is deprecated. Use `meteo_ogimet(source = "synop")` instead.
 
-## The `parser()` Function
+## The `synop_parser()` Function
 
-The `parser()` function decodes raw SYNOP messages into either a tidy data frame or a nested list structure.
+The `synop_parser()` function decodes raw SYNOP messages into either a tidy data frame or a nested list structure.
 
 ### Basic Usage - data frame output:
 
@@ -31,12 +30,12 @@ suppressMessages(library(climate))
 ```
 
 
-```{r echo=TRUE}
+```{r ru, echo=TRUE}
 # A simple SYNOP message
 synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
 
 # Parse into a data frame (default for analysis)
-df_single = parser(synop_code, as_data_frame = TRUE)
+df_single = synop_parser(synop_code, as_data_frame = TRUE)
 head(df_single)
 ```
 
@@ -52,7 +51,7 @@ messages = c(
 )
 
 # Multiple messages as a data frame
-df_multiple = parser(messages, as_data_frame = TRUE)
+df_multiple = synop_parser(messages, as_data_frame = TRUE)
 head(df_multiple)
 ```
 
@@ -108,7 +107,7 @@ For more granular access most of decoded field, use the default list output:
 
 ```{r echo=TRUE}
 # Single message as a nested list
-decoded = parser(synop_code)
+decoded = synop_parser(synop_code)
 str(decoded)
 ```
 
@@ -116,7 +115,7 @@ To parse multiple messages and keep each as a separate list element:
 
 ```{r}
 # Returns a list of two decoded messages
-decoded_list = parser(messages, simplify = FALSE)
+decoded_list = synop_parser(messages, simplify = FALSE)
 
 # Access the first message
 decoded_list[[1]]
@@ -128,10 +127,10 @@ Some SYNOP groups (e.g., precipitation indicators) are country-specific. Pass th
 
 ```{r echo=TRUE}
 # Parse with Russia-specific precipitation decoding
-decoded_ru = parser(synop_code, country = "RU", as_data_frame = TRUE)
+decoded_ru = synop_parser(synop_code, country = "RU", as_data_frame = TRUE)
 
 # Compare with default
-decoded_default = parser(synop_code, as_data_frame = TRUE)
+decoded_default = synop_parser(synop_code, as_data_frame = TRUE)
 ```
 
 ## The `meteo_ogimet()` Function — SYNOP Backend
@@ -173,7 +172,7 @@ By default, `meteo_ogimet()` returns a simplified data frame with the most commo
 To get all decoded SYNOP fields, use `simplified = FALSE`:
 
 ```{r echo=TRUE}
-# Full parser output
+# Full synop_parser output
 full = meteo_ogimet(
   source     = "synop",
   station    = 12330,

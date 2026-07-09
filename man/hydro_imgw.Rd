@@ -4,22 +4,12 @@
 \alias{hydro_imgw}
 \title{Hydrological data from IMGW}
 \usage{
-hydro_imgw(
-  interval,
-  year,
-  coords = FALSE,
-  value = "H",
-  station = NULL,
-  col_names = "short",
-  ...
-)
+hydro_imgw(interval, year, value = "H", station = NULL, ...)
 }
 \arguments{
 \item{interval}{temporal resolution of the data ("daily" or "monthly")}
 
 \item{year}{vector of years (e.g., 1966:2000)}
-
-\item{coords}{add coordinates of the stations (logical value TRUE or FALSE)}
 
 \item{value}{type of data (can be: state - "H" (default), flow - "Q", or
 temperature - "T")}
@@ -28,11 +18,7 @@ temperature - "T")}
 can be given as station name with CAPITAL LETTERS (character)
 It accepts either names (characters in CAPITAL LETTERS) or stations' IDs (numeric)}
 
-\item{col_names}{three types of column names possible: "short" - default,
-values with shorten names, "full" - full English description,
-"polish" - original names in the dataset}
-
-\item{...}{other parameters that may be passed to the 'shortening'
+\item{...}{other parameters that may be passed e.g. to the 'shortening'
 function that shortens column names}
 }
 \value{

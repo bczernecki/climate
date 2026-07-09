@@ -46,14 +46,14 @@
 #'   Row names are sequential integers.
 #' @examples
 #' synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
-#' parser(synop_code)
-#' parser(rep(synop_code, 2), simplify = FALSE)
-#' parser(synop_code, as_data_frame = TRUE)
-#' parser(rep(synop_code, 2), as_data_frame = TRUE)
+#' synop_parser(synop_code)
+#' synop_parser(rep(synop_code, 2), simplify = FALSE)
+#' synop_parser(synop_code, as_data_frame = TRUE)
+#' synop_parser(rep(synop_code, 2), as_data_frame = TRUE)
 #' @import R6
 #' @export
 
-parser = function(message, country = NULL, simplify = TRUE, as_data_frame = FALSE) {
+synop_parser = function(message, country = NULL, simplify = TRUE, as_data_frame = FALSE) {
   if (missing(message) || length(message) == 0) {
     stop("`message` must contain at least one SYNOP string.")
   }
