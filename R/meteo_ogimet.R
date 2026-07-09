@@ -11,7 +11,7 @@
 #'   to include more of decoded SYNOP fields.
 #'
 #' - **`"html"`** (default for daily): Scrapes pre-formatted summary tables
-#'   from the Ogimet `gsynres` endpoint using [XML::readHTMLTable()].
+#'   from the Ogimet using HTML parsing. Supports station mode only (one or more WMO IDs).
 #'   Output columns are described in the **html output** section below.
 #'
 #' @param interval `"hourly"` (default) or `"daily"` — time resolution to retrieve.
@@ -37,9 +37,6 @@
 #'       `TRUE` (default) a compact 20-column `data.frame` is returned (see
 #'       **synop output** below). When `FALSE` the full [parser()] output is
 #'       returned with 30+ columns.}
-#'     \item{`coords`}{Logical. Add geographical coordinates (`Lon`, `Lat`) to
-#'       the output. Applies to hourly and when `source = "html"` only; a warning is emitted
-#'       for `source = "synop"`. Default `FALSE`.}
 #'     \item{`precip_split`}{Logical. Split the precipitation field into
 #'       separate `pr6`, `pr12`, and `pr24` columns. Valid only for
 #'       `interval = "hourly"` with `source = "html"`; a warning is emitted
@@ -50,8 +47,6 @@
 #'       instead of a `data.frame`. A warning is emitted when used with
 #'       `source = "html"`. Default `FALSE`.}
 #'   }
-#'
-#' @importFrom XML readHTMLTable
 #'
 #' @export
 #'
@@ -114,8 +109,7 @@
 #'   poznan_h2 = meteo_ogimet(interval = "hourly",
 #'                            station  = 12330,
 #'                            date     = c("2019-06-01", "2019-06-08"),
-#'                            source   = "html",
-#'                            coords   = TRUE)
+#'                            source   = "html")
 #' }
 #'
 meteo_ogimet = function(interval     = "hourly",
@@ -128,7 +122,6 @@ meteo_ogimet = function(interval     = "hourly",
   dots          = list(...)
   allow_failure = if (!is.null(dots$allow_failure)) dots$allow_failure else TRUE
   simplified    = if (!is.null(dots$simplified))    dots$simplified    else TRUE
-  coords        = if (!is.null(dots$coords))        dots$coords        else FALSE
   precip_split  = if (!is.null(dots$precip_split))  dots$precip_split  else TRUE
   return_list   = if (!is.null(dots$return_list))   dots$return_list   else FALSE
 
@@ -150,9 +143,6 @@ meteo_ogimet = function(interval     = "hourly",
 
   # Warn for HTML-only params used with SYNOP
   if (effective_source == "synop") {
-    if (isTRUE(coords)) {
-      warning("`coords` is not supported for source = 'synop' and will be ignored.", call. = FALSE)
-    }
     if (!isTRUE(precip_split)) {
       warning("`precip_split` is not supported for source = 'synop' and will be ignored.", call. = FALSE)
     }
@@ -174,10 +164,10 @@ meteo_ogimet = function(interval     = "hourly",
       if (!precip_split) {
         warning("The `precip_split` argument is only valid for hourly time step", call. = FALSE)
       }
-      return(ogimet_daily(date = date, coords = coords,
+      return(ogimet_daily(date = date,
                           station = station, allow_failure = allow_failure))
     } else {
-      return(ogimet_hourly(date = date, coords = coords, station = station,
+      return(ogimet_hourly(date = date, station = station,
                            precip_split = precip_split, allow_failure = allow_failure))
     }
   }

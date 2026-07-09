@@ -42,9 +42,6 @@ propagate.}
 \code{TRUE} (default) a compact 20-column \code{data.frame} is returned (see
 \strong{synop output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is
 returned with 30+ columns.}
-\item{\code{coords}}{Logical. Add geographical coordinates (\code{Lon}, \code{Lat}) to
-the output. Applies to hourly and when \code{source = "html"} only; a warning is emitted
-for \code{source = "synop"}. Default \code{FALSE}.}
 \item{\code{precip_split}}{Logical. Split the precipitation field into
 separate \code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
 \code{interval = "hourly"} with \code{source = "html"}; a warning is emitted
@@ -95,7 +92,7 @@ A default output columns are described in the \strong{synop output} section belo
 can be enhanced optionally with \code{simplified = FALSE} or \code{return_list = TRUE}
 to include more of decoded SYNOP fields.
 \item \strong{\code{"html"}} (default for daily): Scrapes pre-formatted summary tables
-from the Ogimet \code{gsynres} endpoint using \code{\link[XML:readHTMLTable]{XML::readHTMLTable()}}.
+from the Ogimet using HTML parsing. Supports station mode only (one or more WMO IDs).
 Output columns are described in the \strong{html output} section below.
 }
 }
@@ -132,8 +129,7 @@ Output columns are described in the \strong{html output} section below.
   poznan_h2 = meteo_ogimet(interval = "hourly",
                            station  = 12330,
                            date     = c("2019-06-01", "2019-06-08"),
-                           source   = "html",
-                           coords   = TRUE)
+                           source   = "html")
 }
 
 }

@@ -6,7 +6,6 @@
 \usage{
 ogimet_hourly(
   date = c(Sys.Date() - 30, Sys.Date()),
-  coords = FALSE,
   station = 12330,
   precip_split = TRUE,
   allow_failure = TRUE
@@ -14,8 +13,6 @@ ogimet_hourly(
 }
 \arguments{
 \item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ); By default last 30 days are taken}
-
-\item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
@@ -32,8 +29,8 @@ Downloading hourly (meteorological) data from the Synop stations available in th
 }
 \examples{
 \donttest{
-  # downloading data for Poznan-Lawica, Poland
-  poznan = ogimet_hourly(station = 12330, coords = TRUE)
+  # downloading hourly data for Poznan-Lawica, Poland for (default) last 30 days:
+  poznan = ogimet_hourly(station = 12330)
 }
 
 }

@@ -4,7 +4,7 @@ test_that("meteo_ogimet works!", {
   skip_on_cran()
   
   df = meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-06-08"),
-                    station = c(12330, 12120), coords = TRUE)
+                    station = c(12330, 12120))
   
   # sometimes ogimet requires warm spin-up, so in order to pass CRAN tests:
   if (is.data.frame(df) & nrow(df) > 15) {
@@ -15,7 +15,7 @@ test_that("meteo_ogimet works!", {
   Sys.sleep(20)
   x = meteo_ogimet(interval = "hourly", source = "html",
                    date = c("2019-06-01", "2019-06-08"),
-                   station = c(12330), coords = TRUE)
+                   station = c(12330))
   
   if (is.data.frame(x)) {
     testthat::expect_true(nrow(x) > 100)
@@ -25,7 +25,7 @@ test_that("meteo_ogimet works!", {
   Sys.sleep(20)
   y = meteo_ogimet(interval = "hourly", source = "html",
                    date = c("2019-01-01", "2019-01-05"),
-                   station = 12120, coords = FALSE)
+                   station = 12120)
   
   if (is.data.frame(y)) {
     testthat::expect_equal(unique(format(y$Date, "%Y")), "2019")
@@ -38,12 +38,12 @@ test_that("meteo_ogimet works!", {
   Sys.sleep(25)
   expect_warning(meteo_ogimet(interval = "hourly", source = "html",
                                date = c("2019-01-01", "2019-01-05"),
-                               station = 999999, coords = FALSE, allow_failure = FALSE))
+                               station = 999999, allow_failure = FALSE))
   # no date (HTML path):
   Sys.sleep(20)
   expect_message(meteo_ogimet(interval = "hourly", source = "html",
                                date = c(NA, NA),
-                               station = 12120, coords = FALSE, allow_failure = TRUE))
+                               station = 12120, allow_failure = TRUE))
   
   # no values for the selected station
   Sys.sleep(20)
@@ -65,14 +65,14 @@ test_that("meteo_ogimet works!", {
                             date = c("2020-02-01", "2020-02-01"),
                             precip_split = FALSE, 
                             interval = "daily",
-                            coords = FALSE, allow_failure = TRUE))
+                            allow_failure = TRUE))
   
   
   # check precip_split on empty precipitation field
   Sys.sleep(20)
   petrobaltic = ogimet_hourly(station = 12001,
                          date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),
-                         coords = TRUE, precip_split = TRUE)
+                         precip_split = TRUE)
   if (is.data.frame(petrobaltic) & nrow(petrobaltic) > 0) {
     testthat::expect_true(all(is.na(petrobaltic$pr12)))
     Sys.sleep(20)
@@ -89,7 +89,6 @@ test_that("meteo_ogimet works!", {
         date = c(as.Date("2020-02-01"), Sys.Date() - 1),
         # date = c(Sys.Date() - 7, Sys.Date() - 1),
         interval = "daily",
-        coords = FALSE,
         station = "06683", allow_failure = FALSE)
     )
     
@@ -139,7 +138,7 @@ test_that("meteo_ogimet warns when coords = TRUE used with SYNOP (hourly default
     suppressMessages(
       meteo_ogimet(interval = "hourly", station = 12330,
                    date = c("2009-12-01", "2009-12-01"),
-                   coords = TRUE, allow_failure = TRUE)
+                   allow_failure = TRUE)
     ),
     "coords"
   )
@@ -199,15 +198,4 @@ test_that("meteo_ogimet source = 'synop' works for daily interval", {
   expect_s3_class(result, "data.frame")
   expect_true("date" %in% names(result))
   expect_true(nrow(result) > 0)
-})
-
-test_that("meteo_ogimet_synop emits a deprecation warning", {
-  expect_warning(
-    suppressMessages(
-      meteo_ogimet_synop(station = 12330,
-                         date = c("2009-12-01", "2009-12-01"),
-                         allow_failure = TRUE)
-    ),
-    "deprecated"
-  )
 })
