@@ -10,7 +10,6 @@
 #' nearest stations to (e.g. c(80, 6)). If not provided the query will be based on a mean longitude and latitude among available dataset.
 #' @param no_of_stations how many nearest stations will be returned from the given geographical coordinates; default 30
 #' @param allow_failure logical - whether to allow or stop on failure. By default set to TRUE. For debugging purposes change to FALSE
-#' @importFrom XML readHTMLTable
 #' @export
 #' @return A data.frame with number of nearest station according to given point columns describing stations parameters 
 #' (e.g.  ID station, distance from point, geographic coordinates, etc.) where each row represent a measurement,

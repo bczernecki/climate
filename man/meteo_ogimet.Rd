@@ -43,7 +43,7 @@ propagate.}
 \strong{synop output} below). When \code{FALSE} the full \code{\link[=parser]{parser()}} output is
 returned with 30+ columns.}
 \item{\code{coords}}{Logical. Add geographical coordinates (\code{Lon}, \code{Lat}) to
-the output. Applies to \code{source = "html"} only; a warning is emitted
+the output. Applies to hourly and when \code{source = "html"} only; a warning is emitted
 for \code{source = "synop"}. Default \code{FALSE}.}
 \item{\code{precip_split}}{Logical. Split the precipitation field into
 separate \code{pr6}, \code{pr12}, and \code{pr24} columns. Valid only for
@@ -58,7 +58,7 @@ instead of a \code{data.frame}. A warning is emitted when used with
 }
 \value{
 \strong{synop output} (\code{source = "synop"}, \code{simplified = TRUE} or \code{return_list = TRUE} \verb{$data}):
-A \code{data.frame} with one row per decoded SYNOP observation and 20 columns:
+A \code{data.frame} with one row per decoded SYNOP observation and approx. 20 columns:
 \code{date} (POSIXct UTC), \code{station}, \code{t2m}, \code{dpt2m}, \code{rel_hum}, \code{tmax},
 \code{tmin}, \code{wd}, \code{ws}, \code{gust}, \code{press}, \code{slp}, \code{press_tend}, \code{precip},
 \code{Nt}, \code{Nh}, \code{N_base}, \code{insol}, \code{visibility}, \code{snow}.
@@ -107,9 +107,7 @@ Output columns are described in the \strong{html output} section below.
                           date     = c("2009-12-01", "2009-12-04"))
 
   # Daily HTML summaries for New York - La Guardia (default source = "html")
-  new_york = meteo_ogimet(interval = "daily",
-                           station  = 72503,
-                           coords   = TRUE)
+  new_york = meteo_ogimet(interval = "daily", station  = 72503)
 
   # Hourly with full parser output as a list
   poznan_list = meteo_ogimet(interval     = "hourly",

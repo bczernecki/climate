@@ -1,9 +1,14 @@
 # climate 1.4.0
 
 * adding the `parser()` function for reading raw SYNOP messages
-* updating the `meteo_ogimet()` function to use the new `parser()`, but also keep possibility to use HTML scraping engine
-* minor fixes
+* major changes in the `meteo_ogimet()` set of functions:
+  * cleaning up and refactoring the code
+  * data source used by OGIMET engine can be specified by setting `parser = "html"` or `parser = "synop"` argument; more details in the documentation, e.g:
+    * SYNOP parser is now used by default for hourly data, and HTML for daily summaries; 
+  * XML parsing engine is now replaced by in-house solutions to reduce dependencies and improve performance in future
+* minor fixes:
   * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
+  * updated columns in IMGW telemetry datasets
   * updated documentation and vignettes to reflect changes in the code and new features
   * unified R code syntax for assignments
 

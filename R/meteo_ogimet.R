@@ -38,7 +38,7 @@
 #'       **synop output** below). When `FALSE` the full [parser()] output is
 #'       returned with 30+ columns.}
 #'     \item{`coords`}{Logical. Add geographical coordinates (`Lon`, `Lat`) to
-#'       the output. Applies to `source = "html"` only; a warning is emitted
+#'       the output. Applies to hourly and when `source = "html"` only; a warning is emitted
 #'       for `source = "synop"`. Default `FALSE`.}
 #'     \item{`precip_split`}{Logical. Split the precipitation field into
 #'       separate `pr6`, `pr12`, and `pr24` columns. Valid only for
@@ -57,7 +57,7 @@
 #'
 #' @return
 #' **synop output** (`source = "synop"`, `simplified = TRUE` or `return_list = TRUE` `$data`):
-#' A `data.frame` with one row per decoded SYNOP observation and 20 columns:
+#' A `data.frame` with one row per decoded SYNOP observation and approx. 20 columns:
 #' `date` (POSIXct UTC), `station`, `t2m`, `dpt2m`, `rel_hum`, `tmax`,
 #' `tmin`, `wd`, `ws`, `gust`, `press`, `slp`, `press_tend`, `precip`,
 #' `Nt`, `Nh`, `N_base`, `insol`, `visibility`, `snow`.
@@ -89,9 +89,7 @@
 #'                           date     = c("2009-12-01", "2009-12-04"))
 #'
 #'   # Daily HTML summaries for New York - La Guardia (default source = "html")
-#'   new_york = meteo_ogimet(interval = "daily",
-#'                            station  = 72503,
-#'                            coords   = TRUE)
+#'   new_york = meteo_ogimet(interval = "daily", station  = 72503)
 #'
 #'   # Hourly with full parser output as a list
 #'   poznan_list = meteo_ogimet(interval     = "hourly",

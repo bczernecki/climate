@@ -395,7 +395,7 @@ meteo_imgw_daily_bp = function(rank,
   }
 
   all_data = imgw_rename_params_to_labels(all_data, meta)
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data = meteo_shortening_imgw(all_data, col_names = col_names, remove_duplicates = TRUE)
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
   if (length(env$logs) > 0) {

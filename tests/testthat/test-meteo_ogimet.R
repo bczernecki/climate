@@ -4,7 +4,7 @@ test_that("meteo_ogimet works!", {
   skip_on_cran()
   
   df = meteo_ogimet(interval = "daily", date = c("2019-06-01", "2019-06-08"),
-                    station = c(12330, 12375), coords = TRUE)
+                    station = c(12330, 12120), coords = TRUE)
   
   # sometimes ogimet requires warm spin-up, so in order to pass CRAN tests:
   if (is.data.frame(df) & nrow(df) > 15) {
@@ -35,7 +35,7 @@ test_that("meteo_ogimet works!", {
   # check error for non existing station or problem with downloading any reasonable data:
   
   # wrong station ID (HTML path emits a warning):
-  Sys.sleep(20)
+  Sys.sleep(25)
   expect_warning(meteo_ogimet(interval = "hourly", source = "html",
                                date = c("2019-01-01", "2019-01-05"),
                                station = 999999, coords = FALSE, allow_failure = FALSE))
