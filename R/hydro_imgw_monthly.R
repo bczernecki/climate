@@ -12,7 +12,6 @@
 #' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
-#' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
@@ -65,10 +64,10 @@ hydro_imgw_monthly_bp = function(year,
   test_url(link = paste0(base_url, interval_pl, "/"), output = temp)
   a = readLines(temp, warn = FALSE)
 
-  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
-  catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
-  catalogs = catalogs[catalogs  %in% as.character(year)]
+  catalogs = unlist(regmatches(a, gregexpr('<a href="([^"/?][^"]*)/">', a, perl = TRUE)))
+  catalogs = gsub('<a href="|/">', "", catalogs)
+  catalogs = catalogs[catalogs %in% as.character(year)]
+  
   if (length(catalogs) == 0) {
     stop("Selected year(s) is not available in the database.", call. = FALSE)
   }

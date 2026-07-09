@@ -1,3 +1,4 @@
 #' @importFrom utils globalVariables
 utils::globalVariables(c("i.parameter", "param",  "Date",
-                         "ave", "setNames", "station_ID"))
+                         "ave", "setNames", "station_ID", 
+                         "bufr"))

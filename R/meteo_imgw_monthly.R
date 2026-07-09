@@ -19,7 +19,6 @@
 #' By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the
 #' 'shortening' function that shortens column names
-#' @importFrom XML readHTMLTable
 #' @importFrom utils unzip read.csv
 #' @importFrom data.table fread
 #' @export
@@ -105,8 +104,8 @@ meteo_imgw_monthly_bp = function(rank,
   a = readLines(temp, warn = FALSE)
   unlink(temp)
 
-  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
+  catalogs = unlist(regmatches(a, gregexpr('<a href="([^"/?][^"]*)/">', a, perl = TRUE)))
+  catalogs = gsub('<a href="|/">', "", catalogs)
 
   years_in_catalogs = strsplit(gsub(x = catalogs, pattern = "/", replacement = ""), split = "_")
   years_in_catalogs = lapply(years_in_catalogs, function(x) x[1]:x[length(x)])

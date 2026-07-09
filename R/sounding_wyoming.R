@@ -69,8 +69,8 @@ sounding_wyoming = function(wmo_id,
   
   if (allow_failure) {
     tryCatch(sounding_wyoming_bp(wmo_id, 
-                               yy, mm, dd, hh, min, 
-                               source = source), 
+                                 yy, mm, dd, hh, min, 
+                                 source = source), 
            error = function(e){
              message(paste("Problems with downloading data.",
                            "Run function with argument allow_failure = FALSE",
@@ -78,7 +78,7 @@ sounding_wyoming = function(wmo_id,
 } else {
   sounding_wyoming_bp(wmo_id, 
                       yy, mm, dd, hh, min, 
-                      bufr = bufr)
+                      source = source)
   }
 }
 

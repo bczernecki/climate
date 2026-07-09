@@ -12,7 +12,6 @@
 #' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
-#' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread data.table
 #' @export
@@ -71,9 +70,8 @@ hydro_imgw_daily_bp = function(year,
   test_url(link = paste0(base_url, interval_pl, "/"), output = temp)
   a = readLines(temp, warn = FALSE)
   
-  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
-  catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
+  catalogs = unlist(regmatches(a, gregexpr('<a href="([^"/?][^"]*)/">', a, perl = TRUE)))
+  catalogs = gsub('<a href="|/">', "", catalogs)
   catalogs = catalogs[catalogs %in% as.character(year)]
   
   if (length(catalogs) == 0) {
@@ -88,7 +86,10 @@ hydro_imgw_daily_bp = function(year,
     test_url(link = paste0(base_url, interval_pl, "/", catalog), output = temp)
     b = readLines(temp, warn = FALSE)
     
-    files_in_dir = readHTMLTable(b)[[1]]$Name
+    all_links = regmatches(b, gregexpr('<a href="([^"]*)">([^<]*)</a>', b))
+    fits = regmatches(all_links, gregexpr('<a href="[^"]*">', all_links))
+    files_in_dir = as.character(na.omit(gsub('<a href="|">', "", fits)))
+    
     ind = grep(files_in_dir, pattern = "zip")
     codz_files = grep(x = files_in_dir, pattern = "codz", value = TRUE)
     zjaw_files = grep(x = files_in_dir, pattern = "zjaw", value = TRUE)
