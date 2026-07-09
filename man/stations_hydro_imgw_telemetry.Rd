@@ -8,7 +8,7 @@ stations_hydro_imgw_telemetry()
 }
 \value{
 data table with metadata for over 850 stations.
-Metadata contains: station ID, station name, river, latitude, longitude, altitude
+Metadata contains: station ID, station name, river, latitude, longitude, altitude, km_of_river
 }
 \description{
 Retrieving current metadata for hydrological stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)

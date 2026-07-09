@@ -20,6 +20,8 @@ ogimet_daily(
 \item{hour}{time for which the daily raport is generated. Set default as hour = 6 (i.e. 6 UTC)}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
+
+\item{...}{extra arguments that may be passed from wrapper top-level functions}
 }
 \value{
 data.frame with historical meteorological data for the daily summaries
