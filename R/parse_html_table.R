@@ -3,13 +3,17 @@
 #' Parses an HTML table into a data.frame using base R only with no external dependencies
 #' The code relies purely on regular expressions and basic string and regex functions.
 #' 
-#' By default the function grabs the first <TABLE> it finds. If your HTML
-#' has several tables and you need a specific one, pass a regex that matches
-#' its opening tag via `table_start_pattern`, e.g.:
-#'   parse_html_table(html, table_start_pattern = '<TABLE align="center" border=0[^>]*>')
+#' @details
+#' By default the function grabs the first `TABLE` element it finds. If the HTML code
+#' has several tables and you need a specific one, pass a regex that
+#' matches its opening tag via `table_start_pattern`, e.g.:
 #'
-#' @param html a single string containing the HTML body (or any larger HTML
-#' chunk) that includes the table you want to parse.
+#' \preformatted{
+#' parse_html_table(html, table_start_pattern = '<TABLE align="center" border=0[^>]*>')
+#' }
+#'
+#' @param html a single string containing the HTML body (or any larger HTML chunk) that includes the table you want to parse.
+#' 
 #' 
 #' @export
 #' @return description

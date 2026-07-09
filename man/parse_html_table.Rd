@@ -7,8 +7,7 @@
 parse_html_table(html, table_start_pattern = "<TABLE[^>]*>")
 }
 \arguments{
-\item{html}{a single string containing the HTML body (or any larger HTML
-chunk) that includes the table you want to parse.}
+\item{html}{a single string containing the HTML body (or any larger HTML chunk) that includes the table you want to parse.}
 }
 \value{
 description
@@ -20,9 +19,12 @@ Parses an HTML table into a data.frame using base R only with no external depend
 The code relies purely on regular expressions and basic string and regex functions.
 }
 \details{
-By default the function grabs the first \if{html}{\out{<TABLE>}} it finds. If your HTML
-has several tables and you need a specific one, pass a regex that matches
-its opening tag via \code{table_start_pattern}, e.g.:
-parse_html_table(html, table_start_pattern = '\if{html}{\out{<TABLE align="center" border=0[^>}}]*>')
+By default the function grabs the first \code{TABLE} element it finds. If the HTML code
+has several tables and you need a specific one, pass a regex that
+matches its opening tag via \code{table_start_pattern}, e.g.:
+
+\preformatted{
+parse_html_table(html, table_start_pattern = '<TABLE align="center" border=0[^>]*>')
+}
 }
 \keyword{internal}
