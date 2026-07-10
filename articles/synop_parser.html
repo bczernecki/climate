@@ -111,7 +111,7 @@ data:</p>
 message strings into structured data</li>
 <li>
 <strong><code>meteo_ogimet(source = "synop")</code></strong> —
-download raw SYNOP messages from Ogimet and decode them
+download raw SYNOP messages from Ogimet web service and decode them
 automatically</li>
 </ul>
 </div>
@@ -123,21 +123,9 @@ into either a tidy data frame or a nested list structure.</p>
 <div class="section level3">
 <h3 id="basic-usage---data-frame-output">Basic Usage - data frame output:<a class="anchor" aria-label="anchor" href="#basic-usage---data-frame-output"></a>
 </h3>
+<p>SYNOP messages should be provided as text vector of any length,
+e.g:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># A simple SYNOP message</span></span>
-<span><span class="va">synop_code</span> <span class="op">=</span> <span class="st">"AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"</span></span>
-<span></span>
-<span><span class="co"># Parse into a data frame (default for analysis)</span></span>
-<span><span class="va">df_single</span> <span class="op">=</span> <span class="fu"><a href="../reference/synop_parser.html">synop_parser</a></span><span class="op">(</span><span class="va">synop_code</span>, as_data_frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df_single</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="multiple-messages">Multiple Messages<a class="anchor" aria-label="anchor" href="#multiple-messages"></a>
-</h3>
-<p>To parse multiple SYNOP messages at once:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Parse multiple messages</span></span>
 <span><span class="va">messages</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"</span>,</span>
@@ -146,39 +134,210 @@ into either a tidy data frame or a nested list structure.</p>
 <span></span>
 <span><span class="co"># Multiple messages as a data frame</span></span>
 <span><span class="va">df_multiple</span> <span class="op">=</span> <span class="fu"><a href="../reference/synop_parser.html">synop_parser</a></span><span class="op">(</span><span class="va">messages</span>, as_data_frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df_multiple</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_multiple</span><span class="op">$</span><span class="va">source</span> <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># remove raw message from output</span></span>
+<span><span class="co"># Display the results in a table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">df_multiple</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">"Examplary results of parsing multiple SYNOP message into data frame"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Examplary results of parsing multiple SYNOP message into data
+frame</caption>
+<tbody>
+<tr class="odd">
+<td align="left">station_type</td>
+<td align="left">AAXX</td>
+<td align="left">AAXX</td>
+</tr>
+<tr class="even">
+<td align="left">station_id</td>
+<td align="left">88889</td>
+<td align="left">12330</td>
+</tr>
+<tr class="odd">
+<td align="left">region</td>
+<td align="left">III</td>
+<td align="left">VI</td>
+</tr>
+<tr class="even">
+<td align="left">obs_day</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">obs_hour</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">wind_unit</td>
+<td align="left">KT</td>
+<td align="left">KT</td>
+</tr>
+<tr class="odd">
+<td align="left">wind_estimated</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">visibility</td>
+<td align="left">40000</td>
+<td align="left">40000</td>
+</tr>
+<tr class="odd">
+<td align="left">cloud_cover</td>
+<td align="left">6</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">wind_direction</td>
+<td align="left">150</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">wind_speed</td>
+<td align="left">6</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">air_temperature</td>
+<td align="left">9.4</td>
+<td align="left">9.4</td>
+</tr>
+<tr class="odd">
+<td align="left">dewpoint_temperature</td>
+<td align="left">4.7</td>
+<td align="left">4.7</td>
+</tr>
+<tr class="even">
+<td align="left">station_pressure</td>
+<td align="left">1011.1</td>
+<td align="left">1011.1</td>
+</tr>
+<tr class="odd">
+<td align="left">sea_level_pressure</td>
+<td align="left">1019.7</td>
+<td align="left">1019.7</td>
+</tr>
+<tr class="even">
+<td align="left">pressure_tendency</td>
+<td align="left">3</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">pressure_change</td>
+<td align="left">0.7</td>
+<td align="left">0.7</td>
+</tr>
+<tr class="even">
+<td align="left">precipitation_amount</td>
+<td align="left">0</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">precipitation_time</td>
+<td align="left">12</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cloud_base_min</td>
+<td align="left">1500</td>
+<td align="left">1500</td>
+</tr>
+<tr class="odd">
+<td align="left">cloud_base_max</td>
+<td align="left">2000</td>
+<td align="left">2000</td>
+</tr>
+<tr class="even">
+<td align="left">low_cloud_type</td>
+<td align="left">5</td>
+<td align="left">5</td>
+</tr>
+<tr class="odd">
+<td align="left">middle_cloud_type</td>
+<td align="left">4</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">high_cloud_type</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">low_cloud_amount</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">maximum_temperature</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">minimum_temperature</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">gust</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">cloudiness_height</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sunshine_duration</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">snow_depth</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">snow_depth_state</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="available-columns">Available Columns<a class="anchor" aria-label="anchor" href="#available-columns"></a>
 </h3>
+<ul>
+<li>
 <p>When <code>as_data_frame = TRUE</code>, the returned data frame
 includes the following columns:</p>
-<p><strong>Identification and metadata:</strong> -
+<ul>
+<li><p><strong>Identification and metadata:</strong> -
 <code>station_type</code> — station classification code -
 <code>station_id</code> — WMO station identifier - <code>region</code> —
 geographic region code - <code>obs_day</code> — observation day of month
-- <code>obs_hour</code> — observation hour (UTC)</p>
-<p><strong>Wind:</strong> - <code>wind_unit</code> — either “m/s” or
+- <code>obs_hour</code> — observation hour (UTC)</p></li>
+<li><p><strong>Wind:</strong> - <code>wind_unit</code> — either “m/s” or
 “knots” - <code>wind_estimated</code> — whether wind is estimated -
 <code>wind_direction</code> — direction in degrees (0–360°) -
-<code>wind_speed</code> — speed in the reported unit</p>
-<p><strong>Temperature and moisture:</strong> -
+<code>wind_speed</code> — speed in the reported unit</p></li>
+<li><p><strong>Temperature and moisture:</strong> -
 <code>air_temperature</code> — air temperature (°C) -
-<code>dewpoint_temperature</code> — dew point (°C)</p>
-<p><strong>Pressure:</strong> - <code>station_pressure</code> —
+<code>dewpoint_temperature</code> — dew point (°C)</p></li>
+<li><p><strong>Pressure:</strong> - <code>station_pressure</code> —
 station-level pressure (hPa) - <code>sea_level_pressure</code> —
 sea-level pressure (hPa) - <code>pressure_tendency</code> — pressure
 change indicator - <code>pressure_change</code> — 3-hour pressure change
-(hPa)</p>
-<p><strong>Clouds:</strong> - <code>cloud_cover</code> — total cloud
+(hPa)</p></li>
+<li><p><strong>Clouds:</strong> - <code>cloud_cover</code> — total cloud
 cover (oktas, 0–8) - <code>low_cloud_type</code> — type of low clouds
 (Sc, St, Cu, Cb) - <code>middle_cloud_type</code> — type of middle
 clouds (Ac, As, Ns) - <code>high_cloud_type</code> — type of high clouds
 (Ci, Cc, Cs) - <code>low_cloud_amount</code> — cover of low clouds
 (oktas) - <code>visibility</code> — horizontal visibility (m) -
 <code>cloud_base_min</code>, <code>cloud_base_max</code> — cloud base
-height range (m)</p>
-<p><strong>Precipitation and other:</strong> -
+height range (m)</p></li>
+<li><p><strong>Precipitation and other:</strong> -
 <code>precipitation_amount</code> — total precipitation (mm) -
 <code>precipitation_time</code> — precipitation period (hours) -
 <code>maximum_temperature</code> — daily maximum (°C, from Section 3) -
@@ -186,20 +345,122 @@ height range (m)</p>
 <code>gust</code> — highest wind gust (in the message’s wind unit) -
 <code>sunshine_duration</code> — daily sunshine duration (hours) -
 <code>snow_depth</code> — total snow depth (cm) -
-<code>snow_depth_state</code> — descriptive snow/ground state</p>
+<code>snow_depth_state</code> — descriptive snow/ground state</p></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="nested-list-output">Nested List Output<a class="anchor" aria-label="anchor" href="#nested-list-output"></a>
 </h3>
 <p>For more granular access most of decoded field, use the default list
 output:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Single message as a nested list</span></span>
+<span><span class="va">synop_code</span> <span class="op">=</span> <span class="va">messages</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">decoded</span> <span class="op">=</span> <span class="fu"><a href="../reference/synop_parser.html">synop_parser</a></span><span class="op">(</span><span class="va">synop_code</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">decoded</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## List of 18</span></span>
+<span><span class="co">##  $ station_type           :List of 1</span></span>
+<span><span class="co">##   ..$ value: chr "AAXX"</span></span>
+<span><span class="co">##  $ obs_time               :List of 2</span></span>
+<span><span class="co">##   ..$ day :List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 1</span></span>
+<span><span class="co">##   ..$ hour:List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 0</span></span>
+<span><span class="co">##  $ wind_indicator         :List of 3</span></span>
+<span><span class="co">##   ..$ value    : int 4</span></span>
+<span><span class="co">##   ..$ unit     : chr "KT"</span></span>
+<span><span class="co">##   ..$ estimated: logi FALSE</span></span>
+<span><span class="co">##  $ station_id             :List of 1</span></span>
+<span><span class="co">##   ..$ value: chr "88889"</span></span>
+<span><span class="co">##  $ region                 :List of 1</span></span>
+<span><span class="co">##   ..$ value: chr "III"</span></span>
+<span><span class="co">##  $ precipitation_indicator:List of 3</span></span>
+<span><span class="co">##   ..$ value     : int 1</span></span>
+<span><span class="co">##   ..$ in_group_1: logi TRUE</span></span>
+<span><span class="co">##   ..$ in_group_3: logi FALSE</span></span>
+<span><span class="co">##  $ weather_indicator      :List of 2</span></span>
+<span><span class="co">##   ..$ value    : int 2</span></span>
+<span><span class="co">##   ..$ automatic: logi FALSE</span></span>
+<span><span class="co">##  $ lowest_cloud_base      :List of 6</span></span>
+<span><span class="co">##   ..$ min       : num 1500</span></span>
+<span><span class="co">##   ..$ max       : num 2000</span></span>
+<span><span class="co">##   ..$ quantifier: NULL</span></span>
+<span><span class="co">##   ..$ _table    : chr "1600"</span></span>
+<span><span class="co">##   ..$ _code     : int 7</span></span>
+<span><span class="co">##   ..$ unit      : chr "m"</span></span>
+<span><span class="co">##  $ visibility             :List of 6</span></span>
+<span><span class="co">##   ..$ value     : num 40000</span></span>
+<span><span class="co">##   ..$ quantifier: NULL</span></span>
+<span><span class="co">##   ..$ use90     : logi FALSE</span></span>
+<span><span class="co">##   ..$ _table    : chr "4377"</span></span>
+<span><span class="co">##   ..$ _code     : int 82</span></span>
+<span><span class="co">##   ..$ unit      : chr "m"</span></span>
+<span><span class="co">##  $ cloud_cover            :List of 5</span></span>
+<span><span class="co">##   ..$ value   : int 6</span></span>
+<span><span class="co">##   ..$ obscured: logi FALSE</span></span>
+<span><span class="co">##   ..$ unit    : chr "okta"</span></span>
+<span><span class="co">##   ..$ _table  : chr "2700"</span></span>
+<span><span class="co">##   ..$ _code   : int 6</span></span>
+<span><span class="co">##  $ surface_wind           :List of 2</span></span>
+<span><span class="co">##   ..$ direction:List of 6</span></span>
+<span><span class="co">##   .. ..$ value        : num 150</span></span>
+<span><span class="co">##   .. ..$ varAllUnknown: logi FALSE</span></span>
+<span><span class="co">##   .. ..$ calm         : logi FALSE</span></span>
+<span><span class="co">##   .. ..$ _table       : chr "0877"</span></span>
+<span><span class="co">##   .. ..$ _code        : int 15</span></span>
+<span><span class="co">##   .. ..$ unit         : chr "deg"</span></span>
+<span><span class="co">##   ..$ speed    :List of 2</span></span>
+<span><span class="co">##   .. ..$ value: int 6</span></span>
+<span><span class="co">##   .. ..$ unit : chr "KT"</span></span>
+<span><span class="co">##  $ air_temperature        :List of 2</span></span>
+<span><span class="co">##   ..$ value: num 9.4</span></span>
+<span><span class="co">##   ..$ unit : chr "Celsius"</span></span>
+<span><span class="co">##  $ dewpoint_temperature   :List of 2</span></span>
+<span><span class="co">##   ..$ value: num 4.7</span></span>
+<span><span class="co">##   ..$ unit : chr "Celsius"</span></span>
+<span><span class="co">##  $ station_pressure       :List of 2</span></span>
+<span><span class="co">##   ..$ value: num 1011</span></span>
+<span><span class="co">##   ..$ unit : chr "hPa"</span></span>
+<span><span class="co">##  $ sea_level_pressure     :List of 2</span></span>
+<span><span class="co">##   ..$ value: num 1020</span></span>
+<span><span class="co">##   ..$ unit : chr "hPa"</span></span>
+<span><span class="co">##  $ pressure_tendency      :List of 2</span></span>
+<span><span class="co">##   ..$ tendency:List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 3</span></span>
+<span><span class="co">##   ..$ change  :List of 2</span></span>
+<span><span class="co">##   .. ..$ value: num 0.7</span></span>
+<span><span class="co">##   .. ..$ unit : chr "hPa"</span></span>
+<span><span class="co">##  $ precipitation_s1       :List of 2</span></span>
+<span><span class="co">##   ..$ amount         :List of 6</span></span>
+<span><span class="co">##   .. ..$ value     : int 0</span></span>
+<span><span class="co">##   .. ..$ quantifier: NULL</span></span>
+<span><span class="co">##   .. ..$ trace     : logi FALSE</span></span>
+<span><span class="co">##   .. ..$ _table    : chr "3590"</span></span>
+<span><span class="co">##   .. ..$ _code     : int 0</span></span>
+<span><span class="co">##   .. ..$ unit      : chr "mm"</span></span>
+<span><span class="co">##   ..$ time_before_obs:List of 4</span></span>
+<span><span class="co">##   .. ..$ value : num 12</span></span>
+<span><span class="co">##   .. ..$ unit  : chr "h"</span></span>
+<span><span class="co">##   .. ..$ _table: chr "4019"</span></span>
+<span><span class="co">##   .. ..$ _code : int 1</span></span>
+<span><span class="co">##  $ cloud_types            :List of 4</span></span>
+<span><span class="co">##   ..$ low_cloud_type   :List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 5</span></span>
+<span><span class="co">##   ..$ middle_cloud_type:List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 4</span></span>
+<span><span class="co">##   ..$ high_cloud_type  :List of 1</span></span>
+<span><span class="co">##   .. ..$ value: int 1</span></span>
+<span><span class="co">##   ..$ low_cloud_amount :List of 5</span></span>
+<span><span class="co">##   .. ..$ value   : int 1</span></span>
+<span><span class="co">##   .. ..$ obscured: logi FALSE</span></span>
+<span><span class="co">##   .. ..$ unit    : chr "okta"</span></span>
+<span><span class="co">##   .. ..$ _table  : chr "2700"</span></span>
+<span><span class="co">##   .. ..$ _code   : int 1</span></span></code></pre>
 <p>To parse multiple messages and keep each as a separate list
 element:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Returns a list of two decoded messages</span></span>
 <span><span class="va">decoded_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/synop_parser.html">synop_parser</a></span><span class="op">(</span><span class="va">messages</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -212,7 +473,7 @@ element:</p>
 <p>Some SYNOP groups (e.g., precipitation indicators) are
 country-specific. Pass the <code>country</code> parameter to adjust
 decoding:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Parse with Russia-specific precipitation decoding</span></span>
 <span><span class="va">decoded_ru</span> <span class="op">=</span> <span class="fu"><a href="../reference/synop_parser.html">synop_parser</a></span><span class="op">(</span><span class="va">synop_code</span>, country <span class="op">=</span> <span class="st">"RU"</span>, as_data_frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -229,29 +490,223 @@ using <code>parser()</code>.</p>
 <div class="section level3">
 <h3 id="station-mode-single-or-multiple-stations">Station Mode: Single or Multiple Stations<a class="anchor" aria-label="anchor" href="#station-mode-single-or-multiple-stations"></a>
 </h3>
-<p>Fetch SYNOP data for one or more WMO station IDs:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>Fetch SYNOP data from OGIMET service for one or more WMO station
+IDs:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># can be used with multiple stations:</span></span>
 <span><span class="va">two_stations</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span></span>
 <span>  source  <span class="op">=</span> <span class="st">"synop"</span>,</span>
 <span>  station <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12330</span>, <span class="fl">12375</span><span class="op">)</span>,</span>
 <span>  date    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="st">"2024-01-10"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">two_stations</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## station: 12330</span></span></code></pre>
+<pre><code><span><span class="co">## http://www.ogimet.com/cgi-bin/getsynop?block=12330&amp;begin=202401010000&amp;end=202401102359</span></span></code></pre>
+<pre><code><span><span class="co">## Downloaded 240 SYNOP messages for: 12330</span></span></code></pre>
+<pre><code><span><span class="co">## station: 12375</span></span></code></pre>
+<pre><code><span><span class="co">## http://www.ogimet.com/cgi-bin/getsynop?block=12375&amp;begin=202401010000&amp;end=202401102359</span></span></code></pre>
+<pre><code><span><span class="co">## Downloaded 240 SYNOP messages for: 12375</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">two_stations</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="5%">
+<col width="2%">
+<col width="4%">
+<col width="5%">
+<col width="3%">
+<col width="3%">
+<col width="2%">
+<col width="2%">
+<col width="3%">
+<col width="4%">
+<col width="5%">
+<col width="8%">
+<col width="5%">
+<col width="2%">
+<col width="2%">
+<col width="5%">
+<col width="4%">
+<col width="8%">
+<col width="3%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">date</th>
+<th align="left">station</th>
+<th align="right">t2m</th>
+<th align="right">dpt2m</th>
+<th align="right">rel_hum</th>
+<th align="right">tmax</th>
+<th align="right">tmin</th>
+<th align="right">wd</th>
+<th align="right">ws</th>
+<th align="right">gust</th>
+<th align="right">press</th>
+<th align="right">slp</th>
+<th align="right">press_tend</th>
+<th align="right">precip</th>
+<th align="right">Nt</th>
+<th align="right">Nh</th>
+<th align="right">N_base</th>
+<th align="right">insol</th>
+<th align="right">visibility</th>
+<th align="right">snow</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2024-01-01 00:00:00</td>
+<td align="left">12330</td>
+<td align="right">3.1</td>
+<td align="right">2.2</td>
+<td align="right">93.8</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">160</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">995.6</td>
+<td align="right">1006.6</td>
+<td align="right">-0.2</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">1000</td>
+<td align="right">NA</td>
+<td align="right">1200</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">2024-01-01 01:00:00</td>
+<td align="left">12330</td>
+<td align="right">2.7</td>
+<td align="right">1.8</td>
+<td align="right">93.8</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">200</td>
+<td align="right">1</td>
+<td align="right">NA</td>
+<td align="right">995.7</td>
+<td align="right">1006.7</td>
+<td align="right">-0.2</td>
+<td align="right">NA</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">1500</td>
+<td align="right">NA</td>
+<td align="right">1000</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">2024-01-01 02:00:00</td>
+<td align="left">12330</td>
+<td align="right">2.5</td>
+<td align="right">1.8</td>
+<td align="right">95.1</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">230</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">995.6</td>
+<td align="right">1006.6</td>
+<td align="right">-0.3</td>
+<td align="right">NA</td>
+<td align="right">8</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">4000</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">2024-01-01 03:00:00</td>
+<td align="left">12330</td>
+<td align="right">3.2</td>
+<td align="right">2.2</td>
+<td align="right">93.2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">220</td>
+<td align="right">3</td>
+<td align="right">NA</td>
+<td align="right">995.5</td>
+<td align="right">1006.5</td>
+<td align="right">-0.1</td>
+<td align="right">NA</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">1000</td>
+<td align="right">NA</td>
+<td align="right">7000</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">2024-01-01 04:00:00</td>
+<td align="left">12330</td>
+<td align="right">3.3</td>
+<td align="right">2.1</td>
+<td align="right">91.8</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">220</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">995.3</td>
+<td align="right">1006.3</td>
+<td align="right">-0.4</td>
+<td align="right">NA</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">1000</td>
+<td align="right">NA</td>
+<td align="right">9000</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">2024-01-01 05:00:00</td>
+<td align="left">12330</td>
+<td align="right">3.4</td>
+<td align="right">2.4</td>
+<td align="right">93.2</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">200</td>
+<td align="right">2</td>
+<td align="right">NA</td>
+<td align="right">995.0</td>
+<td align="right">1006.0</td>
+<td align="right">-0.6</td>
+<td align="right">NA</td>
+<td align="right">8</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">9000</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="country-mode-all-stations-in-a-country">Country mode: all stations in a country<a class="anchor" aria-label="anchor" href="#country-mode-all-stations-in-a-country"></a>
 </h3>
 <p>Fetch SYNOP data for all Ogimet stations in a country for a given
 time range:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># All Polish stations for a single day</span></span>
 <span><span class="va">poland</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span></span>
 <span>  source       <span class="op">=</span> <span class="st">"synop"</span>,</span>
 <span>  country_name <span class="op">=</span> <span class="st">"Poland"</span>,</span>
 <span>  date         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-01-15"</span>, <span class="st">"2024-01-15"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">poland</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Downloading country: Poland</span></span></code></pre>
+<pre><code><span><span class="co">## http://www.ogimet.com/cgi-bin/getsynop?begin=202401150000&amp;end=202401152359&amp;state=Poland</span></span></code></pre>
+<pre><code><span><span class="co">## Could not retrieve data for: Poland</span></span></code></pre>
+<pre><code><span><span class="co">## No SYNOP data returned for: Poland</span></span></code></pre>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">poland</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## NULL</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="simplified-vs--full-data-frame-output">Simplified vs. full data frame output<a class="anchor" aria-label="anchor" href="#simplified-vs--full-data-frame-output"></a>
@@ -259,18 +714,24 @@ time range:</p>
 <p>By default, <code><a href="../reference/meteo_ogimet.html">meteo_ogimet()</a></code> returns a simplified data
 frame with the most commonly used variables. To get all decoded SYNOP
 fields, use <code>simplified = FALSE</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Full synop_parser output</span></span>
 <span><span class="va">full</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span></span>
 <span>  source     <span class="op">=</span> <span class="st">"synop"</span>,</span>
 <span>  station    <span class="op">=</span> <span class="fl">12330</span>,</span>
 <span>  date       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-01-01"</span>, <span class="st">"2024-01-05"</span><span class="op">)</span>,</span>
 <span>  simplified <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">full</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## station: 12330</span></span></code></pre>
+<pre><code><span><span class="co">## http://www.ogimet.com/cgi-bin/getsynop?block=12330&amp;begin=202401010000&amp;end=202401052359</span></span></code></pre>
+<pre><code><span><span class="co">## Could not retrieve data for: 12330</span></span></code></pre>
+<pre><code><span><span class="co">## No SYNOP data returned for: 12330</span></span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">full</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## NULL</span></span></code></pre>
 <p>To obtain both the simplified and full data frames in one call, use
 <code>return_list = TRUE</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span></span>
 <span>  source      <span class="op">=</span> <span class="st">"synop"</span>,</span>
 <span>  station     <span class="op">=</span> <span class="fl">12330</span>,</span>

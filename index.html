@@ -109,7 +109,7 @@
 <p>The stable release of the <strong>climate</strong> package from the <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> repository can be installed with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"climate"</span><span class="op">)</span></span></code></pre></div>
-<p>It is highly recommended to install the most up-to-date development version of <strong>climate</strong> from <a href="https://github.com/bczernecki/climate" class="external-link">GitHub</a> with:</p>
+<p>It is also possible to install the most up-to-date development version of <strong>climate</strong> from <a href="https://github.com/bczernecki/climate" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
 <span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bczernecki/climate"</span><span class="op">)</span></span></code></pre></div>
@@ -121,35 +121,34 @@
 <h3 id="meteorological-data">Meteorological data<a class="anchor" aria-label="anchor" href="#meteorological-data"></a>
 </h3>
 <ul>
-<li><p>🌍 <strong>meteo_ogimet()</strong> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organization framework after year 2000 should be accessible. Two backends are available and selected automatically: raw <strong>SYNOP decoding</strong> (<code>source = "synop"</code>, default for <code>interval = "hourly"</code>) and <strong>HTML scraping</strong> (<code>source = "html"</code>, default for <code>interval = "daily"</code>). Country-level bulk downloads are supported via the <code>country_name</code> argument (SYNOP backend only).</p></li>
-<li><p>🌍 <strong>meteo_noaa_hourly()</strong> - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
-<li><p>🌍 <strong>meteo_noaa_co2()</strong> - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
-<li><p>🌍 <strong>sounding_wyoming()</strong> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
-<li><p>🇵🇱 <strong>meteo_imgw()</strong> - Downloading hourly, daily, and monthly meteorological data from the Polish met service across all types of stations (i.e. SYNOP/CLIMATE/PRECIP ) available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, <code>meteo_hourly()</code> and <code><a href="reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code> which gives access from montly to even to 10-min dataset.</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_ogimet.html"><strong>meteo_ogimet</strong></a> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organization framework after year 2000 should be accessible. Two backends are available and selected automatically: raw <strong>SYNOP decoding</strong> (<code>source = "synop"</code>, default for <code>interval = "hourly"</code>) and <strong>HTML scraping</strong> (<code>source = "html"</code>, default for <code>interval = "daily"</code>). Country-level bulk downloads are supported via the <code>country_name</code> argument (SYNOP backend only).</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_noaa_hourly.html"><strong>meteo_noaa_hourly</strong></a> - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_noaa_co2.html"><strong>meteo_noaa_co2</strong></a>] - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/sounding_wyoming.html"><strong>sounding_wyoming</strong></a> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
+<li><p>🇵🇱 <a href="https://bczernecki.github.io/climate/reference/meteo_imgw.html"><strong>meteo_imgw</strong></a> - Downloading hourly, daily, and monthly meteorological data from the Polish met service across all types of stations (i.e. SYNOP/CLIMATE/PRECIP ) available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, <code>meteo_hourly()</code> and <code><a href="reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code> which gives access from montly to even to 10-min dataset.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="polish-hydrological-data">(Polish) Hydrological data<a class="anchor" aria-label="anchor" href="#polish-hydrological-data"></a>
 </h3>
 <ul>
-<li>🇵🇱 <strong>hydro_imgw()</strong> - Downloading hourly, daily, and monthly hydrological data from stations available in the danepubliczne.imgw.pl collection. It is a wrapper for previously developed set of functions such as: <code>hydro_monthly()</code>, and <code>hydro_daily()</code>
-</li>
-<li>🇵🇱 <strong>hydro_imgw_datastore()</strong> - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.</li>
+<li><p>🇵🇱 <a href="https://bczernecki.github.io/climate/reference/hydro_imgw.html"><strong>hydro_imgw</strong></a> - Downloading hourly, daily, and monthly hydrological data from stations available in the danepubliczne.imgw.pl collection. It is a wrapper for previously developed set of functions such as: <code>hydro_monthly()</code>, and <code>hydro_daily()</code></p></li>
+<li><p>🇵🇱 <a href="https://bczernecki.github.io/climate/reference/hydro_imgw_datastore.html"><strong>hydro_imgw_datastore</strong></a> - Downloading hourly and subhourly hydrological data from the IMGW-PIB hydro telemetry stations.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="auxiliary-functions-and-datasets">Auxiliary functions and datasets<a class="anchor" aria-label="anchor" href="#auxiliary-functions-and-datasets"></a>
 </h3>
 <ul>
-<li><p>🌍 <strong>stations_ogimet()</strong> - Downloading information about all stations available in the selected country in the Ogimet repository</p></li>
-<li><p>🌍 <strong>nearest_stations_ogimet()</strong> - Downloading information about nearest stations to the selected point using Ogimet repository</p></li>
-<li><p>🌍 <strong>nearest_stations_noaa()</strong> - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository</p></li>
-<li><p>🇵🇱 <strong>nearest_stations_imgw()</strong> - List of nearby meteorological or hydrological IMGW-PIB stations in Poland</p></li>
+<li><p>🌍 <strong>stations_ogimet</strong> - Downloading information about all stations available in the selected country in the Ogimet repository</p></li>
+<li><p>🌍 <strong>nearest_stations_ogimet</strong> - Downloading information about nearest stations to the selected point using Ogimet repository</p></li>
+<li><p>🌍 <strong>nearest_stations_noaa</strong> - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository</p></li>
+<li><p>🇵🇱 <strong>nearest_stations_imgw</strong> - List of nearby meteorological or hydrological IMGW-PIB stations in Poland</p></li>
 <li><p>🇵🇱 <strong>imgw_meteo_stations</strong> - Built-in metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers</p></li>
 <li><p>🇵🇱 <strong>imgw_hydro_stations</strong> - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers</p></li>
 <li><p>🇵🇱 <strong>stations_meteo_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations</p></li>
 <li><p>🇵🇱 <strong>stations_hydro_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations</p></li>
-<li><p>🌍 <strong>parser()</strong> - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the <a href="https://bczernecki.github.io/climate/articles/synop_parser.html">SYNOP Messages vignette</a>.</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/synop_parse.html"><strong>synop_parser</strong></a> - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the <a href="https://bczernecki.github.io/climate/articles/synop_parser.html">SYNOP Messages vignette</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -268,7 +267,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># find 100 nearest UK stations to longitude 1W and latitude 53N :</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/nearest_stations_ogimet.html">nearest_stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"United+Kingdom"</span>,</span>
+<span><span class="fu"><a href="reference/nearest_stations_ogimet.html">nearest_stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"United Kingdom"</span>,</span>
 <span>  date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  add_map <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  point <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">53</span><span class="op">)</span>,</span>
