@@ -64,8 +64,8 @@ Najpierw pobierzemy 10 lat (**2001-2010**) miesięcznych obserwacji hydrologiczn
 
 
 
-```{r data, echo = FALSE}
-h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
+```{r data, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
+h = hydro_imgw(interval = "monthly", year = 2001:2010)
 head(h)
 ```
 
@@ -78,7 +78,7 @@ Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w ka
 oraz rozdzielimy dane według roku używając ** tidyr **' `spread ()` aby uzyskać roczne średnie maksymalne przepływy (`MCPRZP`) w 
 kolejnych kolumnach.
   
-```{r filtering, eval=TRUE, include=TRUE}
+```{r filtering, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE}
 h2 = h %>%
   dplyr::filter(MCWSKEX == 3) %>%
   dplyr::select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
@@ -87,7 +87,7 @@ h2 = h %>%
   spread(MCROKH, srednie_roczne_Q)
 ```
 
-```{r filtering2, echo=FALSE}
+```{r filtering2, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE}
 library(knitr)
 kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
 ```
@@ -106,7 +106,7 @@ do istniejącego pliku `.xlsx`.
 By zapisać dane do formatu`.xlsx` najpierw należy zaisntalować pakiet **writexl** przy pomocy 
 komendy`install.packages("writexl")`, oraz dodać go do naszego środowiska: `library(writexl)`.
  
-```{r, eval=FALSE, include=TRUE}
+```{r, eval=TRUE, include=TRUE, echo=TRUE}
 
 library(sf)
 library(tmap)
