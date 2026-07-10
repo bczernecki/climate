@@ -50,6 +50,7 @@
 * `meteo_imgw_daily` fix for current year data retrieval from IMGW-PIB repository
 * `imgw_read` - fix for wrongly formatted input CSVs for hydrological data in the IMGW-PIB repository
 
+
 # climate 1.2.4
 
 * R version >= 4.1 is now required
@@ -57,6 +58,7 @@
 * Minor fixes for reading stations' coordinates from `ogimet_stations()`. Increased accuracy and changed logic for detecting hemisphere
 * Adding `hydro_imgw_datastore()` to retrieve data for hydrological stations from IMGW-PIB repository datastore (telemetry system)
     * Adding `stations_hydro_imgw_telemetry()` to retrieve coordinates metadata for hydrological telemetry stations from IMGW-PIB
+
 
 # climate 1.2.3
 
@@ -69,6 +71,7 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Logging errors in package environment and providing summary at the end of downloading instead of instant messaging
 * Minor changes in unit-tests to adjust for most recent code changes
 
+
 # climate 1.2.2
 
 * Fixes and modifications for `hydro_imgw()` set of functions due to changes in the IMGW-PIB hydrological datasets
@@ -79,11 +82,13 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Resolving date formatting for hydrological data - the Date column represents calendar date
 * Corrected logic in downloading hourly OGIMET dataset
 
+
 # climate 1.2.1
 
 * Major fixes for adjusting code to stay in line with CRAN policies
 * Corrected duplicated column names for IMGW-PIB stations
 * Adjusted encoding changes and documentation updates in `meteo_imgw_telemetry_stations()`
+
 
 # climate 1.2.0
 
@@ -91,10 +96,12 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Added location of IMGW-PIB telemetry stations within `meteo_imgw_telemetry_stations()`
 * Minor bug fixes
 
+
 # climate 1.1.1
 
 * Fix problems with downloading `precip` dataset from IMGW-PIB repository after recent changes in metadata
 * Bug fix for `ogimet_daily` if data contains more than one year
+
 
 # climate 1.1.0
 
@@ -112,11 +119,13 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * units added to column labels for `nearest_stations_` set of functions instead of column names for easier processing (e.g. [km] are visible now only as attributes)
 * new functions follow lintr settings
 
+
 # climate 1.0.4
 
 * Function `spheroid_dist` added to improve accuracy of calculations between points, but also avoid installing GIS dependencies (thanks to @kadyb)
 * Function `nearest_stations_imgw()` now uses the Vincenty's formula in `spheroid_dist` to calculate the distance between points on a spheroid, not the Euclidean distance (previously results were inaccurate for some specific cases)
 * minor bugs fixes and improvements
+
 
 # climate 1.0.3
 
@@ -125,9 +134,11 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * `ogimet_daily` automatically detects column names to be used for extraction in final data.frame; extra debugging info when temperature or precipitation columns are missing
 * minor changes in documentation (e.g. updated links to NOAA website)
 
+
 # climate 1.0.1
 
 * Adding `data.table` package to read CP1250 on machines that do not support this encoding (translit used instead)
+
 
 # climate 0.9.9
 
@@ -135,18 +146,22 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Fixing minor ogimet and IMGW bugs
 * Do not stop downloading data from `ogimet.com`, instead check for all available data in given period of time
 
+
 # climate 0.9.8
 
 * Adding informative message if problems with NOAA hourly dataset occur
 * Informative message if problems with downloading detected for non-IMGW dataset
 
+
 # climate 0.9.7
 
 * stop working if no internet connection detected
 
+
 # climate 0.9.6
 
 * Adding nearest_stations_noaa for NOAA hourly dataset
+
 
 # climate 0.9.5
 
@@ -155,10 +170,12 @@ to changes in the IMGW-PIB meteorological datasets since 2024
     * RCurl dependency removal
     * CO2 & Wyoming examplary data can be loaded offline
 
+
 # climate 0.9.4
 
 * New dataset:
     * Hourly NOAA ISH (Integrated Surface Hourly) data - global meteorological dataset dated back up to 1900
+
 
 # climate 0.9.3
 
@@ -167,10 +184,12 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * New datasets:
     * CO2 concentration from Mauna Loa observatory
 
+
 # climate 0.9.2
 
 * Bug fixes
     * #26
+
 
 # climate 0.9.1
 
@@ -179,13 +198,16 @@ to changes in the IMGW-PIB meteorological datasets since 2024
     * #24
 * restored possibility of downloading single station from Polish (IMGW) repository
 
+
 # climate 0.3
 
 * improves API
 
+
 # climate 0.2
 
 * splits imgw into two packages: imgw and climate
+
 
 # imgw 0.1.1
 
@@ -200,6 +222,7 @@ to changes in the IMGW-PIB meteorological datasets since 2024
 * Improvements
 * Bug fixes
     * Fixes a bug in the `hydro_daily()` that prevented from merging more than 1 dataset
+
 
 # imgw 0.1.0
 

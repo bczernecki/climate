@@ -1,14 +1,15 @@
 #' Sounding data
 #'
-#' Downloading the measurements of the vertical profile of atmosphere (also known as sounding data). Data can be retrieved using TEMP and BUFR sounding formatting.
+#' Downloading the measurements of the vertical profile of atmosphere (also known as sounding data). 
+#' Data can be retrieved using TEMP and BUFR sounding formatting. By default automatic detection of input format is used.
 #'
-#' @param wmo_id international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław- 12425
-#' @param yy year - single number
-#' @param mm month - single number denoting month
-#' @param dd day - single number denoting day
-#' @param hh hour - single number denoting initial hour of sounding; for most stations this measurement is done twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day
-#' @param min minute - single number denoting initial minute of sounding; applies only to BUFR soundings. 
-#' @param source - "BUFR", "TEMP" or "DETECT". By default "DETECT" is used.
+#' @param wmo_id international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław - 12425
+#' @param yy year - calendar year
+#' @param mm month - calendar month
+#' @param dd day - calendar day
+#' @param hh hour - hour of sounding; for most stations measurements are performed twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day
+#' @param min minute - minute of sounding; Default 00; Other values applies only to BUFR soundings. 
+#' @param source - optional; `AUTODETECT`, `BUFR` (raw; most detailed) or `TEMP` (FM-35) input format. By default "AUTODETECT" is used which means that the function will try to detect the format automatically. If a station use only a specific format that is known you can specify it explicitly.
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @importFrom utils read.fwf
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
@@ -35,36 +36,27 @@
 #'
 #' @examples 
 #' \donttest{
-#' ##############################################################################
 #' # download data for Station 45004 starting 1120Z 11 Jul 2021; Kowloon, HONG KONG, CHINA
-#' # using TEMP and BUFR sounding formats
-#' ##############################################################################
-#'   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
-#'                           hh = 12, min = 00, source = "TEMP")
-#'   head(TEMP[[1]])
-#'   
-#'   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
-#'                           hh = 12, min = 00, source = "BUFR")
-#'   head(BUFR[[1]])
+#' # using AUTODETECT, TEMP and BUFR sounding formats
 #' 
+#' # autodect input format:
+#' sounding_auto = sounding_wyoming(wmo_id = 45004, 
+#'                                  yy = 2021, mm = 07, dd = 17, hh = 12)
 #' 
-#' ##############################################################################
-#' ### example with a random date to download sounding from LEBA, PL station: ###
-#' ##############################################################################
-#' 
-#'  # no "source" argument is needed as the function will detect format automatically
-#'   profile = sounding_wyoming(wmo_id = 12120, 
-#'                              yy = sample(2000:2019,1),
-#'                              mm = sample(1:12,1), 
-#'                              dd = sample(1:20,1), 
-#'                              hh = 0) 
-#'   # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
+#' # temp (fm35) input format:
+#' sounding_temp = sounding_wyoming(wmo_id = 45004, 
+#'                                  yy = 2021, mm = 07, dd = 17, hh = 12, 
+#'                                  source = "TEMP")
+#' # bufr input format:  
+#' sounding_bufr = sounding_wyoming(wmo_id = 45004, 
+#'                                  yy = 2021, mm = 07, dd = 17, hh = 12, min = 00, 
+#'                                  source = "BUFR")
 #' }
 #'
 
 sounding_wyoming = function(wmo_id, 
                             yy, mm, dd, hh, min = 00, 
-                            source = "DETECT",
+                            source = "AUTODETECT",
                             allow_failure = TRUE) {
   
   if (allow_failure) {

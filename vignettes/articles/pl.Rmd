@@ -109,7 +109,7 @@ h2 = h %>%
   dplyr::filter(MCWSKEX == 3) %>%
   dplyr::select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
   dplyr::group_by(MCROKH, id, PSNZWP, X, Y) %>%
-  dplyr::summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
+  dplyr::summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE), 1)) %>% 
   spread(MCROKH, srednie_roczne_Q)
 ```
 
@@ -134,8 +134,7 @@ Możemy wynik zapisać do:
   `install.packages("writexl")`, oraz dodać go do naszego środowiska:
   `library(writexl)`.
 
-```{r, eval=TRUE, include=TRUE, echo=TRUE}
-
+```{r, eval=FALSE, echo=TRUE}
 library(sf)
 library(tmap)
 library(rnaturalearth)
@@ -157,4 +156,6 @@ tm_shape(h3) +
             panel.labels = as.character(c(2001:2010)))
 ```
 
-<!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
+[Mean maximum annual
+flow](https://klimat.amu.edu.pl/climate_flow.png)![Mean maximum annual
+flow](https://klimat.amu.edu.pl/climate_flow.png)
