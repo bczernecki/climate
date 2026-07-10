@@ -183,18 +183,11 @@ Override the automatic backend selection with the `source` argument:
 ```{r backend-override, echo=TRUE}
 library(climate)
 
-# Force SYNOP backend for daily data
-poznan_synop = meteo_ogimet(interval = "daily",
-                            station  = 12330,
-                            date     = c("2023-06-01", "2023-06-07"),
-                            source   = "synop")
-head(poznan_synop[, c("date", "station", "t2m", "tmax", "tmin", "precip")])
-
-# Force HTML backend for hourly data (returns km/h wind speed, character wind direction, etc.)
+# Force HTML backend for hourly data
 poznan_html = meteo_ogimet(interval = "hourly",
                            station  = 12330,
                            date     = c("2023-06-01", "2023-06-03"),
-                           source   = "html",
+                           source   = "html", # or synop
                            precip_split = TRUE)
-head(poznan_html[, c("station_ID", "Date", "T", "ffkmh", "ddd", "P0hpa", "pr12" )])
+head(poznan_html)
 ```
