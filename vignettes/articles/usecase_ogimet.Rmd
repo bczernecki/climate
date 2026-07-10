@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, include = TRUE)
 ```
 
 Most of meteorological stations working under the umbrella of the World Meteorlogical Organization (WMO) report their observations in the SYNOP format. The **climate** package provides a convenient interface to download and decode SYNOP messages from the [Ogimet](https://www.ogimet.com/) database, which aggregates data from thousands of stations worldwide. Therefore, it is often the most preferable source of meteorological information being a valuable resource for researchers, students, and weather enthusiasts looking to access historical and real-time meteorological data for analysis, visualization, and educational purposes. This information is most often used as a complementary source to national meteorological services that is delivered free of charge and without any API key requirements.
@@ -39,7 +39,7 @@ library(climate)
 
 # Download hourly data for Svalbard Lufthavn (WMO 01008)
 df = meteo_ogimet(interval = "hourly",
-                  date     = c("2018-01-01", "2018-12-31"),
+                  date     = c("2018-01-01", "2018-01-31"),
                   station  = "01008")
 head(df[, c("date", "station", "t2m", "ws", "wd")])
 ```
@@ -51,17 +51,15 @@ library(openair)
 windRose(mydata  = df,
          ws      = "ws",
          wd      = "wd",
-         type    = "season",
          paddle  = FALSE,
-         main    = "Svalbard Lufthavn (2018)",
+         main    = "Svalbard Lufthavn (Jan 2018)",
          ws.int  = 3,
-         dig.lab = 3,
-         layout  = c(4, 1))
+         dig.lab = 3)
 ```
 
 ```{r svalbard-timeplot, echo=TRUE}
 # Temporal overview of temperature and wind speed
-timePlot(df, pollutant = c("t2m", "ws"))
+timePlot(df, pollutant = c("t2m", "dpt2m"))
 ```
 
 ```{r svalbard-polar, echo=TRUE}
@@ -72,8 +70,6 @@ polarPlot(df,
           wd            = "wd",
           k             = 50,
           force.positive = FALSE,
-          type          = "season",
-          layout        = c(4, 1),
           resolution    = "fine",
           normalise     = FALSE)
 ```
@@ -91,19 +87,19 @@ library(climate)
 # Daily summaries for two Polish stations: Poznan (12330) and Warsaw (12375)
 daily = meteo_ogimet(interval = "daily",
                      date     = c("2023-06-01", "2023-08-31"),
-                     station  = c(12330, 12375),
-                     coords   = TRUE)
+                     station  = c(12330, 12375))
 head(daily)
 ```
 
 ```{r daily-plot, echo=TRUE, message=FALSE}
 library(ggplot2)
+daily$Temperature_Avg = as.numeric(daily$Temperature_Avg)
 
 # Compare average temperatures between the two stations
-ggplot(daily, aes(x = as.Date(Date), y = TemperatureCAvg,
+ggplot(daily, aes(x = as.Date(Date), y = Temperature_Avg,
                   colour = factor(station_ID), group = station_ID)) +
   geom_line() +
-  labs(title  = "Daily average temperature — summer 2023",
+  labs(title  = "Daily average temperature - summer 2023",
        x      = "Date",
        y      = "Temperature (°C)",
        colour = "Station (WMO ID)") +
@@ -134,7 +130,7 @@ head(poland[, c("date", "station", "t2m", "ws", "slp")])
 # Quick spatial overview — requires coordinates from stations_ogimet()
 library(dplyr)
 
-station_meta = stations_ogimet(country = "Poland", date = Sys.Date())
+station_meta = stations_ogimet(country = "Poland")
 
 # Join decoded observations with coordinates
 poland_geo = poland %>%
@@ -146,7 +142,7 @@ ggplot(poland_geo, aes(x = lon, y = lat, colour = t2m_mean, size = t2m_mean)) +
   geom_point(alpha = 0.7) +
   scale_colour_distiller(palette = "RdYlBu", direction = -1, name = "T2m (°C)") +
   coord_quickmap() +
-  labs(title = "Mean temperature — Poland, 2023-12-15") +
+  labs(title = "Mean temperature - Poland, 2023-12-15") +
   theme_bw() +
   theme(legend.position = "right")
 ```
@@ -174,7 +170,7 @@ names(result$data)
 names(result$full)
 
 # Variables only available in the full output
-result$full[1, c("low_cloud_type", "middle_cloud_type", "high_cloud_type",
+result$full[1:5, c("low_cloud_type", "middle_cloud_type", "high_cloud_type",
                   "precipitation_time", "snow_depth_state", "source")]
 ```
 
@@ -199,9 +195,6 @@ poznan_html = meteo_ogimet(interval = "hourly",
                            station  = 12330,
                            date     = c("2023-06-01", "2023-06-03"),
                            source   = "html",
-                           coords   = TRUE,
                            precip_split = TRUE)
-head(poznan_html[, c("station_ID", "Date", "TC", "ffkmh", "ddd", "pr6", "pr12", "pr24")])
+head(poznan_html[, c("station_ID", "Date", "T", "ffkmh", "ddd", "P0hpa", "pr12" )])
 ```
-
-> **Note:** `meteo_ogimet_synop()` is deprecated. Use `meteo_ogimet(source = "synop")` instead.

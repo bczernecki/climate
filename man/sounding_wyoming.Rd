@@ -19,7 +19,7 @@ sounding_wyoming(
 )
 }
 \arguments{
-\item{wmo_id}{international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław- 12425}
+\item{wmo_id}{international WMO station code (World Meteorological Organization ID); For Polish stations: Leba - 12120, Legionowo - 12374, Wrocław - 12425}
 
 \item{yy}{year - calendar year}
 

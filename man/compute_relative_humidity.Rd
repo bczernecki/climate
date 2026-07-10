@@ -13,9 +13,9 @@ compute_relative_humidity(t2m, dpt2m)
 Must be the same length as \code{t2m}.}
 }
 \value{
-Numeric vector of relative humidity values in percent (0–100).
+Numeric vector of relative humidity values in percent (0-100).
 Returns \code{NA} where either input is \code{NA}. Values are not clamped, so
-rounding errors may produce results marginally outside 0–100.
+rounding errors may produce results marginally outside 0-100.
 }
 \description{
 Uses the August-Roche-Magnus approximation to derive relative humidity from
