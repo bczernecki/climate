@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Use Case - Ogimet database • climate</title>
+<title>Ogimet meteorological database • climate</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Use Case - Ogimet database">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Ogimet meteorological database">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -55,7 +55,10 @@
       <a href="../articles/pl.html">Wstęp do pakietu 'climate' (PL)</a>
     </li>
     <li>
-      <a href="../articles/usecase_ogimet.html">Use Case - Ogimet database</a>
+      <a href="../articles/synop_parser.html">SYNOP Messages</a>
+    </li>
+    <li>
+      <a href="../articles/usecase_ogimet.html">Ogimet meteorological database</a>
     </li>
   </ul>
 </li>
@@ -83,7 +86,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Use Case - Ogimet database</h1>
+      <h1 data-toc-skip>Ogimet meteorological database</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/vignettes/articles/usecase_ogimet.Rmd" class="external-link"><code>vignettes/articles/usecase_ogimet.Rmd</code></a></small>
@@ -93,67 +96,213 @@
 
     
     
+<p>Most of meteorological stations working under the umbrella of the
+World Meteorlogical Organization (WMO) report their observations in the
+SYNOP format. The <strong>climate</strong> package provides a convenient
+interface to download and decode SYNOP messages from the <a href="https://www.ogimet.com/" class="external-link">Ogimet</a> database, which aggregates
+data from thousands of stations worldwide. Therefore, it is often the
+most preferable source of meteorological information being a valuable
+resource for researchers, students, and weather enthusiasts looking to
+access historical and real-time meteorological data for analysis,
+visualization, and educational purposes. This information is most often
+used as a complementary source to national meteorological services that
+is delivered free of charge and without any API key requirements.</p>
+<p>The <code><a href="../reference/meteo_ogimet.html">meteo_ogimet()</a></code> function is the unified entry point
+for downloading data from <a href="https://www.ogimet.com/" class="external-link">Ogimet</a>.
+It uses two backends (automatically) selected by the
+<code>interval</code> argument:</p>
+<ul>
+<li>
+<strong><code>interval = "hourly"</code></strong> → <strong>SYNOP
+backend</strong> (default): downloads and decodes raw SYNOP messages via
+the Ogimet <code>getsynop</code> endpoint. Returns clean units used in
+meteorology (<code>ws</code> in m/s, <code>wd</code> in degrees,
+<code>t2m</code> in °C, POSIXct <code>date</code> in UTC).</li>
+<li>
+<strong><code>interval = "daily"</code></strong> → <strong>HTML
+backend</strong> (default): scrapes pre-formatted daily summary tables
+generated in the Ogimet web service.</li>
+</ul>
+<p>Use <code>source = "synop"</code> or <code>source = "html"</code> to
+override the default for any interval.</p>
+<hr>
 <div class="section level2">
-<h2 id="ogimet---download-and-visualize-wind-patterns-over-svalbard">Ogimet - download and visualize wind patterns over Svalbard<a class="anchor" aria-label="anchor" href="#ogimet---download-and-visualize-wind-patterns-over-svalbard"></a>
+<h2 id="hourly-wind-patterns-over-svalbard-synop-backend">1. Hourly wind patterns over Svalbard (SYNOP backend)<a class="anchor" aria-label="anchor" href="#hourly-wind-patterns-over-svalbard-synop-backend"></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>Downloading hourly data from the Ogimet repository for the defined
-time frame (2018/01/01-2018/12/31); chosen station: Svalbard
-Lufthavn</li>
-<li>Using external package ‘openair’ to visualize the downloaded
-results</li>
-</ol>
+<p>Download a full year of hourly observations and visualize wind
+patterns and temperature advection using the <a href="https://davidcarslaw.github.io/openair/" class="external-link">openair</a> package.</p>
+<p>With the SYNOP backend the output already contains:</p>
+<ul>
+<li>
+<code>ws</code> — wind speed in <strong>m/s</strong>
+</li>
+<li>
+<code>wd</code> — wind direction in <strong>degrees</strong> (no
+character-to-degrees conversion needed)</li>
+<li>
+<code>t2m</code> — air temperature in °C</li>
+<li>
+<code>date</code> — POSIXct timestamp in UTC (the column name
+openair expects)</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
-<span><span class="co"># downloading data</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"hourly"</span>,</span>
-<span>                     date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2018-01-01"</span>, <span class="st">"2018-12-31"</span><span class="op">)</span>, </span>
-<span>                     station <span class="op">=</span> <span class="st">"01008"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## station:  01008</span></span></code></pre>
-<pre><code><span><span class="co">##   |                                                                              |                                                                      |   0%</span></span></code></pre>
-<pre><code><span><span class="co">## INFO: Please note that the Ogimet has recently limited number of queries that are accepted</span></span>
-<span><span class="co">##          by the server from a single IP address. Therefore, downloading more than approx. 1 day of data</span></span>
-<span><span class="co">##          for a single station requires 20 seconds pause between subsequent queries and</span></span>
-<span><span class="co">##          may take a while. Thank you for your patience.</span></span></code></pre>
-<pre><code><span><span class="co">##   |                                                                              |======                                                                |   8%  |                                                                              |============                                                          |  17%  |                                                                              |==================                                                    |  25%  |                                                                              |=======================                                               |  33%  |                                                                              |=============================                                         |  42%  |                                                                              |===================================                                   |  50%  |                                                                              |=========================================                             |  58%  |                                                                              |===============================================                       |  67%  |                                                                              |====================================================                  |  75%  |                                                                              |==========================================================            |  83%  |                                                                              |================================================================      |  92%  |                                                                              |======================================================================| 100%</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># loading external packages:</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Attaching package: 'dplyr'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     filter, lag</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/" class="external-link">openair</a></span><span class="op">)</span> <span class="co"># external package for plotting wind roses</span></span>
 <span></span>
-<span><span class="co"># converting wind direction from character into degress required by most </span></span>
-<span><span class="va">wdir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>ddd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CAL"</span>,<span class="st">"N"</span>,<span class="st">"NNE"</span>,<span class="st">"NE"</span>,<span class="st">"ENE"</span>,<span class="st">"E"</span>,<span class="st">"ESE"</span>,<span class="st">"SE"</span>,<span class="st">"SSE"</span>,</span>
-<span>                           <span class="st">"S"</span>,<span class="st">"SSW"</span>,<span class="st">"SW"</span>,<span class="st">"WSW"</span>,<span class="st">"W"</span>,<span class="st">"WNW"</span>,<span class="st">"NW"</span>,<span class="st">"NNW"</span><span class="op">)</span>,</span>
-<span>                   dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">15</span> <span class="op">*</span> <span class="fl">22.5</span><span class="op">)</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co"># changing date column to the format required by openair package:</span></span>
-<span><span class="va">df</span><span class="op">$</span><span class="va">Date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Date</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span></span>
-<span><span class="va">df</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Date</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">wdir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Joining with `by = join_by(ddd)`</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">ws</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">ffkmh</span> <span class="op">/</span> <span class="fl">3.6</span> <span class="co"># conversion to m/s from km/h</span></span>
-<span><span class="va">df</span><span class="op">$</span><span class="va">gust</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Gustmax</span><span class="op">)</span> <span class="op">/</span> <span class="fl">3.6</span> <span class="co"># conversion to m/s from km/h</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html" class="external-link">windRose</a></span><span class="op">(</span>mydata <span class="op">=</span> <span class="va">df</span>, ws <span class="op">=</span> <span class="st">"ws"</span>, wd <span class="op">=</span> <span class="st">"dir"</span>, type <span class="op">=</span> <span class="st">"season"</span>, paddle <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>         main <span class="op">=</span> <span class="st">"Svalbard Lufthavn (2018)"</span>, ws.int <span class="op">=</span> <span class="fl">3</span>, dig.lab <span class="op">=</span> <span class="fl">3</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="usecase_ogimet_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" alt="" width="700"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># do we miss any data?</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/summaryPlot.html" class="external-link">summaryPlot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span> ,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"TC"</span>, <span class="st">"ws"</span>, <span class="st">"gust"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="usecase_ogimet_files/figure-html/unnamed-chunk-1-2.png" class="r-plt" alt="" width="700"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># which sectors are responsible for warm/cold air mass advection:</span></span>
-<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html" class="external-link">polarPlot</a></span><span class="op">(</span><span class="va">df</span>, pollutant <span class="op">=</span> <span class="st">"TC"</span>, x <span class="op">=</span> <span class="st">"ws"</span>, wd <span class="op">=</span> <span class="st">"dir"</span>, k <span class="op">=</span> <span class="fl">50</span>, force.positive <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>          type <span class="op">=</span> <span class="st">"season"</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>, resolution <span class="op">=</span> <span class="st">"fine"</span>,  normalise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="usecase_ogimet_files/figure-html/unnamed-chunk-1-3.png" class="r-plt" alt="" width="700"></p>
+<span><span class="co"># Download hourly data for Svalbard Lufthavn (WMO 01008)</span></span>
+<span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"hourly"</span>,</span>
+<span>                  date     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2018-01-01"</span>, <span class="st">"2018-12-31"</span><span class="op">)</span>,</span>
+<span>                  station  <span class="op">=</span> <span class="st">"01008"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"station"</span>, <span class="st">"t2m"</span>, <span class="st">"ws"</span>, <span class="st">"wd"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://openair-project.github.io/openair/" class="external-link">openair</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wind rose by season — no unit conversion needed</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/windRose.html" class="external-link">windRose</a></span><span class="op">(</span>mydata  <span class="op">=</span> <span class="va">df</span>,</span>
+<span>         ws      <span class="op">=</span> <span class="st">"ws"</span>,</span>
+<span>         wd      <span class="op">=</span> <span class="st">"wd"</span>,</span>
+<span>         type    <span class="op">=</span> <span class="st">"season"</span>,</span>
+<span>         paddle  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         main    <span class="op">=</span> <span class="st">"Svalbard Lufthavn (2018)"</span>,</span>
+<span>         ws.int  <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         dig.lab <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         layout  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Temporal overview of temperature and wind speed</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/timePlot.html" class="external-link">timePlot</a></span><span class="op">(</span><span class="va">df</span>, pollutant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"t2m"</span>, <span class="st">"ws"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Which wind sectors bring warm / cold air masses?</span></span>
+<span><span class="fu"><a href="https://openair-project.github.io/openair/reference/polarPlot.html" class="external-link">polarPlot</a></span><span class="op">(</span><span class="va">df</span>,</span>
+<span>          pollutant     <span class="op">=</span> <span class="st">"t2m"</span>,</span>
+<span>          x             <span class="op">=</span> <span class="st">"ws"</span>,</span>
+<span>          wd            <span class="op">=</span> <span class="st">"wd"</span>,</span>
+<span>          k             <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>          force.positive <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>          type          <span class="op">=</span> <span class="st">"season"</span>,</span>
+<span>          layout        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>          resolution    <span class="op">=</span> <span class="st">"fine"</span>,</span>
+<span>          normalise     <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="daily-summaries-multi-station-temperature-comparison">2. Daily summaries — multi-station temperature comparison<a class="anchor" aria-label="anchor" href="#daily-summaries-multi-station-temperature-comparison"></a>
+</h2>
+<p>The HTML backend (<code>interval = "daily"</code>) returns
+pre-aggregated daily statistics (Tmax, Tmin, Tavg, precipitation, etc.)
+for one or more stations.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Daily summaries for two Polish stations: Poznan (12330) and Warsaw (12375)</span></span>
+<span><span class="va">daily</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>                     date     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023-06-01"</span>, <span class="st">"2023-08-31"</span><span class="op">)</span>,</span>
+<span>                     station  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12330</span>, <span class="fl">12375</span><span class="op">)</span>,</span>
+<span>                     coords   <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">daily</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compare average temperatures between the two stations</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">daily</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">TemperatureCAvg</span>,</span>
+<span>                  colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">station_ID</span><span class="op">)</span>, group <span class="op">=</span> <span class="va">station_ID</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title  <span class="op">=</span> <span class="st">"Daily average temperature — summer 2023"</span>,</span>
+<span>       x      <span class="op">=</span> <span class="st">"Date"</span>,</span>
+<span>       y      <span class="op">=</span> <span class="st">"Temperature (°C)"</span>,</span>
+<span>       colour <span class="op">=</span> <span class="st">"Station (WMO ID)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="country-level-bulk-download">3. Country-level bulk download<a class="anchor" aria-label="anchor" href="#country-level-bulk-download"></a>
+</h2>
+<p>The SYNOP backend supports downloading all Ogimet stations for an
+entire country in a single request via the <code>country_name</code>
+argument. This is useful for spatial analysis.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># All stations in Poland for a single day</span></span>
+<span><span class="va">poland</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval      <span class="op">=</span> <span class="st">"hourly"</span>,</span>
+<span>                      country_name  <span class="op">=</span> <span class="st">"Poland"</span>,</span>
+<span>                      date          <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023-12-15"</span>, <span class="st">"2023-12-15"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Stations:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">poland</span><span class="op">$</span><span class="va">station</span><span class="op">)</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Observations:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">poland</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">poland</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"station"</span>, <span class="st">"t2m"</span>, <span class="st">"ws"</span>, <span class="st">"slp"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Quick spatial overview — requires coordinates from stations_ogimet()</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">station_meta</span> <span class="op">=</span> <span class="fu"><a href="../reference/stations_ogimet.html">stations_ogimet</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Poland"</span>, date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Join decoded observations with coordinates</span></span>
+<span><span class="va">poland_geo</span> <span class="op">=</span> <span class="va">poland</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>t2m_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">t2m</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">station_meta</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"station"</span> <span class="op">=</span> <span class="st">"wmo_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">poland_geo</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lon</span>, y <span class="op">=</span> <span class="va">lat</span>, colour <span class="op">=</span> <span class="va">t2m_mean</span>, size <span class="op">=</span> <span class="va">t2m_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdYlBu"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, name <span class="op">=</span> <span class="st">"T2m (°C)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_map.html" class="external-link">coord_quickmap</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Mean temperature — Poland, 2023-12-15"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="full-synop-output-with-return_list">4. Full SYNOP output with <code>return_list</code><a class="anchor" aria-label="anchor" href="#full-synop-output-with-return_list"></a>
+</h2>
+<p>Setting <code>return_list = TRUE</code> returns a named list with two
+data frames: <code>$data</code> (the compact 20-column simplified view)
+and <code>$full</code> (the complete parser output with 30+ columns
+including cloud types, precipitation period, snow state, etc.).</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval     <span class="op">=</span> <span class="st">"hourly"</span>,</span>
+<span>                      station      <span class="op">=</span> <span class="fl">12330</span>,</span>
+<span>                      date         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023-06-01"</span>, <span class="st">"2023-06-03"</span><span class="op">)</span>,</span>
+<span>                      return_list  <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compact view</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Full parser output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">full</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Variables only available in the full output</span></span>
+<span><span class="va">result</span><span class="op">$</span><span class="va">full</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"low_cloud_type"</span>, <span class="st">"middle_cloud_type"</span>, <span class="st">"high_cloud_type"</span>,</span>
+<span>                  <span class="st">"precipitation_time"</span>, <span class="st">"snow_depth_state"</span>, <span class="st">"source"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="selecting-the-backend-explicitly">5. Selecting the backend explicitly<a class="anchor" aria-label="anchor" href="#selecting-the-backend-explicitly"></a>
+</h2>
+<p>Override the automatic backend selection with the <code>source</code>
+argument:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bczernecki/climate" class="external-link">climate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Force SYNOP backend for daily data</span></span>
+<span><span class="va">poznan_synop</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"daily"</span>,</span>
+<span>                            station  <span class="op">=</span> <span class="fl">12330</span>,</span>
+<span>                            date     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023-06-01"</span>, <span class="st">"2023-06-07"</span><span class="op">)</span>,</span>
+<span>                            source   <span class="op">=</span> <span class="st">"synop"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">poznan_synop</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"station"</span>, <span class="st">"t2m"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>, <span class="st">"precip"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Force HTML backend for hourly data (returns km/h wind speed, character wind direction, etc.)</span></span>
+<span><span class="va">poznan_html</span> <span class="op">=</span> <span class="fu"><a href="../reference/meteo_ogimet.html">meteo_ogimet</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"hourly"</span>,</span>
+<span>                           station  <span class="op">=</span> <span class="fl">12330</span>,</span>
+<span>                           date     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2023-06-01"</span>, <span class="st">"2023-06-03"</span><span class="op">)</span>,</span>
+<span>                           source   <span class="op">=</span> <span class="st">"html"</span>,</span>
+<span>                           coords   <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                           precip_split <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">poznan_html</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"station_ID"</span>, <span class="st">"Date"</span>, <span class="st">"TC"</span>, <span class="st">"ffkmh"</span>, <span class="st">"ddd"</span>, <span class="st">"pr6"</span>, <span class="st">"pr12"</span>, <span class="st">"pr24"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> <code><a href="../reference/meteo_ogimet_synop.html">meteo_ogimet_synop()</a></code> is
+deprecated. Use <code>meteo_ogimet(source = "synop")</code> instead.</p>
+</blockquote>
 </div>
   </div>
 
@@ -172,7 +321,7 @@ results</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -38,7 +38,10 @@
       <a href="../articles/pl.html">Wstęp do pakietu 'climate' (PL)</a>
     </li>
     <li>
-      <a href="../articles/usecase_ogimet.html">Use Case - Ogimet database</a>
+      <a href="../articles/synop_parser.html">SYNOP Messages</a>
+    </li>
+    <li>
+      <a href="../articles/usecase_ogimet.html">Ogimet meteorological database</a>
     </li>
   </ul></li>
 <li>
@@ -76,7 +79,7 @@
 <span>  <span class="va">dd</span>,</span>
 <span>  <span class="va">hh</span>,</span>
 <span>  min <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  bufr <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  source <span class="op">=</span> <span class="st">"DETECT"</span>,</span>
 <span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -113,8 +116,8 @@
 <dd><p>minute - single number denoting initial minute of sounding; applies only to BUFR soundings.</p></dd>
 
 
-<dt id="arg-bufr">bufr<a class="anchor" aria-label="anchor" href="#arg-bufr"></a></dt>
-<dd><ul><li><p>BUFR or TEMP sounding to be decoded. By default TEMP is used. For BUFR soundings use <code>bufr = TRUE</code></p></li>
+<dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
+<dd><ul><li><p>"BUFR", "TEMP" or "DETECT". By default "DETECT" is used.</p></li>
 </ul></dd>
 
 
@@ -131,11 +134,11 @@
 <li><p>RELH - Relative humidity (%)</p></li>
 <li><p>MIXR - Mixing ratio (g/kg)</p></li>
 <li><p>DRCT - Wind direction (deg)</p></li>
-<li><p>SKNT - Wind speed (knots)</p></li>
-<li><p>THTA = (K)</p></li>
-<li><p>THTE = (K)</p></li>
-<li><p>THTV = (K)</p></li>
-</ol><p>The second list contains metadata and calculated thermodynamic / atmospheric instability indices (for TEMP soundings only)</p>
+<li><p>SPED - Wind speed (m/s)</p></li>
+<li><p>THTA - (K)</p></li>
+<li><p>THTE - (K)</p></li>
+<li><p>THTV - (K)</p></li>
+</ol><p>The second list contains metadata for time of observation and station location</p>
 <p>A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorogical parameters (e.g. temperature, air pressure) where each row represent a measurement,
 depending on the height. Second data.frame presents a description of the conditions under which the sounding was carried out.</p>
     </div>
@@ -148,40 +151,41 @@ depending on the height. Second data.frame presents a description of the conditi
 <span class="r-in"><span><span class="co"># using TEMP and BUFR sounding formats</span></span></span>
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
 <span class="r-in"><span>  <span class="va">TEMP</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
-<span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2021&amp;MONTH=07&amp;FROM=1712&amp;TO=1712&amp;STNM=45004</span>
+<span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span>, source <span class="op">=</span> <span class="st">"TEMP"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> https://weather.uwyo.edu/wsgi/sounding?datetime=2021-07-17%2012:00:00&amp;id=45004&amp;src=FM35&amp;type=TEXT:LIST</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">TEMP</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  998   66 27.6 23.6   79 18.78    0    0 300.9 356.4 304.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  975  272 25.9 22.8   83 18.34  105   10 301.3 355.5 304.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  925  737 22.2 21.1   93 17.36  120   19 302.0 353.4 305.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  921  775 22.1 20.9   93 17.22  120   21 302.2 353.3 305.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  907  909 21.6 20.2   92 16.73  114   20 303.1 352.9 306.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  998   66 27.6 23.6   79 18.67    0  0.0 300.9 356.1 304.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  975  272 25.9 22.8   83 18.23  105  5.0 301.3 355.2 304.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  925  737 22.2 21.1   94 17.27  120 10.0 302.0 353.2 305.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  921  775 22.1 20.9   93 17.13  120 11.0 302.2 353.1 305.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  907  909 21.6 20.2   92 16.64  114 10.2 303.1 352.6 306.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  898  996 22.0 16.0   69 12.84  111  9.7 304.4 342.9 306.7</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">BUFR</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">45004</span>, yy <span class="op">=</span> <span class="fl">2021</span>, mm <span class="op">=</span> <span class="fl">07</span>, dd <span class="op">=</span> <span class="fl">17</span>, </span></span>
-<span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span>, bufr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> http://weather.uwyo.edu/cgi-bin/bufrraob.py?src=bufr&amp;datetime=2021-07-17+12:00:00&amp;id=45004&amp;type=TEXT:LIST</span>
+<span class="r-in"><span>                          hh <span class="op">=</span> <span class="fl">12</span>, min <span class="op">=</span> <span class="fl">00</span>, source <span class="op">=</span> <span class="st">"BUFR"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> https://weather.uwyo.edu/wsgi/sounding?datetime=2021-07-17%2012:00:00&amp;id=45004&amp;src=BUFR&amp;type=TEXT:LIST</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">BUFR</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1000.0   50   NA   NA   NA    NA   NA   NA    NA    NA    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  998.2   66 27.7 23.7   79 18.85   27  0.4 301.0 356.7 304.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  996.1   84 27.7 23.8   79 19.00  120  4.7 301.2 357.4 304.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  995.1   93 27.7 23.8   79 18.96  120  5.6 301.3 357.4 304.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  993.9  104 27.6 23.6   79 18.76  120  6.0 301.3 356.8 304.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  992.7  115 27.5 23.5   79 18.69  120  6.4 301.3 356.6 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    PRES HGHT TEMP DWPT RELH  MIXR DRCT SKNT  THTA  THTE  THTV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 998.2   66 27.7 23.7   79 18.83   27  0.2 301.0 356.6 304.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 996.1   84 27.7 23.8   79 18.97  120  2.4 301.2 357.3 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 995.1   93 27.7 23.8   79 18.93  120  2.9 301.3 357.3 304.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 993.9  104 27.6 23.6   79 18.74  120  3.1 301.3 356.7 304.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 992.7  115 27.5 23.5   79 18.67  120  3.3 301.3 356.5 304.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 991.5  125 27.4 23.5   79 18.64  120  3.5 301.2 356.4 304.6</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
 <span class="r-in"><span><span class="co">### example with a random date to download sounding from LEBA, PL station: ###</span></span></span>
 <span class="r-in"><span><span class="co">##############################################################################</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># no "source" argument is needed as the function will detect format automatically</span></span></span>
 <span class="r-in"><span>  <span class="va">profile</span> <span class="op">=</span> <span class="fu">sounding_wyoming</span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">12120</span>, </span></span>
 <span class="r-in"><span>                             yy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">2000</span><span class="op">:</span><span class="fl">2019</span>,<span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                             mm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                             dd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                             hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2000&amp;MONTH=06&amp;FROM=0200&amp;TO=0200&amp;STNM=12120</span>
+<span class="r-in"><span>                             hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> https://weather.uwyo.edu/wsgi/sounding?datetime=2012-07-12%2000:00:00&amp;id=12120&amp;src=UNKNOWN&amp;type=TEXT:LIST</span>
 <span class="r-in"><span>  <span class="co"># plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
@@ -199,7 +203,7 @@ depending on the height. Second data.frame presents a description of the conditi
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

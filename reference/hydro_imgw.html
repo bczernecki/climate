@@ -18,7 +18,7 @@ available in the danepubliczne.imgw.pl collection"><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -39,7 +39,10 @@ available in the danepubliczne.imgw.pl collection"><meta property="og:image" con
       <a href="../articles/pl.html">Wstęp do pakietu 'climate' (PL)</a>
     </li>
     <li>
-      <a href="../articles/usecase_ogimet.html">Use Case - Ogimet database</a>
+      <a href="../articles/synop_parser.html">SYNOP Messages</a>
+    </li>
+    <li>
+      <a href="../articles/usecase_ogimet.html">Ogimet meteorological database</a>
     </li>
   </ul></li>
 <li>
@@ -71,15 +74,7 @@ available in the danepubliczne.imgw.pl collection</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hydro_imgw</span><span class="op">(</span></span>
-<span>  <span class="va">interval</span>,</span>
-<span>  <span class="va">year</span>,</span>
-<span>  coords <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  value <span class="op">=</span> <span class="st">"H"</span>,</span>
-<span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hydro_imgw</span><span class="op">(</span><span class="va">interval</span>, <span class="va">year</span>, value <span class="op">=</span> <span class="st">"H"</span>, station <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -94,10 +89,6 @@ available in the danepubliczne.imgw.pl collection</p>
 <dd><p>vector of years (e.g., 1966:2000)</p></dd>
 
 
-<dt id="arg-coords">coords<a class="anchor" aria-label="anchor" href="#arg-coords"></a></dt>
-<dd><p>add coordinates of the stations (logical value TRUE or FALSE)</p></dd>
-
-
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
 <dd><p>type of data (can be: state - "H" (default), flow - "Q", or
 temperature - "T")</p></dd>
@@ -109,14 +100,8 @@ can be given as station name with CAPITAL LETTERS (character)
 It accepts either names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p></dd>
 
 
-<dt id="arg-col-names">col_names<a class="anchor" aria-label="anchor" href="#arg-col-names"></a></dt>
-<dd><p>three types of column names possible: "short" - default,
-values with shorten names, "full" - full English description,
-"polish" - original names in the dataset</p></dd>
-
-
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>other parameters that may be passed to the 'shortening'
+<dd><p>other parameters that may be passed e.g. to the 'shortening'
 function that shortens column names</p></dd>
 
 </dl></div>
@@ -139,20 +124,20 @@ If <code>coords = TRUE</code> additional two columns with geographic coordinates
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/MIES_publiczne_format.txt</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/1999/mies_1999.zip</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        PSKDSZS  PSNZWP   KDNRZK       Data MCROKH MCMSCH MCWSKEX MCSTAN MCPRZP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 433  151160130 ?CINAWA Odra (1) 1998-11-01   1999      1       1    245    178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 434  151160130 ?CINAWA Odra (1) 1998-11-01   1999      1       2    310    253</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 435  151160130 ?CINAWA Odra (1) 1998-11-01   1999      1       3    366    329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 436  151160130 ?CINAWA Odra (1) 1998-12-01   1999      2       1    214    144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 437  151160130 ?CINAWA Odra (1) 1998-12-01   1999      2       2    266    202</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 438  151160130 ?CINAWA Odra (1) 1998-12-01   1999      2       3    348    302</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     MCPTMP MCMSCK</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 433    1.8     11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 434    6.2     11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 435   10.4     11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 436    1.2     12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 437    2.2     12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 438    3.0     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           id  X  Y       Data       PSNZWP   KDNRZK MCROKH MCMSCH MCWSKEX</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  149180010 NA NA 1998-11-01 KRZYZANOWICE Odra (1)   1999      1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  149180010 NA NA 1998-11-01 KRZYZANOWICE Odra (1)   1999      1       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  149180010 NA NA 1998-11-01 KRZYZANOWICE Odra (1)   1999      1       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  149180010 NA NA 1998-12-01 KRZYZANOWICE Odra (1)   1999      2       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  149180010 NA NA 1998-12-01 KRZYZANOWICE Odra (1)   1999      2       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  149180010 NA NA 1998-12-01 KRZYZANOWICE Odra (1)   1999      2       3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MCSTAN MCPRZP MCPTMP MCMSCK</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    155   34.8     NA     11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    205   73.1     NA     11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    280  140.0     NA     11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    124   18.6     NA     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    172   47.6     NA     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    260  120.0     NA     12</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -168,7 +153,7 @@ If <code>coords = TRUE</code> additional two columns with geographic coordinates
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

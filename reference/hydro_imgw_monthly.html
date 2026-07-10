@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -38,7 +38,10 @@
       <a href="../articles/pl.html">Wstęp do pakietu 'climate' (PL)</a>
     </li>
     <li>
-      <a href="../articles/usecase_ogimet.html">Use Case - Ogimet database</a>
+      <a href="../articles/synop_parser.html">SYNOP Messages</a>
+    </li>
+    <li>
+      <a href="../articles/usecase_ogimet.html">Ogimet meteorological database</a>
     </li>
   </ul></li>
 <li>
@@ -73,7 +76,6 @@
 <span>  <span class="va">year</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
 <span>  allow_failure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -94,13 +96,6 @@
 <dt id="arg-station">station<a class="anchor" aria-label="anchor" href="#arg-station"></a></dt>
 <dd><p>name or ID of hydrological station(s).
 It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p></dd>
-
-
-<dt id="arg-col-names">col_names<a class="anchor" aria-label="anchor" href="#arg-col-names"></a></dt>
-<dd><p>three types of column names possible:
-"short" - default, values with shorten names,
-"full" - full English description,
-"polish" - original names in the dataset</p></dd>
 
 
 <dt id="arg-allow-failure">allow_failure<a class="anchor" aria-label="anchor" href="#arg-allow-failure"></a></dt>
@@ -142,7 +137,7 @@ It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)</p><
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>
