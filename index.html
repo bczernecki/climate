@@ -123,7 +123,7 @@
 <ul>
 <li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_ogimet.html"><strong>meteo_ogimet</strong></a> - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the World Meteorological Organization framework after year 2000 should be accessible. Two backends are available and selected automatically: raw <strong>SYNOP decoding</strong> (<code>source = "synop"</code>, default for <code>interval = "hourly"</code>) and <strong>HTML scraping</strong> (<code>source = "html"</code>, default for <code>interval = "daily"</code>). Country-level bulk downloads are supported via the <code>country_name</code> argument (SYNOP backend only).</p></li>
 <li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_noaa_hourly.html"><strong>meteo_noaa_hourly</strong></a> - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have &gt; 100 years long history of observations</p></li>
-<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_noaa_co2.html"><strong>meteo_noaa_co2</strong></a>] - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/meteo_noaa_co2.html"><strong>meteo_noaa_co2</strong></a> - Downloading monthly CO2 measurements from Mauna Loa Observatory</p></li>
 <li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/sounding_wyoming.html"><strong>sounding_wyoming</strong></a> - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)</p></li>
 <li><p>🇵🇱 <a href="https://bczernecki.github.io/climate/reference/meteo_imgw.html"><strong>meteo_imgw</strong></a> - Downloading hourly, daily, and monthly meteorological data from the Polish met service across all types of stations (i.e. SYNOP/CLIMATE/PRECIP ) available in the danepubliczne.imgw.pl collection. It is a wrapper for <code>meteo_monthly()</code>, <code>meteo_daily()</code>, <code>meteo_hourly()</code> and <code><a href="reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code> which gives access from montly to even to 10-min dataset.</p></li>
 </ul>
@@ -145,10 +145,10 @@
 <li><p>🌍 <strong>nearest_stations_noaa</strong> - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository</p></li>
 <li><p>🇵🇱 <strong>nearest_stations_imgw</strong> - List of nearby meteorological or hydrological IMGW-PIB stations in Poland</p></li>
 <li><p>🇵🇱 <strong>imgw_meteo_stations</strong> - Built-in metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers</p></li>
-<li><p>🇵🇱 <strong>imgw_hydro_stations</strong> - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers</p></li>
+<li><p>🇵🇱 <strong>imgw_hydro_stations</strong> - as above, for hydrological stations</p></li>
 <li><p>🇵🇱 <strong>stations_meteo_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations</p></li>
 <li><p>🇵🇱 <strong>stations_hydro_imgw_telemetry</strong> - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations</p></li>
-<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/synop_parse.html"><strong>synop_parser</strong></a> - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the <a href="https://bczernecki.github.io/climate/articles/synop_parser.html">SYNOP Messages vignette</a>.</p></li>
+<li><p>🌍 <a href="https://bczernecki.github.io/climate/reference/synop_parser.html"><strong>synop_parser</strong></a> - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the <a href="https://bczernecki.github.io/climate/articles/synop_parser.html">SYNOP Messages vignette</a>.</p></li>
 </ul>
 </div>
 </div>
