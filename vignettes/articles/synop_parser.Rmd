@@ -99,7 +99,7 @@ output:
 ```{r echo=TRUE, include = TRUE, eval = TRUE}
 # Single message as a nested list
 synop_code = messages[1]
-decoded = synop_parser()
+decoded = synop_parser(synop_code)
 str(decoded)
 ```
 
