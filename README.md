@@ -51,7 +51,7 @@ Country-level bulk downloads are supported via the `country_name` argument (SYNO
 - 🌍 [**meteo_noaa_hourly**](https://bczernecki.github.io/climate/reference/meteo_noaa_hourly.html) -
 Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
 
-- 🌍 [**meteo_noaa_co2**](https://bczernecki.github.io/climate/reference/meteo_noaa_co2.html)] -
+- 🌍 [**meteo_noaa_co2**](https://bczernecki.github.io/climate/reference/meteo_noaa_co2.html) -
 Downloading monthly CO2 measurements from Mauna Loa Observatory
 
 - 🌍 [**sounding_wyoming**](https://bczernecki.github.io/climate/reference/sounding_wyoming.html) - 
@@ -80,12 +80,12 @@ country in the Ogimet repository
 - 🌍 **nearest_stations_ogimet** - Downloading information about nearest stations to the selected point using Ogimet repository
 - 🌍 **nearest_stations_noaa** - Downloading information about nearest stations to the selected point available for the selected country in the NOAA ISH meteorological repository
 - 🇵🇱 **nearest_stations_imgw** - List of nearby meteorological or hydrological IMGW-PIB stations in Poland
-- 🇵🇱 **imgw_meteo_stations** - Built-in   metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
-- 🇵🇱 **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological stations, their geographical coordinates, and ID numbers
+- 🇵🇱 **imgw_meteo_stations** - Built-in metadata from the IMGW-PIB repository for meteorological stations, their geographical coordinates, and ID numbers
+- 🇵🇱 **imgw_hydro_stations** - as above, for hydrological stations
 - 🇵🇱 **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
 - 🇵🇱 **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
 
-- 🌍 [**synop_parser**](https://bczernecki.github.io/climate/reference/synop_parse.html) - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
+- 🌍 [**synop_parser**](https://bczernecki.github.io/climate/reference/synop_parser.html) - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ## Example 1
 #### Download hourly dataset from NCEI/NOAA ISH meteorological repository:
