@@ -85,7 +85,7 @@ country in the Ogimet repository
 - 🇵🇱 **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry meteorological stations
 - 🇵🇱 **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date information about coordinates for IMGW-PIB telemetry hydrological stations
 
-- 🌍 **synop_parser** - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
+- 🌍 [**synop_parser**](https://bczernecki.github.io/climate/reference/synop_parse.html) - Decoding raw SYNOP meteorological messages into structured R lists or data frames. For a full walkthrough see the [SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ## Example 1
 #### Download hourly dataset from NCEI/NOAA ISH meteorological repository:
