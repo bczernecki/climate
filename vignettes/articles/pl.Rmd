@@ -5,8 +5,11 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Wstęp do pakietu 'climate' (PL)}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include = FALSE}
@@ -20,64 +23,87 @@ library(dplyr)
 options(scipen = 999)
 ```
 
-Głównym celem pakietu **climate** jest zapewnienie wygodnego i programowalnego dostępu do danych meteorologicznych 
-i hydrologicznych z publicznie dostępnych repozytoriów, w tym m.in.:
+Głównym celem pakietu **climate** jest zapewnienie wygodnego i
+programowalnego dostępu do danych meteorologicznych i hydrologicznych z
+publicznie dostępnych repozytoriów, w tym m.in.:
 
-- Instytut Meteorologii i Gospodarki Wodnej - Państwowy Instytut Badawczy (IMGW-PIB)
+- Instytut Meteorologii i Gospodarki Wodnej - Państwowy Instytut
+  Badawczy (IMGW-PIB)
 
 - OGIMET (ogimet.com)
 
--  University of Wyoming - dane atmosferyczne dla radiosondaży (http://weather.uwyo.edu/upperair/).
+- University of Wyoming - dane atmosferyczne dla radiosondaży
+  (<http://weather.uwyo.edu/upperair/>).
 
 ## Funkcje
 
-
 Pakiet **climate** składa się z kilku głównych funkcji:
 
-1. Dane meteorologiczne 
+1.  Dane meteorologiczne
 
-- **meteo_ogimet()** - Umożliwia pobieranie godzinowych i dobowych danych meteorologicznych ze stacji meteorologicznych nadających depesze SYNOP (FM-12) które są udostępnione w serwisie ogimet.com. Każda stacja meteorologiczna (synoptyczna) pracująca w ramach World Meteorological
-framework udostępnia swoje dane w ramach serwisu od ok. 2000 roku 
+- [**meteo_ogimet**](https://bczernecki.github.io/climate/reference/meteo_ogimet.html) -
+  Umożliwia pobieranie godzinowych i dobowych danych meteorologicznych
+  ze stacji meteorologicznych nadających depesze SYNOP (FM-12) które są
+  udostępnione w serwisie ogimet.com. Każda stacja meteorologiczna
+  (synoptyczna) pracująca w ramach World Meteorological Organization
+  (WMO) udostępnia swoje dane w ramach serwisu od ok. 2000 roku
 
-     - **stations_ogimet()** - Umożliwia uzyskiwanie współrzędnych geograficznych, położenia stacji nad poziomem 
-     morza oraz  identyfikatora WMO i nazwy stacji dla kraju określonej przez użytkownika; opcjonalnie 
-     wykreśl wyniki na mapie
+  - [**stations_ogimet**](https://bczernecki.github.io/climate/reference/stations_ogimet.html) -
+    Umożliwia uzyskiwanie współrzędnych geograficznych, położenia stacji
+    nad poziomem morza oraz identyfikatora WMO i nazwy stacji dla kraju
+    określonej przez użytkownika; opcjonalnie wykreśl wyniki na mapie
 
-- **meteo_imgw()** - Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub 
-miesięcznym  o danej randze stacji(SYNOP / CLIMATE / PRECIP) dostępnych w kolekcji dane.imgw.pl. 
+- [**meteo_imgw**](https://bczernecki.github.io/climate/reference/meteo_imgw.html) -
+  Pozwala pobrać dane meteorologiczne interwale godzinowym, dziennym lub
+  miesięcznym o danej randze stacji (SYNOP / CLIMATE / PRECIP)
+  dostępnych w kolekcji dane.imgw.pl.
 
-2. Dane hydrologiczne: 
+2.  Dane hydrologiczne:
 
-- **hydro_imgw()** -  Pobieranie danych hydrologicznych o interwale dziennym, miesięcznym lub  rocznym ze 
-stacji dostępnych w repozytorium dane.imgw.pl.
+- [**hydro_imgw**](https://bczernecki.github.io/climate/reference/hydro_imgw.html) -
+  Pobieranie danych hydrologicznych o rozdzielczości dobowej lub
+  miesięcznej ze stacji dostępnych w repozytorium danepubliczne.imgw.pl.
 
-3. Dane radiosondażowe : 
+3.  Dane radiosondażowe :
 
-- **meteo\_sounding()** - Pobieranie pomiarów pionowych profil atmosfery (danych radiosondażowych)
+- [**sounding_wyoming**](https://bczernecki.github.io/climate/reference/sounding_wyoming.html) -
+  Pobieranie pomiarów pionowych profil atmosfery (danych
+  radiosondażowych)
 
 ## Przykłady
 
-Pokażemy, jak korzystać z naszego pakietu i przygotować dane do analizy przestrzennej z dodatkową pomocą paczek
-[dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) oraz 
+Pokażemy, jak korzystać z naszego pakietu i przygotować dane do analizy
+przestrzennej z dodatkową pomocą paczek
+[dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+oraz
 [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
-Najpierw pobierzemy 10 lat (**2001-2010**) miesięcznych obserwacji hydrologicznych dla wszystkich dostępnych stacji i automatycznie dodają ich współrzędne przestrzenne.
-
-
+Najpierw pobierzemy 10 lat (**2001-2010**) miesięcznych obserwacji
+hydrologicznych dla wszystkich dostępnych stacji i automatycznie dodają
+ich współrzędne przestrzenne.
 
 ```{r data, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE}
 h = hydro_imgw(interval = "monthly", year = 2001:2010)
 head(h)
 ```
 
-Zmienna  `MCWSKEX` reprezentuje etykietę ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych `hydro_abbrev`.]
-Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym
-celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas 
-informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (`MCROKH`), szerokość geograficzną `X` i długość 
-geograficzną` Y`.
-Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w każdym roku za pomocą ** dplyr ** `summarise()`,
-oraz rozdzielimy dane według roku używając ** tidyr **' `spread ()` aby uzyskać roczne średnie maksymalne przepływy (`MCPRZP`) w 
-kolejnych kolumnach.
-  
+Zmienna `MCWSKEX` reprezentuje etykietę ekstremum, gdzie "1" oznacza
+minimum, "2" oznacza średnią, a "3" maksimum. [^1]
+
+[^1]: Więcej informacji na ten temat można znaleźć w zestawie danych
+    `hydro_abbrev`.
+
+Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk,
+np. związanych z przepływami maksymalnymi. W tym celu pozostaną w ramce
+danych tylko wartości przepływów maksymalnych oraz kolumny zawierające
+interesujące nas informacje, tj. identyfikator stacji - `id`, rok
+hydrologiczny (`MCROKH`), szerokość geograficzną `X` i długość
+geograficzną`Y`.
+
+Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w
+każdym roku za pomocą `dplyr::summarise()`, oraz rozdzielimy dane według
+roku używając `spread ()` aby uzyskać roczne średnie maksymalne
+przepływy (`MCPRZP`) w kolejnych kolumnach.
+
 ```{r filtering, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE}
 h2 = h %>%
   dplyr::filter(MCWSKEX == 3) %>%
@@ -92,20 +118,22 @@ library(knitr)
 kable(head(h2), caption = "Examplary data frame of hydrological preprocesssing.")
 ```
 
-Wynik pokazuje jak zmienia się maksymalna roczna średnia prędkość przepływu wody w ciągu dekady dla wszystkich 
-dostępnych stacji w Polsce.
-Możemy zapisać to do:
+Wynik pokazuje jak zmienia się maksymalna roczna średnia prędkość
+przepływu wody w ciągu dekady dla wszystkich dostępnych stacji w Polsce.
 
-- **.csv** przy pomocą funckcji: `write.csv(result, file = "result.csv", sep = ";",dec = ".", col.names = T, row.names = F)`. 
-To polecenie zapisuje nasz wynik do pliku: `result.csv`, gdzie separatorem kolumn jest `;`, część dziesiętna liczby 
-następuje po `.`, zachowujemy nagłówki kolumn i usuwamy nazwy wierszy, które są po prostu liczbami obserwacji.
+Możemy wynik zapisać do:
 
-- **.xlsx** przy pomocą funckcji: `write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)`
-To polecenie zapisuje nasz wynik do pliku: `result.xlsx` o nazwie arkusza `Poland`. Argument `append=TRUE` dodaje arkusz
-do istniejącego pliku `.xlsx`.
-By zapisać dane do formatu`.xlsx` najpierw należy zaisntalować pakiet **writexl** przy pomocy 
-komendy`install.packages("writexl")`, oraz dodać go do naszego środowiska: `library(writexl)`.
- 
+- **.csv** przy pomocą funkcji: `write.csv(result, file = "result.csv")`
+
+- **.xlsx** przy pomocą funckcji:
+  `write.xlsx(result, file = "result.xlsx", sheetName = "Poland", append = FALSE)`\
+  To polecenie zapisuje nasz wynik do pliku: `result.xlsx` o nazwie
+  arkusza `Poland`. Argument `append=TRUE` dodaje arkusz do istniejącego
+  pliku `.xlsx`. By zapisać dane do formatu`.xlsx` najpierw należy
+  zainstalować pakiet **writexl** przy pomocy komendy
+  `install.packages("writexl")`, oraz dodać go do naszego środowiska:
+  `library(writexl)`.
+
 ```{r, eval=TRUE, include=TRUE, echo=TRUE}
 
 library(sf)
@@ -130,4 +158,3 @@ tm_shape(h3) +
 ```
 
 <!-- ![Mean maximum annual flow](../../docs/articles/articles/pl_files/figure-html/unnamed-chunk-1-1.png) -->
-
