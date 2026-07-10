@@ -6,22 +6,22 @@
 \usage{
 ogimet_daily(
   date = c(Sys.Date() - 30, Sys.Date()),
-  coords = FALSE,
   station = NA,
   hour = 6,
-  allow_failure = TRUE
+  allow_failure = TRUE,
+  ...
 )
 }
 \arguments{
 \item{date}{start and finish of date (e.g., date = c("2018-05-01","2018-07-01") ). By default last 30 days.}
-
-\item{coords}{add geographical coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{WMO ID of meteorological station(s). Character or numeric vector}
 
 \item{hour}{time for which the daily raport is generated. Set default as hour = 6 (i.e. 6 UTC)}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
+
+\item{...}{extra arguments that may be passed from wrapper top-level functions}
 }
 \value{
 data.frame with historical meteorological data for the daily summaries
@@ -33,7 +33,7 @@ The data are processed only if temperature or precipitation fields are present.
 \examples{
 \donttest{
   # downloading daily summaries for last 30 days. station: New York - La Guardia
-  new_york = ogimet_daily(station = 72503, coords = TRUE)
+  new_york = ogimet_daily(station = 72503)
 }
 
 }

@@ -1,14 +1,14 @@
 library(climate)
 library(stringr)
 
-m_hs <- meteo_metadata_imgw("hourly", "synop")
-m_hc <- meteo_metadata_imgw("hourly", "climate")
-m_ds <- meteo_metadata_imgw("daily", "synop")
-m_dc <- meteo_metadata_imgw("daily", "climate")
-m_dp <- meteo_metadata_imgw("daily", "precip")
-m_ms <- meteo_metadata_imgw("monthly", "synop")
-m_mc <- meteo_metadata_imgw("monthly", "climate")
-m_mp <- meteo_metadata_imgw("monthly", "precip")
+m_hs = meteo_metadata_imgw("hourly", "synop")
+m_hc = meteo_metadata_imgw("hourly", "climate")
+m_ds = meteo_metadata_imgw("daily", "synop")
+m_dc = meteo_metadata_imgw("daily", "climate")
+m_dp = meteo_metadata_imgw("daily", "precip")
+m_ms = meteo_metadata_imgw("monthly", "synop")
+m_mc = meteo_metadata_imgw("monthly", "climate")
+m_mp = meteo_metadata_imgw("monthly", "precip")
 
 all_meteo_metadata = dplyr::bind_rows(
   m_hs[[1]],
@@ -32,7 +32,7 @@ unique_meteo_parameters = sort(unique_meteo_parameters)
 View(unique_meteo_parameters)
 
 # sprawdzenie czy stworzona recznie baza daje sie polaczyc left_joinem:
-skroty <- read.csv("data-raw/parametry_skrot.csv", stringsAsFactors = F)
-wsio <- data.frame(fullname = unique_meteo_parameters)
-laczenie <- dplyr::left_join(wsio,skroty)
+skroty = read.csv("data-raw/parametry_skrot.csv", stringsAsFactors = F)
+wsio = data.frame(fullname = unique_meteo_parameters)
+laczenie = dplyr::left_join(wsio,skroty)
 head(laczenie)

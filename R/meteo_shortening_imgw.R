@@ -21,6 +21,7 @@
 
 meteo_shortening_imgw = function(data, col_names = "short", remove_duplicates = TRUE) {
 
+  data = as.data.frame(data)
   # removing duplicated column names:  (e.g. station's name)
   if (remove_duplicates == TRUE) {
     data = data[, !duplicated(colnames(data))]

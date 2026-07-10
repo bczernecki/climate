@@ -6,13 +6,8 @@
 #' @param coords add coordinates of the stations (logical value TRUE or FALSE)
 #' @param station name or ID of hydrological station(s).
 #' It accepts names (characters in CAPITAL LETTERS) or stations' IDs (numeric)
-#' @param col_names three types of column names possible:
-#' "short" - default, values with shorten names,
-#' "full" - full English description,
-#' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that shortens column names
-#' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv
 #' @importFrom data.table fread
 #' @export
@@ -25,7 +20,6 @@
 hydro_imgw_monthly = function(year, 
                               coords = FALSE, 
                               station = NULL,
-                              col_names = "short", 
                               allow_failure = TRUE,
                               ...) {
   
@@ -33,7 +27,6 @@ hydro_imgw_monthly = function(year,
     tryCatch(hydro_imgw_monthly_bp(year,
                                  coords,
                                  station,
-                                 col_names, 
                                  ...),
              error = function(e){
                message(paste("Problems with downloading data.",
@@ -43,7 +36,6 @@ hydro_imgw_monthly = function(year,
     hydro_imgw_monthly_bp(year,
                         coords,
                         station,
-                        col_names, 
                         ...)
   }
 }
@@ -53,7 +45,6 @@ hydro_imgw_monthly = function(year,
 hydro_imgw_monthly_bp = function(year,
                                  coords = FALSE,
                                  station = NULL,
-                                 col_names= "short",
                                  allow_failure = TRUE,
                                  ...) {
   translit = check_locale()
@@ -65,10 +56,10 @@ hydro_imgw_monthly_bp = function(year,
   test_url(link = paste0(base_url, interval_pl, "/"), output = temp)
   a = readLines(temp, warn = FALSE)
 
-  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
-  catalogs = gsub(x = catalogs, pattern = "/", replacement = "")
-  catalogs = catalogs[catalogs  %in% as.character(year)]
+  catalogs = unlist(regmatches(a, gregexpr('<a href="([^"/?][^"]*)/">', a, perl = TRUE)))
+  catalogs = gsub('<a href="|/">', "", catalogs)
+  catalogs = catalogs[catalogs %in% as.character(year)]
+  
   if (length(catalogs) == 0) {
     stop("Selected year(s) is not available in the database.", call. = FALSE)
   }
@@ -86,19 +77,23 @@ hydro_imgw_monthly_bp = function(year,
     unzip(zipfile = temp, exdir = temp2)
     file1 = paste(temp2, dir(temp2), sep = "/")[1]
     data1 = imgw_read(translit, file1)
-    colnames(data1) = meta[, 1]
+    colnames(data1) = meta$parameters
+    for (labs in seq_along(meta$parameters)) {
+      attr(data1[[labs]], "label") = meta$label[[labs]]
+    }
     all_data[[i]] = data1
   }
-  all_data = do.call(rbind, all_data)
-
-  all_data[all_data == 9999] = NA
-  all_data[all_data == 99999.999] = NA
-  all_data[all_data == 99.9] = NA
+  all_data = do.call(rbind.data.frame, all_data)
+  all_data[all_data == 9999] = NA            
+  all_data[all_data == 99999.999] = NA            
+  all_data[all_data == 99.9] = NA            
+  all_data[all_data == 999] = NA
+  
   colnames(all_data) = meta[, 1]
+  
   # coords
-  if (coords) {
-    all_data = merge(climate::imgw_hydro_stations, all_data, by.x = "id", by.y = "PSKDSZS", all.y = TRUE)
-  }
+  all_data = merge(as.data.frame(climate::imgw_hydro_stations), 
+                     all_data, by.x = "id", by.y = "PSKDSZS", all.y = TRUE)
   #station selection
   if (!is.null(station)) {
     if (is.character(station)) {
@@ -124,8 +119,14 @@ hydro_imgw_monthly_bp = function(year,
   data_df$yy = ifelse(data_df[, 2] >= 11, data_df[, 1] - 1, data_df[, 1])
   all_data$Data = as.Date(ISOdate(year = data_df$yy, month = data_df[, 2], day = data_df$day))
   all_data = all_data[, c(1:3, ncol(all_data), 4:(ncol(all_data) - 1)), ]
-
-  #all_data = hydro_shortening_imgw(all_data, col_names = col_names, ...)
+  
+  all_data = all_data[order(all_data$id, all_data$Data), ]
+  for (cols in colnames(all_data)) {
+    ind = which(cols == meta$parameters)
+    if (length(ind) > 0) {
+      attr(all_data[[cols]], "label") = meta$label[ind]
+      }
+  }
 
   return(all_data)
 }

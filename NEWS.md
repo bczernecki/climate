@@ -1,3 +1,22 @@
+# climate 1.4.0
+
+* adding the `synop_parser()` function for reading raw SYNOP messages
+* major changes in the `meteo_ogimet()` set of functions:
+  * cleaning up and refactoring the code
+  * data source used by OGIMET engine can be specified by setting `parser = "html"` or `parser = "synop"` argument; more details in the documentation, e.g:
+    * SYNOP parser is now used by default for hourly data, and HTML for daily summaries; 
+  * XML parsing engine is now replaced by in-house solutions to reduce dependencies and improve performance in future
+* major changes in the `sounding_wyoming()` function due to shutting down the legacy interface
+  * thermodynamic and dynamic indices are no longer calculated on the server side, but can be manually obtained using the `thundeR` package
+* minor fixes:
+  * adding label description to `hydro_imgw()` datasets to easen understanding of the data and avoid confusion with units (e.g. "Q [m3/s]" instead of "Q")
+    * therefore argument `col_names` is now removed
+  * station coordinates are automatically added by default
+  * updated columns in IMGW telemetry datasets due to changes in IMGW repository
+  * updated documentation and vignettes to reflect changes in the code and new features
+  * unified R code syntax for assignments
+
+
 # climate 1.3.0
 
 * adapting code to most recent changes in the IMGW-PIB repository:
@@ -8,7 +27,6 @@
   repository that match the provided name(s) and return all available datasets for 
   those stations (e.g.entry "WARSZAWA" will also search for: "WARSZAWA-BIELANY", 
   "WARSZAWA-OKECIE", "WARSZAWA-OBSERWATORIUM", etc.)
-
 
 
 # climate 1.2.9

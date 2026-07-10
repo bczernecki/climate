@@ -3,7 +3,7 @@
 #' Retrieving current metadata for meteorological stations used in the telemetric systems of the IMGW-PIB datastore (danepubliczne.imgw.pl/datastore)
 #' 
 #' @return data table with metadata for over 500 stations. 
-#' Metadata contains: station ID, station name, river, latitude, longitude, altitude
+#' Metadata contains: station ID, station name, river, year_est, latitude, longitude, altitude
 #' @importFrom data.table as.data.table
 #' @export
 #'
@@ -26,7 +26,7 @@ stations_meteo_imgw_telemetry = function() {
       })
   
   if (!is.null(telemetry_stations)) {
-    colnames(telemetry_stations) = c("no", "id", "name", "river", "lat", "lon", "alt")
+    colnames(telemetry_stations) = c("no", "id", "name", "river", "year_est", "lat", "lon", "alt")
     # extra fix for columns wrongly signed in IMGW datatabase (i.e. missing semicolon):
     fix_needed = grep(x = substr(telemetry_stations$river, 1, 1), '^[0-9]$')
     

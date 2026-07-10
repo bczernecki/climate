@@ -1,17 +1,17 @@
 context("hydro_imgw")
-y <- 2017
 
 test_that("hydro_imgw_not_available", {
   
-  expect_error(suppressWarnings(hydro_imgw(interval = "monthly", year = 1960, coord = TRUE,
+  expect_error(suppressWarnings(hydro_imgw(interval = "monthly", year = 1960, 
                           station = "not available", allow_failure = FALSE)))
   
-  expect_error(suppressWarnings(hydro_imgw(interval = "monthly", year = 1960, coord = TRUE,
-                          station = 999, allow_failure = FALSE)))
+  # monthly download for a single station:
+  w = hydro_imgw(interval = "monthly", year = 2010, station = "WIGRY", 
+                 allow_failure = FALSE)
+  expect_true(is.data.frame(w) && nrow(w) == 36)
   
   h2022_2023 = hydro_imgw(interval = "monthly", 
                           year = 2022:2023, 
-                          coord = TRUE,
                           allow_failure = FALSE)
   
   if (!is.null(h2022_2023)) {
@@ -24,7 +24,6 @@ test_that("hydro_imgw_not_available", {
   
   h2022_2023d = hydro_imgw(interval = "daily", 
                           year = 2022:2023, 
-                          coord = TRUE,
                           allow_failure = FALSE)
   if (!is.null(h2022_2023d)) {
     if (is.data.frame(h2022_2023d) & nrow(h2022_2023d > 50000)) {

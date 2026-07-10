@@ -1,46 +1,207 @@
 ---
-title: "Use Case - Ogimet database"
+title: "Ogimet meteorological database"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-## Ogimet - download and visualize wind patterns over Svalbard 
+Most of meteorological stations working under the umbrella of the World Meteorlogical Organization (WMO) report their observations in the SYNOP format. The **climate** package provides a convenient interface to download and decode SYNOP messages from the [Ogimet](https://www.ogimet.com/) database, which aggregates data from thousands of stations worldwide. Therefore, it is often the most preferable source of meteorological information being a valuable resource for researchers, students, and weather enthusiasts looking to access historical and real-time meteorological data for analysis, visualization, and educational purposes. This information is most often used as a complementary source to national meteorological services that is delivered free of charge and without any API key requirements.
 
-1. Downloading hourly data from the Ogimet repository for the defined time frame (2018/01/01-2018/12/31); chosen station: Svalbard Lufthavn
-2. Using external package 'openair' to visualize the downloaded results
+The `meteo_ogimet()` function is the unified entry point for downloading data from [Ogimet](https://www.ogimet.com/).
+It uses two backends (automatically) selected by the `interval` argument:
 
-```{r,warning=FALSE}
+- **`interval = "hourly"`** → **SYNOP backend** (default): downloads and decodes raw SYNOP messages via
+  the Ogimet `getsynop` endpoint. Returns clean units used in meteorology (`ws` in m/s, `wd` in degrees, `t2m`
+  in °C, POSIXct `date` in UTC).
+- **`interval = "daily"`** → **HTML backend** (default): scrapes pre-formatted daily summary tables
+  generated in the Ogimet web service.
+
+Use `source = "synop"` or `source = "html"` to override the default for any interval.
+
+---
+
+## 1. Hourly wind patterns over Svalbard (SYNOP backend)
+
+Download a full year of hourly observations and visualize wind patterns and temperature advection
+using the [openair](https://davidcarslaw.github.io/openair/) package.
+
+With the SYNOP backend the output already contains:
+
+- `ws` — wind speed in **m/s**
+- `wd` — wind direction in **degrees** (no character-to-degrees conversion needed)
+- `t2m` — air temperature in °C
+- `date` — POSIXct timestamp in UTC (the column name openair expects)
+
+```{r svalbard-download, echo=TRUE}
 library(climate)
-# downloading data
-df <- meteo_ogimet(interval = "hourly",
-                     date = c("2018-01-01", "2018-12-31"), 
-                     station = "01008")
 
-# loading external packages:
-library(dplyr)
-library(openair) # external package for plotting wind roses
-
-# converting wind direction from character into degress required by most 
-wdir <- data.frame(ddd = c("CAL","N","NNE","NE","ENE","E","ESE","SE","SSE",
-                           "S","SSW","SW","WSW","W","WNW","NW","NNW"),
-                   dir = c(NA, 0:15 * 22.5), stringsAsFactors = FALSE)
-# changing date column to the format required by openair package:
-df$Date <- as.POSIXct(df$Date, tz = "UTC")
-df$date <- df$Date
-df <- left_join(df, wdir)
-
-df$ws <- df$ffkmh / 3.6 # conversion to m/s from km/h
-df$gust <- as.numeric(df$Gustmax) / 3.6 # conversion to m/s from km/h
-windRose(mydata = df, ws = "ws", wd = "dir", type = "season", paddle = FALSE, 
-         main = "Svalbard Lufthavn (2018)", ws.int = 3, dig.lab = 3, layout = c(4, 1))
-
-# do we miss any data?
-summaryPlot(df[ ,c("date", "TC", "ws", "gust")])
-
-# which sectors are responsible for warm/cold air mass advection:
-polarPlot(df, pollutant = "TC", x = "ws", wd = "dir", k = 50, force.positive = FALSE, 
-          type = "season", layout = c(4, 1), resolution = "fine",  normalise = FALSE)
+# Download hourly data for Svalbard Lufthavn (WMO 01008)
+df = meteo_ogimet(interval = "hourly",
+                  date     = c("2018-01-01", "2018-12-31"),
+                  station  = "01008")
+head(df[, c("date", "station", "t2m", "ws", "wd")])
 ```
+
+```{r svalbard-windrose, echo=TRUE, message=FALSE, warning=FALSE}
+library(openair)
+
+# Wind rose by season — no unit conversion needed
+windRose(mydata  = df,
+         ws      = "ws",
+         wd      = "wd",
+         type    = "season",
+         paddle  = FALSE,
+         main    = "Svalbard Lufthavn (2018)",
+         ws.int  = 3,
+         dig.lab = 3,
+         layout  = c(4, 1))
+```
+
+```{r svalbard-timeplot, echo=TRUE}
+# Temporal overview of temperature and wind speed
+timePlot(df, pollutant = c("t2m", "ws"))
+```
+
+```{r svalbard-polar, echo=TRUE}
+# Which wind sectors bring warm / cold air masses?
+polarPlot(df,
+          pollutant     = "t2m",
+          x             = "ws",
+          wd            = "wd",
+          k             = 50,
+          force.positive = FALSE,
+          type          = "season",
+          layout        = c(4, 1),
+          resolution    = "fine",
+          normalise     = FALSE)
+```
+
+---
+
+## 2. Daily summaries — multi-station temperature comparison
+
+The HTML backend (`interval = "daily"`) returns pre-aggregated daily statistics (Tmax, Tmin, Tavg,
+precipitation, etc.) for one or more stations.
+
+```{r daily-download, echo=TRUE}
+library(climate)
+
+# Daily summaries for two Polish stations: Poznan (12330) and Warsaw (12375)
+daily = meteo_ogimet(interval = "daily",
+                     date     = c("2023-06-01", "2023-08-31"),
+                     station  = c(12330, 12375),
+                     coords   = TRUE)
+head(daily)
+```
+
+```{r daily-plot, echo=TRUE, message=FALSE}
+library(ggplot2)
+
+# Compare average temperatures between the two stations
+ggplot(daily, aes(x = as.Date(Date), y = TemperatureCAvg,
+                  colour = factor(station_ID), group = station_ID)) +
+  geom_line() +
+  labs(title  = "Daily average temperature — summer 2023",
+       x      = "Date",
+       y      = "Temperature (°C)",
+       colour = "Station (WMO ID)") +
+  theme_bw()
+```
+
+---
+
+## 3. Country-level bulk download
+
+The SYNOP backend supports downloading all Ogimet stations for an entire country in a single
+request via the `country_name` argument. This is useful for spatial analysis.
+
+```{r country-download, echo=TRUE}
+library(climate)
+
+# All stations in Poland for a single day
+poland = meteo_ogimet(interval      = "hourly",
+                      country_name  = "Poland",
+                      date          = c("2023-12-15", "2023-12-15"))
+
+cat("Stations:", length(unique(poland$station)), "\n")
+cat("Observations:", nrow(poland), "\n")
+head(poland[, c("date", "station", "t2m", "ws", "slp")])
+```
+
+```{r country-map, echo=TRUE, message=FALSE, warning=FALSE}
+# Quick spatial overview — requires coordinates from stations_ogimet()
+library(dplyr)
+
+station_meta = stations_ogimet(country = "Poland", date = Sys.Date())
+
+# Join decoded observations with coordinates
+poland_geo = poland %>%
+  group_by(station) %>%
+  summarise(t2m_mean = mean(t2m, na.rm = TRUE), .groups = "drop") %>%
+  left_join(station_meta, by = c("station" = "wmo_id"))
+
+ggplot(poland_geo, aes(x = lon, y = lat, colour = t2m_mean, size = t2m_mean)) +
+  geom_point(alpha = 0.7) +
+  scale_colour_distiller(palette = "RdYlBu", direction = -1, name = "T2m (°C)") +
+  coord_quickmap() +
+  labs(title = "Mean temperature — Poland, 2023-12-15") +
+  theme_bw() +
+  theme(legend.position = "right")
+```
+
+---
+
+## 4. Full SYNOP output with `return_list`
+
+Setting `return_list = TRUE` returns a named list with two data frames: `$data` (the compact
+20-column simplified view) and `$full` (the complete parser output with 30+ columns including
+cloud types, precipitation period, snow state, etc.).
+
+```{r return-list, echo=TRUE}
+library(climate)
+
+result = meteo_ogimet(interval     = "hourly",
+                      station      = 12330,
+                      date         = c("2023-06-01", "2023-06-03"),
+                      return_list  = TRUE)
+
+# Compact view
+names(result$data)
+
+# Full parser output
+names(result$full)
+
+# Variables only available in the full output
+result$full[1, c("low_cloud_type", "middle_cloud_type", "high_cloud_type",
+                  "precipitation_time", "snow_depth_state", "source")]
+```
+
+---
+
+## 5. Selecting the backend explicitly
+
+Override the automatic backend selection with the `source` argument:
+
+```{r backend-override, echo=TRUE}
+library(climate)
+
+# Force SYNOP backend for daily data
+poznan_synop = meteo_ogimet(interval = "daily",
+                            station  = 12330,
+                            date     = c("2023-06-01", "2023-06-07"),
+                            source   = "synop")
+head(poznan_synop[, c("date", "station", "t2m", "tmax", "tmin", "precip")])
+
+# Force HTML backend for hourly data (returns km/h wind speed, character wind direction, etc.)
+poznan_html = meteo_ogimet(interval = "hourly",
+                           station  = 12330,
+                           date     = c("2023-06-01", "2023-06-03"),
+                           source   = "html",
+                           coords   = TRUE,
+                           precip_split = TRUE)
+head(poznan_html[, c("station_ID", "Date", "TC", "ffkmh", "ddd", "pr6", "pr12", "pr24")])
+```
+
+> **Note:** `meteo_ogimet_synop()` is deprecated. Use `meteo_ogimet(source = "synop")` instead.

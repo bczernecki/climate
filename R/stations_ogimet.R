@@ -6,7 +6,6 @@
 #' @param date a day when measurements were done in all available locations
 #' @param add_map logical - whether to draw a map based on downloaded dataset (requires `maps` package)
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
-#' @importFrom XML readHTMLTable
 #' @importFrom utils object.size
 #' 
 #' @export

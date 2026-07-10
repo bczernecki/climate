@@ -33,7 +33,7 @@ meteo_imgw_datastore(
 }}
 
 \item{stations}{\itemize{
-\item character vector with station names as visible in the \code{meteo_imgw_telemetry_stations()}.
+\item character vector with station names as visible in the \code{stations_meteo_imgw_telemetry()}.
 Default \code{NULL} means to download data for all available stations.
 }}
 

@@ -21,7 +21,6 @@
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that
 #' shortens column names
-#' @importFrom XML readHTMLTable
 #' @importFrom utils download.file unzip read.csv head
 #' @importFrom data.table fread
 #' @returns data.frame with a daily meteorological measurements
@@ -104,9 +103,8 @@ meteo_imgw_daily_bp = function(rank,
   a = readLines(temp, warn = FALSE)
   unlink(temp)
 
-  ind = grep(readHTMLTable(a)[[1]]$Name, pattern = "/")
-  catalogs = as.character(readHTMLTable(a)[[1]]$Name[ind])
-
+  catalogs = unlist(regmatches(a, gregexpr('<a href="([^"/?][^"]*)/">', a, perl = TRUE)))
+  catalogs = gsub('<a href="|/">', "", catalogs)
   years_in_catalogs = strsplit(gsub(x = catalogs, pattern = "/", replacement = ""),
     split = "_"
   )
@@ -128,8 +126,10 @@ meteo_imgw_daily_bp = function(rank,
       folder_contents = readLines(temp, warn = FALSE)
       unlink(temp)
 
-      ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
-      files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
+      all_links = regmatches(folder_contents, gregexpr('<a href="([^"]*)">([^<]*)</a>', folder_contents))
+      fits = regmatches(all_links, gregexpr('<a href="[^"]*">', all_links))
+      files_in_dir = as.character(na.omit(gsub('<a href="|">', "", fits)))
+      files = grep(files_in_dir, pattern = "zip", value = TRUE)
       addresses_to_download = paste0(address, files)
 
       # check against names in ids_to_download if station is not NULL:
@@ -200,8 +200,10 @@ meteo_imgw_daily_bp = function(rank,
       folder_contents = readLines(temp, warn = FALSE)
       unlink(temp)
 
-      ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
-      files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
+      all_links = regmatches(folder_contents, gregexpr('<a href="([^"]*)">([^<]*)</a>', folder_contents))
+      fits = regmatches(all_links, gregexpr('<a href="[^"]*">', all_links))
+      files_in_dir = as.character(na.omit(gsub('<a href="|">', "", fits)))
+      files = grep(files_in_dir, pattern = "zip", value = TRUE)
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
@@ -285,8 +287,10 @@ meteo_imgw_daily_bp = function(rank,
       folder_contents = readLines(temp, warn = FALSE)
       unlink(temp)
 
-      ind = grep(readHTMLTable(folder_contents)[[1]]$Name, pattern = "zip")
-      files = as.character(readHTMLTable(folder_contents)[[1]]$Name[ind])
+      all_links = regmatches(folder_contents, gregexpr('<a href="([^"]*)">([^<]*)</a>', folder_contents))
+      fits = regmatches(all_links, gregexpr('<a href="[^"]*">', all_links))
+      files_in_dir = as.character(na.omit(gsub('<a href="|">', "", fits)))
+      files = grep(files_in_dir, pattern = "zip", value = TRUE)
       addresses_to_download = paste0(address, files)
 
       for (j in seq_along(addresses_to_download)) {
@@ -394,10 +398,8 @@ meteo_imgw_daily_bp = function(rank,
     all_data = remove_status(all_data)
   }
 
-  # remove duplicates and shorten colnames
-  # turned off temporarily:
-  # all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
-  rownames(all_data) = NULL
+  all_data = imgw_rename_params_to_labels(all_data, meta)
+  all_data = meteo_shortening_imgw(all_data, col_names = col_names, remove_duplicates = TRUE)
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
   if (length(env$logs) > 0) {

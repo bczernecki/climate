@@ -14,7 +14,7 @@ sounding_wyoming(
   dd,
   hh,
   min = 0,
-  bufr = FALSE,
+  source = "DETECT",
   allow_failure = TRUE
 )
 }
@@ -31,8 +31,8 @@ sounding_wyoming(
 
 \item{min}{minute - single number denoting initial minute of sounding; applies only to BUFR soundings.}
 
-\item{bufr}{\itemize{
-\item BUFR or TEMP sounding to be decoded. By default TEMP is used. For BUFR soundings use \code{bufr = TRUE}
+\item{source}{\itemize{
+\item "BUFR", "TEMP" or "DETECT". By default "DETECT" is used.
 }}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
@@ -47,12 +47,12 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
 \item RELH - Relative humidity (\%)
 \item MIXR - Mixing ratio (g/kg)
 \item DRCT - Wind direction (deg)
-\item SKNT - Wind speed (knots)
-\item THTA = (K)
-\item THTE = (K)
-\item THTV = (K)
+\item SPED - Wind speed (m/s)
+\item THTA - (K)
+\item THTE - (K)
+\item THTV - (K)
 }
-The second list contains metadata and calculated thermodynamic / atmospheric instability indices (for TEMP soundings only)
+The second list contains metadata for time of observation and station location
 
 A list of 2 data.frames where first data frame represents parameters of upper parts o with columns describing the meteorogical parameters (e.g. temperature, air pressure) where each row represent a measurement,
 depending on the height. Second data.frame presents a description of the conditions under which the sounding was carried out.
@@ -67,11 +67,11 @@ Downloading the measurements of the vertical profile of atmosphere (also known a
 # using TEMP and BUFR sounding formats
 ##############################################################################
   TEMP = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
-                          hh = 12, min = 00)
+                          hh = 12, min = 00, source = "TEMP")
   head(TEMP[[1]])
   
   BUFR = sounding_wyoming(wmo_id = 45004, yy = 2021, mm = 07, dd = 17, 
-                          hh = 12, min = 00, bufr = TRUE)
+                          hh = 12, min = 00, source = "BUFR")
   head(BUFR[[1]])
 
 
@@ -79,11 +79,12 @@ Downloading the measurements of the vertical profile of atmosphere (also known a
 ### example with a random date to download sounding from LEBA, PL station: ###
 ##############################################################################
 
+ # no "source" argument is needed as the function will detect format automatically
   profile = sounding_wyoming(wmo_id = 12120, 
                              yy = sample(2000:2019,1),
                              mm = sample(1:12,1), 
                              dd = sample(1:20,1), 
-                             hh = 0)
+                             hh = 0) 
   # plot(profile[[1]]$HGHT, profile[[1]]$PRES, type = 'l')
 }
 

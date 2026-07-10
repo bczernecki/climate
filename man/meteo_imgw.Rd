@@ -5,52 +5,73 @@
 \title{Meteorological data from the IMGW-PIB official repository}
 \usage{
 meteo_imgw(
-  interval,
+  interval = NULL,
   rank = "synop",
   year,
   status = FALSE,
   coords = FALSE,
   station = NULL,
   col_names = "short",
+  parameters = NULL,
   ...
 )
 }
 \arguments{
-\item{interval}{temporal resolution of the data ("hourly", "daily", "monthly")}
+\item{interval}{temporal resolution of the data: \code{"hourly"}, \code{"daily"}, or \code{"monthly"}.
+Not used when \code{rank = "telemetry"} (telemetry data are always at 10-minute intervals).
+Defaults to \code{NULL}, which is only valid together with \code{rank = "telemetry"}.}
 
-\item{rank}{rank of the stations: "synop" (default), "climate" or "precip"}
+\item{rank}{rank of the stations: \code{"synop"} (default), \code{"climate"}, \code{"precip"}, or \code{"telemetry"}.
+Use \code{"telemetry"} for the automated IMGW datastore network (data available since 2008).}
 
-\item{year}{vector of years (e.g., 1966:2000)}
+\item{year}{vector of years (e.g., \code{1966:2000}).
+For \code{rank = "telemetry"} all years must be >= 2008.}
 
 \item{status}{leave the columns with measurement and observation statuses
-(default status = FALSE - i.e. the status columns are deleted)}
+(default \code{FALSE} — status columns are deleted). Not used when \code{rank = "telemetry"}.}
 
-\item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
+\item{coords}{add coordinates of the station (logical value \code{TRUE} or \code{FALSE}).
+Default \code{FALSE}.}
 
 \item{station}{name of meteorological station(s).
-It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
-Please note that station names may change over time and thus sometimes 2 names
-are required in some cases, e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.}
+For ranks \code{"synop"}, \code{"climate"}, \code{"precip"}: station name(s) in CAPITAL LETTERS.
+Please note that station names may change over time — sometimes two names are required,
+e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.
+For \code{rank = "telemetry"}: station name(s) as listed by \code{stations_meteo_imgw_telemetry()}.
+\code{NULL} (default) downloads all available stations.}
 
-\item{col_names}{three types of column names possible: "short" - default, values with shorten names,
-"full" - full English description, "polish" - original names in the dataset}
+\item{col_names}{column name style: \code{"short"} (default), \code{"full"} (English descriptions),
+or \code{"polish"} (original dataset names). Not used when \code{rank = "telemetry"}.}
 
-\item{...}{other parameters that may be passed to the 'shortening' function that shortens column names}
+\item{parameters}{character vector of parameter codes to download.
+Only used when \code{rank = "telemetry"}. \code{NULL} (default) downloads all available parameters.
+Accepted values: \code{"wd"}, \code{"t2m"}, \code{"t0m"}, \code{"rr_24h"}, \code{"rr_1h"}, \code{"rr_10min"},
+\code{"ws"}, \code{"ws_max"}, \code{"gust"}, \code{"rh"}, \code{"water_in_snow"}.}
+
+\item{...}{other parameters passed to the column-shortening function. Not used when
+\code{rank = "telemetry"}.}
 }
 \value{
-A data.frame with columns describing the meteorological parameters
-(e.g. temperature, wind speed, precipitation) where each row represent a measurement,
-depending on the interval, at a given hour, month or year.
-If \code{coords = TRUE} additional two
-columns with geographic coordinates are added.
+A data.frame with meteorological parameters where each row is a measurement.
+For ranks \code{"synop"}, \code{"climate"}, \code{"precip"}: measurements at a given hour, day, or month,
+depending on \code{interval}. If \code{coords = TRUE} two additional coordinate columns are appended.
+For \code{rank = "telemetry"}: a data.table with 10-minute interval observations (not
+expert-validated). If \code{coords = TRUE} columns \code{name}, \code{lon}, \code{lat}, and \code{alt} are appended.
 }
 \description{
 Downloading hourly, daily, and monthly meteorological data from the
-SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collection.
+SYNOP / CLIMATE / PRECIP stations, or sub-hourly (10-minute) telemetry data from the
+automated network, all available in the danepubliczne.imgw.pl collection.
 }
 \examples{
 \donttest{
   x = meteo_imgw("monthly", year = 2018, coords = TRUE)
   head(x)
+
+  # Telemetry (10-minute) data from automated stations (available since 2008):
+  tel = meteo_imgw(rank = "telemetry", year = 2022,
+                   parameters = "t2m",
+                   station = "HALA GĄSIENICOWA")
+  head(tel)
 }
 }

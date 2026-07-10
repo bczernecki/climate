@@ -10,6 +10,7 @@
 ^data-raw$
 ^vignettes/articles$
 ^\.github$
+^\.github/copilot-instructions\.md$
 ^\.Rhistory$
 ^\.lintr$
 vignettes/articles/usecase.Rmd
@@ -17,3 +18,6 @@ vignettes/articles/usecase.Rmd
 ^.codecov.yml$
 ^tests$
 ^.covrignore$
+^\.positai$
+^\.claude$
+CLAUDE.md$

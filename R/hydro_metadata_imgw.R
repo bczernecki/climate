@@ -37,6 +37,8 @@ hydro_metadata_imgw_bp = function(interval) {
     #miesieczne
     address_meta = paste0(base_url, "miesieczne/MIES_publiczne_format.txt")
     meta = clean_metadata_hydro(address_meta, interval)
+    # remove everything after " ("
+    meta$label = trimws(gsub(x = meta$label, " \\(.*", ""))
   } else {
     stop("Wrong `interval` value. It should be either 'daily' or 'monthly'.")
   }

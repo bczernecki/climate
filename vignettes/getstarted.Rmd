@@ -14,51 +14,77 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-old <- options(scipen = 999)
+old = options(scipen = 999)
 ```
 
-The goal of the  **climate** R package is to automatize downloading of meteorological
+The goal of the **climate** R package is to automatize downloading of *in-situ* meteorological
 and hydrological data from publicly available repositories:
 
-- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) 
-- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/).
+- OGIMET [(ogimet.com)](http://ogimet.com/index.phtml.en) - up-to-date collection of SYNOP dataset
+- University of Wyoming - atmospheric vertical profiling data (http://weather.uwyo.edu/upperair/)
 - Polish Institute of Meteorology and Water Management - National Research Institute [(IMGW-PIB)](https://dane.imgw.pl/)
-- National Oceanic & Atmospheric Administration - Earth System Research Laboratory - Global
-  Monitoring Division [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
-- National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www.ncei.noaa.gov/pub/data/noaa/)
+- National Oceanic & Atmospheric Administration - Earth System Research Laboratories - Global Monitoring Laboratory [(NOAA)](https://gml.noaa.gov/ccgg/trends/)
+- National Centers for Environmental Information, National Oceanic & Atmospheric Administration - National Climatic Data Center - Integrated Surface Hourly (ISH) [(NOAA)](https://www.ncei.noaa.gov/pub/data/noaa/)
 
 ## Functions 
 
-The **climate** package consists of ten main functions - three for meteorological data, one for hydrological data and six auxiliary functions and datasets:
-  
 ### Meteorological data
-  
-- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations available in the ogimet.com collection.
-Any meteorological (aka SYNOP) station working under the World Meteorological Organizaton  (WMO) framework after year 2000 should be accessible.
 
-- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations available in the dane.imgw.pl collection. 
-It is a wrapper for `meteo_monthly()`, `meteo_daily()`, and `meteo_hourly()`
+- **meteo_ogimet()** - Downloading hourly and daily meteorological data from the SYNOP stations
+available in the ogimet.com collection. Any meteorological (aka SYNOP) station working under the
+World Meteorological Organization (WMO) framework after year 2000 should be accessible.
+Two backends are available and selected automatically: raw **SYNOP decoding** (`source = "synop"`,
+default for `interval = "hourly"`) and **HTML scraping** (`source = "html"`, default for
+`interval = "daily"`). Country-level bulk downloads are supported via the `country_name` argument
+(SYNOP backend only).  
 
-- **meteo_noaa_hourly()** - Downloading hourly NOAA Integrated Surface Hourly (ISH) meteorological data - Some stations have > 100 years long history of observations
+- **meteo_imgw()** - Downloading hourly, daily, and monthly meteorological data from the
+SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection.
+It is a wrapper for `meteo_monthly()`, `meteo_daily()`, `meteo_hourly()` and
+`meteo_imgw_datastore()` which gives access from monthly to even 10-min datasets.
 
-- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data)
+- **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH)
+meteorological data - some stations have > 100 years of observations.
+
+- **meteo_noaa_co2()** - Downloading monthly CO2 measurements from Mauna Loa Observatory.
+
+- **sounding_wyoming()** - Downloading measurements of the vertical profile of atmosphere
+(aka rawinsonde data).
+
+- **synop_parser()** - Decoding raw FM-12 SYNOP meteorological messages into structured R lists or
+data frames. For a full walkthrough see the
+[SYNOP Messages vignette](https://bczernecki.github.io/climate/articles/synop_parser.html).
 
 ### Hydrological data
 
-- **hydro_imgw()** - Downloading hourly, daily, and monthly hydrological data from the SYNOP / CLIMATE / PRECIP stations available in the
-danepubliczne.imgw.pl collection.
-It is a wrapper for `hydro_monthly()`, and `hydro_daily()`
+- **hydro_imgw()** - Downloading daily and monthly hydrological data from stations available in the
+danepubliczne.imgw.pl collection. It is a wrapper for `hydro_monthly()` and `hydro_daily()`.
+
+- **hydro_imgw_datastore()** - Downloading hourly and sub-hourly hydrological data from the
+IMGW-PIB hydro telemetry stations.
 
 ### Auxiliary functions and datasets
 
 - **stations_ogimet()** - Downloading information about all stations available in the selected
 country in the Ogimet repository
-- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected point
-available for the selected country in the Ogimet repository
-- **imgw_meteo_stations** - Built-in metadata from the IMGW-PIB repository for meteorological   stations, their geographical coordinates, and ID numbers
-- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological   stations, their geographical coordinates, and ID numbers
-- **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations (from the IMGW-PIB repository)
-- **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations (from the IMGW-PIB repository)
+- **nearest_stations_ogimet()** - Downloading information about nearest stations to the selected
+point using the Ogimet repository
+- **nearest_stations_noaa()** - Downloading information about nearest stations to the selected
+point in the NOAA ISH meteorological repository
+- **nearest_stations_imgw()** - List of nearby meteorological or hydrological IMGW-PIB stations
+in Poland
+- **imgw_meteo_stations** - Built-in metadata from the IMGW-PIB repository for meteorological
+stations, their geographical coordinates, and ID numbers
+- **imgw_hydro_stations** - Built-in metadata from the IMGW-PIB repository for hydrological
+stations, their geographical coordinates, and ID numbers
+- **stations_meteo_imgw_telemetry** - Downloading complete and up-to-date coordinates for
+IMGW-PIB telemetry meteorological stations
+- **stations_hydro_imgw_telemetry** - Downloading complete and up-to-date coordinates for
+IMGW-PIB telemetry hydrological stations
+- **imgw_meteo_abbrev** - Dictionary explaining variables available for meteorological stations
+(from the IMGW-PIB repository)
+- **imgw_hydro_abbrev** - Dictionary explaining variables available for hydrological stations
+(from the IMGW-PIB repository)
 
 ## Examples
 
@@ -73,7 +99,7 @@ Finding a 50 nearest meteorological stations for a given coordinates in a given 
 
 ``` {r stations , eval=T, fig.width=7,fig.height=7, fig.fullwidth=TRUE}
 library(climate)
-ns = nearest_stations_ogimet(country = c("United Kingdom", "France"),
+ns = nearest_stations_ogimet(country = c("United Kingdom"),
                              point = c(-3, 50),
                              no_of_stations = 50, 
                              add_map = TRUE)
@@ -111,9 +137,9 @@ df = readRDS(system.file("extdata/vignettes/svalbard_noaa.rds", package = "clima
 df = meteo_noaa_hourly(station = "010080-99999", year = 2016)
 
 # You can also download the same (but more granular) data with Ogimet.com (example for year 2016):
-# df = meteo_ogimet(interval = "hourly", 
+# df = meteo_ogimet(interval = "hourly",
 #                   date = c("2016-01-01", "2016-12-31"),
-#                   station = c("01008"))
+#                   station = "01008")
 ```
 
 ``` {r noaa-kable,eval=T}
@@ -131,7 +157,7 @@ colnames(df2)[c(1, 3:4)] = c("PRESS", "TEMP", "DEWPT") # changing column names
 ```
 
 ```{r sonda, eval=F, include=T}
-profile_demo <- sounding_wyoming(wmo_id = 12120,
+profile_demo = sounding_wyoming(wmo_id = 12120,
                                  yy = 2000,
                                  mm = 3,
                                  dd = 23,
@@ -190,7 +216,7 @@ h = readRDS(system.file("extdata/vignettes/hydro_monthly.rds", package = "climat
 library(climate)
 library(dplyr)
 library(tidyr)
-h = hydro_imgw(interval = "monthly", year = 2001:2002, coords = TRUE)
+h = hydro_imgw(interval = "monthly", year = 2001:2002)
 ```
 ```{r data-3, eval=TRUE, include=TRUE, echo=TRUE}
 knitr::kable(head(h))
@@ -213,6 +239,46 @@ knitr::kable(head(h2))
 
 knitr::kable(head(h2),
              caption = "Exemplary data frame of hydrological preprocesssing.")
+```
+
+### Example 7
+Downloading monthly CO2 measurements from Mauna Loa Observatory and plotting the Keeling Curve:
+
+```{r co2, eval=FALSE, include=TRUE}
+library(climate)
+library(ggplot2)
+
+co2 = meteo_noaa_co2()
+co2$date = ISOdate(co2$yy, co2$mm, 1)
+
+ggplot(co2, aes(date, co2_avg)) +
+  geom_line() +
+  geom_smooth() +
+  theme_bw() +
+  labs(title = "Carbon Dioxide (CO2)",
+       subtitle = "Mauna Loa Observatory",
+       x = "", y = "ppm")
+```
+
+### Example 8
+Decoding raw SYNOP meteorological messages with **synop_parser()**:
+
+```{r synop_parser, eval=TRUE, include=TRUE}
+library(climate)
+
+synop_code = "AAXX 01004 88889 12782 61506 10094 20047 30111 40197 53007 60001 81541"
+
+# Decode a single message — returns a named list
+result = synop_parser(synop_code)
+result$air_temperature$value   # 9.4°C
+result$wind_speed$value        # 6 kt
+result$sea_level_pressure$value # 1019.7 hPa
+```
+
+```{r parser-df, eval=TRUE, include=TRUE}
+# Return a tidy data frame with one row per message
+df_parser = synop_parser(synop_code, as_data_frame = TRUE)
+knitr::kable(df_parser[, 1:8])
 ```
 
 ## Acknowledgment

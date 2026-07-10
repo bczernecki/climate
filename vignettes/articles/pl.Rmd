@@ -21,26 +21,23 @@ options(scipen = 999)
 ```
 
 Głównym celem pakietu **climate** jest zapewnienie wygodnego i programowalnego dostępu do danych meteorologicznych 
-i hydrologicznych z publicznie dostępnych repozytoriów:
+i hydrologicznych z publicznie dostępnych repozytoriów, w tym m.in.:
 
-- Polski Instytut Metrologii i Gospodarki Wodnej - Państwowy Instytut Badawczy (IMGW-PIB)
+- Instytut Meteorologii i Gospodarki Wodnej - Państwowy Instytut Badawczy (IMGW-PIB)
 
 - OGIMET (ogimet.com)
 
-- Strona University of Wyoming - dane atmosferycznego profilowania pionowego (http://weather.uwyo.edu/upperair/).
+-  University of Wyoming - dane atmosferyczne dla radiosondaży (http://weather.uwyo.edu/upperair/).
 
 ## Funkcje
 
 
-
-Pakiet **climate** składa się z czterech głównych funkcji - dwóch dla danych meteorologicznych, jednej dla danych
-hydrologicznych i jednej dla sondowania meteo:
+Pakiet **climate** składa się z kilku głównych funkcji:
 
 1. Dane meteorologiczne 
 
-- **meteo_ogimet()** - Umożliwia pobieranie godzinnych i dziennych danych meteorologicznych ze stacji SYNOP dostępnych 
-w repozytorium ogimet.com. Każda stacja meteorologiczna (Synoptyczna) pracująca w ramach World Meteorological
-framework powinna być dostępne po roku 2000 roku 
+- **meteo_ogimet()** - Umożliwia pobieranie godzinowych i dobowych danych meteorologicznych ze stacji meteorologicznych nadających depesze SYNOP (FM-12) które są udostępnione w serwisie ogimet.com. Każda stacja meteorologiczna (synoptyczna) pracująca w ramach World Meteorological
+framework udostępnia swoje dane w ramach serwisu od ok. 2000 roku 
 
      - **stations_ogimet()** - Umożliwia uzyskiwanie współrzędnych geograficznych, położenia stacji nad poziomem 
      morza oraz  identyfikatora WMO i nazwy stacji dla kraju określonej przez użytkownika; opcjonalnie 
@@ -72,7 +69,7 @@ h = hydro_imgw(interval = "monthly", year = 2001:2010, coords = TRUE)
 head(h)
 ```
 
-Zmienna  `MCWSKEX` reprezentuje id ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych`hydro_abbrev`.]
+Zmienna  `MCWSKEX` reprezentuje etykietę ekstremum, gdzie "1" oznacza minimum, "2" oznacza średnią, a "3" maksimum. ^[Więcej informacji na ten temat można znaleźć w zestawie danych `hydro_abbrev`.]
 Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk, np. związanych z przepływami maksymalnymi. W tym
 celu pozostaną w ramce danych tylko wartości przepływów maksymalnych oraz kolumny zawierające interesujące nas 
 informacje, tj. identyfikator stacji - `id`, rok hydrologiczny (`MCROKH`), szerokość geograficzną `X` i długość 
@@ -83,10 +80,10 @@ kolejnych kolumnach.
   
 ```{r filtering, eval=TRUE, include=TRUE}
 h2 = h %>%
-  filter(MCWSKEX == 3) %>%
-  select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
-  group_by(MCROKH, id, PSNZWP, X, Y) %>%
-  summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
+  dplyr::filter(MCWSKEX == 3) %>%
+  dplyr::select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
+  dplyr::group_by(MCROKH, id, PSNZWP, X, Y) %>%
+  dplyr::summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE),1)) %>% 
   spread(MCROKH, srednie_roczne_Q)
 ```
 
