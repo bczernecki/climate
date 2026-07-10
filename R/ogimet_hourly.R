@@ -21,7 +21,7 @@
 #' }
 #'
 
-ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()), 
+ogimet_hourly = function(date = c(Sys.Date() - 30, Sys.Date()),
                          station = 12330,
                          precip_split = TRUE,
                          allow_failure = TRUE) {
@@ -47,31 +47,30 @@ ogimet_hourly_bp = function(date = date,
                             station = station,
                             precip_split = precip_split) {
   
-  dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") - 1
+  dates = seq.Date(min(as.Date(date)), max(as.Date(date)), by = "1 month") 
   dates = unique(c(dates, as.Date(max(date))))
   diff_dates = diff(dates)
 
   # initalizing empty data frame for storing results:
   data_station =
     data.frame(
-      "Date" = character(),
-      "hour" = character(),
-      "UTC" = character(),
-      "TC" = character(),
-      "TdC" = character(),
-      "TmaxC" = character(),
-      "TminC" = character(),
+      "Date_1" = character(),
+      "Date_2" = character(),
+      "T" = character(),
+      "Td" = character(),
+      "Tmax" = character(),
+      "Tmin" = character(),
       "ddd" = character(),
       "ffkmh" = character(),
       "Gustkmh" = character(),
       "P0hPa" = character(),
-      "PseahPa" = character(),
+      "P seahPa" = character(),
       "PTnd" = character(),
-      "Precmm" = character(),
+      "Prec" = character(),
       "Nt" = character(),
       "Nh" = character(),
       "HKm" = character(),
-      "InsoD1" = character(),
+      "InsoD-1" = character(),
       "Viskm" = character(),
       "Snowcm" = character(),
       "WW" = character(),
@@ -103,9 +102,15 @@ ogimet_hourly_bp = function(date = date,
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
-      ndays = as.numeric(diff_dates[i - 1])
-      ndays = ifelse(ndays <= 0, 1, ndays)
-      ndays = sprintf("%02d", ndays)
+      ndays = 32 # default number of days to download
+      hr = "06" # default hour for daily reports
+      
+      if (Sys.Date() == max(date) & as.numeric(format(Sys.time(), "%H")) < 6) {
+        # if current time is before 6 UTC, then download data for 00 UTC of the current day"
+        month = format(Sys.time() - 3600, "%m", tz = 'UTC')
+        day = format(Sys.time() - 3600, "%d", tz = 'UTC')
+        hr = format(Sys.time() - 3600, "%H", tz = 'UTC')
+      }
       
       linkpl2 = paste("https://ogimet.com/cgi-bin/gsynres?ind=",
                       station_nr,
@@ -117,7 +122,8 @@ ogimet_hourly_bp = function(date = date,
                       month,
                       "&day=",
                       day,
-                      "&hora=06",
+                      "&hora=",
+                      hr,
                       sep = "")
       
       if (month == "01") {
@@ -125,7 +131,8 @@ ogimet_hourly_bp = function(date = date,
                         station_nr,
                         "&lang=en&decoded=yes&ndays=32&ano=",
                         year,
-                        "&mes=02&day=1&hora=06",
+                        "&mes=02&day=1&hora=", 
+                        hr,
                         sep = "")
       }
       
@@ -151,13 +158,11 @@ ogimet_hourly_bp = function(date = date,
                          " You can check station ID at https://ogimet.com/display_stations.php?lang=en&tipo=AND&isyn=&oaci=&nombre=&estado=&Send=Send"))
           return(data_station)
         }
-
-        # parse_html_table returns the header row without so need to move names 1 position to the right:
-        if (!any(names(b) %in% c("hour", "UTC"))) {
-          names(b)[2:ncol(b)] = names(b)[1:(ncol(b) - 1)]
-          names(b)[2] = "hour"
-        }
-
+        
+        # parse_html_table returns the header row with paranthesis and percent characters that needs to be removed:
+        names(b) = gsub("\\s*\\([^)]*\\)", "", names(b))
+        names(b) = gsub("%", "", names(b))
+        
         b["station_ID"] = station_nr
 
         coordinates = sapply(c("Latitude", "Longitude"), function(lab) {
@@ -181,27 +186,28 @@ ogimet_hourly_bp = function(date = date,
     # get rid off "---" standing for missing/blank fields:
     data_station[which(data_station == "--" | data_station == "---" | data_station == "----" | data_station == "-----", arr.ind = TRUE)] = NA
     # changing time..
-    data_station$Date = as.POSIXct(paste(data_station$Date, data_station$hour), "%m/%d/%Y %H:%M", tz = 'UTC')
-    data_station$hour = NULL
+    data_station$Date = as.POSIXct(paste(data_station$Date_1, data_station$Date_2), "%m/%d/%Y %H:%M", tz = 'UTC')
+    data_station$Date_2 = NULL
+    data_station$Date_1 = NULL
     
     # changing order of columns and removing blank records:
-    ord1 = c("station_ID", "Lon", "Lat", "Date", "TC")
-    ord1 = c(ord1, setdiff(names(data_station), c("station_ID", "Lon", "Lat", "Date", "TC")))
+    ord1 = c("station_ID", "Lon", "Lat", "Date")
+    ord1 = c(ord1, setdiff(names(data_station), c("station_ID", "Lon", "Lat", "Date")))
     data_station = data_station[, ..ord1]
     
     # splitting precipitation into 6-12-24 hours from a default string in the Precmm column:
     if (precip_split) {
-      if (all(is.na(data_station$Precmm))) {
+      if (all(is.na(data_station$Prec))) {
         data_station$pr6 = NA
         data_station$pr12 = NA
         data_station$pr24 = NA
       } else {
-      data_station$pr6 = precip_split(data_station$Precmm, pattern = "/6")
-      data_station$pr12 = precip_split(data_station$Precmm, pattern = "/12")
-      data_station$pr24 = precip_split(data_station$Precmm, pattern = "/24")
+      data_station$pr6 = precip_split(data_station$Prec, pattern = "/6")
+      data_station$pr12 = precip_split(data_station$Prec, pattern = "/12")
+      data_station$pr24 = precip_split(data_station$Prec, pattern = "/24")
       }
     }
-  
+
     # clipping to interesting period as we're downloading slightly more than needed:
     data_station = data_station[which(as.Date(data_station$Date) >= as.Date(min(date)) & as.Date(data_station$Date) <= as.Date(max(date))), ]
   

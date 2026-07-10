@@ -26,14 +26,20 @@
 
 parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
   
-  # Strips HTML tags and returns plain text
   extract_cell_text = function(cell) {
     txt = gsub("<[^>]+>", "", cell)
     txt = gsub("&nbsp;", " ", txt)
+    txt = gsub("[\x01-\x08\x0B\x0C\x0E-\x1F\x7F]", "", txt, perl = TRUE)
     trimws(txt)
   }
   
-  # Extracts raw <TD>/<TH> cells (including their tags) from one <TR>...</TR>
+  split_html_rows = function(html_chunk) {
+    starts = gregexpr("(?s)<TR[^>]*>", html_chunk, perl = TRUE, ignore.case = TRUE)[[1]]
+    if (starts[1] == -1) return(character(0))
+    ends = c(starts[-1] - 1, nchar(html_chunk))
+    substring(html_chunk, starts, ends)
+  }
+  
   raw_cells_from_row = function(row) {
     regmatches(
       row,
@@ -41,8 +47,6 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
     )[[1]]
   }
   
-  # For a data row, returns both the cleaned text of each cell and a logical
-  # flag marking which cells are images (so they can be dropped later)
   parse_data_row = function(row) {
     raw = raw_cells_from_row(row)
     is_image = grepl("<img", raw, ignore.case = TRUE)
@@ -52,7 +56,6 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
     list(text = text, is_image = is_image)
   }
   
-  # Extracts the first table whose opening tag matches `start_pattern`
   extract_table = function(html, start_pattern) {
     start_pos = regexpr(start_pattern, html, ignore.case = TRUE)
     if (start_pos == -1) stop("No table matching the given pattern was found.")
@@ -61,16 +64,13 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
     substr(remainder, 1, end_pos + attr(end_pos, "match.length") - 1)
   }
   
-  # Reads a numeric attribute (e.g. rowspan="2") from a tag; HTML default is 1
   extract_numeric_attr = function(tag, attr_name, default = 1L) {
-    pattern = paste0(attr_name, '\\s*=\\s*"?([0-9]+)"?')
+    pattern = paste0(attr_name, "\\s*=\\s*[\"']?([0-9]+)[\"']?")
     m = regmatches(tag, regexec(pattern, tag, ignore.case = TRUE))[[1]]
     if (length(m) < 2) default else as.integer(m[2])
   }
   
-  # Reconstructs flat column names from a (possibly multi-row, rowspan/colspan) <THEAD>
   extract_headers = function(table_html) {
-    
     thead_match = regmatches(
       table_html,
       regexpr("(?s)<THEAD>.*?</THEAD>", table_html, perl = TRUE, ignore.case = TRUE)
@@ -79,10 +79,7 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
     if (length(thead_match) > 0) {
       thead_html = thead_match
     } else {
-      all_rows = regmatches(
-        table_html,
-        gregexpr("(?s)<TR>.*?</TR>", table_html, perl = TRUE, ignore.case = TRUE)
-      )[[1]]
+      all_rows = split_html_rows(table_html)
       n_header_rows = 0L
       for (row in all_rows) {
         if (grepl("<TH", row, ignore.case = TRUE)) {
@@ -92,10 +89,7 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
       thead_html = paste(all_rows[seq_len(n_header_rows)], collapse = "\n")
     }
     
-    header_rows = regmatches(
-      thead_html,
-      gregexpr("(?s)<TR>.*?</TR>", thead_html, perl = TRUE, ignore.case = TRUE)
-    )[[1]]
+    header_rows = split_html_rows(thead_html)
     n_rows = length(header_rows)
     
     reserved_until = new.env()
@@ -118,7 +112,7 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
         
         rowspan = extract_numeric_attr(cell, "rowspan", 1L)
         colspan = extract_numeric_attr(cell, "colspan", 1L)
-        text = extract_cell_text(cell)
+        text    = extract_cell_text(cell)
         
         for (c in current_col:(current_col + colspan - 1L)) {
           for (rr in r:(r + rowspan - 1L)) {
@@ -143,30 +137,34 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
       names_out[c] = paste(parts, collapse = "_")
     }
     
-    # de-duplicate repeated names
+    # de-duplicate repeated names (e.g. 8x "Daily weather summary")
     ave(names_out, names_out, FUN = function(x) {
       if (length(x) == 1) x else paste0(x, "_", seq_along(x))
     })
   }
   
-  # -- main parsing section for body --
   table_html = extract_table(html, table_start_pattern)
   column_names = extract_headers(table_html)
   
-  all_rows = regmatches(
-    table_html,
-    gregexpr("(?s)<TR>.*?</TR>", table_html, perl = TRUE, ignore.case = TRUE)
-  )[[1]]
+  all_rows = split_html_rows(table_html)
   data_rows = all_rows[!grepl("<TH", all_rows, ignore.case = TRUE)]
   
   parsed_rows = lapply(data_rows, parse_data_row)
   
-  # image-only columns (e.g. weather icons) are detected from the first data
-  image_mask = parsed_rows[[1]]$is_image
+  image_matrix = do.call(rbind, lapply(parsed_rows, function(row) row$is_image))
+  image_mask = apply(image_matrix, 2, any)
   
   filtered_rows = lapply(parsed_rows, function(row) row$text[!image_mask])
   filtered_names = column_names[!image_mask]
-  filtered_names = gsub("[^A-Za-z0-9]", "", filtered_names)
+  
+  row_lengths = lengths(filtered_rows)
+  if (length(unique(row_lengths)) > 1) {
+    bad_row = which(row_lengths != row_lengths[1])[1]
+    stop(sprintf(
+      "Inconsistent number of cells across data rows: row 1 has %d cells, row %d has %d. Check the source HTML for malformed rows.",
+      row_lengths[1], bad_row, row_lengths[bad_row]
+    ))
+  }
   
   df = as.data.frame(do.call(rbind, filtered_rows), stringsAsFactors = FALSE)
   colnames(df) = filtered_names
@@ -174,7 +172,7 @@ parse_html_table = function(html, table_start_pattern = "<TABLE[^>]*>") {
   # auto-convert to numeric where safe
   for (col in colnames(df)) {
     values = df[[col]]
-    values[values %in% c("----", "---", "")] = NA   # ogimet's missing-value marker
+    values[values %in% c("----", "")] = NA
     numeric_try = suppressWarnings(as.numeric(values))
     
     if (sum(is.na(numeric_try)) == sum(is.na(values))) {

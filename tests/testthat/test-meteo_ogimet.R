@@ -68,18 +68,15 @@ test_that("meteo_ogimet works!", {
                             allow_failure = TRUE))
   
   
-  # turned off for now - requires better HTML parsing strategy for corrupted HTML syntax
-  
   # check precip_split on empty precipitation field
-  #Sys.sleep(20)
-  
-  #petrobaltic = ogimet_hourly(station = 12001,
-  #                       date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),
-  #                       precip_split = TRUE)
-  #if (is.data.frame(petrobaltic) & nrow(petrobaltic) > 0) {
-  #  testthat::expect_true(all(is.na(petrobaltic$pr12)))
-  #  Sys.sleep(20)
-  #}
+  Sys.sleep(20)
+  petrobaltic = ogimet_hourly(station = 12001,
+                        date = c(as.Date("2020-01-01"), as.Date("2020-01-05")),
+                        precip_split = TRUE)
+  if (is.data.frame(petrobaltic) & nrow(petrobaltic) > 0) {
+   testthat::expect_true(all(is.na(petrobaltic$pr12)))
+   Sys.sleep(20)
+  }
 
     
   # only wind measurement are present:

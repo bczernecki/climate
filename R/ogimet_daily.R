@@ -57,19 +57,19 @@ ogimet_daily_bp = function(date = date,
       "Lon" = character(),
       "Lat" = character(),
       "Alt" = character(),
-      "TemperatureCMax" = character(),
-      "TemperatureCMin" = character(),
-      "TemperatureCAvg" = character(),
-      "TdAvgC" = character(),
-      "HrAvg" = character(),
-      "AppTAvgC" = character(),
-      "WindkmhDir" = character(),
-      "WindkmhInt" = character(),
-      "WindkmhGust" = character(),
-      "PresslevHp" = character(),
+      "Temperature_Max" = character(),
+      "Temperature_Min" = character(),
+      "Temperature_Avg" = character(),
+      "TdAvg" = character(),
+      "Hr.Avg" = character(),
+      "App.TAvg" = character(),
+      "Wind_Dir." = character(),
+      "Wind_Int." = character(),
+      "Wind_Gust" = character(),
+      "Pres.s.lev" = character(),
       "Precmm" = character(),
-      "SunD1h" = character(),
-      "SnowDepcm" = character(),
+      "SunD-1" = character(),
+      "SnowDep" = character(),
       "TotClOct" = character(),
       "lowClOct" = character(),
       "VisKm" = character(),
@@ -104,12 +104,21 @@ ogimet_daily_bp = function(date = date,
       year = format(dates[i], "%Y")
       month = format(dates[i], "%m")
       day = format(dates[i], "%d")
-      ndays = day
+      ndays = 32
+      hr = "06" # default hour for daily reports
+      
+      
+      if (Sys.Date() == max(date) & as.numeric(format(Sys.time(), "%H")) < 6) {
+        # if current time is before 6 UTC, then download data for 00 UTC of the current day"
+        month = format(Sys.time() - 3600, "%m", tz = 'UTC')
+        day = format(Sys.time() - 3600, "%d", tz = 'UTC')
+        hr = format(Sys.time() - 3600, "%H", tz = 'UTC')
+      }
 
       linkpl2 = paste("https://www.ogimet.com/cgi-bin/gsynres?lang=en&ind=", 
                       station_nr, "&ndays=32&ano=", 
                       year, "&mes=", month, "&day=", day, 
-                      "&hora=", hour,"&ord=REV&Send=Send", sep = "")
+                      "&hora=", hr,"&ord=REV&Send=Send", sep = "")
       
       body = httr::GET(linkpl2,
                        httr::add_headers(
@@ -131,6 +140,9 @@ ogimet_daily_bp = function(date = date,
 
         b = parse_html_table(body, 
                              table_start_pattern = '<TABLE align="center" border=0[^>]*>')
+        
+        names(b) = gsub("\\s*\\([^)]*\\)", "", names(b))
+        names(b) = gsub("%", "", names(b))
         
         b["station_ID"] = station_nr
         # extra check if date is for December and January simultanously
