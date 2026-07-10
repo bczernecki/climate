@@ -39,7 +39,7 @@ library(climate)
 
 # Download hourly data for Svalbard Lufthavn (WMO 01008)
 df = meteo_ogimet(interval = "hourly",
-                  date     = c("2018-01-01", "2018-01-31"),
+                  date     = c("2020-01-01", "2020-01-31"),
                   station  = "01008")
 head(df[, c("date", "station", "t2m", "ws", "wd")])
 ```
@@ -52,14 +52,12 @@ windRose(mydata  = df,
          ws      = "ws",
          wd      = "wd",
          paddle  = FALSE,
-         main    = "Svalbard Lufthavn (Jan 2018)",
-         ws.int  = 3,
-         dig.lab = 3)
+         title    = "Svalbard Lufthavn")
 ```
 
 ```{r svalbard-timeplot, echo=TRUE}
 # Temporal overview of temperature and wind speed
-timePlot(df, pollutant = c("t2m", "dpt2m"))
+timePlot(df, pollutant = c("t2m", "ws"))
 ```
 
 ```{r svalbard-polar, echo=TRUE}
@@ -86,7 +84,7 @@ library(climate)
 
 # Daily summaries for two Polish stations: Poznan (12330) and Warsaw (12375)
 daily = meteo_ogimet(interval = "daily",
-                     date     = c("2023-06-01", "2023-08-31"),
+                     date     = c("2026-06-01", "2026-06-30"),
                      station  = c(12330, 12375))
 head(daily)
 ```
@@ -99,7 +97,7 @@ daily$Temperature_Avg = as.numeric(daily$Temperature_Avg)
 ggplot(daily, aes(x = as.Date(Date), y = Temperature_Avg,
                   colour = factor(station_ID), group = station_ID)) +
   geom_line() +
-  labs(title  = "Daily average temperature - summer 2023",
+  labs(title  = "Daily average temperature - June 2026",
        x      = "Date",
        y      = "Temperature (°C)",
        colour = "Station (WMO ID)") +
