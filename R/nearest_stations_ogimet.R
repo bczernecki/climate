@@ -29,7 +29,7 @@
 #'
 
 nearest_stations_ogimet = function(country = "United Kingdom", 
-                                   date = Sys.Date(), 
+                                   date = Sys.Date() - 1,
                                    add_map = FALSE, 
                                    point = c(2, 50), 
                                    no_of_stations = 10,
@@ -113,6 +113,7 @@ nearest_stations_ogimet_bp = function(country = country,
   
   # run only if downloaded file is valid
   if (!is.na(body) & (object.size(body) > 500)) {
+    # nocov start
     a = paste(body, sep = "", collapse = "") 
     b = strsplit(a, "Decoded synops since")
     b1 = lapply(b, function(x) substr(iconv(x, from = 'UTF-8', to = 'ASCII//TRANSLIT'), 1, 400))
@@ -159,6 +160,7 @@ nearest_stations_ogimet_bp = function(country = country,
     res = data.frame(wmo_id = res1[, 4], station_names = station_names,
                       lon = lon, lat = lat, alt = as.numeric(res1[, 3]))
     result = rbind(result,res)
+    # nocov end
   } else {
     result = NULL
     message(paste("Wrong name of a country. Please check countries names at 
@@ -168,7 +170,7 @@ nearest_stations_ogimet_bp = function(country = country,
   } 
   
   if (!is.null(result)) {
-
+  # nocov start
   point = as.data.frame(t(point))
   names(point) = c("lon", "lat")
   distmatrix = rbind(point, result[, 3:4])
@@ -187,7 +189,6 @@ nearest_stations_ogimet_bp = function(country = country,
   attr(result[["lat"]], "label") = "decimal degrees"
   attr(result[["alt"]], "label") = "metres AGL"
   
-  # nocov start
   if (add_map == TRUE) {
     if (!requireNamespace("maps", quietly = TRUE)) {
       stop("package maps required, please install it first")

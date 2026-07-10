@@ -7,9 +7,9 @@
 #' @param dpt2m Numeric vector. Dew-point temperature (2 m) in degrees Celsius.
 #'   Must be the same length as `t2m`.
 #'
-#' @return Numeric vector of relative humidity values in percent (0–100).
+#' @return Numeric vector of relative humidity values in percent (0-100).
 #'   Returns `NA` where either input is `NA`. Values are not clamped, so
-#'   rounding errors may produce results marginally outside 0–100.
+#'   rounding errors may produce results marginally outside 0-100.
 #'
 #' @details
 #' The August-Roche-Magnus approximation is:

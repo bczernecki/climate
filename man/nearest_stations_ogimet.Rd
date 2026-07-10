@@ -6,7 +6,7 @@
 \usage{
 nearest_stations_ogimet(
   country = "United Kingdom",
-  date = Sys.Date(),
+  date = Sys.Date() - 1,
   add_map = FALSE,
   point = c(2, 50),
   no_of_stations = 10,

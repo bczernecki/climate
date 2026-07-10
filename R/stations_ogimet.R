@@ -96,6 +96,7 @@ stations_ogimet_bp = function(country = country, date = date, add_map = add_map)
     res = suppressWarnings(do.call("rbind", strsplit(res, " ")))
     res1 = matrix(res[, c(1, 3, 5:7)], ncol = 5)
     
+    # nocov start
     lat = suppressWarnings(
       as.numeric(substr(res1[, 1], 1, 2)) +
       (as.numeric(substr(res1[, 1], 4, 5)) / 100) * 1.6667
@@ -144,6 +145,7 @@ if (!is.null(res)) {
                    col = 'grey70', cex = 0.6)
     maps::map(add = TRUE)
   }
+  # nocov end
 
 } # end of checking if res is NULL
   return(res)

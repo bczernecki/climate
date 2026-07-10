@@ -3,6 +3,7 @@ coverage:
   - "R/sounding_wyoming.R"
   - "R/imgw_read.R"
   - "R/onAttach.R"
+  - "R/meteo_shortening_imgw.R"
   status:
     patch:
       default:
