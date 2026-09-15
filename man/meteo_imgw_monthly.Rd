@@ -10,7 +10,6 @@ meteo_imgw_monthly(
   status = FALSE,
   coords = FALSE,
   station = NULL,
-  col_names = "short",
   allow_failure = TRUE,
   ...
 )
@@ -30,10 +29,6 @@ It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no
 Please note that station names may change over time and thus sometimes 2 names
 are required in some cases, e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.}
 
-\item{col_names}{three types of column names possible: "short" - default,
-values with shorten names, "full" - full English description,
-"polish" - original names in the dataset}
-
 \item{allow_failure}{logical - whether to proceed or stop on failure.
 By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 
@@ -52,12 +47,6 @@ SYNOP / CLIMATE / PRECIP stations available in the danepubliczne.imgw.pl collect
 monthly = meteo_imgw_monthly(rank = "climate", year = 1969)
 head(monthly)
 
-# a descriptive (long) column names:
-monthly2 = meteo_imgw_monthly(
-  rank = "synop", year = 2018,
-  col_names = "full"
-)
-head(monthly2)
 }
 
 }

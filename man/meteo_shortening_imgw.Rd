@@ -4,17 +4,17 @@
 \alias{meteo_shortening_imgw}
 \title{Shortening column names for meteorological variables}
 \usage{
-meteo_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
+meteo_shortening_imgw(data, remove_duplicates = TRUE)
 }
 \arguments{
 \item{data}{downloaded dataset with original column names}
 
-\item{col_names}{three types of column names possible: "short" - default, values with shorten names, "full" - full English description, "polish" - original names in the dataset}
-
 \item{remove_duplicates}{whether to remove duplicated column names (default TRUE - i.e., columns with duplicated names are deleted)}
 }
 \value{
-data.frame with modified names of meteorological parameters
+data.frame with short English names of meteorological parameters.
+Existing column attributes, including the original IMGW \code{label} metadata,
+are preserved.
 }
 \description{
 Shortening column names of meteorological parameters to improve the readability of downloaded dataset from the danepubliczne.imgw.pl collection and removing duplicated column names
@@ -23,9 +23,7 @@ Shortening column names of meteorological parameters to improve the readability 
 \donttest{
   monthly = meteo_imgw("monthly", rank = "climate", year = 1969)
   
-  abbr = meteo_shortening_imgw(data = monthly,
-      col_names = "full", 
-      remove_duplicates = TRUE)
+  abbr = meteo_shortening_imgw(data = monthly, remove_duplicates = TRUE)
   head(abbr)
 }
 

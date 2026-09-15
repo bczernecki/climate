@@ -25,6 +25,7 @@ function that shortens column names}
 A data.frame with columns describing the hydrological parameters
 (e.g. flow, water level) where each row represent a measurement,
 depending on the interval, at a given hour, month or year.
+IMGW parameter columns carry a \code{label} attribute with the original metadata label.
 If \code{coords = TRUE} additional two columns with geographic coordinates are added.
 }
 \description{

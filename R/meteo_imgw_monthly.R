@@ -12,9 +12,6 @@
 #' It accepts names (characters in CAPITAL LETTERS). Stations' IDs (numeric) are no longer supported.
 #' Please note that station names may change over time and thus sometimes 2 names
 #' are required in some cases, e.g. `c("POZNAŃ", "POZNAŃ-ŁAWICA")`.
-#' @param col_names three types of column names possible: "short" - default,
-#' values with shorten names, "full" - full English description,
-#' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure.
 #' By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the
@@ -29,12 +26,6 @@
 #' monthly = meteo_imgw_monthly(rank = "climate", year = 1969)
 #' head(monthly)
 #'
-#' # a descriptive (long) column names:
-#' monthly2 = meteo_imgw_monthly(
-#'   rank = "synop", year = 2018,
-#'   col_names = "full"
-#' )
-#' head(monthly2)
 #' }
 #'
 meteo_imgw_monthly = function(rank = "synop",
@@ -42,7 +33,6 @@ meteo_imgw_monthly = function(rank = "synop",
                               status = FALSE,
                               coords = FALSE,
                               station = NULL,
-                              col_names = "short",
                               allow_failure = TRUE,
                               ...) {
   if (allow_failure) {
@@ -53,7 +43,6 @@ meteo_imgw_monthly = function(rank = "synop",
         status,
         coords,
         station,
-        col_names,
         ...
       ),
       error = function(e) {
@@ -71,7 +60,6 @@ meteo_imgw_monthly = function(rank = "synop",
       status,
       coords,
       station,
-      col_names,
       ...
     )
   }
@@ -84,7 +72,6 @@ meteo_imgw_monthly_bp = function(rank,
                                   status,
                                   coords,
                                   station,
-                                  col_names,
                                   ...) {
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
@@ -245,6 +232,6 @@ meteo_imgw_monthly_bp = function(rank,
   }
 
   all_data = imgw_rename_params_to_labels(all_data, meta)
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data = meteo_shortening_imgw(all_data, ...)
   return(all_data)
 }

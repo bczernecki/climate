@@ -21,3 +21,4 @@ vignettes/articles/usecase.Rmd
 ^\.positai$
 ^\.claude$
 CLAUDE.md$
+^\.posit/assistant$

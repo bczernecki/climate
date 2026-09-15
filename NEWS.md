@@ -1,3 +1,11 @@
+# climate 1.4.1
+
+* fixed IMGW meteorological and hydrological parameter mappings for current metadata labels
+* removed the `col_names` choice between short, full, and Polish column names to simplify usage
+* original full IMGW parameter names are available through each column's `label` attribute
+* updated documentation, README, and vignettes to describe the simplified naming scheme
+
+
 # climate 1.4.0
 
 * adding the `synop_parser()` function for reading raw SYNOP messages

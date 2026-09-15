@@ -29,7 +29,7 @@ Run from the package root in R:
 - **OGIMET**: HTML scraping via `XML::readHTMLTable` from `ogimet.com`. Stations are identified by WMO ID. `precip_split` / `R/precip_split.R` handles 6/12/24h precipitation disaggregation for hourly data.
 - **NOAA / Wyoming**: direct file downloads (ISH gzipped fixed-width, CO2 text, sounding HTML).
 
-**Column-name shortening layer.** Most IMGW download functions accept `col_names = "short" | "full" | "polish"` and pass the raw frame through `meteo_shortening_imgw()` / `hydro_shortening_imgw()` (in `R/*_shortening_imgw.R`). Full and short names are looked up against `imgw_meteo_abbrev` / `imgw_hydro_abbrev` (built-in data). When you add a new IMGW column, update both the abbrev table (`data-raw/`) and the shortener.
+**Column-name shortening layer.** IMGW download functions return short English names and attach the original full IMGW parameter label as a per-column `label` attribute. Names are looked up against `imgw_meteo_abbrev` / `imgw_hydro_abbrev` (built-in data). When you add a new IMGW column, update both the abbrev table (`data-raw/`) and the shortener.
 
 **Graceful network failure** is required for CRAN. Use `test_url()` (`R/test_url.R`) to gate downloads, and follow the existing `allow_failure = TRUE` pattern: wrap the real worker (`*_bp` "best practice" inner function) in `tryCatch` so user-facing functions return `NULL`/`invisible()` with a `message()` instead of erroring. Tests follow the same convention — every network test starts with `if (!curl::has_internet()) return(invisible(NULL))`. Don't add tests that fail when offline.
 

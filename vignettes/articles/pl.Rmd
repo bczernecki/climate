@@ -86,31 +86,31 @@ h = hydro_imgw(interval = "monthly", year = 2001:2010)
 head(h)
 ```
 
-Zmienna `MCWSKEX` reprezentuje etykietę ekstremum, gdzie "1" oznacza
+Zmienna `idex` reprezentuje etykietę ekstremum, gdzie "1" oznacza
 minimum, "2" oznacza średnią, a "3" maksimum. [^1]
 
 [^1]: Więcej informacji na ten temat można znaleźć w zestawie danych
-    `hydro_abbrev`.
+    `imgw_hydro_abbrev`.
 
 Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk,
 np. związanych z przepływami maksymalnymi. W tym celu pozostaną w ramce
 danych tylko wartości przepływów maksymalnych oraz kolumny zawierające
 interesujące nas informacje, tj. identyfikator stacji - `id`, rok
-hydrologiczny (`MCROKH`), szerokość geograficzną `X` i długość
-geograficzną`Y`.
+hydrologiczny (`hyy`), nazwę stacji (`station`), szerokość geograficzną
+`X` i długość geograficzną `Y`.
 
 Następnie obliczymy średnią maksymalną wartość przepływu na stacjach w
 każdym roku za pomocą `dplyr::summarise()`, oraz rozdzielimy dane według
 roku używając `spread ()` aby uzyskać roczne średnie maksymalne
-przepływy (`MCPRZP`) w kolejnych kolumnach.
+przepływy (`Q`) w kolejnych kolumnach.
 
 ```{r filtering, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE}
 h2 = h %>%
-  dplyr::filter(MCWSKEX == 3) %>%
-  dplyr::select(id, PSNZWP, X, Y, MCROKH, MCPRZP) %>%
-  dplyr::group_by(MCROKH, id, PSNZWP, X, Y) %>%
-  dplyr::summarise(srednie_roczne_Q = round(mean(MCPRZP, na.rm = TRUE), 1)) %>% 
-  spread(MCROKH, srednie_roczne_Q)
+  dplyr::filter(idex == 3) %>%
+  dplyr::select(id, station, X, Y, hyy, Q) %>%
+  dplyr::group_by(hyy, id, station, X, Y) %>%
+  dplyr::summarise(srednie_roczne_Q = round(mean(Q, na.rm = TRUE), 1)) %>%
+  spread(hyy, srednie_roczne_Q)
 ```
 
 ```{r filtering2, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, include=TRUE, paged.print=TRUE}

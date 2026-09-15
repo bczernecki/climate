@@ -27,3 +27,4 @@ Grubość lodu [cm];thick;Thickness of ice [cm];;
 Kod zjawiska lodowego (słownik poniżej);id_ice;Ice phenomena;;
 "Procent udziału zjawiska lodowego [mnożnik *10; np. 3 oznacza 30% udziału zjawisk lodowych]";p_ice;Percentage of ice phenomena;;
 Kod zarastania (słownik poniżej);id_over_grow;Overgrowing;;
+Kod zarastania (szczegółowe informacje poniżej);id_over_grow;Overgrowing;;
