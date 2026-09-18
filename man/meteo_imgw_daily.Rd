@@ -10,7 +10,6 @@ meteo_imgw_daily(
   status = FALSE,
   coords = FALSE,
   station = NULL,
-  col_names = "short",
   allow_failure = TRUE,
   ...
 )
@@ -31,11 +30,6 @@ Important: Some stations may have changed names over time in the IMGW-PIB
 database and thus providing both names is needed
 (e.g. \code{station = c("POZNAŃ", "POZNAŃ-ŁAWICA", "WARSZAWA", "WARSZAWA-OKĘCIE")}).
 Stations' IDs (numeric) are no longer valid}
-
-\item{col_names}{three types of column names possible:
-"short" - default, values with shorten names,
-"full" - full English description,
-"polish" - original names in the dataset}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 

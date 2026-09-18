@@ -26,10 +26,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr, any::archive
+          extra-packages: any::covr, any::xml2, any::archive
           needs: coverage
 
       - name: Test coverage
+        timeout-minutes: 70
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,

@@ -10,7 +10,6 @@ meteo_imgw_hourly(
   status = FALSE,
   coords = FALSE,
   station = NULL,
-  col_names = "short",
   allow_failure = TRUE,
   ...
 )
@@ -26,10 +25,6 @@ meteo_imgw_hourly(
 \item{coords}{add coordinates of the station (logical value TRUE or FALSE)}
 
 \item{station}{name of meteorological station(s) (character vector)}
-
-\item{col_names}{three types of column names possible: "short" - default,
-values with shorten names, "full" - full English description,
-"polish" - original names in the dataset}
 
 \item{allow_failure}{logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE}
 

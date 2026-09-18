@@ -28,7 +28,7 @@ Run commands from the package root.
   - **OGIMET**: HTML is scraped with `XML::readHTMLTable`; station identity is based on WMO IDs. Hourly precipitation post-processing is handled by `precip_split()`.
   - **NOAA / Wyoming**: direct file or page downloads for ISH hourly data, Mauna Loa CO2, and Wyoming soundings.
 
-- IMGW column renaming is a distinct normalization layer. Most IMGW functions accept `col_names = "short" | "full" | "polish"` and pass results through `meteo_shortening_imgw()` or `hydro_shortening_imgw()`. The mapping tables live in built-in datasets backed by `data-raw/`.
+- IMGW column renaming is a distinct normalization layer. IMGW functions return short English names and attach the original full parameter label as a per-column `label` attribute through `meteo_shortening_imgw()` or `hydro_shortening_imgw()`. The mapping tables live in built-in datasets backed by `data-raw/`.
 
 - Package data and docs follow standard R package patterns:
   - exported code in `R/`

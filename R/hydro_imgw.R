@@ -16,6 +16,7 @@
 #' @return A data.frame with columns describing the hydrological parameters
 #' (e.g. flow, water level) where each row represent a measurement,
 #' depending on the interval, at a given hour, month or year.
+#' IMGW parameter columns carry a `label` attribute with the original metadata label.
 #' If `coords = TRUE` additional two columns with geographic coordinates are added.
 #' @examples
 #' \donttest{
@@ -30,12 +31,18 @@ hydro_imgw = function(interval,
 
   if (interval == "daily") {
     # dobowe
-    calosc = hydro_imgw_daily(year = year, station = station, ...)
+    calosc = hydro_imgw_daily(
+      year = year,
+      station = station,
+      ...
+    )
   } else if (interval == "monthly") {
     # miesieczne
-    calosc = hydro_imgw_monthly(year = year,
-                                station = station,
-                                ...)
+    calosc = hydro_imgw_monthly(
+      year = year,
+      station = station,
+      ...
+    )
   } else{
     stop("Wrong `interval` value. It should be either 'daily' or 'monthly'", call. = FALSE)
   }

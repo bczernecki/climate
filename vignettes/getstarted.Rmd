@@ -42,6 +42,9 @@ default for `interval = "hourly"`) and **HTML scraping** (`source = "html"`, def
 SYNOP/CLIMATE/PRECIP stations available in the danepubliczne.imgw.pl collection.
 It is a wrapper for `meteo_monthly()`, `meteo_daily()`, `meteo_hourly()` and
 `meteo_imgw_datastore()` which gives access from monthly to even 10-min datasets.
+IMGW archive outputs use short English parameter names. The original IMGW names are
+available as `label` attributes on the corresponding columns, for example
+`attr(df$t2m_mean_mon, "label")`.
 
 - **meteo_noaa_hourly()** - Downloading hourly NCEI/NOAA Integrated Surface Hourly (ISH)
 meteorological data - some stations have > 100 years of observations.
@@ -59,6 +62,9 @@ data frames. For a full walkthrough see the
 
 - **hydro_imgw()** - Downloading daily and monthly hydrological data from stations available in the
 danepubliczne.imgw.pl collection. It is a wrapper for `hydro_monthly()` and `hydro_daily()`.
+IMGW archive outputs use short English parameter names. The original IMGW names are
+available as `label` attributes on the corresponding columns, for example
+`attr(h$Q, "label")`.
 
 - **hydro_imgw_datastore()** - Downloading hourly and sub-hourly hydrological data from the
 IMGW-PIB hydro telemetry stations.

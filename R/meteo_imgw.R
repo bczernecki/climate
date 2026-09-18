@@ -15,8 +15,6 @@
 #'   (default `FALSE` — status columns are deleted). Not used when `rank = "telemetry"`.
 #' @param coords add coordinates of the station (logical value `TRUE` or `FALSE`).
 #'   Default `FALSE`.
-#' @param col_names column name style: `"short"` (default), `"full"` (English descriptions),
-#'   or `"polish"` (original dataset names). Not used when `rank = "telemetry"`.
 #' @param station name of meteorological station(s).
 #'   For ranks `"synop"`, `"climate"`, `"precip"`: station name(s) in CAPITAL LETTERS.
 #'   Please note that station names may change over time — sometimes two names are required,
@@ -33,6 +31,7 @@
 #' @return A data.frame with meteorological parameters where each row is a measurement.
 #'   For ranks `"synop"`, `"climate"`, `"precip"`: measurements at a given hour, day, or month,
 #'   depending on `interval`. If `coords = TRUE` two additional coordinate columns are appended.
+#'   IMGW parameter columns also carry a `label` attribute with the original Polish metadata label.
 #'   For `rank = "telemetry"`: a data.table with 10-minute interval observations (not
 #'   expert-validated). If `coords = TRUE` columns `name`, `lon`, `lat`, and `alt` are appended.
 #' @examples
@@ -52,7 +51,6 @@ meteo_imgw = function(interval = NULL,
                       status = FALSE,
                       coords = FALSE,
                       station = NULL,
-                      col_names = "short",
                       parameters = NULL,
                       ...) {
   if (rank == "telemetry") {
@@ -70,22 +68,19 @@ meteo_imgw = function(interval = NULL,
                               year      = year,
                               status    = status,
                               coords    = coords,
-                              station   = station,
-                              col_names = col_names, ...)
+                              station   = station, ...)
   } else if (interval == "monthly") {
     result = meteo_imgw_monthly(rank      = rank,
                                 year      = year,
                                 status    = status,
                                 coords    = coords,
-                                station   = station,
-                                col_names = col_names, ...)
+                                station   = station, ...)
   } else if (interval == "hourly") {
     result = meteo_imgw_hourly(rank      = rank,
                                year      = year,
                                status    = status,
                                coords    = coords,
-                               station   = station,
-                               col_names = col_names, ...)
+                               station   = station, ...)
   } else {
     stop("Wrong `interval` value. It should be either 'hourly', 'daily', or 'monthly'.")
   }

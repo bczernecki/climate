@@ -11,7 +11,6 @@ meteo_imgw(
   status = FALSE,
   coords = FALSE,
   station = NULL,
-  col_names = "short",
   parameters = NULL,
   ...
 )
@@ -40,9 +39,6 @@ e.g. \code{c("POZNAŃ", "POZNAŃ-ŁAWICA")}.
 For \code{rank = "telemetry"}: station name(s) as listed by \code{stations_meteo_imgw_telemetry()}.
 \code{NULL} (default) downloads all available stations.}
 
-\item{col_names}{column name style: \code{"short"} (default), \code{"full"} (English descriptions),
-or \code{"polish"} (original dataset names). Not used when \code{rank = "telemetry"}.}
-
 \item{parameters}{character vector of parameter codes to download.
 Only used when \code{rank = "telemetry"}. \code{NULL} (default) downloads all available parameters.
 Accepted values: \code{"wd"}, \code{"t2m"}, \code{"t0m"}, \code{"rr_24h"}, \code{"rr_1h"}, \code{"rr_10min"},
@@ -55,6 +51,7 @@ Accepted values: \code{"wd"}, \code{"t2m"}, \code{"t0m"}, \code{"rr_24h"}, \code
 A data.frame with meteorological parameters where each row is a measurement.
 For ranks \code{"synop"}, \code{"climate"}, \code{"precip"}: measurements at a given hour, day, or month,
 depending on \code{interval}. If \code{coords = TRUE} two additional coordinate columns are appended.
+IMGW parameter columns also carry a \code{label} attribute with the original Polish metadata label.
 For \code{rank = "telemetry"}: a data.table with 10-minute interval observations (not
 expert-validated). If \code{coords = TRUE} columns \code{name}, \code{lon}, \code{lat}, and \code{alt} are appended.
 }

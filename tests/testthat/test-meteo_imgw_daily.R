@@ -80,3 +80,43 @@ test_that("check_encoding_in_non_synop", {
     expect_identical(nchar(non_synop$NSP), nchar(trimws(non_synop$NSP)))
   }
 })
+
+test_that("current IMGW daily labels use short names", {
+  data = data.frame(
+    "Maksymalna dobowa temperatura powietrza [°C]" = 1,
+    "Minimalna dobowa temperatura powietrza [°C]" = 2,
+    "Minimalna dobowa temperatura powietrza przy gruncie [°C]" = 3,
+    check.names = FALSE
+  )
+
+  expect_named(
+    meteo_shortening_imgw(data),
+    c("tmax_daily", "tmin_daily", "t5cm_min")
+  )
+})
+
+test_that("IMGW column labels are retained as attributes", {
+  data = data.frame(
+    TMAX = 1:2,
+    TMIN = 3:4,
+    TMNG = 5:6,
+    check.names = FALSE
+  )
+  meta = data.frame(
+    parameters = c("TMAX", "TMIN", "TMNG"),
+    label = c(
+      "Maksymalna dobowa temperatura powietrza [°C]",
+      "Minimalna dobowa temperatura powietrza [°C]",
+      "Minimalna dobowa temperatura powietrza przy gruncie [°C]"
+    ),
+    stringsAsFactors = FALSE
+  )
+
+  data = imgw_rename_params_to_labels(data, meta)
+  data = meteo_shortening_imgw(data)
+
+  expect_equal(
+    unname(vapply(data, attr, character(1), which = "label")),
+    meta$label
+  )
+})

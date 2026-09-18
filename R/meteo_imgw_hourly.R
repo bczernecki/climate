@@ -9,9 +9,6 @@
 #' (default status = FALSE - i.e. the status columns are deleted)
 #' @param coords add coordinates of the station (logical value TRUE or FALSE)
 #' @param station name of meteorological station(s) (character vector)
-#' @param col_names three types of column names possible: "short" - default,
-#' values with shorten names, "full" - full English description,
-#' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening'
 #' function that shortens column names
@@ -31,7 +28,6 @@ meteo_imgw_hourly = function(rank = "synop",
                               status = FALSE,
                               coords = FALSE,
                               station = NULL,
-                              col_names = "short",
                               allow_failure = TRUE,
                               ...) {
   if (allow_failure) {
@@ -41,8 +37,7 @@ meteo_imgw_hourly = function(rank = "synop",
         year,
         status,
         coords,
-        station,
-        col_names, ...
+        station, ...
       ),
       error = function(e) {
         message(paste(
@@ -58,8 +53,7 @@ meteo_imgw_hourly = function(rank = "synop",
       year,
       status,
       coords,
-      station,
-      col_names, ...
+      station, ...
     )
   }
 }
@@ -70,8 +64,7 @@ meteo_imgw_hourly_bp = function(rank,
                                  year,
                                  status,
                                  coords,
-                                 station,
-                                 col_names, ...) {
+                                 station, ...) {
   translit = check_locale()
   stopifnot(rank == "synop" | rank == "climate") # for hourly data only synop and climate has data
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
@@ -279,7 +272,7 @@ meteo_imgw_hourly_bp = function(rank,
   }
 
   all_data = imgw_rename_params_to_labels(all_data, meta)
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, ...)
+  all_data = meteo_shortening_imgw(all_data, ...)
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
   if (length(env$logs) > 0) {

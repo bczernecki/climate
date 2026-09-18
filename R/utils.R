@@ -1,4 +1,4 @@
-#' Rename parameter code columns to full Polish label names
+#' Rename parameter code columns to full Polish label names and attach metadata labels
 #'
 #' Translates short internal parameter codes (e.g. NSP, POST, TMAX) to the
 #' original full Polish labels stored in the metadata, so that the result can
@@ -18,7 +18,10 @@ imgw_rename_params_to_labels = function(data, meta) {
   param_map = setNames(meta$label, meta$parameters)
   cols = colnames(data)
   in_map = cols %in% names(param_map)
-  colnames(data)[in_map] = param_map[cols[in_map]]
+  for (ind in which(in_map)) {
+    attr(data[[ind]], "label") = unname(param_map[cols[ind]])
+  }
+  colnames(data)[in_map] = unname(param_map[cols[in_map]])
   data
 }
 

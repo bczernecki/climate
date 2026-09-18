@@ -127,6 +127,8 @@ hydro_imgw_monthly_bp = function(year,
       attr(all_data[[cols]], "label") = meta$label[ind]
       }
   }
+  all_data = imgw_rename_params_to_labels(all_data, meta)
+  all_data = hydro_shortening_imgw(all_data, ...)
 
   return(all_data)
 }

@@ -4,21 +4,18 @@
 \alias{hydro_shortening_imgw}
 \title{Shortening column names for hydrological variables}
 \usage{
-hydro_shortening_imgw(data, col_names = "short", remove_duplicates = TRUE)
+hydro_shortening_imgw(data, remove_duplicates = TRUE)
 }
 \arguments{
 \item{data}{downloaded dataset with original column names}
-
-\item{col_names}{three types of column names possible: "short" - default,
-values with shorten names,
-"full" - full English description,
-"polish" - original names in the dataset}
 
 \item{remove_duplicates}{whether to remove duplicated column names
 (default TRUE - i.e., columns with duplicated names are deleted)}
 }
 \value{
-data.frame with shorten names of hydrological parameters
+data.frame with short English names of hydrological parameters.
+Existing column attributes, including the original IMGW \code{label} metadata,
+are preserved.
 }
 \description{
 Shortening column names of hydrological parameters to improve the readability of downloaded dataset from
@@ -26,12 +23,10 @@ the danepubliczne.imgw.pl collection and removing duplicated column names
 }
 \examples{
 \donttest{
-  monthly = data = hydro_imgw("monthly", year = 1969, col_names = "polish")
+  monthly = data = hydro_imgw("monthly", year = 1969)
   
   if (is.data.frame(monthly)) {
-  abbr = hydro_shortening_imgw(data = monthly,
-      col_names = "full",
-      remove_duplicates = TRUE)
+  abbr = hydro_shortening_imgw(data = monthly, remove_duplicates = TRUE)
   head(abbr)
   }
 }

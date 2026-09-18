@@ -16,3 +16,4 @@ pkgdown
 test-out.txt
 .positai
 .aider*
+.posit/assistant

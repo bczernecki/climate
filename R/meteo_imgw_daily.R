@@ -14,10 +14,6 @@
 #' database and thus providing both names is needed
 #' (e.g. `station = c("POZNAŃ", "POZNAŃ-ŁAWICA", "WARSZAWA", "WARSZAWA-OKĘCIE")`).
 #' Stations' IDs (numeric) are no longer valid
-#' @param col_names three types of column names possible:
-#' "short" - default, values with shorten names,
-#' "full" - full English description,
-#' "polish" - original names in the dataset
 #' @param allow_failure logical - whether to proceed or stop on failure. By default set to TRUE (i.e. don't stop on error). For debugging purposes change to FALSE
 #' @param ... other parameters that may be passed to the 'shortening' function that
 #' shortens column names
@@ -35,7 +31,6 @@ meteo_imgw_daily = function(rank = "synop",
                              status = FALSE,
                              coords = FALSE,
                              station = NULL,
-                             col_names = "short",
                              allow_failure = TRUE,
                              ...) {
   if (allow_failure) {
@@ -45,8 +40,7 @@ meteo_imgw_daily = function(rank = "synop",
         year,
         status,
         coords,
-        station,
-        col_names
+        station
       ),
       error = function(e) {
         message(paste(
@@ -63,7 +57,6 @@ meteo_imgw_daily = function(rank = "synop",
       status,
       coords,
       station,
-      col_names,
       ...
     )
   }
@@ -74,7 +67,6 @@ meteo_imgw_daily_bp = function(rank,
                                 status,
                                 coords,
                                 station,
-                                col_names,
                                 ...) {
   translit = check_locale()
   base_url = "https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/"
@@ -399,7 +391,7 @@ meteo_imgw_daily_bp = function(rank,
   }
 
   all_data = imgw_rename_params_to_labels(all_data, meta)
-  all_data = meteo_shortening_imgw(all_data, col_names = col_names, remove_duplicates = TRUE)
+  all_data = meteo_shortening_imgw(all_data, remove_duplicates = TRUE)
 
   # check if there any messages gathered in env$logs and if it is not empty then print them:
   if (length(env$logs) > 0) {
