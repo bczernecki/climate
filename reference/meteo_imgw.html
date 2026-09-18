@@ -19,7 +19,7 @@ automated network, all available in the danepubliczne.imgw.pl collection."><meta
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -65,7 +65,7 @@ automated network, all available in the danepubliczne.imgw.pl collection."><meta
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Meteorological data from the IMGW-PIB official repository</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.4.0/R/meteo_imgw.R" class="external-link"><code>R/meteo_imgw.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/R/meteo_imgw.R" class="external-link"><code>R/meteo_imgw.R</code></a></small>
     <div class="hidden name"><code>meteo_imgw.Rd</code></div>
     </div>
 
@@ -83,7 +83,6 @@ automated network, all available in the danepubliczne.imgw.pl collection.</p>
 <span>  status <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  coords <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  station <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  col_names <span class="op">=</span> <span class="st">"short"</span>,</span>
 <span>  parameters <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -128,11 +127,6 @@ For <code>rank = "telemetry"</code>: station name(s) as listed by <code><a href=
 <code>NULL</code> (default) downloads all available stations.</p></dd>
 
 
-<dt id="arg-col-names">col_names<a class="anchor" aria-label="anchor" href="#arg-col-names"></a></dt>
-<dd><p>column name style: <code>"short"</code> (default), <code>"full"</code> (English descriptions),
-or <code>"polish"</code> (original dataset names). Not used when <code>rank = "telemetry"</code>.</p></dd>
-
-
 <dt id="arg-parameters">parameters<a class="anchor" aria-label="anchor" href="#arg-parameters"></a></dt>
 <dd><p>character vector of parameter codes to download.
 Only used when <code>rank = "telemetry"</code>. <code>NULL</code> (default) downloads all available parameters.
@@ -150,6 +144,7 @@ Accepted values: <code>"wd"</code>, <code>"t2m"</code>, <code>"t0m"</code>, <cod
     <p>A data.frame with meteorological parameters where each row is a measurement.
 For ranks <code>"synop"</code>, <code>"climate"</code>, <code>"precip"</code>: measurements at a given hour, day, or month,
 depending on <code>interval</code>. If <code>coords = TRUE</code> two additional coordinate columns are appended.
+IMGW parameter columns also carry a <code>label</code> attribute with the original Polish metadata label.
 For <code>rank = "telemetry"</code>: a data.table with 10-minute interval observations (not
 expert-validated). If <code>coords = TRUE</code> columns <code>name</code>, <code>lon</code>, <code>lat</code>, and <code>alt</code> are appended.</p>
     </div>
@@ -166,62 +161,20 @@ expert-validated). If <code>coords = TRUE</code> columns <code>name</code>, <cod
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/miesieczne/synop/2018/2018_m_s.zip</span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          id        X        Y       station   yy mm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Absolutna maksymalna temperatura powietrza [°C]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                            11.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                             7.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                            16.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                            26.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                            28.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                            29.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Srednia maksymalna temperatura powietrza [°C]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                           5.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                          -1.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                           4.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                          20.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                          21.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                          22.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Absolutna minimalna temperatura powietrza [°C]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                           -7.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                          -15.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                          -17.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                           -1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                            5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                            8.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Srednia minimalna temperatura powietrza [°C]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                         -0.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                         -6.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                         -3.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                          8.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                         10.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                         13.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Srednia miesieczna temperatura powietrza [°C]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                           2.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                          -3.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                           1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                          14.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                          16.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                          17.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Minimalna temperatura powietrza przy gruncie [°C] rr_monthly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                             -10.8       23.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                             -23.3       34.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                             -21.9       28.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                              -1.7       10.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                               2.2       91.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                               6.1      135.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Maksymalna dobowa suma opadow w miesiacu [mm] first_day_max_rr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                           6.5                8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                           9.5                4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                          10.1               16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                           3.5               23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                          19.5               17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                          30.4                2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          id        X        Y       station   yy mm tmax_abs tmax_mean tmin_abs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  1     11.6       5.0     -7.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  2      7.2      -1.4    -15.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  3     16.5       4.8    -17.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  4     26.7      20.3     -1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  5     28.0      21.3      5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 349190600 19.00234 49.80671 BIELSKO-BIALA 2018  6     29.5      22.7      8.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   tmin_mean t2m_mean_mon tmin_soil rr_monthly rr_max_daily first_day_max_rr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      -0.4          2.3     -10.8       23.5          6.5                8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      -6.0         -3.7     -23.3       34.1          9.5                4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      -3.0          1.0     -21.9       28.5         10.1               16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       8.2         14.3      -1.7       10.3          3.5               23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      10.6         16.2       2.2       91.1         19.5               17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      13.5         17.6       6.1      135.5         30.4                2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   last_day_max_rr insolation_monthly snowcover_max snowcover_days rain_days</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1              NA               58.8             4              5         7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2              NA               47.0            19             25         0</span>
@@ -236,34 +189,27 @@ expert-validated). If <code>coords = TRUE</code> columns <code>name</code>, <cod
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4         1        1         0        1              6         0          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5         0        0         1        1             11         0          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6         1        0         0        2             15         0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   snowstorm_low_days snowstorm_high_days Liczba dni ze zmetnieniem opalizujacym</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  0                   0                                      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  6                   1                                      2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  2                   0                                      7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  0                   0                                      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  0                   0                                      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  0                   0                                      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   thunder_days dew_days hoarfrost_days NA. NA..1 cloud_mean_mon ws_mean_mon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1            2        0              0   9    NA            6.4         4.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2            0        0              0   3    NA            6.8         2.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3            0        0              2   5    NA            5.5         3.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4            0        1             17   2    NA            4.2         3.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5            0        9             26   0    NA            4.4         3.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6            0        9             15   0    NA            5.7         2.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vapor_press_mean_mon rh_mean_mon press_mean_mon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  5.8        80.0          967.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  4.1        83.8          969.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  5.1        72.5          959.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  9.0        56.7          967.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 12.3        68.4          969.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                 14.8        74.2          968.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Srednie miesieczne cisnienie na poziomie morza [hPa] rr_daytime rr_nightime</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                               1017.2       13.5        10.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                               1019.9       17.4        16.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                                               1008.9       14.1        14.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                               1015.0        5.3         5.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                               1016.8       40.6        50.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                               1015.2       45.7        89.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   snowstorm_low_days snowstorm_high_days hazyness_days thunder_days dew_days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  0                   0             0            2        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  6                   1             2            0        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  2                   0             7            0        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  0                   0             0            0        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  0                   0             0            0        9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  0                   0             0            0        9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   hoarfrost_days NA. NA..1 cloud_mean_mon ws_mean_mon vapor_press_mean_mon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              0   9    NA            6.4         4.6                  5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              0   3    NA            6.8         2.9                  4.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3              2   5    NA            5.5         3.6                  5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4             17   2    NA            4.2         3.8                  9.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5             26   0    NA            4.4         3.1                 12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6             15   0    NA            5.7         2.6                 14.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   rh_mean_mon press_mean_mon slp_mean_mon rr_daytime rr_nightime</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        80.0          967.9       1017.2       13.5        10.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        83.8          969.5       1019.9       17.4        16.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        72.5          959.8       1008.9       14.1        14.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        56.7          967.9       1015.0        5.3         5.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        68.4          969.9       1016.8       40.6        50.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        74.2          968.6       1015.2       45.7        89.8</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Telemetry (10-minute) data from automated stations (available since 2008):</span></span></span>
 <span class="r-in"><span>  <span class="va">tel</span> <span class="op">=</span> <span class="fu">meteo_imgw</span><span class="op">(</span>rank <span class="op">=</span> <span class="st">"telemetry"</span>, year <span class="op">=</span> <span class="fl">2022</span>,</span></span>

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -90,9 +90,9 @@
                         <h4 data-toc-skip class="author">Bartosz
 Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2026-07-13</h4>
+            <h4 data-toc-skip class="date">2026-09-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.4.0/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/vignettes/getstarted.Rmd" class="external-link"><code>vignettes/getstarted.Rmd</code></a></small>
       <div class="hidden name"><code>getstarted.Rmd</code></div>
 
     </div>
@@ -140,7 +140,10 @@ monthly meteorological data from the SYNOP/CLIMATE/PRECIP stations
 available in the danepubliczne.imgw.pl collection. It is a wrapper for
 <code>meteo_monthly()</code>, <code>meteo_daily()</code>,
 <code>meteo_hourly()</code> and <code><a href="../reference/meteo_imgw_datastore.html">meteo_imgw_datastore()</a></code>
-which gives access from monthly to even 10-min datasets.</p></li>
+which gives access from monthly to even 10-min datasets. IMGW archive
+outputs use short English parameter names. The original IMGW names are
+available as <code>label</code> attributes on the corresponding columns,
+for example <code>attr(df$t2m_mean_mon, "label")</code>.</p></li>
 <li><p><strong>meteo_noaa_hourly()</strong> - Downloading hourly
 NCEI/NOAA Integrated Surface Hourly (ISH) meteorological data - some
 stations have &gt; 100 years of observations.</p></li>
@@ -161,7 +164,10 @@ Messages vignette</a>.</p></li>
 <li><p><strong>hydro_imgw()</strong> - Downloading daily and monthly
 hydrological data from stations available in the danepubliczne.imgw.pl
 collection. It is a wrapper for <code>hydro_monthly()</code> and
-<code>hydro_daily()</code>.</p></li>
+<code>hydro_daily()</code>. IMGW archive outputs use short English
+parameter names. The original IMGW names are available as
+<code>label</code> attributes on the corresponding columns, for example
+<code>attr(h$Q, "label")</code>.</p></li>
 <li><p><strong>hydro_imgw_datastore()</strong> - Downloading hourly and
 sub-hourly hydrological data from the IMGW-PIB hydro telemetry
 stations.</p></li>
@@ -240,13 +246,13 @@ in a given country(ies):</p>
 <span><span class="op">}</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="6%">
+<col width="5%">
 <col width="10%">
-<col width="32%">
-<col width="15%">
+<col width="36%">
+<col width="14%">
 <col width="13%">
-<col width="6%">
-<col width="15%">
+<col width="5%">
+<col width="14%">
 </colgroup>
 <thead><tr class="header">
 <th align="left"></th>
@@ -259,7 +265,7 @@ in a given country(ies):</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">126</td>
+<td align="left">185</td>
 <td align="left">03894</td>
 <td align="left">Guernsey Airport</td>
 <td align="right">-2.583345</td>
@@ -268,7 +274,7 @@ in a given country(ies):</p>
 <td align="right">80.42783</td>
 </tr>
 <tr class="even">
-<td align="left">120</td>
+<td align="left">179</td>
 <td align="left">03857</td>
 <td align="left">Isle Of Portland</td>
 <td align="right">-2.450009</td>
@@ -277,7 +283,7 @@ in a given country(ies):</p>
 <td align="right">84.66540</td>
 </tr>
 <tr class="odd">
-<td align="left">118</td>
+<td align="left">177</td>
 <td align="left">03844</td>
 <td align="left">Exeter Airport No2</td>
 <td align="right">-3.400008</td>
@@ -286,7 +292,7 @@ in a given country(ies):</p>
 <td align="right">93.72323</td>
 </tr>
 <tr class="even">
-<td align="left">117</td>
+<td align="left">176</td>
 <td align="left">03840</td>
 <td align="left">Dunkeswell Aerodrome</td>
 <td align="right">-3.233338</td>
@@ -295,7 +301,7 @@ in a given country(ies):</p>
 <td align="right">98.89712</td>
 </tr>
 <tr class="odd">
-<td align="left">119</td>
+<td align="left">178</td>
 <td align="left">03853</td>
 <td align="left">Yeovilton</td>
 <td align="right">-2.633346</td>
@@ -304,7 +310,7 @@ in a given country(ies):</p>
 <td align="right">119.50052</td>
 </tr>
 <tr class="even">
-<td align="left">127</td>
+<td align="left">186</td>
 <td align="left">03895</td>
 <td align="left">Jersey Airport</td>
 <td align="right">-2.183337</td>
@@ -313,7 +319,7 @@ in a given country(ies):</p>
 <td align="right">128.26450</td>
 </tr>
 <tr class="odd">
-<td align="left">116</td>
+<td align="left">175</td>
 <td align="left">03827</td>
 <td align="left">Plymouth</td>
 <td align="right">-4.116669</td>
@@ -322,7 +328,7 @@ in a given country(ies):</p>
 <td align="right">131.29669</td>
 </tr>
 <tr class="even">
-<td align="left">128</td>
+<td align="left">187</td>
 <td align="left">03896</td>
 <td align="left">Saint Helier</td>
 <td align="right">-2.100002</td>
@@ -331,7 +337,7 @@ in a given country(ies):</p>
 <td align="right">135.10222</td>
 </tr>
 <tr class="odd">
-<td align="left">100</td>
+<td align="left">158</td>
 <td align="left">03710</td>
 <td align="left">Liscombe</td>
 <td align="right">-3.600012</td>
@@ -340,7 +346,7 @@ in a given country(ies):</p>
 <td align="right">138.94411</td>
 </tr>
 <tr class="even">
-<td align="left">121</td>
+<td align="left">180</td>
 <td align="left">03862</td>
 <td align="left">Bournemouth Airport</td>
 <td align="right">-1.833350</td>
@@ -349,7 +355,7 @@ in a given country(ies):</p>
 <td align="right">156.62887</td>
 </tr>
 <tr class="odd">
-<td align="left">101</td>
+<td align="left">159</td>
 <td align="left">03716</td>
 <td align="left">St. Athan</td>
 <td align="right">-3.433342</td>
@@ -358,7 +364,16 @@ in a given country(ies):</p>
 <td align="right">164.42872</td>
 </tr>
 <tr class="even">
-<td align="left">99</td>
+<td align="left">160</td>
+<td align="left">03717</td>
+<td align="left">Cardiff, Bute Park (Aut)</td>
+<td align="right">-3.183337</td>
+<td align="right">51.48334</td>
+<td align="right">9</td>
+<td align="right">167.69251</td>
+</tr>
+<tr class="odd">
+<td align="left">157</td>
 <td align="left">03707</td>
 <td align="left">Chivenor</td>
 <td align="right">-4.133336</td>
@@ -366,8 +381,8 @@ in a given country(ies):</p>
 <td align="right">8</td>
 <td align="right">175.90439</td>
 </tr>
-<tr class="odd">
-<td align="left">137</td>
+<tr class="even">
+<td align="left">196</td>
 <td align="left">03930</td>
 <td align="left">Almondsbury</td>
 <td align="right">-2.550011</td>
@@ -375,23 +390,14 @@ in a given country(ies):</p>
 <td align="right">75</td>
 <td align="right">181.08641</td>
 </tr>
-<tr class="even">
-<td align="left">103</td>
+<tr class="odd">
+<td align="left">162</td>
 <td align="left">03743</td>
 <td align="left">Larkhill</td>
 <td align="right">-1.800016</td>
 <td align="right">51.20000</td>
 <td align="right">132</td>
 <td align="right">190.40311</td>
-</tr>
-<tr class="odd">
-<td align="left">104</td>
-<td align="left">03746</td>
-<td align="left">Boscombe Down</td>
-<td align="right">-1.750015</td>
-<td align="right">51.15000</td>
-<td align="right">124</td>
-<td align="right">190.56827</td>
 </tr>
 </tbody>
 </table>

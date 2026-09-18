@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
 <strong>OGIMET</strong>: HTML scraping via <code>XML::readHTMLTable</code> from <code>ogimet.com</code>. Stations are identified by WMO ID. <code>precip_split</code> / <code>R/precip_split.R</code> handles 6/12/24h precipitation disaggregation for hourly data.</li>
 <li>
 <strong>NOAA / Wyoming</strong>: direct file downloads (ISH gzipped fixed-width, CO2 text, sounding HTML).</li>
-</ul><p><strong>Column-name shortening layer.</strong> Most IMGW download functions accept <code>col_names = "short" | "full" | "polish"</code> and pass the raw frame through <code><a href="reference/meteo_shortening_imgw.html">meteo_shortening_imgw()</a></code> / <code><a href="reference/hydro_shortening_imgw.html">hydro_shortening_imgw()</a></code> (in <code>R/*_shortening_imgw.R</code>). Full and short names are looked up against <code>imgw_meteo_abbrev</code> / <code>imgw_hydro_abbrev</code> (built-in data). When you add a new IMGW column, update both the abbrev table (<code>data-raw/</code>) and the shortener.</p>
+</ul><p><strong>Column-name shortening layer.</strong> IMGW download functions return short English names and attach the original full IMGW parameter label as a per-column <code>label</code> attribute. Names are looked up against <code>imgw_meteo_abbrev</code> / <code>imgw_hydro_abbrev</code> (built-in data). When you add a new IMGW column, update both the abbrev table (<code>data-raw/</code>) and the shortener.</p>
 <p><strong>Graceful network failure</strong> is required for CRAN. Use <code><a href="reference/test_url.html">test_url()</a></code> (<code>R/test_url.R</code>) to gate downloads, and follow the existing <code>allow_failure = TRUE</code> pattern: wrap the real worker (<code>*_bp</code> “best practice” inner function) in <code>tryCatch</code> so user-facing functions return <code>NULL</code>/<code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible()</a></code> with a <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> instead of erroring. Tests follow the same convention — every network test starts with <code>if (!curl::has_internet()) return(invisible(NULL))</code>. Don’t add tests that fail when offline.</p>
 <p><strong>Other notes.</strong> - <code>R/globals.R</code> holds <code>utils::globalVariables(...)</code> declarations needed because of data.table’s NSE; add new NSE symbols there to keep <code>R CMD check</code> clean. - <code>R/onAttach.R</code> prints a startup message; it’s covr-ignored and behind <code>interactive() &amp;&amp; runif &lt; 0.25</code>. - <code>inst/parser.R</code> and <code>R/parser.R</code> exist separately — <code>R/parser.R</code> is the exported package function; <code>inst/parser.R</code> is a sandbox script (currently untracked per <code>git status</code>). Don’t conflate them.</p>
 </div>

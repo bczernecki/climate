@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -90,9 +90,9 @@
                         <h4 data-toc-skip class="author">Bartosz
 Czernecki, Arkadiusz Głogowski, Jakub Nowosad</h4>
             
-            <h4 data-toc-skip class="date">2026-07-13</h4>
+            <h4 data-toc-skip class="date">2026-09-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/v1.4.0/vignettes/articles/pl.Rmd" class="external-link"><code>vignettes/articles/pl.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bczernecki/climate/blob/master/vignettes/articles/pl.Rmd" class="external-link"><code>vignettes/articles/pl.Rmd</code></a></small>
       <div class="hidden name"><code>pl.Rmd</code></div>
 
     </div>
@@ -169,40 +169,41 @@ automatycznie dodają ich współrzędne przestrzenne.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">=</span> <span class="fu"><a href="../reference/hydro_imgw.html">hydro_imgw</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="st">"monthly"</span>, year <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2010</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           id  X  Y       Data       PSNZWP   KDNRZK MCROKH MCMSCH MCWSKEX</span></span>
-<span><span class="co">#&gt; 1  149180010 NA NA 2000-11-01 KRZYZANOWICE Odra (1)   2001      1       1</span></span>
-<span><span class="co">#&gt; 2  149180010 NA NA 2000-11-01 KRZYZANOWICE Odra (1)   2001      1       2</span></span>
-<span><span class="co">#&gt; 3  149180010 NA NA 2000-11-01 KRZYZANOWICE Odra (1)   2001      1       3</span></span>
-<span><span class="co">#&gt; 4  149180010 NA NA 2000-12-01 KRZYZANOWICE Odra (1)   2001      2       1</span></span>
-<span><span class="co">#&gt; 5  149180010 NA NA 2000-12-01 KRZYZANOWICE Odra (1)   2001      2       2</span></span>
-<span><span class="co">#&gt; 6  149180010 NA NA 2000-12-01 KRZYZANOWICE Odra (1)   2001      2       3</span></span>
-<span><span class="co">#&gt;   MCSTAN MCPRZP MCPTMP MCMSCK</span></span>
-<span><span class="co">#&gt; 1    108   19.8     NA     11</span></span>
-<span><span class="co">#&gt; 2    149   38.7     NA     11</span></span>
-<span><span class="co">#&gt; 3    188   60.1     NA     11</span></span>
-<span><span class="co">#&gt; 4    118   23.7     NA     12</span></span>
-<span><span class="co">#&gt; 5    138   32.3     NA     12</span></span>
-<span><span class="co">#&gt; 6    158   42.5     NA     12</span></span></code></pre></div>
-<p>Zmienna <code>MCWSKEX</code> reprezentuje etykietę ekstremum, gdzie
-“1” oznacza minimum, “2” oznacza średnią, a “3” maksimum. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<span><span class="co">#&gt;           id  X  Y       Data      station riv_or_lake  hyy idhyy idex   H    Q</span></span>
+<span><span class="co">#&gt; 1  149180010 NA NA 2000-11-01 KRZYZANOWICE    Odra (1) 2001     1    1 108 19.8</span></span>
+<span><span class="co">#&gt; 2  149180010 NA NA 2000-11-01 KRZYZANOWICE    Odra (1) 2001     1    2 149 38.7</span></span>
+<span><span class="co">#&gt; 3  149180010 NA NA 2000-11-01 KRZYZANOWICE    Odra (1) 2001     1    3 188 60.1</span></span>
+<span><span class="co">#&gt; 4  149180010 NA NA 2000-12-01 KRZYZANOWICE    Odra (1) 2001     2    1 118 23.7</span></span>
+<span><span class="co">#&gt; 5  149180010 NA NA 2000-12-01 KRZYZANOWICE    Odra (1) 2001     2    2 138 32.3</span></span>
+<span><span class="co">#&gt; 6  149180010 NA NA 2000-12-01 KRZYZANOWICE    Odra (1) 2001     2    3 158 42.5</span></span>
+<span><span class="co">#&gt;    T mm</span></span>
+<span><span class="co">#&gt; 1 NA 11</span></span>
+<span><span class="co">#&gt; 2 NA 11</span></span>
+<span><span class="co">#&gt; 3 NA 11</span></span>
+<span><span class="co">#&gt; 4 NA 12</span></span>
+<span><span class="co">#&gt; 5 NA 12</span></span>
+<span><span class="co">#&gt; 6 NA 12</span></span></code></pre></div>
+<p>Zmienna <code>idex</code> reprezentuje etykietę ekstremum, gdzie “1”
+oznacza minimum, “2” oznacza średnią, a “3” maksimum. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>Analizy hydrologiczne często koncentrują się na jednej grupy zjawisk,
 np. związanych z przepływami maksymalnymi. W tym celu pozostaną w ramce
 danych tylko wartości przepływów maksymalnych oraz kolumny zawierające
 interesujące nas informacje, tj. identyfikator stacji - <code>id</code>,
-rok hydrologiczny (<code>MCROKH</code>), szerokość geograficzną
-<code>X</code> i długość geograficzną<code>Y</code>.</p>
+rok hydrologiczny (<code>hyy</code>), nazwę stacji
+(<code>station</code>), szerokość geograficzną <code>X</code> i długość
+geograficzną <code>Y</code>.</p>
 <p>Następnie obliczymy średnią maksymalną wartość przepływu na stacjach
 w każdym roku za pomocą <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarise()</a></code>, oraz
 rozdzielimy dane według roku używając <code><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread ()</a></code> aby uzyskać
-roczne średnie maksymalne przepływy (<code>MCPRZP</code>) w kolejnych
+roczne średnie maksymalne przepływy (<code>Q</code>) w kolejnych
 kolumnach.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h2</span> <span class="op">=</span> <span class="va">h</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">MCWSKEX</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">PSNZWP</span>, <span class="va">X</span>, <span class="va">Y</span>, <span class="va">MCROKH</span>, <span class="va">MCPRZP</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">MCROKH</span>, <span class="va">id</span>, <span class="va">PSNZWP</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>srednie_roczne_Q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">MCPRZP</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">MCROKH</span>, <span class="va">srednie_roczne_Q</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">idex</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span>, <span class="va">hyy</span>, <span class="va">Q</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hyy</span>, <span class="va">id</span>, <span class="va">station</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>srednie_roczne_Q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Q</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">hyy</span>, <span class="va">srednie_roczne_Q</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">h2</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">"Examplary data frame of hydrological preprocesssing."</span><span class="op">)</span></span></code></pre></div>
@@ -226,7 +227,7 @@ kolumnach.</p>
 </colgroup>
 <thead><tr class="header">
 <th align="left">id</th>
-<th align="left">PSNZWP</th>
+<th align="left">station</th>
 <th align="right">X</th>
 <th align="right">Y</th>
 <th align="right">2001</th>
@@ -383,7 +384,7 @@ annual flow</a><img src="https://klimat.amu.edu.pl/climate_flow.png" alt="Mean m
 <hr>
 <ol>
 <li id="fn1"><p>Więcej informacji na ten temat można znaleźć w zestawie
-danych <code>hydro_abbrev</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+danych <code>imgw_hydro_abbrev</code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

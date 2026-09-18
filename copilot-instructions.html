@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">climate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -113,7 +113,7 @@
 <li>
 <strong>NOAA / Wyoming</strong>: direct file or page downloads for ISH hourly data, Mauna Loa CO2, and Wyoming soundings.</li>
 </ul></li>
-<li><p>IMGW column renaming is a distinct normalization layer. Most IMGW functions accept <code>col_names = "short" | "full" | "polish"</code> and pass results through <code><a href="reference/meteo_shortening_imgw.html">meteo_shortening_imgw()</a></code> or <code><a href="reference/hydro_shortening_imgw.html">hydro_shortening_imgw()</a></code>. The mapping tables live in built-in datasets backed by <code>data-raw/</code>.</p></li>
+<li><p>IMGW column renaming is a distinct normalization layer. IMGW functions return short English names and attach the original full parameter label as a per-column <code>label</code> attribute through <code><a href="reference/meteo_shortening_imgw.html">meteo_shortening_imgw()</a></code> or <code><a href="reference/hydro_shortening_imgw.html">hydro_shortening_imgw()</a></code>. The mapping tables live in built-in datasets backed by <code>data-raw/</code>.</p></li>
 <li>
 <p>Package data and docs follow standard R package patterns:</p>
 <ul><li>exported code in <code>R/</code>
