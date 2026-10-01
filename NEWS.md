@@ -1,3 +1,8 @@
+# climate 1.4.2
+
+* fixed missing daily temperature means for IMGW meteorological dataset
+
+
 # climate 1.4.1
 
 * fixed IMGW meteorological and hydrological parameter mappings for current metadata labels

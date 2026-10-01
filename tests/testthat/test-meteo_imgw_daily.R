@@ -95,6 +95,21 @@ test_that("current IMGW daily labels use short names", {
   )
 })
 
+test_that("daily mean air temperature is retained unless it is a duplicate alias", {
+  data = data.frame(
+    "Srednia dobowa temperatura powietrza [°C]" = 12,
+    check.names = FALSE
+  )
+
+  expect_named(meteo_shortening_imgw(data), "t2m_mean_daily")
+  expect_equal(meteo_shortening_imgw(data)$t2m_mean_daily, 12)
+
+  data[["Srednia temperatura dobowa [°C]"]] = 11
+  shortened = meteo_shortening_imgw(data)
+  expect_named(shortened, "t2m_mean_daily")
+  expect_equal(shortened$t2m_mean_daily, 11)
+})
+
 test_that("IMGW column labels are retained as attributes", {
   data = data.frame(
     TMAX = 1:2,

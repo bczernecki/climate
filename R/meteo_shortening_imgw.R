@@ -37,10 +37,11 @@ meteo_shortening_imgw = function(data, remove_duplicates = TRUE) {
       colnames(data)[colnames(data) == "Nazwa stacji.x"] = "Nazwa stacji"
     }
     
-    # fix for mean air temperature which is stated sometimes in two files as:
-    # "Srednia dobowa temperatura[°C]" and "Srednia temperatura dobowa [°C]"
-    if (any(grepl(x = colnames(data), "Srednia dobowa temperatura"))) {
-      keep = !grepl(x = colnames(data), "Srednia dobowa temperatura")
+    # Keep one of the two historical labels when both are present.
+    mean_daily_temp = grepl("Srednia dobowa temperatura", colnames(data))
+    other_mean_daily_temp = grepl("Srednia temperatura dobowa", colnames(data))
+    if (any(mean_daily_temp) && any(other_mean_daily_temp)) {
+      keep = !mean_daily_temp
       data = data[, keep, drop = FALSE]
       column_attributes = column_attributes[keep]
     }
